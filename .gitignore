@@ -1,0 +1,33 @@
+# Patient data must never enter this repository. Synthetic fixtures live under synthetic/ only.
+data/
+*.835
+*.837
+*.edi
+*.x12
+*.hl7
+*.ccda
+*.dcm
+*.csv
+*.xlsx
+*.parquet
+*.db
+*.sqlite
+!synthetic/**
+
+# Secrets and local configuration
+.env
+.env.*
+*.pem
+*.key
+*.p12
+credentials*.json
+
+# Build, dependency, and OS clutter
+node_modules/
+dist/
+build/
+__pycache__/
+*.pyc
+.venv/
+.DS_Store
+Thumbs.db
