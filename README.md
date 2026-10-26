@@ -134,9 +134,9 @@ The test runs on 50 synthetic denials. No real patient data is used. Results, in
 
 | Model | Passed verification (%) | Ungrounded statements caught (count) | Latency (s per appeal) | Cost ($ per appeal) |
 | --- | :---: | :---: | :---: | :---: |
-| Current baseline | pending | pending | pending | pending |
-| Muse Spark (Meta Model API) | pending | pending | pending | pending |
-| Open-weight model, hosted | pending | pending | pending | pending |
+| muse-spark-1.3 (Meta Model API) | pending | pending | pending | pending |
+| muse-wonder-1.0 (Meta Model API) | pending | pending | pending | pending |
+| Muse Spark Open (hosted open weights) | pending | pending | pending | pending |
 
 <br>
 
