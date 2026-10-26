@@ -51,8 +51,37 @@ The insurers dispute these characterizations. UnitedHealth says nH Predict only 
 
 I wrote that standard down as **LITMUS** and published it openly under CC BY 4.0, so anyone can use it, test it, or argue with it. It applies to an insurer's algorithm as much as to mine.
 
-- [Litmus: The Admissible Set](https://doi.org/10.5281/zenodo.21227402), position paper, July 2026
-- [Litmus: The Admissible Set (System Architecture)](https://doi.org/10.5281/zenodo.21227855), architecture companion, July 2026
+#### [Litmus: The Admissible Set](https://doi.org/10.5281/zenodo.21227402)
+*Position paper · Rosing, J. H. · Zenodo, July 6, 2026 · doi:10.5281/zenodo.21227402*
+
+Generative artificial intelligence is entering clinical work ahead of any agreed method for making it safe. This paper argues that an autonomous system can be trusted only in proportion to the strength of the external check that verifies it, and that medicine has exactly one valid check: the certified specialist physician. That check has a definite shape. It returns membership in a small admissible set of treatments a qualified body would accept, a structure independently confirmed by a century of malpractice doctrine. Because the basis for membership is partly explicit and partly tacit, the machine may act alone only where consensus is explicit and settled, and must defer to the physician everywhere else. The paper sets out this method, litmus-gated reach, and the buildable system it implies.
+
+#### [Litmus: The Admissible Set (System Architecture)](https://doi.org/10.5281/zenodo.21227855)
+*Architecture companion · Rosing, J. H. · Zenodo, July 6, 2026 · doi:10.5281/zenodo.21227855*
+
+This companion document specifies the system architecture implied by Litmus: The Admissible Set. The design is one substrate applied to many workflows: a model-pluggable agent runtime, an extensible registry of standardized tools, and a fail-closed verification spine whose criteria are curated per specialty. The machine acts alone where physician consensus is explicit, routes an evidence-bounded case to the certified specialist where it is not, and records every claim, gate decision, and verdict in a provenance layer. Feedback from physician verdicts, payer adjudication, and clinical outcomes widens what can be verified over time. The document details the layers, the runtime flow, an end-to-end medical coding and appeals workflow, the build sequence from existing components, and how the architecture scales across specialties and absorbs advances in model capability.
+
+<details>
+<summary>Cite</summary>
+
+```bibtex
+@misc{rosing2026litmus,
+  author    = {Rosing, James H.},
+  title     = {Litmus: The Admissible Set},
+  year      = {2026},
+  publisher = {Zenodo},
+  doi       = {10.5281/zenodo.21227402}
+}
+@misc{rosing2026litmusarch,
+  author    = {Rosing, James H.},
+  title     = {Litmus: The Admissible Set (System Architecture)},
+  year      = {2026},
+  publisher = {Zenodo},
+  doi       = {10.5281/zenodo.21227855}
+}
+```
+
+</details>
 
 ## What I am building
 
