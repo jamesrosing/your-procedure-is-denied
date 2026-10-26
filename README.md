@@ -1,59 +1,94 @@
-# The Denial Machine
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/header-dark.svg">
+  <img alt="Your procedure is denied. A denial takes an insurer about one second. An appeal takes a physician hours." src="assets/header-light.svg" width="100%">
+</picture>
 
-Oct 26, 2026 · James H. Rosing, MD, FACS
+<p>
+  <a href="https://doi.org/10.5281/zenodo.21227402"><img alt="LITMUS paper DOI" src="https://zenodo.org/badge/DOI/10.5281/zenodo.21227402.svg"></a>
+  <a href="https://doi.org/10.5281/zenodo.21227855"><img alt="LITMUS architecture DOI" src="https://zenodo.org/badge/DOI/10.5281/zenodo.21227855.svg"></a>
+  <img alt="Data: synthetic only" src="https://img.shields.io/badge/data-synthetic%20only-2b333d">
+  <img alt="Meta Global AI Developer Hackathon 2026" src="https://img.shields.io/badge/Meta%20Global%20AI%20Developer%20Hackathon-Oct%2026%20to%20Nov%204%2C%202026-2b333d">
+</p>
 
-Insurers have built machines that say no at scale. Physicians answer with fax machines and hold music. The denial costs the payer a fraction of a second. The appeal costs the doctor hours, and the patient goes without care while it waits.
+*James H. Rosing, MD, FACS · Board-certified surgeon, Newport Beach, California*
 
-The asymmetry is the business model. Most denials are never appealed, and most that are appealed get overturned. Every denial nobody fights is money the insurer keeps, whether the care was necessary or not.
+An insurer can now issue a claim denial in about a second. Answering it takes a physician hours. In between, a patient waits to learn whether the operation their surgeon recommended will be approved or refused.
 
-heme exists to end that asymmetry. It gives the physician a machine of their own, and holds that machine to a higher evidence standard than the one used against them.
+This repository is the public record of one physician's attempt to change that balance: the evidence, the standard I think every medical AI should meet, and the work I am doing to meet it.
 
-## The evidence
+## The problem in three numbers
 
-The largest insurers in the country have been caught denying care by algorithm, and the federal government is now importing the model into traditional Medicare.
+Medicare Advantage, 2023 ([KFF](https://www.kff.org/f63a430)):
 
-| Who | Tool | What it does | The number | Where it stands |
-| --- | --- | --- | --- | --- |
-| UnitedHealth (naviHealth) | [nH Predict](https://distilinfo.com/2026/03/12/court-orders-unitedhealth-to-disclose-ai-denial-algorithm/) | Predicts how long elderly Medicare Advantage patients "should" stay in post-acute care | Plaintiffs allege a 90% error rate: about 9 in 10 denials reversed on appeal | Class action in discovery, D. Minn.; March 9, 2026 order compels internal records back to 2017 |
-| UnitedHealthcare | Post-acute review ([Senate PSI](https://www.healthcaredive.com/news/medicare-advantage-AI-denials-cvs-humana-unitedhealthcare-senate-report/730383/)) | Prior authorization for rehab, skilled nursing, long-term acute care | Post-acute denial rate rose from 8.7% (2019) to 22.7% (2022) | Senate investigation report, October 2024 |
-| CVS Health | [Post-Acute Analytics](https://www.healthcaredive.com/news/medicare-advantage-AI-denials-cvs-humana-unitedhealthcare-senate-report/730383/) | AI project to cut skilled nursing spending | Savings target raised from $10M to $15M to $77.3M over 3 years | Senate investigation report, October 2024 |
-| Cigna | [PxDx](https://www.healthcaredive.com/news/cigna-lawsuit-algorithm-claims-denials-california/) | Batch-rejects claims where diagnosis and procedure codes do not match its list | 300,000+ claims denied in 2 months of 2022, averaging 1.2 s each; one medical director denied 60,000 in a month | Class action, E.D. Cal., filed July 2023 |
-| CMS | [WISeR](https://www.medicaleconomics.com/view/medicare-wiser-prior-authorizations-needed-congress-prior-authorization-lawmakers-say) | AI-supported prior authorization in traditional Medicare; contractors paid from reduced spending | Live since January 2026 in 6 states, covering skin substitutes, nerve stimulators, knee replacements, and cervical fusions | GAO found it is a rule that should have gone to Congress; repeal resolution pending |
+| Requests denied | Denials appealed | Appeals overturned |
+| :---: | :---: | :---: |
+| **3.2 million** | **11.7%** | **81.7%** |
 
-The insurers dispute these characterizations. UnitedHealth says nH Predict only guides care planning, and Cigna says PxDx is not AI. A court in Minnesota found the appeal process so futile it waived the exhaustion requirement.
+When denials are challenged, most fall. Most are never challenged, because the cost of answering lands on the people with the least time. Physicians report spending 13 hours a week on prior authorization, and 79% say patients have abandoned treatment while waiting ([AMA, 2025 survey](https://www.ama-assn.org/press-center/ama-press-releases/ama-survey-prior-authorization-reform-pledge-falls-short-physicians)).
 
-## Why denial pays
+I do not think most of the people who build these systems set out to harm patients. But a system rewarded for saying no, and rarely asked to show its reasons, will say no more often than it should.
 
-In 2023, Medicare Advantage plans denied 3.2 million prior authorization requests. Only 11.7% were appealed, and 81.7% of those appeals won ([KFF](https://www.kff.org/f63a430)). That means about 2.8 million denials stood simply because nobody fought them, even though the denials that were challenged lost more than four times in five.
+<details>
+<summary><b>The public record on algorithmic denials</b> (5 cases)</summary>
+<br>
 
-The cost of fighting falls on the people with the least time. Physicians handle an average of 40 prior authorizations per week, which takes 13 hours of physician and staff time. 79% say patients have abandoned treatment while waiting, and 26% report a serious adverse event, according to the [AMA's 2025 survey](https://www.ama-assn.org/press-center/ama-press-releases/ama-survey-prior-authorization-reform-pledge-falls-short-physicians) released May 2026. Six in ten physicians fear AI will push denial rates higher.
+| Who | Tool | What is alleged or reported | Status |
+| --- | --- | --- | --- |
+| UnitedHealth (naviHealth) | [nH Predict](https://distilinfo.com/2026/03/12/court-orders-unitedhealth-to-disclose-ai-denial-algorithm/) | Predicts post-acute length of stay for Medicare Advantage patients; plaintiffs allege about 9 in 10 denials were reversed on appeal | Class action in discovery, D. Minn.; March 2026 order compels records back to 2017 |
+| UnitedHealthcare | [Post-acute review](https://www.healthcaredive.com/news/medicare-advantage-AI-denials-cvs-humana-unitedhealthcare-senate-report/730383/) | Post-acute denial rate rose from 8.7% (2019) to 22.7% (2022) | Senate investigation report, October 2024 |
+| CVS Health | [Post-Acute Analytics](https://www.healthcaredive.com/news/medicare-advantage-AI-denials-cvs-humana-unitedhealthcare-senate-report/730383/) | AI project to reduce skilled nursing spending; savings target raised to $77.3M over 3 years | Senate investigation report, October 2024 |
+| Cigna | [PxDx](https://www.healthcaredive.com/news/cigna-lawsuit-algorithm-claims-denials-california/) | 300,000+ claims denied in 2 months of 2022, averaging 1.2 s each | Class action, E.D. Cal., filed July 2023 |
+| CMS | [WISeR](https://www.medicaleconomics.com/view/medicare-wiser-prior-authorizations-needed-congress-prior-authorization-lawmakers-say) | AI-supported prior authorization in traditional Medicare across 6 states, including skin substitutes, nerve stimulators, knee replacements, and cervical fusions | Live since January 2026; repeal resolution pending |
 
-A denial issued in 1.2 seconds that stands nearly nine times in ten because nobody appeals is not a review process. It is a toll booth, and the toll is paid in delayed surgery, unpaid wound care, and physicians who give up appealing.
+The insurers dispute these characterizations. UnitedHealth says nH Predict only guides care planning, and Cigna says PxDx is not AI.
 
-## The answer: a machine on the physician's side
+</details>
 
-heme answers every denial the chart can defeat with an appeal the payer has to answer, and it refuses to send any argument it cannot prove from the chart. The payer's algorithm is judged by whether it saves money. Ours is judged by whether every sentence traces to evidence.
+## A standard, not a product
 
-1. **heme** is the EHR where the care is documented and the claim originates. It handles FHIR R4, the 837P claim, the 835 remittance, and the 278 prior authorization, so the denial arrives in the same system that holds the chart.
-2. **writ** reads the denial and adjudicates it against the payer's own medical-necessity rules. It is fail-closed: if the record does not meet the criteria, it says so instead of arguing anyway.
-3. **CHART** supplies those rules. It is a versioned database of payer coverage criteria, so an appeal cites the policy that was in force on the date of service, not one from last year.
-4. **The Gladiator** drafts the appeal from the patient's chart and the matching criteria. Every claim in the letter must pass a grounding gate that ties it to a specific chart entry. Anything ungrounded is blocked, not softened.
-5. **The physician signs.** The machine does the hours of assembly. The doctor makes the medical judgment and owns the letter.
+> **No machine should make a claim about a patient's care that it cannot support.**
+> It must cite its source or show its derivation. If it cannot, it stops and the physician decides.
 
-The insurer's tool can deny 300,000 claims without opening a file. Ours cannot send one appeal without citing one.
+I wrote that standard down as **LITMUS** and published it openly under CC BY 4.0, so anyone can use it, test it, or argue with it. It applies to an insurer's algorithm as much as to mine.
 
-## Why Meta open weights
+- [Litmus: The Admissible Set](https://doi.org/10.5281/zenodo.21227402), position paper, July 2026
+- [Litmus: The Admissible Set (System Architecture)](https://doi.org/10.5281/zenodo.21227855), architecture companion, July 2026
 
-Open weights let an independent practice run the same class of machine the payers run, without sending patient records to a vendor it does not control. A model hosted inside heme's own boundary keeps protected health information where it belongs.
+## What I am building
 
-The grounding gate makes the model swappable. If the proposer can be any model and the verifier still blocks every ungrounded sentence, then the practice picks the cheapest model that passes, not the most famous one. That is how a two-surgeon practice affords what a Fortune 50 insurer built.
+Software that answers a denial the way a careful physician would, with every statement held to the standard above.
 
-The hackathon build proves it with numbers: the same 50 synthetic denials run through the current model, Muse Spark, and an open-weights model, each scored on gate pass rate (%), ungrounded claims caught (count), latency (s per appeal), and cost ($ per appeal).
+```mermaid
+flowchart LR
+    A[Denial arrives] --> B[Check against the insurer's<br/>published criteria for that date]
+    B --> C[Draft response from<br/>the medical record]
+    C --> D{Every statement<br/>traced to the chart?}
+    D -- yes --> E[Physician reviews<br/>and signs]
+    D -- no --> F[Blocked.<br/>Physician decides]
+```
+
+If the record does not support an appeal, the software says so instead of arguing anyway. Nothing is sent without a physician's signature.
+
+## This week: open models, measured in public
+
+During the [Meta Global AI Developer Hackathon](https://cerebralvalley.ai/e/meta-ai-developer-hackathon) (Oct 26 to Nov 4, 2026), I am testing whether open-weight models can do the drafting while the verification step holds them to the same standard. If they can, an independent practice can run this without sending patient records to a vendor it does not control.
+
+The test runs on 50 synthetic denials. No real patient data is used. Results, including failures, will be posted here.
+
+| Model | Passed verification (%) | Ungrounded statements caught (count) | Latency (s per appeal) | Cost ($ per appeal) |
+| --- | :---: | :---: | :---: | :---: |
+| Current baseline | pending | pending | pending | pending |
+| Muse Spark (Meta Model API) | pending | pending | pending | pending |
+| Open-weight model, hosted | pending | pending | pending | pending |
+
+## If you have seen this from the inside
+
+Physicians, billers, patients, and people who work at payers: I want to hear what you have seen, where this approach is wrong, and what it misses. [Open an issue](https://github.com/jamesrosing/your-procedure-is-denied/issues) to start a conversation.
 
 ## Sources
 
 - [Court orders UnitedHealth to disclose AI denial algorithm](https://distilinfo.com/2026/03/12/court-orders-unitedhealth-to-disclose-ai-denial-algorithm/), DistilINFO, March 2026
-- [Senate report: Medicare Advantage AI denials at CVS, Humana, UnitedHealthcare](https://www.healthcaredive.com/news/medicare-advantage-AI-denials-cvs-humana-unitedhealthcare-senate-report/730383/), Healthcare Dive, October 2024
+- [Senate report on Medicare Advantage AI denials at CVS, Humana, UnitedHealthcare](https://www.healthcaredive.com/news/medicare-advantage-AI-denials-cvs-humana-unitedhealthcare-senate-report/730383/), Healthcare Dive, October 2024
 - [Senate PSI majority staff report on Medicare Advantage](https://www.hsgac.senate.gov/wp-content/uploads/2024.10.17-PSI-Majority-Staff-Report-on-Medicare-Advantage.pdf), October 17, 2024
 - [Cigna sued over algorithm used to deny claims](https://www.healthcaredive.com/news/cigna-lawsuit-algorithm-claims-denials-california/), Healthcare Dive, July 2023
 - [Medicare Advantage prior authorization, 2023 data](https://www.kff.org/f63a430), KFF

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 440" width="1280" height="440" role="img" aria-label="Your procedure is denied. A denial takes an insurer about one second. An appeal takes a physician hours.">
+  <rect width="1280" height="440" fill="#f3f5f7"/>
+  <text x="72" y="86" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="15" letter-spacing="2.5" fill="#5f6b78">PRIOR AUTHORIZATION · CLAIM DENIALS · ACCOUNTABLE AI</text>
+  <text x="68" y="196" font-family="Georgia, 'Times New Roman', serif" font-size="78" fill="#14181e">Your procedure is</text>
+  <text x="68" y="284" font-family="Georgia, 'Times New Roman', serif" font-size="78" font-style="italic" fill="#a3212b">denied.</text>
+  <line x1="72" y1="330" x2="1208" y2="330" stroke="#d5dbe1" stroke-width="1"/>
+  <text x="72" y="372" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" letter-spacing="1.5" fill="#5f6b78">INSURER DECISION</text>
+  <rect x="300" y="360" width="4" height="16" fill="#a3212b"/>
+  <text x="316" y="374" font-family="Georgia, serif" font-size="17" fill="#14181e">about 1 s</text>
+  <text x="72" y="408" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" letter-spacing="1.5" fill="#5f6b78">PHYSICIAN APPEAL</text>
+  <rect x="300" y="396" width="760" height="16" fill="#d5dbe1"/>
+  <rect x="300" y="396" width="760" height="16" fill="#14181e" opacity="0.85"/>
+  <text x="1076" y="410" font-family="Georgia, serif" font-size="17" fill="#14181e">hours</text>
+</svg>
