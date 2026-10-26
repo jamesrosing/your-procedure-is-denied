@@ -1,0 +1,31 @@
+name: Correction
+description: A figure, date, case status, or citation in the README that is inaccurate or out of date.
+title: "[Correction]: "
+labels: ["correction"]
+body:
+  - type: input
+    id: location
+    attributes:
+      label: Where
+      description: Section heading or quoted sentence.
+    validations:
+      required: true
+  - type: textarea
+    id: current
+    attributes:
+      label: What it says now
+    validations:
+      required: true
+  - type: textarea
+    id: proposed
+    attributes:
+      label: What it should say
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Source
+      description: A link to the public document, filing, or report that supports the correction.
+    validations:
+      required: true

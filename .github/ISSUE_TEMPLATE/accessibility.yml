@@ -1,0 +1,24 @@
+name: Accessibility barrier
+description: Something here is hard to read or use with your environment or assistive technology.
+title: "[Accessibility]: "
+labels: ["accessibility"]
+body:
+  - type: textarea
+    id: task
+    attributes:
+      label: What you were trying to do
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Browser, device, theme, screen reader or other assistive technology.
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: What happened
+    validations:
+      required: true

@@ -1,0 +1,43 @@
+name: Field report
+description: What you have seen inside a practice, a billing office, or a payer that this record gets wrong or misses.
+title: "[Field report]: "
+labels: ["field report"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you. Reports from the inside are the most useful thing this repository can receive.
+
+        **Do not include real patient data of any kind.** No names, dates of service, claim or member numbers, or chart text. If you need an example, make one up.
+  - type: dropdown
+    id: vantage
+    attributes:
+      label: Your vantage point
+      options:
+        - Physician or other clinician
+        - Billing, coding, or revenue cycle
+        - Patient or family member
+        - Payer employee or former employee
+        - Engineer or researcher
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: observation
+    attributes:
+      label: What you have seen
+      description: Describe the practice, pattern, or decision. Approximate numbers and timeframes are fine.
+    validations:
+      required: true
+  - type: textarea
+    id: disagreement
+    attributes:
+      label: Where this record or the approach is wrong
+      description: Be direct. Critique of LITMUS or of the software is as useful as agreement.
+  - type: checkboxes
+    id: phi
+    attributes:
+      label: Patient data
+      options:
+        - label: This report contains no real patient data.
+          required: true
