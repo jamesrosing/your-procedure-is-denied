@@ -1,0 +1,13 @@
+{
+  "name": "your-procedure-is-denied-build",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Hackathon work: appeal-drafting proposer on Meta models behind the LITMUS verifier",
+  "type": "module",
+  "scripts": {
+    "test-call": "node --env-file=../.env --import tsx src/test-call.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

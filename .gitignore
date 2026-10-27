@@ -16,6 +16,8 @@ data/
 
 # Secrets and local configuration
 .env
+# Private hackathon plan, never committed
+ROADMAP.md
 .env.*
 *.pem
 *.key
@@ -25,7 +27,9 @@ credentials*.json
 # Build, dependency, and OS clutter
 node_modules/
 dist/
-build/
+# Compiled output in nested packages only. The top-level /build directory is hackathon source and stays tracked.
+**/build/
+!/build/
 __pycache__/
 *.pyc
 .venv/
