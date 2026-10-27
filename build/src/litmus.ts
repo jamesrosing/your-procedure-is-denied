@@ -16,8 +16,11 @@
 //   2. The quote must appear verbatim in that entry's text (whitespace, case,
 //      and quote glyphs normalized, nothing else). Absent or trivial: refuted.
 //   3. Every hard token in the sentence (numbers, dates, codes, laterality in
-//      anatomical context) must appear in the quote, the payer criteria, the
-//      denial, or the stated case facts. Anything else: refuted, token named.
+//      anatomical context) must appear in the cited entry, the payer criteria,
+//      the denial, or the stated case facts. Anything else: refuted, token named.
+//      The whole cited entry counts, not only the quoted span: the gate exists
+//      to catch invented facts, not to grade quoting form, and the clinician who
+//      wrote the entry did not write it to a payer's vocabulary.
 //   4. A check that throws is an error, never a refutation and never a pass.
 // There is no resemblance threshold and no keyword list. The evidence is the
 // clinician's own words, which no payer vocabulary can require.
@@ -182,8 +185,10 @@ function resolve(chart: GateEntry[], citation: string): { ok: true; entry: GateE
 function checkQuote(entry: GateEntry, quote: string): Check {
   const q = canon(quote);
   if (q.length === 0) return { ok: false, status: 'refuted', reason: 'quote-empty' };
+  // Two words, or one substantive word of five or more letters ("Nonsmoker"). Never "the" or "PT".
   const words = q.split(' ').filter(w => /[a-z0-9]/.test(w));
-  if (words.length < 2) return { ok: false, status: 'refuted', reason: 'quote-too-short: a quote must be at least two words' };
+  const substantive = words.length === 1 && /^[a-z]{5,}$/.test(words[0]!);
+  if (words.length < 2 && !substantive) return { ok: false, status: 'refuted', reason: 'quote-too-short: a quote must be at least two words, or one substantive word' };
   if (!canon(entry.text).includes(q)) return { ok: false, status: 'refuted', reason: `quote-not-in-entry: the quote does not appear verbatim in ${entry.id}` };
   return { ok: true };
 }
@@ -215,11 +220,11 @@ export function litmus(sources: GateSources, appeal: Appeal): GateResult {
       const q = checkQuote(r.entry, s.quote);
       if (!q.ok) return { ...base, status: q.status, reason: q.reason };
       const allowed = new Set(shared);
-      sourceTokens(s.quote, allowed);
+      sourceTokens(r.entry.text, allowed);
       if (r.entry.date) sourceTokens(r.entry.date, allowed);
       const h = checkHardTokens(s.text, allowed);
       if (!h.ok) return { ...base, status: h.status, reason: h.reason, ...(h.missing ? { missing: h.missing } : {}) };
-      return { ...base, status: 'verified', reason: 'verified: quote found in the cited entry; every hard token sourced', [VERIFIED]: true };
+      return { ...base, status: 'verified', reason: 'verified: quote found in the cited entry; every hard token sourced from the entry, the criteria, the denial, or the case facts', [VERIFIED]: true };
     } catch (error: unknown) {
       return { ...base, status: 'error', reason: `error: ${error instanceof Error ? error.message : String(error)}` };
     }

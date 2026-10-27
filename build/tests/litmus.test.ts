@@ -125,9 +125,11 @@ describe('litmus: quote check', () => {
     assert.match(s.reason, /quote-not-in-entry/);
   });
 
-  test('an empty or one-word quote is refuted, never verified', () => {
+  test('an empty or trivial quote is refuted; a single substantive word the clinician wrote is accepted', () => {
     assert.match(one('Therapy was completed.', 'note-002', '').reason, /quote-empty/);
     assert.match(one('Therapy was completed.', 'note-002', 'PT').reason, /quote-too-short/);
+    assert.match(one('Therapy was completed.', 'note-002', 'the').reason, /quote-too-short/);
+    assert.equal(one('She uses ibuprofen.', 'note-002', 'ibuprofen').status, 'verified');
   });
 });
 
@@ -150,11 +152,18 @@ describe('litmus: hard tokens', () => {
     assert.equal(one('This exceeds the 6 month symptom requirement and answers the CARC 50 denial of CPT 19318.', 'note-001', Q_PAIN).status, 'verified');
   });
 
-  test('a number elsewhere in the cited entry but outside the quote is not admissible: quote the span', () => {
-    const s = one('The 620 gram threshold is exceeded.', 'note-001', Q_PAIN);
-    assert.equal(s.status, 'refuted');
-    assert.deepEqual(s.missing, ['620']);
+  test('a number anywhere in the cited entry is admissible, inside the quote or not: the physician wrote it', () => {
+    assert.equal(one('The 620 gram threshold is exceeded.', 'note-001', Q_PAIN).status, 'verified');
     assert.equal(one('The 620 gram threshold is exceeded.', 'note-001', Q_WEIGHT).status, 'verified');
+    const s = one('The 650 gram threshold is exceeded.', 'note-001', Q_WEIGHT);
+    assert.equal(s.status, 'refuted');
+    assert.deepEqual(s.missing, ['650']);
+  });
+
+  test('a fact in a different, uncited entry is not admissible', () => {
+    const s = one('Blood pressure was 128 over 82.', 'note-002', Q_PT);
+    assert.equal(s.status, 'refuted');
+    assert.deepEqual(s.missing, ['128', '82']);
   });
 
   test('the cited entry date is admissible in either form', () => {
@@ -164,9 +173,10 @@ describe('litmus: hard tokens', () => {
   });
 
   test('laterality is a hard token in anatomical context only', () => {
-    const s = one('Resection on the left breast was estimated at 724 grams.', 'note-001', 'I am estimating 724 grams on the right');
+    const s = one('Resection on the left breast was estimated at 724 grams.', 'note-002', Q_PT.replace('12', '12'));
     assert.equal(s.status, 'refuted');
-    assert.deepEqual(s.missing, ['left']);
+    assert.deepEqual(s.missing, ['724', 'left']);
+    assert.equal(one('Resection on the left breast was estimated at 724 grams.', 'note-001', 'I am estimating 724 grams on the right').status, 'verified');
     assert.equal(one('The patient reserves the right to further appeal.', 'note-002', Q_PT).status, 'verified');
   });
 
