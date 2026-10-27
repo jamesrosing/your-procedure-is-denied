@@ -38,3 +38,6 @@ Thumbs.db
 
 # Windows download-marker streams that WSL exposes as files
 *:Zone.Identifier
+
+# Browser tool scratch output, never committed
+.playwright-mcp/
