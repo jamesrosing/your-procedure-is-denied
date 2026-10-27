@@ -130,13 +130,38 @@ If the record does not support an appeal, the software says so instead of arguin
 
 During the Meta Global AI Developer Hackathon[^hack] (Oct 26 to Nov 4, 2026), I am testing whether open-weight models can do the drafting while the verification step holds them to the same standard. If they can, an independent practice can run this without sending patient records to a vendor it does not control.
 
-The test runs on 50 synthetic denials. No real patient data is used. Results, including failures, will be posted here as they come in.
+The test runs on 50 synthetic denials across the categories where denial dollars concentrate: post-acute care, inpatient level of care, oncology, vascular and cardiac procedures, spine and joint surgery, wound care, biologics, bariatric and plastic surgery. Thirty can be answered from the chart. Twenty cannot, and the right answer for those is to decline. No real patient data is used. The set, the gate, the harness, and every result file are in [`/build`](build/), and [NEW-WORK.md](NEW-WORK.md) is the ledger of what was built when.
 
-| Model | Passed verification (%) | Ungrounded statements caught (count) | Latency (s per appeal) | Cost ($ per appeal) |
-| --- | :---: | :---: | :---: | :---: |
-| muse-spark-1.3 (Meta Model API) | pending | pending | pending | pending |
-| muse-wonder-1.0 (Meta Model API) | pending | pending | pending | pending |
-| Muse Spark Open (hosted open weights) | pending | pending | pending | pending |
+### Results
+
+Three Meta models, 50 cases each, one run per model on October 27, 2026, effort low, eight cases in flight at a time. A result agrees with the grading key when the model drafts an appeal for a case the chart supports and the gate verifies every sentence, or when the model declines a case the chart does not support.
+
+| Model | Agreed with the key | Gate blocked a draft | Sentences verified | Latency, median | Cost per appeal |
+| --- | :---: | :---: | :---: | :---: | :---: |
+| muse-spark-1.3 (Meta Model API) | 50 of 50 | 0 | 247 | 16.3 s | $0.013 |
+| muse-wonder-1.0 (Meta Model API) | 49 of 50 | 0 | 236 | 8.8 s | $0.037 |
+| Muse Spark Open (open weights, hosted on Baseten) | 49 of 50 | 1 | 233 | 4.3 s | $0.007[^open] |
+
+The two disagreements:
+
+- **muse-wonder-1.0 declined a wound-care case the key calls warranted.** The criterion lists infection control and glycemic management among the components of standard wound care. The weekly notes document debridement, dressings, and offloading, and the chart holds a normal A1c and a clean wound elsewhere. The model read the criterion strictly and said the record did not meet it. That is a judgment a physician could share. It is not an invented fact.
+- **The gate blocked one Muse Spark Open draft.** The sentence said the patient was on three antianginal agents, citing a note that lists metoprolol, amlodipine, and isosorbide. The count is correct, and the gate blocked it anyway, because the number three appears nowhere in the record. The gate cannot count. See the limitations below.
+
+Every warranted draft from all three models cited the chart entries the key expected, with citation precision above 95 percent, and across the three runs no model invented a quote. One did in an earlier, superseded run: muse-wonder-1.0 wrote "Proceededed" inside a quotation, and the gate refuted the sentence. That is the check doing its job.
+
+### What the models found wrong with my test
+
+Four of my grading keys were defective, and each was found by a model reading the chart more carefully than I had. A rehabilitation chart labeled warranted documented two physician visits in 14 days against a criterion of three a week. A sepsis chart labeled absent still carried a lactate and a blood pressure in a later note. A fusion chart labeled absent still mentioned the slip and the motion on the films. A carotid chart put surgery outside the 14-day window the criterion requires. Each was fixed by regenerating only the affected cases, and the ledger records every one. A benchmark written by one person has that person's blind spots, and the models were useful reviewers of it.
+
+### Limitations
+
+- **The gate checks consistency, not correctness.** It verifies that the quoted words are in the cited entry and that every number, date, code, and side in the sentence is sourced. It does not verify that those words satisfy the criterion. In an earlier run, a model quoted "plan 5 to 6 days a week" for a therapy-intensity criterion and "significant plaque on the left" for a stenosis criterion. Both quotes are real, neither meets the criterion, and the gate passed both. The papers call this the referential limit, and it is the reason nothing is sent without a physician's signature.
+- **The gate cannot derive.** A count read off a list, a duration computed from two dates, or a side inferred from an entry that names it elsewhere is blocked unless the token appears verbatim. The one block above is a false block. The design favors blocking a true derivation over passing an invented one, and whether to exempt simple counts is an open question.
+- **Pronouns and other soft words are not checked.** A model once wrote "he" for a female patient. Nothing in the sentence tripped the gate. Sex, age, and alias are case facts and could be checked next.
+- **The counts are small.** Fifty synthetic cases, one run per model, one seed. There are no repeat runs, so no estimate of run-to-run variance. The charts and the criteria were written by the same person, which makes the test easier than a real chart against a real policy.
+- **The data are synthetic.** The charts are generated in dictation voice from 18 templates. No result here says anything about performance on real records, and that measurement cannot be made in public.
+
+Next, the agentic step: the model fetches chart entries by tool call instead of receiving the whole chart, and the same 50 cases run again.
 
 <br>
 
@@ -156,4 +181,5 @@ Physicians, billers, patients, and people who work at payers: I want to hear wha
 [^psi]: Healthcare Dive on the U.S. Senate Permanent Subcommittee on Investigations report, October 2024. https://www.healthcaredive.com/news/medicare-advantage-AI-denials-cvs-humana-unitedhealthcare-senate-report/730383/ Full report: https://www.hsgac.senate.gov/wp-content/uploads/2024.10.17-PSI-Majority-Staff-Report-on-Medicare-Advantage.pdf
 [^cigna]: Healthcare Dive, Cigna lawsuit over PxDx claim denials, July 2023. https://www.healthcaredive.com/news/cigna-lawsuit-algorithm-claims-denials-california/
 [^wiser]: Medical Economics, lawmakers on the WISeR model, May 2026. https://www.medicaleconomics.com/view/medicare-wiser-prior-authorizations-needed-congress-prior-authorization-lawmakers-say
+[^open]: Muse Spark Open reported zero reasoning tokens through the Baseten endpoint on every call, so its cost may be understated if reasoning is billed as output. Latency is wall-clock and unaffected.
 [^hack]: Meta Global AI Developer Hackathon, hosted by Meta and Cerebral Valley. https://cerebralvalley.ai/e/meta-ai-developer-hackathon

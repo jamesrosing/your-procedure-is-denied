@@ -33,7 +33,9 @@ The hackathon work reimplements the LITMUS gate contract in `/build` against syn
 
 - `build/results/` (Oct 27): the first denial end to end through muse-spark-1.3 and the gate. case-001, a skilled nursing continued-stay denial under the Medicare Advantage payer: the model mapped all four criteria to verbatim quotes, wrote 8 sentences, and the gate verified 8 of 8 with every citation on the grading key. 2,491 input and 2,950 output tokens (2,286 of them thinking), 16.8 seconds, $0.0157. Prompt caching needed a longer shared block: a 500-token instruction block was never cached (two identical runs, zero cache reads); after the shared block was extended to about 1,200 tokens with a CARC reference and a worked example, a repeat call read 3,057 tokens from cache against 96 uncached. Meta reports no cache-creation count; the first call bills the prefix as ordinary input.
 
-Still to come: the full 50-case runs on three Meta models, and the agentic step.
+- `build/results/` (Oct 27, final): three 50-case runs, one per Meta model, on the corrected set. muse-spark-1.3 agreed with the key on 50 of 50; muse-wonder-1.0 on 49 (one strict decline of a warranted wound-care case); Muse Spark Open on Baseten on 49 (one draft blocked for a count word, "three", that is true but appears nowhere verbatim). No model invented a quote in the final runs. The repository README carries the table and the limitations.
+
+Still to come: the agentic step, where the proposer fetches chart entries by tool call.
 
 ## Commit ledger
 
@@ -59,4 +61,5 @@ Every commit made during the event, oldest first. A commit's hash is recorded by
 | 2026-10-27 | d2afefb | Three-model runs on the final synthetic set (`build/results/`): muse-spark-1.3, muse-wonder-1.0, and Muse Spark Open on Baseten, 50 cases each, effort low, concurrency 8. One more grading-key leak fixed first, found by the Spark Open run: the fusion case labeled 'absent' had a follow-up note that still mentioned the slip and the motion on the films (case-045 regenerated, the other 49 byte-identical). Earlier result files were superseded and removed. Tag `event-04-three-model-runs` |
 | 2026-10-27 | ba77feb | `scripts/phi_check.py`: a ten-digit run inside a longer hex string (a SHA-256 hash in a results file) is no longer reported as a possible NPI; test added. Commits are now gated on the check's exit status rather than a piped tail |
 | 2026-10-27 | d9a2ed0 | Carotid cases: the TIA was 12 days before the clinic visit and surgery 10 to 13 days after it, so 'within 14 days of the index event' was never true; muse-wonder-1.0 declined it correctly. Timing fixed, two cases regenerated, the other 48 byte-identical |
-| 2026-10-27 | pending | Final three-model runs on the corrected set (`build/results/`, one file per model): muse-spark-1.3 50 of 50, muse-wonder-1.0 49 of 50, Muse Spark Open on Baseten 49 of 50. Earlier result files removed as superseded |
+| 2026-10-27 | e656833 | Final three-model runs on the corrected set (`build/results/`, one file per model): muse-spark-1.3 50 of 50, muse-wonder-1.0 49 of 50, Muse Spark Open on Baseten 49 of 50. Earlier result files removed as superseded |
+| 2026-10-27 | pending | README: results table for the three Meta models from the October 27 runs, the two disagreements read and explained, the four grading-key defects the models found, and the limitations (referential limit, no derivation, unchecked pronouns, small counts, synthetic data). `build/README.md` contents list brought up to date with the gate, harness, and results |
