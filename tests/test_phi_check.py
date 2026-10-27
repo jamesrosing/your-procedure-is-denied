@@ -34,3 +34,9 @@ def test_npi_luhn():
 def test_x12_segments():
     assert "X12 interchange header" in names("ISA*00*          *00*")
     assert "X12 patient name segment" in names("NM1*IL*1*DOE*JANE")
+
+
+def test_hex_hash_is_not_an_npi():
+    """A SHA-256 hash can contain a Luhn-valid ten-digit run; it is not an identifier."""
+    findings = list(phi_check.scan("x", '"inputHash": "b434f1e95cf9d5934307252eeb38747330c11636c32d7a032de35895a9bd355d"'))
+    assert findings == []

@@ -23,7 +23,8 @@ PATTERNS = {
     "X12 interchange header": re.compile(r"^ISA\*\d{2}\*", re.M),
     "X12 patient name segment": re.compile(r"\bNM1\*(?:IL|QC)\*1\*"),
 }
-NPI_CANDIDATE = re.compile(r"(?<!\d)\d{10}(?!\d)")
+# Ten digits not embedded in a longer hex string: a hash is not an NPI.
+NPI_CANDIDATE = re.compile(r"(?<![0-9A-Fa-f])\d{10}(?![0-9A-Fa-f])")
 
 
 def is_npi(digits: str) -> bool:
