@@ -1,0 +1,226 @@
+{
+  "id": "case-034",
+  "patient": {
+    "alias": "SYN-034",
+    "age": 74,
+    "sex": "male"
+  },
+  "procedure": {
+    "cpt": "15823",
+    "description": "bilateral upper eyelid blepharoplasty with excessive skin weighting down the lid"
+  },
+  "payer": {
+    "name": "Saltmarsh Benefits Administrators",
+    "planType": "self-funded employer plan"
+  },
+  "denial": {
+    "carc": "50",
+    "carcText": "These are non-covered services because this is not deemed a 'medical necessity' by the payer.",
+    "text": "Saltmarsh Benefits Administrators denied the claim for CPT 15823 (bilateral upper eyelid blepharoplasty with excessive skin weighting down the lid) with date of service 2026-05-02. CARC 50: These are non-covered services because this is not deemed a 'medical necessity' by the payer. Payer remark: Visual field documentation submitted does not meet the policy threshold for functional impairment.",
+    "dateOfService": "2026-05-02"
+  },
+  "criteria": [
+    {
+      "id": "crit-1",
+      "text": "Automated visual field testing demonstrating at least 30 percent loss of the superior visual field, with improvement when the upper lids are taped."
+    },
+    {
+      "id": "crit-2",
+      "text": "Photographs documenting redundant upper lid skin resting on or over the lashes, or a margin reflex distance 1 of 2 millimeters or less."
+    },
+    {
+      "id": "crit-3",
+      "text": "A documented functional complaint such as difficulty reading or driving, loss of the superior field, or brow fatigue."
+    }
+  ],
+  "chart": [
+    {
+      "id": "note-001",
+      "date": "2025-04-06",
+      "kind": "outside letter",
+      "text": "Referral letter from the primary care office. Thank you for seeing this patient of mine for surgical evaluation. His history and medication list are attached. Please let me know what you recommend and whether anything is needed from our end for clearance."
+    },
+    {
+      "id": "note-002",
+      "date": "2025-04-09",
+      "kind": "office visit",
+      "text": "Seasonal allergies acting up, itchy eyes, sneezing, clear drainage, worse outdoors. No wheeze. Cetirizine at night and the saline rinse. Fine with that."
+    },
+    {
+      "id": "note-003",
+      "date": "2025-04-14",
+      "kind": "office visit",
+      "text": "74 year old man sent over by his eye doctor for heavy upper lids. Exam: marked dermatochalasis both upper lids, skin hooding over the lashes laterally, brow ptosis mild, no true ptosis of the lid itself, levator function good. Discussed upper lid blepharoplasty. His history otherwise: hypertension on lisinopril. Surgeries: a C-section. Allergies: codeine makes him sick. Does not smoke, a glass of wine on weekends, works from home. Family history noncontributory for what we are talking about today. He says he is lifting his brows all day to see, gets a headache by evening, has given up night driving, tilts his head back to read the paper."
+    },
+    {
+      "id": "note-004",
+      "date": "2025-04-21",
+      "kind": "office visit",
+      "text": "Burning with urination for two days, going frequently, no fever, no back pain. Urine dip positive for leukocytes and nitrites. Nitrofurantoin for five days, push fluids, call if fever or flank pain."
+    },
+    {
+      "id": "note-005",
+      "date": "2025-04-24",
+      "kind": "phone note",
+      "text": "Pharmacy called about the refill on the omeprazole 40. Approved 90 days. He mentioned the heartburn is better since cutting back on coffee."
+    },
+    {
+      "id": "note-006",
+      "date": "2025-05-13",
+      "kind": "phone note",
+      "text": "He called asking about travel vaccines for a trip in the spring. Advised hepatitis A and a typhoid booster, referred to the travel clinic. Nothing else needed from us."
+    },
+    {
+      "id": "note-007",
+      "date": "2025-06-02",
+      "kind": "office visit",
+      "text": "Trouble sleeping for a couple of months, falls asleep fine but wakes at three and lies there. No snoring per the spouse, no daytime naps, two cups of coffee before noon. Went over sleep hygiene, no screens in bed, cut the afternoon caffeine. Will hold off on medication for now."
+    },
+    {
+      "id": "note-008",
+      "date": "2025-06-10",
+      "kind": "office visit",
+      "text": "Mole on the left forearm that his spouse noticed. About 7 millimeters, even color, regular border, no change he is aware of. Looks benign. Photo in the chart for comparison, recheck in a year or sooner if it changes."
+    },
+    {
+      "id": "note-009",
+      "date": "2025-06-13",
+      "kind": "office visit",
+      "text": "Back to review the testing. Went over the operation, bruising, the scar in the crease, the small chance of dry eye. He wants to go ahead. Vitals today 121 over 75, pulse 78."
+    },
+    {
+      "id": "note-010",
+      "date": "2025-06-13",
+      "kind": "photo documentation",
+      "text": "Frontal and lateral photos today, primary gaze, flash. Redundant upper lid skin draping onto the lashes on both sides. MRD1 about 1.5 millimeters right and 1.5 left."
+    },
+    {
+      "id": "note-011",
+      "date": "2025-07-11",
+      "kind": "office visit",
+      "text": "A1c came back 5.9. Prediabetic range, same as last year. Walking program, cut the soda, recheck in six months. He is motivated."
+    },
+    {
+      "id": "note-012",
+      "date": "2025-07-26",
+      "kind": "phone note",
+      "text": "Patient called about a tick bite on the calf after a hike. Tick removed whole, no rash, no fever. Watch for a bull's-eye rash or flu symptoms over the next month and call if either shows up."
+    },
+    {
+      "id": "note-013",
+      "date": "2025-08-07",
+      "kind": "office visit",
+      "text": "Twisted the right ankle stepping off a curb 4 days ago. Swelling over the lateral malleolus, tender over the ATFL, can bear weight. Ottawa negative, no film. Brace, ice, ibuprofen, elevate. Should be fine in a couple weeks."
+    },
+    {
+      "id": "note-014",
+      "date": "2025-08-27",
+      "kind": "phone note",
+      "text": "Thyroid labs back. TSH 3.4, free T4 normal. No change to the levothyroxine 75. Repeat in a year."
+    },
+    {
+      "id": "note-015",
+      "date": "2025-08-29",
+      "kind": "phone note",
+      "text": "He called asking where things stand with the insurance. Told him the paperwork went in and we are waiting to hear. Reviewed what to do in the meantime."
+    },
+    {
+      "id": "note-016",
+      "date": "2025-10-02",
+      "kind": "office visit",
+      "text": "Ear fullness and muffled hearing on the left for a week after a cold. Canal clear, drum dull with fluid behind it, no infection. Serous otitis. Decongestant, swallow and yawn, recheck in three weeks if not better."
+    },
+    {
+      "id": "note-017",
+      "date": "2025-10-02",
+      "kind": "outside letter",
+      "text": "Dermatology consult note received. Two actinic keratoses on the forehead treated with cryotherapy. Annual skin check recommended, sunscreen counseling done."
+    },
+    {
+      "id": "note-018",
+      "date": "2025-10-05",
+      "kind": "outside letter",
+      "text": "Optometry report forwarded for the record. Routine refraction, mild astigmatism, new glasses prescribed, retinas healthy, pressures 19 and 18. No ocular pathology noted."
+    },
+    {
+      "id": "note-019",
+      "date": "2025-10-26",
+      "kind": "phone note",
+      "text": "Called his with the cholesterol results. Total 209, LDL 155, HDL 41, triglycerides 146. Discussed diet and walking. He wants to try lifestyle first for six months before we talk about a statin. Agreed."
+    },
+    {
+      "id": "note-020",
+      "date": "2025-10-30",
+      "kind": "phone note",
+      "text": "Work note requested for a sick day last Tuesday. Faxed to the employer."
+    },
+    {
+      "id": "note-021",
+      "date": "2025-11-28",
+      "kind": "office visit",
+      "text": "Interval visit. Nothing new since last time, symptoms as described before, he is managing. Went over the plan again and answered questions from his spouse."
+    },
+    {
+      "id": "note-022",
+      "date": "2026-02-27",
+      "kind": "outside letter",
+      "text": "Letter from the dentist's office confirming routine cleaning and exam completed, no active infection, no dental work pending. Sent at our request for the surgical file."
+    },
+    {
+      "id": "note-023",
+      "date": "2026-03-17",
+      "kind": "outside letter",
+      "text": "Gastroenterology note received. Screening colonoscopy completed, two small polyps removed, benign on pathology, repeat in 7 years."
+    },
+    {
+      "id": "note-024",
+      "date": "2026-03-29",
+      "kind": "office visit",
+      "text": "Low back strain after moving furniture over the weekend. No radiation down the legs, no numbness, no bowel or bladder trouble. Paraspinal tenderness, straight leg raise negative. Heat, keep moving, ibuprofen with food for a week. Should settle."
+    },
+    {
+      "id": "note-025",
+      "date": "2026-04-18",
+      "kind": "preoperative visit",
+      "text": "Pre-op. Consent signed. Marked the skin excision sitting up. No blood thinners. Stop the fish oil."
+    }
+  ],
+  "expected": {
+    "warranted": false,
+    "subtype": "absent",
+    "criteriaMet": [
+      "crit-2",
+      "crit-3"
+    ],
+    "support": {
+      "crit-1": [],
+      "crit-2": [
+        "note-010"
+      ],
+      "crit-3": [
+        "note-003"
+      ]
+    },
+    "distractors": [
+      "note-002",
+      "note-004",
+      "note-005",
+      "note-006",
+      "note-007",
+      "note-008",
+      "note-011",
+      "note-012",
+      "note-013",
+      "note-014",
+      "note-016",
+      "note-017",
+      "note-018",
+      "note-019",
+      "note-020",
+      "note-022",
+      "note-023",
+      "note-024"
+    ],
+    "note": "The chart never addresses crit-1 (vft); no entry supports it, so an appeal would assert what the record does not contain."
+  }
+}

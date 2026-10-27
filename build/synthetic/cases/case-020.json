@@ -1,0 +1,234 @@
+{
+  "id": "case-020",
+  "patient": {
+    "alias": "SYN-020",
+    "age": 59,
+    "sex": "male"
+  },
+  "procedure": {
+    "cpt": "15823",
+    "description": "bilateral upper eyelid blepharoplasty with excessive skin weighting down the lid"
+  },
+  "payer": {
+    "name": "Northwind Mutual Health",
+    "planType": "commercial PPO"
+  },
+  "denial": {
+    "carc": "50",
+    "carcText": "These are non-covered services because this is not deemed a 'medical necessity' by the payer.",
+    "text": "Northwind Mutual Health denied the claim for CPT 15823 (bilateral upper eyelid blepharoplasty with excessive skin weighting down the lid) with date of service 2026-01-19. CARC 50: These are non-covered services because this is not deemed a 'medical necessity' by the payer. Payer remark: Visual field documentation submitted does not meet the policy threshold for functional impairment.",
+    "dateOfService": "2026-01-19"
+  },
+  "criteria": [
+    {
+      "id": "crit-1",
+      "text": "Visual field testing demonstrating at least 12 degrees of superior visual field loss, with improvement when the upper lids are taped."
+    },
+    {
+      "id": "crit-2",
+      "text": "Photographs documenting redundant upper lid skin resting on or over the lashes, or a margin reflex distance 1 of 2 millimeters or less."
+    },
+    {
+      "id": "crit-3",
+      "text": "A documented functional complaint such as difficulty reading or driving, loss of the superior field, or brow fatigue."
+    }
+  ],
+  "chart": [
+    {
+      "id": "note-001",
+      "date": "2024-12-22",
+      "kind": "phone note",
+      "text": "He called asking about travel vaccines for a trip in the spring. Advised hepatitis A and a typhoid booster, referred to the travel clinic. Nothing else needed from us."
+    },
+    {
+      "id": "note-002",
+      "date": "2025-01-04",
+      "kind": "phone note",
+      "text": "Work note requested for a sick day last Tuesday. Faxed to the employer."
+    },
+    {
+      "id": "note-003",
+      "date": "2025-01-18",
+      "kind": "outside letter",
+      "text": "Referral letter from the primary care office. Thank you for seeing this patient of mine for surgical evaluation. His history and medication list are attached. Please let me know what you recommend and whether anything is needed from our end for clearance."
+    },
+    {
+      "id": "note-004",
+      "date": "2025-01-25",
+      "kind": "office visit",
+      "text": "59 year old man sent over by his eye doctor for heavy upper lids. Exam: marked dermatochalasis both upper lids, skin hooding over the lashes laterally, brow ptosis mild, no true ptosis of the lid itself, levator function good. Discussed upper lid blepharoplasty. His history otherwise: migraines, rare now, hypertension on lisinopril, mild asthma, albuterol maybe twice a year. Surgeries: no prior surgery. Allergies: no drug allergies. Does not smoke, a glass of wine on weekends, works as a nurse. Family history noncontributory for what we are talking about today. He says he is lifting his brows all day to see, gets a headache by evening, has given up night driving, tilts his head back to read the paper."
+    },
+    {
+      "id": "note-005",
+      "date": "2025-02-23",
+      "kind": "visual field test",
+      "text": "Humphrey superior field, untaped: 16 degrees of superior field remaining on the right and 19 on the left, which works out to about 34 percent loss of the superior field. Taped: improves to 34 right and 39 left. Reliable test, fixation losses low."
+    },
+    {
+      "id": "note-006",
+      "date": "2025-03-11",
+      "kind": "office visit",
+      "text": "Blood pressure check. 121 over 82 today, 129 over 81 on repeat. He has been taking the lisinopril 40 most days, admits to missing weekends. Low salt talk again. Keep the dose, recheck in 8 weeks."
+    },
+    {
+      "id": "note-007",
+      "date": "2025-03-19",
+      "kind": "office visit",
+      "text": "Trouble sleeping for a couple of months, falls asleep fine but wakes at three and lies there. No snoring per the spouse, no daytime naps, two cups of coffee before noon. Went over sleep hygiene, no screens in bed, cut the afternoon caffeine. Will hold off on medication for now."
+    },
+    {
+      "id": "note-008",
+      "date": "2025-04-06",
+      "kind": "phone note",
+      "text": "Patient called about a tick bite on the shoulder after a hike. Tick removed whole, no rash, no fever. Watch for a bull's-eye rash or flu symptoms over the next month and call if either shows up."
+    },
+    {
+      "id": "note-009",
+      "date": "2025-04-07",
+      "kind": "office visit",
+      "text": "Back to review the testing. Went over the operation, bruising, the scar in the crease, the small chance of dry eye. He wants to go ahead. Vitals today 129 over 70, pulse 87."
+    },
+    {
+      "id": "note-010",
+      "date": "2025-04-07",
+      "kind": "photo documentation",
+      "text": "Frontal and lateral photos today, primary gaze, flash. Redundant upper lid skin draping onto the lashes on both sides. MRD1 about 2 millimeters right and 2 left."
+    },
+    {
+      "id": "note-011",
+      "date": "2025-04-28",
+      "kind": "office visit",
+      "text": "Burning with urination for two days, going frequently, no fever, no back pain. Urine dip positive for leukocytes and nitrites. Nitrofurantoin for five days, push fluids, call if fever or flank pain."
+    },
+    {
+      "id": "note-012",
+      "date": "2025-05-07",
+      "kind": "office visit",
+      "text": "A1c came back 5.9. Prediabetic range, same as last year. Walking program, cut the soda, recheck in six months. He is motivated."
+    },
+    {
+      "id": "note-013",
+      "date": "2025-05-23",
+      "kind": "office visit",
+      "text": "Twisted the left ankle stepping off a curb 3 days ago. Swelling over the lateral malleolus, tender over the ATFL, can bear weight. Ottawa negative, no film. Brace, ice, ibuprofen, elevate. Should be fine in a couple weeks."
+    },
+    {
+      "id": "note-014",
+      "date": "2025-05-31",
+      "kind": "phone note",
+      "text": "He called asking where things stand with the insurance. Told him the paperwork went in and we are waiting to hear. Reviewed what to do in the meantime."
+    },
+    {
+      "id": "note-015",
+      "date": "2025-06-05",
+      "kind": "outside letter",
+      "text": "Optometry report forwarded for the record. Routine refraction, mild astigmatism, new glasses prescribed, retinas healthy, pressures 15 and 15. No ocular pathology noted."
+    },
+    {
+      "id": "note-016",
+      "date": "2025-06-17",
+      "kind": "phone note",
+      "text": "Called his with the cholesterol results. Total 193, LDL 122, HDL 52, triglycerides 161. Discussed diet and walking. He wants to try lifestyle first for six months before we talk about a statin. Agreed."
+    },
+    {
+      "id": "note-017",
+      "date": "2025-07-22",
+      "kind": "office visit",
+      "text": "Check-in while we wait on the insurance. No change in the complaints. Reviewed the risks and recovery one more time, he remains sure about going ahead."
+    },
+    {
+      "id": "note-018",
+      "date": "2025-08-11",
+      "kind": "outside letter",
+      "text": "Dermatology consult note received. Two actinic keratoses on the forehead treated with cryotherapy. Annual skin check recommended, sunscreen counseling done."
+    },
+    {
+      "id": "note-019",
+      "date": "2025-08-12",
+      "kind": "phone note",
+      "text": "Thyroid labs back. TSH 2.2, free T4 normal. No change to the levothyroxine 75. Repeat in a year."
+    },
+    {
+      "id": "note-020",
+      "date": "2025-08-28",
+      "kind": "phone note",
+      "text": "Pharmacy called about the refill on the omeprazole 20. Approved 90 days. He mentioned the heartburn is better since cutting back on coffee."
+    },
+    {
+      "id": "note-021",
+      "date": "2025-09-26",
+      "kind": "office visit",
+      "text": "Low back strain after moving furniture over the weekend. No radiation down the legs, no numbness, no bowel or bladder trouble. Paraspinal tenderness, straight leg raise negative. Heat, keep moving, ibuprofen with food for a week. Should settle."
+    },
+    {
+      "id": "note-022",
+      "date": "2025-11-28",
+      "kind": "office visit",
+      "text": "Annual physical. Feels well overall. Sleeping fine, appetite fine, no chest pain, no shortness of breath. Flu shot given in the left arm today. Due for a tetanus booster, he will think about it. Labs ordered, fasting."
+    },
+    {
+      "id": "note-023",
+      "date": "2025-12-08",
+      "kind": "office visit",
+      "text": "Vitamin D came back 20. Started 1000 units daily, recheck in three months. Also talked about calcium from food rather than pills."
+    },
+    {
+      "id": "note-024",
+      "date": "2026-01-04",
+      "kind": "preoperative visit",
+      "text": "Pre-op. Consent signed. Marked the skin excision sitting up. No blood thinners. Stop the fish oil."
+    },
+    {
+      "id": "note-025",
+      "date": "2026-01-10",
+      "kind": "outside letter",
+      "text": "Gastroenterology note received. Screening colonoscopy completed, two small polyps removed, benign on pathology, repeat in 7 years."
+    },
+    {
+      "id": "note-026",
+      "date": "2026-01-17",
+      "kind": "office visit",
+      "text": "Here with a cough and congestion for 5 days, low grade temp at home, no shortness of breath. Lungs clear, throat a little red, ears fine. Looks viral. Fluids, rest, honey for the cough, come back if he gets a fever over 101 or it goes past two weeks."
+    }
+  ],
+  "expected": {
+    "warranted": true,
+    "criteriaMet": [
+      "crit-1",
+      "crit-2",
+      "crit-3"
+    ],
+    "support": {
+      "crit-1": [
+        "note-005"
+      ],
+      "crit-2": [
+        "note-010"
+      ],
+      "crit-3": [
+        "note-004"
+      ]
+    },
+    "distractors": [
+      "note-001",
+      "note-002",
+      "note-006",
+      "note-007",
+      "note-008",
+      "note-011",
+      "note-012",
+      "note-013",
+      "note-015",
+      "note-016",
+      "note-018",
+      "note-019",
+      "note-020",
+      "note-021",
+      "note-022",
+      "note-023",
+      "note-025",
+      "note-026"
+    ],
+    "note": "The chart documents every criterion; the CARC 50 denial can be answered from the record."
+  }
+}

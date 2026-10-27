@@ -1,0 +1,279 @@
+{
+  "id": "case-050",
+  "patient": {
+    "alias": "SYN-050",
+    "age": 30,
+    "sex": "female"
+  },
+  "procedure": {
+    "cpt": "15877",
+    "description": "suction assisted lipectomy, trunk and lower extremities, for lipedema"
+  },
+  "payer": {
+    "name": "Northwind Mutual Health",
+    "planType": "commercial PPO"
+  },
+  "denial": {
+    "carc": "56",
+    "carcText": "Procedure/treatment is deemed experimental/investigational by the payer.",
+    "text": "Northwind Mutual Health denied the claim for CPT 15877 (suction assisted lipectomy, trunk and lower extremities, for lipedema) with date of service 2026-01-26. CARC 56: Procedure/treatment is deemed experimental/investigational by the payer. Payer remark: Coverage criteria in the medical policy for lipedema were not met based on the documentation submitted.",
+    "dateOfService": "2026-01-26"
+  },
+  "criteria": [
+    {
+      "id": "crit-1",
+      "text": "Diagnosis of lipedema stage II or III documented on examination: bilateral symmetric disproportionate adiposity of the limbs sparing the feet, negative Stemmer sign, tenderness, and easy bruising."
+    },
+    {
+      "id": "crit-2",
+      "text": "At least 3 months of conservative therapy including compression garments and manual lymphatic drainage or supervised exercise, with persistent pain or functional impairment."
+    },
+    {
+      "id": "crit-3",
+      "text": "Pain or impaired mobility attributable to lipedema."
+    }
+  ],
+  "chart": [
+    {
+      "id": "note-001",
+      "date": "2025-02-02",
+      "kind": "phone note",
+      "text": "Thyroid labs back. TSH 3.4, free T4 normal. No change to the levothyroxine 75. Repeat in a year."
+    },
+    {
+      "id": "note-002",
+      "date": "2025-02-22",
+      "kind": "outside letter",
+      "text": "From the referring physician: please evaluate for surgical management. We have exhausted what we can do in primary care and the patient is motivated. Recent labs enclosed, all within normal limits."
+    },
+    {
+      "id": "note-003",
+      "date": "2025-02-22",
+      "kind": "office visit",
+      "text": "Seasonal allergies acting up, itchy eyes, sneezing, clear drainage, worse outdoors. No wheeze. Cetirizine at night and the saline rinse. Fine with that."
+    },
+    {
+      "id": "note-004",
+      "date": "2025-03-07",
+      "kind": "outside letter",
+      "text": "Mammogram report forwarded for the record. Bilateral screening, BI-RADS 1, negative, routine screening in one year."
+    },
+    {
+      "id": "note-005",
+      "date": "2025-03-11",
+      "kind": "office visit",
+      "text": "30 year old woman here about her legs, self-referred after reading about lipedema. Mother and aunt had the same legs. Discussed lymph-sparing liposuction, staged, and that it is debulking, not a cure. Her history otherwise: prediabetes, diet controlled. Surgeries: wisdom teeth. Allergies: sulfa, hives as a child. Quit smoking 4 years ago, no alcohol, drives for a living. Family history noncontributory for what we are talking about today. Classic picture. Column legs out of all proportion to her waist, cuff sign at the ankles, feet spared, Stemmer negative, exquisitely tender to pinch over the thighs, bruises if you look at her. Stage 2. She has been in class 2 flat-knit compression daily for 10 months, MLD weekly with the lymphedema therapist across town, water aerobics twice a week, and she is still in pain and the legs have not budged. Says she cannot stand through a shift anymore, pain in the thighs is constant, stairs are hard because the legs knock together."
+    },
+    {
+      "id": "note-006",
+      "date": "2025-03-17",
+      "kind": "phone note",
+      "text": "She called asking about travel vaccines for a trip in early summer. Advised hepatitis A and a typhoid booster, referred to the travel clinic. Nothing else needed from us."
+    },
+    {
+      "id": "note-007",
+      "date": "2025-03-18",
+      "kind": "physical therapy",
+      "text": "Lymphedema therapy visit. Manual lymphatic drainage both lower extremities, compression check, garments fitting well, she reports wearing them daily. Pain unchanged at 6 out of 10."
+    },
+    {
+      "id": "note-008",
+      "date": "2025-03-23",
+      "kind": "physical therapy",
+      "text": "Session 2. Continued the program from the evaluation, tolerated well, home exercises reviewed, she reports slight improvement that does not last."
+    },
+    {
+      "id": "note-009",
+      "date": "2025-03-28",
+      "kind": "physical therapy",
+      "text": "Session 3. Continued the program from the evaluation, tolerated well, home exercises reviewed, she reports no real change."
+    },
+    {
+      "id": "note-010",
+      "date": "2025-04-02",
+      "kind": "physical therapy",
+      "text": "Session 4. Continued the program from the evaluation, tolerated well, home exercises reviewed, she reports about the same."
+    },
+    {
+      "id": "note-011",
+      "date": "2025-04-07",
+      "kind": "physical therapy",
+      "text": "Session 5. Continued the program from the evaluation, tolerated well, home exercises reviewed, she reports no real change."
+    },
+    {
+      "id": "note-012",
+      "date": "2025-04-12",
+      "kind": "physical therapy",
+      "text": "Session 6. Continued the program from the evaluation, tolerated well, home exercises reviewed, she reports about the same."
+    },
+    {
+      "id": "note-013",
+      "date": "2025-04-17",
+      "kind": "physical therapy",
+      "text": "Session 7. Continued the program from the evaluation, tolerated well, home exercises reviewed, she reports no real change."
+    },
+    {
+      "id": "note-014",
+      "date": "2025-04-27",
+      "kind": "office visit",
+      "text": "Follow-up. Reviewed photos and measurements, legs unchanged. Went over the staged plan and the compression afterward. Vitals today 131 over 78, pulse 73."
+    },
+    {
+      "id": "note-015",
+      "date": "2025-05-23",
+      "kind": "office visit",
+      "text": "A1c came back 6.7. Prediabetic range, same as last year. Walking program, cut the soda, recheck in six months. She is motivated."
+    },
+    {
+      "id": "note-016",
+      "date": "2025-06-11",
+      "kind": "outside letter",
+      "text": "Optometry report forwarded for the record. Routine refraction, mild astigmatism, new glasses prescribed, retinas healthy, pressures 17 and 14. No ocular pathology noted."
+    },
+    {
+      "id": "note-017",
+      "date": "2025-06-15",
+      "kind": "phone note",
+      "text": "Work note requested for a sick day last Tuesday. Faxed to the employer."
+    },
+    {
+      "id": "note-018",
+      "date": "2025-06-21",
+      "kind": "phone note",
+      "text": "Message from the patient about scheduling. Wants a date in the next couple of months if the insurance comes through. Passed to the surgery scheduler."
+    },
+    {
+      "id": "note-019",
+      "date": "2025-07-03",
+      "kind": "office visit",
+      "text": "Vitamin D came back 16. Started 2000 units daily, recheck in three months. Also talked about calcium from food rather than pills."
+    },
+    {
+      "id": "note-020",
+      "date": "2025-07-04",
+      "kind": "office visit",
+      "text": "Mole on the left forearm that her spouse noticed. About 4 millimeters, even color, regular border, no change she is aware of. Looks benign. Photo in the chart for comparison, recheck in a year or sooner if it changes."
+    },
+    {
+      "id": "note-021",
+      "date": "2025-07-07",
+      "kind": "office visit",
+      "text": "Annual physical. Feels well overall. Sleeping fine, appetite fine, no chest pain, no shortness of breath. Flu shot given in the left arm today. Due for a tetanus booster, she will think about it. Labs ordered, fasting."
+    },
+    {
+      "id": "note-022",
+      "date": "2025-07-18",
+      "kind": "office visit",
+      "text": "Low back strain after moving furniture over the weekend. No radiation down the legs, no numbness, no bowel or bladder trouble. Paraspinal tenderness, straight leg raise negative. Heat, keep moving, ibuprofen with food for a week. Should settle."
+    },
+    {
+      "id": "note-023",
+      "date": "2025-08-14",
+      "kind": "office visit",
+      "text": "Ear fullness and muffled hearing on the right for a week after a cold. Canal clear, drum dull with fluid behind it, no infection. Serous otitis. Decongestant, swallow and yawn, recheck in three weeks if not better."
+    },
+    {
+      "id": "note-024",
+      "date": "2025-08-15",
+      "kind": "office visit",
+      "text": "Check-in while we wait on the insurance. No change in the complaints. Reviewed the risks and recovery one more time, she remains sure about going ahead."
+    },
+    {
+      "id": "note-025",
+      "date": "2025-09-16",
+      "kind": "outside letter",
+      "text": "Dermatology consult note received. Two actinic keratoses on the forehead treated with cryotherapy. Annual skin check recommended, sunscreen counseling done."
+    },
+    {
+      "id": "note-026",
+      "date": "2025-09-30",
+      "kind": "office visit",
+      "text": "Twisted the left ankle stepping off a curb 5 days ago. Swelling over the lateral malleolus, tender over the ATFL, can bear weight. Ottawa negative, no film. Brace, ice, ibuprofen, elevate. Should be fine in a couple weeks."
+    },
+    {
+      "id": "note-027",
+      "date": "2025-11-07",
+      "kind": "office visit",
+      "text": "Here with a cough and congestion for 7 days, low grade temp at home, no shortness of breath. Lungs clear, throat a little red, ears fine. Looks viral. Fluids, rest, honey for the cough, come back if she gets a fever over 101 or it goes past two weeks."
+    },
+    {
+      "id": "note-028",
+      "date": "2025-11-11",
+      "kind": "outside letter",
+      "text": "Gastroenterology note received. Screening colonoscopy completed, two small polyps removed, benign on pathology, repeat in 7 years."
+    },
+    {
+      "id": "note-029",
+      "date": "2025-12-24",
+      "kind": "phone note",
+      "text": "Patient called about a tick bite on the calf after a hike. Tick removed whole, no rash, no fever. Watch for a bull's-eye rash or flu symptoms over the next month and call if either shows up."
+    },
+    {
+      "id": "note-030",
+      "date": "2026-01-06",
+      "kind": "office visit",
+      "text": "Knee pain going down stairs, right side, no injury, no locking or giving way. Patellar grind positive, no effusion, ligaments stable. Patellofemoral pain. Quad strengthening sheet, ice after activity, cushioned shoes."
+    },
+    {
+      "id": "note-031",
+      "date": "2026-01-16",
+      "kind": "preoperative visit",
+      "text": "Pre-op for stage one, thighs. Consent signed. Marked standing. Garments ordered."
+    },
+    {
+      "id": "note-032",
+      "date": "2026-01-18",
+      "kind": "outside letter",
+      "text": "Letter from the dentist's office confirming routine cleaning and exam completed, no active infection, no dental work pending. Sent at our request for the surgical file."
+    },
+    {
+      "id": "note-033",
+      "date": "2026-01-20",
+      "kind": "phone note",
+      "text": "Pharmacy called about the refill on the omeprazole 20. Approved 90 days. She mentioned the heartburn is better since cutting back on coffee."
+    }
+  ],
+  "expected": {
+    "warranted": true,
+    "criteriaMet": [
+      "crit-1",
+      "crit-2",
+      "crit-3"
+    ],
+    "support": {
+      "crit-1": [
+        "note-005"
+      ],
+      "crit-2": [
+        "note-005",
+        "note-007"
+      ],
+      "crit-3": [
+        "note-005"
+      ]
+    },
+    "distractors": [
+      "note-001",
+      "note-003",
+      "note-004",
+      "note-006",
+      "note-015",
+      "note-016",
+      "note-017",
+      "note-019",
+      "note-020",
+      "note-021",
+      "note-022",
+      "note-023",
+      "note-025",
+      "note-026",
+      "note-027",
+      "note-028",
+      "note-029",
+      "note-030",
+      "note-032",
+      "note-033"
+    ],
+    "note": "The chart documents every criterion; the CARC 56 denial can be answered from the record."
+  }
+}

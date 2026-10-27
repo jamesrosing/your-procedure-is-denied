@@ -9,7 +9,8 @@
     "probe": "node --env-file=../.env --import tsx src/probe.ts",
     "typecheck": "tsc --noEmit",
     "test": "node --import tsx --test tests/*.test.ts",
-    "smoke": "node --env-file=../.env --import tsx src/smoke.ts"
+    "smoke": "node --env-file=../.env --import tsx src/smoke.ts",
+    "synthetic": "node --import tsx src/synthetic/generate.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^1.3.0",

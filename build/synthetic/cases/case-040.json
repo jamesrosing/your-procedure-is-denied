@@ -1,0 +1,188 @@
+{
+  "id": "case-040",
+  "patient": {
+    "alias": "SYN-040",
+    "age": 48,
+    "sex": "female"
+  },
+  "procedure": {
+    "cpt": "19357",
+    "description": "breast reconstruction, immediate or delayed, with tissue expander"
+  },
+  "payer": {
+    "name": "Saltmarsh Benefits Administrators",
+    "planType": "self-funded employer plan"
+  },
+  "denial": {
+    "carc": "11",
+    "carcText": "The diagnosis is inconsistent with the procedure.",
+    "text": "Saltmarsh Benefits Administrators denied the claim for CPT 19357 (breast reconstruction, immediate or delayed, with tissue expander) with date of service 2026-07-26. CARC 11: The diagnosis is inconsistent with the procedure. Payer remark: The diagnosis reported does not support the procedure billed.",
+    "dateOfService": "2026-07-26"
+  },
+  "criteria": [
+    {
+      "id": "crit-1",
+      "text": "Documented mastectomy for breast cancer, or prophylactic mastectomy for a qualifying risk, with reconstruction requested by the patient. Reconstruction after a covered mastectomy is a mandated benefit under the Women’s Health and Cancer Rights Act."
+    },
+    {
+      "id": "crit-2",
+      "text": "An operative plan for staged reconstruction (tissue expander placement followed by implant exchange) appropriate to the patient’s radiation status and tissue quality."
+    },
+    {
+      "id": "crit-3",
+      "text": "Medical clearance for the planned surgery is documented."
+    }
+  ],
+  "chart": [
+    {
+      "id": "note-001",
+      "date": "2025-07-14",
+      "kind": "office visit",
+      "text": "Ear fullness and muffled hearing on the left for a week after a cold. Canal clear, drum dull with fluid behind it, no infection. Serous otitis. Decongestant, swallow and yawn, recheck in three weeks if not better."
+    },
+    {
+      "id": "note-002",
+      "date": "2025-08-08",
+      "kind": "outside letter",
+      "text": "From the referring physician: please evaluate for surgical management. We have exhausted what we can do in primary care and the patient is motivated. Recent labs enclosed, all within normal limits. From the breast surgeon: left total mastectomy performed 6 months ago for a 1.7 centimeter invasive ductal carcinoma, sentinel nodes negative, margins clear. She has completed adjuvant chemotherapy and wishes to proceed with reconstruction."
+    },
+    {
+      "id": "note-003",
+      "date": "2025-08-18",
+      "kind": "outside letter",
+      "text": "Letter from the dentist's office confirming routine cleaning and exam completed, no active infection, no dental work pending. Sent at our request for the surgical file."
+    },
+    {
+      "id": "note-004",
+      "date": "2025-08-28",
+      "kind": "office visit",
+      "text": "48 year old woman referred by the breast surgeon for reconstruction. Went over expanders versus flaps, she prefers the expander route, fewer operations and no donor site. Her history otherwise: seasonal allergies, hypothyroidism on levothyroxine. Allergies: penicillin, rash. Quit smoking 10 years ago, no alcohol, retired. Family history noncontributory for what we are talking about today. Status post left mastectomy 6 months ago for a 1.7 centimeter invasive ductal. Done with chemo. She wants reconstruction and has thought hard about it. No radiation planned per oncology. Good skin envelope, no infection, mastectomy flap healed. Plan is a left tissue expander under the pectoralis now, exchange to a permanent implant in about 3 months, and a right lift for symmetry later."
+    },
+    {
+      "id": "note-005",
+      "date": "2025-09-17",
+      "kind": "phone note",
+      "text": "Pharmacy called about the refill on the omeprazole 40. Approved 90 days. She mentioned the heartburn is better since cutting back on coffee."
+    },
+    {
+      "id": "note-006",
+      "date": "2025-10-08",
+      "kind": "office visit",
+      "text": "Vitamin D came back 16. Started 1000 units daily, recheck in three months. Also talked about calcium from food rather than pills."
+    },
+    {
+      "id": "note-007",
+      "date": "2025-10-24",
+      "kind": "office visit",
+      "text": "Back with her sister to go over the plan again. Questions answered. Ready to schedule. Vitals today 129 over 89, pulse 69."
+    },
+    {
+      "id": "note-008",
+      "date": "2025-11-04",
+      "kind": "office visit",
+      "text": "Blood pressure check. 139 over 82 today, 125 over 94 on repeat. She has been taking the lisinopril 20 most days, admits to missing weekends. Low salt talk again. Keep the dose, recheck in 6 weeks."
+    },
+    {
+      "id": "note-009",
+      "date": "2025-12-06",
+      "kind": "phone note",
+      "text": "Called to let her know the surgery date is set and that we are submitting to the insurance. She called asking where things stand with the insurance. Told her the paperwork went in and we are waiting to hear. Reviewed what to do in the meantime."
+    },
+    {
+      "id": "note-010",
+      "date": "2025-12-11",
+      "kind": "phone note",
+      "text": "Work note requested for a sick day last Monday. Faxed to the employer."
+    },
+    {
+      "id": "note-011",
+      "date": "2025-12-25",
+      "kind": "phone note",
+      "text": "Thyroid labs back. TSH 2.1, free T4 normal. No change to the levothyroxine 50. Repeat in a year."
+    },
+    {
+      "id": "note-012",
+      "date": "2026-01-15",
+      "kind": "office visit",
+      "text": "Low back strain after moving furniture over the weekend. No radiation down the legs, no numbness, no bowel or bladder trouble. Paraspinal tenderness, straight leg raise negative. Heat, keep moving, ibuprofen with food for a week. Should settle."
+    },
+    {
+      "id": "note-013",
+      "date": "2026-01-30",
+      "kind": "office visit",
+      "text": "Mole on the upper back that her spouse noticed. About 5 millimeters, even color, regular border, no change she is aware of. Looks benign. Photo in the chart for comparison, recheck in a year or sooner if it changes."
+    },
+    {
+      "id": "note-014",
+      "date": "2026-02-13",
+      "kind": "outside letter",
+      "text": "Optometry report forwarded for the record. Routine refraction, mild astigmatism, new glasses prescribed, retinas healthy, pressures 13 and 14. No ocular pathology noted."
+    },
+    {
+      "id": "note-015",
+      "date": "2026-03-25",
+      "kind": "phone note",
+      "text": "She called asking about travel vaccines for a trip in the fall. Advised hepatitis A and a typhoid booster, referred to the travel clinic. Nothing else needed from us."
+    },
+    {
+      "id": "note-016",
+      "date": "2026-03-31",
+      "kind": "office visit",
+      "text": "Check-in while we wait on the insurance. No change in the complaints. Reviewed the risks and recovery one more time, she remains sure about going ahead."
+    },
+    {
+      "id": "note-017",
+      "date": "2026-04-13",
+      "kind": "outside letter",
+      "text": "Gastroenterology note received. Screening colonoscopy completed, two small polyps removed, benign on pathology, repeat in 5 years."
+    },
+    {
+      "id": "note-018",
+      "date": "2026-06-12",
+      "kind": "office visit",
+      "text": "Seasonal allergies acting up, itchy eyes, sneezing, clear drainage, worse outdoors. No wheeze. Cetirizine at night and the saline rinse. Fine with that."
+    },
+    {
+      "id": "note-019",
+      "date": "2026-07-11",
+      "kind": "preoperative visit",
+      "text": "Pre-op. Cleared by her PCP, letter in the chart, labs and EKG fine. Consent signed for left tissue expander placement."
+    }
+  ],
+  "expected": {
+    "warranted": true,
+    "criteriaMet": [
+      "crit-1",
+      "crit-2",
+      "crit-3"
+    ],
+    "support": {
+      "crit-1": [
+        "note-002",
+        "note-004"
+      ],
+      "crit-2": [
+        "note-004"
+      ],
+      "crit-3": [
+        "note-019"
+      ]
+    },
+    "distractors": [
+      "note-001",
+      "note-003",
+      "note-005",
+      "note-006",
+      "note-008",
+      "note-010",
+      "note-011",
+      "note-012",
+      "note-013",
+      "note-014",
+      "note-015",
+      "note-017",
+      "note-018"
+    ],
+    "note": "The chart documents every criterion; the CARC 11 denial can be answered from the record."
+  }
+}

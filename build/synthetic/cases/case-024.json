@@ -1,0 +1,229 @@
+{
+  "id": "case-024",
+  "patient": {
+    "alias": "SYN-024",
+    "age": 62,
+    "sex": "female"
+  },
+  "procedure": {
+    "cpt": "19371",
+    "description": "periprosthetic capsulectomy, breast, with implant removal"
+  },
+  "payer": {
+    "name": "Prairie Commons Medicaid Plan",
+    "planType": "Medicaid managed care"
+  },
+  "denial": {
+    "carc": "50",
+    "carcText": "These are non-covered services because this is not deemed a 'medical necessity' by the payer.",
+    "text": "Prairie Commons Medicaid Plan denied the claim for CPT 19371 (periprosthetic capsulectomy, breast, with implant removal) with date of service 2026-03-29. CARC 50: These are non-covered services because this is not deemed a 'medical necessity' by the payer. Payer remark: Documentation does not establish a grade III or IV contracture or a confirmed rupture.",
+    "dateOfService": "2026-03-29"
+  },
+  "criteria": [
+    {
+      "id": "crit-1",
+      "text": "Baker grade III or IV capsular contracture with pain or deformity, or implant rupture confirmed by imaging."
+    },
+    {
+      "id": "crit-2",
+      "text": "The original implants were placed for reconstruction after mastectomy, for a congenital deformity, or for another covered medical indication."
+    },
+    {
+      "id": "crit-3",
+      "text": "Symptoms documented for at least 3 months."
+    }
+  ],
+  "chart": [
+    {
+      "id": "note-001",
+      "date": "2025-01-29",
+      "kind": "office visit",
+      "text": "Mole on the upper back that her spouse noticed. About 5 millimeters, even color, regular border, no change she is aware of. Looks benign. Photo in the chart for comparison, recheck in a year or sooner if it changes."
+    },
+    {
+      "id": "note-002",
+      "date": "2025-02-03",
+      "kind": "office visit",
+      "text": "Ear fullness and muffled hearing on the left for a week after a cold. Canal clear, drum dull with fluid behind it, no infection. Serous otitis. Decongestant, swallow and yawn, recheck in three weeks if not better."
+    },
+    {
+      "id": "note-003",
+      "date": "2025-02-23",
+      "kind": "outside letter",
+      "text": "From the referring physician: please evaluate for surgical management. We have exhausted what we can do in primary care and the patient is motivated. Recent labs enclosed, all within normal limits."
+    },
+    {
+      "id": "note-004",
+      "date": "2025-02-27",
+      "kind": "office visit",
+      "text": "Seasonal allergies acting up, itchy eyes, sneezing, clear drainage, worse outdoors. No wheeze. Cetirizine at night and the saline rinse. Fine with that."
+    },
+    {
+      "id": "note-005",
+      "date": "2025-03-09",
+      "kind": "office visit",
+      "text": "62 year old woman here about her implants. Discussed capsulectomy with implant removal and the options for replacement versus leaving them out. Her history otherwise: prediabetes, diet controlled. Allergies: sulfa, hives as a child. Does not smoke, a glass of wine on weekends, works from home. Family history noncontributory for what we are talking about today. Right breast is hard as a rock, distorted upward, tender to the touch, I would grade it Baker IV. Left is a Baker III, firm but not painful. Implants were placed in 2021 as part of her reconstruction after a right mastectomy for cancer, left side for symmetry. The hardening on the right started about 5 months ago and has gotten steadily worse, now hurts to lie on that side."
+    },
+    {
+      "id": "note-006",
+      "date": "2025-04-02",
+      "kind": "office visit",
+      "text": "Low back strain after moving furniture over the weekend. No radiation down the legs, no numbness, no bowel or bladder trouble. Paraspinal tenderness, straight leg raise negative. Heat, keep moving, ibuprofen with food for a week. Should settle."
+    },
+    {
+      "id": "note-007",
+      "date": "2025-04-13",
+      "kind": "imaging",
+      "text": "MRI breast implants: right implant with a linguine sign consistent with intracapsular rupture, thickened capsule. Left implant intact with a thickened capsule and no rupture."
+    },
+    {
+      "id": "note-008",
+      "date": "2025-04-18",
+      "kind": "office visit",
+      "text": "Annual physical. Feels well overall. Sleeping fine, appetite fine, no chest pain, no shortness of breath. Flu shot given in the left arm today. Due for a tetanus booster, she will think about it. Labs ordered, fasting."
+    },
+    {
+      "id": "note-009",
+      "date": "2025-04-23",
+      "kind": "office visit",
+      "text": "Back to go over the MRI and the plan. She wants the right one out and both capsules addressed. Vitals today 114 over 83, pulse 68."
+    },
+    {
+      "id": "note-010",
+      "date": "2025-05-17",
+      "kind": "phone note",
+      "text": "Thyroid labs back. TSH 3.3, free T4 normal. No change to the levothyroxine 100. Repeat in a year."
+    },
+    {
+      "id": "note-011",
+      "date": "2025-06-16",
+      "kind": "phone note",
+      "text": "Nurse call. Patient had questions about time off work after surgery and whether she needs someone at home the first night. Answered both, she will arrange it."
+    },
+    {
+      "id": "note-012",
+      "date": "2025-08-04",
+      "kind": "office visit",
+      "text": "Knee pain going down stairs, left side, no injury, no locking or giving way. Patellar grind positive, no effusion, ligaments stable. Patellofemoral pain. Quad strengthening sheet, ice after activity, cushioned shoes."
+    },
+    {
+      "id": "note-013",
+      "date": "2025-09-08",
+      "kind": "office visit",
+      "text": "Interval visit. Nothing new since last time, symptoms as described before, she is managing. Went over the plan again and answered questions from her spouse."
+    },
+    {
+      "id": "note-014",
+      "date": "2025-10-05",
+      "kind": "office visit",
+      "text": "Trouble sleeping for a couple of months, falls asleep fine but wakes at three and lies there. No snoring per the spouse, no daytime naps, two cups of coffee before noon. Went over sleep hygiene, no screens in bed, cut the afternoon caffeine. Will hold off on medication for now."
+    },
+    {
+      "id": "note-015",
+      "date": "2025-11-12",
+      "kind": "office visit",
+      "text": "Burning with urination for two days, going frequently, no fever, no back pain. Urine dip positive for leukocytes and nitrites. Nitrofurantoin for five days, push fluids, call if fever or flank pain."
+    },
+    {
+      "id": "note-016",
+      "date": "2025-11-14",
+      "kind": "office visit",
+      "text": "A1c came back 6.6. Prediabetic range, same as last year. Walking program, cut the soda, recheck in six months. She is motivated."
+    },
+    {
+      "id": "note-017",
+      "date": "2025-11-15",
+      "kind": "phone note",
+      "text": "Called her with the cholesterol results. Total 182, LDL 131, HDL 59, triglycerides 149. Discussed diet and walking. She wants to try lifestyle first for six months before we talk about a statin. Agreed."
+    },
+    {
+      "id": "note-018",
+      "date": "2025-11-30",
+      "kind": "outside letter",
+      "text": "Dermatology consult note received. Two actinic keratoses on the forehead treated with cryotherapy. Annual skin check recommended, sunscreen counseling done."
+    },
+    {
+      "id": "note-019",
+      "date": "2025-12-03",
+      "kind": "phone note",
+      "text": "Work note requested for a sick day last Tuesday. Faxed to the employer."
+    },
+    {
+      "id": "note-020",
+      "date": "2025-12-15",
+      "kind": "outside letter",
+      "text": "Gastroenterology note received. Screening colonoscopy completed, two small polyps removed, benign on pathology, repeat in 7 years."
+    },
+    {
+      "id": "note-021",
+      "date": "2026-01-26",
+      "kind": "outside letter",
+      "text": "Letter from the dentist's office confirming routine cleaning and exam completed, no active infection, no dental work pending. Sent at our request for the surgical file."
+    },
+    {
+      "id": "note-022",
+      "date": "2026-01-31",
+      "kind": "office visit",
+      "text": "Blood pressure check. 135 over 73 today, 128 over 89 on repeat. She has been taking the lisinopril 40 most days, admits to missing weekends. Low salt talk again. Keep the dose, recheck in 12 weeks."
+    },
+    {
+      "id": "note-023",
+      "date": "2026-03-11",
+      "kind": "preoperative visit",
+      "text": "Pre-op. Consent signed for bilateral capsulectomy with implant removal, right side en bloc if the capsule allows. Labs fine."
+    },
+    {
+      "id": "note-024",
+      "date": "2026-03-20",
+      "kind": "phone note",
+      "text": "Patient called about a tick bite on the calf after a hike. Tick removed whole, no rash, no fever. Watch for a bull's-eye rash or flu symptoms over the next month and call if either shows up."
+    },
+    {
+      "id": "note-025",
+      "date": "2026-03-28",
+      "kind": "office visit",
+      "text": "Here with a cough and congestion for 9 days, low grade temp at home, no shortness of breath. Lungs clear, throat a little red, ears fine. Looks viral. Fluids, rest, honey for the cough, come back if she gets a fever over 101 or it goes past two weeks."
+    }
+  ],
+  "expected": {
+    "warranted": true,
+    "criteriaMet": [
+      "crit-1",
+      "crit-2",
+      "crit-3"
+    ],
+    "support": {
+      "crit-1": [
+        "note-005",
+        "note-007"
+      ],
+      "crit-2": [
+        "note-005"
+      ],
+      "crit-3": [
+        "note-005"
+      ]
+    },
+    "distractors": [
+      "note-001",
+      "note-002",
+      "note-004",
+      "note-006",
+      "note-008",
+      "note-010",
+      "note-012",
+      "note-014",
+      "note-015",
+      "note-016",
+      "note-017",
+      "note-018",
+      "note-019",
+      "note-020",
+      "note-021",
+      "note-022",
+      "note-024",
+      "note-025"
+    ],
+    "note": "The chart documents every criterion; the CARC 50 denial can be answered from the record."
+  }
+}

@@ -24,7 +24,9 @@ The hackathon work reimplements the LITMUS gate contract in `/build` against syn
 
 - `build/src/provider.ts`, `schema.ts`, `cost.ts` (Oct 26): the provider seam. One `propose` interface over the Messages protocol (Meta Model API and Baseten through the Anthropic SDK with the base URL swapped) and over OpenAI-compatible hosts (Fireworks, fallback). Sends effort, the flat JSON Schema, and a cache marker; never sends the fields the Meta endpoint rejects. Normalizes usage (input, cached input, output, thinking), prices the call, and validates the draft: `warranted`, optional `reason`, and `sentences[]` of `{text, citation}` where every citation is a chart entry id. Tests in `build/tests/` run against a stubbed transport.
 
-Still to come: the synthetic denial set, the evaluation harness, the LITMUS gate reimplementation, the model runs, and the agentic step.
+- `build/src/synthetic/` and `build/synthetic/cases/` (Oct 26): the 50-case synthetic denial set. A seeded generator writes charts in dictation voice across eight procedures, six fictional payers, and ten CARC codes, with a grading key per case: 30 warranted, 20 not (criterion absent, near-miss, wrong remedy, plan exclusion). Tests pin the composition, the labels, and that the committed files match the generator; no patient identifiers appear anywhere in the set.
+
+Still to come: the evaluation harness, the LITMUS gate reimplementation, the model runs, and the agentic step.
 
 ## Commit ledger
 
@@ -36,4 +38,5 @@ Every commit made during the event, oldest first. A commit's hash is recorded by
 | 2026-10-26 | 4685260 | First call to muse-spark-1.3 on the Meta Model API through the Anthropic SDK base-URL swap (`build/src/test-call.ts`), with the /build package set up for TypeScript |
 | 2026-10-26 | 8082dc1 | Probe of reasoning-token spend by effort, JSON Schema output, and prompt caching on muse-spark-1.3 (`build/src/probe.ts`), synthetic chart only |
 | 2026-10-26 | ee1cab6 | Ignore Windows Zone.Identifier marker files |
-| 2026-10-26 | pending | Provider adapter (`build/src/provider.ts`), appeal JSON Schema contract and validator (`build/src/schema.ts`), price table (`build/src/cost.ts`), 12 unit tests with a stubbed transport, and a live smoke test through Meta and Baseten (`build/src/smoke.ts`) |
+| 2026-10-26 | 3e57e4c | Provider adapter (`build/src/provider.ts`), appeal JSON Schema contract and validator (`build/src/schema.ts`), price table (`build/src/cost.ts`), 12 unit tests with a stubbed transport, and a live smoke test through Meta and Baseten (`build/src/smoke.ts`) |
+| 2026-10-26 | pending | Synthetic denial set: generator (`build/src/synthetic/`), 50 committed cases with grading keys (`build/synthetic/cases/`), README, and 9 tests |

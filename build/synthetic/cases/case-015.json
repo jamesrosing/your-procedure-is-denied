@@ -1,0 +1,287 @@
+{
+  "id": "case-015",
+  "patient": {
+    "alias": "SYN-015",
+    "age": 52,
+    "sex": "female"
+  },
+  "procedure": {
+    "cpt": "19318",
+    "description": "bilateral reduction mammaplasty"
+  },
+  "payer": {
+    "name": "Copperfield Health",
+    "planType": "commercial EPO"
+  },
+  "denial": {
+    "carc": "197",
+    "carcText": "Precertification/authorization/notification/pre-treatment absent.",
+    "text": "Copperfield Health denied the claim for CPT 19318 (bilateral reduction mammaplasty) with date of service 2026-08-23. CARC 197: Precertification/authorization/notification/pre-treatment absent. Payer remark: No authorization is on file. A retrospective medical necessity review may be requested with supporting clinical documentation within 180 days.",
+    "dateOfService": "2026-08-23"
+  },
+  "criteria": [
+    {
+      "id": "crit-1",
+      "text": "Symptoms attributable to macromastia documented for at least 6 months, such as neck, shoulder, or upper back pain, shoulder grooving, or inframammary intertrigo."
+    },
+    {
+      "id": "crit-2",
+      "text": "At least 3 months of conservative treatment, including a supportive garment plus physical therapy, analgesics, or dermatologic treatment of intertrigo, without adequate relief."
+    },
+    {
+      "id": "crit-3",
+      "text": "Estimated resection weight per breast at or above the 22nd percentile of the Schnur sliding scale for the patient's body surface area."
+    },
+    {
+      "id": "crit-4",
+      "text": "Photographic documentation of macromastia and shoulder grooving."
+    }
+  ],
+  "chart": [
+    {
+      "id": "note-001",
+      "date": "2025-09-18",
+      "kind": "outside letter",
+      "text": "From the referring physician: please evaluate for surgical management. We have exhausted what we can do in primary care and the patient is motivated. Recent labs enclosed, all within normal limits."
+    },
+    {
+      "id": "note-002",
+      "date": "2025-09-19",
+      "kind": "outside letter",
+      "text": "Dermatology consult note received. Two actinic keratoses on the forehead treated with cryotherapy. Annual skin check recommended, sunscreen counseling done."
+    },
+    {
+      "id": "note-003",
+      "date": "2025-09-22",
+      "kind": "office visit",
+      "text": "Trouble sleeping for a couple of months, falls asleep fine but wakes at three and lies there. No snoring per the spouse, no daytime naps, two cups of coffee before noon. Went over sleep hygiene, no screens in bed, cut the afternoon caffeine. Will hold off on medication for now."
+    },
+    {
+      "id": "note-004",
+      "date": "2025-09-25",
+      "kind": "outside letter",
+      "text": "Gastroenterology note received. Screening colonoscopy completed, two small polyps removed, benign on pathology, repeat in 5 years."
+    },
+    {
+      "id": "note-005",
+      "date": "2025-10-07",
+      "kind": "office visit",
+      "text": "52 year old woman here about her breasts, referred by her primary. Exam: large pendulous breasts, nipple to notch 31 on the right and 32 on the left, grade 3 ptosis, intertrigo in both inframammary folds. Discussed reduction, risks, scars, sensation, the works. Her history otherwise: mild asthma, albuterol maybe twice a year. Surgeries: appendix years ago. Allergies: sulfa, hives as a child. Does not smoke, a glass of wine on weekends, works as a teacher. Family history noncontributory for what we are talking about today. Going on 14 months of upper back and neck pain that she ties to the weight of the breasts, worse by the end of a shift. Shoulder grooving from the straps, recurrent intertrigo in the folds. She has been in a fitted supportive bra from the specialty shop for months, takes ibuprofen most days, treats the rash with nystatin powder. I am sending her to PT for posture and scapular work. She is 5 foot 6, 156 pounds, which puts BSA right around 1.82. Schnur 22nd percentile at that BSA is about 453 grams. I am estimating 604 grams on the right and 563 on the left."
+    },
+    {
+      "id": "note-006",
+      "date": "2025-10-14",
+      "kind": "physical therapy",
+      "text": "Eval for upper back and neck pain in the setting of large breasts. Forward shoulder posture, tight pecs, weak lower traps. Plan 8 weeks, twice a week, scapular stabilization and postural retraining."
+    },
+    {
+      "id": "note-007",
+      "date": "2025-10-20",
+      "kind": "physical therapy",
+      "text": "Session 2. Continued the program from the evaluation, tolerated well, home exercises reviewed, she reports no real change."
+    },
+    {
+      "id": "note-008",
+      "date": "2025-10-26",
+      "kind": "physical therapy",
+      "text": "Session 3. Continued the program from the evaluation, tolerated well, home exercises reviewed, she reports no real change."
+    },
+    {
+      "id": "note-009",
+      "date": "2025-11-01",
+      "kind": "physical therapy",
+      "text": "Session 4. Continued the program from the evaluation, tolerated well, home exercises reviewed, she reports slight improvement that does not last."
+    },
+    {
+      "id": "note-010",
+      "date": "2025-11-07",
+      "kind": "physical therapy",
+      "text": "Session 5. Continued the program from the evaluation, tolerated well, home exercises reviewed, she reports slight improvement that does not last."
+    },
+    {
+      "id": "note-011",
+      "date": "2025-11-09",
+      "kind": "office visit",
+      "text": "Burning with urination for two days, going frequently, no fever, no back pain. Urine dip positive for leukocytes and nitrites. Nitrofurantoin for five days, push fluids, call if fever or flank pain."
+    },
+    {
+      "id": "note-012",
+      "date": "2025-11-13",
+      "kind": "physical therapy",
+      "text": "Session 6. Continued the program from the evaluation, tolerated well, home exercises reviewed, she reports no real change."
+    },
+    {
+      "id": "note-013",
+      "date": "2025-11-19",
+      "kind": "physical therapy",
+      "text": "Session 7. Continued the program from the evaluation, tolerated well, home exercises reviewed, she reports about the same."
+    },
+    {
+      "id": "note-014",
+      "date": "2025-11-25",
+      "kind": "office visit",
+      "text": "Knee pain going down stairs, right side, no injury, no locking or giving way. Patellar grind positive, no effusion, ligaments stable. Patellofemoral pain. Quad strengthening sheet, ice after activity, cushioned shoes."
+    },
+    {
+      "id": "note-015",
+      "date": "2025-11-26",
+      "kind": "phone note",
+      "text": "Thyroid labs back. TSH 1.7, free T4 normal. No change to the levothyroxine 75. Repeat in a year."
+    },
+    {
+      "id": "note-016",
+      "date": "2025-12-15",
+      "kind": "office visit",
+      "text": "Back to go over the plan. Symptoms unchanged. We went through the operation again and she wants to proceed if insurance will cover it. Vitals today 133 over 90, pulse 84. Finished 8 weeks of PT across the street, says it helped while she was there and then right back to baseline. Still in the supportive bra, still on the ibuprofen, intertrigo treated with nystatin powder with partial relief. That is 8 months of conservative measures without durable relief."
+    },
+    {
+      "id": "note-017",
+      "date": "2025-12-15",
+      "kind": "photo documentation",
+      "text": "Standard pre-op photo series taken today, front, both obliques, both laterals. Grooving visible at both shoulders in the AP view, grade 3 ptosis, intertrigo in both folds."
+    },
+    {
+      "id": "note-018",
+      "date": "2025-12-16",
+      "kind": "office visit",
+      "text": "Here with a cough and congestion for 7 days, low grade temp at home, no shortness of breath. Lungs clear, throat a little red, ears fine. Looks viral. Fluids, rest, honey for the cough, come back if she gets a fever over 101 or it goes past two weeks."
+    },
+    {
+      "id": "note-019",
+      "date": "2025-12-25",
+      "kind": "office visit",
+      "text": "Twisted the right ankle stepping off a curb 3 days ago. Swelling over the lateral malleolus, tender over the ATFL, can bear weight. Ottawa negative, no film. Brace, ice, ibuprofen, elevate. Should be fine in a couple weeks."
+    },
+    {
+      "id": "note-020",
+      "date": "2025-12-26",
+      "kind": "outside letter",
+      "text": "Letter from the dentist's office confirming routine cleaning and exam completed, no active infection, no dental work pending. Sent at our request for the surgical file."
+    },
+    {
+      "id": "note-021",
+      "date": "2026-01-31",
+      "kind": "office visit",
+      "text": "A1c came back 6.8. Prediabetic range, same as last year. Walking program, cut the soda, recheck in six months. She is motivated."
+    },
+    {
+      "id": "note-022",
+      "date": "2026-02-09",
+      "kind": "office visit",
+      "text": "Low back strain after moving furniture over the weekend. No radiation down the legs, no numbness, no bowel or bladder trouble. Paraspinal tenderness, straight leg raise negative. Heat, keep moving, ibuprofen with food for a week. Should settle."
+    },
+    {
+      "id": "note-023",
+      "date": "2026-02-13",
+      "kind": "phone note",
+      "text": "She called asking where things stand with the insurance. Told her the paperwork went in and we are waiting to hear. Reviewed what to do in the meantime."
+    },
+    {
+      "id": "note-024",
+      "date": "2026-03-02",
+      "kind": "office visit",
+      "text": "Seasonal allergies acting up, itchy eyes, sneezing, clear drainage, worse outdoors. No wheeze. Cetirizine at night and the saline rinse. Fine with that."
+    },
+    {
+      "id": "note-025",
+      "date": "2026-04-01",
+      "kind": "phone note",
+      "text": "She called asking about travel vaccines for a trip in the fall. Advised hepatitis A and a typhoid booster, referred to the travel clinic. Nothing else needed from us."
+    },
+    {
+      "id": "note-026",
+      "date": "2026-04-03",
+      "kind": "office visit",
+      "text": "Ear fullness and muffled hearing on the left for a week after a cold. Canal clear, drum dull with fluid behind it, no infection. Serous otitis. Decongestant, swallow and yawn, recheck in three weeks if not better."
+    },
+    {
+      "id": "note-027",
+      "date": "2026-04-12",
+      "kind": "office visit",
+      "text": "Annual physical. Feels well overall. Sleeping fine, appetite fine, no chest pain, no shortness of breath. Flu shot given in the left arm today. Due for a tetanus booster, she will think about it. Labs ordered, fasting."
+    },
+    {
+      "id": "note-028",
+      "date": "2026-05-08",
+      "kind": "office visit",
+      "text": "Check-in while we wait on the insurance. No change in the complaints. Reviewed the risks and recovery one more time, she remains sure about going ahead."
+    },
+    {
+      "id": "note-029",
+      "date": "2026-05-12",
+      "kind": "office visit",
+      "text": "Vitamin D came back 17. Started 2000 units daily, recheck in three months. Also talked about calcium from food rather than pills."
+    },
+    {
+      "id": "note-030",
+      "date": "2026-05-25",
+      "kind": "office visit",
+      "text": "Mole on the left forearm that her spouse noticed. About 6 millimeters, even color, regular border, no change she is aware of. Looks benign. Photo in the chart for comparison, recheck in a year or sooner if it changes."
+    },
+    {
+      "id": "note-031",
+      "date": "2026-07-22",
+      "kind": "phone note",
+      "text": "Patient called about a tick bite on the shoulder after a hike. Tick removed whole, no rash, no fever. Watch for a bull's-eye rash or flu symptoms over the next month and call if either shows up."
+    },
+    {
+      "id": "note-032",
+      "date": "2026-08-05",
+      "kind": "office visit",
+      "text": "Blood pressure check. 121 over 83 today, 129 over 84 on repeat. She has been taking the lisinopril 20 most days, admits to missing weekends. Low salt talk again. Keep the dose, recheck in 12 weeks."
+    },
+    {
+      "id": "note-033",
+      "date": "2026-08-14",
+      "kind": "preoperative visit",
+      "text": "Pre-op visit. Consent signed, marked the plan on her in the mirror, superomedial pedicle, Wise pattern. Labs fine. Stop the ibuprofen a week out."
+    }
+  ],
+  "expected": {
+    "warranted": true,
+    "criteriaMet": [
+      "crit-1",
+      "crit-2",
+      "crit-3",
+      "crit-4"
+    ],
+    "support": {
+      "crit-1": [
+        "note-005"
+      ],
+      "crit-2": [
+        "note-005",
+        "note-006",
+        "note-016"
+      ],
+      "crit-3": [
+        "note-005"
+      ],
+      "crit-4": [
+        "note-017"
+      ]
+    },
+    "distractors": [
+      "note-002",
+      "note-003",
+      "note-004",
+      "note-011",
+      "note-014",
+      "note-015",
+      "note-018",
+      "note-019",
+      "note-020",
+      "note-021",
+      "note-022",
+      "note-024",
+      "note-025",
+      "note-026",
+      "note-027",
+      "note-029",
+      "note-030",
+      "note-031",
+      "note-032"
+    ],
+    "note": "The chart documents every criterion; the CARC 197 denial can be answered from the record."
+  }
+}

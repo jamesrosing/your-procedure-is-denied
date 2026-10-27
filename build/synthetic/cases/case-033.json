@@ -1,0 +1,246 @@
+{
+  "id": "case-033",
+  "patient": {
+    "alias": "SYN-033",
+    "age": 65,
+    "sex": "female"
+  },
+  "procedure": {
+    "cpt": "15847",
+    "description": "panniculectomy with excision of excess skin and subcutaneous tissue of the abdomen"
+  },
+  "payer": {
+    "name": "Copperfield Health",
+    "planType": "commercial EPO"
+  },
+  "denial": {
+    "carc": "11",
+    "carcText": "The diagnosis is inconsistent with the procedure.",
+    "text": "Copperfield Health denied the claim for CPT 15847 (panniculectomy with excision of excess skin and subcutaneous tissue of the abdomen) with date of service 2026-02-18. CARC 11: The diagnosis is inconsistent with the procedure. Payer remark: The diagnosis reported does not support the procedure billed.",
+    "dateOfService": "2026-02-18"
+  },
+  "criteria": [
+    {
+      "id": "crit-1",
+      "text": "Panniculus hangs at or below the level of the pubis (grade 2 or higher) as documented on examination."
+    },
+    {
+      "id": "crit-2",
+      "text": "Recurrent or chronic intertrigo, cellulitis, or skin breakdown beneath the panniculus that has failed at least 3 months of conservative treatment such as topical antifungals, hygiene measures, and barrier products."
+    },
+    {
+      "id": "crit-3",
+      "text": "Weight stable within 10 pounds for at least 6 months."
+    },
+    {
+      "id": "crit-4",
+      "text": "The panniculus interferes with activities of daily living or ambulation."
+    }
+  ],
+  "chart": [
+    {
+      "id": "note-001",
+      "date": "2025-04-04",
+      "kind": "outside letter",
+      "text": "Mammogram report forwarded for the record. Bilateral screening, BI-RADS 1, negative, routine screening in one year."
+    },
+    {
+      "id": "note-002",
+      "date": "2025-04-13",
+      "kind": "office visit",
+      "text": "Vitamin D came back 22. Started 1000 units daily, recheck in three months. Also talked about calcium from food rather than pills."
+    },
+    {
+      "id": "note-003",
+      "date": "2025-04-18",
+      "kind": "outside letter",
+      "text": "From the referring physician: please evaluate for surgical management. We have exhausted what we can do in primary care and the patient is motivated. Recent labs enclosed, all within normal limits."
+    },
+    {
+      "id": "note-004",
+      "date": "2025-05-16",
+      "kind": "phone note",
+      "text": "Called her with the cholesterol results. Total 220, LDL 149, HDL 38, triglycerides 140. Discussed diet and walking. She wants to try lifestyle first for six months before we talk about a statin. Agreed."
+    },
+    {
+      "id": "note-005",
+      "date": "2025-05-17",
+      "kind": "office visit",
+      "text": "65 year old woman here about the abdominal apron after her weight loss. Nice result on the weight. Discussed panniculectomy versus a full abdominoplasty and what insurance will and will not look at. Her history otherwise: reflux on omeprazole as needed, hypothyroidism on levothyroxine, anxiety, sees a counselor. Allergies: sulfa, hives as a child. Quit smoking 4 years ago, no alcohol, works two jobs. Family history noncontributory for what we are talking about today. On exam the pannus hangs well below the pubis, I would call it grade 2, with maceration and an odor in the fold. She has been fighting the rash under the apron for better than a year, treated with nystatin, then clotrimazole, keeps it dry with powder and a cloth liner, and it comes right back. Two rounds of antibiotics from the PCP for cellulitis in the fold. Down 150 pounds after the sleeve in 2022. Weight has been steady at 189 give or take five for the last 16 months. Says she cannot walk more than a block without the skin fold chafing raw, has to lift it to wash underneath, cannot find pants that fit over it."
+    },
+    {
+      "id": "note-006",
+      "date": "2025-06-05",
+      "kind": "office visit",
+      "text": "Low back strain after moving furniture over the weekend. No radiation down the legs, no numbness, no bowel or bladder trouble. Paraspinal tenderness, straight leg raise negative. Heat, keep moving, ibuprofen with food for a week. Should settle."
+    },
+    {
+      "id": "note-007",
+      "date": "2025-06-21",
+      "kind": "office visit",
+      "text": "Blood pressure check. 142 over 72 today, 137 over 80 on repeat. She has been taking the lisinopril 20 most days, admits to missing weekends. Low salt talk again. Keep the dose, recheck in 8 weeks."
+    },
+    {
+      "id": "note-008",
+      "date": "2025-07-26",
+      "kind": "office visit",
+      "text": "Follow-up on the abdomen. Went back over the operation, drains, the scar, recovery of four to six weeks. She understands this is skin and fat removal for the skin problems, not a tummy tuck. Vitals today 118 over 74, pulse 71. Rash is back again despite 5 months of the antifungal and barrier routine. Fold is red and weeping today. Weight 188 today, holding."
+    },
+    {
+      "id": "note-009",
+      "date": "2025-08-10",
+      "kind": "phone note",
+      "text": "She called asking about travel vaccines for a trip in early summer. Advised hepatitis A and a typhoid booster, referred to the travel clinic. Nothing else needed from us."
+    },
+    {
+      "id": "note-010",
+      "date": "2025-08-19",
+      "kind": "office visit",
+      "text": "Twisted the right ankle stepping off a curb 4 days ago. Swelling over the lateral malleolus, tender over the ATFL, can bear weight. Ottawa negative, no film. Brace, ice, ibuprofen, elevate. Should be fine in a couple weeks."
+    },
+    {
+      "id": "note-011",
+      "date": "2025-10-05",
+      "kind": "phone note",
+      "text": "Message from the patient about scheduling. Wants a date in the next couple of months if the insurance comes through. Passed to the surgery scheduler."
+    },
+    {
+      "id": "note-012",
+      "date": "2025-10-16",
+      "kind": "office visit",
+      "text": "Follow-up. Same story, no better. She asked about timing around work and family, we talked through it. Still wants to proceed."
+    },
+    {
+      "id": "note-013",
+      "date": "2025-10-21",
+      "kind": "office visit",
+      "text": "Mole on the upper back that her spouse noticed. About 5 millimeters, even color, regular border, no change she is aware of. Looks benign. Photo in the chart for comparison, recheck in a year or sooner if it changes."
+    },
+    {
+      "id": "note-014",
+      "date": "2025-11-06",
+      "kind": "office visit",
+      "text": "A1c came back 6.4. Prediabetic range, same as last year. Walking program, cut the soda, recheck in six months. She is motivated."
+    },
+    {
+      "id": "note-015",
+      "date": "2025-11-16",
+      "kind": "office visit",
+      "text": "Seasonal allergies acting up, itchy eyes, sneezing, clear drainage, worse outdoors. No wheeze. Cetirizine at night and the saline rinse. Fine with that."
+    },
+    {
+      "id": "note-016",
+      "date": "2025-11-16",
+      "kind": "outside letter",
+      "text": "Gastroenterology note received. Screening colonoscopy completed, two small polyps removed, benign on pathology, repeat in 7 years."
+    },
+    {
+      "id": "note-017",
+      "date": "2025-12-03",
+      "kind": "phone note",
+      "text": "Thyroid labs back. TSH 2.4, free T4 normal. No change to the levothyroxine 75. Repeat in a year."
+    },
+    {
+      "id": "note-018",
+      "date": "2025-12-06",
+      "kind": "outside letter",
+      "text": "Letter from the dentist's office confirming routine cleaning and exam completed, no active infection, no dental work pending. Sent at our request for the surgical file."
+    },
+    {
+      "id": "note-019",
+      "date": "2025-12-14",
+      "kind": "office visit",
+      "text": "Ear fullness and muffled hearing on the right for a week after a cold. Canal clear, drum dull with fluid behind it, no infection. Serous otitis. Decongestant, swallow and yawn, recheck in three weeks if not better."
+    },
+    {
+      "id": "note-020",
+      "date": "2025-12-17",
+      "kind": "office visit",
+      "text": "Trouble sleeping for a couple of months, falls asleep fine but wakes at three and lies there. No snoring per the spouse, no daytime naps, two cups of coffee before noon. Went over sleep hygiene, no screens in bed, cut the afternoon caffeine. Will hold off on medication for now."
+    },
+    {
+      "id": "note-021",
+      "date": "2025-12-18",
+      "kind": "office visit",
+      "text": "Knee pain going down stairs, left side, no injury, no locking or giving way. Patellar grind positive, no effusion, ligaments stable. Patellofemoral pain. Quad strengthening sheet, ice after activity, cushioned shoes."
+    },
+    {
+      "id": "note-022",
+      "date": "2026-01-08",
+      "kind": "phone note",
+      "text": "Pharmacy called about the refill on the omeprazole 40. Approved 90 days. She mentioned the heartburn is better since cutting back on coffee."
+    },
+    {
+      "id": "note-023",
+      "date": "2026-01-11",
+      "kind": "outside letter",
+      "text": "Optometry report forwarded for the record. Routine refraction, mild astigmatism, new glasses prescribed, retinas healthy, pressures 18 and 13. No ocular pathology noted."
+    },
+    {
+      "id": "note-024",
+      "date": "2026-01-14",
+      "kind": "office visit",
+      "text": "Burning with urination for two days, going frequently, no fever, no back pain. Urine dip positive for leukocytes and nitrites. Nitrofurantoin for five days, push fluids, call if fever or flank pain."
+    },
+    {
+      "id": "note-025",
+      "date": "2026-01-15",
+      "kind": "office visit",
+      "text": "Here with a cough and congestion for 9 days, low grade temp at home, no shortness of breath. Lungs clear, throat a little red, ears fine. Looks viral. Fluids, rest, honey for the cough, come back if she gets a fever over 101 or it goes past two weeks."
+    },
+    {
+      "id": "note-026",
+      "date": "2026-01-29",
+      "kind": "preoperative visit",
+      "text": "Pre-op. Consent signed. Marked the resection with her standing. Nicotine negative. Hold the metformin the morning of."
+    }
+  ],
+  "expected": {
+    "warranted": true,
+    "criteriaMet": [
+      "crit-1",
+      "crit-2",
+      "crit-3",
+      "crit-4"
+    ],
+    "support": {
+      "crit-1": [
+        "note-005"
+      ],
+      "crit-2": [
+        "note-005",
+        "note-008"
+      ],
+      "crit-3": [
+        "note-005",
+        "note-008"
+      ],
+      "crit-4": [
+        "note-005"
+      ]
+    },
+    "distractors": [
+      "note-001",
+      "note-002",
+      "note-004",
+      "note-006",
+      "note-007",
+      "note-009",
+      "note-010",
+      "note-013",
+      "note-014",
+      "note-015",
+      "note-016",
+      "note-017",
+      "note-018",
+      "note-019",
+      "note-020",
+      "note-021",
+      "note-022",
+      "note-023",
+      "note-024",
+      "note-025"
+    ],
+    "note": "The chart documents every criterion; the CARC 11 denial can be answered from the record."
+  }
+}

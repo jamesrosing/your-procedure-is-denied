@@ -1,0 +1,202 @@
+{
+  "id": "case-025",
+  "patient": {
+    "alias": "SYN-025",
+    "age": 65,
+    "sex": "male"
+  },
+  "procedure": {
+    "cpt": "30520",
+    "description": "septoplasty with or without cartilage scoring, contouring, or replacement with graft"
+  },
+  "payer": {
+    "name": "Silverline Medicare Advantage",
+    "planType": "Medicare Advantage"
+  },
+  "denial": {
+    "carc": "50",
+    "carcText": "These are non-covered services because this is not deemed a 'medical necessity' by the payer.",
+    "text": "Silverline Medicare Advantage denied the claim for CPT 30520 (septoplasty with or without cartilage scoring, contouring, or replacement with graft) with date of service 2026-03-30. CARC 50: These are non-covered services because this is not deemed a 'medical necessity' by the payer. Payer remark: Documentation does not establish failure of medical management or an anatomic obstruction.",
+    "dateOfService": "2026-03-30"
+  },
+  "criteria": [
+    {
+      "id": "crit-1",
+      "text": "Nasal airway obstruction symptoms persisting for at least 3 months."
+    },
+    {
+      "id": "crit-2",
+      "text": "Failure of at least 4 weeks of an intranasal corticosteroid together with an oral or intranasal antihistamine."
+    },
+    {
+      "id": "crit-3",
+      "text": "Physical examination or imaging documenting septal deviation obstructing the nasal airway, with symptoms not explained by mucosal disease alone."
+    }
+  ],
+  "chart": [
+    {
+      "id": "note-001",
+      "date": "2025-04-01",
+      "kind": "outside letter",
+      "text": "Gastroenterology note received. Screening colonoscopy completed, two small polyps removed, benign on pathology, repeat in 7 years."
+    },
+    {
+      "id": "note-002",
+      "date": "2025-04-21",
+      "kind": "outside letter",
+      "text": "Referral letter from the primary care office. Thank you for seeing this patient of mine for surgical evaluation. His history and medication list are attached. Please let me know what you recommend and whether anything is needed from our end for clearance."
+    },
+    {
+      "id": "note-003",
+      "date": "2025-05-09",
+      "kind": "office visit",
+      "text": "65 year old man here for nasal obstruction. Broke the nose playing ball as a teenager, never fixed. Discussed septoplasty, possible turbinate reduction, recovery of a week or so. His history otherwise: prediabetes, diet controlled. Surgeries: appendix years ago. Allergies: no drug allergies. Never smoked, occasional beer, has three kids at home. Family history noncontributory for what we are talking about today. Cannot breathe through the right side for going on 8 months, mouth-breathes at night, his spouse says the snoring is worse. He has been on fluticasone two sprays each side daily plus loratadine since his PCP started them, says it does nothing for the right side. Anterior rhinoscopy: septum deviated to the right with a caudal spur contacting the inferior turbinate, right airway maybe 37 percent of the left. Turbinates decongest fine with oxymetazoline, the right side does not open up."
+    },
+    {
+      "id": "note-004",
+      "date": "2025-05-23",
+      "kind": "office visit",
+      "text": "Annual physical. Feels well overall. Sleeping fine, appetite fine, no chest pain, no shortness of breath. Flu shot given in the left arm today. Due for a tetanus booster, he will think about it. Labs ordered, fasting."
+    },
+    {
+      "id": "note-005",
+      "date": "2025-05-23",
+      "kind": "office visit",
+      "text": "A1c came back 6.3. Prediabetic range, same as last year. Walking program, cut the soda, recheck in six months. He is motivated."
+    },
+    {
+      "id": "note-006",
+      "date": "2025-05-25",
+      "kind": "phone note",
+      "text": "Called his with the cholesterol results. Total 196, LDL 108, HDL 59, triglycerides 118. Discussed diet and walking. He wants to try lifestyle first for six months before we talk about a statin. Agreed."
+    },
+    {
+      "id": "note-007",
+      "date": "2025-06-02",
+      "kind": "imaging",
+      "text": "CT sinus without contrast: rightward septal deviation with a bony spur abutting the right inferior turbinate, no significant sinus disease, no polyps."
+    },
+    {
+      "id": "note-008",
+      "date": "2025-07-27",
+      "kind": "office visit",
+      "text": "Trouble sleeping for a couple of months, falls asleep fine but wakes at three and lies there. No snoring per the spouse, no daytime naps, two cups of coffee before noon. Went over sleep hygiene, no screens in bed, cut the afternoon caffeine. Will hold off on medication for now."
+    },
+    {
+      "id": "note-009",
+      "date": "2025-07-28",
+      "kind": "office visit",
+      "text": "Follow-up on the nose. Reviewed the imaging with him. Still wants to proceed. Vitals today 138 over 78, pulse 76. 11 weeks on the fluticasone and loratadine now, used it every day per him, no change in the right sided obstruction."
+    },
+    {
+      "id": "note-010",
+      "date": "2025-08-09",
+      "kind": "office visit",
+      "text": "Knee pain going down stairs, left side, no injury, no locking or giving way. Patellar grind positive, no effusion, ligaments stable. Patellofemoral pain. Quad strengthening sheet, ice after activity, cushioned shoes."
+    },
+    {
+      "id": "note-011",
+      "date": "2025-09-03",
+      "kind": "phone note",
+      "text": "Nurse call. Patient had questions about time off work after surgery and whether he needs someone at home the first night. Answered both, he will arrange it."
+    },
+    {
+      "id": "note-012",
+      "date": "2025-10-16",
+      "kind": "office visit",
+      "text": "Here with a cough and congestion for 8 days, low grade temp at home, no shortness of breath. Lungs clear, throat a little red, ears fine. Looks viral. Fluids, rest, honey for the cough, come back if he gets a fever over 101 or it goes past two weeks."
+    },
+    {
+      "id": "note-013",
+      "date": "2025-10-18",
+      "kind": "outside letter",
+      "text": "Optometry report forwarded for the record. Routine refraction, mild astigmatism, new glasses prescribed, retinas healthy, pressures 18 and 19. No ocular pathology noted."
+    },
+    {
+      "id": "note-014",
+      "date": "2025-10-23",
+      "kind": "office visit",
+      "text": "Ear fullness and muffled hearing on the right for a week after a cold. Canal clear, drum dull with fluid behind it, no infection. Serous otitis. Decongestant, swallow and yawn, recheck in three weeks if not better."
+    },
+    {
+      "id": "note-015",
+      "date": "2025-10-24",
+      "kind": "office visit",
+      "text": "Mole on the upper back that his spouse noticed. About 7 millimeters, even color, regular border, no change he is aware of. Looks benign. Photo in the chart for comparison, recheck in a year or sooner if it changes."
+    },
+    {
+      "id": "note-016",
+      "date": "2025-12-15",
+      "kind": "outside letter",
+      "text": "Letter from the dentist's office confirming routine cleaning and exam completed, no active infection, no dental work pending. Sent at our request for the surgical file."
+    },
+    {
+      "id": "note-017",
+      "date": "2025-12-20",
+      "kind": "office visit",
+      "text": "Check-in while we wait on the insurance. No change in the complaints. Reviewed the risks and recovery one more time, he remains sure about going ahead."
+    },
+    {
+      "id": "note-018",
+      "date": "2026-02-02",
+      "kind": "office visit",
+      "text": "Low back strain after moving furniture over the weekend. No radiation down the legs, no numbness, no bowel or bladder trouble. Paraspinal tenderness, straight leg raise negative. Heat, keep moving, ibuprofen with food for a week. Should settle."
+    },
+    {
+      "id": "note-019",
+      "date": "2026-02-06",
+      "kind": "phone note",
+      "text": "Pharmacy called about the refill on the omeprazole 20. Approved 90 days. He mentioned the heartburn is better since cutting back on coffee."
+    },
+    {
+      "id": "note-020",
+      "date": "2026-02-24",
+      "kind": "office visit",
+      "text": "Twisted the right ankle stepping off a curb 3 days ago. Swelling over the lateral malleolus, tender over the ATFL, can bear weight. Ottawa negative, no film. Brace, ice, ibuprofen, elevate. Should be fine in a couple weeks."
+    },
+    {
+      "id": "note-021",
+      "date": "2026-03-18",
+      "kind": "preoperative visit",
+      "text": "Pre-op. Consent signed, septoplasty with possible inferior turbinate reduction. No aspirin for ten days."
+    }
+  ],
+  "expected": {
+    "warranted": true,
+    "criteriaMet": [
+      "crit-1",
+      "crit-2",
+      "crit-3"
+    ],
+    "support": {
+      "crit-1": [
+        "note-003"
+      ],
+      "crit-2": [
+        "note-003",
+        "note-009"
+      ],
+      "crit-3": [
+        "note-003",
+        "note-007"
+      ]
+    },
+    "distractors": [
+      "note-001",
+      "note-004",
+      "note-005",
+      "note-006",
+      "note-008",
+      "note-010",
+      "note-012",
+      "note-013",
+      "note-014",
+      "note-015",
+      "note-016",
+      "note-018",
+      "note-019",
+      "note-020"
+    ],
+    "note": "The chart documents every criterion; the CARC 50 denial can be answered from the record."
+  }
+}

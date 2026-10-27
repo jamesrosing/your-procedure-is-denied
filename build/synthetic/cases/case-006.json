@@ -1,0 +1,226 @@
+{
+  "id": "case-006",
+  "patient": {
+    "alias": "SYN-006",
+    "age": 32,
+    "sex": "male"
+  },
+  "procedure": {
+    "cpt": "15847",
+    "description": "panniculectomy with excision of excess skin and subcutaneous tissue of the abdomen"
+  },
+  "payer": {
+    "name": "Prairie Commons Medicaid Plan",
+    "planType": "Medicaid managed care"
+  },
+  "denial": {
+    "carc": "96",
+    "carcText": "Non-covered charge(s).",
+    "rarc": "N130",
+    "text": "Prairie Commons Medicaid Plan denied the claim for CPT 15847 (panniculectomy with excision of excess skin and subcutaneous tissue of the abdomen) with date of service 2026-08-27. CARC 96: Non-covered charge(s). RARC N130: Consult plan benefit documents/guidelines for information about restrictions for this service. Payer remark: Abdominoplasty and related procedures are considered cosmetic.",
+    "dateOfService": "2026-08-27"
+  },
+  "criteria": [
+    {
+      "id": "crit-1",
+      "text": "Panniculus hangs at or below the level of the pubis (grade 2 or higher) as documented on examination."
+    },
+    {
+      "id": "crit-2",
+      "text": "Recurrent or chronic intertrigo, cellulitis, or skin breakdown beneath the panniculus that has failed at least 3 months of conservative treatment such as topical antifungals, hygiene measures, and barrier products."
+    },
+    {
+      "id": "crit-3",
+      "text": "Weight stable within 10 pounds for at least 12 months (or at least 18 months after bariatric surgery)."
+    },
+    {
+      "id": "crit-4",
+      "text": "The panniculus interferes with activities of daily living or ambulation."
+    }
+  ],
+  "chart": [
+    {
+      "id": "note-001",
+      "date": "2025-08-20",
+      "kind": "office visit",
+      "text": "Vitamin D came back 23. Started 2000 units daily, recheck in three months. Also talked about calcium from food rather than pills."
+    },
+    {
+      "id": "note-002",
+      "date": "2025-08-26",
+      "kind": "office visit",
+      "text": "Mole on the left forearm that his spouse noticed. About 4 millimeters, even color, regular border, no change he is aware of. Looks benign. Photo in the chart for comparison, recheck in a year or sooner if it changes."
+    },
+    {
+      "id": "note-003",
+      "date": "2025-09-15",
+      "kind": "phone note",
+      "text": "Patient called about a tick bite on the scalp after a hike. Tick removed whole, no rash, no fever. Watch for a bull's-eye rash or flu symptoms over the next month and call if either shows up."
+    },
+    {
+      "id": "note-004",
+      "date": "2025-09-17",
+      "kind": "outside letter",
+      "text": "Referral letter from the primary care office. Thank you for seeing this patient of mine for surgical evaluation. His history and medication list are attached. Please let me know what you recommend and whether anything is needed from our end for clearance."
+    },
+    {
+      "id": "note-005",
+      "date": "2025-09-18",
+      "kind": "office visit",
+      "text": "Blood pressure check. 119 over 76 today, 133 over 75 on repeat. He has been taking the lisinopril 10 most days, admits to missing weekends. Low salt talk again. Keep the dose, recheck in 8 weeks."
+    },
+    {
+      "id": "note-006",
+      "date": "2025-09-19",
+      "kind": "phone note",
+      "text": "Work note requested for a sick day last Tuesday. Faxed to the employer."
+    },
+    {
+      "id": "note-007",
+      "date": "2025-09-24",
+      "kind": "office visit",
+      "text": "32 year old man here about the abdominal apron after his weight loss. Nice result on the weight. Discussed panniculectomy versus a full abdominoplasty and what insurance will and will not look at. His history otherwise: seasonal allergies, anxiety, sees a counselor, migraines, rare now. Allergies: no drug allergies. Quit smoking 12 years ago, no alcohol, works two jobs. Family history noncontributory for what we are talking about today. On exam the pannus hangs well below the pubis, I would call it grade 2, with maceration and an odor in the fold. He has been fighting the rash under the apron for better than a year, treated with nystatin, then clotrimazole, keeps it dry with powder and a cloth liner, and it comes right back. Two rounds of antibiotics from the PCP for cellulitis in the fold. Down 103 pounds after the sleeve in 2023. Weight has been steady at 215 give or take five for the last 21 months. Says he cannot walk more than a block without the skin fold chafing raw, has to lift it to wash underneath, cannot find pants that fit over it."
+    },
+    {
+      "id": "note-008",
+      "date": "2025-10-15",
+      "kind": "office visit",
+      "text": "Seasonal allergies acting up, itchy eyes, sneezing, clear drainage, worse outdoors. No wheeze. Cetirizine at night and the saline rinse. Fine with that."
+    },
+    {
+      "id": "note-009",
+      "date": "2025-11-14",
+      "kind": "office visit",
+      "text": "Knee pain going down stairs, left side, no injury, no locking or giving way. Patellar grind positive, no effusion, ligaments stable. Patellofemoral pain. Quad strengthening sheet, ice after activity, cushioned shoes."
+    },
+    {
+      "id": "note-010",
+      "date": "2025-11-28",
+      "kind": "office visit",
+      "text": "Follow-up on the abdomen. Went back over the operation, drains, the scar, recovery of four to six weeks. He understands this is skin and fat removal for the skin problems, not a tummy tuck. Vitals today 117 over 85, pulse 63. Rash is back again despite 13 months of the antifungal and barrier routine. Fold is red and weeping today. Weight 218 today, holding."
+    },
+    {
+      "id": "note-011",
+      "date": "2025-11-29",
+      "kind": "office visit",
+      "text": "Here with a cough and congestion for 5 days, low grade temp at home, no shortness of breath. Lungs clear, throat a little red, ears fine. Looks viral. Fluids, rest, honey for the cough, come back if he gets a fever over 101 or it goes past two weeks."
+    },
+    {
+      "id": "note-012",
+      "date": "2025-11-30",
+      "kind": "phone note",
+      "text": "Thyroid labs back. TSH 2.9, free T4 normal. No change to the levothyroxine 100. Repeat in a year."
+    },
+    {
+      "id": "note-013",
+      "date": "2025-12-24",
+      "kind": "outside letter",
+      "text": "Optometry report forwarded for the record. Routine refraction, mild astigmatism, new glasses prescribed, retinas healthy, pressures 17 and 19. No ocular pathology noted."
+    },
+    {
+      "id": "note-014",
+      "date": "2026-01-10",
+      "kind": "office visit",
+      "text": "Trouble sleeping for a couple of months, falls asleep fine but wakes at three and lies there. No snoring per the spouse, no daytime naps, two cups of coffee before noon. Went over sleep hygiene, no screens in bed, cut the afternoon caffeine. Will hold off on medication for now."
+    },
+    {
+      "id": "note-015",
+      "date": "2026-01-11",
+      "kind": "outside letter",
+      "text": "Dermatology consult note received. Two actinic keratoses on the forehead treated with cryotherapy. Annual skin check recommended, sunscreen counseling done."
+    },
+    {
+      "id": "note-016",
+      "date": "2026-02-23",
+      "kind": "outside letter",
+      "text": "Letter from the dentist's office confirming routine cleaning and exam completed, no active infection, no dental work pending. Sent at our request for the surgical file."
+    },
+    {
+      "id": "note-017",
+      "date": "2026-02-23",
+      "kind": "office visit",
+      "text": "A1c came back 6.2. Prediabetic range, same as last year. Walking program, cut the soda, recheck in six months. He is motivated."
+    },
+    {
+      "id": "note-018",
+      "date": "2026-03-02",
+      "kind": "phone note",
+      "text": "Nurse call. Patient had questions about time off work after surgery and whether he needs someone at home the first night. Answered both, he will arrange it."
+    },
+    {
+      "id": "note-019",
+      "date": "2026-03-10",
+      "kind": "outside letter",
+      "text": "Gastroenterology note received. Screening colonoscopy completed, two small polyps removed, benign on pathology, repeat in 10 years."
+    },
+    {
+      "id": "note-020",
+      "date": "2026-05-11",
+      "kind": "office visit",
+      "text": "Follow-up. Same story, no better. He asked about timing around work and family, we talked through it. Still wants to proceed."
+    },
+    {
+      "id": "note-021",
+      "date": "2026-06-17",
+      "kind": "phone note",
+      "text": "Pharmacy called about the refill on the omeprazole 20. Approved 90 days. He mentioned the heartburn is better since cutting back on coffee."
+    },
+    {
+      "id": "note-022",
+      "date": "2026-07-05",
+      "kind": "office visit",
+      "text": "Low back strain after moving furniture over the weekend. No radiation down the legs, no numbness, no bowel or bladder trouble. Paraspinal tenderness, straight leg raise negative. Heat, keep moving, ibuprofen with food for a week. Should settle."
+    },
+    {
+      "id": "note-023",
+      "date": "2026-08-06",
+      "kind": "preoperative visit",
+      "text": "Pre-op. Consent signed. Marked the resection with him standing. Nicotine negative. Hold the metformin the morning of."
+    }
+  ],
+  "expected": {
+    "warranted": true,
+    "criteriaMet": [
+      "crit-1",
+      "crit-2",
+      "crit-3",
+      "crit-4"
+    ],
+    "support": {
+      "crit-1": [
+        "note-007"
+      ],
+      "crit-2": [
+        "note-007",
+        "note-010"
+      ],
+      "crit-3": [
+        "note-007",
+        "note-010"
+      ],
+      "crit-4": [
+        "note-007"
+      ]
+    },
+    "distractors": [
+      "note-001",
+      "note-002",
+      "note-003",
+      "note-005",
+      "note-006",
+      "note-008",
+      "note-009",
+      "note-011",
+      "note-012",
+      "note-013",
+      "note-014",
+      "note-015",
+      "note-016",
+      "note-017",
+      "note-019",
+      "note-021",
+      "note-022"
+    ],
+    "note": "The chart documents every criterion; the CARC 96 denial can be answered from the record."
+  }
+}

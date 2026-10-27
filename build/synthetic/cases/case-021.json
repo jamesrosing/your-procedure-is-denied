@@ -1,0 +1,220 @@
+{
+  "id": "case-021",
+  "patient": {
+    "alias": "SYN-021",
+    "age": 44,
+    "sex": "female"
+  },
+  "procedure": {
+    "cpt": "15877",
+    "description": "suction assisted lipectomy, trunk and lower extremities, for lipedema"
+  },
+  "payer": {
+    "name": "Copperfield Health",
+    "planType": "commercial EPO"
+  },
+  "denial": {
+    "carc": "50",
+    "carcText": "These are non-covered services because this is not deemed a 'medical necessity' by the payer.",
+    "text": "Copperfield Health denied the claim for CPT 15877 (suction assisted lipectomy, trunk and lower extremities, for lipedema) with date of service 2026-06-25. CARC 50: These are non-covered services because this is not deemed a 'medical necessity' by the payer. Payer remark: Documentation does not establish failure of conservative therapy.",
+    "dateOfService": "2026-06-25"
+  },
+  "criteria": [
+    {
+      "id": "crit-1",
+      "text": "Diagnosis of lipedema stage II or III documented on examination: bilateral symmetric disproportionate adiposity of the limbs sparing the feet, negative Stemmer sign, tenderness, and easy bruising."
+    },
+    {
+      "id": "crit-2",
+      "text": "At least 3 months of conservative therapy including compression garments and manual lymphatic drainage or supervised exercise, with persistent pain or functional impairment."
+    },
+    {
+      "id": "crit-3",
+      "text": "Pain or impaired mobility attributable to lipedema."
+    }
+  ],
+  "chart": [
+    {
+      "id": "note-001",
+      "date": "2025-08-10",
+      "kind": "phone note",
+      "text": "Work note requested for a sick day last Thursday. Faxed to the employer."
+    },
+    {
+      "id": "note-002",
+      "date": "2025-08-15",
+      "kind": "outside letter",
+      "text": "Optometry report forwarded for the record. Routine refraction, mild astigmatism, new glasses prescribed, retinas healthy, pressures 17 and 15. No ocular pathology noted."
+    },
+    {
+      "id": "note-003",
+      "date": "2025-08-17",
+      "kind": "phone note",
+      "text": "Thyroid labs back. TSH 1.4, free T4 normal. No change to the levothyroxine 50. Repeat in a year."
+    },
+    {
+      "id": "note-004",
+      "date": "2025-08-30",
+      "kind": "phone note",
+      "text": "Patient called about a tick bite on the shoulder after a hike. Tick removed whole, no rash, no fever. Watch for a bull's-eye rash or flu symptoms over the next month and call if either shows up."
+    },
+    {
+      "id": "note-005",
+      "date": "2025-09-04",
+      "kind": "outside letter",
+      "text": "From the referring physician: please evaluate for surgical management. We have exhausted what we can do in primary care and the patient is motivated. Recent labs enclosed, all within normal limits."
+    },
+    {
+      "id": "note-006",
+      "date": "2025-09-16",
+      "kind": "office visit",
+      "text": "44 year old woman here about her legs, self-referred after reading about lipedema. Mother and aunt had the same legs. Discussed lymph-sparing liposuction, staged, and that it is debulking, not a cure. Her history otherwise: migraines, rare now, mild asthma, albuterol maybe twice a year. Surgeries: no prior surgery. Allergies: penicillin, rash. Does not smoke, a glass of wine on weekends, works from home. Family history noncontributory for what we are talking about today. Classic picture. Column legs out of all proportion to her waist, cuff sign at the ankles, feet spared, Stemmer negative, exquisitely tender to pinch over the thighs, bruises if you look at her. Stage 3. She bought some compression stockings online, not sure she wears them much. Has not done any lymphatic drainage. We talked about starting a real program. Says she cannot stand through a shift anymore, pain in the thighs is constant, stairs are hard because the legs knock together."
+    },
+    {
+      "id": "note-007",
+      "date": "2025-10-05",
+      "kind": "office visit",
+      "text": "Low back strain after moving furniture over the weekend. No radiation down the legs, no numbness, no bowel or bladder trouble. Paraspinal tenderness, straight leg raise negative. Heat, keep moving, ibuprofen with food for a week. Should settle."
+    },
+    {
+      "id": "note-008",
+      "date": "2025-10-05",
+      "kind": "outside letter",
+      "text": "Gastroenterology note received. Screening colonoscopy completed, two small polyps removed, benign on pathology, repeat in 5 years."
+    },
+    {
+      "id": "note-009",
+      "date": "2025-11-18",
+      "kind": "office visit",
+      "text": "Vitamin D came back 22. Started 1000 units daily, recheck in three months. Also talked about calcium from food rather than pills."
+    },
+    {
+      "id": "note-010",
+      "date": "2025-11-23",
+      "kind": "office visit",
+      "text": "Follow-up. Reviewed photos and measurements, legs unchanged. Went over the staged plan and the compression afterward. Vitals today 135 over 85, pulse 70."
+    },
+    {
+      "id": "note-011",
+      "date": "2025-12-01",
+      "kind": "office visit",
+      "text": "Burning with urination for two days, going frequently, no fever, no back pain. Urine dip positive for leukocytes and nitrites. Nitrofurantoin for five days, push fluids, call if fever or flank pain."
+    },
+    {
+      "id": "note-012",
+      "date": "2025-12-09",
+      "kind": "phone note",
+      "text": "She called asking about travel vaccines for a trip in early summer. Advised hepatitis A and a typhoid booster, referred to the travel clinic. Nothing else needed from us."
+    },
+    {
+      "id": "note-013",
+      "date": "2025-12-14",
+      "kind": "office visit",
+      "text": "A1c came back 6.4. Prediabetic range, same as last year. Walking program, cut the soda, recheck in six months. She is motivated."
+    },
+    {
+      "id": "note-014",
+      "date": "2026-01-02",
+      "kind": "outside letter",
+      "text": "Dermatology consult note received. Two actinic keratoses on the forehead treated with cryotherapy. Annual skin check recommended, sunscreen counseling done."
+    },
+    {
+      "id": "note-015",
+      "date": "2026-01-27",
+      "kind": "phone note",
+      "text": "Nurse call. Patient had questions about time off work after surgery and whether she needs someone at home the first night. Answered both, she will arrange it."
+    },
+    {
+      "id": "note-016",
+      "date": "2026-01-28",
+      "kind": "office visit",
+      "text": "Trouble sleeping for a couple of months, falls asleep fine but wakes at three and lies there. No snoring per the spouse, no daytime naps, two cups of coffee before noon. Went over sleep hygiene, no screens in bed, cut the afternoon caffeine. Will hold off on medication for now."
+    },
+    {
+      "id": "note-017",
+      "date": "2026-03-16",
+      "kind": "office visit",
+      "text": "Interval visit. Nothing new since last time, symptoms as described before, she is managing. Went over the plan again and answered questions from her spouse."
+    },
+    {
+      "id": "note-018",
+      "date": "2026-03-18",
+      "kind": "office visit",
+      "text": "Ear fullness and muffled hearing on the right for a week after a cold. Canal clear, drum dull with fluid behind it, no infection. Serous otitis. Decongestant, swallow and yawn, recheck in three weeks if not better."
+    },
+    {
+      "id": "note-019",
+      "date": "2026-03-30",
+      "kind": "office visit",
+      "text": "Here with a cough and congestion for 4 days, low grade temp at home, no shortness of breath. Lungs clear, throat a little red, ears fine. Looks viral. Fluids, rest, honey for the cough, come back if she gets a fever over 101 or it goes past two weeks."
+    },
+    {
+      "id": "note-020",
+      "date": "2026-04-22",
+      "kind": "phone note",
+      "text": "Called her with the cholesterol results. Total 194, LDL 107, HDL 43, triglycerides 203. Discussed diet and walking. She wants to try lifestyle first for six months before we talk about a statin. Agreed."
+    },
+    {
+      "id": "note-021",
+      "date": "2026-05-21",
+      "kind": "office visit",
+      "text": "Blood pressure check. 139 over 79 today, 122 over 86 on repeat. She has been taking the lisinopril 40 most days, admits to missing weekends. Low salt talk again. Keep the dose, recheck in 6 weeks."
+    },
+    {
+      "id": "note-022",
+      "date": "2026-06-04",
+      "kind": "preoperative visit",
+      "text": "Pre-op for stage one, thighs. Consent signed. Marked standing. Garments ordered."
+    },
+    {
+      "id": "note-023",
+      "date": "2026-06-05",
+      "kind": "office visit",
+      "text": "Annual physical. Feels well overall. Sleeping fine, appetite fine, no chest pain, no shortness of breath. Flu shot given in the left arm today. Due for a tetanus booster, she will think about it. Labs ordered, fasting."
+    },
+    {
+      "id": "note-024",
+      "date": "2026-06-16",
+      "kind": "office visit",
+      "text": "Seasonal allergies acting up, itchy eyes, sneezing, clear drainage, worse outdoors. No wheeze. Cetirizine at night and the saline rinse. Fine with that."
+    }
+  ],
+  "expected": {
+    "warranted": false,
+    "subtype": "near-miss",
+    "criteriaMet": [
+      "crit-1",
+      "crit-3"
+    ],
+    "support": {
+      "crit-1": [
+        "note-006"
+      ],
+      "crit-2": [],
+      "crit-3": [
+        "note-006"
+      ]
+    },
+    "distractors": [
+      "note-001",
+      "note-002",
+      "note-003",
+      "note-004",
+      "note-007",
+      "note-008",
+      "note-009",
+      "note-011",
+      "note-012",
+      "note-013",
+      "note-014",
+      "note-016",
+      "note-018",
+      "note-019",
+      "note-020",
+      "note-021",
+      "note-023",
+      "note-024"
+    ],
+    "note": "The chart raises crit-2 (conservative) but does not satisfy it; the mention is a plan or a shortfall, not completed treatment or a met threshold."
+  }
+}

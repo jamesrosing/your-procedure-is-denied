@@ -1,0 +1,196 @@
+{
+  "id": "case-045",
+  "patient": {
+    "alias": "SYN-045",
+    "age": 57,
+    "sex": "female"
+  },
+  "procedure": {
+    "cpt": "19357",
+    "description": "breast reconstruction, immediate or delayed, with tissue expander"
+  },
+  "payer": {
+    "name": "Copperfield Health",
+    "planType": "commercial EPO"
+  },
+  "denial": {
+    "carc": "29",
+    "carcText": "The time limit for filing has expired.",
+    "text": "Copperfield Health denied the claim for CPT 19357 (breast reconstruction, immediate or delayed, with tissue expander) with date of service 2026-05-13. CARC 29: The time limit for filing has expired. Payer remark: The claim was received more than 120 days after the date of service.",
+    "dateOfService": "2026-05-13"
+  },
+  "criteria": [
+    {
+      "id": "crit-1",
+      "text": "Documented mastectomy for breast cancer, or prophylactic mastectomy for a qualifying risk, with reconstruction requested by the patient. Reconstruction after a covered mastectomy is a mandated benefit under the Women’s Health and Cancer Rights Act."
+    },
+    {
+      "id": "crit-2",
+      "text": "An operative plan for staged reconstruction (tissue expander placement followed by implant exchange) appropriate to the patient’s radiation status and tissue quality."
+    },
+    {
+      "id": "crit-3",
+      "text": "Medical clearance for the planned surgery is documented."
+    }
+  ],
+  "chart": [
+    {
+      "id": "note-001",
+      "date": "2025-06-17",
+      "kind": "office visit",
+      "text": "Knee pain going down stairs, right side, no injury, no locking or giving way. Patellar grind positive, no effusion, ligaments stable. Patellofemoral pain. Quad strengthening sheet, ice after activity, cushioned shoes."
+    },
+    {
+      "id": "note-002",
+      "date": "2025-06-27",
+      "kind": "outside letter",
+      "text": "From the referring physician: please evaluate for surgical management. We have exhausted what we can do in primary care and the patient is motivated. Recent labs enclosed, all within normal limits. From the breast surgeon: left total mastectomy performed 9 months ago for a 2.6 centimeter invasive ductal carcinoma, sentinel nodes negative, margins clear. She has completed adjuvant chemotherapy and wishes to proceed with reconstruction."
+    },
+    {
+      "id": "note-003",
+      "date": "2025-07-24",
+      "kind": "office visit",
+      "text": "57 year old woman referred by the breast surgeon for reconstruction. Went over expanders versus flaps, she prefers the expander route, fewer operations and no donor site. Her history otherwise: migraines, rare now, prediabetes, diet controlled, hypertension on lisinopril. Allergies: codeine makes her sick. Quit smoking 7 years ago, no alcohol, stays home with the kids. Family history noncontributory for what we are talking about today. Status post left mastectomy 9 months ago for a 2.6 centimeter invasive ductal. Done with chemo. She wants reconstruction and has thought hard about it. No radiation planned per oncology. Good skin envelope, no infection, mastectomy flap healed. Plan is a left tissue expander under the pectoralis now, exchange to a permanent implant in about 3 months, and a right lift for symmetry later."
+    },
+    {
+      "id": "note-004",
+      "date": "2025-09-09",
+      "kind": "office visit",
+      "text": "Low back strain after moving furniture over the weekend. No radiation down the legs, no numbness, no bowel or bladder trouble. Paraspinal tenderness, straight leg raise negative. Heat, keep moving, ibuprofen with food for a week. Should settle."
+    },
+    {
+      "id": "note-005",
+      "date": "2025-10-01",
+      "kind": "phone note",
+      "text": "Patient called about a tick bite on the calf after a hike. Tick removed whole, no rash, no fever. Watch for a bull's-eye rash or flu symptoms over the next month and call if either shows up."
+    },
+    {
+      "id": "note-006",
+      "date": "2025-10-08",
+      "kind": "outside letter",
+      "text": "Optometry report forwarded for the record. Routine refraction, mild astigmatism, new glasses prescribed, retinas healthy, pressures 15 and 19. No ocular pathology noted."
+    },
+    {
+      "id": "note-007",
+      "date": "2025-10-10",
+      "kind": "office visit",
+      "text": "Annual physical. Feels well overall. Sleeping fine, appetite fine, no chest pain, no shortness of breath. Flu shot given in the left arm today. Due for a tetanus booster, she will think about it. Labs ordered, fasting."
+    },
+    {
+      "id": "note-008",
+      "date": "2025-10-12",
+      "kind": "office visit",
+      "text": "Back with her sister to go over the plan again. Questions answered. Ready to schedule. Vitals today 137 over 80, pulse 67."
+    },
+    {
+      "id": "note-009",
+      "date": "2025-11-25",
+      "kind": "outside letter",
+      "text": "Letter from the dentist's office confirming routine cleaning and exam completed, no active infection, no dental work pending. Sent at our request for the surgical file."
+    },
+    {
+      "id": "note-010",
+      "date": "2025-11-27",
+      "kind": "office visit",
+      "text": "Ear fullness and muffled hearing on the right for a week after a cold. Canal clear, drum dull with fluid behind it, no infection. Serous otitis. Decongestant, swallow and yawn, recheck in three weeks if not better."
+    },
+    {
+      "id": "note-011",
+      "date": "2025-12-12",
+      "kind": "phone note",
+      "text": "Called to let her know the surgery date is set and that we are submitting to the insurance. Nurse call. Patient had questions about time off work after surgery and whether she needs someone at home the first night. Answered both, she will arrange it."
+    },
+    {
+      "id": "note-012",
+      "date": "2025-12-18",
+      "kind": "office visit",
+      "text": "Burning with urination for two days, going frequently, no fever, no back pain. Urine dip positive for leukocytes and nitrites. Nitrofurantoin for five days, push fluids, call if fever or flank pain."
+    },
+    {
+      "id": "note-013",
+      "date": "2026-01-07",
+      "kind": "office visit",
+      "text": "Blood pressure check. 141 over 75 today, 138 over 93 on repeat. She has been taking the lisinopril 20 most days, admits to missing weekends. Low salt talk again. Keep the dose, recheck in 8 weeks."
+    },
+    {
+      "id": "note-014",
+      "date": "2026-01-26",
+      "kind": "phone note",
+      "text": "Thyroid labs back. TSH 1.6, free T4 normal. No change to the levothyroxine 100. Repeat in a year."
+    },
+    {
+      "id": "note-015",
+      "date": "2026-02-11",
+      "kind": "office visit",
+      "text": "Vitamin D came back 16. Started 1000 units daily, recheck in three months. Also talked about calcium from food rather than pills."
+    },
+    {
+      "id": "note-016",
+      "date": "2026-02-18",
+      "kind": "office visit",
+      "text": "Follow-up. Same story, no better. She asked about timing around work and family, we talked through it. Still wants to proceed."
+    },
+    {
+      "id": "note-017",
+      "date": "2026-03-20",
+      "kind": "office visit",
+      "text": "Trouble sleeping for a couple of months, falls asleep fine but wakes at three and lies there. No snoring per the spouse, no daytime naps, two cups of coffee before noon. Went over sleep hygiene, no screens in bed, cut the afternoon caffeine. Will hold off on medication for now."
+    },
+    {
+      "id": "note-018",
+      "date": "2026-03-22",
+      "kind": "phone note",
+      "text": "She called asking about travel vaccines for a trip in early summer. Advised hepatitis A and a typhoid booster, referred to the travel clinic. Nothing else needed from us."
+    },
+    {
+      "id": "note-019",
+      "date": "2026-03-25",
+      "kind": "outside letter",
+      "text": "Gastroenterology note received. Screening colonoscopy completed, two small polyps removed, benign on pathology, repeat in 7 years."
+    },
+    {
+      "id": "note-020",
+      "date": "2026-04-26",
+      "kind": "preoperative visit",
+      "text": "Pre-op. Cleared by her PCP, letter in the chart, labs and EKG fine. Consent signed for left tissue expander placement."
+    }
+  ],
+  "expected": {
+    "warranted": false,
+    "subtype": "wrong-remedy",
+    "criteriaMet": [
+      "crit-1",
+      "crit-2",
+      "crit-3"
+    ],
+    "support": {
+      "crit-1": [
+        "note-002",
+        "note-003"
+      ],
+      "crit-2": [
+        "note-003"
+      ],
+      "crit-3": [
+        "note-020"
+      ]
+    },
+    "distractors": [
+      "note-001",
+      "note-004",
+      "note-005",
+      "note-006",
+      "note-007",
+      "note-009",
+      "note-010",
+      "note-012",
+      "note-013",
+      "note-014",
+      "note-015",
+      "note-017",
+      "note-018",
+      "note-019"
+    ],
+    "note": "CARC 29 is an administrative denial the chart cannot answer: the remedy is proof of timely submission, not a medical necessity appeal."
+  }
+}
