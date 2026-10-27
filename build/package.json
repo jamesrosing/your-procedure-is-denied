@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "test-call": "node --env-file=../.env --import tsx src/test-call.ts",
+    "probe": "node --env-file=../.env --import tsx src/probe.ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

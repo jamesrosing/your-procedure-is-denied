@@ -5,6 +5,7 @@ Everything in this directory was written during the Meta Global AI Developer Hac
 Contents:
 
 - `src/test-call.ts`: one call to muse-spark-1.3 on the Meta Model API through the Anthropic SDK base-URL swap. Run with `npm run test-call`; it reads `MODEL_API_KEY` from the repository `.env`.
+- `src/probe.ts`: effort, JSON Schema, and prompt-cache probe on a synthetic chart. Run with `npm run probe`. Costs a few cents.
 
 Models are called only over hosted APIs; nothing runs locally.
 

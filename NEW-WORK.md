@@ -20,6 +20,7 @@ The hackathon work reimplements the LITMUS gate contract in `/build` against syn
 ## What is new
 
 - `build/src/test-call.ts` (Oct 26): one call to muse-spark-1.3 through the Anthropic SDK with the base URL swapped to the Meta Model API. Confirms the endpoint, the effort field, and where reasoning tokens are reported.
+- `build/src/probe.ts` (Oct 26): a synthetic 40-entry chart and one denial, run at three effort levels with a flat JSON Schema output contract. Measured thinking tokens per effort, confirmed the schema is honored, and found that caching needs an explicit cache marker.
 
 Still to come: the provider adapter, the JSON Schema output contract, the synthetic denial set, the evaluation harness, the LITMUS gate reimplementation, the model runs, and the agentic step.
 
@@ -30,4 +31,5 @@ Every commit made during the event, oldest first. A commit's hash is recorded by
 | Date (PT) | Commit | What it added |
 | --- | --- | --- |
 | 2026-10-26 | 79e5e21 | Hackathon scaffolding: NEW-WORK.md, /build, .gitignore fixes so /build is tracked and ROADMAP.md never is |
-| 2026-10-26 | pending | First call to muse-spark-1.3 on the Meta Model API through the Anthropic SDK base-URL swap (`build/src/test-call.ts`), with the /build package set up for TypeScript |
+| 2026-10-26 | 4685260 | First call to muse-spark-1.3 on the Meta Model API through the Anthropic SDK base-URL swap (`build/src/test-call.ts`), with the /build package set up for TypeScript |
+| 2026-10-26 | pending | Probe of reasoning-token spend by effort, JSON Schema output, and prompt caching on muse-spark-1.3 (`build/src/probe.ts`), synthetic chart only |
