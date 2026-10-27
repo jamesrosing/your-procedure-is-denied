@@ -35,3 +35,6 @@ __pycache__/
 .venv/
 .DS_Store
 Thumbs.db
+
+# Windows download-marker streams that WSL exposes as files
+*:Zone.Identifier

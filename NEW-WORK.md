@@ -32,4 +32,5 @@ Every commit made during the event, oldest first. A commit's hash is recorded by
 | --- | --- | --- |
 | 2026-10-26 | 79e5e21 | Hackathon scaffolding: NEW-WORK.md, /build, .gitignore fixes so /build is tracked and ROADMAP.md never is |
 | 2026-10-26 | 4685260 | First call to muse-spark-1.3 on the Meta Model API through the Anthropic SDK base-URL swap (`build/src/test-call.ts`), with the /build package set up for TypeScript |
-| 2026-10-26 | pending | Probe of reasoning-token spend by effort, JSON Schema output, and prompt caching on muse-spark-1.3 (`build/src/probe.ts`), synthetic chart only |
+| 2026-10-26 | 8082dc1 | Probe of reasoning-token spend by effort, JSON Schema output, and prompt caching on muse-spark-1.3 (`build/src/probe.ts`), synthetic chart only |
+| 2026-10-26 | pending | Ignore Windows Zone.Identifier marker files |
