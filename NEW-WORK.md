@@ -39,4 +39,5 @@ Every commit made during the event, oldest first. A commit's hash is recorded by
 | 2026-10-26 | 8082dc1 | Probe of reasoning-token spend by effort, JSON Schema output, and prompt caching on muse-spark-1.3 (`build/src/probe.ts`), synthetic chart only |
 | 2026-10-26 | ee1cab6 | Ignore Windows Zone.Identifier marker files |
 | 2026-10-26 | 3e57e4c | Provider adapter (`build/src/provider.ts`), appeal JSON Schema contract and validator (`build/src/schema.ts`), price table (`build/src/cost.ts`), 12 unit tests with a stubbed transport, and a live smoke test through Meta and Baseten (`build/src/smoke.ts`) |
-| 2026-10-26 | pending | Synthetic denial set: generator (`build/src/synthetic/`), 50 committed cases with grading keys (`build/synthetic/cases/`), README, and 9 tests |
+| 2026-10-26 | 4fba43c | Synthetic denial set, first cut: generator (`build/src/synthetic/`), 50 committed cases with grading keys (`build/synthetic/cases/`), README, and 9 tests |
+| 2026-10-27 | pending | Work-in-progress checkpoint: tests for the v2 appeal contract (quotes per sentence, evidence per criterion), cache-write pricing, provider system blocks, and the LITMUS gate (`build/tests/litmus.test.ts`); start of the generator refactor toward a cross-specialty case mix (`build/src/synthetic/template.ts`, new case types) |

@@ -82,3 +82,31 @@ export function distractors(rng: Rng, sex: 'female' | 'male', n: number, opts: {
   const picks = rng.shuffle(bank).slice(0, Math.min(n, bank.length));
   return picks.map(make => make());
 }
+
+// Routine inpatient and facility traffic unrelated to the level-of-care
+// question: the notes that fill a hospital or nursing-facility chart.
+export function facilityDistractors(rng: Rng, sex: 'female' | 'male', n: number): Distractor[] {
+  const she = sex === 'female' ? 'she' : 'he';
+  const She = sex === 'female' ? 'She' : 'He';
+  const her = sex === 'female' ? 'her' : 'his';
+  const bank: (() => Distractor)[] = [
+    () => ({ kind: 'nursing note', text: `Fall risk assessment completed, score ${rng.int(35, 60)}, high risk. Bed alarm on, nonskid socks, call light within reach, hourly rounding. Family at bedside this evening.` }),
+    () => ({ kind: 'nursing note', text: `Skin assessment on admission. Braden ${rng.int(14, 19)}. Skin intact, no pressure injury, heels floated. Turn every two hours while in bed. Barrier cream to the sacrum as a precaution.` }),
+    () => ({ kind: 'consult note', text: `Dietitian consult. Regular diet with ${rng.pick(['no added salt', 'carbohydrate consistent', 'heart healthy'])} modification. Intake about ${rng.int(50, 80)} percent of meals. Supplement shake twice daily added. Will follow.` }),
+    () => ({ kind: 'medication record', text: `Pharmacy note. Renal dosing reviewed, creatinine ${(rng.int(8, 14) / 10).toFixed(1)}, no adjustments needed today. Home medication list reconciled with the daughter by phone, one duplicate statin removed.` }),
+    () => ({ kind: 'nursing note', text: `Potassium ${(rng.int(31, 35) / 10).toFixed(1)} this morning, repleted with ${rng.pick([20, 40])} milliequivalents oral per protocol. Recheck with morning labs.` }),
+    () => ({ kind: 'consult note', text: `Social work met with the patient and ${her} ${rng.pick(['daughter', 'son', 'spouse'])} to confirm the home address, the primary contact, and transportation for follow-up appointments. No barriers identified today.` }),
+    () => ({ kind: 'nursing note', text: `Patient requested something for sleep. Melatonin ${rng.pick([3, 5])} milligrams given per order at 2130. Slept in two-hour stretches per night shift report.` }),
+    () => ({ kind: 'nursing note', text: `IV site rotated from the left forearm to the right hand, old site without redness. Dressing dated. Patient tolerated well.` }),
+    () => ({ kind: 'nursing note', text: `Bowel regimen started, senna and docusate at bedtime. Last bowel movement ${rng.int(2, 3)} days ago per patient. Encouraged fluids and ambulation as able.` }),
+    () => ({ kind: 'nursing note', text: `Chaplain visited at the patient's request, about twenty minutes. ${She} appreciated the visit. No needs identified.` }),
+    () => ({ kind: 'nursing note', text: `Glucose checks before meals and at bedtime, ranging ${rng.int(118, 150)} to ${rng.int(160, 230)}. Sliding scale given per protocol. Patient's own glucometer at bedside, sent home with family for safekeeping.` }),
+    () => ({ kind: 'consult note', text: `Audiology screen at nursing's request. ${She} wears a hearing aid on the ${rng.pick(['left', 'right'])}, battery replaced, hears conversational voice well now. No further needs.` }),
+    () => ({ kind: 'nursing note', text: `Pneumococcal vaccine status reviewed, up to date per state registry. Influenza vaccine offered and accepted, given left deltoid.` }),
+    () => ({ kind: 'nursing note', text: `Dentures labeled and placed in the denture cup at the bedside. Patient prefers them out at night. Oral care done.` }),
+    () => ({ kind: 'medication record', text: `Home ${rng.pick(['levothyroxine', 'amlodipine', 'atorvastatin', 'omeprazole'])} resumed at the home dose this morning after review with the attending. No interactions flagged.` }),
+    () => ({ kind: 'nursing note', text: `Daily weight ${rng.int(140, 210)} pounds, up ${rng.int(0, 2)} from yesterday. Intake and output recorded. Patient ambulated to the bathroom with standby assistance.` }),
+  ];
+  const picks = rng.shuffle(bank).slice(0, Math.min(n, bank.length));
+  return picks.map(make => make());
+}
