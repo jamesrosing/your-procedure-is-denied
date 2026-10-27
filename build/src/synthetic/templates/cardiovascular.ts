@@ -81,7 +81,7 @@ export const carotidEndarterectomy: Template = (rng, spec) => {
   const other = side === 'right' ? 'left' : 'right';
   const psv = rng.int(300, 380);
   const pct = rng.int(75, 88);
-  const dosOffset = rng.int(10, 13);
+  const dosOffset = rng.int(7, 9); // surgery 11 to 14 days after the event
 
   const criteria: CriterionDef[] = [
     {
@@ -89,7 +89,7 @@ export const carotidEndarterectomy: Template = (rng, spec) => {
       text: 'Symptomatic carotid stenosis: transient ischemic attack, amaurosis fugax, or non-disabling stroke in the ipsilateral territory within the past 6 months with 50 to 99 percent stenosis; or asymptomatic 70 to 99 percent stenosis with a life expectancy over 5 years and a perioperative stroke and death risk under 3 percent.',
       support: [
         f('ed', `Twenty minutes of ${other} arm weakness and slurred speech that resolved before arrival. CT head without hemorrhage or infarct. ABCD2 score 5. Aspirin given, carotid imaging ordered, neurology consulted.`),
-        f('consult', `Transient ischemic attack ${rng.int(9, 12)} days ago, ${other} arm and face, now back to baseline. Symptomatic ${side} carotid disease.`),
+        f('consult', `Transient ischemic attack ${rng.int(3, 5)} days ago, ${other} arm and face, now back to baseline. Symptomatic ${side} carotid disease.`),
       ],
       nearMiss: [],
     },
@@ -126,11 +126,11 @@ export const carotidEndarterectomy: Template = (rng, spec) => {
     patient: { age, sex },
     dosOffset,
     phases: {
-      ed: { offset: -12, kind: 'emergency department note' },
-      duplex: { offset: -9, kind: 'vascular laboratory' },
-      cta: { offset: -5, kind: 'imaging' },
+      ed: { offset: -4, kind: 'emergency department note' },
+      duplex: { offset: -3, kind: 'vascular laboratory' },
+      cta: { offset: -2, kind: 'imaging' },
       consult: { offset: 0, kind: 'office visit' },
-      followup1: { offset: 4, kind: 'office visit' },
+      followup1: { offset: 3, kind: 'office visit' },
       preop: { offset: dosOffset - 2, kind: 'preoperative visit' },
     },
     baseline: [
