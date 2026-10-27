@@ -54,7 +54,7 @@
       "id": "note-002",
       "date": "2026-02-04",
       "kind": "history and physical",
-      "text": "Admission history and physical. Assessment: pyelonephritis. Plan as above. Family updated at the bedside. 2.5 liters of lactated Ringer’s given as a 30 per kilo bolus in the department, piperacillin-tazobactam started within the hour. Repeat lactate every 6 hours until cleared, telemetry, strict intake and output, hold the lisinopril. Admit inpatient. I expect this admission to span at least two midnights: he needs 48 hours of intravenous antibiotics pending cultures, lactate clearance, and recovery of renal function before any oral step-down is safe."
+      "text": "Admission history and physical. Assessment: pyelonephritis. Plan as above. Family updated at the bedside. 2.5 liters of lactated Ringer’s given as a 30 per kilo bolus in the department, piperacillin-tazobactam started within the hour. Repeat lactate every 6 hours until cleared, telemetry, strict intake and output, hold the lisinopril. Admit inpatient. I expect this admission to span at least two midnights: he needs 48 hours of intravenous antibiotics pending cultures and has to be keeping fluids down before any oral step-down is safe."
     },
     {
       "id": "note-003",
@@ -90,13 +90,13 @@
       "id": "note-008",
       "date": "2026-02-05",
       "kind": "laboratory result",
-      "text": "Hospital day 2 labs. Lactate 2.1 at 12 hours. White count 15.0. Creatinine 1.9. Blood cultures: gram-negative rods in 2 of 2 bottles, identification pending."
+      "text": "Hospital day 2 labs. White count 13.4. Creatinine 1.0. Blood cultures: gram-negative rods in 2 of 2 bottles, identification pending."
     },
     {
       "id": "note-009",
       "date": "2026-02-05",
       "kind": "hospital progress note",
-      "text": "Hospital day 2. Not an observation candidate: blood pressure dipped to 84 over 48 overnight requiring a third liter, lactate 2.6 at 6 hours and 2.1 at 12 hours, creatinine 1.9 this morning. Continue intravenous antibiotics and fluids, nephrology aware."
+      "text": "Hospital day 2. Not an observation candidate: still febrile, still not keeping fluids down, needs intravenous antibiotics for at least another 48 hours pending cultures."
     },
     {
       "id": "note-010",
@@ -132,7 +132,7 @@
       "id": "note-015",
       "date": "2026-02-06",
       "kind": "hospital progress note",
-      "text": "Hospital day 3. Improving. Temperature maximum 37.9, heart rate 92, blood pressure 108 over 66 without fluids since this morning. Lactate 1.6. Creatinine 1.5. Cultures pending speciation. Advance diet, continue intravenous antibiotics."
+      "text": "Hospital day 3. Improving. Temperature maximum 37.9, heart rate 92. Cultures pending speciation. Advance diet, continue intravenous antibiotics."
     },
     {
       "id": "note-016",
@@ -162,7 +162,7 @@
       "id": "note-020",
       "date": "2026-02-08",
       "kind": "discharge summary",
-      "text": "Hospital day 4. Afebrile 36 hours, lactate 1.1, creatinine back to 1.1, cultures grew E. coli sensitive to cefpodoxime. Discharged home on oral antibiotics."
+      "text": "Hospital day 4. Afebrile 36 hours, cultures grew E. coli sensitive to cefpodoxime. Discharged home on oral antibiotics."
     },
     {
       "id": "note-021",

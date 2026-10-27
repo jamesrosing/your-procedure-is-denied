@@ -48,8 +48,13 @@ export const irfStroke: Template = (rng, spec) => {
       key: 'physician',
       text: 'Requires supervision by a rehabilitation physician with face-to-face visits at least 3 days per week to manage medical and rehabilitation needs.',
       support: [
+        f('progress1', `Rehab physician progress note, day 1, seen face to face. Reviewed the acute hospital course and the therapy evaluations, confirmed goals with the team. Blood pressure 158 over 90. Dysphagia precautions reinforced.`),
+        f('progress2', `Rehab physician progress note, day 2, seen face to face. Tolerated the first full therapy day. Mild orthostatic drop in the gym, fluids encouraged. Bowel and bladder program started.`),
         f('progress3', `Rehab physician progress note, day 3, seen face to face. Blood pressure labile, 168 over 94 this morning, 112 over 70 last night with lightheadedness in therapy; adjusted the amlodipine timing. Dysphagia diet reviewed with SLP. ${side} shoulder pain with range of motion, added a sling for transfers.`),
+        f('progress5', `Rehab physician progress note, day 5, seen face to face. Blood pressure 142 over 84 on the adjusted schedule, no further lightheadedness in therapy. Shoulder pain better with the sling. Swallow advancing per SLP.`),
+        f('progress9', `Rehab physician progress note, day 9, seen face to face. Afebrile, voiding, bladder scan residuals 80 and 110. Mood good, sleeping. Discussed the discharge target with ${p.hers} and the family.`),
         f('progress10', `Rehab physician progress note, day 10, seen face to face. Blood pressure steadier on the new schedule. Bladder scan residuals under 100, catheter out. Spasticity in the ${side} hand, started a night splint. Reviewed therapy progress with the team.`),
+        f('progress12', `Rehab physician progress note, day 12, seen face to face. Medically stable, home medications finalized, home health orders written. Three physician visits this week documented.`),
       ],
       nearMiss: [],
     },
@@ -77,10 +82,15 @@ export const irfStroke: Template = (rng, spec) => {
       ptEval: { offset: 1, kind: 'therapy note' },
       otEval: { offset: 1, kind: 'therapy note' },
       slpEval: { offset: 1, kind: 'therapy note' },
+      progress1: { offset: 1, kind: 'hospital progress note' },
+      progress2: { offset: 2, kind: 'hospital progress note' },
       progress3: { offset: 3, kind: 'hospital progress note' },
+      progress5: { offset: 5, kind: 'hospital progress note' },
       therapyWeek: { offset: 6, kind: 'therapy note' },
       teamConf: { offset: 7, kind: 'team conference' },
+      progress9: { offset: 9, kind: 'hospital progress note' },
       progress10: { offset: 10, kind: 'hospital progress note' },
+      progress12: { offset: 12, kind: 'hospital progress note' },
       discharge: { offset: 14, kind: 'discharge summary' },
     },
     baseline: [
@@ -187,6 +197,7 @@ export const inpatientSepsis: Template = (rng, spec) => {
   const p = pronouns(sex);
   const age = rng.int(58, 84);
   const shortStay = spec.subtype === 'near-miss' && spec.failKey === 'twoMidnights';
+  const noPhysiology = spec.subtype === 'absent' && spec.failKey === 'sepsis';
   const kg = rng.int(62, 94);
   const bolus = (Math.round((kg * 30) / 250) * 250) / 1000;
   const lactate = (rng.int(30, 44) / 10).toFixed(1);
@@ -212,8 +223,12 @@ export const inpatientSepsis: Template = (rng, spec) => {
       key: 'twoMidnights',
       text: 'At the time of the admission order, the admitting physician documented a reasonable expectation that care would span at least two midnights, and the actual stay met that expectation or was shortened by an unforeseen event.',
       support: [
-        f('hp', `Admit inpatient. I expect this admission to span at least two midnights: ${p.she} needs 48 hours of intravenous antibiotics pending cultures, lactate clearance, and recovery of renal function before any oral step-down is safe.`),
-        f('discharge', `Hospital day 4. Afebrile 36 hours, lactate 1.1, creatinine back to 1.1, cultures grew E. coli sensitive to cefpodoxime. Discharged home on oral antibiotics.`),
+        f('hp', noPhysiology
+          ? `Admit inpatient. I expect this admission to span at least two midnights: ${p.she} needs 48 hours of intravenous antibiotics pending cultures and has to be keeping fluids down before any oral step-down is safe.`
+          : `Admit inpatient. I expect this admission to span at least two midnights: ${p.she} needs 48 hours of intravenous antibiotics pending cultures, lactate clearance, and recovery of renal function before any oral step-down is safe.`),
+        f('discharge', noPhysiology
+          ? `Hospital day 4. Afebrile 36 hours, cultures grew E. coli sensitive to cefpodoxime. Discharged home on oral antibiotics.`
+          : `Hospital day 4. Afebrile 36 hours, lactate 1.1, creatinine back to 1.1, cultures grew E. coli sensitive to cefpodoxime. Discharged home on oral antibiotics.`),
       ],
       nearMiss: [
         f('hp', `Admit inpatient for now. ${p.She} will likely be able to go home tomorrow if ${p.she} responds to fluids and the repeat lactate is down.`),
@@ -223,7 +238,11 @@ export const inpatientSepsis: Template = (rng, spec) => {
     {
       key: 'notObservation',
       text: 'The condition could not be safely treated with outpatient or observation services.',
-      support: shortStay ? [] : [f('progress1', `Hospital day 2. Not an observation candidate: blood pressure dipped to 84 over 48 overnight requiring a third liter, lactate 2.6 at 6 hours and 2.1 at 12 hours, creatinine 1.9 this morning. Continue intravenous antibiotics and fluids, nephrology aware.`)],
+      support: shortStay
+        ? []
+        : noPhysiology
+          ? [f('progress1', `Hospital day 2. Not an observation candidate: still febrile, still not keeping fluids down, needs intravenous antibiotics for at least another 48 hours pending cultures.`)]
+          : [f('progress1', `Hospital day 2. Not an observation candidate: blood pressure dipped to 84 over 48 overnight requiring a third liter, lactate 2.6 at 6 hours and 2.1 at 12 hours, creatinine 1.9 this morning. Continue intravenous antibiotics and fluids, nephrology aware.`)],
       nearMiss: [],
     },
   ];
@@ -243,8 +262,12 @@ export const inpatientSepsis: Template = (rng, spec) => {
     );
   } else {
     baseline.push(
-      f('labs2', `Hospital day 2 labs. Lactate 2.1 at 12 hours. White count 15.0. Creatinine 1.9. Blood cultures: gram-negative rods in 2 of 2 bottles, identification pending.`),
-      f('progress2', `Hospital day 3. Improving. Temperature maximum 37.9, heart rate 92, blood pressure 108 over 66 without fluids since this morning. Lactate 1.6. Creatinine 1.5. Cultures pending speciation. Advance diet, continue intravenous antibiotics.`),
+      f('labs2', noPhysiology
+        ? `Hospital day 2 labs. White count 13.4. Creatinine 1.0. Blood cultures: gram-negative rods in 2 of 2 bottles, identification pending.`
+        : `Hospital day 2 labs. Lactate 2.1 at 12 hours. White count 15.0. Creatinine 1.9. Blood cultures: gram-negative rods in 2 of 2 bottles, identification pending.`),
+      f('progress2', noPhysiology
+        ? `Hospital day 3. Improving. Temperature maximum 37.9, heart rate 92. Cultures pending speciation. Advance diet, continue intravenous antibiotics.`
+        : `Hospital day 3. Improving. Temperature maximum 37.9, heart rate 92, blood pressure 108 over 66 without fluids since this morning. Lactate 1.6. Creatinine 1.5. Cultures pending speciation. Advance diet, continue intravenous antibiotics.`),
       f('nursing2', `Day 3 nursing. Ambulated in the hall with standby assistance twice, tolerating a regular diet, voiding without difficulty, pain 2 out of 10. Intravenous antibiotics infusing on schedule.`),
     );
   }

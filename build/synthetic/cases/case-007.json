@@ -81,113 +81,143 @@
     {
       "id": "note-006",
       "date": "2026-06-08",
+      "kind": "hospital progress note",
+      "text": "Rehab physician progress note, day 1, seen face to face. Reviewed the acute hospital course and the therapy evaluations, confirmed goals with the team. Blood pressure 158 over 90. Dysphagia precautions reinforced."
+    },
+    {
+      "id": "note-007",
+      "date": "2026-06-08",
       "kind": "nursing note",
       "text": "Skin assessment on admission. Braden 18. Skin intact, no pressure injury, heels floated. Turn every two hours while in bed. Barrier cream to the sacrum as a precaution."
     },
     {
-      "id": "note-007",
+      "id": "note-008",
+      "date": "2026-06-09",
+      "kind": "hospital progress note",
+      "text": "Rehab physician progress note, day 2, seen face to face. Tolerated the first full therapy day. Mild orthostatic drop in the gym, fluids encouraged. Bowel and bladder program started."
+    },
+    {
+      "id": "note-009",
       "date": "2026-06-10",
       "kind": "hospital progress note",
       "text": "Rehab physician progress note, day 3, seen face to face. Blood pressure labile, 168 over 94 this morning, 112 over 70 last night with lightheadedness in therapy; adjusted the amlodipine timing. Dysphagia diet reviewed with SLP. right shoulder pain with range of motion, added a sling for transfers."
     },
     {
-      "id": "note-008",
+      "id": "note-010",
       "date": "2026-06-10",
       "kind": "nursing note",
       "text": "Dentures labeled and placed in the denture cup at the bedside. Patient prefers them out at night. Oral care done."
     },
     {
-      "id": "note-009",
+      "id": "note-011",
       "date": "2026-06-11",
       "kind": "nursing note",
       "text": "Chaplain visited at the patient's request, about twenty minutes. She appreciated the visit. No needs identified."
     },
     {
-      "id": "note-010",
+      "id": "note-012",
       "date": "2026-06-11",
       "kind": "medication record",
       "text": "Pharmacy note. Renal dosing reviewed, creatinine 1.2, no adjustments needed today. Home medication list reconciled with the daughter by phone, one duplicate statin removed."
     },
     {
-      "id": "note-011",
+      "id": "note-013",
+      "date": "2026-06-12",
+      "kind": "hospital progress note",
+      "text": "Rehab physician progress note, day 5, seen face to face. Blood pressure 142 over 84 on the adjusted schedule, no further lightheadedness in therapy. Shoulder pain better with the sling. Swallow advancing per SLP."
+    },
+    {
+      "id": "note-014",
       "date": "2026-06-13",
       "kind": "therapy note",
       "text": "Week one therapy minutes: PT 90, OT 75, SLP 30 daily, 195 minutes a day on 6 of 7 days. Tolerating sessions, asking for more, no sessions refused or cut short for fatigue."
     },
     {
-      "id": "note-012",
+      "id": "note-015",
       "date": "2026-06-13",
       "kind": "nursing note",
       "text": "Daily weight 151 pounds, up 1 from yesterday. Intake and output recorded. Repositioned per schedule, skin checked."
     },
     {
-      "id": "note-013",
+      "id": "note-016",
       "date": "2026-06-14",
       "kind": "team conference",
       "text": "Team conference, day 7. Transfers improved from maximal assist of two to minimal assist of one. Gait 25 feet to 80 feet with a hemi-walker and contact guard. Swallow advanced to mechanical soft with nectar liquids. On track for the 14 day goals, continue."
     },
     {
-      "id": "note-014",
+      "id": "note-017",
       "date": "2026-06-14",
       "kind": "nursing note",
       "text": "Glucose checks before meals and at bedtime, ranging 130 to 167. Sliding scale given per protocol. Patient's own glucometer at bedside, sent home with family for safekeeping."
     },
     {
-      "id": "note-015",
+      "id": "note-018",
       "date": "2026-06-15",
       "kind": "nursing note",
       "text": "Patient requested something for sleep. Melatonin 3 milligrams given per order at 2130. Slept in two-hour stretches per night shift report."
     },
     {
-      "id": "note-016",
+      "id": "note-019",
+      "date": "2026-06-16",
+      "kind": "hospital progress note",
+      "text": "Rehab physician progress note, day 9, seen face to face. Afebrile, voiding, bladder scan residuals 80 and 110. Mood good, sleeping. Discussed the discharge target with her and the family."
+    },
+    {
+      "id": "note-020",
       "date": "2026-06-16",
       "kind": "nursing note",
       "text": "Potassium 3.2 this morning, repleted with 20 milliequivalents oral per protocol. Recheck with morning labs."
     },
     {
-      "id": "note-017",
+      "id": "note-021",
       "date": "2026-06-17",
       "kind": "hospital progress note",
       "text": "Rehab physician progress note, day 10, seen face to face. Blood pressure steadier on the new schedule. Bladder scan residuals under 100, catheter out. Spasticity in the right hand, started a night splint. Reviewed therapy progress with the team."
     },
     {
-      "id": "note-018",
+      "id": "note-022",
       "date": "2026-06-17",
       "kind": "nursing note",
       "text": "IV site rotated from the left forearm to the right hand, old site without redness. Dressing dated. Patient tolerated well."
     },
     {
-      "id": "note-019",
+      "id": "note-023",
       "date": "2026-06-18",
       "kind": "consult note",
       "text": "Dietitian consult. Regular diet with no added salt modification. Intake about 59 percent of meals. Supplement shake twice daily added. Will follow."
     },
     {
-      "id": "note-020",
+      "id": "note-024",
       "date": "2026-06-18",
       "kind": "consult note",
       "text": "Social work met with the patient and her daughter to confirm the home address, the primary contact, and transportation for follow-up appointments. No barriers identified today."
     },
     {
-      "id": "note-021",
+      "id": "note-025",
+      "date": "2026-06-19",
+      "kind": "hospital progress note",
+      "text": "Rehab physician progress note, day 12, seen face to face. Medically stable, home medications finalized, home health orders written. Three physician visits this week documented."
+    },
+    {
+      "id": "note-026",
       "date": "2026-06-19",
       "kind": "nursing note",
       "text": "Bowel regimen started, senna and docusate at bedtime. Last bowel movement 3 days ago per patient. Encouraged fluids and ambulation as able."
     },
     {
-      "id": "note-022",
+      "id": "note-027",
       "date": "2026-06-19",
       "kind": "medication record",
       "text": "Home levothyroxine resumed at the home dose this morning after review with the attending. No interactions flagged."
     },
     {
-      "id": "note-023",
+      "id": "note-028",
       "date": "2026-06-19",
       "kind": "consult note",
       "text": "Audiology screen at nursing's request. She wears a hearing aid on the left, battery replaced, hears conversational voice well now. No further needs."
     },
     {
-      "id": "note-024",
+      "id": "note-029",
       "date": "2026-06-21",
       "kind": "discharge summary",
       "text": "Discharge summary, day 14. Transfers supervision, ambulating 160 feet with a hemi-walker and supervision, regular diet with thin liquids, feeding modified independent. Home with spouse, home health PT and OT arranged."
@@ -209,35 +239,40 @@
       ],
       "crit-2": [
         "note-002",
-        "note-011"
+        "note-014"
       ],
       "crit-3": [
         "note-002",
-        "note-013"
+        "note-016"
       ],
       "crit-4": [
-        "note-007",
-        "note-017"
+        "note-006",
+        "note-008",
+        "note-009",
+        "note-013",
+        "note-019",
+        "note-021",
+        "note-025"
       ],
       "crit-5": [
         "note-001"
       ]
     },
     "distractors": [
-      "note-006",
-      "note-008",
-      "note-009",
+      "note-007",
       "note-010",
+      "note-011",
       "note-012",
-      "note-014",
       "note-015",
-      "note-016",
+      "note-017",
       "note-018",
-      "note-019",
       "note-020",
-      "note-021",
       "note-022",
-      "note-023"
+      "note-023",
+      "note-024",
+      "note-026",
+      "note-027",
+      "note-028"
     ],
     "note": "The chart documents every criterion; the CARC 50 denial can be answered from the record."
   }
