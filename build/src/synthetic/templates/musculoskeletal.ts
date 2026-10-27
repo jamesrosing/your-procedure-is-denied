@@ -12,6 +12,7 @@ export const lumbarFusion: Template = (rng, spec) => {
   const angle = rng.int(10, 14);
   const dosOffset = rng.int(200, 300);
   const side = rng.pick(['left', 'right']);
+  const noInstability = spec.subtype === 'absent' && spec.failKey === 'instability';
 
   const criteria: CriterionDef[] = [
     {
@@ -69,7 +70,9 @@ export const lumbarFusion: Template = (rng, spec) => {
     },
     baseline: [
       f('consult', `${age} year old ${p.woman} in spine clinic with low back and leg pain going back about ${rng.int(2, 4)} years, much worse this past year. ${rng.pick(['Works in a warehouse', 'Retired teacher', 'Drives a delivery route', 'Works at a desk'])}. Reviewed the imaging with ${p.hers} and the options from more therapy to decompression to fusion.`),
-      f('followup1', `Back to decide. Symptoms unchanged, walking distance down to about 150 feet. Recommended L4-L5 decompression and interbody fusion given the slip and the motion on the films. Risks reviewed at length.`),
+      f('followup1', noInstability
+        ? `Back to decide. Symptoms unchanged, walking distance down to about 150 feet. Recommended L4-L5 decompression and interbody fusion. Risks reviewed at length.`
+        : `Back to decide. Symptoms unchanged, walking distance down to about 150 feet. Recommended L4-L5 decompression and interbody fusion given the slip and the motion on the films. Risks reviewed at length.`),
       f('preop', `Pre-op. Medical clearance in the chart, A1c 6.1, stopped the meloxicam. Consent signed for L4-L5 posterior lumbar interbody fusion with instrumentation.`),
     ],
     criteria,
