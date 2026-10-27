@@ -9,8 +9,13 @@ import { costUsd, type Usage } from './cost.js';
 
 export type Effort = 'low' | 'medium' | 'high';
 
+export interface SystemBlock {
+  text: string;
+  cache?: boolean; // mark the shared prefix so it is written to and read from the prompt cache
+}
+
 export interface ProposeRequest {
-  system: string; // the shared, cacheable prefix: instructions plus the synthetic chart
+  system: SystemBlock[]; // instructions (shared, cached) then the chart for this case
   user: string; // the denial and the payer criteria
   effort: Effort;
   maxTokens: number;
@@ -24,7 +29,7 @@ export interface ProposeResult {
   usage: Usage;
   costUsd: number;
   draft: ParsedAppeal;
-  rawText: string; // kept for the verifier; never logged by the harness
+  rawText: string; // kept for the verifier; the harness stores it only for synthetic runs
 }
 
 export interface Provider {
@@ -35,13 +40,23 @@ export interface Provider {
 
 // Fields the Meta Model API answers with HTTP 400 (dev.meta.ai/docs/protocols/messages,
 // Oct 26, 2026). The provider never sets them; the test pins that.
-export const FORBIDDEN_FIELDS = ['stop_sequences', 'top_k', 'container', 'inference_geo', 'tool_choice'] as const;
+export const FORBIDDEN_FIELDS = ['stop_sequences', 'top_k', 'container', 'inference_geo', 'tool_choice', 'thinking'] as const;
 
 interface MetaUsage {
-  input_tokens: number;
-  output_tokens: number;
-  cache_read_input_tokens?: number | null;
-  output_tokens_details?: { thinking_tokens?: number } | null;
+  input_tokens?: unknown;
+  output_tokens?: unknown;
+  cache_read_input_tokens?: unknown;
+  cache_creation_input_tokens?: unknown;
+  output_tokens_details?: { thinking_tokens?: unknown } | null;
+}
+
+function count(value: unknown, field: string, optional = false): number {
+  if (value === undefined || value === null) {
+    if (optional) return 0;
+    throw new Error(`usage field ${field} missing from the response`);
+  }
+  if (typeof value !== 'number' || !Number.isFinite(value)) throw new Error(`usage field ${field} is not a number`);
+  return value;
 }
 
 export interface MessagesProviderOptions {
@@ -72,17 +87,18 @@ export function messagesProvider(options: MessagesProviderOptions): Provider {
       const response = await client.messages.create({
         model: options.model,
         max_tokens: request.maxTokens,
-        system: [{ type: 'text', text: request.system, cache_control: { type: 'ephemeral' } }],
+        system: request.system.map(b => ({ type: 'text' as const, text: b.text, ...(b.cache ? { cache_control: { type: 'ephemeral' as const } } : {}) })),
         output_config: { effort: request.effort, format: { type: 'json_schema', schema: APPEAL_SCHEMA } },
         messages: [{ role: 'user', content: request.user }],
       });
       const latencyMs = Date.now() - started;
-      const u = response.usage as unknown as MetaUsage;
+      const u = (response.usage ?? {}) as MetaUsage;
       const usage: Usage = {
-        inputTokens: u.input_tokens,
-        cachedInputTokens: u.cache_read_input_tokens ?? 0,
-        outputTokens: u.output_tokens,
-        thinkingTokens: u.output_tokens_details?.thinking_tokens ?? 0,
+        inputTokens: count(u.input_tokens, 'input_tokens'),
+        cachedInputTokens: count(u.cache_read_input_tokens, 'cache_read_input_tokens', true),
+        cacheWriteTokens: count(u.cache_creation_input_tokens, 'cache_creation_input_tokens', true),
+        outputTokens: count(u.output_tokens, 'output_tokens'),
+        thinkingTokens: count(u.output_tokens_details?.thinking_tokens, 'thinking_tokens', true),
       };
       const rawText = response.content
         .filter((b): b is Anthropic.TextBlock => b.type === 'text')
@@ -114,12 +130,12 @@ export interface OpenAiProviderOptions {
 interface ChatCompletion {
   model: string;
   choices: { message: { content: string | null }; finish_reason: string | null }[];
-  usage: {
-    prompt_tokens: number;
-    completion_tokens: number;
-    prompt_tokens_details?: { cached_tokens?: number } | null;
-    completion_tokens_details?: { reasoning_tokens?: number } | null;
-  };
+  usage?: {
+    prompt_tokens?: unknown;
+    completion_tokens?: unknown;
+    prompt_tokens_details?: { cached_tokens?: unknown } | null;
+    completion_tokens_details?: { reasoning_tokens?: unknown } | null;
+  } | null;
 }
 
 // Fallback path for OpenAI-compatible hosts. Kept to fetch so the only SDK in
@@ -140,7 +156,7 @@ export function openAiProvider(options: OpenAiProviderOptions): Provider {
           reasoning_effort: request.effort,
           response_format: { type: 'json_schema', json_schema: { name: 'appeal', schema: APPEAL_SCHEMA, strict: true } },
           messages: [
-            { role: 'system', content: request.system },
+            { role: 'system', content: request.system.map(b => b.text).join('\n\n') },
             { role: 'user', content: request.user },
           ],
         }),
@@ -148,14 +164,16 @@ export function openAiProvider(options: OpenAiProviderOptions): Provider {
       const latencyMs = Date.now() - started;
       if (!res.ok) throw new Error(`${options.label} returned HTTP ${res.status}`);
       const body = (await res.json()) as ChatCompletion;
+      if (!body.usage) throw new Error(`${options.label} response has no usage block`);
       const choice = body.choices[0];
       const rawText = choice?.message.content ?? '';
-      const cached = body.usage.prompt_tokens_details?.cached_tokens ?? 0;
+      const cached = count(body.usage.prompt_tokens_details?.cached_tokens, 'cached_tokens', true);
       const usage: Usage = {
-        inputTokens: body.usage.prompt_tokens - cached,
+        inputTokens: count(body.usage.prompt_tokens, 'prompt_tokens') - cached,
         cachedInputTokens: cached,
-        outputTokens: body.usage.completion_tokens,
-        thinkingTokens: body.usage.completion_tokens_details?.reasoning_tokens ?? 0,
+        cacheWriteTokens: 0,
+        outputTokens: count(body.usage.completion_tokens, 'completion_tokens'),
+        thinkingTokens: count(body.usage.completion_tokens_details?.reasoning_tokens, 'reasoning_tokens', true),
       };
       return {
         provider: options.label,
