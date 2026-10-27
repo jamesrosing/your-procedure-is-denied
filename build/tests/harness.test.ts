@@ -49,6 +49,8 @@ describe('buildRequest', () => {
     for (const k of warrantedCase.criteria) assert.ok(req.user.includes(`${k.id}: ${k.text}`));
     assert.equal(req.effort, 'low');
     assert.ok(!req.system[0]!.text.includes(warrantedCase.id), 'the shared block must not vary by case or the cache misses');
+    // Roughly four characters per token: the shared block has to clear the cache minimum (1,024 tokens) with margin.
+    assert.ok(req.system[0]!.text.length >= 4600, `shared block is ${req.system[0]!.text.length} chars, too short to be cached`);
   });
 });
 
