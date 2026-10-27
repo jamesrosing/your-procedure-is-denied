@@ -11,10 +11,11 @@ const CASES_DIR = join(import.meta.dirname, '..', 'synthetic', 'cases');
 // The same patterns scripts/phi_check.py looks for, applied to the case text.
 const PHI_PATTERNS: [string, RegExp][] = [
   ['SSN', /\b(?!000|666|9\d\d)\d{3}-(?!00)\d{2}-(?!0000)\d{4}\b/],
-  ['labeled DOB', /\b(?:dob|date of birth|birth ?date)[ \t]*[:#=]?[ \t]*\d{1,4}[/-]\d{1,2}[/-]\d{1,4}/i],
-  ['labeled MRN', /\b(?:mrn|medical record (?:number|no\.?))[ \t]*[:#=]?[ \t]*[A-Z0-9-]{5,}/i],
-  ['labeled member id', /\b(?:member|subscriber|insurance)[ \t]*(?:id|number|no\.?|#)[ \t]*[:#=]?[ \t]*[A-Z0-9-]{6,}/i],
-  ['labeled claim number', /\bclaim[ \t]*(?:id|number|no\.?|#)[ \t]*[:#=]?[ \t]*[A-Z0-9-]{8,}/i],
+  // phi_check.py matches the label case-insensitively and the identifier case-sensitively (upper case or digits).
+  ['labeled DOB', /\b(?:[Dd][Oo][Bb]|[Dd]ate of [Bb]irth|[Bb]irth ?[Dd]ate)[ \t]*[:#=]?[ \t]*\d{1,4}[/-]\d{1,2}[/-]\d{1,4}/],
+  ['labeled MRN', /\b(?:[Mm][Rr][Nn]|[Mm]edical [Rr]ecord (?:[Nn]umber|[Nn]o\.?))[ \t]*[:#=]?[ \t]*[A-Z0-9-]{5,}/],
+  ['labeled member id', /\b(?:[Mm]ember|[Ss]ubscriber|[Ii]nsurance)[ \t]*(?:[Ii][Dd]|[Nn]umber|[Nn]o\.?|#)[ \t]*[:#=]?[ \t]*[A-Z0-9-]{6,}/],
+  ['labeled claim number', /\b[Cc]laim[ \t]*(?:[Ii][Dd]|[Nn]umber|[Nn]o\.?|#)[ \t]*[:#=]?[ \t]*[A-Z0-9-]{8,}/],
   ['ten digit run', /(?<!\d)\d{10}(?!\d)/],
 ];
 
@@ -41,7 +42,9 @@ describe('synthetic denial set', () => {
         assert.ok(e.text.trim().length > 20, `${c.id} ${e.id} is too short`);
         if (i > 0) assert.ok(e.date >= c.chart[i - 1]!.date, `${c.id} ${e.id} is out of order`);
       });
-      assert.ok(c.chart.every(e => e.date <= c.denial.dateOfService), `${c.id} has an entry after the date of service`);
+      const last = c.denial.serviceEnd ?? c.denial.dateOfService;
+      assert.ok(c.chart.every(e => e.date <= last), `${c.id} has an entry after the service period`);
+      assert.equal(new Set(c.chart.map(e => e.text)).size, c.chart.length, `${c.id} repeats an entry verbatim`);
     }
   });
 
@@ -91,18 +94,32 @@ describe('synthetic denial set', () => {
     }
   });
 
-  test('varies payers, procedures, and CARC codes', () => {
+  test('spans the high-dollar denial categories: payers, services, settings, CARC codes', () => {
     const payers = new Set(cases.map(c => c.payer.name));
-    const cpts = new Set(cases.map(c => c.procedure.cpt));
+    const codes = new Set(cases.map(c => c.procedure.code));
+    const categories = new Set(cases.map(c => c.category));
+    const settings = new Set(cases.map(c => c.setting));
     const carcs = new Set(cases.map(c => c.denial.carc));
     assert.equal(payers.size, 6);
-    assert.equal(cpts.size, 8);
+    assert.ok(codes.size >= 16, `only ${codes.size} distinct service codes`);
+    assert.ok(categories.size >= 10, `only ${categories.size} categories`);
+    assert.deepEqual([...settings].sort(), ['inpatient', 'outpatient', 'post-acute']);
     assert.ok(carcs.size >= 10, `only ${carcs.size} CARC codes`);
+    assert.ok(count(cases, c => c.category === 'post-acute care') >= 8, 'post-acute care is the documented target and needs weight');
     for (const c of cases) {
-      assert.ok(c.criteria.length >= 1 && c.criteria.length <= 6);
+      assert.ok(c.criteria.length >= 3 && c.criteria.length <= 6, `${c.id} has ${c.criteria.length} criteria`);
       c.criteria.forEach((k, i) => assert.equal(k.id, `crit-${i + 1}`));
-      assert.match(c.denial.text, new RegExp(c.procedure.cpt));
+      assert.match(c.denial.text, new RegExp(`${c.procedure.codeSystem} ${c.procedure.code}`));
       assert.match(c.denial.text, new RegExp(`CARC ${c.denial.carc}\\b`));
+      assert.ok(c.stakesUsd >= 1000, `${c.id} stakes`);
+      if (c.denial.serviceEnd) assert.ok(c.denial.serviceEnd > c.denial.dateOfService);
+    }
+  });
+
+  test('facility charts read as facility records: no clinic-style insurance calls, dates inside the stay', () => {
+    for (const c of cases.filter(c => c.setting !== 'outpatient')) {
+      assert.ok(c.denial.serviceEnd, `${c.id} needs a service period`);
+      assert.ok(!c.chart.some(e => /where things stand with the insurance/.test(e.text)), `${c.id} has an outpatient phone note`);
     }
   });
 
@@ -116,10 +133,10 @@ describe('synthetic denial set', () => {
     }
   });
 
-  test('charts are dictation sized: 600 to 3500 words', () => {
+  test('charts are dictation sized: 500 to 3500 words (a sub-24-hour stay is the shortest)', () => {
     for (const c of cases) {
       const words = c.chart.reduce((n, e) => n + e.text.split(/\s+/).length, 0);
-      assert.ok(words >= 600 && words <= 3500, `${c.id} has ${words} words`);
+      assert.ok(words >= 500 && words <= 3500, `${c.id} has ${words} words`);
     }
   });
 

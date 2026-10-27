@@ -1,13 +1,17 @@
 {
   "id": "case-030",
+  "category": "spine surgery",
+  "setting": "outpatient",
+  "stakesUsd": 45000,
   "patient": {
     "alias": "SYN-030",
-    "age": 60,
+    "age": 55,
     "sex": "female"
   },
   "procedure": {
-    "cpt": "15823",
-    "description": "bilateral upper eyelid blepharoplasty with excessive skin weighting down the lid"
+    "code": "22630",
+    "codeSystem": "CPT",
+    "description": "posterior lumbar interbody fusion, L4-L5, with decompression"
   },
   "payer": {
     "name": "Prairie Commons Medicaid Plan",
@@ -16,210 +20,259 @@
   "denial": {
     "carc": "50",
     "carcText": "These are non-covered services because this is not deemed a 'medical necessity' by the payer.",
-    "text": "Prairie Commons Medicaid Plan denied the claim for CPT 15823 (bilateral upper eyelid blepharoplasty with excessive skin weighting down the lid) with date of service 2026-06-24. CARC 50: These are non-covered services because this is not deemed a 'medical necessity' by the payer. Payer remark: Visual field documentation submitted does not meet the policy threshold for functional impairment.",
-    "dateOfService": "2026-06-24"
+    "text": "Prairie Commons Medicaid Plan denied the claim for CPT 22630 (posterior lumbar interbody fusion, L4-L5, with decompression) with date of service 2026-07-15. CARC 50: These are non-covered services because this is not deemed a 'medical necessity' by the payer. Payer remark: Documentation does not demonstrate instability requiring fusion; decompression alone would be the covered procedure.",
+    "dateOfService": "2026-07-15"
   },
   "criteria": [
     {
       "id": "crit-1",
-      "text": "Automated visual field testing demonstrating at least 30 percent loss of the superior visual field, with improvement when the upper lids are taped."
+      "text": "Failure of at least 12 months of conservative treatment including physical therapy, anti-inflammatory or analgesic medication, activity modification, and at least one epidural steroid injection."
     },
     {
       "id": "crit-2",
-      "text": "Photographs documenting redundant upper lid skin resting on or over the lashes, or a margin reflex distance 1 of 2 millimeters or less."
+      "text": "Imaging documenting segmental instability or spondylolisthesis at the level to be fused: anterolisthesis of 3 millimeters or more, or translation of 4 millimeters or more or angulation of 10 degrees or more on flexion-extension radiographs, with stenosis or radiculopathy correlating with the symptoms."
     },
     {
       "id": "crit-3",
-      "text": "A documented functional complaint such as difficulty reading or driving, loss of the superior field, or brow fatigue."
+      "text": "Symptoms and examination findings correlate with the imaging level: radicular leg pain or neurogenic claudication with a corresponding dermatomal deficit."
+    },
+    {
+      "id": "crit-4",
+      "text": "Psychosocial screening completed with no untreated major depression or active substance use disorder, and nicotine-free or documented cessation of at least 6 weeks."
     }
   ],
   "chart": [
     {
       "id": "note-001",
-      "date": "2025-06-25",
+      "date": "2025-09-13",
       "kind": "outside letter",
-      "text": "Referral letter from the primary care office. Thank you for seeing this patient of mine for surgical evaluation. Her history and medication list are attached. Please let me know what you recommend and whether anything is needed from our end for clearance."
+      "text": "Referral letter from the primary care office. Thank you for seeing this patient of mine for evaluation. Her history and medication list are attached. Please let me know what you recommend and whether anything is needed from our end."
     },
     {
       "id": "note-002",
-      "date": "2025-07-12",
-      "kind": "phone note",
-      "text": "Pharmacy called about the refill on the omeprazole 20. Approved 90 days. She mentioned the heartburn is better since cutting back on coffee."
+      "date": "2025-09-24",
+      "kind": "office visit",
+      "text": "55 year old woman in spine clinic with low back and leg pain going back about 3 years, much worse this past year. Drives a delivery route. Reviewed the imaging with her and the options from more therapy to decompression to fusion. Her history otherwise: hypothyroidism on levothyroxine, hypertension on lisinopril, seasonal allergies. Allergies: sulfa, hives as a child. Does not smoke, a glass of wine on weekends, works retail. Family history noncontributory for what we are talking about today. She has been on meloxicam 15 daily and gabapentin 600 three times daily, stopped lifting at work, and did a course of PT last year. Bilateral leg pain into the lateral calves and the tops of the feet with standing and walking, walks about 200 feet before she has to sit, better leaning on the cart. L5 distribution. Extensor hallucis longus 4 out of 5 on the right, reflexes symmetric, straight leg raise negative."
     },
     {
       "id": "note-003",
-      "date": "2025-07-14",
-      "kind": "office visit",
-      "text": "60 year old woman sent over by her eye doctor for heavy upper lids. Exam: marked dermatochalasis both upper lids, skin hooding over the lashes laterally, brow ptosis mild, no true ptosis of the lid itself, levator function good. Discussed upper lid blepharoplasty. Her history otherwise: hypertension on lisinopril. Surgeries: wisdom teeth. Allergies: no drug allergies. Does not smoke, a glass of wine on weekends, works as a nurse. Family history noncontributory for what we are talking about today. She says she is lifting her brows all day to see, gets a headache by evening, has given up night driving, tilts her head back to read the paper."
+      "date": "2025-09-28",
+      "kind": "phone note",
+      "text": "Work note requested for a sick day last Tuesday. Faxed to the employer."
     },
     {
       "id": "note-004",
-      "date": "2025-07-31",
-      "kind": "visual field test",
-      "text": "Humphrey superior field, untaped: 9 degrees of superior field loss on the right and 8 on the left, roughly 16 percent. Taped: modest improvement, about 3 degrees each side."
+      "date": "2025-09-29",
+      "kind": "imaging",
+      "text": "MRI lumbar spine without contrast. L4-L5: grade 1 degenerative anterolisthesis measuring 6 millimeters, facet effusions, severe central and bilateral lateral recess stenosis compressing the traversing L5 roots. L3-L4 and L5-S1 mild degenerative change without stenosis."
     },
     {
       "id": "note-005",
-      "date": "2025-08-04",
-      "kind": "outside letter",
-      "text": "Gastroenterology note received. Screening colonoscopy completed, two small polyps removed, benign on pathology, repeat in 5 years."
+      "date": "2025-10-01",
+      "kind": "physical therapy",
+      "text": "Spine PT evaluation. Flexion-based program, core stabilization, nerve glides. Plan 12 weeks, twice a week."
     },
     {
       "id": "note-006",
-      "date": "2025-08-09",
-      "kind": "phone note",
-      "text": "Thyroid labs back. TSH 1.3, free T4 normal. No change to the levothyroxine 75. Repeat in a year."
-    },
-    {
-      "id": "note-007",
-      "date": "2025-09-29",
-      "kind": "office visit",
-      "text": "Back to review the testing. Went over the operation, bruising, the scar in the crease, the small chance of dry eye. She wants to go ahead. Vitals today 126 over 71, pulse 65."
-    },
-    {
-      "id": "note-008",
-      "date": "2025-09-29",
-      "kind": "photo documentation",
-      "text": "Frontal and lateral photos today, primary gaze, flash. Redundant upper lid skin draping onto the lashes on both sides. MRD1 about 2 millimeters right and 2 left."
-    },
-    {
-      "id": "note-009",
       "date": "2025-10-04",
-      "kind": "phone note",
-      "text": "Patient called about a tick bite on the calf after a hike. Tick removed whole, no rash, no fever. Watch for a bull's-eye rash or flu symptoms over the next month and call if either shows up."
-    },
-    {
-      "id": "note-010",
-      "date": "2025-10-11",
-      "kind": "office visit",
-      "text": "Here with a cough and congestion for 9 days, low grade temp at home, no shortness of breath. Lungs clear, throat a little red, ears fine. Looks viral. Fluids, rest, honey for the cough, come back if she gets a fever over 101 or it goes past two weeks."
-    },
-    {
-      "id": "note-011",
-      "date": "2025-10-22",
-      "kind": "office visit",
-      "text": "Mole on the right calf that her spouse noticed. About 4 millimeters, even color, regular border, no change she is aware of. Looks benign. Photo in the chart for comparison, recheck in a year or sooner if it changes."
-    },
-    {
-      "id": "note-012",
-      "date": "2025-10-31",
-      "kind": "office visit",
-      "text": "Burning with urination for two days, going frequently, no fever, no back pain. Urine dip positive for leukocytes and nitrites. Nitrofurantoin for five days, push fluids, call if fever or flank pain."
-    },
-    {
-      "id": "note-013",
-      "date": "2025-11-13",
-      "kind": "phone note",
-      "text": "Nurse call. Patient had questions about time off work after surgery and whether she needs someone at home the first night. Answered both, she will arrange it."
-    },
-    {
-      "id": "note-014",
-      "date": "2025-11-18",
-      "kind": "outside letter",
-      "text": "Optometry report forwarded for the record. Routine refraction, mild astigmatism, new glasses prescribed, retinas healthy, pressures 19 and 13. No ocular pathology noted."
-    },
-    {
-      "id": "note-015",
-      "date": "2025-11-30",
-      "kind": "phone note",
-      "text": "She called asking about travel vaccines for a trip in the fall. Advised hepatitis A and a typhoid booster, referred to the travel clinic. Nothing else needed from us."
-    },
-    {
-      "id": "note-016",
-      "date": "2025-12-25",
       "kind": "outside letter",
       "text": "Letter from the dentist's office confirming routine cleaning and exam completed, no active infection, no dental work pending. Sent at our request for the surgical file."
     },
     {
+      "id": "note-007",
+      "date": "2025-10-06",
+      "kind": "imaging",
+      "text": "Lumbar flexion-extension lateral radiographs. L4-L5: 6 millimeters of translation between flexion and extension, 12 degrees of angular motion. Other levels stable."
+    },
+    {
+      "id": "note-008",
+      "date": "2025-10-10",
+      "kind": "physical therapy",
+      "text": "Session 2. Continued the program from the evaluation, tolerated well, home exercises reviewed, she reports about the same."
+    },
+    {
+      "id": "note-009",
+      "date": "2025-10-19",
+      "kind": "physical therapy",
+      "text": "Session 3. Continued the program from the evaluation, tolerated well, home exercises reviewed, she reports about the same."
+    },
+    {
+      "id": "note-010",
+      "date": "2025-10-28",
+      "kind": "physical therapy",
+      "text": "Session 4. Continued the program from the evaluation, tolerated well, home exercises reviewed, she reports no real change."
+    },
+    {
+      "id": "note-011",
+      "date": "2025-11-03",
+      "kind": "procedure note",
+      "text": "Fluoroscopically guided transforaminal epidural steroid injection, L4-L5 right. Tolerated well."
+    },
+    {
+      "id": "note-012",
+      "date": "2025-11-06",
+      "kind": "physical therapy",
+      "text": "Session 5. Continued the program from the evaluation, tolerated well, home exercises reviewed, she reports no real change."
+    },
+    {
+      "id": "note-013",
+      "date": "2025-11-07",
+      "kind": "phone note",
+      "text": "Pharmacy called about the refill on the omeprazole 20. Approved 90 days. She mentioned the heartburn is better since cutting back on coffee."
+    },
+    {
+      "id": "note-014",
+      "date": "2025-11-09",
+      "kind": "phone note",
+      "text": "Patient called about a tick bite on the scalp after a hike. Tick removed whole, no rash, no fever. Watch for a bull's-eye rash or flu symptoms over the next month and call if either shows up."
+    },
+    {
+      "id": "note-015",
+      "date": "2025-11-15",
+      "kind": "physical therapy",
+      "text": "Session 6. Continued the program from the evaluation, tolerated well, home exercises reviewed, she reports no real change."
+    },
+    {
+      "id": "note-016",
+      "date": "2025-12-08",
+      "kind": "procedure note",
+      "text": "Second transforaminal epidural steroid injection, L4-L5 right. The first gave about 2 weeks of relief."
+    },
+    {
       "id": "note-017",
-      "date": "2026-01-10",
+      "date": "2025-12-23",
+      "kind": "office visit",
+      "text": "Twisted the right ankle stepping off a curb 4 days ago. Swelling over the lateral malleolus, tender over the ATFL, can bear weight. Ottawa negative, no film. Brace, ice, ibuprofen, elevate. Should be fine in a couple weeks."
+    },
+    {
+      "id": "note-018",
+      "date": "2025-12-26",
+      "kind": "office visit",
+      "text": "Ear fullness and muffled hearing on the left for a week after a cold. Canal clear, drum dull with fluid behind it, no infection. Serous otitis. Decongestant, swallow and yawn, recheck in three weeks if not better."
+    },
+    {
+      "id": "note-019",
+      "date": "2026-01-02",
+      "kind": "office visit",
+      "text": "Back to decide. Symptoms unchanged, walking distance down to about 150 feet. Recommended L4-L5 decompression and interbody fusion given the slip and the motion on the films. Risks reviewed at length. Vitals today 112 over 71, pulse 72. Finished 12 weeks of PT, two epidurals with transient relief only, still on the meloxicam and gabapentin. That is 14 months of conservative care without durable benefit. PHQ-9 score 4, no substance use, never smoked. Realistic expectations about what fusion will and will not fix."
+    },
+    {
+      "id": "note-020",
+      "date": "2026-02-06",
+      "kind": "office visit",
+      "text": "Seasonal allergies acting up, itchy eyes, sneezing, clear drainage, worse outdoors. No wheeze. Cetirizine at night and the saline rinse. Fine with that."
+    },
+    {
+      "id": "note-021",
+      "date": "2026-03-06",
+      "kind": "office visit",
+      "text": "Annual physical. Feels well overall. Sleeping fine, appetite fine, no chest pain, no shortness of breath. Flu shot given in the left arm today. Due for a tetanus booster, she will think about it. Labs ordered, fasting."
+    },
+    {
+      "id": "note-022",
+      "date": "2026-03-07",
+      "kind": "office visit",
+      "text": "Trouble sleeping for a couple of months, falls asleep fine but wakes at three and lies there. No snoring per the spouse, no daytime naps, two cups of coffee before noon. Went over sleep hygiene, no screens in bed, cut the afternoon caffeine. Will hold off on medication for now."
+    },
+    {
+      "id": "note-023",
+      "date": "2026-03-11",
+      "kind": "phone note",
+      "text": "Nurse call. Patient had questions about time off work and whether she needs someone at home the first night. Answered both, she will arrange it."
+    },
+    {
+      "id": "note-024",
+      "date": "2026-03-12",
+      "kind": "office visit",
+      "text": "Burning with urination for two days, going frequently, no fever, no back pain. Urine dip positive for leukocytes and nitrites. Nitrofurantoin for five days, push fluids, call if fever or flank pain."
+    },
+    {
+      "id": "note-025",
+      "date": "2026-03-15",
+      "kind": "office visit",
+      "text": "Blood pressure check. 144 over 72 today, 130 over 85 on repeat. She has been taking the lisinopril 10 most days, admits to missing weekends. Low salt talk again. Keep the dose, recheck in 6 weeks."
+    },
+    {
+      "id": "note-026",
+      "date": "2026-04-29",
+      "kind": "office visit",
+      "text": "Here with a cough and congestion for 6 days, low grade temp at home, no shortness of breath. Lungs clear, throat a little red, ears fine. Looks viral. Fluids, rest, honey for the cough, come back if she gets a fever over 101 or it goes past two weeks."
+    },
+    {
+      "id": "note-027",
+      "date": "2026-06-02",
       "kind": "outside letter",
       "text": "Dermatology consult note received. Two actinic keratoses on the forehead treated with cryotherapy. Annual skin check recommended, sunscreen counseling done."
     },
     {
-      "id": "note-018",
-      "date": "2026-01-20",
-      "kind": "office visit",
-      "text": "Check-in while we wait on the insurance. No change in the complaints. Reviewed the risks and recovery one more time, she remains sure about going ahead."
-    },
-    {
-      "id": "note-019",
-      "date": "2026-01-27",
-      "kind": "office visit",
-      "text": "Ear fullness and muffled hearing on the right for a week after a cold. Canal clear, drum dull with fluid behind it, no infection. Serous otitis. Decongestant, swallow and yawn, recheck in three weeks if not better."
-    },
-    {
-      "id": "note-020",
-      "date": "2026-03-19",
-      "kind": "phone note",
-      "text": "Work note requested for a sick day last Monday. Faxed to the employer."
-    },
-    {
-      "id": "note-021",
-      "date": "2026-04-12",
+      "id": "note-028",
+      "date": "2026-06-14",
       "kind": "outside letter",
-      "text": "Mammogram report forwarded for the record. Bilateral screening, BI-RADS 1, negative, routine screening in one year."
+      "text": "Gastroenterology note received. Screening colonoscopy completed, two small polyps removed, benign on pathology, repeat in 7 years."
     },
     {
-      "id": "note-022",
-      "date": "2026-05-14",
+      "id": "note-029",
+      "date": "2026-06-25",
+      "kind": "office visit",
+      "text": "Follow-up. Same story, no better. She asked about timing around work and family, we talked through it. Still wants to proceed."
+    },
+    {
+      "id": "note-030",
+      "date": "2026-07-04",
+      "kind": "preoperative visit",
+      "text": "Pre-op. Medical clearance in the chart, A1c 6.1, stopped the meloxicam. Consent signed for L4-L5 posterior lumbar interbody fusion with instrumentation."
+    },
+    {
+      "id": "note-031",
+      "date": "2026-07-11",
       "kind": "office visit",
       "text": "Low back strain after moving furniture over the weekend. No radiation down the legs, no numbness, no bowel or bladder trouble. Paraspinal tenderness, straight leg raise negative. Heat, keep moving, ibuprofen with food for a week. Should settle."
-    },
-    {
-      "id": "note-023",
-      "date": "2026-06-04",
-      "kind": "office visit",
-      "text": "Blood pressure check. 123 over 84 today, 121 over 77 on repeat. She has been taking the lisinopril 40 most days, admits to missing weekends. Low salt talk again. Keep the dose, recheck in 6 weeks."
-    },
-    {
-      "id": "note-024",
-      "date": "2026-06-17",
-      "kind": "preoperative visit",
-      "text": "Pre-op. Consent signed. Marked the skin excision sitting up. No blood thinners. Stop the fish oil."
-    },
-    {
-      "id": "note-025",
-      "date": "2026-06-23",
-      "kind": "office visit",
-      "text": "Annual physical. Feels well overall. Sleeping fine, appetite fine, no chest pain, no shortness of breath. Flu shot given in the left arm today. Due for a tetanus booster, she will think about it. Labs ordered, fasting."
     }
   ],
   "expected": {
-    "warranted": false,
-    "subtype": "near-miss",
+    "warranted": true,
     "criteriaMet": [
+      "crit-1",
       "crit-2",
-      "crit-3"
+      "crit-3",
+      "crit-4"
     ],
     "support": {
-      "crit-1": [],
+      "crit-1": [
+        "note-002",
+        "note-005",
+        "note-011",
+        "note-016",
+        "note-019"
+      ],
       "crit-2": [
-        "note-008"
+        "note-004",
+        "note-007"
       ],
       "crit-3": [
-        "note-003"
+        "note-002"
+      ],
+      "crit-4": [
+        "note-019"
       ]
     },
     "distractors": [
-      "note-002",
-      "note-005",
+      "note-003",
       "note-006",
-      "note-009",
-      "note-010",
-      "note-011",
-      "note-012",
+      "note-013",
       "note-014",
-      "note-015",
-      "note-016",
       "note-017",
-      "note-019",
+      "note-018",
       "note-020",
       "note-021",
       "note-022",
-      "note-023",
-      "note-025"
+      "note-024",
+      "note-025",
+      "note-026",
+      "note-027",
+      "note-028",
+      "note-031"
     ],
-    "note": "The chart raises crit-1 (vft) but does not satisfy it; the mention is a plan or a shortfall, not completed treatment or a met threshold."
+    "note": "The chart documents every criterion; the CARC 50 denial can be answered from the record."
   }
 }

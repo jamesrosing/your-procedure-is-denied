@@ -1,13 +1,17 @@
 {
   "id": "case-019",
+  "category": "orthopedic surgery",
+  "setting": "outpatient",
+  "stakesUsd": 25000,
   "patient": {
     "alias": "SYN-019",
-    "age": 36,
+    "age": 72,
     "sex": "female"
   },
   "procedure": {
-    "cpt": "15847",
-    "description": "panniculectomy with excision of excess skin and subcutaneous tissue of the abdomen"
+    "code": "27447",
+    "codeSystem": "CPT",
+    "description": "total knee arthroplasty"
   },
   "payer": {
     "name": "Silverline Medicare Advantage",
@@ -16,160 +20,196 @@
   "denial": {
     "carc": "50",
     "carcText": "These are non-covered services because this is not deemed a 'medical necessity' by the payer.",
-    "text": "Silverline Medicare Advantage denied the claim for CPT 15847 (panniculectomy with excision of excess skin and subcutaneous tissue of the abdomen) with date of service 2026-08-18. CARC 50: These are non-covered services because this is not deemed a 'medical necessity' by the payer. Payer remark: The documentation does not establish a functional impairment or failure of conservative treatment of the skin condition.",
-    "dateOfService": "2026-08-18"
+    "text": "Silverline Medicare Advantage denied the claim for CPT 27447 (total knee arthroplasty) with date of service 2026-09-04. CARC 50: These are non-covered services because this is not deemed a 'medical necessity' by the payer. Payer remark: Documentation does not establish failure of conservative treatment prior to arthroplasty.",
+    "dateOfService": "2026-09-04"
   },
   "criteria": [
     {
       "id": "crit-1",
-      "text": "Panniculus hangs at or below the level of the pubis (grade 2 or higher) as documented on examination."
+      "text": "Radiographic evidence of advanced osteoarthritis: Kellgren-Lawrence grade 3 or 4, joint space narrowing to bone-on-bone contact, or deformity."
     },
     {
       "id": "crit-2",
-      "text": "Recurrent or chronic intertrigo, cellulitis, or skin breakdown beneath the panniculus that has failed at least 3 months of conservative treatment such as topical antifungals, hygiene measures, and barrier products."
+      "text": "Failure of at least 3 months of conservative treatment including anti-inflammatory or analgesic medication, physical therapy or a supervised home exercise program, activity modification, and at least one intra-articular corticosteroid injection."
     },
     {
       "id": "crit-3",
-      "text": "Weight stable within 10 pounds for at least 6 months."
+      "text": "Pain with weight-bearing that interferes with activities of daily living, with limited range of motion or instability on examination."
     },
     {
       "id": "crit-4",
-      "text": "The panniculus interferes with activities of daily living or ambulation."
+      "text": "Body mass index under 40, nicotine-free, and medically optimized for surgery."
     }
   ],
   "chart": [
     {
       "id": "note-001",
-      "date": "2025-09-07",
+      "date": "2026-03-11",
+      "kind": "phone note",
+      "text": "Patient called about a tick bite on the shoulder after a hike. Tick removed whole, no rash, no fever. Watch for a bull's-eye rash or flu symptoms over the next month and call if either shows up."
+    },
+    {
+      "id": "note-002",
+      "date": "2026-03-11",
+      "kind": "outside letter",
+      "text": "Optometry report forwarded for the record. Routine refraction, mild astigmatism, new glasses prescribed, retinas healthy, pressures 17 and 15. No ocular pathology noted."
+    },
+    {
+      "id": "note-003",
+      "date": "2026-03-23",
+      "kind": "outside letter",
+      "text": "Referral letter from the primary care office. Thank you for seeing this patient of mine for evaluation. Her history and medication list are attached. Please let me know what you recommend and whether anything is needed from our end."
+    },
+    {
+      "id": "note-004",
+      "date": "2026-04-03",
+      "kind": "office visit",
+      "text": "72 year old woman in orthopedic clinic for the left knee, hurting for 3 years and much worse this year. Discussed the options from more conservative care to replacement. Her history otherwise: anxiety, sees a counselor, mild asthma, albuterol maybe twice a year, hypertension on lisinopril. Allergies: sulfa, hives as a child. Does not smoke, a glass of wine on weekends, works as a teacher. Family history noncontributory for what we are talking about today. Meloxicam 15 daily for the better part of a year, acetaminophen on top, gave up the yard work, uses a cane outdoors. Sending her to PT. Pain with every step, night pain that wakes her, cannot do stairs without the rail, cannot kneel or get out of a low chair without pushing up. Range of motion 5 to 105 degrees with crepitus, medial joint line tenderness, varus thrust with gait."
+    },
+    {
+      "id": "note-005",
+      "date": "2026-04-03",
+      "kind": "imaging",
+      "text": "Standing AP, lateral, and sunrise views of the left knee. Complete loss of the medial joint space with bone-on-bone contact, large marginal osteophytes, subchondral sclerosis and cysts, 7 degrees of varus. Kellgren-Lawrence grade 4."
+    },
+    {
+      "id": "note-006",
+      "date": "2026-04-07",
       "kind": "office visit",
       "text": "Burning with urination for two days, going frequently, no fever, no back pain. Urine dip positive for leukocytes and nitrites. Nitrofurantoin for five days, push fluids, call if fever or flank pain."
     },
     {
-      "id": "note-002",
-      "date": "2025-09-22",
-      "kind": "office visit",
-      "text": "Here with a cough and congestion for 8 days, low grade temp at home, no shortness of breath. Lungs clear, throat a little red, ears fine. Looks viral. Fluids, rest, honey for the cough, come back if she gets a fever over 101 or it goes past two weeks."
-    },
-    {
-      "id": "note-003",
-      "date": "2025-09-24",
-      "kind": "outside letter",
-      "text": "Referral letter from the primary care office. Thank you for seeing this patient of mine for surgical evaluation. Her history and medication list are attached. Please let me know what you recommend and whether anything is needed from our end for clearance."
-    },
-    {
-      "id": "note-004",
-      "date": "2025-10-17",
-      "kind": "office visit",
-      "text": "Knee pain going down stairs, right side, no injury, no locking or giving way. Patellar grind positive, no effusion, ligaments stable. Patellofemoral pain. Quad strengthening sheet, ice after activity, cushioned shoes."
-    },
-    {
-      "id": "note-005",
-      "date": "2025-10-22",
-      "kind": "office visit",
-      "text": "36 year old woman here about the abdominal apron after her weight loss. Nice result on the weight. Discussed panniculectomy versus a full abdominoplasty and what insurance will and will not look at. Her history otherwise: anxiety, sees a counselor, reflux on omeprazole as needed, migraines, rare now. Allergies: codeine makes her sick. Never smoked, occasional beer, lives with her spouse. Family history noncontributory for what we are talking about today. On exam the pannus hangs well below the pubis, I would call it grade 2, with maceration and an odor in the fold. Down 118 pounds after the sleeve in 2023. Weight has been steady at 182 give or take five for the last 15 months. Says she cannot walk more than a block without the skin fold chafing raw, has to lift it to wash underneath, cannot find pants that fit over it."
-    },
-    {
-      "id": "note-006",
-      "date": "2025-11-14",
-      "kind": "office visit",
-      "text": "Trouble sleeping for a couple of months, falls asleep fine but wakes at three and lies there. No snoring per the spouse, no daytime naps, two cups of coffee before noon. Went over sleep hygiene, no screens in bed, cut the afternoon caffeine. Will hold off on medication for now."
-    },
-    {
       "id": "note-007",
-      "date": "2025-11-18",
-      "kind": "phone note",
-      "text": "Thyroid labs back. TSH 3.4, free T4 normal. No change to the levothyroxine 50. Repeat in a year."
+      "date": "2026-04-10",
+      "kind": "physical therapy",
+      "text": "PT evaluation, left knee osteoarthritis. Quad strengthening, range of motion, gait training with the cane. Plan 8 weeks."
     },
     {
       "id": "note-008",
-      "date": "2025-12-07",
-      "kind": "outside letter",
-      "text": "Optometry report forwarded for the record. Routine refraction, mild astigmatism, new glasses prescribed, retinas healthy, pressures 15 and 15. No ocular pathology noted."
+      "date": "2026-04-16",
+      "kind": "physical therapy",
+      "text": "Session 2. Continued the program from the evaluation, tolerated well, home exercises reviewed, she reports no real change."
     },
     {
       "id": "note-009",
-      "date": "2025-12-17",
-      "kind": "office visit",
-      "text": "Follow-up on the abdomen. Went back over the operation, drains, the scar, recovery of four to six weeks. She understands this is skin and fat removal for the skin problems, not a tummy tuck. Vitals today 125 over 89, pulse 69. Weight 183 today, holding."
+      "date": "2026-04-16",
+      "kind": "phone note",
+      "text": "Work note requested for a sick day last Thursday. Faxed to the employer."
     },
     {
       "id": "note-010",
-      "date": "2026-01-19",
-      "kind": "office visit",
-      "text": "Seasonal allergies acting up, itchy eyes, sneezing, clear drainage, worse outdoors. No wheeze. Cetirizine at night and the saline rinse. Fine with that."
+      "date": "2026-04-22",
+      "kind": "physical therapy",
+      "text": "Session 3. Continued the program from the evaluation, tolerated well, home exercises reviewed, she reports about the same."
     },
     {
       "id": "note-011",
-      "date": "2026-02-09",
-      "kind": "phone note",
-      "text": "Message from the patient about scheduling. Wants a date in the next couple of months if the insurance comes through. Passed to the surgery scheduler."
+      "date": "2026-04-24",
+      "kind": "office visit",
+      "text": "Twisted the right ankle stepping off a curb 5 days ago. Swelling over the lateral malleolus, tender over the ATFL, can bear weight. Ottawa negative, no film. Brace, ice, ibuprofen, elevate. Should be fine in a couple weeks."
     },
     {
       "id": "note-012",
-      "date": "2026-02-27",
-      "kind": "phone note",
-      "text": "Called her with the cholesterol results. Total 229, LDL 127, HDL 38, triglycerides 170. Discussed diet and walking. She wants to try lifestyle first for six months before we talk about a statin. Agreed."
+      "date": "2026-04-28",
+      "kind": "physical therapy",
+      "text": "Session 4. Continued the program from the evaluation, tolerated well, home exercises reviewed, she reports slight improvement that does not last."
     },
     {
       "id": "note-013",
-      "date": "2026-03-12",
-      "kind": "office visit",
-      "text": "Vitamin D came back 14. Started 2000 units daily, recheck in three months. Also talked about calcium from food rather than pills."
+      "date": "2026-05-03",
+      "kind": "procedure note",
+      "text": "Intra-articular corticosteroid injection, left knee, triamcinolone 40 with lidocaine, anterolateral approach. Tolerated well."
     },
     {
       "id": "note-014",
-      "date": "2026-03-22",
+      "date": "2026-05-04",
+      "kind": "physical therapy",
+      "text": "Session 5. Continued the program from the evaluation, tolerated well, home exercises reviewed, she reports about the same."
+    },
+    {
+      "id": "note-015",
+      "date": "2026-05-10",
+      "kind": "physical therapy",
+      "text": "Session 6. Continued the program from the evaluation, tolerated well, home exercises reviewed, she reports no real change."
+    },
+    {
+      "id": "note-016",
+      "date": "2026-05-11",
+      "kind": "office visit",
+      "text": "Blood pressure check. 125 over 87 today, 145 over 75 on repeat. She has been taking the lisinopril 20 most days, admits to missing weekends. Low salt talk again. Keep the dose, recheck in 6 weeks."
+    },
+    {
+      "id": "note-017",
+      "date": "2026-05-15",
       "kind": "outside letter",
       "text": "Letter from the dentist's office confirming routine cleaning and exam completed, no active infection, no dental work pending. Sent at our request for the surgical file."
     },
     {
-      "id": "note-015",
-      "date": "2026-04-15",
-      "kind": "office visit",
-      "text": "Blood pressure check. 140 over 78 today, 126 over 74 on repeat. She has been taking the lisinopril 10 most days, admits to missing weekends. Low salt talk again. Keep the dose, recheck in 6 weeks."
-    },
-    {
-      "id": "note-016",
-      "date": "2026-04-17",
-      "kind": "office visit",
-      "text": "Follow-up. Same story, no better. She asked about timing around work and family, we talked through it. Still wants to proceed."
-    },
-    {
-      "id": "note-017",
-      "date": "2026-05-07",
-      "kind": "outside letter",
-      "text": "Mammogram report forwarded for the record. Bilateral screening, BI-RADS 1, negative, routine screening in one year."
-    },
-    {
       "id": "note-018",
-      "date": "2026-07-02",
-      "kind": "outside letter",
-      "text": "Dermatology consult note received. Two actinic keratoses on the forehead treated with cryotherapy. Annual skin check recommended, sunscreen counseling done."
+      "date": "2026-05-23",
+      "kind": "phone note",
+      "text": "Called her with the cholesterol results. Total 206, LDL 144, HDL 61, triglycerides 135. Discussed diet and walking. She wants to try lifestyle first for six months before we talk about a statin. Agreed."
     },
     {
       "id": "note-019",
-      "date": "2026-07-26",
+      "date": "2026-06-07",
       "kind": "office visit",
-      "text": "Mole on the upper back that her spouse noticed. About 4 millimeters, even color, regular border, no change she is aware of. Looks benign. Photo in the chart for comparison, recheck in a year or sooner if it changes."
+      "text": "Interval visit. Nothing new since last time, symptoms as described before, she is managing. Went over the plan again and answered questions from her spouse."
     },
     {
       "id": "note-020",
-      "date": "2026-08-07",
-      "kind": "office visit",
-      "text": "Ear fullness and muffled hearing on the left for a week after a cold. Canal clear, drum dull with fluid behind it, no infection. Serous otitis. Decongestant, swallow and yawn, recheck in three weeks if not better."
+      "date": "2026-06-19",
+      "kind": "outside letter",
+      "text": "Gastroenterology note received. Screening colonoscopy completed, two small polyps removed, benign on pathology, repeat in 7 years."
     },
     {
       "id": "note-021",
-      "date": "2026-08-09",
+      "date": "2026-06-20",
+      "kind": "office visit",
+      "text": "Trouble sleeping for a couple of months, falls asleep fine but wakes at three and lies there. No snoring per the spouse, no daytime naps, two cups of coffee before noon. Went over sleep hygiene, no screens in bed, cut the afternoon caffeine. Will hold off on medication for now."
+    },
+    {
+      "id": "note-022",
+      "date": "2026-07-02",
+      "kind": "office visit",
+      "text": "Back to decide on the left knee. Recommended total knee arthroplasty. Reviewed the operation, the hospital stay, the rehab, and the risks including infection and clot. Vitals today 136 over 81, pulse 74. Finished 8 weeks of PT, the injection gave about 3 weeks of relief, still on the meloxicam, still using the cane. That is 4 months of conservative care without durable benefit. BMI 35, never smoked, A1c 6.3, dental clearance in the chart."
+    },
+    {
+      "id": "note-023",
+      "date": "2026-07-10",
+      "kind": "phone note",
+      "text": "Nurse call. Patient had questions about time off work and whether she needs someone at home the first night. Answered both, she will arrange it."
+    },
+    {
+      "id": "note-024",
+      "date": "2026-07-12",
+      "kind": "office visit",
+      "text": "Annual physical. Feels well overall. Sleeping fine, appetite fine, no chest pain, no shortness of breath. Flu shot given in the left arm today. Due for a tetanus booster, she will think about it. Labs ordered, fasting."
+    },
+    {
+      "id": "note-025",
+      "date": "2026-08-27",
       "kind": "preoperative visit",
-      "text": "Pre-op. Consent signed. Marked the resection with her standing. Nicotine negative. Hold the metformin the morning of."
+      "text": "Pre-op. Medical clearance in the chart. Hold the meloxicam a week out. Consent signed for left total knee arthroplasty."
+    },
+    {
+      "id": "note-026",
+      "date": "2026-08-27",
+      "kind": "office visit",
+      "text": "Mole on the left forearm that her spouse noticed. About 7 millimeters, even color, regular border, no change she is aware of. Looks benign. Photo in the chart for comparison, recheck in a year or sooner if it changes."
+    },
+    {
+      "id": "note-027",
+      "date": "2026-09-01",
+      "kind": "office visit",
+      "text": "Vitamin D came back 20. Started 2000 units daily, recheck in three months. Also talked about calcium from food rather than pills."
     }
   ],
   "expected": {
-    "warranted": false,
-    "subtype": "absent",
+    "warranted": true,
     "criteriaMet": [
       "crit-1",
+      "crit-2",
       "crit-3",
       "crit-4"
     ],
@@ -177,32 +217,34 @@
       "crit-1": [
         "note-005"
       ],
-      "crit-2": [],
+      "crit-2": [
+        "note-004",
+        "note-007",
+        "note-013",
+        "note-022"
+      ],
       "crit-3": [
-        "note-005",
-        "note-009"
+        "note-004"
       ],
       "crit-4": [
-        "note-005"
+        "note-022"
       ]
     },
     "distractors": [
       "note-001",
       "note-002",
-      "note-004",
       "note-006",
-      "note-007",
-      "note-008",
-      "note-010",
-      "note-012",
-      "note-013",
-      "note-014",
-      "note-015",
+      "note-009",
+      "note-011",
+      "note-016",
       "note-017",
       "note-018",
-      "note-019",
-      "note-020"
+      "note-020",
+      "note-021",
+      "note-024",
+      "note-026",
+      "note-027"
     ],
-    "note": "The chart never addresses crit-2 (skin); no entry supports it, so an appeal would assert what the record does not contain."
+    "note": "The chart documents every criterion; the CARC 50 denial can be answered from the record."
   }
 }

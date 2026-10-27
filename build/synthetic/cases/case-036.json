@@ -1,182 +1,244 @@
 {
   "id": "case-036",
+  "category": "bariatric surgery",
+  "setting": "outpatient",
+  "stakesUsd": 18000,
   "patient": {
     "alias": "SYN-036",
-    "age": 53,
-    "sex": "male"
+    "age": 55,
+    "sex": "female"
   },
   "procedure": {
-    "cpt": "64721",
-    "description": "neuroplasty and/or transposition, median nerve at carpal tunnel"
+    "code": "43775",
+    "codeSystem": "CPT",
+    "description": "laparoscopic sleeve gastrectomy"
   },
   "payer": {
     "name": "Prairie Commons Medicaid Plan",
     "planType": "Medicaid managed care"
   },
   "denial": {
-    "carc": "11",
-    "carcText": "The diagnosis is inconsistent with the procedure.",
-    "text": "Prairie Commons Medicaid Plan denied the claim for CPT 64721 (neuroplasty and/or transposition, median nerve at carpal tunnel) with date of service 2026-05-23. CARC 11: The diagnosis is inconsistent with the procedure. Payer remark: The diagnosis reported does not support the procedure billed.",
-    "dateOfService": "2026-05-23"
+    "carc": "50",
+    "carcText": "These are non-covered services because this is not deemed a 'medical necessity' by the payer.",
+    "text": "Prairie Commons Medicaid Plan denied the claim for CPT 43775 (laparoscopic sleeve gastrectomy) with date of service 2026-02-16. CARC 50: These are non-covered services because this is not deemed a 'medical necessity' by the payer. Payer remark: Documentation does not demonstrate completion of the required supervised weight management program.",
+    "dateOfService": "2026-02-16"
   },
   "criteria": [
     {
       "id": "crit-1",
-      "text": "Symptoms consistent with carpal tunnel syndrome, such as nocturnal paresthesias in the median nerve distribution with a positive Tinel or Phalen sign, present for at least 6 weeks."
+      "text": "Body mass index of 40 or more, or 35 or more with at least one obesity-related comorbidity (type 2 diabetes, obstructive sleep apnea, or hypertension)."
     },
     {
       "id": "crit-2",
-      "text": "Failure of at least 6 weeks of conservative management including neutral wrist splinting, together with NSAIDs, activity modification, or a corticosteroid injection."
+      "text": "Participation in a physician-supervised weight management program for at least 6 consecutive months within the past 2 years, with monthly visits documenting diet, exercise, and weight."
     },
     {
       "id": "crit-3",
-      "text": "Electrodiagnostic testing (nerve conduction study or electromyography) confirming median neuropathy at the wrist, unless thenar atrophy or constant sensory loss is present."
+      "text": "Psychological evaluation finding no untreated eating disorder, substance use disorder, or psychiatric condition that would impair adherence to the postoperative regimen."
+    },
+    {
+      "id": "crit-4",
+      "text": "Nutrition evaluation and education on the postoperative diet completed."
     }
   ],
   "chart": [
     {
       "id": "note-001",
-      "date": "2025-03-22",
+      "date": "2025-06-19",
       "kind": "office visit",
-      "text": "Vitamin D came back 18. Started 1000 units daily, recheck in three months. Also talked about calcium from food rather than pills."
+      "text": "Supervised weight management visit 1 of 6. Weight 246 pounds. Reviewed the food log, 1,500 calorie plan, walking 30 minutes 5 days a week. Added a second walk on weekends."
     },
     {
       "id": "note-002",
-      "date": "2025-04-03",
-      "kind": "outside letter",
-      "text": "From the referring physician: please evaluate for surgical management. We have exhausted what we can do in primary care and the patient is motivated. Recent labs enclosed, all within normal limits."
+      "date": "2025-07-19",
+      "kind": "office visit",
+      "text": "Supervised weight management visit 2 of 6. Weight 244 pounds. Reviewed the food log, 1,500 calorie plan, walking 30 minutes 5 days a week. Struggling with evening snacking."
     },
     {
       "id": "note-003",
-      "date": "2025-04-21",
+      "date": "2025-08-18",
       "kind": "office visit",
-      "text": "Trouble sleeping for a couple of months, falls asleep fine but wakes at three and lies there. No snoring per the spouse, no daytime naps, two cups of coffee before noon. Went over sleep hygiene, no screens in bed, cut the afternoon caffeine. Will hold off on medication for now."
+      "text": "Supervised weight management visit 3 of 6. Weight 242 pounds. Reviewed the food log, 1,500 calorie plan, walking 30 minutes 5 days a week. Struggling with evening snacking."
     },
     {
       "id": "note-004",
-      "date": "2025-05-02",
+      "date": "2025-09-17",
       "kind": "office visit",
-      "text": "53 year old man here for the left hand, referred by the PCP. Works on a keyboard all day. Discussed carpal tunnel release, open versus endoscopic, recovery. His history otherwise: anxiety, sees a counselor. Surgeries: a C-section. Allergies: penicillin, rash. Quit smoking 10 years ago, no alcohol, works two jobs. Family history noncontributory for what we are talking about today. 5 months of numbness and tingling in the thumb, index, and middle fingers on the left, wakes him at night, shakes it out. Positive Tinel at the left wrist, Phalen positive in about 20 seconds. Some early thenar weakness, no atrophy yet. Splinted at night for 9 weeks, naproxen twice a day, moved the mouse to the other hand, and had a steroid shot in the left carpal tunnel from the PCP that helped for about three weeks and wore off."
+      "text": "Supervised weight management visit 4 of 6. Weight 240 pounds. Reviewed the food log, 1,500 calorie plan, walking 30 minutes 5 days a week. Struggling with evening snacking."
     },
     {
       "id": "note-005",
-      "date": "2025-05-06",
+      "date": "2025-10-17",
       "kind": "office visit",
-      "text": "Knee pain going down stairs, right side, no injury, no locking or giving way. Patellar grind positive, no effusion, ligaments stable. Patellofemoral pain. Quad strengthening sheet, ice after activity, cushioned shoes."
+      "text": "Supervised weight management visit 5 of 6. Weight 238 pounds. Reviewed the food log, 1,500 calorie plan, walking 30 minutes 5 days a week. Struggling with evening snacking."
     },
     {
       "id": "note-006",
-      "date": "2025-05-12",
+      "date": "2025-10-26",
       "kind": "office visit",
-      "text": "Blood pressure check. 139 over 92 today, 148 over 84 on repeat. He has been taking the lisinopril 10 most days, admits to missing weekends. Low salt talk again. Keep the dose, recheck in 12 weeks."
+      "text": "Seasonal allergies acting up, itchy eyes, sneezing, clear drainage, worse outdoors. No wheeze. Cetirizine at night and the saline rinse. Fine with that."
     },
     {
       "id": "note-007",
-      "date": "2025-05-15",
-      "kind": "outside letter",
-      "text": "Dermatology consult note received. Two actinic keratoses on the forehead treated with cryotherapy. Annual skin check recommended, sunscreen counseling done."
+      "date": "2025-11-03",
+      "kind": "office visit",
+      "text": "Annual physical. Feels well overall. Sleeping fine, appetite fine, no chest pain, no shortness of breath. Flu shot given in the left arm today. Due for a tetanus booster, she will think about it. Labs ordered, fasting."
     },
     {
       "id": "note-008",
-      "date": "2025-06-13",
-      "kind": "nerve conduction study",
-      "text": "Nerve conduction study, left upper extremity. Median sensory peak latency 4.3 milliseconds across the wrist, prolonged. Median motor distal latency 5.5 milliseconds, prolonged. Ulnar normal. Consistent with moderate left median neuropathy at the wrist."
+      "date": "2025-11-06",
+      "kind": "outside letter",
+      "text": "From the referring physician: please evaluate and treat as you see fit. We have exhausted what we can do in primary care and the patient is motivated. Recent labs enclosed, all within normal limits."
     },
     {
       "id": "note-009",
-      "date": "2025-06-14",
-      "kind": "office visit",
-      "text": "Burning with urination for two days, going frequently, no fever, no back pain. Urine dip positive for leukocytes and nitrites. Nitrofurantoin for five days, push fluids, call if fever or flank pain."
+      "date": "2025-11-06",
+      "kind": "sleep study",
+      "text": "Polysomnography. Apnea-hypopnea index 41 per hour, oxygen nadir 78 percent. Moderate to severe obstructive sleep apnea. CPAP titrated to 11 centimeters of water."
     },
     {
       "id": "note-010",
-      "date": "2025-06-26",
+      "date": "2025-11-10",
+      "kind": "phone note",
+      "text": "Pharmacy called about the refill on the omeprazole 40. Approved 90 days. She mentioned the heartburn is better since cutting back on coffee."
+    },
+    {
+      "id": "note-011",
+      "date": "2025-11-12",
+      "kind": "outside letter",
+      "text": "Mammogram report forwarded for the record. Bilateral screening, BI-RADS 1, negative, routine screening in one year."
+    },
+    {
+      "id": "note-012",
+      "date": "2025-11-13",
+      "kind": "office visit",
+      "text": "Low back strain after moving furniture over the weekend. No radiation down the legs, no numbness, no bowel or bladder trouble. Paraspinal tenderness, straight leg raise negative. Heat, keep moving, ibuprofen with food for a week. Should settle."
+    },
+    {
+      "id": "note-013",
+      "date": "2025-11-14",
+      "kind": "phone note",
+      "text": "Patient called about a tick bite on the scalp after a hike. Tick removed whole, no rash, no fever. Watch for a bull's-eye rash or flu symptoms over the next month and call if either shows up."
+    },
+    {
+      "id": "note-014",
+      "date": "2025-11-16",
+      "kind": "office visit",
+      "text": "Supervised weight management visit 6 of 6. Weight 236 pounds. Reviewed the food log, 1,500 calorie plan, walking 30 minutes 5 days a week. Struggling with evening snacking."
+    },
+    {
+      "id": "note-015",
+      "date": "2025-12-06",
+      "kind": "office visit",
+      "text": "55 year old woman in bariatric surgery clinic after finishing the supervised program with her primary. Discussed sleeve versus bypass; sleeve preferred given reflux is mild and she wants the simpler operation. Her history otherwise: reflux on omeprazole as needed. Allergies: penicillin, rash. Does not smoke, a glass of wine on weekends, works in an office. Family history noncontributory for what we are talking about today. BMI 41.5 at 5 foot 3 and 234 pounds. Type 2 diabetes on metformin with an A1c of 7.5, obstructive sleep apnea on CPAP, hypertension on two agents."
+    },
+    {
+      "id": "note-016",
+      "date": "2025-12-08",
       "kind": "office visit",
       "text": "Ear fullness and muffled hearing on the left for a week after a cold. Canal clear, drum dull with fluid behind it, no infection. Serous otitis. Decongestant, swallow and yawn, recheck in three weeks if not better."
     },
     {
-      "id": "note-011",
-      "date": "2025-06-29",
-      "kind": "phone note",
-      "text": "Work note requested for a sick day last Thursday. Faxed to the employer."
-    },
-    {
-      "id": "note-012",
-      "date": "2025-07-03",
-      "kind": "office visit",
-      "text": "Back to review the plan for the left hand. Still symptomatic. Wants to proceed. Vitals today 136 over 73, pulse 79."
-    },
-    {
-      "id": "note-013",
-      "date": "2025-07-25",
-      "kind": "outside letter",
-      "text": "Optometry report forwarded for the record. Routine refraction, mild astigmatism, new glasses prescribed, retinas healthy, pressures 15 and 18. No ocular pathology noted."
-    },
-    {
-      "id": "note-014",
-      "date": "2025-08-13",
-      "kind": "office visit",
-      "text": "Twisted the left ankle stepping off a curb 5 days ago. Swelling over the lateral malleolus, tender over the ATFL, can bear weight. Ottawa negative, no film. Brace, ice, ibuprofen, elevate. Should be fine in a couple weeks."
-    },
-    {
-      "id": "note-015",
-      "date": "2025-09-04",
-      "kind": "office visit",
-      "text": "A1c came back 6.6. Prediabetic range, same as last year. Walking program, cut the soda, recheck in six months. He is motivated."
-    },
-    {
-      "id": "note-016",
-      "date": "2025-10-07",
-      "kind": "phone note",
-      "text": "Message from the patient about scheduling. Wants a date in the next couple of months if the insurance comes through. Passed to the surgery scheduler."
-    },
-    {
       "id": "note-017",
-      "date": "2025-10-16",
-      "kind": "office visit",
-      "text": "Interval visit. Nothing new since last time, symptoms as described before, he is managing. Went over the plan again and answered questions from his spouse."
+      "date": "2025-12-21",
+      "kind": "psychological evaluation",
+      "text": "Pre-bariatric psychological evaluation. No binge eating disorder, no purging, no substance use, depression in remission on sertraline with a PHQ-9 of 3. Understands the lifelong dietary changes. Cleared for surgery."
     },
     {
       "id": "note-018",
-      "date": "2025-11-10",
-      "kind": "office visit",
-      "text": "Here with a cough and congestion for 8 days, low grade temp at home, no shortness of breath. Lungs clear, throat a little red, ears fine. Looks viral. Fluids, rest, honey for the cough, come back if he gets a fever over 101 or it goes past two weeks."
+      "date": "2025-12-24",
+      "kind": "phone note",
+      "text": "Work note requested for a sick day last Monday. Faxed to the employer."
     },
     {
       "id": "note-019",
-      "date": "2025-11-15",
+      "date": "2025-12-26",
+      "kind": "nutrition evaluation",
+      "text": "Registered dietitian evaluation. Reviewed the staged postoperative diet, protein goals of 60 to 80 grams, vitamin and mineral supplementation for life, and fluid separation from meals. Teach-back successful."
+    },
+    {
+      "id": "note-020",
+      "date": "2025-12-28",
+      "kind": "office visit",
+      "text": "Burning with urination for two days, going frequently, no fever, no back pain. Urine dip positive for leukocytes and nitrites. Nitrofurantoin for five days, push fluids, call if fever or flank pain."
+    },
+    {
+      "id": "note-021",
+      "date": "2025-12-29",
+      "kind": "office visit",
+      "text": "Twisted the right ankle stepping off a curb 3 days ago. Swelling over the lateral malleolus, tender over the ATFL, can bear weight. Ottawa negative, no film. Brace, ice, ibuprofen, elevate. Should be fine in a couple weeks."
+    },
+    {
+      "id": "note-022",
+      "date": "2025-12-31",
+      "kind": "office visit",
+      "text": "Trouble sleeping for a couple of months, falls asleep fine but wakes at three and lies there. No snoring per the spouse, no daytime naps, two cups of coffee before noon. Went over sleep hygiene, no screens in bed, cut the afternoon caffeine. Will hold off on medication for now."
+    },
+    {
+      "id": "note-023",
+      "date": "2026-01-15",
+      "kind": "office visit",
+      "text": "Back with the psychology and nutrition evaluations done. Reviewed the operation, the leak risk, and the postoperative diet again. Ready to schedule. Vitals today 127 over 72, pulse 85."
+    },
+    {
+      "id": "note-024",
+      "date": "2026-01-15",
+      "kind": "phone note",
+      "text": "Nurse call. Patient had questions about time off work and whether she needs someone at home the first night. Answered both, she will arrange it."
+    },
+    {
+      "id": "note-025",
+      "date": "2026-01-15",
+      "kind": "office visit",
+      "text": "Blood pressure check. 134 over 73 today, 143 over 88 on repeat. She has been taking the lisinopril 20 most days, admits to missing weekends. Low salt talk again. Keep the dose, recheck in 12 weeks."
+    },
+    {
+      "id": "note-026",
+      "date": "2026-01-21",
       "kind": "outside letter",
       "text": "Gastroenterology note received. Screening colonoscopy completed, two small polyps removed, benign on pathology, repeat in 7 years."
     },
     {
-      "id": "note-020",
-      "date": "2025-11-20",
-      "kind": "office visit",
-      "text": "Annual physical. Feels well overall. Sleeping fine, appetite fine, no chest pain, no shortness of breath. Flu shot given in the left arm today. Due for a tetanus booster, he will think about it. Labs ordered, fasting."
-    },
-    {
-      "id": "note-021",
-      "date": "2025-11-22",
-      "kind": "office visit",
-      "text": "Mole on the left forearm that his spouse noticed. About 6 millimeters, even color, regular border, no change he is aware of. Looks benign. Photo in the chart for comparison, recheck in a year or sooner if it changes."
-    },
-    {
-      "id": "note-022",
-      "date": "2025-12-26",
+      "id": "note-027",
+      "date": "2026-01-23",
       "kind": "phone note",
-      "text": "Pharmacy called about the refill on the omeprazole 40. Approved 90 days. He mentioned the heartburn is better since cutting back on coffee."
+      "text": "She called asking about travel vaccines for a trip in early summer. Advised hepatitis A and a typhoid booster, referred to the travel clinic. Nothing else needed from us."
     },
     {
-      "id": "note-023",
-      "date": "2026-04-14",
+      "id": "note-028",
+      "date": "2026-01-24",
       "kind": "phone note",
-      "text": "Thyroid labs back. TSH 1.8, free T4 normal. No change to the levothyroxine 100. Repeat in a year."
+      "text": "Called her with the cholesterol results. Total 205, LDL 144, HDL 53, triglycerides 195. Discussed diet and walking. She wants to try lifestyle first for six months before we talk about a statin. Agreed."
     },
     {
-      "id": "note-024",
-      "date": "2026-05-08",
+      "id": "note-029",
+      "date": "2026-01-25",
+      "kind": "outside letter",
+      "text": "Optometry report forwarded for the record. Routine refraction, mild astigmatism, new glasses prescribed, retinas healthy, pressures 19 and 14. No ocular pathology noted."
+    },
+    {
+      "id": "note-030",
+      "date": "2026-01-28",
+      "kind": "office visit",
+      "text": "A1c came back 5.9. Prediabetic range, same as last year. Walking program, cut the soda, recheck in six months. She is motivated."
+    },
+    {
+      "id": "note-031",
+      "date": "2026-02-02",
       "kind": "preoperative visit",
-      "text": "Pre-op. Consent signed for left open carpal tunnel release under local with sedation. Marked."
+      "text": "Pre-op. Clear liquids for 2 days before, hold the metformin the morning of, CPAP to come with her. Consent signed for laparoscopic sleeve gastrectomy."
+    },
+    {
+      "id": "note-032",
+      "date": "2026-02-11",
+      "kind": "outside letter",
+      "text": "Letter from the dentist's office confirming routine cleaning and exam completed, no active infection, no dental work pending. Sent at our request for the surgical file."
+    },
+    {
+      "id": "note-033",
+      "date": "2026-02-15",
+      "kind": "office visit",
+      "text": "Mole on the right calf that her spouse noticed. About 5 millimeters, even color, regular border, no change she is aware of. Looks benign. Photo in the chart for comparison, recheck in a year or sooner if it changes."
     }
   ],
   "expected": {
@@ -184,38 +246,50 @@
     "criteriaMet": [
       "crit-1",
       "crit-2",
-      "crit-3"
+      "crit-3",
+      "crit-4"
     ],
     "support": {
       "crit-1": [
-        "note-004"
+        "note-009",
+        "note-015"
       ],
       "crit-2": [
-        "note-004"
+        "note-001",
+        "note-002",
+        "note-003",
+        "note-004",
+        "note-005",
+        "note-014"
       ],
       "crit-3": [
-        "note-008"
+        "note-017"
+      ],
+      "crit-4": [
+        "note-019"
       ]
     },
     "distractors": [
-      "note-001",
-      "note-003",
-      "note-005",
       "note-006",
       "note-007",
-      "note-009",
       "note-010",
       "note-011",
+      "note-012",
       "note-013",
-      "note-014",
-      "note-015",
+      "note-016",
       "note-018",
-      "note-019",
       "note-020",
       "note-021",
       "note-022",
-      "note-023"
+      "note-025",
+      "note-026",
+      "note-027",
+      "note-028",
+      "note-029",
+      "note-030",
+      "note-032",
+      "note-033"
     ],
-    "note": "The chart documents every criterion; the CARC 11 denial can be answered from the record."
+    "note": "The chart documents every criterion; the CARC 50 denial can be answered from the record."
   }
 }

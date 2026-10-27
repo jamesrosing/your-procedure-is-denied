@@ -1,268 +1,242 @@
 {
   "id": "case-023",
+  "category": "post-acute care",
+  "setting": "post-acute",
+  "stakesUsd": 25000,
   "patient": {
     "alias": "SYN-023",
-    "age": 52,
-    "sex": "female"
+    "age": 71,
+    "sex": "male"
   },
   "procedure": {
-    "cpt": "19318",
-    "description": "bilateral reduction mammaplasty"
+    "code": "0104",
+    "codeSystem": "CMG",
+    "description": "inpatient rehabilitation facility admission, stroke"
   },
   "payer": {
-    "name": "Lanternhill Health Plan",
-    "planType": "commercial HMO"
+    "name": "Silverline Medicare Advantage",
+    "planType": "Medicare Advantage"
   },
   "denial": {
-    "carc": "96",
-    "carcText": "Non-covered charge(s).",
-    "rarc": "N130",
-    "text": "Lanternhill Health Plan denied the claim for CPT 19318 (bilateral reduction mammaplasty) with date of service 2026-05-19. CARC 96: Non-covered charge(s). RARC N130: Consult plan benefit documents/guidelines for information about restrictions for this service. Payer remark: Reduction mammaplasty is a listed plan exclusion except for symmetry procedures following a covered mastectomy.",
-    "dateOfService": "2026-05-19"
+    "carc": "50",
+    "carcText": "These are non-covered services because this is not deemed a 'medical necessity' by the payer.",
+    "rarc": "N10",
+    "text": "Silverline Medicare Advantage denied the claim for CMG 0104 (inpatient rehabilitation facility admission, stroke) with dates of service 2026-07-25 through 2026-08-08. CARC 50: These are non-covered services because this is not deemed a 'medical necessity' by the payer. RARC N10: Adjustment based on the findings of a review organization. Payer remark: Documentation does not demonstrate that the member required the intensity of services provided in an inpatient rehabilitation facility; the member’s needs could have been met at a skilled nursing facility level of care.",
+    "dateOfService": "2026-07-25",
+    "serviceEnd": "2026-08-08"
   },
   "criteria": [
     {
       "id": "crit-1",
-      "text": "Reduction mammaplasty is excluded under this plan except when performed for symmetry after a covered mastectomy for breast cancer."
+      "text": "Requires active and ongoing intervention of at least two therapy disciplines, one of which is physical or occupational therapy."
     },
     {
       "id": "crit-2",
-      "text": "Symptoms attributable to macromastia documented for at least 12 months, such as neck, shoulder, or upper back pain, shoulder grooving, or inframammary intertrigo."
+      "text": "Requires, and can reasonably be expected to actively participate in, an intensive rehabilitation program: generally at least 3 hours of therapy per day at least 5 days per week."
     },
     {
       "id": "crit-3",
-      "text": "At least 6 months of conservative treatment, including a supportive garment plus physical therapy, analgesics, or dermatologic treatment of intertrigo, without adequate relief."
+      "text": "Reasonably expected to make measurable functional improvement of practical value within a prescribed period, documented against goals in an individualized plan of care."
     },
     {
       "id": "crit-4",
-      "text": "Estimated resection of at least 500 grams per breast."
+      "text": "Requires supervision by a rehabilitation physician with face-to-face visits at least 3 days per week to manage medical and rehabilitation needs."
     },
     {
       "id": "crit-5",
-      "text": "Photographic documentation of macromastia and shoulder grooving."
+      "text": "The patient’s needs cannot be met at a less intensive level of care, such as a skilled nursing facility."
     }
   ],
   "chart": [
     {
       "id": "note-001",
-      "date": "2025-07-27",
-      "kind": "office visit",
-      "text": "Mole on the right calf that her spouse noticed. About 6 millimeters, even color, regular border, no change she is aware of. Looks benign. Photo in the chart for comparison, recheck in a year or sooner if it changes."
+      "date": "2026-07-24",
+      "kind": "preadmission screening",
+      "text": "Preadmission screening. 71 year old man with an acute left middle cerebral artery ischemic stroke 6 days ago, NIHSS 10, dense right hemiparesis, right neglect, and oropharyngeal dysphagia on a modified diet. Needs PT for transfers and gait, OT for right upper extremity and self-care, and SLP for swallowing and cognition. Premorbidly independent, lives with his spouse in a single-level home. A skilled nursing facility would not provide the daily physician oversight he needs for the blood pressure lability and the dysphagia, nor three disciplines at this intensity. Recommend inpatient rehabilitation."
     },
     {
       "id": "note-002",
-      "date": "2025-07-30",
-      "kind": "office visit",
-      "text": "Ear fullness and muffled hearing on the right for a week after a cold. Canal clear, drum dull with fluid behind it, no infection. Serous otitis. Decongestant, swallow and yawn, recheck in three weeks if not better."
+      "date": "2026-07-25",
+      "kind": "history and physical",
+      "text": "Admitted to inpatient rehabilitation from the acute hospital. History otherwise hypertension, hyperlipidemia, remote smoking history. Medications reconciled. Code status full. Post-admission physician evaluation. Confirms the preadmission findings. Three disciplines ordered: PT, OT, and SLP, each to evaluate within 24 hours. Prognosis for functional gains is good given premorbid independence and intact comprehension. Goals in 14 days: supervision level transfers, 150 feet with a hemi-walker, modified independent feeding, regular diet with thin liquids."
     },
     {
       "id": "note-003",
-      "date": "2025-08-01",
-      "kind": "outside letter",
-      "text": "Referral letter from the primary care office. Thank you for seeing this patient of mine for surgical evaluation. Her history and medication list are attached. Please let me know what you recommend and whether anything is needed from our end for clearance."
+      "date": "2026-07-26",
+      "kind": "therapy note",
+      "text": "PT evaluation. Transfers maximal assist of two, sit to stand with right knee buckling, unable to ambulate. Sitting balance fair, standing balance poor. Goals set, plan 5 to 6 days a week."
     },
     {
       "id": "note-004",
-      "date": "2025-08-14",
-      "kind": "office visit",
-      "text": "52 year old woman here about her breasts, referred by her primary. Exam: large pendulous breasts, nipple to notch 36 on the right and 37 on the left, grade 3 ptosis, intertrigo in both inframammary folds. Discussed reduction, risks, scars, sensation, the works. Her history otherwise: reflux on omeprazole as needed, mild asthma, albuterol maybe twice a year, hypertension on lisinopril. Surgeries: wisdom teeth. Allergies: sulfa, hives as a child. Never smoked, occasional beer, lives with her spouse. Family history noncontributory for what we are talking about today. No prior breast surgery, no personal history of breast cancer, mammogram last year was normal. She has had the neck and upper back pain for 19 months now, maybe longer, says it is daily by the afternoon. The bra straps have worn grooves into both shoulders and she gets the rash under the breasts every summer. She has been in a fitted supportive bra from the specialty shop for months, takes ibuprofen most days, treats the rash with nystatin powder. I am sending her to PT for posture and scapular work. She is 5 foot 6, 155 pounds, which puts BSA right around 1.81. Schnur 22nd percentile at that BSA is about 448 grams. I am estimating 677 grams on the right and 664 on the left."
+      "date": "2026-07-26",
+      "kind": "therapy note",
+      "text": "OT evaluation. right upper extremity flaccid with trace shoulder shrug, dependent for dressing and bathing, maximal assist for grooming, right neglect on cancellation testing. Goals set."
     },
     {
       "id": "note-005",
-      "date": "2025-08-17",
-      "kind": "outside letter",
-      "text": "Letter from the dentist's office confirming routine cleaning and exam completed, no active infection, no dental work pending. Sent at our request for the surgical file."
+      "date": "2026-07-26",
+      "kind": "therapy note",
+      "text": "SLP evaluation. Oropharyngeal dysphagia with delayed swallow and throat clearing on thin liquids, mechanical soft and nectar thick recommended. Mild word-finding difficulty, follows two-step commands. Goals set."
     },
     {
       "id": "note-006",
-      "date": "2025-08-21",
-      "kind": "physical therapy",
-      "text": "Eval for upper back and neck pain in the setting of large breasts. Forward shoulder posture, tight pecs, weak lower traps. Plan 8 weeks, twice a week, scapular stabilization and postural retraining."
+      "date": "2026-07-26",
+      "kind": "nursing note",
+      "text": "Fall risk assessment completed, score 41, high risk. Bed alarm on, nonskid socks, call light within reach, hourly rounding. Family at bedside this evening."
     },
     {
       "id": "note-007",
-      "date": "2025-08-26",
-      "kind": "physical therapy",
-      "text": "Session 2. Continued the program from the evaluation, tolerated well, home exercises reviewed, she reports no real change."
+      "date": "2026-07-27",
+      "kind": "nursing note",
+      "text": "IV site rotated from the left forearm to the right hand, old site without redness. Dressing dated. Patient tolerated well."
     },
     {
       "id": "note-008",
-      "date": "2025-08-27",
-      "kind": "office visit",
-      "text": "A1c came back 6.1. Prediabetic range, same as last year. Walking program, cut the soda, recheck in six months. She is motivated."
+      "date": "2026-07-28",
+      "kind": "hospital progress note",
+      "text": "Rehab physician progress note, day 3, seen face to face. Blood pressure labile, 168 over 94 this morning, 112 over 70 last night with lightheadedness in therapy; adjusted the amlodipine timing. Dysphagia diet reviewed with SLP. right shoulder pain with range of motion, added a sling for transfers."
     },
     {
       "id": "note-009",
-      "date": "2025-08-30",
-      "kind": "phone note",
-      "text": "Pharmacy called about the refill on the omeprazole 20. Approved 90 days. She mentioned the heartburn is better since cutting back on coffee."
+      "date": "2026-07-28",
+      "kind": "nursing note",
+      "text": "Bowel regimen started, senna and docusate at bedtime. Last bowel movement 2 days ago per patient. Encouraged fluids and ambulation as able."
     },
     {
       "id": "note-010",
-      "date": "2025-08-31",
-      "kind": "physical therapy",
-      "text": "Session 3. Continued the program from the evaluation, tolerated well, home exercises reviewed, she reports no real change."
+      "date": "2026-07-28",
+      "kind": "nursing note",
+      "text": "Dentures labeled and placed in the denture cup at the bedside. Patient prefers them out at night. Oral care done."
     },
     {
       "id": "note-011",
-      "date": "2025-09-05",
-      "kind": "physical therapy",
-      "text": "Session 4. Continued the program from the evaluation, tolerated well, home exercises reviewed, she reports about the same."
+      "date": "2026-07-28",
+      "kind": "nursing note",
+      "text": "Patient requested something for sleep. Melatonin 3 milligrams given per order at 2130. Slept in two-hour stretches per night shift report."
     },
     {
       "id": "note-012",
-      "date": "2025-09-06",
-      "kind": "office visit",
-      "text": "Vitamin D came back 19. Started 1000 units daily, recheck in three months. Also talked about calcium from food rather than pills."
+      "date": "2026-07-31",
+      "kind": "nursing note",
+      "text": "Skin assessment on admission. Braden 18. Skin intact, no pressure injury, heels floated. Turn every two hours while in bed. Barrier cream to the sacrum as a precaution."
     },
     {
       "id": "note-013",
-      "date": "2025-09-10",
-      "kind": "physical therapy",
-      "text": "Session 5. Continued the program from the evaluation, tolerated well, home exercises reviewed, she reports about the same."
+      "date": "2026-07-31",
+      "kind": "nursing note",
+      "text": "Glucose checks before meals and at bedtime, ranging 149 to 202. Sliding scale given per protocol. Patient's own glucometer at bedside, sent home with family for safekeeping."
     },
     {
       "id": "note-014",
-      "date": "2025-09-16",
-      "kind": "office visit",
-      "text": "Knee pain going down stairs, left side, no injury, no locking or giving way. Patellar grind positive, no effusion, ligaments stable. Patellofemoral pain. Quad strengthening sheet, ice after activity, cushioned shoes."
+      "date": "2026-07-31",
+      "kind": "nursing note",
+      "text": "Daily weight 149 pounds, up 0 from yesterday. Intake and output recorded. Repositioned per schedule, skin checked."
     },
     {
       "id": "note-015",
-      "date": "2025-10-05",
-      "kind": "office visit",
-      "text": "Back to go over the plan. Symptoms unchanged. We went through the operation again and she wants to proceed if insurance will cover it. Vitals today 138 over 78, pulse 81. Finished 8 weeks of PT across the street, says it helped while she was there and then right back to baseline. Still in the supportive bra, still on the ibuprofen, intertrigo treated with nystatin powder with partial relief. That is 7 months of conservative measures without durable relief."
+      "date": "2026-08-01",
+      "kind": "team conference",
+      "text": "Team conference, day 7. Transfers improved from maximal assist of two to minimal assist of one. Gait 25 feet to 80 feet with a hemi-walker and contact guard. Swallow advanced to mechanical soft with nectar liquids. On track for the 14 day goals, continue."
     },
     {
       "id": "note-016",
-      "date": "2025-10-05",
-      "kind": "photo documentation",
-      "text": "Standard pre-op photo series taken today, front, both obliques, both laterals. Grooving visible at both shoulders in the AP view, grade 3 ptosis, intertrigo in both folds."
+      "date": "2026-08-01",
+      "kind": "consult note",
+      "text": "Dietitian consult. Regular diet with heart healthy modification. Intake about 67 percent of meals. Supplement shake twice daily added. Will follow."
     },
     {
       "id": "note-017",
-      "date": "2025-11-19",
-      "kind": "phone note",
-      "text": "Message from the patient about scheduling. Wants a date in the next couple of months if the insurance comes through. Passed to the surgery scheduler."
+      "date": "2026-08-02",
+      "kind": "consult note",
+      "text": "Audiology screen at nursing's request. He wears a hearing aid on the right, battery replaced, hears conversational voice well now. No further needs."
     },
     {
       "id": "note-018",
-      "date": "2025-11-20",
-      "kind": "phone note",
-      "text": "Called her with the cholesterol results. Total 186, LDL 134, HDL 51, triglycerides 172. Discussed diet and walking. She wants to try lifestyle first for six months before we talk about a statin. Agreed."
+      "date": "2026-08-03",
+      "kind": "consult note",
+      "text": "Social work met with the patient and his daughter to confirm the home address, the primary contact, and transportation for follow-up appointments. No barriers identified today."
     },
     {
       "id": "note-019",
-      "date": "2025-12-30",
-      "kind": "office visit",
-      "text": "Here with a cough and congestion for 7 days, low grade temp at home, no shortness of breath. Lungs clear, throat a little red, ears fine. Looks viral. Fluids, rest, honey for the cough, come back if she gets a fever over 101 or it goes past two weeks."
+      "date": "2026-08-04",
+      "kind": "hospital progress note",
+      "text": "Rehab physician progress note, day 10, seen face to face. Blood pressure steadier on the new schedule. Bladder scan residuals under 100, catheter out. Spasticity in the right hand, started a night splint. Reviewed therapy progress with the team."
     },
     {
       "id": "note-020",
-      "date": "2026-01-22",
-      "kind": "outside letter",
-      "text": "Optometry report forwarded for the record. Routine refraction, mild astigmatism, new glasses prescribed, retinas healthy, pressures 16 and 16. No ocular pathology noted."
+      "date": "2026-08-04",
+      "kind": "medication record",
+      "text": "Pharmacy note. Renal dosing reviewed, creatinine 1.2, no adjustments needed today. Home medication list reconciled with the daughter by phone, one duplicate statin removed."
     },
     {
       "id": "note-021",
-      "date": "2026-02-14",
-      "kind": "office visit",
-      "text": "Trouble sleeping for a couple of months, falls asleep fine but wakes at three and lies there. No snoring per the spouse, no daytime naps, two cups of coffee before noon. Went over sleep hygiene, no screens in bed, cut the afternoon caffeine. Will hold off on medication for now."
+      "date": "2026-08-05",
+      "kind": "nursing note",
+      "text": "Potassium 3.4 this morning, repleted with 20 milliequivalents oral per protocol. Recheck with morning labs."
     },
     {
       "id": "note-022",
-      "date": "2026-03-04",
-      "kind": "office visit",
-      "text": "Check-in while we wait on the insurance. No change in the complaints. Reviewed the risks and recovery one more time, she remains sure about going ahead."
+      "date": "2026-08-08",
+      "kind": "discharge summary",
+      "text": "Discharge summary, day 14. Transfers supervision, ambulating 160 feet with a hemi-walker and supervision, regular diet with thin liquids, feeding modified independent. Home with spouse, home health PT and OT arranged."
     },
     {
       "id": "note-023",
-      "date": "2026-03-24",
-      "kind": "office visit",
-      "text": "Burning with urination for two days, going frequently, no fever, no back pain. Urine dip positive for leukocytes and nitrites. Nitrofurantoin for five days, push fluids, call if fever or flank pain."
+      "date": "2026-08-08",
+      "kind": "medication record",
+      "text": "Home levothyroxine resumed at the home dose this morning after review with the attending. No interactions flagged."
     },
     {
       "id": "note-024",
-      "date": "2026-04-06",
-      "kind": "outside letter",
-      "text": "Dermatology consult note received. Two actinic keratoses on the forehead treated with cryotherapy. Annual skin check recommended, sunscreen counseling done."
-    },
-    {
-      "id": "note-025",
-      "date": "2026-04-07",
-      "kind": "office visit",
-      "text": "Blood pressure check. 139 over 73 today, 128 over 82 on repeat. She has been taking the lisinopril 10 most days, admits to missing weekends. Low salt talk again. Keep the dose, recheck in 12 weeks."
-    },
-    {
-      "id": "note-026",
-      "date": "2026-04-13",
-      "kind": "outside letter",
-      "text": "Gastroenterology note received. Screening colonoscopy completed, two small polyps removed, benign on pathology, repeat in 7 years."
-    },
-    {
-      "id": "note-027",
-      "date": "2026-05-06",
-      "kind": "phone note",
-      "text": "Patient called about a tick bite on the calf after a hike. Tick removed whole, no rash, no fever. Watch for a bull's-eye rash or flu symptoms over the next month and call if either shows up."
-    },
-    {
-      "id": "note-028",
-      "date": "2026-05-11",
-      "kind": "preoperative visit",
-      "text": "Pre-op visit. Consent signed, marked the plan on her in the mirror, superomedial pedicle, Wise pattern. Labs fine. Stop the ibuprofen a week out."
-    },
-    {
-      "id": "note-029",
-      "date": "2026-05-13",
-      "kind": "office visit",
-      "text": "Twisted the right ankle stepping off a curb 6 days ago. Swelling over the lateral malleolus, tender over the ATFL, can bear weight. Ottawa negative, no film. Brace, ice, ibuprofen, elevate. Should be fine in a couple weeks."
+      "date": "2026-08-08",
+      "kind": "nursing note",
+      "text": "Pneumococcal vaccine status reviewed, up to date per state registry. Influenza vaccine offered and accepted, given left deltoid."
     }
   ],
   "expected": {
     "warranted": false,
-    "subtype": "exclusion",
+    "subtype": "absent",
     "criteriaMet": [
-      "crit-2",
+      "crit-1",
       "crit-3",
       "crit-4",
       "crit-5"
     ],
     "support": {
-      "crit-1": [],
-      "crit-2": [
-        "note-004"
+      "crit-1": [
+        "note-001",
+        "note-002"
       ],
+      "crit-2": [],
       "crit-3": [
-        "note-004",
-        "note-006",
+        "note-002",
         "note-015"
       ],
       "crit-4": [
-        "note-004"
+        "note-008",
+        "note-019"
       ],
       "crit-5": [
-        "note-016"
+        "note-001"
       ]
     },
     "distractors": [
-      "note-001",
-      "note-002",
-      "note-005",
-      "note-008",
+      "note-006",
+      "note-007",
       "note-009",
+      "note-010",
+      "note-011",
       "note-012",
+      "note-013",
       "note-014",
+      "note-016",
+      "note-017",
       "note-018",
-      "note-019",
       "note-020",
       "note-021",
       "note-023",
-      "note-024",
-      "note-025",
-      "note-026",
-      "note-027",
-      "note-029"
+      "note-024"
     ],
-    "note": "Plan exclusion: crit-1 (exclusion) cannot be met by any chart content."
+    "note": "The chart never addresses crit-2 (intensity); no entry supports it, so an appeal would assert what the record does not contain."
   }
 }

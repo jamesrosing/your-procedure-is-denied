@@ -1,242 +1,223 @@
 {
   "id": "case-028",
+  "category": "spine surgery",
+  "setting": "outpatient",
+  "stakesUsd": 40000,
   "patient": {
     "alias": "SYN-028",
-    "age": 56,
+    "age": 53,
     "sex": "female"
   },
   "procedure": {
-    "cpt": "64721",
-    "description": "neuroplasty and/or transposition, median nerve at carpal tunnel"
+    "code": "63685",
+    "codeSystem": "CPT",
+    "description": "insertion of spinal neurostimulator pulse generator with connection to leads"
   },
   "payer": {
-    "name": "Saltmarsh Benefits Administrators",
-    "planType": "self-funded employer plan"
+    "name": "Northwind Mutual Health",
+    "planType": "commercial PPO"
   },
   "denial": {
     "carc": "50",
     "carcText": "These are non-covered services because this is not deemed a 'medical necessity' by the payer.",
-    "text": "Saltmarsh Benefits Administrators denied the claim for CPT 64721 (neuroplasty and/or transposition, median nerve at carpal tunnel) with date of service 2026-05-31. CARC 50: These are non-covered services because this is not deemed a 'medical necessity' by the payer. Payer remark: Documentation does not establish failure of conservative treatment or electrodiagnostic confirmation.",
-    "dateOfService": "2026-05-31"
+    "text": "Northwind Mutual Health denied the claim for CPT 63685 (insertion of spinal neurostimulator pulse generator with connection to leads) with date of service 2026-01-30. CARC 50: These are non-covered services because this is not deemed a 'medical necessity' by the payer. Payer remark: Documentation does not establish a successful trial meeting the plan’s definition of 50 percent pain reduction with functional improvement.",
+    "dateOfService": "2026-01-30"
   },
   "criteria": [
     {
       "id": "crit-1",
-      "text": "Symptoms consistent with carpal tunnel syndrome, such as nocturnal paresthesias in the median nerve distribution with a positive Tinel or Phalen sign, present for at least 6 weeks."
+      "text": "Chronic intractable neuropathic pain of the trunk or limbs (such as failed back surgery syndrome or complex regional pain syndrome) for at least 6 months despite conservative therapy including medications, physical therapy, and injections."
     },
     {
       "id": "crit-2",
-      "text": "Failure of at least 6 weeks of conservative management including neutral wrist splinting, together with NSAIDs, activity modification, or a corticosteroid injection."
+      "text": "Psychological evaluation documenting no untreated psychiatric condition or substance use disorder that would preclude benefit from neuromodulation."
     },
     {
       "id": "crit-3",
-      "text": "Electrodiagnostic testing (nerve conduction study or electromyography) confirming median neuropathy at the wrist, unless thenar atrophy or constant sensory loss is present."
+      "text": "A successful trial of at least 5 days with at least 50 percent pain reduction and documented functional improvement."
+    },
+    {
+      "id": "crit-4",
+      "text": "No further surgically correctable lesion identified on imaging."
     }
   ],
   "chart": [
     {
       "id": "note-001",
-      "date": "2025-05-04",
+      "date": "2025-10-12",
       "kind": "office visit",
-      "text": "Here with a cough and congestion for 4 days, low grade temp at home, no shortness of breath. Lungs clear, throat a little red, ears fine. Looks viral. Fluids, rest, honey for the cough, come back if she gets a fever over 101 or it goes past two weeks."
+      "text": "Knee pain going down stairs, left side, no injury, no locking or giving way. Patellar grind positive, no effusion, ligaments stable. Patellofemoral pain. Quad strengthening sheet, ice after activity, cushioned shoes."
     },
     {
       "id": "note-002",
-      "date": "2025-05-18",
+      "date": "2025-10-22",
       "kind": "outside letter",
-      "text": "Referral letter from the primary care office. Thank you for seeing this patient of mine for surgical evaluation. Her history and medication list are attached. Please let me know what you recommend and whether anything is needed from our end for clearance."
+      "text": "From the referring physician: please evaluate and treat as you see fit. We have exhausted what we can do in primary care and the patient is motivated. Recent labs enclosed, all within normal limits."
     },
     {
       "id": "note-003",
-      "date": "2025-06-16",
-      "kind": "office visit",
-      "text": "56 year old woman here for the left hand, referred by the PCP. Works on a keyboard all day. Discussed carpal tunnel release, open versus endoscopic, recovery. Her history otherwise: hypothyroidism on levothyroxine, reflux on omeprazole as needed, hypertension on lisinopril. Surgeries: a C-section. Allergies: no drug allergies. Does not smoke, a glass of wine on weekends, works in a warehouse. Family history noncontributory for what we are talking about today. 4 months of numbness and tingling in the thumb, index, and middle fingers on the left, wakes her at night, shakes it out. Positive Tinel at the left wrist, Phalen positive in about 20 seconds. Some early thenar weakness, no atrophy yet. Splinted at night for 9 weeks, naproxen twice a day, moved the mouse to the other hand, and had a steroid shot in the left carpal tunnel from the PCP that helped for about three weeks and wore off."
+      "date": "2025-10-22",
+      "kind": "outside letter",
+      "text": "Letter from the dentist's office confirming routine cleaning and exam completed, no active infection, no dental work pending. Sent at our request for the surgical file."
     },
     {
       "id": "note-004",
-      "date": "2025-06-18",
-      "kind": "phone note",
-      "text": "Thyroid labs back. TSH 3.1, free T4 normal. No change to the levothyroxine 100. Repeat in a year."
+      "date": "2025-10-25",
+      "kind": "office visit",
+      "text": "A1c came back 6.7. Prediabetic range, same as last year. Walking program, cut the soda, recheck in six months. She is motivated."
     },
     {
       "id": "note-005",
-      "date": "2025-07-10",
-      "kind": "nerve conduction study",
-      "text": "Nerve conduction study, left upper extremity. Median sensory peak latency 4.3 milliseconds across the wrist, prolonged. Median motor distal latency 5.9 milliseconds, prolonged. Ulnar normal. Consistent with moderate left median neuropathy at the wrist."
+      "date": "2025-10-27",
+      "kind": "phone note",
+      "text": "Thyroid labs back. TSH 3.2, free T4 normal. No change to the levothyroxine 50. Repeat in a year."
     },
     {
       "id": "note-006",
-      "date": "2025-07-19",
+      "date": "2025-10-30",
+      "kind": "outside letter",
+      "text": "Gastroenterology note received. Screening colonoscopy completed, two small polyps removed, benign on pathology, repeat in 10 years."
+    },
+    {
+      "id": "note-007",
+      "date": "2025-11-02",
       "kind": "office visit",
       "text": "Seasonal allergies acting up, itchy eyes, sneezing, clear drainage, worse outdoors. No wheeze. Cetirizine at night and the saline rinse. Fine with that."
     },
     {
-      "id": "note-007",
-      "date": "2025-08-29",
-      "kind": "office visit",
-      "text": "Low back strain after moving furniture over the weekend. No radiation down the legs, no numbness, no bowel or bladder trouble. Paraspinal tenderness, straight leg raise negative. Heat, keep moving, ibuprofen with food for a week. Should settle."
-    },
-    {
       "id": "note-008",
-      "date": "2025-08-30",
-      "kind": "office visit",
-      "text": "Back to review the plan for the left hand. Still symptomatic. Wants to proceed. Vitals today 112 over 90, pulse 76."
-    },
-    {
-      "id": "note-009",
-      "date": "2025-09-10",
-      "kind": "outside letter",
-      "text": "Optometry report forwarded for the record. Routine refraction, mild astigmatism, new glasses prescribed, retinas healthy, pressures 16 and 19. No ocular pathology noted."
-    },
-    {
-      "id": "note-010",
-      "date": "2025-10-06",
-      "kind": "office visit",
-      "text": "Knee pain going down stairs, right side, no injury, no locking or giving way. Patellar grind positive, no effusion, ligaments stable. Patellofemoral pain. Quad strengthening sheet, ice after activity, cushioned shoes."
-    },
-    {
-      "id": "note-011",
-      "date": "2025-10-10",
-      "kind": "office visit",
-      "text": "Vitamin D came back 17. Started 1000 units daily, recheck in three months. Also talked about calcium from food rather than pills."
-    },
-    {
-      "id": "note-012",
-      "date": "2025-11-09",
-      "kind": "phone note",
-      "text": "Message from the patient about scheduling. Wants a date in the next couple of months if the insurance comes through. Passed to the surgery scheduler."
-    },
-    {
-      "id": "note-013",
-      "date": "2025-11-25",
-      "kind": "office visit",
-      "text": "Follow-up. Same story, no better. She asked about timing around work and family, we talked through it. Still wants to proceed."
-    },
-    {
-      "id": "note-014",
-      "date": "2025-11-25",
-      "kind": "office visit",
-      "text": "Annual physical. Feels well overall. Sleeping fine, appetite fine, no chest pain, no shortness of breath. Flu shot given in the left arm today. Due for a tetanus booster, she will think about it. Labs ordered, fasting."
-    },
-    {
-      "id": "note-015",
-      "date": "2025-12-09",
-      "kind": "office visit",
-      "text": "Burning with urination for two days, going frequently, no fever, no back pain. Urine dip positive for leukocytes and nitrites. Nitrofurantoin for five days, push fluids, call if fever or flank pain."
-    },
-    {
-      "id": "note-016",
-      "date": "2025-12-24",
-      "kind": "outside letter",
-      "text": "Gastroenterology note received. Screening colonoscopy completed, two small polyps removed, benign on pathology, repeat in 5 years."
-    },
-    {
-      "id": "note-017",
-      "date": "2025-12-28",
-      "kind": "office visit",
-      "text": "Trouble sleeping for a couple of months, falls asleep fine but wakes at three and lies there. No snoring per the spouse, no daytime naps, two cups of coffee before noon. Went over sleep hygiene, no screens in bed, cut the afternoon caffeine. Will hold off on medication for now."
-    },
-    {
-      "id": "note-018",
-      "date": "2025-12-30",
-      "kind": "phone note",
-      "text": "Patient called about a tick bite on the scalp after a hike. Tick removed whole, no rash, no fever. Watch for a bull's-eye rash or flu symptoms over the next month and call if either shows up."
-    },
-    {
-      "id": "note-019",
-      "date": "2026-01-24",
-      "kind": "phone note",
-      "text": "Pharmacy called about the refill on the omeprazole 20. Approved 90 days. She mentioned the heartburn is better since cutting back on coffee."
-    },
-    {
-      "id": "note-020",
-      "date": "2026-02-05",
-      "kind": "office visit",
-      "text": "Blood pressure check. 141 over 77 today, 130 over 85 on repeat. She has been taking the lisinopril 20 most days, admits to missing weekends. Low salt talk again. Keep the dose, recheck in 8 weeks."
-    },
-    {
-      "id": "note-021",
-      "date": "2026-02-19",
-      "kind": "phone note",
-      "text": "Called her with the cholesterol results. Total 195, LDL 155, HDL 50, triglycerides 123. Discussed diet and walking. She wants to try lifestyle first for six months before we talk about a statin. Agreed."
-    },
-    {
-      "id": "note-022",
-      "date": "2026-03-14",
-      "kind": "phone note",
-      "text": "Work note requested for a sick day last Tuesday. Faxed to the employer."
-    },
-    {
-      "id": "note-023",
-      "date": "2026-04-09",
+      "date": "2025-11-02",
       "kind": "outside letter",
       "text": "Mammogram report forwarded for the record. Bilateral screening, BI-RADS 1, negative, routine screening in one year."
     },
     {
-      "id": "note-024",
-      "date": "2026-04-18",
+      "id": "note-009",
+      "date": "2025-11-08",
+      "kind": "phone note",
+      "text": "She called asking about travel vaccines for a trip in the spring. Advised hepatitis A and a typhoid booster, referred to the travel clinic. Nothing else needed from us."
+    },
+    {
+      "id": "note-010",
+      "date": "2025-11-14",
       "kind": "office visit",
-      "text": "Mole on the right calf that her spouse noticed. About 7 millimeters, even color, regular border, no change she is aware of. Looks benign. Photo in the chart for comparison, recheck in a year or sooner if it changes."
+      "text": "53 year old woman in the pain clinic referred by her spine surgeon. Discussed spinal cord stimulation, what a trial involves, and that it is for leg-predominant neuropathic pain. She is interested. Her history otherwise: seasonal allergies. Allergies: sulfa, hives as a child. Does not smoke, a glass of wine on weekends, works from home. Family history noncontributory for what we are talking about today. Persistent bilateral leg and low back pain 18 months after an L4-S1 fusion, 8 out of 10 most days, burning quality down both legs. On gabapentin 1200 three times daily and duloxetine 60, 14 weeks of PT, two epidurals and a medial branch block without durable relief. Post-operative MRI and CT show a solid fusion, no recurrent stenosis, no hardware problem; the spine surgeon has nothing further to offer surgically."
     },
     {
-      "id": "note-025",
-      "date": "2026-05-22",
-      "kind": "office visit",
-      "text": "A1c came back 6.2. Prediabetic range, same as last year. Walking program, cut the soda, recheck in six months. She is motivated."
+      "id": "note-011",
+      "date": "2025-12-04",
+      "kind": "psychological evaluation",
+      "text": "Psychological evaluation for neuromodulation candidacy. PHQ-9 score 7, mild; no somatic symptom disorder; no substance use disorder, opioid use stable and monitored; realistic expectations about pain reduction rather than cure. Cleared for trial."
     },
     {
-      "id": "note-026",
-      "date": "2026-05-24",
-      "kind": "preoperative visit",
-      "text": "Pre-op. Consent signed for left open carpal tunnel release under local with sedation. Marked."
+      "id": "note-012",
+      "date": "2025-12-04",
+      "kind": "phone note",
+      "text": "Work note requested for a sick day last Thursday. Faxed to the employer."
     },
     {
-      "id": "note-027",
-      "date": "2026-05-26",
+      "id": "note-013",
+      "date": "2025-12-05",
       "kind": "office visit",
       "text": "Twisted the right ankle stepping off a curb 6 days ago. Swelling over the lateral malleolus, tender over the ATFL, can bear weight. Ottawa negative, no film. Brace, ice, ibuprofen, elevate. Should be fine in a couple weeks."
+    },
+    {
+      "id": "note-014",
+      "date": "2025-12-06",
+      "kind": "office visit",
+      "text": "Vitamin D came back 18. Started 1000 units daily, recheck in three months. Also talked about calcium from food rather than pills."
+    },
+    {
+      "id": "note-015",
+      "date": "2025-12-10",
+      "kind": "office visit",
+      "text": "Mole on the upper back that her spouse noticed. About 7 millimeters, even color, regular border, no change she is aware of. Looks benign. Photo in the chart for comparison, recheck in a year or sooner if it changes."
+    },
+    {
+      "id": "note-016",
+      "date": "2025-12-11",
+      "kind": "phone note",
+      "text": "Message from the patient about scheduling. Wants a date in the next couple of months if the insurance comes through. Passed to the scheduler."
+    },
+    {
+      "id": "note-017",
+      "date": "2025-12-14",
+      "kind": "office visit",
+      "text": "Reviewed the psychological evaluation. Scheduling the trial. Anticoagulation and infection precautions reviewed. Vitals today 129 over 77, pulse 75."
+    },
+    {
+      "id": "note-018",
+      "date": "2025-12-15",
+      "kind": "office visit",
+      "text": "Here with a cough and congestion for 8 days, low grade temp at home, no shortness of breath. Lungs clear, throat a little red, ears fine. Looks viral. Fluids, rest, honey for the cough, come back if she gets a fever over 101 or it goes past two weeks."
+    },
+    {
+      "id": "note-019",
+      "date": "2025-12-23",
+      "kind": "phone note",
+      "text": "Patient called about a tick bite on the shoulder after a hike. Tick removed whole, no rash, no fever. Watch for a bull's-eye rash or flu symptoms over the next month and call if either shows up."
+    },
+    {
+      "id": "note-020",
+      "date": "2025-12-29",
+      "kind": "procedure note",
+      "text": "Percutaneous trial leads placed at T8 and T9 under fluoroscopy, paresthesia coverage of both legs confirmed. Trial programmed, home with the diary."
+    },
+    {
+      "id": "note-021",
+      "date": "2026-01-03",
+      "kind": "office visit",
+      "text": "Trial day 5: pain down from 8 out of 10 to about 5.5, roughly 30 percent, says it takes the edge off. Activity about the same, still not sleeping well, opioid use unchanged. She wants the permanent implant anyway. Leads removed."
+    },
+    {
+      "id": "note-022",
+      "date": "2026-01-15",
+      "kind": "outside letter",
+      "text": "Optometry report forwarded for the record. Routine refraction, mild astigmatism, new glasses prescribed, retinas healthy, pressures 15 and 15. No ocular pathology noted."
+    },
+    {
+      "id": "note-023",
+      "date": "2026-01-19",
+      "kind": "preoperative visit",
+      "text": "Pre-op for permanent implant. Labs fine, nicotine negative. Consent signed for percutaneous leads and a rechargeable generator in the right upper buttock."
     }
   ],
   "expected": {
-    "warranted": true,
+    "warranted": false,
+    "subtype": "near-miss",
     "criteriaMet": [
       "crit-1",
       "crit-2",
-      "crit-3"
+      "crit-4"
     ],
     "support": {
       "crit-1": [
-        "note-003"
+        "note-010"
       ],
       "crit-2": [
-        "note-003"
+        "note-011"
       ],
-      "crit-3": [
-        "note-005"
+      "crit-3": [],
+      "crit-4": [
+        "note-010"
       ]
     },
     "distractors": [
       "note-001",
+      "note-003",
       "note-004",
+      "note-005",
       "note-006",
       "note-007",
+      "note-008",
       "note-009",
-      "note-010",
-      "note-011",
+      "note-012",
+      "note-013",
       "note-014",
       "note-015",
-      "note-016",
-      "note-017",
       "note-018",
       "note-019",
-      "note-020",
-      "note-021",
-      "note-022",
-      "note-023",
-      "note-024",
-      "note-025",
-      "note-027"
+      "note-022"
     ],
-    "note": "The chart documents every criterion; the CARC 50 denial can be answered from the record."
+    "note": "The chart raises crit-3 (trial) but does not satisfy it; the mention is a plan, a shortfall, or a result below the threshold."
   }
 }

@@ -1,200 +1,214 @@
 {
   "id": "case-038",
+  "category": "cardiology",
+  "setting": "outpatient",
+  "stakesUsd": 20000,
   "patient": {
     "alias": "SYN-038",
-    "age": 36,
+    "age": 60,
     "sex": "female"
   },
   "procedure": {
-    "cpt": "19371",
-    "description": "periprosthetic capsulectomy, breast, with implant removal"
+    "code": "92928",
+    "codeSystem": "CPT",
+    "description": "percutaneous transcatheter placement of intracoronary stent, single major coronary artery"
   },
   "payer": {
-    "name": "Northwind Mutual Health",
-    "planType": "commercial PPO"
+    "name": "Lanternhill Health Plan",
+    "planType": "commercial HMO"
   },
   "denial": {
-    "carc": "96",
-    "carcText": "Non-covered charge(s).",
-    "rarc": "N130",
-    "text": "Northwind Mutual Health denied the claim for CPT 19371 (periprosthetic capsulectomy, breast, with implant removal) with date of service 2026-03-07. CARC 96: Non-covered charge(s). RARC N130: Consult plan benefit documents/guidelines for information about restrictions for this service. Payer remark: Complications of cosmetic implants are a listed plan exclusion.",
-    "dateOfService": "2026-03-07"
+    "carc": "50",
+    "carcText": "These are non-covered services because this is not deemed a 'medical necessity' by the payer.",
+    "text": "Lanternhill Health Plan denied the claim for CPT 92928 (percutaneous transcatheter placement of intracoronary stent, single major coronary artery) with date of service 2026-01-26. CARC 50: These are non-covered services because this is not deemed a 'medical necessity' by the payer. Payer remark: Documentation does not establish refractory angina on optimal medical therapy or objective ischemia in the target vessel.",
+    "dateOfService": "2026-01-26"
   },
   "criteria": [
     {
       "id": "crit-1",
-      "text": "Baker grade III or IV capsular contracture with pain or deformity, or implant rupture confirmed by imaging."
+      "text": "Angina of Canadian Cardiovascular Society class II to IV persisting despite at least two antianginal medications at optimal doses, or documented intolerance."
     },
     {
       "id": "crit-2",
-      "text": "Capsulectomy and implant removal are not covered when the original implants were placed for cosmetic augmentation, regardless of subsequent complication."
+      "text": "Objective evidence of ischemia: stress imaging showing a moderate or large reversible defect (10 percent or more of the myocardium), or invasive physiology with fractional flow reserve of 0.80 or less or instantaneous wave-free ratio of 0.89 or less in the target vessel."
     },
     {
       "id": "crit-3",
-      "text": "Symptoms documented for at least 3 months."
+      "text": "Angiographic stenosis of 70 percent or more in the target vessel (50 to 69 percent with abnormal invasive physiology)."
     }
   ],
   "chart": [
     {
       "id": "note-001",
-      "date": "2025-03-06",
-      "kind": "outside letter",
-      "text": "From the referring physician: please evaluate for surgical management. We have exhausted what we can do in primary care and the patient is motivated. Recent labs enclosed, all within normal limits."
+      "date": "2025-11-09",
+      "kind": "office visit",
+      "text": "Mole on the upper back that her spouse noticed. About 6 millimeters, even color, regular border, no change she is aware of. Looks benign. Photo in the chart for comparison, recheck in a year or sooner if it changes."
     },
     {
       "id": "note-002",
-      "date": "2025-03-13",
-      "kind": "office visit",
-      "text": "36 year old woman here about her implants. Discussed capsulectomy with implant removal and the options for replacement versus leaving them out. Her history otherwise: migraines, rare now, mild asthma, albuterol maybe twice a year, hypertension on lisinopril. Allergies: no drug allergies. Quit smoking 5 years ago, no alcohol, works two jobs. Family history noncontributory for what we are talking about today. Right breast is hard as a rock, distorted upward, tender to the touch, I would grade it Baker IV. Left is a Baker III, firm but not painful. Implants went in in 2012, cosmetic augmentation, saline, done out of state. No history of breast cancer. The hardening on the right started about 10 months ago and has gotten steadily worse, now hurts to lie on that side."
+      "date": "2025-11-15",
+      "kind": "outside letter",
+      "text": "Mammogram report forwarded for the record. Bilateral screening, BI-RADS 1, negative, routine screening in one year."
     },
     {
       "id": "note-003",
-      "date": "2025-04-06",
-      "kind": "phone note",
-      "text": "Called her with the cholesterol results. Total 199, LDL 156, HDL 46, triglycerides 172. Discussed diet and walking. She wants to try lifestyle first for six months before we talk about a statin. Agreed."
-    },
-    {
-      "id": "note-004",
-      "date": "2025-04-07",
-      "kind": "imaging",
-      "text": "MRI breast implants: right implant with a linguine sign consistent with intracapsular rupture, thickened capsule. Left implant intact with a thickened capsule and no rupture."
-    },
-    {
-      "id": "note-005",
-      "date": "2025-05-17",
+      "date": "2025-11-24",
       "kind": "office visit",
       "text": "Trouble sleeping for a couple of months, falls asleep fine but wakes at three and lies there. No snoring per the spouse, no daytime naps, two cups of coffee before noon. Went over sleep hygiene, no screens in bed, cut the afternoon caffeine. Will hold off on medication for now."
     },
     {
+      "id": "note-004",
+      "date": "2025-11-26",
+      "kind": "phone note",
+      "text": "Patient called about a tick bite on the scalp after a hike. Tick removed whole, no rash, no fever. Watch for a bull's-eye rash or flu symptoms over the next month and call if either shows up."
+    },
+    {
+      "id": "note-005",
+      "date": "2025-11-30",
+      "kind": "outside letter",
+      "text": "From the referring physician: please evaluate and treat as you see fit. We have exhausted what we can do in primary care and the patient is motivated. Recent labs enclosed, all within normal limits."
+    },
+    {
       "id": "note-006",
-      "date": "2025-05-22",
-      "kind": "office visit",
-      "text": "Back to go over the MRI and the plan. She wants the right one out and both capsules addressed. Vitals today 117 over 76, pulse 84."
+      "date": "2025-12-04",
+      "kind": "phone note",
+      "text": "Called her with the cholesterol results. Total 220, LDL 149, HDL 54, triglycerides 135. Discussed diet and walking. She wants to try lifestyle first for six months before we talk about a statin. Agreed."
     },
     {
       "id": "note-007",
-      "date": "2025-06-02",
+      "date": "2025-12-12",
       "kind": "office visit",
-      "text": "Knee pain going down stairs, right side, no injury, no locking or giving way. Patellar grind positive, no effusion, ligaments stable. Patellofemoral pain. Quad strengthening sheet, ice after activity, cushioned shoes."
+      "text": "60 year old woman in cardiology clinic with exertional chest pressure for 7 months, relieved by rest. Hypertension, hyperlipidemia, type 2 diabetes. Stress imaging ordered, medications reviewed and continued. Her history otherwise: anxiety, sees a counselor, seasonal allergies, reflux on omeprazole as needed. Allergies: penicillin, rash. Does not smoke, a glass of wine on weekends, works in an office. Family history noncontributory for what we are talking about today."
     },
     {
       "id": "note-008",
-      "date": "2025-06-26",
+      "date": "2025-12-14",
       "kind": "office visit",
-      "text": "Vitamin D came back 24. Started 2000 units daily, recheck in three months. Also talked about calcium from food rather than pills."
+      "text": "Blood pressure check. 121 over 87 today, 127 over 79 on repeat. She has been taking the lisinopril 20 most days, admits to missing weekends. Low salt talk again. Keep the dose, recheck in 6 weeks."
     },
     {
       "id": "note-009",
-      "date": "2025-07-04",
-      "kind": "office visit",
-      "text": "Annual physical. Feels well overall. Sleeping fine, appetite fine, no chest pain, no shortness of breath. Flu shot given in the left arm today. Due for a tetanus booster, she will think about it. Labs ordered, fasting."
-    },
-    {
-      "id": "note-010",
-      "date": "2025-07-10",
-      "kind": "phone note",
-      "text": "Nurse call. Patient had questions about time off work after surgery and whether she needs someone at home the first night. Answered both, she will arrange it."
-    },
-    {
-      "id": "note-011",
-      "date": "2025-07-31",
+      "date": "2025-12-15",
       "kind": "office visit",
       "text": "Low back strain after moving furniture over the weekend. No radiation down the legs, no numbness, no bowel or bladder trouble. Paraspinal tenderness, straight leg raise negative. Heat, keep moving, ibuprofen with food for a week. Should settle."
     },
     {
-      "id": "note-012",
-      "date": "2025-09-01",
+      "id": "note-010",
+      "date": "2025-12-15",
       "kind": "office visit",
-      "text": "Check-in while we wait on the insurance. No change in the complaints. Reviewed the risks and recovery one more time, she remains sure about going ahead."
+      "text": "A1c came back 6.0. Prediabetic range, same as last year. Walking program, cut the soda, recheck in six months. She is motivated."
+    },
+    {
+      "id": "note-011",
+      "date": "2025-12-17",
+      "kind": "office visit",
+      "text": "Annual physical. Feels well overall. Sleeping fine, appetite fine, no chest pain, no shortness of breath. Flu shot given in the left arm today. Due for a tetanus booster, she will think about it. Labs ordered, fasting."
+    },
+    {
+      "id": "note-012",
+      "date": "2025-12-18",
+      "kind": "office visit",
+      "text": "Twisted the left ankle stepping off a curb 2 days ago. Swelling over the lateral malleolus, tender over the ATFL, can bear weight. Ottawa negative, no film. Brace, ice, ibuprofen, elevate. Should be fine in a couple weeks."
     },
     {
       "id": "note-013",
-      "date": "2025-09-01",
-      "kind": "office visit",
-      "text": "Mole on the right calf that her spouse noticed. About 5 millimeters, even color, regular border, no change she is aware of. Looks benign. Photo in the chart for comparison, recheck in a year or sooner if it changes."
+      "date": "2025-12-20",
+      "kind": "stress test",
+      "text": "Regadenoson SPECT myocardial perfusion imaging. Large reversible perfusion defect of the anterior wall and apex, 12 percent of the left ventricle, with transient ischemic dilation. Ejection fraction 54 percent post-stress."
     },
     {
       "id": "note-014",
-      "date": "2025-09-04",
-      "kind": "outside letter",
-      "text": "Optometry report forwarded for the record. Routine refraction, mild astigmatism, new glasses prescribed, retinas healthy, pressures 18 and 18. No ocular pathology noted."
+      "date": "2025-12-22",
+      "kind": "medication record",
+      "text": "Metoprolol succinate 100 daily, amlodipine 10 daily, isosorbide mononitrate 60 daily, all at these doses for the past 4 months. Aspirin 81, atorvastatin 80."
     },
     {
       "id": "note-015",
-      "date": "2025-09-10",
-      "kind": "phone note",
-      "text": "Thyroid labs back. TSH 3.2, free T4 normal. No change to the levothyroxine 100. Repeat in a year."
+      "date": "2025-12-23",
+      "kind": "outside letter",
+      "text": "Letter from the dentist's office confirming routine cleaning and exam completed, no active infection, no dental work pending. Sent at our request for the surgical file."
     },
     {
       "id": "note-016",
-      "date": "2025-09-23",
-      "kind": "office visit",
-      "text": "Ear fullness and muffled hearing on the right for a week after a cold. Canal clear, drum dull with fluid behind it, no infection. Serous otitis. Decongestant, swallow and yawn, recheck in three weeks if not better."
+      "date": "2025-12-23",
+      "kind": "phone note",
+      "text": "Pharmacy called about the refill on the omeprazole 40. Approved 90 days. She mentioned the heartburn is better since cutting back on coffee."
     },
     {
       "id": "note-017",
-      "date": "2025-12-27",
+      "date": "2026-01-05",
       "kind": "phone note",
-      "text": "Patient called about a tick bite on the shoulder after a hike. Tick removed whole, no rash, no fever. Watch for a bull's-eye rash or flu symptoms over the next month and call if either shows up."
+      "text": "Thyroid labs back. TSH 3.7, free T4 normal. No change to the levothyroxine 100. Repeat in a year."
     },
     {
       "id": "note-018",
-      "date": "2026-01-28",
+      "date": "2026-01-07",
       "kind": "office visit",
-      "text": "Seasonal allergies acting up, itchy eyes, sneezing, clear drainage, worse outdoors. No wheeze. Cetirizine at night and the saline rinse. Fine with that."
+      "text": "Here with a cough and congestion for 7 days, low grade temp at home, no shortness of breath. Lungs clear, throat a little red, ears fine. Looks viral. Fluids, rest, honey for the cough, come back if she gets a fever over 101 or it goes past two weeks."
     },
     {
       "id": "note-019",
-      "date": "2026-02-04",
-      "kind": "outside letter",
-      "text": "Dermatology consult note received. Two actinic keratoses on the forehead treated with cryotherapy. Annual skin check recommended, sunscreen counseling done."
+      "date": "2026-01-11",
+      "kind": "office visit",
+      "text": "Reviewed the stress test. Given the size of the defect and ongoing symptoms on maximal medical therapy, recommended coronary angiography with physiology and intervention if appropriate. Risks reviewed, she agrees. Vitals today 131 over 88, pulse 70. Still class III angina walking one block or climbing a flight despite three antianginal medications at target doses, using nitroglycerin 4 times a week."
     },
     {
       "id": "note-020",
-      "date": "2026-02-19",
+      "date": "2026-01-11",
       "kind": "office visit",
-      "text": "Burning with urination for two days, going frequently, no fever, no back pain. Urine dip positive for leukocytes and nitrites. Nitrofurantoin for five days, push fluids, call if fever or flank pain."
+      "text": "Vitamin D came back 16. Started 1000 units daily, recheck in three months. Also talked about calcium from food rather than pills."
     },
     {
       "id": "note-021",
-      "date": "2026-02-23",
-      "kind": "preoperative visit",
-      "text": "Pre-op. Consent signed for bilateral capsulectomy with implant removal, right side en bloc if the capsule allows. Labs fine."
+      "date": "2026-01-13",
+      "kind": "phone note",
+      "text": "Work note requested for a sick day last Monday. Faxed to the employer."
+    },
+    {
+      "id": "note-022",
+      "date": "2026-01-26",
+      "kind": "cardiac catheterization",
+      "text": "Coronary angiography. Proximal left anterior descending 82 percent stenosis. Fractional flow reserve across the lesion 0.69. Circumflex and right coronary without significant disease. Proceeded to intervention of the proximal left anterior descending: predilation and a 3.5 by 18 millimeter drug-eluting stent, TIMI 3 flow, no residual stenosis."
     }
   ],
   "expected": {
-    "warranted": false,
-    "subtype": "exclusion",
+    "warranted": true,
     "criteriaMet": [
       "crit-1",
+      "crit-2",
       "crit-3"
     ],
     "support": {
       "crit-1": [
-        "note-002",
-        "note-004"
+        "note-014",
+        "note-019"
       ],
-      "crit-2": [],
+      "crit-2": [
+        "note-013",
+        "note-022"
+      ],
       "crit-3": [
-        "note-002"
+        "note-022"
       ]
     },
     "distractors": [
+      "note-001",
+      "note-002",
       "note-003",
-      "note-005",
-      "note-007",
+      "note-004",
+      "note-006",
       "note-008",
       "note-009",
+      "note-010",
       "note-011",
-      "note-013",
-      "note-014",
+      "note-012",
       "note-015",
       "note-016",
       "note-017",
       "note-018",
-      "note-019",
-      "note-020"
+      "note-020",
+      "note-021"
     ],
-    "note": "Plan exclusion: crit-2 (origin) cannot be met by any chart content."
+    "note": "The chart documents every criterion; the CARC 50 denial can be answered from the record."
   }
 }

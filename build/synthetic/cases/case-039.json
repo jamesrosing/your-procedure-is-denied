@@ -1,202 +1,252 @@
 {
   "id": "case-039",
+  "category": "orthopedic surgery",
+  "setting": "outpatient",
+  "stakesUsd": 25000,
   "patient": {
     "alias": "SYN-039",
-    "age": 47,
-    "sex": "female"
+    "age": 80,
+    "sex": "male"
   },
   "procedure": {
-    "cpt": "19357",
-    "description": "breast reconstruction, immediate or delayed, with tissue expander"
+    "code": "27447",
+    "codeSystem": "CPT",
+    "description": "total knee arthroplasty"
   },
   "payer": {
-    "name": "Copperfield Health",
-    "planType": "commercial EPO"
+    "name": "Saltmarsh Benefits Administrators",
+    "planType": "self-funded employer plan"
   },
   "denial": {
-    "carc": "197",
-    "carcText": "Precertification/authorization/notification/pre-treatment absent.",
-    "text": "Copperfield Health denied the claim for CPT 19357 (breast reconstruction, immediate or delayed, with tissue expander) with date of service 2026-01-18. CARC 197: Precertification/authorization/notification/pre-treatment absent. Payer remark: No authorization is on file. A retrospective medical necessity review may be requested with supporting clinical documentation within 180 days.",
-    "dateOfService": "2026-01-18"
+    "carc": "50",
+    "carcText": "These are non-covered services because this is not deemed a 'medical necessity' by the payer.",
+    "text": "Saltmarsh Benefits Administrators denied the claim for CPT 27447 (total knee arthroplasty) with date of service 2026-05-17. CARC 50: These are non-covered services because this is not deemed a 'medical necessity' by the payer. Payer remark: Documentation does not establish failure of conservative treatment prior to arthroplasty.",
+    "dateOfService": "2026-05-17"
   },
   "criteria": [
     {
       "id": "crit-1",
-      "text": "Documented mastectomy for breast cancer, or prophylactic mastectomy for a qualifying risk, with reconstruction requested by the patient. Reconstruction after a covered mastectomy is a mandated benefit under the Women’s Health and Cancer Rights Act."
+      "text": "Radiographic evidence of advanced osteoarthritis: Kellgren-Lawrence grade 3 or 4, joint space narrowing to bone-on-bone contact, or deformity."
     },
     {
       "id": "crit-2",
-      "text": "An operative plan for staged reconstruction (tissue expander placement followed by implant exchange) appropriate to the patient’s radiation status and tissue quality."
+      "text": "Failure of at least 6 months of conservative treatment including anti-inflammatory or analgesic medication, physical therapy or a supervised home exercise program, activity modification, and at least one intra-articular corticosteroid injection."
     },
     {
       "id": "crit-3",
-      "text": "Medical clearance for the planned surgery is documented."
+      "text": "Pain with weight-bearing that interferes with activities of daily living, with limited range of motion or instability on examination."
+    },
+    {
+      "id": "crit-4",
+      "text": "Body mass index under 40, nicotine-free, and medically optimized for surgery."
     }
   ],
   "chart": [
     {
       "id": "note-001",
-      "date": "2024-11-30",
+      "date": "2025-10-08",
       "kind": "outside letter",
-      "text": "From the referring physician: please evaluate for surgical management. We have exhausted what we can do in primary care and the patient is motivated. Recent labs enclosed, all within normal limits. From the breast surgeon: right total mastectomy performed 3 months ago for a 1.8 centimeter invasive ductal carcinoma, sentinel nodes negative, margins clear. She has completed adjuvant chemotherapy and wishes to proceed with reconstruction."
+      "text": "Optometry report forwarded for the record. Routine refraction, mild astigmatism, new glasses prescribed, retinas healthy, pressures 19 and 19. No ocular pathology noted."
     },
     {
       "id": "note-002",
-      "date": "2024-12-03",
-      "kind": "office visit",
-      "text": "Mole on the right calf that her spouse noticed. About 7 millimeters, even color, regular border, no change she is aware of. Looks benign. Photo in the chart for comparison, recheck in a year or sooner if it changes."
+      "date": "2025-10-15",
+      "kind": "outside letter",
+      "text": "Referral letter from the primary care office. Thank you for seeing this patient of mine for evaluation. His history and medication list are attached. Please let me know what you recommend and whether anything is needed from our end."
     },
     {
       "id": "note-003",
-      "date": "2024-12-14",
+      "date": "2025-11-10",
       "kind": "office visit",
-      "text": "47 year old woman referred by the breast surgeon for reconstruction. Went over expanders versus flaps, she prefers the expander route, fewer operations and no donor site. Her history otherwise: reflux on omeprazole as needed, hypothyroidism on levothyroxine, seasonal allergies. Allergies: codeine makes her sick. Quit smoking 4 years ago, no alcohol, retired. Family history noncontributory for what we are talking about today. Status post right mastectomy 3 months ago for a 1.8 centimeter invasive ductal. Done with chemo. She wants reconstruction and has thought hard about it. No radiation planned per oncology. Good skin envelope, no infection, mastectomy flap healed. Plan is a right tissue expander under the pectoralis now, exchange to a permanent implant in about 4 months, and a left lift for symmetry later."
+      "text": "80 year old man in orthopedic clinic for the left knee, hurting for 4 years and much worse this year. Discussed the options from more conservative care to replacement. His history otherwise: reflux on omeprazole as needed, hypothyroidism on levothyroxine. Allergies: codeine makes him sick. Never smoked, occasional beer, lives with his spouse. Family history noncontributory for what we are talking about today. Pain with every step, night pain that wakes him, cannot do stairs without the rail, cannot kneel or get out of a low chair without pushing up. Range of motion 5 to 105 degrees with crepitus, medial joint line tenderness, varus thrust with gait."
     },
     {
       "id": "note-004",
-      "date": "2025-01-16",
-      "kind": "phone note",
-      "text": "Patient called about a tick bite on the shoulder after a hike. Tick removed whole, no rash, no fever. Watch for a bull's-eye rash or flu symptoms over the next month and call if either shows up."
+      "date": "2025-11-10",
+      "kind": "imaging",
+      "text": "Standing AP, lateral, and sunrise views of the left knee. Complete loss of the medial joint space with bone-on-bone contact, large marginal osteophytes, subchondral sclerosis and cysts, 6 degrees of varus. Kellgren-Lawrence grade 4."
     },
     {
       "id": "note-005",
-      "date": "2025-01-31",
+      "date": "2025-12-10",
       "kind": "office visit",
-      "text": "A1c came back 5.7. Prediabetic range, same as last year. Walking program, cut the soda, recheck in six months. She is motivated."
+      "text": "Burning with urination for two days, going frequently, no fever, no back pain. Urine dip positive for leukocytes and nitrites. Nitrofurantoin for five days, push fluids, call if fever or flank pain."
     },
     {
       "id": "note-006",
-      "date": "2025-02-11",
-      "kind": "phone note",
-      "text": "She called asking about travel vaccines for a trip in early summer. Advised hepatitis A and a typhoid booster, referred to the travel clinic. Nothing else needed from us."
+      "date": "2025-12-18",
+      "kind": "office visit",
+      "text": "Knee pain going down stairs, right side, no injury, no locking or giving way. Patellar grind positive, no effusion, ligaments stable. Patellofemoral pain. Quad strengthening sheet, ice after activity, cushioned shoes."
     },
     {
       "id": "note-007",
-      "date": "2025-03-03",
-      "kind": "office visit",
-      "text": "Back with her sister to go over the plan again. Questions answered. Ready to schedule. Vitals today 113 over 82, pulse 82."
+      "date": "2025-12-23",
+      "kind": "phone note",
+      "text": "Thyroid labs back. TSH 1.5, free T4 normal. No change to the levothyroxine 75. Repeat in a year."
     },
     {
       "id": "note-008",
-      "date": "2025-04-06",
+      "date": "2026-01-01",
       "kind": "phone note",
-      "text": "Work note requested for a sick day last Monday. Faxed to the employer."
+      "text": "Work note requested for a sick day last Thursday. Faxed to the employer."
     },
     {
       "id": "note-009",
-      "date": "2025-04-30",
-      "kind": "outside letter",
-      "text": "Dermatology consult note received. Two actinic keratoses on the forehead treated with cryotherapy. Annual skin check recommended, sunscreen counseling done."
-    },
-    {
-      "id": "note-010",
-      "date": "2025-05-13",
-      "kind": "phone note",
-      "text": "Called to let her know the surgery date is set and that we are submitting to the insurance. Nurse call. Patient had questions about time off work after surgery and whether she needs someone at home the first night. Answered both, she will arrange it."
-    },
-    {
-      "id": "note-011",
-      "date": "2025-05-23",
-      "kind": "office visit",
-      "text": "Follow-up. Same story, no better. She asked about timing around work and family, we talked through it. Still wants to proceed."
-    },
-    {
-      "id": "note-012",
-      "date": "2025-07-01",
+      "date": "2026-01-03",
       "kind": "office visit",
       "text": "Trouble sleeping for a couple of months, falls asleep fine but wakes at three and lies there. No snoring per the spouse, no daytime naps, two cups of coffee before noon. Went over sleep hygiene, no screens in bed, cut the afternoon caffeine. Will hold off on medication for now."
     },
     {
+      "id": "note-010",
+      "date": "2026-01-08",
+      "kind": "office visit",
+      "text": "Here with a cough and congestion for 8 days, low grade temp at home, no shortness of breath. Lungs clear, throat a little red, ears fine. Looks viral. Fluids, rest, honey for the cough, come back if he gets a fever over 101 or it goes past two weeks."
+    },
+    {
+      "id": "note-011",
+      "date": "2026-01-25",
+      "kind": "office visit",
+      "text": "Annual physical. Feels well overall. Sleeping fine, appetite fine, no chest pain, no shortness of breath. Flu shot given in the left arm today. Due for a tetanus booster, he will think about it. Labs ordered, fasting."
+    },
+    {
+      "id": "note-012",
+      "date": "2026-01-27",
+      "kind": "outside letter",
+      "text": "Letter from the dentist's office confirming routine cleaning and exam completed, no active infection, no dental work pending. Sent at our request for the surgical file."
+    },
+    {
       "id": "note-013",
-      "date": "2025-07-22",
+      "date": "2026-02-06",
+      "kind": "phone note",
+      "text": "He called asking where things stand with the insurance. Told him the paperwork went in and we are waiting to hear. Reviewed what to do in the meantime."
+    },
+    {
+      "id": "note-014",
+      "date": "2026-02-08",
+      "kind": "office visit",
+      "text": "Back to decide on the left knee. Recommended total knee arthroplasty. Reviewed the operation, the hospital stay, the rehab, and the risks including infection and clot. Vitals today 132 over 83, pulse 85. BMI 32, never smoked, A1c 6.2, dental clearance in the chart."
+    },
+    {
+      "id": "note-015",
+      "date": "2026-02-09",
       "kind": "office visit",
       "text": "Seasonal allergies acting up, itchy eyes, sneezing, clear drainage, worse outdoors. No wheeze. Cetirizine at night and the saline rinse. Fine with that."
     },
     {
-      "id": "note-014",
-      "date": "2025-07-23",
-      "kind": "office visit",
-      "text": "Ear fullness and muffled hearing on the left for a week after a cold. Canal clear, drum dull with fluid behind it, no infection. Serous otitis. Decongestant, swallow and yawn, recheck in three weeks if not better."
-    },
-    {
-      "id": "note-015",
-      "date": "2025-08-14",
-      "kind": "office visit",
-      "text": "Low back strain after moving furniture over the weekend. No radiation down the legs, no numbness, no bowel or bladder trouble. Paraspinal tenderness, straight leg raise negative. Heat, keep moving, ibuprofen with food for a week. Should settle."
-    },
-    {
       "id": "note-016",
-      "date": "2025-09-03",
+      "date": "2026-02-10",
       "kind": "office visit",
-      "text": "Annual physical. Feels well overall. Sleeping fine, appetite fine, no chest pain, no shortness of breath. Flu shot given in the left arm today. Due for a tetanus booster, she will think about it. Labs ordered, fasting."
+      "text": "Mole on the left forearm that his spouse noticed. About 6 millimeters, even color, regular border, no change he is aware of. Looks benign. Photo in the chart for comparison, recheck in a year or sooner if it changes."
     },
     {
       "id": "note-017",
-      "date": "2025-10-04",
-      "kind": "phone note",
-      "text": "Thyroid labs back. TSH 2.9, free T4 normal. No change to the levothyroxine 50. Repeat in a year."
-    },
-    {
-      "id": "note-018",
-      "date": "2025-10-08",
+      "date": "2026-02-21",
       "kind": "office visit",
       "text": "Twisted the right ankle stepping off a curb 4 days ago. Swelling over the lateral malleolus, tender over the ATFL, can bear weight. Ottawa negative, no film. Brace, ice, ibuprofen, elevate. Should be fine in a couple weeks."
     },
     {
-      "id": "note-019",
-      "date": "2025-12-10",
+      "id": "note-018",
+      "date": "2026-02-25",
       "kind": "office visit",
-      "text": "Vitamin D came back 17. Started 1000 units daily, recheck in three months. Also talked about calcium from food rather than pills."
+      "text": "Low back strain after moving furniture over the weekend. No radiation down the legs, no numbness, no bowel or bladder trouble. Paraspinal tenderness, straight leg raise negative. Heat, keep moving, ibuprofen with food for a week. Should settle."
+    },
+    {
+      "id": "note-019",
+      "date": "2026-02-27",
+      "kind": "office visit",
+      "text": "Vitamin D came back 24. Started 2000 units daily, recheck in three months. Also talked about calcium from food rather than pills."
     },
     {
       "id": "note-020",
-      "date": "2025-12-28",
-      "kind": "preoperative visit",
-      "text": "Pre-op. Cleared by her PCP, letter in the chart, labs and EKG fine. Consent signed for right tissue expander placement."
+      "date": "2026-03-08",
+      "kind": "outside letter",
+      "text": "Dermatology consult note received. Two actinic keratoses on the forehead treated with cryotherapy. Annual skin check recommended, sunscreen counseling done."
     },
     {
       "id": "note-021",
-      "date": "2026-01-02",
+      "date": "2026-03-10",
       "kind": "office visit",
-      "text": "Burning with urination for two days, going frequently, no fever, no back pain. Urine dip positive for leukocytes and nitrites. Nitrofurantoin for five days, push fluids, call if fever or flank pain."
+      "text": "Blood pressure check. 142 over 83 today, 141 over 91 on repeat. He has been taking the lisinopril 20 most days, admits to missing weekends. Low salt talk again. Keep the dose, recheck in 6 weeks."
+    },
+    {
+      "id": "note-022",
+      "date": "2026-04-22",
+      "kind": "outside letter",
+      "text": "Gastroenterology note received. Screening colonoscopy completed, two small polyps removed, benign on pathology, repeat in 5 years."
+    },
+    {
+      "id": "note-023",
+      "date": "2026-04-23",
+      "kind": "office visit",
+      "text": "Check-in while we wait on the insurance. No change in the complaints. Reviewed the risks and recovery one more time, he remains sure about going ahead."
+    },
+    {
+      "id": "note-024",
+      "date": "2026-05-01",
+      "kind": "phone note",
+      "text": "He called asking about travel vaccines for a trip in early summer. Advised hepatitis A and a typhoid booster, referred to the travel clinic. Nothing else needed from us."
+    },
+    {
+      "id": "note-025",
+      "date": "2026-05-04",
+      "kind": "preoperative visit",
+      "text": "Pre-op. Medical clearance in the chart. Hold the meloxicam a week out. Consent signed for left total knee arthroplasty."
+    },
+    {
+      "id": "note-026",
+      "date": "2026-05-05",
+      "kind": "phone note",
+      "text": "Patient called about a tick bite on the shoulder after a hike. Tick removed whole, no rash, no fever. Watch for a bull's-eye rash or flu symptoms over the next month and call if either shows up."
+    },
+    {
+      "id": "note-027",
+      "date": "2026-05-16",
+      "kind": "phone note",
+      "text": "Pharmacy called about the refill on the omeprazole 20. Approved 90 days. He mentioned the heartburn is better since cutting back on coffee."
     }
   ],
   "expected": {
-    "warranted": true,
+    "warranted": false,
+    "subtype": "absent",
     "criteriaMet": [
       "crit-1",
-      "crit-2",
-      "crit-3"
+      "crit-3",
+      "crit-4"
     ],
     "support": {
       "crit-1": [
-        "note-001",
-        "note-003"
+        "note-004"
       ],
-      "crit-2": [
-        "note-003"
-      ],
+      "crit-2": [],
       "crit-3": [
-        "note-020"
+        "note-003"
+      ],
+      "crit-4": [
+        "note-014"
       ]
     },
     "distractors": [
-      "note-002",
-      "note-004",
+      "note-001",
       "note-005",
       "note-006",
+      "note-007",
       "note-008",
       "note-009",
+      "note-010",
+      "note-011",
       "note-012",
-      "note-013",
-      "note-014",
       "note-015",
       "note-016",
       "note-017",
       "note-018",
       "note-019",
-      "note-021"
+      "note-020",
+      "note-021",
+      "note-022",
+      "note-024",
+      "note-026",
+      "note-027"
     ],
-    "note": "The chart documents every criterion; the CARC 197 denial can be answered from the record."
+    "note": "The chart never addresses crit-2 (conservative); no entry supports it, so an appeal would assert what the record does not contain."
   }
 }

@@ -1,194 +1,208 @@
 {
   "id": "case-009",
+  "category": "vascular surgery",
+  "setting": "outpatient",
+  "stakesUsd": 15000,
   "patient": {
     "alias": "SYN-009",
-    "age": 76,
+    "age": 70,
     "sex": "male"
   },
   "procedure": {
-    "cpt": "15823",
-    "description": "bilateral upper eyelid blepharoplasty with excessive skin weighting down the lid"
+    "code": "37227",
+    "codeSystem": "CPT",
+    "description": "revascularization of the femoral-popliteal artery with atherectomy and stent placement"
   },
   "payer": {
-    "name": "Copperfield Health",
-    "planType": "commercial EPO"
+    "name": "Saltmarsh Benefits Administrators",
+    "planType": "self-funded employer plan"
   },
   "denial": {
-    "carc": "50",
-    "carcText": "These are non-covered services because this is not deemed a 'medical necessity' by the payer.",
-    "text": "Copperfield Health denied the claim for CPT 15823 (bilateral upper eyelid blepharoplasty with excessive skin weighting down the lid) with date of service 2026-07-11. CARC 50: These are non-covered services because this is not deemed a 'medical necessity' by the payer. Payer remark: Visual field documentation submitted does not meet the policy threshold for functional impairment.",
-    "dateOfService": "2026-07-11"
+    "carc": "11",
+    "carcText": "The diagnosis is inconsistent with the procedure.",
+    "text": "Saltmarsh Benefits Administrators denied the claim for CPT 37227 (revascularization of the femoral-popliteal artery with atherectomy and stent placement) with date of service 2026-08-02. CARC 11: The diagnosis is inconsistent with the procedure. Payer remark: The diagnosis reported does not support the procedure billed.",
+    "dateOfService": "2026-08-02"
   },
   "criteria": [
     {
       "id": "crit-1",
-      "text": "Visual field testing demonstrating at least 12 degrees of superior visual field loss, with improvement when the upper lids are taped."
+      "text": "Chronic limb-threatening ischemia (ischemic rest pain, non-healing ulcer, or gangrene, Rutherford 4 to 6); or lifestyle-limiting claudication (Rutherford 3) that has failed at least 12 weeks of supervised exercise therapy and optimal medical therapy."
     },
     {
       "id": "crit-2",
-      "text": "Photographs documenting redundant upper lid skin resting on or over the lashes, or a margin reflex distance 1 of 2 millimeters or less."
+      "text": "Hemodynamic confirmation: ankle-brachial index 0.4 or less, toe pressure below 30 mmHg, or TcPO2 below 30 mmHg for limb-threatening ischemia (ankle-brachial index below 0.9 for claudication)."
     },
     {
       "id": "crit-3",
-      "text": "A documented functional complaint such as difficulty reading or driving, loss of the superior field, or brow fatigue."
+      "text": "Imaging (duplex, CT angiography, or angiography) demonstrating a femoropopliteal stenosis of 50 percent or more, or an occlusion, amenable to endovascular treatment."
+    },
+    {
+      "id": "crit-4",
+      "text": "Optimal medical therapy documented: an antiplatelet agent, a statin, and smoking cessation or cessation counseling."
     }
   ],
   "chart": [
     {
       "id": "note-001",
-      "date": "2025-07-04",
+      "date": "2026-04-21",
       "kind": "office visit",
-      "text": "Seasonal allergies acting up, itchy eyes, sneezing, clear drainage, worse outdoors. No wheeze. Cetirizine at night and the saline rinse. Fine with that."
+      "text": "Here with a cough and congestion for 9 days, low grade temp at home, no shortness of breath. Lungs clear, throat a little red, ears fine. Looks viral. Fluids, rest, honey for the cough, come back if he gets a fever over 101 or it goes past two weeks."
     },
     {
       "id": "note-002",
-      "date": "2025-07-06",
-      "kind": "outside letter",
-      "text": "Gastroenterology note received. Screening colonoscopy completed, two small polyps removed, benign on pathology, repeat in 5 years."
+      "date": "2026-05-01",
+      "kind": "office visit",
+      "text": "Ear fullness and muffled hearing on the right for a week after a cold. Canal clear, drum dull with fluid behind it, no infection. Serous otitis. Decongestant, swallow and yawn, recheck in three weeks if not better."
     },
     {
       "id": "note-003",
-      "date": "2025-07-17",
+      "date": "2026-05-02",
       "kind": "outside letter",
-      "text": "Referral letter from the primary care office. Thank you for seeing this patient of mine for surgical evaluation. His history and medication list are attached. Please let me know what you recommend and whether anything is needed from our end for clearance."
+      "text": "Dermatology consult note received. Two actinic keratoses on the forehead treated with cryotherapy. Annual skin check recommended, sunscreen counseling done."
     },
     {
       "id": "note-004",
-      "date": "2025-07-22",
-      "kind": "phone note",
-      "text": "Thyroid labs back. TSH 2.2, free T4 normal. No change to the levothyroxine 50. Repeat in a year."
+      "date": "2026-05-03",
+      "kind": "office visit",
+      "text": "Blood pressure check. 132 over 77 today, 134 over 91 on repeat. He has been taking the lisinopril 40 most days, admits to missing weekends. Low salt talk again. Keep the dose, recheck in 12 weeks."
     },
     {
       "id": "note-005",
-      "date": "2025-08-14",
-      "kind": "office visit",
-      "text": "76 year old man sent over by his eye doctor for heavy upper lids. Exam: marked dermatochalasis both upper lids, skin hooding over the lashes laterally, brow ptosis mild, no true ptosis of the lid itself, levator function good. Discussed upper lid blepharoplasty. His history otherwise: prediabetes, diet controlled, seasonal allergies, hypertension on lisinopril. Surgeries: appendix years ago. Allergies: sulfa, hives as a child. Quit smoking 4 years ago, no alcohol, drives for a living. Family history noncontributory for what we are talking about today. He says he is lifting his brows all day to see, gets a headache by evening, has given up night driving, tilts his head back to read the paper."
+      "date": "2026-05-13",
+      "kind": "phone note",
+      "text": "Thyroid labs back. TSH 3.3, free T4 normal. No change to the levothyroxine 100. Repeat in a year."
     },
     {
       "id": "note-006",
-      "date": "2025-09-09",
-      "kind": "visual field test",
-      "text": "Humphrey superior field, untaped: 20 degrees of superior field remaining on the right and 21 on the left, which works out to about 45 percent loss of the superior field. Taped: improves to 38 right and 39 left. Reliable test, fixation losses low."
+      "date": "2026-05-21",
+      "kind": "phone note",
+      "text": "He called asking about travel vaccines for a trip in the spring. Advised hepatitis A and a typhoid booster, referred to the travel clinic. Nothing else needed from us."
     },
     {
       "id": "note-007",
-      "date": "2025-09-10",
-      "kind": "office visit",
-      "text": "A1c came back 5.9. Prediabetic range, same as last year. Walking program, cut the soda, recheck in six months. He is motivated."
+      "date": "2026-05-24",
+      "kind": "outside letter",
+      "text": "From the referring physician: please evaluate and treat as you see fit. We have exhausted what we can do in primary care and the patient is motivated. Recent labs enclosed, all within normal limits."
     },
     {
       "id": "note-008",
-      "date": "2025-09-29",
-      "kind": "office visit",
-      "text": "Mole on the right calf that his spouse noticed. About 5 millimeters, even color, regular border, no change he is aware of. Looks benign. Photo in the chart for comparison, recheck in a year or sooner if it changes."
+      "date": "2026-05-29",
+      "kind": "wound care visit",
+      "text": "Left heel ulcer 2.0 by 1.5 centimeters, pale base, no granulation tissue after 10 weeks of weekly debridement and offloading. Pedal pulses not palpable."
     },
     {
       "id": "note-009",
-      "date": "2025-10-06",
+      "date": "2026-05-29",
       "kind": "office visit",
-      "text": "Burning with urination for two days, going frequently, no fever, no back pain. Urine dip positive for leukocytes and nitrites. Nitrofurantoin for five days, push fluids, call if fever or flank pain."
+      "text": "Low back strain after moving furniture over the weekend. No radiation down the legs, no numbness, no bowel or bladder trouble. Paraspinal tenderness, straight leg raise negative. Heat, keep moving, ibuprofen with food for a week. Should settle."
     },
     {
       "id": "note-010",
-      "date": "2025-10-16",
-      "kind": "office visit",
-      "text": "Back to review the testing. Went over the operation, bruising, the scar in the crease, the small chance of dry eye. He wants to go ahead. Vitals today 137 over 90, pulse 80."
+      "date": "2026-06-02",
+      "kind": "phone note",
+      "text": "Called his with the cholesterol results. Total 227, LDL 134, HDL 56, triglycerides 109. Discussed diet and walking. He wants to try lifestyle first for six months before we talk about a statin. Agreed."
     },
     {
       "id": "note-011",
-      "date": "2025-10-16",
-      "kind": "photo documentation",
-      "text": "Frontal and lateral photos today, primary gaze, flash. Redundant upper lid skin draping onto the lashes on both sides. MRD1 about 1 millimeters right and 1 left."
+      "date": "2026-06-05",
+      "kind": "office visit",
+      "text": "70 year old man referred by podiatry for the left leg. Diabetic 16 years, hypertension, prior cataract surgery. Discussed endovascular versus bypass; endovascular first given the anatomy. His history otherwise: anxiety, sees a counselor, migraines, rare now, mild asthma, albuterol maybe twice a year. Allergies: no drug allergies. Never smoked, occasional beer, lives alone. Family history noncontributory for what we are talking about today. Left heel ulcer for 3 months that will not heal despite offloading and weekly wound care, and rest pain in the left foot at night relieved by hanging it off the bed. Rutherford 5. On aspirin 81 and atorvastatin 80. Quit smoking 7 weeks ago after 30 years; counseled again today and offered nicotine replacement."
     },
     {
       "id": "note-012",
-      "date": "2025-10-16",
-      "kind": "office visit",
-      "text": "Ear fullness and muffled hearing on the left for a week after a cold. Canal clear, drum dull with fluid behind it, no infection. Serous otitis. Decongestant, swallow and yawn, recheck in three weeks if not better."
+      "date": "2026-06-08",
+      "kind": "vascular laboratory",
+      "text": "Arterial studies. Ankle-brachial index left 0.38, right 0.93. Left toe pressure 18 mmHg. Monophasic waveforms at the left popliteal and tibial levels."
     },
     {
       "id": "note-013",
-      "date": "2025-11-20",
-      "kind": "phone note",
-      "text": "Message from the patient about scheduling. Wants a date in the next couple of months if the insurance comes through. Passed to the surgery scheduler."
+      "date": "2026-06-11",
+      "kind": "outside letter",
+      "text": "Optometry report forwarded for the record. Routine refraction, mild astigmatism, new glasses prescribed, retinas healthy, pressures 17 and 19. No ocular pathology noted."
     },
     {
       "id": "note-014",
-      "date": "2025-12-04",
+      "date": "2026-06-13",
+      "kind": "imaging",
+      "text": "CT angiography with runoff: left superficial femoral artery occluded over 12 centimeters from the mid thigh to the adductor canal, reconstitution of the above-knee popliteal artery, two-vessel runoff via the anterior tibial and peroneal. Contralateral mild disease. Aortoiliac segments patent."
+    },
+    {
+      "id": "note-015",
+      "date": "2026-06-17",
       "kind": "outside letter",
       "text": "Letter from the dentist's office confirming routine cleaning and exam completed, no active infection, no dental work pending. Sent at our request for the surgical file."
     },
     {
-      "id": "note-015",
-      "date": "2025-12-12",
-      "kind": "office visit",
-      "text": "Vitamin D came back 23. Started 2000 units daily, recheck in three months. Also talked about calcium from food rather than pills."
-    },
-    {
       "id": "note-016",
-      "date": "2026-01-09",
+      "date": "2026-06-17",
       "kind": "office visit",
       "text": "Knee pain going down stairs, left side, no injury, no locking or giving way. Patellar grind positive, no effusion, ligaments stable. Patellofemoral pain. Quad strengthening sheet, ice after activity, cushioned shoes."
     },
     {
       "id": "note-017",
-      "date": "2026-01-15",
-      "kind": "outside letter",
-      "text": "Dermatology consult note received. Two actinic keratoses on the forehead treated with cryotherapy. Annual skin check recommended, sunscreen counseling done."
+      "date": "2026-06-18",
+      "kind": "office visit",
+      "text": "Twisted the left ankle stepping off a curb 2 days ago. Swelling over the lateral malleolus, tender over the ATFL, can bear weight. Ottawa negative, no film. Brace, ice, ibuprofen, elevate. Should be fine in a couple weeks."
     },
     {
       "id": "note-018",
-      "date": "2026-01-25",
+      "date": "2026-06-19",
       "kind": "office visit",
-      "text": "Interval visit. Nothing new since last time, symptoms as described before, he is managing. Went over the plan again and answered questions from his spouse."
+      "text": "Back to review the imaging. Plan left superficial femoral artery recanalization with atherectomy and stent, outpatient. Risks reviewed including embolization and need for bypass. Vitals today 119 over 83, pulse 86."
     },
     {
       "id": "note-019",
-      "date": "2026-01-26",
+      "date": "2026-06-19",
       "kind": "office visit",
-      "text": "Blood pressure check. 129 over 88 today, 127 over 92 on repeat. He has been taking the lisinopril 10 most days, admits to missing weekends. Low salt talk again. Keep the dose, recheck in 12 weeks."
+      "text": "Mole on the upper back that his spouse noticed. About 6 millimeters, even color, regular border, no change he is aware of. Looks benign. Photo in the chart for comparison, recheck in a year or sooner if it changes."
     },
     {
       "id": "note-020",
-      "date": "2026-02-11",
-      "kind": "outside letter",
-      "text": "Optometry report forwarded for the record. Routine refraction, mild astigmatism, new glasses prescribed, retinas healthy, pressures 15 and 14. No ocular pathology noted."
+      "date": "2026-06-24",
+      "kind": "office visit",
+      "text": "Burning with urination for two days, going frequently, no fever, no back pain. Urine dip positive for leukocytes and nitrites. Nitrofurantoin for five days, push fluids, call if fever or flank pain."
     },
     {
       "id": "note-021",
-      "date": "2026-04-01",
-      "kind": "phone note",
-      "text": "Work note requested for a sick day last Monday. Faxed to the employer."
-    },
-    {
-      "id": "note-022",
-      "date": "2026-05-08",
-      "kind": "office visit",
-      "text": "Trouble sleeping for a couple of months, falls asleep fine but wakes at three and lies there. No snoring per the spouse, no daytime naps, two cups of coffee before noon. Went over sleep hygiene, no screens in bed, cut the afternoon caffeine. Will hold off on medication for now."
-    },
-    {
-      "id": "note-023",
-      "date": "2026-06-06",
-      "kind": "phone note",
-      "text": "Pharmacy called about the refill on the omeprazole 40. Approved 90 days. He mentioned the heartburn is better since cutting back on coffee."
-    },
-    {
-      "id": "note-024",
-      "date": "2026-07-01",
+      "date": "2026-06-29",
       "kind": "office visit",
       "text": "Annual physical. Feels well overall. Sleeping fine, appetite fine, no chest pain, no shortness of breath. Flu shot given in the left arm today. Due for a tetanus booster, he will think about it. Labs ordered, fasting."
     },
     {
+      "id": "note-022",
+      "date": "2026-07-04",
+      "kind": "outside letter",
+      "text": "Gastroenterology note received. Screening colonoscopy completed, two small polyps removed, benign on pathology, repeat in 10 years."
+    },
+    {
+      "id": "note-023",
+      "date": "2026-07-12",
+      "kind": "phone note",
+      "text": "Patient called about a tick bite on the shoulder after a hike. Tick removed whole, no rash, no fever. Watch for a bull's-eye rash or flu symptoms over the next month and call if either shows up."
+    },
+    {
+      "id": "note-024",
+      "date": "2026-07-15",
+      "kind": "office visit",
+      "text": "Vitamin D came back 18. Started 2000 units daily, recheck in three months. Also talked about calcium from food rather than pills."
+    },
+    {
       "id": "note-025",
-      "date": "2026-07-03",
-      "kind": "preoperative visit",
-      "text": "Pre-op. Consent signed. Marked the skin excision sitting up. No blood thinners. Stop the fish oil."
+      "date": "2026-07-16",
+      "kind": "phone note",
+      "text": "Pharmacy called about the refill on the omeprazole 20. Approved 90 days. He mentioned the heartburn is better since cutting back on coffee."
     },
     {
       "id": "note-026",
-      "date": "2026-07-10",
+      "date": "2026-07-28",
+      "kind": "preoperative visit",
+      "text": "Pre-procedure visit. Creatinine 1.3, hold metformin, hydration protocol. Consent signed."
+    },
+    {
+      "id": "note-027",
+      "date": "2026-08-01",
       "kind": "office visit",
-      "text": "Low back strain after moving furniture over the weekend. No radiation down the legs, no numbness, no bowel or bladder trouble. Paraspinal tenderness, straight leg raise negative. Heat, keep moving, ibuprofen with food for a week. Should settle."
+      "text": "Seasonal allergies acting up, itchy eyes, sneezing, clear drainage, worse outdoors. No wheeze. Cetirizine at night and the saline rinse. Fine with that."
     }
   ],
   "expected": {
@@ -196,28 +210,34 @@
     "criteriaMet": [
       "crit-1",
       "crit-2",
-      "crit-3"
+      "crit-3",
+      "crit-4"
     ],
     "support": {
       "crit-1": [
-        "note-006"
-      ],
-      "crit-2": [
+        "note-008",
         "note-011"
       ],
+      "crit-2": [
+        "note-012"
+      ],
       "crit-3": [
-        "note-005"
+        "note-014"
+      ],
+      "crit-4": [
+        "note-011"
       ]
     },
     "distractors": [
       "note-001",
       "note-002",
+      "note-003",
       "note-004",
-      "note-007",
-      "note-008",
+      "note-005",
+      "note-006",
       "note-009",
-      "note-012",
-      "note-014",
+      "note-010",
+      "note-013",
       "note-015",
       "note-016",
       "note-017",
@@ -227,8 +247,9 @@
       "note-022",
       "note-023",
       "note-024",
-      "note-026"
+      "note-025",
+      "note-027"
     ],
-    "note": "The chart documents every criterion; the CARC 50 denial can be answered from the record."
+    "note": "The chart documents every criterion; the CARC 11 denial can be answered from the record."
   }
 }

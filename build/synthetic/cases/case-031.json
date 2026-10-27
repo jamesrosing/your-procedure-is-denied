@@ -1,242 +1,246 @@
 {
   "id": "case-031",
+  "category": "post-acute care",
+  "setting": "post-acute",
+  "stakesUsd": 8000,
   "patient": {
     "alias": "SYN-031",
-    "age": 35,
+    "age": 78,
     "sex": "female"
   },
   "procedure": {
-    "cpt": "19318",
-    "description": "bilateral reduction mammaplasty"
+    "code": "KDOB1",
+    "codeSystem": "HIPPS",
+    "description": "skilled nursing facility continued stay, days 15 through 28, after hip fracture repair"
   },
   "payer": {
     "name": "Silverline Medicare Advantage",
     "planType": "Medicare Advantage"
   },
   "denial": {
-    "carc": "197",
-    "carcText": "Precertification/authorization/notification/pre-treatment absent.",
-    "text": "Silverline Medicare Advantage denied the claim for CPT 19318 (bilateral reduction mammaplasty) with date of service 2026-06-09. CARC 197: Precertification/authorization/notification/pre-treatment absent. Payer remark: No authorization is on file. Under the plan terms, elective procedures performed without prior authorization are not eligible for retrospective review. This is an administrative determination and not a medical necessity determination.",
-    "dateOfService": "2026-06-09"
+    "carc": "50",
+    "carcText": "These are non-covered services because this is not deemed a 'medical necessity' by the payer.",
+    "rarc": "N10",
+    "text": "Silverline Medicare Advantage denied the claim for HIPPS KDOB1 (skilled nursing facility continued stay, days 15 through 28, after hip fracture repair) with dates of service 2026-07-25 through 2026-08-07. CARC 50: These are non-covered services because this is not deemed a 'medical necessity' by the payer. RARC N10: Adjustment based on the findings of a review organization. Payer remark: Based on review of the clinical record, the member no longer required daily skilled services as of day 15 and could have been safely managed at home with home health services.",
+    "dateOfService": "2026-07-25",
+    "serviceEnd": "2026-08-07"
   },
   "criteria": [
     {
       "id": "crit-1",
-      "text": "Symptoms attributable to macromastia documented for at least 6 months, such as neck, shoulder, or upper back pain, shoulder grooving, or inframammary intertrigo."
+      "text": "Requires skilled nursing or skilled rehabilitation services on a daily basis (skilled therapy at least 5 days per week)."
     },
     {
       "id": "crit-2",
-      "text": "At least 3 months of conservative treatment, including a supportive garment plus physical therapy, analgesics, or dermatologic treatment of intertrigo, without adequate relief."
+      "text": "Documented, measurable functional progress toward the goals in the plan of care during the preceding 7 days, or a documented skilled need to maintain function or prevent deterioration."
     },
     {
       "id": "crit-3",
-      "text": "Estimated resection weight per breast at or above the 22nd percentile of the Schnur sliding scale for the patient's body surface area."
+      "text": "The skilled services can, as a practical matter, only be provided on an inpatient basis in a skilled nursing facility."
     },
     {
       "id": "crit-4",
-      "text": "Photographic documentation of macromastia and shoulder grooving."
+      "text": "A qualifying inpatient hospital stay of at least 3 consecutive days preceded the admission, or the plan has waived the requirement."
     }
   ],
   "chart": [
     {
       "id": "note-001",
-      "date": "2025-04-24",
-      "kind": "office visit",
-      "text": "Vitamin D came back 19. Started 2000 units daily, recheck in three months. Also talked about calcium from food rather than pills."
+      "date": "2026-07-11",
+      "kind": "history and physical",
+      "text": "78 year old woman admitted for skilled rehabilitation. History of osteoporosis, hypertension, chronic kidney disease stage 3. Fell at home reaching for a cabinet. Lives alone in a second-floor walk-up, 15 steps, no elevator, no caregiver available during the day. Weight bearing as tolerated on the left but cannot yet transfer without two people. Admitted to the skilled unit from the hospital after a 4 day inpatient stay for a left femoral neck fracture treated with hemiarthroplasty on hospital day 1."
     },
     {
       "id": "note-002",
-      "date": "2025-04-25",
-      "kind": "office visit",
-      "text": "Mole on the right calf that her spouse noticed. About 5 millimeters, even color, regular border, no change she is aware of. Looks benign. Photo in the chart for comparison, recheck in a year or sooner if it changes."
+      "date": "2026-07-12",
+      "kind": "therapy note",
+      "text": "PT evaluation on admission. Transfers moderate assist of two, stood at the parallel bars for 30 seconds, ambulation not attempted. Pain 6 out of 10 with movement."
     },
     {
       "id": "note-003",
-      "date": "2025-05-19",
-      "kind": "outside letter",
-      "text": "From the referring physician: please evaluate for surgical management. We have exhausted what we can do in primary care and the patient is motivated. Recent labs enclosed, all within normal limits."
+      "date": "2026-07-14",
+      "kind": "nursing note",
+      "text": "Incision clean, dry, staples intact. Pain controlled on scheduled acetaminophen and oxycodone 5 as needed. Bowels moving. Appetite fair."
     },
     {
       "id": "note-004",
-      "date": "2025-05-27",
-      "kind": "office visit",
-      "text": "Here with a cough and congestion for 4 days, low grade temp at home, no shortness of breath. Lungs clear, throat a little red, ears fine. Looks viral. Fluids, rest, honey for the cough, come back if she gets a fever over 101 or it goes past two weeks."
+      "date": "2026-07-14",
+      "kind": "consult note",
+      "text": "Social work met with the patient and her son to confirm the home address, the primary contact, and transportation for follow-up appointments. No barriers identified today."
     },
     {
       "id": "note-005",
-      "date": "2025-05-31",
-      "kind": "office visit",
-      "text": "35 year old woman here about her breasts, referred by her primary. Exam: large pendulous breasts, nipple to notch 36 on the right and 37 on the left, grade 3 ptosis, intertrigo in both inframammary folds. Discussed reduction, risks, scars, sensation, the works. Her history otherwise: seasonal allergies, reflux on omeprazole as needed. Surgeries: tonsils as a kid. Allergies: codeine makes her sick. Never smoked, occasional beer, has three kids at home. Family history noncontributory for what we are talking about today. Going on 19 months of upper back and neck pain that she ties to the weight of the breasts, worse by the end of a shift. Shoulder grooving from the straps, recurrent intertrigo in the folds. She has been in a fitted supportive bra from the specialty shop for months, takes ibuprofen most days, treats the rash with nystatin powder. I am sending her to PT for posture and scapular work. She is 5 foot 3, 209 pounds, which puts BSA right around 2.05. Schnur 22nd percentile at that BSA is about 692 grams. I am estimating 887 grams on the right and 884 on the left."
+      "date": "2026-07-17",
+      "kind": "nursing note",
+      "text": "Bowel regimen started, senna and docusate at bedtime. Last bowel movement 2 days ago per patient. Encouraged fluids and ambulation as able."
     },
     {
       "id": "note-006",
-      "date": "2025-06-07",
-      "kind": "physical therapy",
-      "text": "Eval for upper back and neck pain in the setting of large breasts. Forward shoulder posture, tight pecs, weak lower traps. Plan 10 weeks, twice a week, scapular stabilization and postural retraining."
+      "date": "2026-07-18",
+      "kind": "therapy note",
+      "text": "Week one summary. Transfers moderate assist of two to moderate assist of one. Ambulation 15 to 40 feet with the rolling walker. Working on weight shifting and step length on the left."
     },
     {
       "id": "note-007",
-      "date": "2025-06-12",
-      "kind": "physical therapy",
-      "text": "Session 2. Continued the program from the evaluation, tolerated well, home exercises reviewed, she reports about the same."
+      "date": "2026-07-18",
+      "kind": "nursing note",
+      "text": "IV site rotated from the left forearm to the right hand, old site without redness. Dressing dated. Patient tolerated well."
     },
     {
       "id": "note-008",
-      "date": "2025-06-17",
-      "kind": "physical therapy",
-      "text": "Session 3. Continued the program from the evaluation, tolerated well, home exercises reviewed, she reports about the same."
+      "date": "2026-07-19",
+      "kind": "hospital progress note",
+      "text": "Physician visit. Cannot yet manage the 15 stairs to the apartment and needs assistance of one for every transfer. Home health could not provide twice daily transfer assistance and daily injections for someone living alone. Continue skilled stay."
     },
     {
       "id": "note-009",
-      "date": "2025-06-22",
-      "kind": "physical therapy",
-      "text": "Session 4. Continued the program from the evaluation, tolerated well, home exercises reviewed, she reports no real change."
+      "date": "2026-07-19",
+      "kind": "consult note",
+      "text": "Dietitian consult. Regular diet with heart healthy modification. Intake about 71 percent of meals. Supplement shake twice daily added. Will follow."
     },
     {
       "id": "note-010",
-      "date": "2025-08-16",
-      "kind": "office visit",
-      "text": "Back to go over the plan. Symptoms unchanged. We went through the operation again and she wants to proceed if insurance will cover it. Vitals today 118 over 87, pulse 63. Finished 10 weeks of PT across the street, says it helped while she was there and then right back to baseline. Still in the supportive bra, still on the ibuprofen, intertrigo treated with nystatin powder with partial relief. That is 7 months of conservative measures without durable relief."
+      "date": "2026-07-21",
+      "kind": "nursing note",
+      "text": "Potassium 3.1 this morning, repleted with 20 milliequivalents oral per protocol. Recheck with morning labs."
     },
     {
       "id": "note-011",
-      "date": "2025-08-16",
-      "kind": "photo documentation",
-      "text": "Standard pre-op photo series taken today, front, both obliques, both laterals. Grooving visible at both shoulders in the AP view, grade 3 ptosis, intertrigo in both folds."
+      "date": "2026-07-21",
+      "kind": "nursing note",
+      "text": "Fall risk assessment completed, score 39, high risk. Bed alarm on, nonskid socks, call light within reach, hourly rounding. Family at bedside this evening."
     },
     {
       "id": "note-012",
-      "date": "2025-08-16",
-      "kind": "office visit",
-      "text": "Trouble sleeping for a couple of months, falls asleep fine but wakes at three and lies there. No snoring per the spouse, no daytime naps, two cups of coffee before noon. Went over sleep hygiene, no screens in bed, cut the afternoon caffeine. Will hold off on medication for now."
+      "date": "2026-07-21",
+      "kind": "medication record",
+      "text": "Home amlodipine resumed at the home dose this morning after review with the attending. No interactions flagged."
     },
     {
       "id": "note-013",
-      "date": "2025-09-05",
-      "kind": "office visit",
-      "text": "A1c came back 6.0. Prediabetic range, same as last year. Walking program, cut the soda, recheck in six months. She is motivated."
+      "date": "2026-07-23",
+      "kind": "nursing note",
+      "text": "Dentures labeled and placed in the denture cup at the bedside. Patient prefers them out at night. Oral care done."
     },
     {
       "id": "note-014",
-      "date": "2025-09-06",
-      "kind": "phone note",
-      "text": "Work note requested for a sick day last Monday. Faxed to the employer."
+      "date": "2026-07-25",
+      "kind": "therapy note",
+      "text": "PT 5 days this week, 45 to 60 minutes per session, plus OT 5 days. Skilled gait training with the rolling walker, transfer training, and stair training started. Ambulation 40 feet with the rolling walker, the same as last week. Transfers minimal assist of one, unchanged. No measurable gain this week; she reports fatigue and declined the second session on two days."
     },
     {
       "id": "note-015",
-      "date": "2025-09-29",
-      "kind": "office visit",
-      "text": "Annual physical. Feels well overall. Sleeping fine, appetite fine, no chest pain, no shortness of breath. Flu shot given in the left arm today. Due for a tetanus booster, she will think about it. Labs ordered, fasting."
+      "date": "2026-07-26",
+      "kind": "nursing note",
+      "text": "Patient requested something for sleep. Melatonin 5 milligrams given per order at 2130. Slept in two-hour stretches per night shift report."
     },
     {
       "id": "note-016",
-      "date": "2025-10-01",
-      "kind": "office visit",
-      "text": "Ear fullness and muffled hearing on the left for a week after a cold. Canal clear, drum dull with fluid behind it, no infection. Serous otitis. Decongestant, swallow and yawn, recheck in three weeks if not better."
+      "date": "2026-07-26",
+      "kind": "nursing note",
+      "text": "Daily weight 178 pounds, up 0 from yesterday. Intake and output recorded. Repositioned per schedule, skin checked."
     },
     {
       "id": "note-017",
-      "date": "2025-10-02",
-      "kind": "phone note",
-      "text": "Message from the patient about scheduling. Wants a date in the next couple of months if the insurance comes through. Passed to the surgery scheduler."
+      "date": "2026-07-27",
+      "kind": "nursing note",
+      "text": "Daily skilled nursing: enoxaparin 40 subcutaneous daily through day 28, incision assessment with a 2 centimeter area of serous drainage at the distal end being monitored, pain regimen titrated, oxycodone cut to 2.5 at night only."
     },
     {
       "id": "note-018",
-      "date": "2025-12-06",
-      "kind": "office visit",
-      "text": "Check-in while we wait on the insurance. No change in the complaints. Reviewed the risks and recovery one more time, she remains sure about going ahead."
+      "date": "2026-07-28",
+      "kind": "consult note",
+      "text": "Audiology screen at nursing's request. She wears a hearing aid on the left, battery replaced, hears conversational voice well now. No further needs."
     },
     {
       "id": "note-019",
-      "date": "2025-12-20",
-      "kind": "phone note",
-      "text": "She called asking about travel vaccines for a trip in early summer. Advised hepatitis A and a typhoid booster, referred to the travel clinic. Nothing else needed from us."
+      "date": "2026-07-30",
+      "kind": "medication record",
+      "text": "Pharmacy note. Renal dosing reviewed, creatinine 0.8, no adjustments needed today. Home medication list reconciled with the daughter by phone, one duplicate statin removed."
     },
     {
       "id": "note-020",
-      "date": "2026-01-12",
-      "kind": "office visit",
-      "text": "Twisted the left ankle stepping off a curb 3 days ago. Swelling over the lateral malleolus, tender over the ATFL, can bear weight. Ottawa negative, no film. Brace, ice, ibuprofen, elevate. Should be fine in a couple weeks."
+      "date": "2026-08-01",
+      "kind": "therapy note",
+      "text": "Plateau. Ambulation 40 to 50 feet, unchanged over the past 7 days, transfers unchanged. Recommend transition to a maintenance program with home health and family training."
     },
     {
       "id": "note-021",
-      "date": "2026-01-22",
-      "kind": "phone note",
-      "text": "Patient called about a tick bite on the calf after a hike. Tick removed whole, no rash, no fever. Watch for a bull's-eye rash or flu symptoms over the next month and call if either shows up."
+      "date": "2026-08-01",
+      "kind": "nursing note",
+      "text": "Chaplain visited at the patient's request, about twenty minutes. She appreciated the visit. No needs identified."
     },
     {
       "id": "note-022",
-      "date": "2026-01-27",
-      "kind": "outside letter",
-      "text": "Letter from the dentist's office confirming routine cleaning and exam completed, no active infection, no dental work pending. Sent at our request for the surgical file."
+      "date": "2026-08-01",
+      "kind": "nursing note",
+      "text": "Pneumococcal vaccine status reviewed, up to date per state registry. Influenza vaccine offered and accepted, given left deltoid."
     },
     {
       "id": "note-023",
-      "date": "2026-05-12",
-      "kind": "office visit",
-      "text": "Knee pain going down stairs, left side, no injury, no locking or giving way. Patellar grind positive, no effusion, ligaments stable. Patellofemoral pain. Quad strengthening sheet, ice after activity, cushioned shoes."
+      "date": "2026-08-02",
+      "kind": "nursing note",
+      "text": "Glucose checks before meals and at bedtime, ranging 135 to 189. Sliding scale given per protocol. Patient's own glucometer at bedside, sent home with family for safekeeping."
     },
     {
       "id": "note-024",
-      "date": "2026-05-16",
-      "kind": "outside letter",
-      "text": "Dermatology consult note received. Two actinic keratoses on the forehead treated with cryotherapy. Annual skin check recommended, sunscreen counseling done."
+      "date": "2026-08-03",
+      "kind": "nursing note",
+      "text": "Skin assessment on admission. Braden 17. Skin intact, no pressure injury, heels floated. Turn every two hours while in bed. Barrier cream to the sacrum as a precaution."
     },
     {
       "id": "note-025",
-      "date": "2026-05-23",
-      "kind": "outside letter",
-      "text": "Gastroenterology note received. Screening colonoscopy completed, two small polyps removed, benign on pathology, repeat in 7 years."
+      "date": "2026-08-07",
+      "kind": "therapy note",
+      "text": "Week four summary. Ambulation 50 feet with the rolling walker and contact guard, unchanged for 2 weeks. Transfers minimal assist of one, unchanged. Family trained in transfers and the home program. Discharge to daughter’s single-level home."
     },
     {
       "id": "note-026",
-      "date": "2026-05-27",
-      "kind": "preoperative visit",
-      "text": "Pre-op visit. Consent signed, marked the plan on her in the mirror, superomedial pedicle, Wise pattern. Labs fine. Stop the ibuprofen a week out."
+      "date": "2026-08-07",
+      "kind": "discharge summary",
+      "text": "Discharged on day 28 to the daughter’s home with home health nursing for the remaining enoxaparin doses and a maintenance exercise program. Functional status unchanged over the final 2 weeks."
     }
   ],
   "expected": {
     "warranted": false,
-    "subtype": "wrong-remedy",
+    "subtype": "near-miss",
     "criteriaMet": [
       "crit-1",
-      "crit-2",
       "crit-3",
       "crit-4"
     ],
     "support": {
       "crit-1": [
-        "note-005"
+        "note-014",
+        "note-017"
       ],
-      "crit-2": [
-        "note-005",
-        "note-006",
-        "note-010"
-      ],
+      "crit-2": [],
       "crit-3": [
-        "note-005"
+        "note-001",
+        "note-008"
       ],
       "crit-4": [
-        "note-011"
+        "note-001"
       ]
     },
     "distractors": [
-      "note-001",
-      "note-002",
       "note-004",
+      "note-005",
+      "note-007",
+      "note-009",
+      "note-010",
+      "note-011",
       "note-012",
       "note-013",
-      "note-014",
       "note-015",
       "note-016",
+      "note-018",
       "note-019",
-      "note-020",
       "note-021",
       "note-022",
       "note-023",
-      "note-024",
-      "note-025"
+      "note-024"
     ],
-    "note": "CARC 197 is an administrative denial the chart cannot answer: the plan refuses retrospective review, so the remedy is a dispute of the authorization process, not a medical necessity appeal."
+    "note": "The chart raises crit-2 (progress) but does not satisfy it; the mention is a plan, a shortfall, or a result below the threshold."
   }
 }

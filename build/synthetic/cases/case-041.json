@@ -1,152 +1,178 @@
 {
   "id": "case-041",
+  "category": "vascular surgery",
+  "setting": "outpatient",
+  "stakesUsd": 15000,
   "patient": {
     "alias": "SYN-041",
-    "age": 34,
-    "sex": "female"
+    "age": 69,
+    "sex": "male"
   },
   "procedure": {
-    "cpt": "19357",
-    "description": "breast reconstruction, immediate or delayed, with tissue expander"
+    "code": "37227",
+    "codeSystem": "CPT",
+    "description": "revascularization of the femoral-popliteal artery with atherectomy and stent placement"
   },
   "payer": {
-    "name": "Lanternhill Health Plan",
-    "planType": "commercial HMO"
+    "name": "Copperfield Health",
+    "planType": "commercial EPO"
   },
   "denial": {
-    "carc": "50",
-    "carcText": "These are non-covered services because this is not deemed a 'medical necessity' by the payer.",
-    "text": "Lanternhill Health Plan denied the claim for CPT 19357 (breast reconstruction, immediate or delayed, with tissue expander) with date of service 2026-04-19. CARC 50: These are non-covered services because this is not deemed a 'medical necessity' by the payer. Payer remark: Documentation does not establish a covered indication for breast reconstruction.",
-    "dateOfService": "2026-04-19"
+    "carc": "56",
+    "carcText": "Procedure/treatment is deemed experimental/investigational by the payer.",
+    "text": "Copperfield Health denied the claim for CPT 37227 (revascularization of the femoral-popliteal artery with atherectomy and stent placement) with date of service 2026-05-06. CARC 56: Procedure/treatment is deemed experimental/investigational by the payer. Payer remark: Atherectomy is considered investigational for femoropopliteal disease.",
+    "dateOfService": "2026-05-06"
   },
   "criteria": [
     {
       "id": "crit-1",
-      "text": "Documented mastectomy for breast cancer, or prophylactic mastectomy for a qualifying risk, with reconstruction requested by the patient. Reconstruction after a covered mastectomy is a mandated benefit under the Women’s Health and Cancer Rights Act."
+      "text": "Chronic limb-threatening ischemia (ischemic rest pain, non-healing ulcer, or gangrene, Rutherford 4 to 6); or lifestyle-limiting claudication (Rutherford 3) that has failed at least 12 weeks of supervised exercise therapy and optimal medical therapy."
     },
     {
       "id": "crit-2",
-      "text": "An operative plan for staged reconstruction (tissue expander placement followed by implant exchange) appropriate to the patient’s radiation status and tissue quality."
+      "text": "Hemodynamic confirmation: ankle-brachial index 0.4 or less, toe pressure below 30 mmHg, or TcPO2 below 30 mmHg for limb-threatening ischemia (ankle-brachial index below 0.9 for claudication)."
     },
     {
       "id": "crit-3",
-      "text": "Medical clearance for the planned surgery is documented."
+      "text": "Imaging (duplex, CT angiography, or angiography) demonstrating a femoropopliteal stenosis of 50 percent or more, or an occlusion, amenable to endovascular treatment."
+    },
+    {
+      "id": "crit-4",
+      "text": "Optimal medical therapy documented: an antiplatelet agent, a statin, and smoking cessation or cessation counseling."
     }
   ],
   "chart": [
     {
       "id": "note-001",
-      "date": "2025-04-20",
+      "date": "2026-02-10",
       "kind": "office visit",
-      "text": "Blood pressure check. 131 over 88 today, 131 over 90 on repeat. She has been taking the lisinopril 10 most days, admits to missing weekends. Low salt talk again. Keep the dose, recheck in 8 weeks."
+      "text": "Ear fullness and muffled hearing on the left for a week after a cold. Canal clear, drum dull with fluid behind it, no infection. Serous otitis. Decongestant, swallow and yawn, recheck in three weeks if not better."
     },
     {
       "id": "note-002",
-      "date": "2025-05-03",
-      "kind": "outside letter",
-      "text": "Dermatology consult note received. Two actinic keratoses on the forehead treated with cryotherapy. Annual skin check recommended, sunscreen counseling done."
+      "date": "2026-02-13",
+      "kind": "office visit",
+      "text": "Here with a cough and congestion for 6 days, low grade temp at home, no shortness of breath. Lungs clear, throat a little red, ears fine. Looks viral. Fluids, rest, honey for the cough, come back if he gets a fever over 101 or it goes past two weeks."
     },
     {
       "id": "note-003",
-      "date": "2025-05-13",
-      "kind": "outside letter",
-      "text": "Referral letter from the primary care office. Thank you for seeing this patient of mine for surgical evaluation. Her history and medication list are attached. Please let me know what you recommend and whether anything is needed from our end for clearance. From the breast surgeon: right total mastectomy performed 6 months ago for a 1.4 centimeter invasive ductal carcinoma, sentinel nodes negative, margins clear. She has completed adjuvant chemotherapy and wishes to proceed with reconstruction."
+      "date": "2026-02-13",
+      "kind": "office visit",
+      "text": "Blood pressure check. 130 over 81 today, 120 over 93 on repeat. He has been taking the lisinopril 40 most days, admits to missing weekends. Low salt talk again. Keep the dose, recheck in 8 weeks."
     },
     {
       "id": "note-004",
-      "date": "2025-05-22",
+      "date": "2026-02-18",
       "kind": "office visit",
-      "text": "34 year old woman referred by the breast surgeon for reconstruction. Went over expanders versus flaps, she prefers the expander route, fewer operations and no donor site. Her history otherwise: prediabetes, diet controlled, anxiety, sees a counselor. Allergies: codeine makes her sick. Does not smoke, a glass of wine on weekends, works from home. Family history noncontributory for what we are talking about today. Status post right mastectomy 6 months ago for a 1.4 centimeter invasive ductal. Done with chemo. She wants reconstruction and has thought hard about it. No radiation planned per oncology. Good skin envelope, no infection, mastectomy flap healed. Plan is a right tissue expander under the pectoralis now, exchange to a permanent implant in about 4 months, and a left lift for symmetry later."
+      "text": "Vitamin D came back 14. Started 1000 units daily, recheck in three months. Also talked about calcium from food rather than pills."
     },
     {
       "id": "note-005",
-      "date": "2025-05-27",
-      "kind": "office visit",
-      "text": "Annual physical. Feels well overall. Sleeping fine, appetite fine, no chest pain, no shortness of breath. Flu shot given in the left arm today. Due for a tetanus booster, she will think about it. Labs ordered, fasting."
+      "date": "2026-03-02",
+      "kind": "outside letter",
+      "text": "From the referring physician: please evaluate and treat as you see fit. We have exhausted what we can do in primary care and the patient is motivated. Recent labs enclosed, all within normal limits."
     },
     {
       "id": "note-006",
-      "date": "2025-06-05",
-      "kind": "phone note",
-      "text": "Called her with the cholesterol results. Total 219, LDL 129, HDL 47, triglycerides 180. Discussed diet and walking. She wants to try lifestyle first for six months before we talk about a statin. Agreed."
-    },
-    {
-      "id": "note-007",
-      "date": "2025-06-09",
-      "kind": "outside letter",
-      "text": "Letter from the dentist's office confirming routine cleaning and exam completed, no active infection, no dental work pending. Sent at our request for the surgical file."
-    },
-    {
-      "id": "note-008",
-      "date": "2025-07-02",
-      "kind": "phone note",
-      "text": "Pharmacy called about the refill on the omeprazole 40. Approved 90 days. She mentioned the heartburn is better since cutting back on coffee."
-    },
-    {
-      "id": "note-009",
-      "date": "2025-07-15",
+      "date": "2026-03-08",
       "kind": "office visit",
       "text": "Burning with urination for two days, going frequently, no fever, no back pain. Urine dip positive for leukocytes and nitrites. Nitrofurantoin for five days, push fluids, call if fever or flank pain."
     },
     {
-      "id": "note-010",
-      "date": "2025-08-02",
+      "id": "note-007",
+      "date": "2026-03-11",
+      "kind": "wound care visit",
+      "text": "Left heel ulcer 2.4 by 1.6 centimeters, pale base, no granulation tissue after 10 weeks of weekly debridement and offloading. Pedal pulses not palpable."
+    },
+    {
+      "id": "note-008",
+      "date": "2026-03-15",
+      "kind": "outside letter",
+      "text": "Letter from the dentist's office confirming routine cleaning and exam completed, no active infection, no dental work pending. Sent at our request for the surgical file."
+    },
+    {
+      "id": "note-009",
+      "date": "2026-03-18",
       "kind": "office visit",
-      "text": "Back with her sister to go over the plan again. Questions answered. Ready to schedule. Vitals today 126 over 87, pulse 62."
+      "text": "69 year old man referred by podiatry for the left leg. Diabetic 10 years, hypertension, prior coronary stent. Discussed endovascular versus bypass; endovascular first given the anatomy. His history otherwise: hypothyroidism on levothyroxine. Allergies: sulfa, hives as a child. Never smoked, occasional beer, lives alone. Family history noncontributory for what we are talking about today. Left heel ulcer for 3 months that will not heal despite offloading and weekly wound care, and rest pain in the left foot at night relieved by hanging it off the bed. Rutherford 5. On aspirin 81 and atorvastatin 80. Quit smoking 9 weeks ago after 35 years; counseled again today and offered nicotine replacement."
+    },
+    {
+      "id": "note-010",
+      "date": "2026-03-21",
+      "kind": "vascular laboratory",
+      "text": "Arterial studies. Ankle-brachial index left 0.30, right 0.87. Left toe pressure 26 mmHg. Monophasic waveforms at the left popliteal and tibial levels."
     },
     {
       "id": "note-011",
-      "date": "2025-08-25",
-      "kind": "office visit",
-      "text": "Knee pain going down stairs, left side, no injury, no locking or giving way. Patellar grind positive, no effusion, ligaments stable. Patellofemoral pain. Quad strengthening sheet, ice after activity, cushioned shoes."
+      "date": "2026-03-26",
+      "kind": "imaging",
+      "text": "CT angiography with runoff: left superficial femoral artery occluded over 16 centimeters from the mid thigh to the adductor canal, reconstitution of the above-knee popliteal artery, two-vessel runoff via the anterior tibial and peroneal. Contralateral mild disease. Aortoiliac segments patent."
     },
     {
       "id": "note-012",
-      "date": "2025-09-23",
-      "kind": "phone note",
-      "text": "Called to let her know the surgery date is set and that we are submitting to the insurance. She called asking where things stand with the insurance. Told her the paperwork went in and we are waiting to hear. Reviewed what to do in the meantime."
+      "date": "2026-03-26",
+      "kind": "office visit",
+      "text": "Twisted the left ankle stepping off a curb 6 days ago. Swelling over the lateral malleolus, tender over the ATFL, can bear weight. Ottawa negative, no film. Brace, ice, ibuprofen, elevate. Should be fine in a couple weeks."
     },
     {
       "id": "note-013",
-      "date": "2025-10-19",
-      "kind": "phone note",
-      "text": "Patient called about a tick bite on the calf after a hike. Tick removed whole, no rash, no fever. Watch for a bull's-eye rash or flu symptoms over the next month and call if either shows up."
+      "date": "2026-03-30",
+      "kind": "office visit",
+      "text": "A1c came back 6.5. Prediabetic range, same as last year. Walking program, cut the soda, recheck in six months. He is motivated."
     },
     {
       "id": "note-014",
-      "date": "2025-11-02",
+      "date": "2026-04-01",
       "kind": "office visit",
-      "text": "Interval visit. Nothing new since last time, symptoms as described before, she is managing. Went over the plan again and answered questions from her spouse."
+      "text": "Back to review the imaging. Plan left superficial femoral artery recanalization with atherectomy and stent, outpatient. Risks reviewed including embolization and need for bypass. Vitals today 132 over 71, pulse 71."
     },
     {
       "id": "note-015",
-      "date": "2025-12-03",
+      "date": "2026-04-01",
       "kind": "phone note",
-      "text": "Thyroid labs back. TSH 2.6, free T4 normal. No change to the levothyroxine 75. Repeat in a year."
+      "text": "Thyroid labs back. TSH 2.5, free T4 normal. No change to the levothyroxine 75. Repeat in a year."
     },
     {
       "id": "note-016",
-      "date": "2025-12-29",
-      "kind": "office visit",
-      "text": "Mole on the upper back that her spouse noticed. About 5 millimeters, even color, regular border, no change she is aware of. Looks benign. Photo in the chart for comparison, recheck in a year or sooner if it changes."
+      "date": "2026-04-06",
+      "kind": "outside letter",
+      "text": "Gastroenterology note received. Screening colonoscopy completed, two small polyps removed, benign on pathology, repeat in 7 years."
     },
     {
       "id": "note-017",
-      "date": "2026-03-03",
-      "kind": "office visit",
-      "text": "Low back strain after moving furniture over the weekend. No radiation down the legs, no numbness, no bowel or bladder trouble. Paraspinal tenderness, straight leg raise negative. Heat, keep moving, ibuprofen with food for a week. Should settle."
+      "date": "2026-04-21",
+      "kind": "phone note",
+      "text": "Work note requested for a sick day last Tuesday. Faxed to the employer."
     },
     {
       "id": "note-018",
-      "date": "2026-03-07",
-      "kind": "office visit",
-      "text": "Twisted the left ankle stepping off a curb 3 days ago. Swelling over the lateral malleolus, tender over the ATFL, can bear weight. Ottawa negative, no film. Brace, ice, ibuprofen, elevate. Should be fine in a couple weeks."
+      "date": "2026-04-24",
+      "kind": "preoperative visit",
+      "text": "Pre-procedure visit. Creatinine 0.9, hold metformin, hydration protocol. Consent signed."
     },
     {
       "id": "note-019",
-      "date": "2026-04-09",
-      "kind": "preoperative visit",
-      "text": "Pre-op. Cleared by her PCP, letter in the chart, labs and EKG fine. Consent signed for right tissue expander placement."
+      "date": "2026-04-29",
+      "kind": "office visit",
+      "text": "Seasonal allergies acting up, itchy eyes, sneezing, clear drainage, worse outdoors. No wheeze. Cetirizine at night and the saline rinse. Fine with that."
+    },
+    {
+      "id": "note-020",
+      "date": "2026-04-30",
+      "kind": "office visit",
+      "text": "Trouble sleeping for a couple of months, falls asleep fine but wakes at three and lies there. No snoring per the spouse, no daytime naps, two cups of coffee before noon. Went over sleep hygiene, no screens in bed, cut the afternoon caffeine. Will hold off on medication for now."
+    },
+    {
+      "id": "note-021",
+      "date": "2026-05-01",
+      "kind": "phone note",
+      "text": "Called his with the cholesterol results. Total 213, LDL 117, HDL 59, triglycerides 159. Discussed diet and walking. He wants to try lifestyle first for six months before we talk about a statin. Agreed."
+    },
+    {
+      "id": "note-022",
+      "date": "2026-05-02",
+      "kind": "office visit",
+      "text": "Annual physical. Feels well overall. Sleeping fine, appetite fine, no chest pain, no shortness of breath. Flu shot given in the left arm today. Due for a tetanus booster, he will think about it. Labs ordered, fasting."
     }
   ],
   "expected": {
@@ -154,35 +180,41 @@
     "criteriaMet": [
       "crit-1",
       "crit-2",
-      "crit-3"
+      "crit-3",
+      "crit-4"
     ],
     "support": {
       "crit-1": [
-        "note-003",
-        "note-004"
+        "note-007",
+        "note-009"
       ],
       "crit-2": [
-        "note-004"
+        "note-010"
       ],
       "crit-3": [
-        "note-019"
+        "note-011"
+      ],
+      "crit-4": [
+        "note-009"
       ]
     },
     "distractors": [
       "note-001",
       "note-002",
-      "note-005",
+      "note-003",
+      "note-004",
       "note-006",
-      "note-007",
       "note-008",
-      "note-009",
-      "note-011",
+      "note-012",
       "note-013",
       "note-015",
       "note-016",
       "note-017",
-      "note-018"
+      "note-019",
+      "note-020",
+      "note-021",
+      "note-022"
     ],
-    "note": "The chart documents every criterion; the CARC 50 denial can be answered from the record."
+    "note": "The chart documents every criterion; the CARC 56 denial can be answered from the record."
   }
 }

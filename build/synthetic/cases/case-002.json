@@ -1,181 +1,181 @@
 {
   "id": "case-002",
+  "category": "oncology",
+  "setting": "outpatient",
+  "stakesUsd": 25000,
   "patient": {
     "alias": "SYN-002",
     "age": 46,
     "sex": "female"
   },
   "procedure": {
-    "cpt": "15847",
-    "description": "panniculectomy with excision of excess skin and subcutaneous tissue of the abdomen"
+    "code": "77301",
+    "codeSystem": "CPT",
+    "description": "intensity modulated radiation therapy planning, left breast after lumpectomy"
   },
   "payer": {
-    "name": "Northwind Mutual Health",
-    "planType": "commercial PPO"
+    "name": "Lanternhill Health Plan",
+    "planType": "commercial HMO"
   },
   "denial": {
-    "carc": "119",
-    "carcText": "Benefit maximum for this time period or occurrence has been reached.",
-    "text": "Northwind Mutual Health denied the claim for CPT 15847 (panniculectomy with excision of excess skin and subcutaneous tissue of the abdomen) with date of service 2026-05-04. CARC 119: Benefit maximum for this time period or occurrence has been reached. Payer remark: The outpatient surgical benefit maximum for the plan year has been exhausted.",
-    "dateOfService": "2026-05-04"
+    "carc": "50",
+    "carcText": "These are non-covered services because this is not deemed a 'medical necessity' by the payer.",
+    "text": "Lanternhill Health Plan denied the claim for CPT 77301 (intensity modulated radiation therapy planning, left breast after lumpectomy) with date of service 2026-07-25. CARC 50: These are non-covered services because this is not deemed a 'medical necessity' by the payer. Payer remark: Intensity modulated radiation therapy is not medically necessary for breast cancer; three-dimensional conformal radiation therapy is the covered standard.",
+    "dateOfService": "2026-07-25"
   },
   "criteria": [
     {
       "id": "crit-1",
-      "text": "Panniculus hangs at or below the level of the pubis (grade 2 or higher) as documented on examination."
+      "text": "Adjuvant radiation to the intact breast or chest wall after surgery for invasive breast carcinoma."
     },
     {
       "id": "crit-2",
-      "text": "Recurrent or chronic intertrigo, cellulitis, or skin breakdown beneath the panniculus that has failed at least 3 months of conservative treatment such as topical antifungals, hygiene measures, and barrier products."
+      "text": "A three-dimensional conformal plan was generated and documented to exceed normal-tissue dose constraints (mean heart dose above 4 Gy, or ipsilateral lung V20 above 20 percent), such that intensity modulated planning is required to meet them."
     },
     {
       "id": "crit-3",
-      "text": "Weight stable within 10 pounds for at least 6 months."
-    },
-    {
-      "id": "crit-4",
-      "text": "The panniculus interferes with activities of daily living or ambulation."
+      "text": "Target volume, dose, and fractionation documented by the treating radiation oncologist."
     }
   ],
   "chart": [
     {
       "id": "note-001",
-      "date": "2025-04-29",
+      "date": "2026-05-30",
+      "kind": "phone note",
+      "text": "Called her with the cholesterol results. Total 199, LDL 121, HDL 60, triglycerides 114. Discussed diet and walking. She wants to try lifestyle first for six months before we talk about a statin. Agreed."
+    },
+    {
+      "id": "note-002",
+      "date": "2026-06-04",
+      "kind": "office visit",
+      "text": "A1c came back 6.4. Prediabetic range, same as last year. Walking program, cut the soda, recheck in six months. She is motivated."
+    },
+    {
+      "id": "note-003",
+      "date": "2026-06-09",
+      "kind": "outside letter",
+      "text": "Gastroenterology note received. Screening colonoscopy completed, two small polyps removed, benign on pathology, repeat in 7 years."
+    },
+    {
+      "id": "note-004",
+      "date": "2026-06-11",
       "kind": "office visit",
       "text": "Low back strain after moving furniture over the weekend. No radiation down the legs, no numbness, no bowel or bladder trouble. Paraspinal tenderness, straight leg raise negative. Heat, keep moving, ibuprofen with food for a week. Should settle."
     },
     {
-      "id": "note-002",
-      "date": "2025-05-09",
-      "kind": "office visit",
-      "text": "Twisted the right ankle stepping off a curb 2 days ago. Swelling over the lateral malleolus, tender over the ATFL, can bear weight. Ottawa negative, no film. Brace, ice, ibuprofen, elevate. Should be fine in a couple weeks."
-    },
-    {
-      "id": "note-003",
-      "date": "2025-05-14",
-      "kind": "office visit",
-      "text": "Vitamin D came back 14. Started 2000 units daily, recheck in three months. Also talked about calcium from food rather than pills."
-    },
-    {
-      "id": "note-004",
-      "date": "2025-05-16",
-      "kind": "office visit",
-      "text": "Burning with urination for two days, going frequently, no fever, no back pain. Urine dip positive for leukocytes and nitrites. Nitrofurantoin for five days, push fluids, call if fever or flank pain."
-    },
-    {
       "id": "note-005",
-      "date": "2025-05-25",
+      "date": "2026-06-13",
       "kind": "outside letter",
-      "text": "Referral letter from the primary care office. Thank you for seeing this patient of mine for surgical evaluation. Her history and medication list are attached. Please let me know what you recommend and whether anything is needed from our end for clearance."
+      "text": "Referral letter from the primary care office. Thank you for seeing this patient of mine for evaluation. Her history and medication list are attached. Please let me know what you recommend and whether anything is needed from our end."
     },
     {
       "id": "note-006",
-      "date": "2025-05-31",
-      "kind": "outside letter",
-      "text": "Dermatology consult note received. Two actinic keratoses on the forehead treated with cryotherapy. Annual skin check recommended, sunscreen counseling done."
+      "date": "2026-06-14",
+      "kind": "office visit",
+      "text": "Blood pressure check. 143 over 73 today, 131 over 90 on repeat. She has been taking the lisinopril 40 most days, admits to missing weekends. Low salt talk again. Keep the dose, recheck in 8 weeks."
     },
     {
       "id": "note-007",
-      "date": "2025-06-05",
-      "kind": "phone note",
-      "text": "Pharmacy called about the refill on the omeprazole 20. Approved 90 days. She mentioned the heartburn is better since cutting back on coffee."
+      "date": "2026-06-20",
+      "kind": "pathology report",
+      "text": "Left breast lumpectomy and sentinel node biopsy: 0.9 centimeter grade 2 invasive ductal carcinoma, margins negative, closest 3 millimeters, 0 of 2 sentinel nodes, estrogen receptor positive, HER2 negative."
     },
     {
       "id": "note-008",
-      "date": "2025-06-13",
-      "kind": "office visit",
-      "text": "46 year old woman here about the abdominal apron after her weight loss. Nice result on the weight. Discussed panniculectomy versus a full abdominoplasty and what insurance will and will not look at. Her history otherwise: seasonal allergies, mild asthma, albuterol maybe twice a year. Allergies: codeine makes her sick. Never smoked, occasional beer, has three kids at home. Family history noncontributory for what we are talking about today. On exam the pannus hangs well below the pubis, I would call it grade 2, with maceration and an odor in the fold. She has been fighting the rash under the apron for better than a year, treated with nystatin, then clotrimazole, keeps it dry with powder and a cloth liner, and it comes right back. Two rounds of antibiotics from the PCP for cellulitis in the fold. Down 123 pounds after the sleeve in 2023. Weight has been steady at 181 give or take five for the last 11 months. Says she cannot walk more than a block without the skin fold chafing raw, has to lift it to wash underneath, cannot find pants that fit over it."
-    },
-    {
-      "id": "note-009",
-      "date": "2025-06-18",
+      "date": "2026-06-24",
       "kind": "phone note",
       "text": "She called asking about travel vaccines for a trip in the fall. Advised hepatitis A and a typhoid booster, referred to the travel clinic. Nothing else needed from us."
     },
     {
-      "id": "note-010",
-      "date": "2025-07-02",
-      "kind": "office visit",
-      "text": "Blood pressure check. 130 over 81 today, 130 over 81 on repeat. She has been taking the lisinopril 20 most days, admits to missing weekends. Low salt talk again. Keep the dose, recheck in 8 weeks."
-    },
-    {
-      "id": "note-011",
-      "date": "2025-08-03",
-      "kind": "office visit",
-      "text": "Follow-up on the abdomen. Went back over the operation, drains, the scar, recovery of four to six weeks. She understands this is skin and fat removal for the skin problems, not a tummy tuck. Vitals today 133 over 73, pulse 85. Rash is back again despite 11 months of the antifungal and barrier routine. Fold is red and weeping today. Weight 184 today, holding."
-    },
-    {
-      "id": "note-012",
-      "date": "2025-10-02",
-      "kind": "phone note",
-      "text": "She called asking where things stand with the insurance. Told her the paperwork went in and we are waiting to hear. Reviewed what to do in the meantime."
-    },
-    {
-      "id": "note-013",
-      "date": "2026-01-01",
-      "kind": "office visit",
-      "text": "Check-in while we wait on the insurance. No change in the complaints. Reviewed the risks and recovery one more time, she remains sure about going ahead."
-    },
-    {
-      "id": "note-014",
-      "date": "2026-01-26",
-      "kind": "office visit",
-      "text": "Ear fullness and muffled hearing on the left for a week after a cold. Canal clear, drum dull with fluid behind it, no infection. Serous otitis. Decongestant, swallow and yawn, recheck in three weeks if not better."
-    },
-    {
-      "id": "note-015",
-      "date": "2026-02-06",
-      "kind": "office visit",
-      "text": "A1c came back 6.5. Prediabetic range, same as last year. Walking program, cut the soda, recheck in six months. She is motivated."
-    },
-    {
-      "id": "note-016",
-      "date": "2026-02-18",
-      "kind": "office visit",
-      "text": "Trouble sleeping for a couple of months, falls asleep fine but wakes at three and lies there. No snoring per the spouse, no daytime naps, two cups of coffee before noon. Went over sleep hygiene, no screens in bed, cut the afternoon caffeine. Will hold off on medication for now."
-    },
-    {
-      "id": "note-017",
-      "date": "2026-04-06",
+      "id": "note-009",
+      "date": "2026-06-30",
       "kind": "office visit",
       "text": "Seasonal allergies acting up, itchy eyes, sneezing, clear drainage, worse outdoors. No wheeze. Cetirizine at night and the saline rinse. Fine with that."
     },
     {
-      "id": "note-018",
-      "date": "2026-04-24",
+      "id": "note-010",
+      "date": "2026-07-01",
+      "kind": "office visit",
+      "text": "Twisted the right ankle stepping off a curb 4 days ago. Swelling over the lateral malleolus, tender over the ATFL, can bear weight. Ottawa negative, no film. Brace, ice, ibuprofen, elevate. Should be fine in a couple weeks."
+    },
+    {
+      "id": "note-011",
+      "date": "2026-07-08",
       "kind": "phone note",
-      "text": "Called her with the cholesterol results. Total 223, LDL 152, HDL 58, triglycerides 169. Discussed diet and walking. She wants to try lifestyle first for six months before we talk about a statin. Agreed."
+      "text": "Patient called about a tick bite on the calf after a hike. Tick removed whole, no rash, no fever. Watch for a bull's-eye rash or flu symptoms over the next month and call if either shows up."
+    },
+    {
+      "id": "note-012",
+      "date": "2026-07-10",
+      "kind": "radiation oncology note",
+      "text": "46 year old woman in radiation oncology consultation. Reviewed the role of whole-breast radiation after lumpectomy, hypofractionation, and the left-sided heart question. She is anxious about the heart and asked good questions. Her history otherwise: osteoarthritis of the hands. Allergies: codeine makes her sick. Quit smoking 13 years ago, no alcohol, drives for a living. Family history noncontributory for what we are talking about today. Status post left lumpectomy for a 0.9 centimeter invasive ductal carcinoma, node negative. Adjuvant whole-breast radiation recommended, then endocrine therapy."
+    },
+    {
+      "id": "note-013",
+      "date": "2026-07-10",
+      "kind": "office visit",
+      "text": "Annual physical. Feels well overall. Sleeping fine, appetite fine, no chest pain, no shortness of breath. Flu shot given in the left arm today. Due for a tetanus booster, she will think about it. Labs ordered, fasting."
+    },
+    {
+      "id": "note-014",
+      "date": "2026-07-16",
+      "kind": "outside letter",
+      "text": "Optometry report forwarded for the record. Routine refraction, mild astigmatism, new glasses prescribed, retinas healthy, pressures 17 and 19. No ocular pathology noted."
+    },
+    {
+      "id": "note-015",
+      "date": "2026-07-17",
+      "kind": "office visit",
+      "text": "Follow-up to answer questions with her husband. Reviewed the breath-hold technique we will try at simulation. Consent signed. Vitals today 134 over 73, pulse 82."
+    },
+    {
+      "id": "note-016",
+      "date": "2026-07-19",
+      "kind": "radiation oncology note",
+      "text": "Simulation. Supine on the breast board, left arm up, deep inspiration breath hold attempted and reproducible to 3 millimeters. CT acquired, isocenter set, skin marks placed. Heart sits close to the chest wall even in breath hold."
+    },
+    {
+      "id": "note-017",
+      "date": "2026-07-22",
+      "kind": "office visit",
+      "text": "Vitamin D came back 20. Started 2000 units daily, recheck in three months. Also talked about calcium from food rather than pills."
+    },
+    {
+      "id": "note-018",
+      "date": "2026-07-22",
+      "kind": "phone note",
+      "text": "Pharmacy called about the refill on the omeprazole 40. Approved 90 days. She mentioned the heartburn is better since cutting back on coffee."
     },
     {
       "id": "note-019",
-      "date": "2026-04-25",
-      "kind": "preoperative visit",
-      "text": "Pre-op. Consent signed. Marked the resection with her standing. Nicotine negative. Hold the metformin the morning of."
+      "date": "2026-07-23",
+      "kind": "dosimetry note",
+      "text": "Comparative plans, left breast, 42.56 Gy in 16 fractions. Three-dimensional conformal tangents with a heart block: mean heart dose 6.7 Gy, left anterior descending maximum 36 Gy, ipsilateral lung V20 23 percent. The 3D plan fails the heart constraint. Intensity modulated plan: mean heart dose 1.8 Gy, lung V20 13 percent, target coverage 95 percent of the volume at 95 percent of the dose. IMRT required to meet constraints."
+    },
+    {
+      "id": "note-020",
+      "date": "2026-07-25",
+      "kind": "radiation oncology note",
+      "text": "Treatment planning note. Prescription: whole left breast 42.56 Gy in 16 fractions of 2.66 Gy, lumpectomy cavity boost 10 Gy in 4 fractions. Target volumes contoured on the simulation scan, plan reviewed and approved today."
     }
   ],
   "expected": {
-    "warranted": false,
-    "subtype": "wrong-remedy",
+    "warranted": true,
     "criteriaMet": [
       "crit-1",
       "crit-2",
-      "crit-3",
-      "crit-4"
+      "crit-3"
     ],
     "support": {
       "crit-1": [
-        "note-008"
+        "note-007",
+        "note-012"
       ],
       "crit-2": [
-        "note-008",
-        "note-011"
+        "note-019"
       ],
       "crit-3": [
-        "note-008",
-        "note-011"
-      ],
-      "crit-4": [
-        "note-008"
+        "note-020"
       ]
     },
     "distractors": [
@@ -184,15 +184,15 @@
       "note-003",
       "note-004",
       "note-006",
-      "note-007",
+      "note-008",
       "note-009",
       "note-010",
+      "note-011",
+      "note-013",
       "note-014",
-      "note-015",
-      "note-016",
       "note-017",
       "note-018"
     ],
-    "note": "CARC 119 is an administrative denial the chart cannot answer: the remedy is a benefits dispute under the plan document, not a medical necessity appeal."
+    "note": "The chart documents every criterion; the CARC 50 denial can be answered from the record."
   }
 }

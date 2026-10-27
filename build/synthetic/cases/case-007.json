@@ -1,13 +1,17 @@
 {
   "id": "case-007",
+  "category": "post-acute care",
+  "setting": "post-acute",
+  "stakesUsd": 25000,
   "patient": {
     "alias": "SYN-007",
-    "age": 40,
-    "sex": "male"
+    "age": 75,
+    "sex": "female"
   },
   "procedure": {
-    "cpt": "30520",
-    "description": "septoplasty with or without cartilage scoring, contouring, or replacement with graft"
+    "code": "0104",
+    "codeSystem": "CMG",
+    "description": "inpatient rehabilitation facility admission, stroke"
   },
   "payer": {
     "name": "Silverline Medicare Advantage",
@@ -16,149 +20,177 @@
   "denial": {
     "carc": "50",
     "carcText": "These are non-covered services because this is not deemed a 'medical necessity' by the payer.",
-    "text": "Silverline Medicare Advantage denied the claim for CPT 30520 (septoplasty with or without cartilage scoring, contouring, or replacement with graft) with date of service 2026-05-10. CARC 50: These are non-covered services because this is not deemed a 'medical necessity' by the payer. Payer remark: Documentation does not establish failure of medical management or an anatomic obstruction.",
-    "dateOfService": "2026-05-10"
+    "rarc": "N10",
+    "text": "Silverline Medicare Advantage denied the claim for CMG 0104 (inpatient rehabilitation facility admission, stroke) with dates of service 2026-06-07 through 2026-06-21. CARC 50: These are non-covered services because this is not deemed a 'medical necessity' by the payer. RARC N10: Adjustment based on the findings of a review organization. Payer remark: Documentation does not demonstrate that the member required the intensity of services provided in an inpatient rehabilitation facility; the member’s needs could have been met at a skilled nursing facility level of care.",
+    "dateOfService": "2026-06-07",
+    "serviceEnd": "2026-06-21"
   },
   "criteria": [
     {
       "id": "crit-1",
-      "text": "Nasal airway obstruction symptoms persisting for at least 3 months."
+      "text": "Requires active and ongoing intervention of at least two therapy disciplines, one of which is physical or occupational therapy."
     },
     {
       "id": "crit-2",
-      "text": "Failure of at least 4 weeks of an intranasal corticosteroid together with an oral or intranasal antihistamine."
+      "text": "Requires, and can reasonably be expected to actively participate in, an intensive rehabilitation program: generally at least 3 hours of therapy per day at least 5 days per week."
     },
     {
       "id": "crit-3",
-      "text": "Physical examination or imaging documenting septal deviation obstructing the nasal airway, with symptoms not explained by mucosal disease alone."
+      "text": "Reasonably expected to make measurable functional improvement of practical value within a prescribed period, documented against goals in an individualized plan of care."
+    },
+    {
+      "id": "crit-4",
+      "text": "Requires supervision by a rehabilitation physician with face-to-face visits at least 3 days per week to manage medical and rehabilitation needs."
+    },
+    {
+      "id": "crit-5",
+      "text": "The patient’s needs cannot be met at a less intensive level of care, such as a skilled nursing facility."
     }
   ],
   "chart": [
     {
       "id": "note-001",
-      "date": "2025-07-02",
-      "kind": "phone note",
-      "text": "Patient called about a tick bite on the shoulder after a hike. Tick removed whole, no rash, no fever. Watch for a bull's-eye rash or flu symptoms over the next month and call if either shows up."
+      "date": "2026-06-06",
+      "kind": "preadmission screening",
+      "text": "Preadmission screening. 75 year old woman with an acute left middle cerebral artery ischemic stroke 5 days ago, NIHSS 11, dense right hemiparesis, right neglect, and oropharyngeal dysphagia on a modified diet. Needs PT for transfers and gait, OT for right upper extremity and self-care, and SLP for swallowing and cognition. Premorbidly independent, lives with her spouse in a single-level home. A skilled nursing facility would not provide the daily physician oversight she needs for the blood pressure lability and the dysphagia, nor three disciplines at this intensity. Recommend inpatient rehabilitation."
     },
     {
       "id": "note-002",
-      "date": "2025-07-13",
-      "kind": "outside letter",
-      "text": "From the referring physician: please evaluate for surgical management. We have exhausted what we can do in primary care and the patient is motivated. Recent labs enclosed, all within normal limits."
+      "date": "2026-06-07",
+      "kind": "history and physical",
+      "text": "Admitted to inpatient rehabilitation from the acute hospital. History otherwise hypertension, hyperlipidemia, remote smoking history. Medications reconciled. Code status full. Post-admission physician evaluation. Confirms the preadmission findings. Three disciplines ordered: PT, OT, and SLP, each to evaluate within 24 hours. She was sitting up at the edge of the bed with the acute PT and tolerated 45 minute sessions there without fatigue. I expect her to tolerate three hours a day. Prognosis for functional gains is good given premorbid independence and intact comprehension. Goals in 14 days: supervision level transfers, 150 feet with a hemi-walker, modified independent feeding, regular diet with thin liquids."
     },
     {
       "id": "note-003",
-      "date": "2025-07-17",
-      "kind": "office visit",
-      "text": "A1c came back 6.2. Prediabetic range, same as last year. Walking program, cut the soda, recheck in six months. He is motivated."
+      "date": "2026-06-08",
+      "kind": "therapy note",
+      "text": "PT evaluation. Transfers maximal assist of two, sit to stand with right knee buckling, unable to ambulate. Sitting balance fair, standing balance poor. Goals set, plan 5 to 6 days a week."
     },
     {
       "id": "note-004",
-      "date": "2025-08-12",
-      "kind": "office visit",
-      "text": "40 year old man here for nasal obstruction. Broke the nose playing ball as a teenager, never fixed. Discussed septoplasty, possible turbinate reduction, recovery of a week or so. His history otherwise: hypertension on lisinopril, reflux on omeprazole as needed. Surgeries: tonsils as a kid. Allergies: codeine makes him sick. Never smoked, occasional beer, lives with his spouse. Family history noncontributory for what we are talking about today. Cannot breathe through the left side for going on 11 months, mouth-breathes at night, his spouse says the snoring is worse. He has been on fluticasone two sprays each side daily plus loratadine since his PCP started them, says it does nothing for the left side. Anterior rhinoscopy: septum deviated to the left with a caudal spur contacting the inferior turbinate, left airway maybe 36 percent of the right. Turbinates decongest fine with oxymetazoline, the left side does not open up."
+      "date": "2026-06-08",
+      "kind": "therapy note",
+      "text": "OT evaluation. right upper extremity flaccid with trace shoulder shrug, dependent for dressing and bathing, maximal assist for grooming, right neglect on cancellation testing. Goals set."
     },
     {
       "id": "note-005",
-      "date": "2025-08-16",
-      "kind": "phone note",
-      "text": "Called his with the cholesterol results. Total 205, LDL 125, HDL 59, triglycerides 135. Discussed diet and walking. He wants to try lifestyle first for six months before we talk about a statin. Agreed."
+      "date": "2026-06-08",
+      "kind": "therapy note",
+      "text": "SLP evaluation. Oropharyngeal dysphagia with delayed swallow and throat clearing on thin liquids, mechanical soft and nectar thick recommended. Mild word-finding difficulty, follows two-step commands. Goals set."
     },
     {
       "id": "note-006",
-      "date": "2025-09-16",
-      "kind": "office visit",
-      "text": "Trouble sleeping for a couple of months, falls asleep fine but wakes at three and lies there. No snoring per the spouse, no daytime naps, two cups of coffee before noon. Went over sleep hygiene, no screens in bed, cut the afternoon caffeine. Will hold off on medication for now."
+      "date": "2026-06-08",
+      "kind": "nursing note",
+      "text": "Skin assessment on admission. Braden 18. Skin intact, no pressure injury, heels floated. Turn every two hours while in bed. Barrier cream to the sacrum as a precaution."
     },
     {
       "id": "note-007",
-      "date": "2025-09-22",
-      "kind": "phone note",
-      "text": "Thyroid labs back. TSH 1.7, free T4 normal. No change to the levothyroxine 50. Repeat in a year."
+      "date": "2026-06-10",
+      "kind": "hospital progress note",
+      "text": "Rehab physician progress note, day 3, seen face to face. Blood pressure labile, 168 over 94 this morning, 112 over 70 last night with lightheadedness in therapy; adjusted the amlodipine timing. Dysphagia diet reviewed with SLP. right shoulder pain with range of motion, added a sling for transfers."
     },
     {
       "id": "note-008",
-      "date": "2025-09-24",
-      "kind": "imaging",
-      "text": "CT sinus without contrast: leftward septal deviation with a bony spur abutting the left inferior turbinate, no significant sinus disease, no polyps."
+      "date": "2026-06-10",
+      "kind": "nursing note",
+      "text": "Dentures labeled and placed in the denture cup at the bedside. Patient prefers them out at night. Oral care done."
     },
     {
       "id": "note-009",
-      "date": "2025-09-30",
-      "kind": "office visit",
-      "text": "Mole on the upper back that his spouse noticed. About 5 millimeters, even color, regular border, no change he is aware of. Looks benign. Photo in the chart for comparison, recheck in a year or sooner if it changes."
+      "date": "2026-06-11",
+      "kind": "nursing note",
+      "text": "Chaplain visited at the patient's request, about twenty minutes. She appreciated the visit. No needs identified."
     },
     {
       "id": "note-010",
-      "date": "2025-10-14",
-      "kind": "office visit",
-      "text": "Follow-up on the nose. Reviewed the imaging with him. Still wants to proceed. Vitals today 121 over 88, pulse 88. 6 weeks on the fluticasone and loratadine now, used it every day per him, no change in the left sided obstruction."
+      "date": "2026-06-11",
+      "kind": "medication record",
+      "text": "Pharmacy note. Renal dosing reviewed, creatinine 1.2, no adjustments needed today. Home medication list reconciled with the daughter by phone, one duplicate statin removed."
     },
     {
       "id": "note-011",
-      "date": "2025-11-21",
-      "kind": "office visit",
-      "text": "Seasonal allergies acting up, itchy eyes, sneezing, clear drainage, worse outdoors. No wheeze. Cetirizine at night and the saline rinse. Fine with that."
+      "date": "2026-06-13",
+      "kind": "therapy note",
+      "text": "Week one therapy minutes: PT 90, OT 75, SLP 30 daily, 195 minutes a day on 6 of 7 days. Tolerating sessions, asking for more, no sessions refused or cut short for fatigue."
     },
     {
       "id": "note-012",
-      "date": "2025-11-23",
-      "kind": "phone note",
-      "text": "He called asking where things stand with the insurance. Told him the paperwork went in and we are waiting to hear. Reviewed what to do in the meantime."
+      "date": "2026-06-13",
+      "kind": "nursing note",
+      "text": "Daily weight 151 pounds, up 1 from yesterday. Intake and output recorded. Repositioned per schedule, skin checked."
     },
     {
       "id": "note-013",
-      "date": "2025-12-25",
-      "kind": "office visit",
-      "text": "Annual physical. Feels well overall. Sleeping fine, appetite fine, no chest pain, no shortness of breath. Flu shot given in the left arm today. Due for a tetanus booster, he will think about it. Labs ordered, fasting."
+      "date": "2026-06-14",
+      "kind": "team conference",
+      "text": "Team conference, day 7. Transfers improved from maximal assist of two to minimal assist of one. Gait 25 feet to 80 feet with a hemi-walker and contact guard. Swallow advanced to mechanical soft with nectar liquids. On track for the 14 day goals, continue."
     },
     {
       "id": "note-014",
-      "date": "2026-01-23",
-      "kind": "office visit",
-      "text": "Low back strain after moving furniture over the weekend. No radiation down the legs, no numbness, no bowel or bladder trouble. Paraspinal tenderness, straight leg raise negative. Heat, keep moving, ibuprofen with food for a week. Should settle."
+      "date": "2026-06-14",
+      "kind": "nursing note",
+      "text": "Glucose checks before meals and at bedtime, ranging 130 to 167. Sliding scale given per protocol. Patient's own glucometer at bedside, sent home with family for safekeeping."
     },
     {
       "id": "note-015",
-      "date": "2026-02-03",
-      "kind": "office visit",
-      "text": "Check-in while we wait on the insurance. No change in the complaints. Reviewed the risks and recovery one more time, he remains sure about going ahead."
+      "date": "2026-06-15",
+      "kind": "nursing note",
+      "text": "Patient requested something for sleep. Melatonin 3 milligrams given per order at 2130. Slept in two-hour stretches per night shift report."
     },
     {
       "id": "note-016",
-      "date": "2026-02-13",
-      "kind": "outside letter",
-      "text": "Dermatology consult note received. Two actinic keratoses on the forehead treated with cryotherapy. Annual skin check recommended, sunscreen counseling done."
+      "date": "2026-06-16",
+      "kind": "nursing note",
+      "text": "Potassium 3.2 this morning, repleted with 20 milliequivalents oral per protocol. Recheck with morning labs."
     },
     {
       "id": "note-017",
-      "date": "2026-03-16",
-      "kind": "office visit",
-      "text": "Twisted the left ankle stepping off a curb 4 days ago. Swelling over the lateral malleolus, tender over the ATFL, can bear weight. Ottawa negative, no film. Brace, ice, ibuprofen, elevate. Should be fine in a couple weeks."
+      "date": "2026-06-17",
+      "kind": "hospital progress note",
+      "text": "Rehab physician progress note, day 10, seen face to face. Blood pressure steadier on the new schedule. Bladder scan residuals under 100, catheter out. Spasticity in the right hand, started a night splint. Reviewed therapy progress with the team."
     },
     {
       "id": "note-018",
-      "date": "2026-03-24",
-      "kind": "office visit",
-      "text": "Here with a cough and congestion for 4 days, low grade temp at home, no shortness of breath. Lungs clear, throat a little red, ears fine. Looks viral. Fluids, rest, honey for the cough, come back if he gets a fever over 101 or it goes past two weeks."
+      "date": "2026-06-17",
+      "kind": "nursing note",
+      "text": "IV site rotated from the left forearm to the right hand, old site without redness. Dressing dated. Patient tolerated well."
     },
     {
       "id": "note-019",
-      "date": "2026-03-24",
-      "kind": "office visit",
-      "text": "Knee pain going down stairs, left side, no injury, no locking or giving way. Patellar grind positive, no effusion, ligaments stable. Patellofemoral pain. Quad strengthening sheet, ice after activity, cushioned shoes."
+      "date": "2026-06-18",
+      "kind": "consult note",
+      "text": "Dietitian consult. Regular diet with no added salt modification. Intake about 59 percent of meals. Supplement shake twice daily added. Will follow."
     },
     {
       "id": "note-020",
-      "date": "2026-04-02",
-      "kind": "phone note",
-      "text": "Pharmacy called about the refill on the omeprazole 20. Approved 90 days. He mentioned the heartburn is better since cutting back on coffee."
+      "date": "2026-06-18",
+      "kind": "consult note",
+      "text": "Social work met with the patient and her daughter to confirm the home address, the primary contact, and transportation for follow-up appointments. No barriers identified today."
     },
     {
       "id": "note-021",
-      "date": "2026-04-21",
-      "kind": "preoperative visit",
-      "text": "Pre-op. Consent signed, septoplasty with possible inferior turbinate reduction. No aspirin for ten days."
+      "date": "2026-06-19",
+      "kind": "nursing note",
+      "text": "Bowel regimen started, senna and docusate at bedtime. Last bowel movement 3 days ago per patient. Encouraged fluids and ambulation as able."
+    },
+    {
+      "id": "note-022",
+      "date": "2026-06-19",
+      "kind": "medication record",
+      "text": "Home levothyroxine resumed at the home dose this morning after review with the attending. No interactions flagged."
+    },
+    {
+      "id": "note-023",
+      "date": "2026-06-19",
+      "kind": "consult note",
+      "text": "Audiology screen at nursing's request. She wears a hearing aid on the left, battery replaced, hears conversational voice well now. No further needs."
+    },
+    {
+      "id": "note-024",
+      "date": "2026-06-21",
+      "kind": "discharge summary",
+      "text": "Discharge summary, day 14. Transfers supervision, ambulating 160 feet with a hemi-walker and supervision, regular diet with thin liquids, feeding modified independent. Home with spouse, home health PT and OT arranged."
     }
   ],
   "expected": {
@@ -166,36 +198,46 @@
     "criteriaMet": [
       "crit-1",
       "crit-2",
-      "crit-3"
+      "crit-3",
+      "crit-4",
+      "crit-5"
     ],
     "support": {
       "crit-1": [
-        "note-004"
+        "note-001",
+        "note-002"
       ],
       "crit-2": [
-        "note-004",
-        "note-010"
+        "note-002",
+        "note-011"
       ],
       "crit-3": [
-        "note-004",
-        "note-008"
+        "note-002",
+        "note-013"
+      ],
+      "crit-4": [
+        "note-007",
+        "note-017"
+      ],
+      "crit-5": [
+        "note-001"
       ]
     },
     "distractors": [
-      "note-001",
-      "note-003",
-      "note-005",
       "note-006",
-      "note-007",
+      "note-008",
       "note-009",
-      "note-011",
-      "note-013",
+      "note-010",
+      "note-012",
       "note-014",
+      "note-015",
       "note-016",
-      "note-017",
       "note-018",
       "note-019",
-      "note-020"
+      "note-020",
+      "note-021",
+      "note-022",
+      "note-023"
     ],
     "note": "The chart documents every criterion; the CARC 50 denial can be answered from the record."
   }

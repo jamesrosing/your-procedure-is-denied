@@ -1,220 +1,228 @@
 {
   "id": "case-021",
+  "category": "inpatient level of care",
+  "setting": "inpatient",
+  "stakesUsd": 12000,
   "patient": {
     "alias": "SYN-021",
-    "age": 44,
+    "age": 76,
     "sex": "female"
   },
   "procedure": {
-    "cpt": "15877",
-    "description": "suction assisted lipectomy, trunk and lower extremities, for lipedema"
+    "code": "871",
+    "codeSystem": "MS-DRG",
+    "description": "inpatient admission, septicemia or severe sepsis without mechanical ventilation over 96 hours, with major complication or comorbidity"
   },
   "payer": {
-    "name": "Copperfield Health",
-    "planType": "commercial EPO"
+    "name": "Saltmarsh Benefits Administrators",
+    "planType": "self-funded employer plan"
   },
   "denial": {
     "carc": "50",
     "carcText": "These are non-covered services because this is not deemed a 'medical necessity' by the payer.",
-    "text": "Copperfield Health denied the claim for CPT 15877 (suction assisted lipectomy, trunk and lower extremities, for lipedema) with date of service 2026-06-25. CARC 50: These are non-covered services because this is not deemed a 'medical necessity' by the payer. Payer remark: Documentation does not establish failure of conservative therapy.",
-    "dateOfService": "2026-06-25"
+    "rarc": "N10",
+    "text": "Saltmarsh Benefits Administrators denied the claim for MS-DRG 871 (inpatient admission, septicemia or severe sepsis without mechanical ventilation over 96 hours, with major complication or comorbidity) with dates of service 2026-02-04 through 2026-02-08. CARC 50: These are non-covered services because this is not deemed a 'medical necessity' by the payer. RARC N10: Adjustment based on the findings of a review organization. Payer remark: Inpatient level of care is not supported by the clinical documentation. Observation services were appropriate for the services rendered; the claim is denied as billed.",
+    "dateOfService": "2026-02-04",
+    "serviceEnd": "2026-02-08"
   },
   "criteria": [
     {
       "id": "crit-1",
-      "text": "Diagnosis of lipedema stage II or III documented on examination: bilateral symmetric disproportionate adiposity of the limbs sparing the feet, negative Stemmer sign, tenderness, and easy bruising."
+      "text": "Sepsis documented by a suspected or confirmed infection with at least two systemic inflammatory response criteria or a qSOFA score of 2 or more, together with evidence of hypoperfusion or organ dysfunction such as a lactate of 2 or more or hypotension."
     },
     {
       "id": "crit-2",
-      "text": "At least 3 months of conservative therapy including compression garments and manual lymphatic drainage or supervised exercise, with persistent pain or functional impairment."
+      "text": "Treatment required inpatient-level resources: intravenous fluid resuscitation of 30 mL/kg, broad-spectrum intravenous antibiotics, serial lactate measurement, and continuous hemodynamic monitoring."
     },
     {
       "id": "crit-3",
-      "text": "Pain or impaired mobility attributable to lipedema."
+      "text": "At the time of the admission order, the admitting physician documented a reasonable expectation that care would span at least two midnights, and the actual stay met that expectation or was shortened by an unforeseen event."
+    },
+    {
+      "id": "crit-4",
+      "text": "The condition could not be safely treated with outpatient or observation services."
     }
   ],
   "chart": [
     {
       "id": "note-001",
-      "date": "2025-08-10",
-      "kind": "phone note",
-      "text": "Work note requested for a sick day last Thursday. Faxed to the employer."
+      "date": "2026-02-04",
+      "kind": "emergency department note",
+      "text": "76 year old woman brought in by her daughter with two days of fever, chills, and left-sided back pain, poor oral intake since yesterday. History of hypertension and chronic kidney disease. On arrival temperature 39.2, heart rate 118, respiratory rate 24, blood pressure 86 over 50, oxygen saturation 94 percent on room air. Looks sick. Left flank tenderness, urine cloudy. Working diagnosis pyelonephritis with sepsis."
     },
     {
       "id": "note-002",
-      "date": "2025-08-15",
-      "kind": "outside letter",
-      "text": "Optometry report forwarded for the record. Routine refraction, mild astigmatism, new glasses prescribed, retinas healthy, pressures 17 and 15. No ocular pathology noted."
+      "date": "2026-02-04",
+      "kind": "history and physical",
+      "text": "Admission history and physical. Assessment: pyelonephritis. Plan as above. Family updated at the bedside. 2.25 liters of lactated Ringer’s given as a 30 per kilo bolus in the department, piperacillin-tazobactam started within the hour. Repeat lactate every 6 hours until cleared, telemetry, strict intake and output, hold the lisinopril. Admit inpatient. I expect this admission to span at least two midnights: she needs 48 hours of intravenous antibiotics pending cultures, lactate clearance, and recovery of renal function before any oral step-down is safe."
     },
     {
       "id": "note-003",
-      "date": "2025-08-17",
-      "kind": "phone note",
-      "text": "Thyroid labs back. TSH 1.4, free T4 normal. No change to the levothyroxine 50. Repeat in a year."
+      "date": "2026-02-04",
+      "kind": "laboratory result",
+      "text": "Lactate 4.1. White count 16.1 with 12 percent bands. Creatinine 1.8, baseline 1.0 from last year. Urinalysis: many white cells, nitrite positive. Blood and urine cultures sent."
     },
     {
       "id": "note-004",
-      "date": "2025-08-30",
-      "kind": "phone note",
-      "text": "Patient called about a tick bite on the shoulder after a hike. Tick removed whole, no rash, no fever. Watch for a bull's-eye rash or flu symptoms over the next month and call if either shows up."
+      "date": "2026-02-04",
+      "kind": "nursing note",
+      "text": "Daily weight 196 pounds, up 0 from yesterday. Intake and output recorded. Repositioned per schedule, skin checked."
     },
     {
       "id": "note-005",
-      "date": "2025-09-04",
-      "kind": "outside letter",
-      "text": "From the referring physician: please evaluate for surgical management. We have exhausted what we can do in primary care and the patient is motivated. Recent labs enclosed, all within normal limits."
+      "date": "2026-02-04",
+      "kind": "nursing note",
+      "text": "Bowel regimen started, senna and docusate at bedtime. Last bowel movement 3 days ago per patient. Encouraged fluids and ambulation as able."
     },
     {
       "id": "note-006",
-      "date": "2025-09-16",
-      "kind": "office visit",
-      "text": "44 year old woman here about her legs, self-referred after reading about lipedema. Mother and aunt had the same legs. Discussed lymph-sparing liposuction, staged, and that it is debulking, not a cure. Her history otherwise: migraines, rare now, mild asthma, albuterol maybe twice a year. Surgeries: no prior surgery. Allergies: penicillin, rash. Does not smoke, a glass of wine on weekends, works from home. Family history noncontributory for what we are talking about today. Classic picture. Column legs out of all proportion to her waist, cuff sign at the ankles, feet spared, Stemmer negative, exquisitely tender to pinch over the thighs, bruises if you look at her. Stage 3. She bought some compression stockings online, not sure she wears them much. Has not done any lymphatic drainage. We talked about starting a real program. Says she cannot stand through a shift anymore, pain in the thighs is constant, stairs are hard because the legs knock together."
+      "date": "2026-02-04",
+      "kind": "nursing note",
+      "text": "Fall risk assessment completed, score 54, high risk. Bed alarm on, nonskid socks, call light within reach, hourly rounding. Family at bedside this evening."
     },
     {
       "id": "note-007",
-      "date": "2025-10-05",
-      "kind": "office visit",
-      "text": "Low back strain after moving furniture over the weekend. No radiation down the legs, no numbness, no bowel or bladder trouble. Paraspinal tenderness, straight leg raise negative. Heat, keep moving, ibuprofen with food for a week. Should settle."
+      "date": "2026-02-04",
+      "kind": "nursing note",
+      "text": "Potassium 3.1 this morning, repleted with 20 milliequivalents oral per protocol. Recheck with morning labs."
     },
     {
       "id": "note-008",
-      "date": "2025-10-05",
-      "kind": "outside letter",
-      "text": "Gastroenterology note received. Screening colonoscopy completed, two small polyps removed, benign on pathology, repeat in 5 years."
+      "date": "2026-02-05",
+      "kind": "nursing note",
+      "text": "Overnight: vital signs every 2 hours, two episodes of rigors, warm blankets, acetaminophen given. Tolerating sips. Urine output recorded hourly."
     },
     {
       "id": "note-009",
-      "date": "2025-11-18",
-      "kind": "office visit",
-      "text": "Vitamin D came back 22. Started 1000 units daily, recheck in three months. Also talked about calcium from food rather than pills."
+      "date": "2026-02-05",
+      "kind": "laboratory result",
+      "text": "Hospital day 2 labs. Lactate 2.1 at 12 hours. White count 15.0. Creatinine 1.9. Blood cultures: gram-negative rods in 2 of 2 bottles, identification pending."
     },
     {
       "id": "note-010",
-      "date": "2025-11-23",
-      "kind": "office visit",
-      "text": "Follow-up. Reviewed photos and measurements, legs unchanged. Went over the staged plan and the compression afterward. Vitals today 135 over 85, pulse 70."
+      "date": "2026-02-05",
+      "kind": "hospital progress note",
+      "text": "Hospital day 2. Not an observation candidate: blood pressure dipped to 84 over 48 overnight requiring a third liter, lactate 2.6 at 6 hours and 2.1 at 12 hours, creatinine 1.9 this morning. Continue intravenous antibiotics and fluids, nephrology aware."
     },
     {
       "id": "note-011",
-      "date": "2025-12-01",
-      "kind": "office visit",
-      "text": "Burning with urination for two days, going frequently, no fever, no back pain. Urine dip positive for leukocytes and nitrites. Nitrofurantoin for five days, push fluids, call if fever or flank pain."
+      "date": "2026-02-05",
+      "kind": "nursing note",
+      "text": "Pneumococcal vaccine status reviewed, up to date per state registry. Influenza vaccine offered and accepted, given left deltoid."
     },
     {
       "id": "note-012",
-      "date": "2025-12-09",
-      "kind": "phone note",
-      "text": "She called asking about travel vaccines for a trip in early summer. Advised hepatitis A and a typhoid booster, referred to the travel clinic. Nothing else needed from us."
+      "date": "2026-02-05",
+      "kind": "medication record",
+      "text": "Pharmacy note. Renal dosing reviewed, creatinine 0.8, no adjustments needed today. Home medication list reconciled with the daughter by phone, one duplicate statin removed."
     },
     {
       "id": "note-013",
-      "date": "2025-12-14",
-      "kind": "office visit",
-      "text": "A1c came back 6.4. Prediabetic range, same as last year. Walking program, cut the soda, recheck in six months. She is motivated."
+      "date": "2026-02-06",
+      "kind": "hospital progress note",
+      "text": "Hospital day 3. Improving. Temperature maximum 37.9, heart rate 92, blood pressure 108 over 66 without fluids since this morning. Lactate 1.6. Creatinine 1.5. Cultures pending speciation. Advance diet, continue intravenous antibiotics."
     },
     {
       "id": "note-014",
-      "date": "2026-01-02",
-      "kind": "outside letter",
-      "text": "Dermatology consult note received. Two actinic keratoses on the forehead treated with cryotherapy. Annual skin check recommended, sunscreen counseling done."
+      "date": "2026-02-06",
+      "kind": "nursing note",
+      "text": "Day 3 nursing. Ambulated in the hall with standby assistance twice, tolerating a regular diet, voiding without difficulty, pain 2 out of 10. Intravenous antibiotics infusing on schedule."
     },
     {
       "id": "note-015",
-      "date": "2026-01-27",
-      "kind": "phone note",
-      "text": "Nurse call. Patient had questions about time off work after surgery and whether she needs someone at home the first night. Answered both, she will arrange it."
+      "date": "2026-02-06",
+      "kind": "consult note",
+      "text": "Dietitian consult. Regular diet with no added salt modification. Intake about 60 percent of meals. Supplement shake twice daily added. Will follow."
     },
     {
       "id": "note-016",
-      "date": "2026-01-28",
-      "kind": "office visit",
-      "text": "Trouble sleeping for a couple of months, falls asleep fine but wakes at three and lies there. No snoring per the spouse, no daytime naps, two cups of coffee before noon. Went over sleep hygiene, no screens in bed, cut the afternoon caffeine. Will hold off on medication for now."
+      "date": "2026-02-06",
+      "kind": "nursing note",
+      "text": "IV site rotated from the left forearm to the right hand, old site without redness. Dressing dated. Patient tolerated well."
     },
     {
       "id": "note-017",
-      "date": "2026-03-16",
-      "kind": "office visit",
-      "text": "Interval visit. Nothing new since last time, symptoms as described before, she is managing. Went over the plan again and answered questions from her spouse."
+      "date": "2026-02-06",
+      "kind": "consult note",
+      "text": "Audiology screen at nursing's request. She wears a hearing aid on the right, battery replaced, hears conversational voice well now. No further needs."
     },
     {
       "id": "note-018",
-      "date": "2026-03-18",
-      "kind": "office visit",
-      "text": "Ear fullness and muffled hearing on the right for a week after a cold. Canal clear, drum dull with fluid behind it, no infection. Serous otitis. Decongestant, swallow and yawn, recheck in three weeks if not better."
+      "date": "2026-02-07",
+      "kind": "medication record",
+      "text": "Home levothyroxine resumed at the home dose this morning after review with the attending. No interactions flagged."
     },
     {
       "id": "note-019",
-      "date": "2026-03-30",
-      "kind": "office visit",
-      "text": "Here with a cough and congestion for 4 days, low grade temp at home, no shortness of breath. Lungs clear, throat a little red, ears fine. Looks viral. Fluids, rest, honey for the cough, come back if she gets a fever over 101 or it goes past two weeks."
+      "date": "2026-02-07",
+      "kind": "consult note",
+      "text": "Social work met with the patient and her son to confirm the home address, the primary contact, and transportation for follow-up appointments. No barriers identified today."
     },
     {
       "id": "note-020",
-      "date": "2026-04-22",
-      "kind": "phone note",
-      "text": "Called her with the cholesterol results. Total 194, LDL 107, HDL 43, triglycerides 203. Discussed diet and walking. She wants to try lifestyle first for six months before we talk about a statin. Agreed."
+      "date": "2026-02-08",
+      "kind": "discharge summary",
+      "text": "Hospital day 4. Afebrile 36 hours, lactate 1.1, creatinine back to 1.1, cultures grew E. coli sensitive to cefpodoxime. Discharged home on oral antibiotics."
     },
     {
       "id": "note-021",
-      "date": "2026-05-21",
-      "kind": "office visit",
-      "text": "Blood pressure check. 139 over 79 today, 122 over 86 on repeat. She has been taking the lisinopril 40 most days, admits to missing weekends. Low salt talk again. Keep the dose, recheck in 6 weeks."
+      "date": "2026-02-08",
+      "kind": "nursing note",
+      "text": "Skin assessment on admission. Braden 17. Skin intact, no pressure injury, heels floated. Turn every two hours while in bed. Barrier cream to the sacrum as a precaution."
     },
     {
       "id": "note-022",
-      "date": "2026-06-04",
-      "kind": "preoperative visit",
-      "text": "Pre-op for stage one, thighs. Consent signed. Marked standing. Garments ordered."
+      "date": "2026-02-08",
+      "kind": "nursing note",
+      "text": "Chaplain visited at the patient's request, about twenty minutes. She appreciated the visit. No needs identified."
     },
     {
       "id": "note-023",
-      "date": "2026-06-05",
-      "kind": "office visit",
-      "text": "Annual physical. Feels well overall. Sleeping fine, appetite fine, no chest pain, no shortness of breath. Flu shot given in the left arm today. Due for a tetanus booster, she will think about it. Labs ordered, fasting."
-    },
-    {
-      "id": "note-024",
-      "date": "2026-06-16",
-      "kind": "office visit",
-      "text": "Seasonal allergies acting up, itchy eyes, sneezing, clear drainage, worse outdoors. No wheeze. Cetirizine at night and the saline rinse. Fine with that."
+      "date": "2026-02-08",
+      "kind": "nursing note",
+      "text": "Dentures labeled and placed in the denture cup at the bedside. Patient prefers them out at night. Oral care done."
     }
   ],
   "expected": {
-    "warranted": false,
-    "subtype": "near-miss",
+    "warranted": true,
     "criteriaMet": [
       "crit-1",
-      "crit-3"
+      "crit-2",
+      "crit-3",
+      "crit-4"
     ],
     "support": {
       "crit-1": [
-        "note-006"
+        "note-001",
+        "note-003"
       ],
-      "crit-2": [],
+      "crit-2": [
+        "note-002"
+      ],
       "crit-3": [
-        "note-006"
+        "note-002",
+        "note-020"
+      ],
+      "crit-4": [
+        "note-010"
       ]
     },
     "distractors": [
-      "note-001",
-      "note-002",
-      "note-003",
       "note-004",
+      "note-005",
+      "note-006",
       "note-007",
-      "note-008",
-      "note-009",
       "note-011",
       "note-012",
-      "note-013",
-      "note-014",
+      "note-015",
       "note-016",
+      "note-017",
       "note-018",
       "note-019",
-      "note-020",
       "note-021",
-      "note-023",
-      "note-024"
+      "note-022",
+      "note-023"
     ],
-    "note": "The chart raises crit-2 (conservative) but does not satisfy it; the mention is a plan or a shortfall, not completed treatment or a met threshold."
+    "note": "The chart documents every criterion; the CARC 50 denial can be answered from the record."
   }
 }

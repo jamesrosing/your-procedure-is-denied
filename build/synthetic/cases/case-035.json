@@ -1,207 +1,172 @@
 {
   "id": "case-035",
+  "category": "oncology",
+  "setting": "outpatient",
+  "stakesUsd": 3500,
   "patient": {
     "alias": "SYN-035",
-    "age": 65,
+    "age": 51,
     "sex": "female"
   },
   "procedure": {
-    "cpt": "15823",
-    "description": "bilateral upper eyelid blepharoplasty with excessive skin weighting down the lid"
+    "code": "81455",
+    "codeSystem": "CPT",
+    "description": "targeted genomic sequence analysis panel, solid organ neoplasm, 51 or more genes"
   },
   "payer": {
-    "name": "Lanternhill Health Plan",
-    "planType": "commercial HMO"
+    "name": "Copperfield Health",
+    "planType": "commercial EPO"
   },
   "denial": {
-    "carc": "96",
-    "carcText": "Non-covered charge(s).",
-    "rarc": "N130",
-    "text": "Lanternhill Health Plan denied the claim for CPT 15823 (bilateral upper eyelid blepharoplasty with excessive skin weighting down the lid) with date of service 2026-05-07. CARC 96: Non-covered charge(s). RARC N130: Consult plan benefit documents/guidelines for information about restrictions for this service. Payer remark: Eyelid surgery is considered cosmetic in the absence of documented visual impairment.",
-    "dateOfService": "2026-05-07"
+    "carc": "56",
+    "carcText": "Procedure/treatment is deemed experimental/investigational by the payer.",
+    "text": "Copperfield Health denied the claim for CPT 81455 (targeted genomic sequence analysis panel, solid organ neoplasm, 51 or more genes) with date of service 2026-01-25. CARC 56: Procedure/treatment is deemed experimental/investigational by the payer. Payer remark: Multi-gene panel testing is considered investigational for this diagnosis based on the documentation submitted.",
+    "dateOfService": "2026-01-25"
   },
   "criteria": [
     {
       "id": "crit-1",
-      "text": "Automated visual field testing demonstrating at least 30 percent loss of the superior visual field, with improvement when the upper lids are taped."
+      "text": "Recurrent, relapsed, refractory, metastatic, or advanced stage III or IV cancer."
     },
     {
       "id": "crit-2",
-      "text": "Photographs documenting redundant upper lid skin resting on or over the lashes, or a margin reflex distance 1 of 2 millimeters or less."
+      "text": "The patient is seeking further cancer treatment and the result will inform the selection of therapy."
     },
     {
       "id": "crit-3",
-      "text": "A documented functional complaint such as difficulty reading or driving, loss of the superior field, or brow fatigue."
+      "text": "The same tumor panel has not previously been performed for this primary cancer."
+    },
+    {
+      "id": "crit-4",
+      "text": "The panel is an FDA-approved or cleared companion diagnostic, or its use is recommended by National Comprehensive Cancer Network guidelines for the tumor type (RAS, BRAF, HER2, microsatellite instability, and NTRK status for metastatic colorectal cancer)."
     }
   ],
   "chart": [
     {
       "id": "note-001",
-      "date": "2025-04-24",
+      "date": "2025-11-29",
       "kind": "phone note",
-      "text": "Work note requested for a sick day last Monday. Faxed to the employer."
+      "text": "Thyroid labs back. TSH 1.9, free T4 normal. No change to the levothyroxine 100. Repeat in a year."
     },
     {
       "id": "note-002",
-      "date": "2025-05-07",
-      "kind": "outside letter",
-      "text": "Referral letter from the primary care office. Thank you for seeing this patient of mine for surgical evaluation. Her history and medication list are attached. Please let me know what you recommend and whether anything is needed from our end for clearance."
-    },
-    {
-      "id": "note-003",
-      "date": "2025-05-12",
-      "kind": "office visit",
-      "text": "Burning with urination for two days, going frequently, no fever, no back pain. Urine dip positive for leukocytes and nitrites. Nitrofurantoin for five days, push fluids, call if fever or flank pain."
-    },
-    {
-      "id": "note-004",
-      "date": "2025-06-03",
-      "kind": "office visit",
-      "text": "65 year old woman sent over by her eye doctor for heavy upper lids. Exam: marked dermatochalasis both upper lids, skin hooding over the lashes laterally, brow ptosis mild, no true ptosis of the lid itself, levator function good. Discussed upper lid blepharoplasty. Her history otherwise: migraines, rare now. Surgeries: tonsils as a kid. Allergies: codeine makes her sick. Never smoked, occasional beer, has three kids at home. Family history noncontributory for what we are talking about today. She says she is lifting her brows all day to see, gets a headache by evening, has given up night driving, tilts her head back to read the paper."
-    },
-    {
-      "id": "note-005",
-      "date": "2025-06-15",
-      "kind": "phone note",
-      "text": "Pharmacy called about the refill on the omeprazole 40. Approved 90 days. She mentioned the heartburn is better since cutting back on coffee."
-    },
-    {
-      "id": "note-006",
-      "date": "2025-06-17",
+      "date": "2025-11-30",
       "kind": "outside letter",
       "text": "Letter from the dentist's office confirming routine cleaning and exam completed, no active infection, no dental work pending. Sent at our request for the surgical file."
     },
     {
-      "id": "note-007",
-      "date": "2025-06-24",
-      "kind": "visual field test",
-      "text": "Humphrey superior field, untaped: 16 degrees of superior field remaining on the right and 16 on the left, which works out to about 32 percent loss of the superior field. Taped: improves to 32 right and 34 left. Reliable test, fixation losses low."
-    },
-    {
-      "id": "note-008",
-      "date": "2025-07-10",
-      "kind": "office visit",
-      "text": "Twisted the left ankle stepping off a curb 6 days ago. Swelling over the lateral malleolus, tender over the ATFL, can bear weight. Ottawa negative, no film. Brace, ice, ibuprofen, elevate. Should be fine in a couple weeks."
-    },
-    {
-      "id": "note-009",
-      "date": "2025-07-20",
-      "kind": "office visit",
-      "text": "Knee pain going down stairs, left side, no injury, no locking or giving way. Patellar grind positive, no effusion, ligaments stable. Patellofemoral pain. Quad strengthening sheet, ice after activity, cushioned shoes."
-    },
-    {
-      "id": "note-010",
-      "date": "2025-07-21",
-      "kind": "office visit",
-      "text": "Seasonal allergies acting up, itchy eyes, sneezing, clear drainage, worse outdoors. No wheeze. Cetirizine at night and the saline rinse. Fine with that."
-    },
-    {
-      "id": "note-011",
-      "date": "2025-08-14",
-      "kind": "office visit",
-      "text": "Ear fullness and muffled hearing on the right for a week after a cold. Canal clear, drum dull with fluid behind it, no infection. Serous otitis. Decongestant, swallow and yawn, recheck in three weeks if not better."
-    },
-    {
-      "id": "note-012",
-      "date": "2025-08-22",
-      "kind": "office visit",
-      "text": "Back to review the testing. Went over the operation, bruising, the scar in the crease, the small chance of dry eye. She wants to go ahead. Vitals today 140 over 69, pulse 85."
-    },
-    {
-      "id": "note-013",
-      "date": "2025-08-22",
-      "kind": "photo documentation",
-      "text": "Frontal and lateral photos today, primary gaze, flash. Redundant upper lid skin draping onto the lashes on both sides. MRD1 about 2 millimeters right and 2 left."
-    },
-    {
-      "id": "note-014",
-      "date": "2025-08-29",
-      "kind": "office visit",
-      "text": "Low back strain after moving furniture over the weekend. No radiation down the legs, no numbness, no bowel or bladder trouble. Paraspinal tenderness, straight leg raise negative. Heat, keep moving, ibuprofen with food for a week. Should settle."
-    },
-    {
-      "id": "note-015",
-      "date": "2025-08-31",
-      "kind": "outside letter",
-      "text": "Mammogram report forwarded for the record. Bilateral screening, BI-RADS 1, negative, routine screening in one year."
-    },
-    {
-      "id": "note-016",
-      "date": "2025-09-18",
-      "kind": "office visit",
-      "text": "A1c came back 6.0. Prediabetic range, same as last year. Walking program, cut the soda, recheck in six months. She is motivated."
-    },
-    {
-      "id": "note-017",
-      "date": "2025-09-25",
-      "kind": "phone note",
-      "text": "Called her with the cholesterol results. Total 210, LDL 113, HDL 53, triglycerides 173. Discussed diet and walking. She wants to try lifestyle first for six months before we talk about a statin. Agreed."
-    },
-    {
-      "id": "note-018",
-      "date": "2025-10-03",
-      "kind": "phone note",
-      "text": "She called asking about travel vaccines for a trip in the fall. Advised hepatitis A and a typhoid booster, referred to the travel clinic. Nothing else needed from us."
-    },
-    {
-      "id": "note-019",
-      "date": "2025-10-18",
-      "kind": "office visit",
-      "text": "Mole on the left forearm that her spouse noticed. About 7 millimeters, even color, regular border, no change she is aware of. Looks benign. Photo in the chart for comparison, recheck in a year or sooner if it changes."
-    },
-    {
-      "id": "note-020",
-      "date": "2025-11-09",
-      "kind": "phone note",
-      "text": "Nurse call. Patient had questions about time off work after surgery and whether she needs someone at home the first night. Answered both, she will arrange it."
-    },
-    {
-      "id": "note-021",
-      "date": "2025-12-27",
-      "kind": "outside letter",
-      "text": "Dermatology consult note received. Two actinic keratoses on the forehead treated with cryotherapy. Annual skin check recommended, sunscreen counseling done."
-    },
-    {
-      "id": "note-022",
-      "date": "2026-01-13",
-      "kind": "office visit",
-      "text": "Interval visit. Nothing new since last time, symptoms as described before, she is managing. Went over the plan again and answered questions from her spouse."
-    },
-    {
-      "id": "note-023",
-      "date": "2026-01-31",
-      "kind": "office visit",
-      "text": "Blood pressure check. 123 over 82 today, 124 over 76 on repeat. She has been taking the lisinopril 20 most days, admits to missing weekends. Low salt talk again. Keep the dose, recheck in 6 weeks."
-    },
-    {
-      "id": "note-024",
-      "date": "2026-02-01",
-      "kind": "office visit",
-      "text": "Vitamin D came back 16. Started 1000 units daily, recheck in three months. Also talked about calcium from food rather than pills."
-    },
-    {
-      "id": "note-025",
-      "date": "2026-02-09",
+      "id": "note-003",
+      "date": "2025-12-01",
       "kind": "office visit",
       "text": "Annual physical. Feels well overall. Sleeping fine, appetite fine, no chest pain, no shortness of breath. Flu shot given in the left arm today. Due for a tetanus booster, she will think about it. Labs ordered, fasting."
     },
     {
-      "id": "note-026",
-      "date": "2026-03-27",
+      "id": "note-004",
+      "date": "2025-12-04",
       "kind": "phone note",
-      "text": "Patient called about a tick bite on the shoulder after a hike. Tick removed whole, no rash, no fever. Watch for a bull's-eye rash or flu symptoms over the next month and call if either shows up."
+      "text": "Patient called about a tick bite on the scalp after a hike. Tick removed whole, no rash, no fever. Watch for a bull's-eye rash or flu symptoms over the next month and call if either shows up."
     },
     {
-      "id": "note-027",
-      "date": "2026-04-26",
-      "kind": "preoperative visit",
-      "text": "Pre-op. Consent signed. Marked the skin excision sitting up. No blood thinners. Stop the fish oil."
+      "id": "note-005",
+      "date": "2025-12-07",
+      "kind": "office visit",
+      "text": "Burning with urination for two days, going frequently, no fever, no back pain. Urine dip positive for leukocytes and nitrites. Nitrofurantoin for five days, push fluids, call if fever or flank pain."
     },
     {
-      "id": "note-028",
-      "date": "2026-05-05",
+      "id": "note-006",
+      "date": "2025-12-13",
+      "kind": "office visit",
+      "text": "Knee pain going down stairs, left side, no injury, no locking or giving way. Patellar grind positive, no effusion, ligaments stable. Patellofemoral pain. Quad strengthening sheet, ice after activity, cushioned shoes."
+    },
+    {
+      "id": "note-007",
+      "date": "2025-12-20",
       "kind": "outside letter",
-      "text": "Optometry report forwarded for the record. Routine refraction, mild astigmatism, new glasses prescribed, retinas healthy, pressures 15 and 17. No ocular pathology noted."
+      "text": "From the referring physician: please evaluate and treat as you see fit. We have exhausted what we can do in primary care and the patient is motivated. Recent labs enclosed, all within normal limits."
+    },
+    {
+      "id": "note-008",
+      "date": "2025-12-20",
+      "kind": "outside letter",
+      "text": "Dermatology consult note received. Two actinic keratoses on the forehead treated with cryotherapy. Annual skin check recommended, sunscreen counseling done."
+    },
+    {
+      "id": "note-009",
+      "date": "2025-12-26",
+      "kind": "outside letter",
+      "text": "Mammogram report forwarded for the record. Bilateral screening, BI-RADS 1, negative, routine screening in one year."
+    },
+    {
+      "id": "note-010",
+      "date": "2025-12-29",
+      "kind": "phone note",
+      "text": "Pharmacy called about the refill on the omeprazole 20. Approved 90 days. She mentioned the heartburn is better since cutting back on coffee."
+    },
+    {
+      "id": "note-011",
+      "date": "2025-12-30",
+      "kind": "office visit",
+      "text": "Twisted the left ankle stepping off a curb 2 days ago. Swelling over the lateral malleolus, tender over the ATFL, can bear weight. Ottawa negative, no film. Brace, ice, ibuprofen, elevate. Should be fine in a couple weeks."
+    },
+    {
+      "id": "note-012",
+      "date": "2026-01-01",
+      "kind": "pathology report",
+      "text": "Sigmoid colon biopsy: invasive adenocarcinoma, moderately differentiated. Mismatch repair proteins intact by immunohistochemistry."
+    },
+    {
+      "id": "note-013",
+      "date": "2026-01-02",
+      "kind": "office visit",
+      "text": "Mole on the upper back that her spouse noticed. About 7 millimeters, even color, regular border, no change she is aware of. Looks benign. Photo in the chart for comparison, recheck in a year or sooner if it changes."
+    },
+    {
+      "id": "note-014",
+      "date": "2026-01-05",
+      "kind": "office visit",
+      "text": "Trouble sleeping for a couple of months, falls asleep fine but wakes at three and lies there. No snoring per the spouse, no daytime naps, two cups of coffee before noon. Went over sleep hygiene, no screens in bed, cut the afternoon caffeine. Will hold off on medication for now."
+    },
+    {
+      "id": "note-015",
+      "date": "2026-01-06",
+      "kind": "imaging",
+      "text": "CT chest, abdomen, pelvis with contrast: circumferential sigmoid mass with regional nodes, 3 hepatic lesions in the right lobe, largest 3.6 centimeters, consistent with metastases. No lung lesions."
+    },
+    {
+      "id": "note-016",
+      "date": "2026-01-08",
+      "kind": "office visit",
+      "text": "Low back strain after moving furniture over the weekend. No radiation down the legs, no numbness, no bowel or bladder trouble. Paraspinal tenderness, straight leg raise negative. Heat, keep moving, ibuprofen with food for a week. Should settle."
+    },
+    {
+      "id": "note-017",
+      "date": "2026-01-10",
+      "kind": "outside letter",
+      "text": "Optometry report forwarded for the record. Routine refraction, mild astigmatism, new glasses prescribed, retinas healthy, pressures 16 and 16. No ocular pathology noted."
+    },
+    {
+      "id": "note-018",
+      "date": "2026-01-11",
+      "kind": "office visit",
+      "text": "51 year old woman in medical oncology after colonoscopy for a change in bowel habits found a sigmoid mass. Long conversation about what stage IV means and what treatment looks like. She is realistic and motivated. ECOG 1. Port referral placed. Her history otherwise: osteoarthritis of the hands, hypothyroidism on levothyroxine, seasonal allergies. Allergies: penicillin, rash. Does not smoke, a glass of wine on weekends, works from home. Family history noncontributory for what we are talking about today. Stage IV sigmoid adenocarcinoma with synchronous liver metastases. She wants treatment. Results will determine whether she is a candidate for anti-EGFR antibody therapy, BRAF-directed therapy, HER2-directed therapy, or immunotherapy, and the chemotherapy backbone will start while we wait. No prior molecular testing on this tumor; the biopsy block is available at pathology. Ordering the solid tumor next-generation sequencing panel to cover KRAS, NRAS, BRAF, HER2 amplification, microsatellite status, and NTRK fusions in one assay, per NCCN for metastatic colorectal cancer."
+    },
+    {
+      "id": "note-019",
+      "date": "2026-01-18",
+      "kind": "outside letter",
+      "text": "Gastroenterology note received. Screening colonoscopy completed, two small polyps removed, benign on pathology, repeat in 5 years."
+    },
+    {
+      "id": "note-020",
+      "date": "2026-01-24",
+      "kind": "office visit",
+      "text": "Back to start treatment. Panel sent to the reference laboratory today from the biopsy block. FOLFOX cycle 1 scheduled for next week; we will adjust the biologic once the molecular results are back. Vitals today 114 over 89, pulse 67."
+    },
+    {
+      "id": "note-021",
+      "date": "2026-01-24",
+      "kind": "office visit",
+      "text": "A1c came back 6.5. Prediabetic range, same as last year. Walking program, cut the soda, recheck in six months. She is motivated."
     }
   ],
   "expected": {
@@ -209,41 +174,43 @@
     "criteriaMet": [
       "crit-1",
       "crit-2",
-      "crit-3"
+      "crit-3",
+      "crit-4"
     ],
     "support": {
       "crit-1": [
-        "note-007"
+        "note-012",
+        "note-015",
+        "note-018"
       ],
       "crit-2": [
-        "note-013"
+        "note-018"
       ],
       "crit-3": [
-        "note-004"
+        "note-018"
+      ],
+      "crit-4": [
+        "note-018"
       ]
     },
     "distractors": [
       "note-001",
+      "note-002",
       "note-003",
+      "note-004",
       "note-005",
       "note-006",
       "note-008",
       "note-009",
       "note-010",
       "note-011",
+      "note-013",
       "note-014",
-      "note-015",
       "note-016",
       "note-017",
-      "note-018",
       "note-019",
-      "note-021",
-      "note-023",
-      "note-024",
-      "note-025",
-      "note-026",
-      "note-028"
+      "note-021"
     ],
-    "note": "The chart documents every criterion; the CARC 96 denial can be answered from the record."
+    "note": "The chart documents every criterion; the CARC 56 denial can be answered from the record."
   }
 }

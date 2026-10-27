@@ -1,176 +1,156 @@
 {
   "id": "case-029",
+  "category": "oncology",
+  "setting": "outpatient",
+  "stakesUsd": 25000,
   "patient": {
     "alias": "SYN-029",
-    "age": 42,
+    "age": 53,
     "sex": "female"
   },
   "procedure": {
-    "cpt": "64721",
-    "description": "neuroplasty and/or transposition, median nerve at carpal tunnel"
+    "code": "77301",
+    "codeSystem": "CPT",
+    "description": "intensity modulated radiation therapy planning, left breast after lumpectomy"
   },
   "payer": {
-    "name": "Lanternhill Health Plan",
-    "planType": "commercial HMO"
+    "name": "Copperfield Health",
+    "planType": "commercial EPO"
   },
   "denial": {
     "carc": "50",
     "carcText": "These are non-covered services because this is not deemed a 'medical necessity' by the payer.",
-    "text": "Lanternhill Health Plan denied the claim for CPT 64721 (neuroplasty and/or transposition, median nerve at carpal tunnel) with date of service 2026-05-29. CARC 50: These are non-covered services because this is not deemed a 'medical necessity' by the payer. Payer remark: Documentation does not establish failure of conservative treatment or electrodiagnostic confirmation.",
-    "dateOfService": "2026-05-29"
+    "text": "Copperfield Health denied the claim for CPT 77301 (intensity modulated radiation therapy planning, left breast after lumpectomy) with date of service 2026-07-11. CARC 50: These are non-covered services because this is not deemed a 'medical necessity' by the payer. Payer remark: Intensity modulated radiation therapy is not medically necessary for breast cancer; three-dimensional conformal radiation therapy is the covered standard.",
+    "dateOfService": "2026-07-11"
   },
   "criteria": [
     {
       "id": "crit-1",
-      "text": "Symptoms consistent with carpal tunnel syndrome, such as nocturnal paresthesias in the median nerve distribution with a positive Tinel or Phalen sign, present for at least 6 weeks."
+      "text": "Adjuvant radiation to the intact breast or chest wall after surgery for invasive breast carcinoma."
     },
     {
       "id": "crit-2",
-      "text": "Failure of at least 6 weeks of conservative management including neutral wrist splinting, together with NSAIDs, activity modification, or a corticosteroid injection."
+      "text": "A three-dimensional conformal plan was generated and documented to exceed normal-tissue dose constraints (mean heart dose above 4 Gy, or ipsilateral lung V20 above 20 percent), such that intensity modulated planning is required to meet them."
     },
     {
       "id": "crit-3",
-      "text": "Electrodiagnostic testing (nerve conduction study or electromyography) confirming median neuropathy at the wrist, unless thenar atrophy or constant sensory loss is present."
+      "text": "Target volume, dose, and fractionation documented by the treating radiation oncologist."
     }
   ],
   "chart": [
     {
       "id": "note-001",
-      "date": "2025-06-22",
-      "kind": "outside letter",
-      "text": "Dermatology consult note received. Two actinic keratoses on the forehead treated with cryotherapy. Annual skin check recommended, sunscreen counseling done."
-    },
-    {
-      "id": "note-002",
-      "date": "2025-07-03",
-      "kind": "outside letter",
-      "text": "From the referring physician: please evaluate for surgical management. We have exhausted what we can do in primary care and the patient is motivated. Recent labs enclosed, all within normal limits."
-    },
-    {
-      "id": "note-003",
-      "date": "2025-07-19",
-      "kind": "office visit",
-      "text": "Trouble sleeping for a couple of months, falls asleep fine but wakes at three and lies there. No snoring per the spouse, no daytime naps, two cups of coffee before noon. Went over sleep hygiene, no screens in bed, cut the afternoon caffeine. Will hold off on medication for now."
-    },
-    {
-      "id": "note-004",
-      "date": "2025-07-22",
-      "kind": "office visit",
-      "text": "Mole on the right calf that her spouse noticed. About 6 millimeters, even color, regular border, no change she is aware of. Looks benign. Photo in the chart for comparison, recheck in a year or sooner if it changes."
-    },
-    {
-      "id": "note-005",
-      "date": "2025-07-23",
-      "kind": "office visit",
-      "text": "Blood pressure check. 130 over 78 today, 132 over 78 on repeat. She has been taking the lisinopril 20 most days, admits to missing weekends. Low salt talk again. Keep the dose, recheck in 8 weeks."
-    },
-    {
-      "id": "note-006",
-      "date": "2025-07-27",
-      "kind": "office visit",
-      "text": "Knee pain going down stairs, left side, no injury, no locking or giving way. Patellar grind positive, no effusion, ligaments stable. Patellofemoral pain. Quad strengthening sheet, ice after activity, cushioned shoes."
-    },
-    {
-      "id": "note-007",
-      "date": "2025-07-29",
-      "kind": "office visit",
-      "text": "42 year old woman here for the right hand, referred by the PCP. Works on a keyboard all day. Discussed carpal tunnel release, open versus endoscopic, recovery. Her history otherwise: seasonal allergies. Surgeries: no prior surgery. Allergies: codeine makes her sick. Never smoked, occasional beer, lives alone. Family history noncontributory for what we are talking about today. 3 months of numbness and tingling in the thumb, index, and middle fingers on the right, wakes her at night, shakes it out. Positive Tinel at the right wrist, Phalen positive in about 20 seconds. Some early thenar weakness, no atrophy yet. Splinted at night for 10 weeks, naproxen twice a day, moved the mouse to the other hand, and had a steroid shot in the right carpal tunnel from the PCP that helped for about three weeks and wore off."
-    },
-    {
-      "id": "note-008",
-      "date": "2025-09-13",
-      "kind": "office visit",
-      "text": "Back to review the plan for the right hand. Still symptomatic. Wants to proceed. Vitals today 142 over 84, pulse 74."
-    },
-    {
-      "id": "note-009",
-      "date": "2025-09-13",
-      "kind": "office visit",
-      "text": "A1c came back 5.7. Prediabetic range, same as last year. Walking program, cut the soda, recheck in six months. She is motivated."
-    },
-    {
-      "id": "note-010",
-      "date": "2025-10-14",
-      "kind": "office visit",
-      "text": "Low back strain after moving furniture over the weekend. No radiation down the legs, no numbness, no bowel or bladder trouble. Paraspinal tenderness, straight leg raise negative. Heat, keep moving, ibuprofen with food for a week. Should settle."
-    },
-    {
-      "id": "note-011",
-      "date": "2025-12-02",
-      "kind": "phone note",
-      "text": "Message from the patient about scheduling. Wants a date in the next couple of months if the insurance comes through. Passed to the surgery scheduler."
-    },
-    {
-      "id": "note-012",
-      "date": "2026-01-03",
-      "kind": "outside letter",
-      "text": "Letter from the dentist's office confirming routine cleaning and exam completed, no active infection, no dental work pending. Sent at our request for the surgical file."
-    },
-    {
-      "id": "note-013",
-      "date": "2026-01-04",
-      "kind": "phone note",
-      "text": "Thyroid labs back. TSH 2.6, free T4 normal. No change to the levothyroxine 75. Repeat in a year."
-    },
-    {
-      "id": "note-014",
-      "date": "2026-01-16",
-      "kind": "phone note",
-      "text": "Pharmacy called about the refill on the omeprazole 20. Approved 90 days. She mentioned the heartburn is better since cutting back on coffee."
-    },
-    {
-      "id": "note-015",
-      "date": "2026-01-20",
-      "kind": "phone note",
-      "text": "Work note requested for a sick day last Thursday. Faxed to the employer."
-    },
-    {
-      "id": "note-016",
-      "date": "2026-01-20",
-      "kind": "outside letter",
-      "text": "Mammogram report forwarded for the record. Bilateral screening, BI-RADS 1, negative, routine screening in one year."
-    },
-    {
-      "id": "note-017",
-      "date": "2026-02-03",
-      "kind": "phone note",
-      "text": "Called her with the cholesterol results. Total 231, LDL 151, HDL 38, triglycerides 113. Discussed diet and walking. She wants to try lifestyle first for six months before we talk about a statin. Agreed."
-    },
-    {
-      "id": "note-018",
-      "date": "2026-02-25",
-      "kind": "office visit",
-      "text": "Check-in while we wait on the insurance. No change in the complaints. Reviewed the risks and recovery one more time, she remains sure about going ahead."
-    },
-    {
-      "id": "note-019",
-      "date": "2026-04-02",
+      "date": "2026-05-15",
       "kind": "office visit",
       "text": "Seasonal allergies acting up, itchy eyes, sneezing, clear drainage, worse outdoors. No wheeze. Cetirizine at night and the saline rinse. Fine with that."
     },
     {
-      "id": "note-020",
-      "date": "2026-04-10",
+      "id": "note-002",
+      "date": "2026-05-18",
+      "kind": "outside letter",
+      "text": "Optometry report forwarded for the record. Routine refraction, mild astigmatism, new glasses prescribed, retinas healthy, pressures 13 and 18. No ocular pathology noted."
+    },
+    {
+      "id": "note-003",
+      "date": "2026-05-22",
+      "kind": "outside letter",
+      "text": "Letter from the dentist's office confirming routine cleaning and exam completed, no active infection, no dental work pending. Sent at our request for the surgical file."
+    },
+    {
+      "id": "note-004",
+      "date": "2026-05-26",
+      "kind": "phone note",
+      "text": "Work note requested for a sick day last Tuesday. Faxed to the employer."
+    },
+    {
+      "id": "note-005",
+      "date": "2026-05-31",
+      "kind": "outside letter",
+      "text": "Gastroenterology note received. Screening colonoscopy completed, two small polyps removed, benign on pathology, repeat in 5 years."
+    },
+    {
+      "id": "note-006",
+      "date": "2026-06-06",
+      "kind": "outside letter",
+      "text": "From the referring physician: please evaluate and treat as you see fit. We have exhausted what we can do in primary care and the patient is motivated. Recent labs enclosed, all within normal limits."
+    },
+    {
+      "id": "note-007",
+      "date": "2026-06-06",
+      "kind": "pathology report",
+      "text": "Left breast lumpectomy and sentinel node biopsy: 1.3 centimeter grade 2 invasive ductal carcinoma, margins negative, closest 3 millimeters, 0 of 2 sentinel nodes, estrogen receptor positive, HER2 negative."
+    },
+    {
+      "id": "note-008",
+      "date": "2026-06-24",
+      "kind": "office visit",
+      "text": "Low back strain after moving furniture over the weekend. No radiation down the legs, no numbness, no bowel or bladder trouble. Paraspinal tenderness, straight leg raise negative. Heat, keep moving, ibuprofen with food for a week. Should settle."
+    },
+    {
+      "id": "note-009",
+      "date": "2026-06-24",
+      "kind": "office visit",
+      "text": "Knee pain going down stairs, right side, no injury, no locking or giving way. Patellar grind positive, no effusion, ligaments stable. Patellofemoral pain. Quad strengthening sheet, ice after activity, cushioned shoes."
+    },
+    {
+      "id": "note-010",
+      "date": "2026-06-26",
+      "kind": "radiation oncology note",
+      "text": "53 year old woman in radiation oncology consultation. Reviewed the role of whole-breast radiation after lumpectomy, hypofractionation, and the left-sided heart question. She is anxious about the heart and asked good questions. Her history otherwise: osteoarthritis of the hands, migraines, rare now, seasonal allergies. Allergies: codeine makes her sick. Never smoked, occasional beer, lives with her spouse. Family history noncontributory for what we are talking about today. Status post left lumpectomy for a 1.3 centimeter invasive ductal carcinoma, node negative. Adjuvant whole-breast radiation recommended, then endocrine therapy."
+    },
+    {
+      "id": "note-011",
+      "date": "2026-06-26",
+      "kind": "office visit",
+      "text": "Vitamin D came back 17. Started 1000 units daily, recheck in three months. Also talked about calcium from food rather than pills."
+    },
+    {
+      "id": "note-012",
+      "date": "2026-06-28",
+      "kind": "office visit",
+      "text": "Ear fullness and muffled hearing on the left for a week after a cold. Canal clear, drum dull with fluid behind it, no infection. Serous otitis. Decongestant, swallow and yawn, recheck in three weeks if not better."
+    },
+    {
+      "id": "note-013",
+      "date": "2026-07-02",
+      "kind": "office visit",
+      "text": "Blood pressure check. 135 over 86 today, 141 over 78 on repeat. She has been taking the lisinopril 20 most days, admits to missing weekends. Low salt talk again. Keep the dose, recheck in 12 weeks."
+    },
+    {
+      "id": "note-014",
+      "date": "2026-07-03",
+      "kind": "office visit",
+      "text": "Follow-up to answer questions with her daughter. Reviewed the breath-hold technique we will try at simulation. Consent signed. Vitals today 119 over 88, pulse 77."
+    },
+    {
+      "id": "note-015",
+      "date": "2026-07-05",
+      "kind": "radiation oncology note",
+      "text": "Simulation. Supine on the breast board, left arm up, deep inspiration breath hold attempted and reproducible to 3 millimeters. CT acquired, isocenter set, skin marks placed. Heart sits close to the chest wall even in breath hold."
+    },
+    {
+      "id": "note-016",
+      "date": "2026-07-06",
+      "kind": "phone note",
+      "text": "She called asking about travel vaccines for a trip in the fall. Advised hepatitis A and a typhoid booster, referred to the travel clinic. Nothing else needed from us."
+    },
+    {
+      "id": "note-017",
+      "date": "2026-07-07",
+      "kind": "office visit",
+      "text": "Mole on the left forearm that her spouse noticed. About 6 millimeters, even color, regular border, no change she is aware of. Looks benign. Photo in the chart for comparison, recheck in a year or sooner if it changes."
+    },
+    {
+      "id": "note-018",
+      "date": "2026-07-10",
       "kind": "office visit",
       "text": "Here with a cough and congestion for 6 days, low grade temp at home, no shortness of breath. Lungs clear, throat a little red, ears fine. Looks viral. Fluids, rest, honey for the cough, come back if she gets a fever over 101 or it goes past two weeks."
     },
     {
-      "id": "note-021",
-      "date": "2026-05-01",
-      "kind": "office visit",
-      "text": "Burning with urination for two days, going frequently, no fever, no back pain. Urine dip positive for leukocytes and nitrites. Nitrofurantoin for five days, push fluids, call if fever or flank pain."
-    },
-    {
-      "id": "note-022",
-      "date": "2026-05-14",
-      "kind": "office visit",
-      "text": "Ear fullness and muffled hearing on the right for a week after a cold. Canal clear, drum dull with fluid behind it, no infection. Serous otitis. Decongestant, swallow and yawn, recheck in three weeks if not better."
-    },
-    {
-      "id": "note-023",
-      "date": "2026-05-20",
-      "kind": "preoperative visit",
-      "text": "Pre-op. Consent signed for right open carpal tunnel release under local with sedation. Marked."
+      "id": "note-019",
+      "date": "2026-07-11",
+      "kind": "radiation oncology note",
+      "text": "Treatment planning note. Prescription: whole left breast 42.56 Gy in 16 fractions of 2.66 Gy, lumpectomy cavity boost 10 Gy in 4 fractions. Target volumes contoured on the simulation scan, plan reviewed and approved today."
     }
   ],
   "expected": {
@@ -178,36 +158,33 @@
     "subtype": "absent",
     "criteriaMet": [
       "crit-1",
-      "crit-2"
+      "crit-3"
     ],
     "support": {
       "crit-1": [
-        "note-007"
+        "note-007",
+        "note-010"
       ],
-      "crit-2": [
-        "note-007"
-      ],
-      "crit-3": []
+      "crit-2": [],
+      "crit-3": [
+        "note-019"
+      ]
     },
     "distractors": [
       "note-001",
+      "note-002",
       "note-003",
       "note-004",
       "note-005",
-      "note-006",
+      "note-008",
       "note-009",
-      "note-010",
+      "note-011",
       "note-012",
       "note-013",
-      "note-014",
-      "note-015",
       "note-016",
       "note-017",
-      "note-019",
-      "note-020",
-      "note-021",
-      "note-022"
+      "note-018"
     ],
-    "note": "The chart never addresses crit-3 (ncs); no entry supports it, so an appeal would assert what the record does not contain."
+    "note": "The chart never addresses crit-2 (comparison); no entry supports it, so an appeal would assert what the record does not contain."
   }
 }

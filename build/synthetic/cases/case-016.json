@@ -1,216 +1,199 @@
 {
   "id": "case-016",
+  "category": "vascular surgery",
+  "setting": "outpatient",
+  "stakesUsd": 18000,
   "patient": {
     "alias": "SYN-016",
-    "age": 38,
-    "sex": "female"
+    "age": 81,
+    "sex": "male"
   },
   "procedure": {
-    "cpt": "19371",
-    "description": "periprosthetic capsulectomy, breast, with implant removal"
+    "code": "35301",
+    "codeSystem": "CPT",
+    "description": "carotid endarterectomy"
   },
   "payer": {
-    "name": "Saltmarsh Benefits Administrators",
-    "planType": "self-funded employer plan"
+    "name": "Northwind Mutual Health",
+    "planType": "commercial PPO"
   },
   "denial": {
-    "carc": "151",
-    "carcText": "Payment adjusted because the payer deems the information submitted does not support this many/frequency of services.",
-    "rarc": "N10",
-    "text": "Saltmarsh Benefits Administrators denied the claim for CPT 19371 (periprosthetic capsulectomy, breast, with implant removal) with date of service 2026-07-14. CARC 151: Payment adjusted because the payer deems the information submitted does not support this many/frequency of services. RARC N10: Adjustment based on the findings of a review organization. Payer remark: A revision procedure on the same breast was paid within the prior six years; the documentation does not support an additional procedure.",
-    "dateOfService": "2026-07-14"
+    "carc": "50",
+    "carcText": "These are non-covered services because this is not deemed a 'medical necessity' by the payer.",
+    "text": "Northwind Mutual Health denied the claim for CPT 35301 (carotid endarterectomy) with date of service 2026-04-12. CARC 50: These are non-covered services because this is not deemed a 'medical necessity' by the payer. Payer remark: Documentation does not establish the degree of stenosis or the symptomatic status required for coverage.",
+    "dateOfService": "2026-04-12"
   },
   "criteria": [
     {
       "id": "crit-1",
-      "text": "Baker grade III or IV capsular contracture with pain or deformity, or implant rupture confirmed by imaging."
+      "text": "Symptomatic carotid stenosis: transient ischemic attack, amaurosis fugax, or non-disabling stroke in the ipsilateral territory within the past 6 months with 50 to 99 percent stenosis; or asymptomatic 70 to 99 percent stenosis with a life expectancy over 5 years and a perioperative stroke and death risk under 3 percent."
     },
     {
       "id": "crit-2",
-      "text": "The original implants were placed for reconstruction after mastectomy, for a congenital deformity, or for another covered medical indication."
+      "text": "Degree of stenosis documented by duplex ultrasound using velocity criteria, confirmed by CT or MR angiography when indicated, reported by the NASCET method."
     },
     {
       "id": "crit-3",
-      "text": "Symptoms documented for at least 3 months."
+      "text": "Best medical therapy in place: antiplatelet therapy and a high-intensity statin."
+    },
+    {
+      "id": "crit-4",
+      "text": "Surgery planned within 14 days of the index event when feasible."
     }
   ],
   "chart": [
     {
       "id": "note-001",
-      "date": "2025-08-19",
-      "kind": "outside letter",
-      "text": "From the referring physician: please evaluate for surgical management. We have exhausted what we can do in primary care and the patient is motivated. Recent labs enclosed, all within normal limits."
-    },
-    {
-      "id": "note-002",
-      "date": "2025-09-16",
-      "kind": "office visit",
-      "text": "38 year old woman here about her implants. Discussed capsulectomy with implant removal and the options for replacement versus leaving them out. Her history otherwise: mild asthma, albuterol maybe twice a year, reflux on omeprazole as needed. Allergies: codeine makes her sick. Quit smoking 12 years ago, no alcohol, works two jobs. Family history noncontributory for what we are talking about today. Right breast is hard as a rock, distorted upward, tender to the touch, I would grade it Baker IV. Left is a Baker III, firm but not painful. Implants were placed in 2020 as part of her reconstruction after a right mastectomy for cancer, left side for symmetry. The hardening on the right started about 6 months ago and has gotten steadily worse, now hurts to lie on that side."
-    },
-    {
-      "id": "note-003",
-      "date": "2025-09-29",
-      "kind": "office visit",
-      "text": "Blood pressure check. 120 over 85 today, 121 over 85 on repeat. She has been taking the lisinopril 20 most days, admits to missing weekends. Low salt talk again. Keep the dose, recheck in 12 weeks."
-    },
-    {
-      "id": "note-004",
-      "date": "2025-10-29",
-      "kind": "imaging",
-      "text": "MRI breast implants: right implant with a linguine sign consistent with intracapsular rupture, thickened capsule. Left implant intact with a thickened capsule and no rupture."
-    },
-    {
-      "id": "note-005",
-      "date": "2025-11-05",
-      "kind": "office visit",
-      "text": "Back to go over the MRI and the plan. She wants the right one out and both capsules addressed. Vitals today 119 over 89, pulse 78."
-    },
-    {
-      "id": "note-006",
-      "date": "2025-11-22",
-      "kind": "office visit",
-      "text": "Seasonal allergies acting up, itchy eyes, sneezing, clear drainage, worse outdoors. No wheeze. Cetirizine at night and the saline rinse. Fine with that."
-    },
-    {
-      "id": "note-007",
-      "date": "2025-11-26",
-      "kind": "office visit",
-      "text": "Knee pain going down stairs, right side, no injury, no locking or giving way. Patellar grind positive, no effusion, ligaments stable. Patellofemoral pain. Quad strengthening sheet, ice after activity, cushioned shoes."
-    },
-    {
-      "id": "note-008",
-      "date": "2025-11-26",
-      "kind": "office visit",
-      "text": "Twisted the left ankle stepping off a curb 2 days ago. Swelling over the lateral malleolus, tender over the ATFL, can bear weight. Ottawa negative, no film. Brace, ice, ibuprofen, elevate. Should be fine in a couple weeks."
-    },
-    {
-      "id": "note-009",
-      "date": "2025-11-27",
-      "kind": "office visit",
-      "text": "Burning with urination for two days, going frequently, no fever, no back pain. Urine dip positive for leukocytes and nitrites. Nitrofurantoin for five days, push fluids, call if fever or flank pain."
-    },
-    {
-      "id": "note-010",
-      "date": "2025-12-13",
+      "date": "2026-02-14",
       "kind": "phone note",
       "text": "Patient called about a tick bite on the shoulder after a hike. Tick removed whole, no rash, no fever. Watch for a bull's-eye rash or flu symptoms over the next month and call if either shows up."
     },
     {
-      "id": "note-011",
-      "date": "2025-12-15",
-      "kind": "phone note",
-      "text": "Message from the patient about scheduling. Wants a date in the next couple of months if the insurance comes through. Passed to the surgery scheduler."
+      "id": "note-002",
+      "date": "2026-02-17",
+      "kind": "office visit",
+      "text": "Ear fullness and muffled hearing on the right for a week after a cold. Canal clear, drum dull with fluid behind it, no infection. Serous otitis. Decongestant, swallow and yawn, recheck in three weeks if not better."
     },
     {
-      "id": "note-012",
-      "date": "2025-12-30",
+      "id": "note-003",
+      "date": "2026-02-22",
+      "kind": "office visit",
+      "text": "Seasonal allergies acting up, itchy eyes, sneezing, clear drainage, worse outdoors. No wheeze. Cetirizine at night and the saline rinse. Fine with that."
+    },
+    {
+      "id": "note-004",
+      "date": "2026-02-22",
+      "kind": "office visit",
+      "text": "Vitamin D came back 15. Started 1000 units daily, recheck in three months. Also talked about calcium from food rather than pills."
+    },
+    {
+      "id": "note-005",
+      "date": "2026-03-05",
+      "kind": "office visit",
+      "text": "Here with a cough and congestion for 5 days, low grade temp at home, no shortness of breath. Lungs clear, throat a little red, ears fine. Looks viral. Fluids, rest, honey for the cough, come back if he gets a fever over 101 or it goes past two weeks."
+    },
+    {
+      "id": "note-006",
+      "date": "2026-03-11",
+      "kind": "office visit",
+      "text": "Knee pain going down stairs, right side, no injury, no locking or giving way. Patellar grind positive, no effusion, ligaments stable. Patellofemoral pain. Quad strengthening sheet, ice after activity, cushioned shoes."
+    },
+    {
+      "id": "note-007",
+      "date": "2026-03-19",
+      "kind": "emergency department note",
+      "text": "Twenty minutes of right arm weakness and slurred speech that resolved before arrival. CT head without hemorrhage or infarct. ABCD2 score 5. Aspirin given, carotid imaging ordered, neurology consulted."
+    },
+    {
+      "id": "note-008",
+      "date": "2026-03-22",
+      "kind": "outside letter",
+      "text": "From the referring physician: please evaluate and treat as you see fit. We have exhausted what we can do in primary care and the patient is motivated. Recent labs enclosed, all within normal limits."
+    },
+    {
+      "id": "note-009",
+      "date": "2026-03-23",
       "kind": "outside letter",
       "text": "Letter from the dentist's office confirming routine cleaning and exam completed, no active infection, no dental work pending. Sent at our request for the surgical file."
     },
     {
-      "id": "note-013",
-      "date": "2026-01-08",
-      "kind": "office visit",
-      "text": "Ear fullness and muffled hearing on the left for a week after a cold. Canal clear, drum dull with fluid behind it, no infection. Serous otitis. Decongestant, swallow and yawn, recheck in three weeks if not better."
-    },
-    {
-      "id": "note-014",
-      "date": "2026-01-20",
-      "kind": "office visit",
-      "text": "Annual physical. Feels well overall. Sleeping fine, appetite fine, no chest pain, no shortness of breath. Flu shot given in the left arm today. Due for a tetanus booster, she will think about it. Labs ordered, fasting."
-    },
-    {
-      "id": "note-015",
-      "date": "2026-01-26",
-      "kind": "outside letter",
-      "text": "Dermatology consult note received. Two actinic keratoses on the forehead treated with cryotherapy. Annual skin check recommended, sunscreen counseling done."
-    },
-    {
-      "id": "note-016",
-      "date": "2026-01-28",
-      "kind": "office visit",
-      "text": "Vitamin D came back 21. Started 1000 units daily, recheck in three months. Also talked about calcium from food rather than pills."
-    },
-    {
-      "id": "note-017",
-      "date": "2026-02-26",
-      "kind": "office visit",
-      "text": "Mole on the left forearm that her spouse noticed. About 7 millimeters, even color, regular border, no change she is aware of. Looks benign. Photo in the chart for comparison, recheck in a year or sooner if it changes."
-    },
-    {
-      "id": "note-018",
-      "date": "2026-03-30",
-      "kind": "outside letter",
-      "text": "Gastroenterology note received. Screening colonoscopy completed, two small polyps removed, benign on pathology, repeat in 10 years."
-    },
-    {
-      "id": "note-019",
-      "date": "2026-04-06",
-      "kind": "office visit",
-      "text": "Interval visit. Nothing new since last time, symptoms as described before, she is managing. Went over the plan again and answered questions from her spouse."
-    },
-    {
-      "id": "note-020",
-      "date": "2026-04-17",
-      "kind": "phone note",
-      "text": "Work note requested for a sick day last Monday. Faxed to the employer."
-    },
-    {
-      "id": "note-021",
-      "date": "2026-04-20",
-      "kind": "office visit",
-      "text": "Low back strain after moving furniture over the weekend. No radiation down the legs, no numbness, no bowel or bladder trouble. Paraspinal tenderness, straight leg raise negative. Heat, keep moving, ibuprofen with food for a week. Should settle."
-    },
-    {
-      "id": "note-022",
-      "date": "2026-06-27",
+      "id": "note-010",
+      "date": "2026-03-24",
       "kind": "office visit",
       "text": "Trouble sleeping for a couple of months, falls asleep fine but wakes at three and lies there. No snoring per the spouse, no daytime naps, two cups of coffee before noon. Went over sleep hygiene, no screens in bed, cut the afternoon caffeine. Will hold off on medication for now."
     },
     {
-      "id": "note-023",
-      "date": "2026-07-06",
+      "id": "note-011",
+      "date": "2026-03-24",
+      "kind": "office visit",
+      "text": "A1c came back 6.8. Prediabetic range, same as last year. Walking program, cut the soda, recheck in six months. He is motivated."
+    },
+    {
+      "id": "note-012",
+      "date": "2026-03-28",
+      "kind": "office visit",
+      "text": "Mole on the upper back that his spouse noticed. About 5 millimeters, even color, regular border, no change he is aware of. Looks benign. Photo in the chart for comparison, recheck in a year or sooner if it changes."
+    },
+    {
+      "id": "note-013",
+      "date": "2026-03-29",
+      "kind": "outside letter",
+      "text": "Gastroenterology note received. Screening colonoscopy completed, two small polyps removed, benign on pathology, repeat in 10 years."
+    },
+    {
+      "id": "note-014",
+      "date": "2026-03-31",
+      "kind": "office visit",
+      "text": "81 year old man in vascular surgery clinic after a recent neurologic event, sent by neurology. Significant plaque on the left. Hypertension, hyperlipidemia, coronary disease with a remote stent. Discussed endarterectomy versus stenting; endarterectomy preferred for this anatomy and age. His history otherwise: osteoarthritis of the hands. Allergies: penicillin, rash. Never smoked, occasional beer, lives with his spouse. Family history noncontributory for what we are talking about today. Transient ischemic attack 9 days ago, right arm and face, now back to baseline. Symptomatic left carotid disease. Aspirin 81 and clopidogrel 75 started in the emergency department, atorvastatin 80 nightly, blood pressure 138 over 82 today. Scheduling endarterectomy within 2 weeks of the event per guideline; the operating room is booked for 12 days from today."
+    },
+    {
+      "id": "note-015",
+      "date": "2026-04-04",
+      "kind": "office visit",
+      "text": "Returned with his spouse to go over the operation, the risk of stroke with and without surgery, cranial nerve injury, and the hospital stay of one night. Wants to proceed. Vitals today 127 over 78, pulse 66."
+    },
+    {
+      "id": "note-016",
+      "date": "2026-04-06",
+      "kind": "phone note",
+      "text": "He called asking about travel vaccines for a trip in the spring. Advised hepatitis A and a typhoid booster, referred to the travel clinic. Nothing else needed from us."
+    },
+    {
+      "id": "note-017",
+      "date": "2026-04-08",
+      "kind": "office visit",
+      "text": "Blood pressure check. 137 over 81 today, 122 over 83 on repeat. He has been taking the lisinopril 40 most days, admits to missing weekends. Low salt talk again. Keep the dose, recheck in 6 weeks."
+    },
+    {
+      "id": "note-018",
+      "date": "2026-04-10",
       "kind": "preoperative visit",
-      "text": "Pre-op. Consent signed for bilateral capsulectomy with implant removal, right side en bloc if the capsule allows. Labs fine."
+      "text": "Pre-op. Anesthesia evaluation done, EKG unchanged. Continue aspirin and clopidogrel through surgery. Consent signed."
+    },
+    {
+      "id": "note-019",
+      "date": "2026-04-11",
+      "kind": "office visit",
+      "text": "Burning with urination for two days, going frequently, no fever, no back pain. Urine dip positive for leukocytes and nitrites. Nitrofurantoin for five days, push fluids, call if fever or flank pain."
     }
   ],
   "expected": {
-    "warranted": true,
+    "warranted": false,
+    "subtype": "absent",
     "criteriaMet": [
       "crit-1",
-      "crit-2",
-      "crit-3"
+      "crit-3",
+      "crit-4"
     ],
     "support": {
       "crit-1": [
-        "note-002",
-        "note-004"
+        "note-007",
+        "note-014"
       ],
-      "crit-2": [
-        "note-002"
-      ],
+      "crit-2": [],
       "crit-3": [
-        "note-002"
+        "note-014"
+      ],
+      "crit-4": [
+        "note-014"
       ]
     },
     "distractors": [
+      "note-001",
+      "note-002",
       "note-003",
+      "note-004",
+      "note-005",
       "note-006",
-      "note-007",
-      "note-008",
       "note-009",
       "note-010",
+      "note-011",
       "note-012",
       "note-013",
-      "note-014",
-      "note-015",
       "note-016",
       "note-017",
-      "note-018",
-      "note-020",
-      "note-021",
-      "note-022"
+      "note-019"
     ],
-    "note": "The chart documents every criterion; the CARC 151 denial can be answered from the record."
+    "note": "The chart never addresses crit-2 (imaging); no entry supports it, so an appeal would assert what the record does not contain."
   }
 }

@@ -1,13 +1,17 @@
 {
   "id": "case-006",
+  "category": "plastic surgery",
+  "setting": "outpatient",
+  "stakesUsd": 9000,
   "patient": {
     "alias": "SYN-006",
-    "age": 32,
-    "sex": "male"
+    "age": 50,
+    "sex": "female"
   },
   "procedure": {
-    "cpt": "15847",
-    "description": "panniculectomy with excision of excess skin and subcutaneous tissue of the abdomen"
+    "code": "19318",
+    "codeSystem": "CPT",
+    "description": "bilateral reduction mammaplasty"
   },
   "payer": {
     "name": "Prairie Commons Medicaid Plan",
@@ -17,165 +21,207 @@
     "carc": "96",
     "carcText": "Non-covered charge(s).",
     "rarc": "N130",
-    "text": "Prairie Commons Medicaid Plan denied the claim for CPT 15847 (panniculectomy with excision of excess skin and subcutaneous tissue of the abdomen) with date of service 2026-08-27. CARC 96: Non-covered charge(s). RARC N130: Consult plan benefit documents/guidelines for information about restrictions for this service. Payer remark: Abdominoplasty and related procedures are considered cosmetic.",
-    "dateOfService": "2026-08-27"
+    "text": "Prairie Commons Medicaid Plan denied the claim for CPT 19318 (bilateral reduction mammaplasty) with date of service 2026-05-06. CARC 96: Non-covered charge(s). RARC N130: Consult plan benefit documents/guidelines for information about restrictions for this service. Payer remark: The procedure was determined to be cosmetic and is excluded from coverage.",
+    "dateOfService": "2026-05-06"
   },
   "criteria": [
     {
       "id": "crit-1",
-      "text": "Panniculus hangs at or below the level of the pubis (grade 2 or higher) as documented on examination."
+      "text": "Symptoms attributable to macromastia documented for at least 12 months, such as neck, shoulder, or upper back pain, shoulder grooving, or inframammary intertrigo."
     },
     {
       "id": "crit-2",
-      "text": "Recurrent or chronic intertrigo, cellulitis, or skin breakdown beneath the panniculus that has failed at least 3 months of conservative treatment such as topical antifungals, hygiene measures, and barrier products."
+      "text": "At least 6 months of conservative treatment, including a supportive garment plus physical therapy, analgesics, or dermatologic treatment of intertrigo, without adequate relief."
     },
     {
       "id": "crit-3",
-      "text": "Weight stable within 10 pounds for at least 12 months (or at least 18 months after bariatric surgery)."
+      "text": "Estimated resection of at least 500 grams per breast."
     },
     {
       "id": "crit-4",
-      "text": "The panniculus interferes with activities of daily living or ambulation."
+      "text": "Photographic documentation of macromastia and shoulder grooving."
     }
   ],
   "chart": [
     {
       "id": "note-001",
-      "date": "2025-08-20",
-      "kind": "office visit",
-      "text": "Vitamin D came back 23. Started 2000 units daily, recheck in three months. Also talked about calcium from food rather than pills."
+      "date": "2025-05-15",
+      "kind": "phone note",
+      "text": "Thyroid labs back. TSH 3.1, free T4 normal. No change to the levothyroxine 50. Repeat in a year."
     },
     {
       "id": "note-002",
-      "date": "2025-08-26",
+      "date": "2025-05-24",
       "kind": "office visit",
-      "text": "Mole on the left forearm that his spouse noticed. About 4 millimeters, even color, regular border, no change he is aware of. Looks benign. Photo in the chart for comparison, recheck in a year or sooner if it changes."
+      "text": "Blood pressure check. 138 over 77 today, 131 over 86 on repeat. She has been taking the lisinopril 10 most days, admits to missing weekends. Low salt talk again. Keep the dose, recheck in 8 weeks."
     },
     {
       "id": "note-003",
-      "date": "2025-09-15",
-      "kind": "phone note",
-      "text": "Patient called about a tick bite on the scalp after a hike. Tick removed whole, no rash, no fever. Watch for a bull's-eye rash or flu symptoms over the next month and call if either shows up."
+      "date": "2025-05-29",
+      "kind": "office visit",
+      "text": "Mole on the left forearm that her spouse noticed. About 4 millimeters, even color, regular border, no change she is aware of. Looks benign. Photo in the chart for comparison, recheck in a year or sooner if it changes."
     },
     {
       "id": "note-004",
-      "date": "2025-09-17",
+      "date": "2025-06-03",
       "kind": "outside letter",
-      "text": "Referral letter from the primary care office. Thank you for seeing this patient of mine for surgical evaluation. His history and medication list are attached. Please let me know what you recommend and whether anything is needed from our end for clearance."
+      "text": "Referral letter from the primary care office. Thank you for seeing this patient of mine for evaluation. Her history and medication list are attached. Please let me know what you recommend and whether anything is needed from our end."
     },
     {
       "id": "note-005",
-      "date": "2025-09-18",
+      "date": "2025-06-10",
       "kind": "office visit",
-      "text": "Blood pressure check. 119 over 76 today, 133 over 75 on repeat. He has been taking the lisinopril 10 most days, admits to missing weekends. Low salt talk again. Keep the dose, recheck in 8 weeks."
+      "text": "50 year old woman here about her breasts, referred by her primary. Exam: large pendulous breasts, nipple to notch 37 on the right and a centimeter more on the left, grade 3 ptosis, intertrigo in both inframammary folds. Discussed reduction, risks, scars, sensation, the works. Her history otherwise: reflux on omeprazole as needed. Allergies: penicillin, rash. Does not smoke, a glass of wine on weekends, works in a warehouse. Family history noncontributory for what we are talking about today. Going on 15 months of upper back and neck pain that she ties to the weight of the breasts, worse by the end of a shift. Shoulder grooving from the straps, recurrent intertrigo in the folds. She has been in a fitted supportive bra from the specialty shop for months, takes ibuprofen most days, treats the rash with nystatin powder. I am sending her to PT for posture and scapular work. She is 5 foot 5, 209 pounds, which puts BSA right around 2.09. Schnur 22nd percentile at that BSA is about 732 grams. I am estimating 717 grams on the right and 700 on the left."
     },
     {
       "id": "note-006",
-      "date": "2025-09-19",
-      "kind": "phone note",
-      "text": "Work note requested for a sick day last Tuesday. Faxed to the employer."
+      "date": "2025-06-17",
+      "kind": "physical therapy",
+      "text": "Eval for upper back and neck pain in the setting of large breasts. Forward shoulder posture, tight pecs, weak lower traps. Plan 12 weeks, twice a week, scapular stabilization and postural retraining."
     },
     {
       "id": "note-007",
-      "date": "2025-09-24",
-      "kind": "office visit",
-      "text": "32 year old man here about the abdominal apron after his weight loss. Nice result on the weight. Discussed panniculectomy versus a full abdominoplasty and what insurance will and will not look at. His history otherwise: seasonal allergies, anxiety, sees a counselor, migraines, rare now. Allergies: no drug allergies. Quit smoking 12 years ago, no alcohol, works two jobs. Family history noncontributory for what we are talking about today. On exam the pannus hangs well below the pubis, I would call it grade 2, with maceration and an odor in the fold. He has been fighting the rash under the apron for better than a year, treated with nystatin, then clotrimazole, keeps it dry with powder and a cloth liner, and it comes right back. Two rounds of antibiotics from the PCP for cellulitis in the fold. Down 103 pounds after the sleeve in 2023. Weight has been steady at 215 give or take five for the last 21 months. Says he cannot walk more than a block without the skin fold chafing raw, has to lift it to wash underneath, cannot find pants that fit over it."
+      "date": "2025-06-24",
+      "kind": "physical therapy",
+      "text": "Session 2. Continued the program from the evaluation, tolerated well, home exercises reviewed, she reports about the same."
     },
     {
       "id": "note-008",
-      "date": "2025-10-15",
+      "date": "2025-06-24",
       "kind": "office visit",
-      "text": "Seasonal allergies acting up, itchy eyes, sneezing, clear drainage, worse outdoors. No wheeze. Cetirizine at night and the saline rinse. Fine with that."
+      "text": "Twisted the left ankle stepping off a curb 4 days ago. Swelling over the lateral malleolus, tender over the ATFL, can bear weight. Ottawa negative, no film. Brace, ice, ibuprofen, elevate. Should be fine in a couple weeks."
     },
     {
       "id": "note-009",
-      "date": "2025-11-14",
-      "kind": "office visit",
-      "text": "Knee pain going down stairs, left side, no injury, no locking or giving way. Patellar grind positive, no effusion, ligaments stable. Patellofemoral pain. Quad strengthening sheet, ice after activity, cushioned shoes."
-    },
-    {
-      "id": "note-010",
-      "date": "2025-11-28",
-      "kind": "office visit",
-      "text": "Follow-up on the abdomen. Went back over the operation, drains, the scar, recovery of four to six weeks. He understands this is skin and fat removal for the skin problems, not a tummy tuck. Vitals today 117 over 85, pulse 63. Rash is back again despite 13 months of the antifungal and barrier routine. Fold is red and weeping today. Weight 218 today, holding."
-    },
-    {
-      "id": "note-011",
-      "date": "2025-11-29",
-      "kind": "office visit",
-      "text": "Here with a cough and congestion for 5 days, low grade temp at home, no shortness of breath. Lungs clear, throat a little red, ears fine. Looks viral. Fluids, rest, honey for the cough, come back if he gets a fever over 101 or it goes past two weeks."
-    },
-    {
-      "id": "note-012",
-      "date": "2025-11-30",
-      "kind": "phone note",
-      "text": "Thyroid labs back. TSH 2.9, free T4 normal. No change to the levothyroxine 100. Repeat in a year."
-    },
-    {
-      "id": "note-013",
-      "date": "2025-12-24",
-      "kind": "outside letter",
-      "text": "Optometry report forwarded for the record. Routine refraction, mild astigmatism, new glasses prescribed, retinas healthy, pressures 17 and 19. No ocular pathology noted."
-    },
-    {
-      "id": "note-014",
-      "date": "2026-01-10",
-      "kind": "office visit",
-      "text": "Trouble sleeping for a couple of months, falls asleep fine but wakes at three and lies there. No snoring per the spouse, no daytime naps, two cups of coffee before noon. Went over sleep hygiene, no screens in bed, cut the afternoon caffeine. Will hold off on medication for now."
-    },
-    {
-      "id": "note-015",
-      "date": "2026-01-11",
-      "kind": "outside letter",
-      "text": "Dermatology consult note received. Two actinic keratoses on the forehead treated with cryotherapy. Annual skin check recommended, sunscreen counseling done."
-    },
-    {
-      "id": "note-016",
-      "date": "2026-02-23",
-      "kind": "outside letter",
-      "text": "Letter from the dentist's office confirming routine cleaning and exam completed, no active infection, no dental work pending. Sent at our request for the surgical file."
-    },
-    {
-      "id": "note-017",
-      "date": "2026-02-23",
-      "kind": "office visit",
-      "text": "A1c came back 6.2. Prediabetic range, same as last year. Walking program, cut the soda, recheck in six months. He is motivated."
-    },
-    {
-      "id": "note-018",
-      "date": "2026-03-02",
-      "kind": "phone note",
-      "text": "Nurse call. Patient had questions about time off work after surgery and whether he needs someone at home the first night. Answered both, he will arrange it."
-    },
-    {
-      "id": "note-019",
-      "date": "2026-03-10",
-      "kind": "outside letter",
-      "text": "Gastroenterology note received. Screening colonoscopy completed, two small polyps removed, benign on pathology, repeat in 10 years."
-    },
-    {
-      "id": "note-020",
-      "date": "2026-05-11",
-      "kind": "office visit",
-      "text": "Follow-up. Same story, no better. He asked about timing around work and family, we talked through it. Still wants to proceed."
-    },
-    {
-      "id": "note-021",
-      "date": "2026-06-17",
-      "kind": "phone note",
-      "text": "Pharmacy called about the refill on the omeprazole 20. Approved 90 days. He mentioned the heartburn is better since cutting back on coffee."
-    },
-    {
-      "id": "note-022",
-      "date": "2026-07-05",
+      "date": "2025-06-28",
       "kind": "office visit",
       "text": "Low back strain after moving furniture over the weekend. No radiation down the legs, no numbness, no bowel or bladder trouble. Paraspinal tenderness, straight leg raise negative. Heat, keep moving, ibuprofen with food for a week. Should settle."
     },
     {
+      "id": "note-010",
+      "date": "2025-07-01",
+      "kind": "physical therapy",
+      "text": "Session 3. Continued the program from the evaluation, tolerated well, home exercises reviewed, she reports no real change."
+    },
+    {
+      "id": "note-011",
+      "date": "2025-07-08",
+      "kind": "physical therapy",
+      "text": "Session 4. Continued the program from the evaluation, tolerated well, home exercises reviewed, she reports slight improvement that does not last."
+    },
+    {
+      "id": "note-012",
+      "date": "2025-07-15",
+      "kind": "physical therapy",
+      "text": "Session 5. Continued the program from the evaluation, tolerated well, home exercises reviewed, she reports about the same."
+    },
+    {
+      "id": "note-013",
+      "date": "2025-07-16",
+      "kind": "phone note",
+      "text": "Nurse call. Patient had questions about time off work and whether she needs someone at home the first night. Answered both, she will arrange it."
+    },
+    {
+      "id": "note-014",
+      "date": "2025-07-17",
+      "kind": "office visit",
+      "text": "Here with a cough and congestion for 9 days, low grade temp at home, no shortness of breath. Lungs clear, throat a little red, ears fine. Looks viral. Fluids, rest, honey for the cough, come back if she gets a fever over 101 or it goes past two weeks."
+    },
+    {
+      "id": "note-015",
+      "date": "2025-07-20",
+      "kind": "phone note",
+      "text": "Pharmacy called about the refill on the omeprazole 40. Approved 90 days. She mentioned the heartburn is better since cutting back on coffee."
+    },
+    {
+      "id": "note-016",
+      "date": "2025-08-11",
+      "kind": "phone note",
+      "text": "She called asking about travel vaccines for a trip in the spring. Advised hepatitis A and a typhoid booster, referred to the travel clinic. Nothing else needed from us."
+    },
+    {
+      "id": "note-017",
+      "date": "2025-08-15",
+      "kind": "office visit",
+      "text": "Back to go over the plan. Symptoms unchanged. We went through the operation again and she wants to proceed if insurance will cover it. Vitals today 141 over 71, pulse 66. Finished 12 weeks of PT across the street, says it helped while she was there and then right back to baseline. Still in the supportive bra, still on the ibuprofen, intertrigo treated with nystatin powder with partial relief. That is 9 months of conservative measures without durable relief."
+    },
+    {
+      "id": "note-018",
+      "date": "2025-08-15",
+      "kind": "photo documentation",
+      "text": "Standard pre-op photo series taken today, front, both obliques, both laterals. Grooving visible at both shoulders in the AP view, grade 3 ptosis, intertrigo in both folds."
+    },
+    {
+      "id": "note-019",
+      "date": "2025-08-15",
+      "kind": "outside letter",
+      "text": "Optometry report forwarded for the record. Routine refraction, mild astigmatism, new glasses prescribed, retinas healthy, pressures 14 and 18. No ocular pathology noted."
+    },
+    {
+      "id": "note-020",
+      "date": "2025-08-17",
+      "kind": "outside letter",
+      "text": "Dermatology consult note received. Two actinic keratoses on the forehead treated with cryotherapy. Annual skin check recommended, sunscreen counseling done."
+    },
+    {
+      "id": "note-021",
+      "date": "2025-09-01",
+      "kind": "office visit",
+      "text": "Vitamin D came back 18. Started 1000 units daily, recheck in three months. Also talked about calcium from food rather than pills."
+    },
+    {
+      "id": "note-022",
+      "date": "2025-09-02",
+      "kind": "office visit",
+      "text": "Ear fullness and muffled hearing on the right for a week after a cold. Canal clear, drum dull with fluid behind it, no infection. Serous otitis. Decongestant, swallow and yawn, recheck in three weeks if not better."
+    },
+    {
       "id": "note-023",
-      "date": "2026-08-06",
+      "date": "2025-09-03",
+      "kind": "phone note",
+      "text": "Patient called about a tick bite on the calf after a hike. Tick removed whole, no rash, no fever. Watch for a bull's-eye rash or flu symptoms over the next month and call if either shows up."
+    },
+    {
+      "id": "note-024",
+      "date": "2025-10-30",
+      "kind": "office visit",
+      "text": "Knee pain going down stairs, left side, no injury, no locking or giving way. Patellar grind positive, no effusion, ligaments stable. Patellofemoral pain. Quad strengthening sheet, ice after activity, cushioned shoes."
+    },
+    {
+      "id": "note-025",
+      "date": "2025-11-06",
+      "kind": "office visit",
+      "text": "Seasonal allergies acting up, itchy eyes, sneezing, clear drainage, worse outdoors. No wheeze. Cetirizine at night and the saline rinse. Fine with that."
+    },
+    {
+      "id": "note-026",
+      "date": "2025-12-31",
+      "kind": "outside letter",
+      "text": "Letter from the dentist's office confirming routine cleaning and exam completed, no active infection, no dental work pending. Sent at our request for the surgical file."
+    },
+    {
+      "id": "note-027",
+      "date": "2026-02-16",
+      "kind": "office visit",
+      "text": "Follow-up. Same story, no better. She asked about timing around work and family, we talked through it. Still wants to proceed."
+    },
+    {
+      "id": "note-028",
+      "date": "2026-03-14",
+      "kind": "phone note",
+      "text": "Work note requested for a sick day last Monday. Faxed to the employer."
+    },
+    {
+      "id": "note-029",
+      "date": "2026-04-19",
+      "kind": "office visit",
+      "text": "Trouble sleeping for a couple of months, falls asleep fine but wakes at three and lies there. No snoring per the spouse, no daytime naps, two cups of coffee before noon. Went over sleep hygiene, no screens in bed, cut the afternoon caffeine. Will hold off on medication for now."
+    },
+    {
+      "id": "note-030",
+      "date": "2026-04-24",
       "kind": "preoperative visit",
-      "text": "Pre-op. Consent signed. Marked the resection with him standing. Nicotine negative. Hold the metformin the morning of."
+      "text": "Pre-op visit. Consent signed, marked the plan in the mirror, superomedial pedicle, Wise pattern. Labs fine. Stop the ibuprofen a week out."
     }
   ],
   "expected": {
@@ -188,38 +234,39 @@
     ],
     "support": {
       "crit-1": [
-        "note-007"
+        "note-005"
       ],
       "crit-2": [
-        "note-007",
-        "note-010"
+        "note-005",
+        "note-006",
+        "note-017"
       ],
       "crit-3": [
-        "note-007",
-        "note-010"
+        "note-005"
       ],
       "crit-4": [
-        "note-007"
+        "note-018"
       ]
     },
     "distractors": [
       "note-001",
       "note-002",
       "note-003",
-      "note-005",
-      "note-006",
       "note-008",
       "note-009",
-      "note-011",
-      "note-012",
-      "note-013",
       "note-014",
       "note-015",
       "note-016",
-      "note-017",
       "note-019",
+      "note-020",
       "note-021",
-      "note-022"
+      "note-022",
+      "note-023",
+      "note-024",
+      "note-025",
+      "note-026",
+      "note-028",
+      "note-029"
     ],
     "note": "The chart documents every criterion; the CARC 96 denial can be answered from the record."
   }

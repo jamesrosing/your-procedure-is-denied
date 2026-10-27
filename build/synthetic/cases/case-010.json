@@ -1,170 +1,202 @@
 {
   "id": "case-010",
+  "category": "spine surgery",
+  "setting": "outpatient",
+  "stakesUsd": 40000,
   "patient": {
     "alias": "SYN-010",
-    "age": 44,
-    "sex": "female"
+    "age": 64,
+    "sex": "male"
   },
   "procedure": {
-    "cpt": "19357",
-    "description": "breast reconstruction, immediate or delayed, with tissue expander"
+    "code": "63685",
+    "codeSystem": "CPT",
+    "description": "insertion of spinal neurostimulator pulse generator with connection to leads"
   },
   "payer": {
-    "name": "Saltmarsh Benefits Administrators",
-    "planType": "self-funded employer plan"
+    "name": "Northwind Mutual Health",
+    "planType": "commercial PPO"
   },
   "denial": {
-    "carc": "197",
-    "carcText": "Precertification/authorization/notification/pre-treatment absent.",
-    "text": "Saltmarsh Benefits Administrators denied the claim for CPT 19357 (breast reconstruction, immediate or delayed, with tissue expander) with date of service 2026-05-28. CARC 197: Precertification/authorization/notification/pre-treatment absent. Payer remark: No authorization is on file. A retrospective medical necessity review may be requested with supporting clinical documentation within 180 days.",
-    "dateOfService": "2026-05-28"
+    "carc": "50",
+    "carcText": "These are non-covered services because this is not deemed a 'medical necessity' by the payer.",
+    "text": "Northwind Mutual Health denied the claim for CPT 63685 (insertion of spinal neurostimulator pulse generator with connection to leads) with date of service 2026-02-03. CARC 50: These are non-covered services because this is not deemed a 'medical necessity' by the payer. Payer remark: Documentation does not establish a successful trial meeting the plan’s definition of 50 percent pain reduction with functional improvement.",
+    "dateOfService": "2026-02-03"
   },
   "criteria": [
     {
       "id": "crit-1",
-      "text": "Documented mastectomy for breast cancer, or prophylactic mastectomy for a qualifying risk, with reconstruction requested by the patient. Reconstruction after a covered mastectomy is a mandated benefit under the Women’s Health and Cancer Rights Act."
+      "text": "Chronic intractable neuropathic pain of the trunk or limbs (such as failed back surgery syndrome or complex regional pain syndrome) for at least 6 months despite conservative therapy including medications, physical therapy, and injections."
     },
     {
       "id": "crit-2",
-      "text": "An operative plan for staged reconstruction (tissue expander placement followed by implant exchange) appropriate to the patient’s radiation status and tissue quality."
+      "text": "Psychological evaluation documenting no untreated psychiatric condition or substance use disorder that would preclude benefit from neuromodulation."
     },
     {
       "id": "crit-3",
-      "text": "Medical clearance for the planned surgery is documented."
+      "text": "A successful trial of at least 5 days with at least 50 percent pain reduction and documented functional improvement."
+    },
+    {
+      "id": "crit-4",
+      "text": "No further surgically correctable lesion identified on imaging."
     }
   ],
   "chart": [
     {
       "id": "note-001",
-      "date": "2025-04-30",
-      "kind": "office visit",
-      "text": "Mole on the upper back that her spouse noticed. About 7 millimeters, even color, regular border, no change she is aware of. Looks benign. Photo in the chart for comparison, recheck in a year or sooner if it changes."
-    },
-    {
-      "id": "note-002",
-      "date": "2025-05-05",
-      "kind": "outside letter",
-      "text": "Optometry report forwarded for the record. Routine refraction, mild astigmatism, new glasses prescribed, retinas healthy, pressures 15 and 16. No ocular pathology noted."
-    },
-    {
-      "id": "note-003",
-      "date": "2025-05-17",
-      "kind": "outside letter",
-      "text": "Referral letter from the primary care office. Thank you for seeing this patient of mine for surgical evaluation. Her history and medication list are attached. Please let me know what you recommend and whether anything is needed from our end for clearance. From the breast surgeon: left total mastectomy performed 4 months ago for a 2.3 centimeter invasive ductal carcinoma, sentinel nodes negative, margins clear. She has completed adjuvant chemotherapy and wishes to proceed with reconstruction."
-    },
-    {
-      "id": "note-004",
-      "date": "2025-05-28",
-      "kind": "office visit",
-      "text": "44 year old woman referred by the breast surgeon for reconstruction. Went over expanders versus flaps, she prefers the expander route, fewer operations and no donor site. Her history otherwise: hypothyroidism on levothyroxine, reflux on omeprazole as needed. Allergies: sulfa, hives as a child. Never smoked, occasional beer, has three kids at home. Family history noncontributory for what we are talking about today. Status post left mastectomy 4 months ago for a 2.3 centimeter invasive ductal. Done with chemo. She wants reconstruction and has thought hard about it. No radiation planned per oncology. Good skin envelope, no infection, mastectomy flap healed. Plan is a left tissue expander under the pectoralis now, exchange to a permanent implant in about 6 months, and a right lift for symmetry later."
-    },
-    {
-      "id": "note-005",
-      "date": "2025-07-02",
-      "kind": "phone note",
-      "text": "Called her with the cholesterol results. Total 188, LDL 124, HDL 38, triglycerides 189. Discussed diet and walking. She wants to try lifestyle first for six months before we talk about a statin. Agreed."
-    },
-    {
-      "id": "note-006",
-      "date": "2025-07-06",
-      "kind": "office visit",
-      "text": "Blood pressure check. 144 over 90 today, 124 over 87 on repeat. She has been taking the lisinopril 40 most days, admits to missing weekends. Low salt talk again. Keep the dose, recheck in 12 weeks."
-    },
-    {
-      "id": "note-007",
-      "date": "2025-07-13",
-      "kind": "office visit",
-      "text": "Back with her sister to go over the plan again. Questions answered. Ready to schedule. Vitals today 136 over 75, pulse 62."
-    },
-    {
-      "id": "note-008",
-      "date": "2025-08-26",
-      "kind": "phone note",
-      "text": "Pharmacy called about the refill on the omeprazole 20. Approved 90 days. She mentioned the heartburn is better since cutting back on coffee."
-    },
-    {
-      "id": "note-009",
-      "date": "2025-09-11",
-      "kind": "office visit",
-      "text": "Annual physical. Feels well overall. Sleeping fine, appetite fine, no chest pain, no shortness of breath. Flu shot given in the left arm today. Due for a tetanus booster, she will think about it. Labs ordered, fasting."
-    },
-    {
-      "id": "note-010",
-      "date": "2025-09-15",
-      "kind": "office visit",
-      "text": "Trouble sleeping for a couple of months, falls asleep fine but wakes at three and lies there. No snoring per the spouse, no daytime naps, two cups of coffee before noon. Went over sleep hygiene, no screens in bed, cut the afternoon caffeine. Will hold off on medication for now."
-    },
-    {
-      "id": "note-011",
-      "date": "2025-09-18",
-      "kind": "office visit",
-      "text": "A1c came back 6.6. Prediabetic range, same as last year. Walking program, cut the soda, recheck in six months. She is motivated."
-    },
-    {
-      "id": "note-012",
-      "date": "2025-10-12",
+      "date": "2025-09-16",
       "kind": "outside letter",
       "text": "Letter from the dentist's office confirming routine cleaning and exam completed, no active infection, no dental work pending. Sent at our request for the surgical file."
     },
     {
-      "id": "note-013",
-      "date": "2025-10-24",
-      "kind": "phone note",
-      "text": "Called to let her know the surgery date is set and that we are submitting to the insurance. She called asking where things stand with the insurance. Told her the paperwork went in and we are waiting to hear. Reviewed what to do in the meantime."
-    },
-    {
-      "id": "note-014",
-      "date": "2025-11-01",
-      "kind": "office visit",
-      "text": "Follow-up. Same story, no better. She asked about timing around work and family, we talked through it. Still wants to proceed."
-    },
-    {
-      "id": "note-015",
-      "date": "2025-11-02",
+      "id": "note-002",
+      "date": "2025-10-07",
       "kind": "office visit",
       "text": "Burning with urination for two days, going frequently, no fever, no back pain. Urine dip positive for leukocytes and nitrites. Nitrofurantoin for five days, push fluids, call if fever or flank pain."
     },
     {
-      "id": "note-016",
-      "date": "2025-11-23",
-      "kind": "phone note",
-      "text": "Thyroid labs back. TSH 2.4, free T4 normal. No change to the levothyroxine 75. Repeat in a year."
-    },
-    {
-      "id": "note-017",
-      "date": "2025-11-30",
-      "kind": "phone note",
-      "text": "She called asking about travel vaccines for a trip in the fall. Advised hepatitis A and a typhoid booster, referred to the travel clinic. Nothing else needed from us."
-    },
-    {
-      "id": "note-018",
-      "date": "2025-11-30",
+      "id": "note-003",
+      "date": "2025-10-12",
       "kind": "outside letter",
-      "text": "Gastroenterology note received. Screening colonoscopy completed, two small polyps removed, benign on pathology, repeat in 7 years."
+      "text": "From the referring physician: please evaluate and treat as you see fit. We have exhausted what we can do in primary care and the patient is motivated. Recent labs enclosed, all within normal limits."
     },
     {
-      "id": "note-019",
-      "date": "2025-12-11",
+      "id": "note-004",
+      "date": "2025-10-20",
+      "kind": "office visit",
+      "text": "Here with a cough and congestion for 4 days, low grade temp at home, no shortness of breath. Lungs clear, throat a little red, ears fine. Looks viral. Fluids, rest, honey for the cough, come back if he gets a fever over 101 or it goes past two weeks."
+    },
+    {
+      "id": "note-005",
+      "date": "2025-10-30",
+      "kind": "office visit",
+      "text": "64 year old man in the pain clinic referred by his spine surgeon. Discussed spinal cord stimulation, what a trial involves, and that it is for leg-predominant neuropathic pain. He is interested. His history otherwise: seasonal allergies, migraines, rare now, anxiety, sees a counselor. Allergies: sulfa, hives as a child. Does not smoke, a glass of wine on weekends, works as a teacher. Family history noncontributory for what we are talking about today. Persistent bilateral leg and low back pain 22 months after an L4-S1 fusion, 8 out of 10 most days, burning quality down both legs. On gabapentin 1200 three times daily and duloxetine 60, 18 weeks of PT, two epidurals and a medial branch block without durable relief. Post-operative MRI and CT show a solid fusion, no recurrent stenosis, no hardware problem; the spine surgeon has nothing further to offer surgically."
+    },
+    {
+      "id": "note-006",
+      "date": "2025-11-19",
+      "kind": "psychological evaluation",
+      "text": "Psychological evaluation for neuromodulation candidacy. PHQ-9 score 10, mild; no somatic symptom disorder; no substance use disorder, opioid use stable and monitored; realistic expectations about pain reduction rather than cure. Cleared for trial."
+    },
+    {
+      "id": "note-007",
+      "date": "2025-11-19",
+      "kind": "outside letter",
+      "text": "Gastroenterology note received. Screening colonoscopy completed, two small polyps removed, benign on pathology, repeat in 10 years."
+    },
+    {
+      "id": "note-008",
+      "date": "2025-11-24",
+      "kind": "office visit",
+      "text": "Twisted the right ankle stepping off a curb 2 days ago. Swelling over the lateral malleolus, tender over the ATFL, can bear weight. Ottawa negative, no film. Brace, ice, ibuprofen, elevate. Should be fine in a couple weeks."
+    },
+    {
+      "id": "note-009",
+      "date": "2025-11-29",
+      "kind": "office visit",
+      "text": "Reviewed the psychological evaluation. Scheduling the trial. Anticoagulation and infection precautions reviewed. Vitals today 119 over 75, pulse 73."
+    },
+    {
+      "id": "note-010",
+      "date": "2025-12-09",
       "kind": "phone note",
       "text": "Work note requested for a sick day last Tuesday. Faxed to the employer."
     },
     {
-      "id": "note-020",
-      "date": "2026-04-10",
+      "id": "note-011",
+      "date": "2025-12-11",
+      "kind": "phone note",
+      "text": "Thyroid labs back. TSH 2.1, free T4 normal. No change to the levothyroxine 50. Repeat in a year."
+    },
+    {
+      "id": "note-012",
+      "date": "2025-12-12",
+      "kind": "phone note",
+      "text": "Called his with the cholesterol results. Total 215, LDL 125, HDL 57, triglycerides 123. Discussed diet and walking. He wants to try lifestyle first for six months before we talk about a statin. Agreed."
+    },
+    {
+      "id": "note-013",
+      "date": "2025-12-12",
       "kind": "office visit",
-      "text": "Ear fullness and muffled hearing on the right for a week after a cold. Canal clear, drum dull with fluid behind it, no infection. Serous otitis. Decongestant, swallow and yawn, recheck in three weeks if not better."
+      "text": "A1c came back 6.1. Prediabetic range, same as last year. Walking program, cut the soda, recheck in six months. He is motivated."
+    },
+    {
+      "id": "note-014",
+      "date": "2025-12-14",
+      "kind": "procedure note",
+      "text": "Percutaneous trial leads placed at T8 and T9 under fluoroscopy, paresthesia coverage of both legs and the low back confirmed. Trial programmed, home with the diary."
+    },
+    {
+      "id": "note-015",
+      "date": "2025-12-19",
+      "kind": "office visit",
+      "text": "Trial day 5: pain down from 8 out of 10 to 3 out of 10, a 62 percent reduction. Walking 30 minutes a day, sleeping through the night, cut the oxycodone in half. Successful trial; proceed to permanent implant. Leads removed."
+    },
+    {
+      "id": "note-016",
+      "date": "2025-12-23",
+      "kind": "office visit",
+      "text": "Ear fullness and muffled hearing on the left for a week after a cold. Canal clear, drum dull with fluid behind it, no infection. Serous otitis. Decongestant, swallow and yawn, recheck in three weeks if not better."
+    },
+    {
+      "id": "note-017",
+      "date": "2025-12-27",
+      "kind": "outside letter",
+      "text": "Dermatology consult note received. Two actinic keratoses on the forehead treated with cryotherapy. Annual skin check recommended, sunscreen counseling done."
+    },
+    {
+      "id": "note-018",
+      "date": "2026-01-05",
+      "kind": "office visit",
+      "text": "Annual physical. Feels well overall. Sleeping fine, appetite fine, no chest pain, no shortness of breath. Flu shot given in the left arm today. Due for a tetanus booster, he will think about it. Labs ordered, fasting."
+    },
+    {
+      "id": "note-019",
+      "date": "2026-01-07",
+      "kind": "office visit",
+      "text": "Mole on the right calf that his spouse noticed. About 5 millimeters, even color, regular border, no change he is aware of. Looks benign. Photo in the chart for comparison, recheck in a year or sooner if it changes."
+    },
+    {
+      "id": "note-020",
+      "date": "2026-01-08",
+      "kind": "office visit",
+      "text": "Low back strain after moving furniture over the weekend. No radiation down the legs, no numbness, no bowel or bladder trouble. Paraspinal tenderness, straight leg raise negative. Heat, keep moving, ibuprofen with food for a week. Should settle."
     },
     {
       "id": "note-021",
-      "date": "2026-05-12",
-      "kind": "preoperative visit",
-      "text": "Pre-op. Cleared by her PCP, letter in the chart, labs and EKG fine. Consent signed for left tissue expander placement."
+      "date": "2026-01-11",
+      "kind": "office visit",
+      "text": "Knee pain going down stairs, left side, no injury, no locking or giving way. Patellar grind positive, no effusion, ligaments stable. Patellofemoral pain. Quad strengthening sheet, ice after activity, cushioned shoes."
     },
     {
       "id": "note-022",
-      "date": "2026-05-24",
-      "kind": "outside letter",
-      "text": "Dermatology consult note received. Two actinic keratoses on the forehead treated with cryotherapy. Annual skin check recommended, sunscreen counseling done."
+      "date": "2026-01-18",
+      "kind": "office visit",
+      "text": "Trouble sleeping for a couple of months, falls asleep fine but wakes at three and lies there. No snoring per the spouse, no daytime naps, two cups of coffee before noon. Went over sleep hygiene, no screens in bed, cut the afternoon caffeine. Will hold off on medication for now."
+    },
+    {
+      "id": "note-023",
+      "date": "2026-01-20",
+      "kind": "phone note",
+      "text": "Message from the patient about scheduling. Wants a date in the next couple of months if the insurance comes through. Passed to the scheduler."
+    },
+    {
+      "id": "note-024",
+      "date": "2026-01-25",
+      "kind": "office visit",
+      "text": "Blood pressure check. 142 over 83 today, 134 over 94 on repeat. He has been taking the lisinopril 20 most days, admits to missing weekends. Low salt talk again. Keep the dose, recheck in 6 weeks."
+    },
+    {
+      "id": "note-025",
+      "date": "2026-01-27",
+      "kind": "preoperative visit",
+      "text": "Pre-op for permanent implant. Labs fine, nicotine negative. Consent signed for percutaneous leads and a rechargeable generator in the left upper buttock."
+    },
+    {
+      "id": "note-026",
+      "date": "2026-01-30",
+      "kind": "phone note",
+      "text": "Pharmacy called about the refill on the omeprazole 20. Approved 90 days. He mentioned the heartburn is better since cutting back on coffee."
     }
   ],
   "expected": {
@@ -172,38 +204,44 @@
     "criteriaMet": [
       "crit-1",
       "crit-2",
-      "crit-3"
+      "crit-3",
+      "crit-4"
     ],
     "support": {
       "crit-1": [
-        "note-003",
-        "note-004"
+        "note-005"
       ],
       "crit-2": [
-        "note-004"
+        "note-006"
       ],
       "crit-3": [
-        "note-021"
+        "note-014",
+        "note-015"
+      ],
+      "crit-4": [
+        "note-005"
       ]
     },
     "distractors": [
       "note-001",
       "note-002",
-      "note-005",
-      "note-006",
+      "note-004",
+      "note-007",
       "note-008",
-      "note-009",
       "note-010",
       "note-011",
       "note-012",
-      "note-015",
+      "note-013",
       "note-016",
       "note-017",
       "note-018",
       "note-019",
       "note-020",
-      "note-022"
+      "note-021",
+      "note-022",
+      "note-024",
+      "note-026"
     ],
-    "note": "The chart documents every criterion; the CARC 197 denial can be answered from the record."
+    "note": "The chart documents every criterion; the CARC 50 denial can be answered from the record."
   }
 }

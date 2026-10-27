@@ -1,227 +1,263 @@
 {
   "id": "case-017",
+  "category": "oncology",
+  "setting": "outpatient",
+  "stakesUsd": 11000,
   "patient": {
     "alias": "SYN-017",
-    "age": 39,
-    "sex": "female"
+    "age": 59,
+    "sex": "male"
   },
   "procedure": {
-    "cpt": "15877",
-    "description": "suction assisted lipectomy, trunk and lower extremities, for lipedema"
+    "code": "J9271",
+    "codeSystem": "HCPCS",
+    "description": "pembrolizumab injection, 200 mg, first-line therapy for metastatic non-small cell lung cancer"
   },
   "payer": {
-    "name": "Lanternhill Health Plan",
-    "planType": "commercial HMO"
+    "name": "Copperfield Health",
+    "planType": "commercial EPO"
   },
   "denial": {
-    "carc": "50",
-    "carcText": "These are non-covered services because this is not deemed a 'medical necessity' by the payer.",
-    "text": "Lanternhill Health Plan denied the claim for CPT 15877 (suction assisted lipectomy, trunk and lower extremities, for lipedema) with date of service 2026-06-23. CARC 50: These are non-covered services because this is not deemed a 'medical necessity' by the payer. Payer remark: Documentation does not establish failure of conservative therapy.",
-    "dateOfService": "2026-06-23"
+    "carc": "56",
+    "carcText": "Procedure/treatment is deemed experimental/investigational by the payer.",
+    "text": "Copperfield Health denied the claim for HCPCS J9271 (pembrolizumab injection, 200 mg, first-line therapy for metastatic non-small cell lung cancer) with date of service 2026-02-26. CARC 56: Procedure/treatment is deemed experimental/investigational by the payer. Payer remark: Use of this agent is considered investigational for the submitted diagnosis.",
+    "dateOfService": "2026-02-26"
   },
   "criteria": [
     {
       "id": "crit-1",
-      "text": "Diagnosis of lipedema stage II or III documented on examination: bilateral symmetric disproportionate adiposity of the limbs sparing the feet, negative Stemmer sign, tenderness, and easy bruising."
+      "text": "Histologically confirmed non-small cell lung cancer that is metastatic (stage IV) or recurrent and not amenable to curative treatment."
     },
     {
       "id": "crit-2",
-      "text": "At least 6 months of conservative therapy including compression garments and manual lymphatic drainage or supervised exercise, with persistent pain or functional impairment."
+      "text": "PD-L1 tumor proportion score of 50 percent or greater for single-agent therapy (1 percent or greater when combined with platinum chemotherapy)."
     },
     {
       "id": "crit-3",
-      "text": "Pain or impaired mobility attributable to lipedema."
+      "text": "No EGFR sensitizing mutation and no ALK rearrangement, since targeted therapy is first-line for those tumors."
+    },
+    {
+      "id": "crit-4",
+      "text": "Eastern Cooperative Oncology Group performance status 0 to 2."
+    },
+    {
+      "id": "crit-5",
+      "text": "No prior systemic therapy for metastatic disease."
     }
   ],
   "chart": [
     {
       "id": "note-001",
-      "date": "2025-07-10",
-      "kind": "phone note",
-      "text": "Thyroid labs back. TSH 3.3, free T4 normal. No change to the levothyroxine 75. Repeat in a year."
-    },
-    {
-      "id": "note-002",
-      "date": "2025-07-21",
-      "kind": "outside letter",
-      "text": "From the referring physician: please evaluate for surgical management. We have exhausted what we can do in primary care and the patient is motivated. Recent labs enclosed, all within normal limits."
-    },
-    {
-      "id": "note-003",
-      "date": "2025-07-30",
-      "kind": "phone note",
-      "text": "Pharmacy called about the refill on the omeprazole 20. Approved 90 days. She mentioned the heartburn is better since cutting back on coffee."
-    },
-    {
-      "id": "note-004",
-      "date": "2025-08-08",
-      "kind": "office visit",
-      "text": "39 year old woman here about her legs, self-referred after reading about lipedema. Mother and aunt had the same legs. Discussed lymph-sparing liposuction, staged, and that it is debulking, not a cure. Her history otherwise: prediabetes, diet controlled, anxiety, sees a counselor. Surgeries: a C-section. Allergies: codeine makes her sick. Never smoked, occasional beer, has three kids at home. Family history noncontributory for what we are talking about today. Classic picture. Column legs out of all proportion to her waist, cuff sign at the ankles, feet spared, Stemmer negative, exquisitely tender to pinch over the thighs, bruises if you look at her. Stage 3. Says she cannot stand through a shift anymore, pain in the thighs is constant, stairs are hard because the legs knock together."
-    },
-    {
-      "id": "note-005",
-      "date": "2025-08-13",
-      "kind": "phone note",
-      "text": "Patient called about a tick bite on the scalp after a hike. Tick removed whole, no rash, no fever. Watch for a bull's-eye rash or flu symptoms over the next month and call if either shows up."
-    },
-    {
-      "id": "note-006",
-      "date": "2025-08-20",
-      "kind": "office visit",
-      "text": "Vitamin D came back 23. Started 2000 units daily, recheck in three months. Also talked about calcium from food rather than pills."
-    },
-    {
-      "id": "note-007",
-      "date": "2025-08-30",
-      "kind": "outside letter",
-      "text": "Optometry report forwarded for the record. Routine refraction, mild astigmatism, new glasses prescribed, retinas healthy, pressures 13 and 17. No ocular pathology noted."
-    },
-    {
-      "id": "note-008",
-      "date": "2025-09-09",
-      "kind": "office visit",
-      "text": "Knee pain going down stairs, left side, no injury, no locking or giving way. Patellar grind positive, no effusion, ligaments stable. Patellofemoral pain. Quad strengthening sheet, ice after activity, cushioned shoes."
-    },
-    {
-      "id": "note-009",
-      "date": "2025-09-24",
-      "kind": "office visit",
-      "text": "Blood pressure check. 127 over 88 today, 138 over 85 on repeat. She has been taking the lisinopril 40 most days, admits to missing weekends. Low salt talk again. Keep the dose, recheck in 6 weeks."
-    },
-    {
-      "id": "note-010",
-      "date": "2025-10-16",
-      "kind": "office visit",
-      "text": "Follow-up. Reviewed photos and measurements, legs unchanged. Went over the staged plan and the compression afterward. Vitals today 122 over 86, pulse 70."
-    },
-    {
-      "id": "note-011",
-      "date": "2025-11-24",
-      "kind": "phone note",
-      "text": "Message from the patient about scheduling. Wants a date in the next couple of months if the insurance comes through. Passed to the surgery scheduler."
-    },
-    {
-      "id": "note-012",
-      "date": "2025-12-25",
-      "kind": "outside letter",
-      "text": "Mammogram report forwarded for the record. Bilateral screening, BI-RADS 1, negative, routine screening in one year."
-    },
-    {
-      "id": "note-013",
-      "date": "2025-12-26",
-      "kind": "office visit",
-      "text": "Low back strain after moving furniture over the weekend. No radiation down the legs, no numbness, no bowel or bladder trouble. Paraspinal tenderness, straight leg raise negative. Heat, keep moving, ibuprofen with food for a week. Should settle."
-    },
-    {
-      "id": "note-014",
-      "date": "2026-02-09",
-      "kind": "outside letter",
-      "text": "Letter from the dentist's office confirming routine cleaning and exam completed, no active infection, no dental work pending. Sent at our request for the surgical file."
-    },
-    {
-      "id": "note-015",
-      "date": "2026-03-17",
-      "kind": "office visit",
-      "text": "Check-in while we wait on the insurance. No change in the complaints. Reviewed the risks and recovery one more time, she remains sure about going ahead."
-    },
-    {
-      "id": "note-016",
-      "date": "2026-03-20",
-      "kind": "office visit",
-      "text": "Trouble sleeping for a couple of months, falls asleep fine but wakes at three and lies there. No snoring per the spouse, no daytime naps, two cups of coffee before noon. Went over sleep hygiene, no screens in bed, cut the afternoon caffeine. Will hold off on medication for now."
-    },
-    {
-      "id": "note-017",
-      "date": "2026-03-31",
-      "kind": "phone note",
-      "text": "Called her with the cholesterol results. Total 190, LDL 141, HDL 48, triglycerides 143. Discussed diet and walking. She wants to try lifestyle first for six months before we talk about a statin. Agreed."
-    },
-    {
-      "id": "note-018",
-      "date": "2026-04-08",
-      "kind": "phone note",
-      "text": "Work note requested for a sick day last Thursday. Faxed to the employer."
-    },
-    {
-      "id": "note-019",
-      "date": "2026-04-10",
-      "kind": "office visit",
-      "text": "Twisted the left ankle stepping off a curb 4 days ago. Swelling over the lateral malleolus, tender over the ATFL, can bear weight. Ottawa negative, no film. Brace, ice, ibuprofen, elevate. Should be fine in a couple weeks."
-    },
-    {
-      "id": "note-020",
-      "date": "2026-04-18",
+      "date": "2026-01-02",
       "kind": "office visit",
       "text": "Seasonal allergies acting up, itchy eyes, sneezing, clear drainage, worse outdoors. No wheeze. Cetirizine at night and the saline rinse. Fine with that."
     },
     {
-      "id": "note-021",
-      "date": "2026-05-18",
+      "id": "note-002",
+      "date": "2026-01-08",
+      "kind": "phone note",
+      "text": "Patient called about a tick bite on the shoulder after a hike. Tick removed whole, no rash, no fever. Watch for a bull's-eye rash or flu symptoms over the next month and call if either shows up."
+    },
+    {
+      "id": "note-003",
+      "date": "2026-01-11",
       "kind": "office visit",
-      "text": "Burning with urination for two days, going frequently, no fever, no back pain. Urine dip positive for leukocytes and nitrites. Nitrofurantoin for five days, push fluids, call if fever or flank pain."
+      "text": "Annual physical. Feels well overall. Sleeping fine, appetite fine, no chest pain, no shortness of breath. Flu shot given in the left arm today. Due for a tetanus booster, he will think about it. Labs ordered, fasting."
+    },
+    {
+      "id": "note-004",
+      "date": "2026-01-15",
+      "kind": "outside letter",
+      "text": "Dermatology consult note received. Two actinic keratoses on the forehead treated with cryotherapy. Annual skin check recommended, sunscreen counseling done."
+    },
+    {
+      "id": "note-005",
+      "date": "2026-01-15",
+      "kind": "office visit",
+      "text": "Low back strain after moving furniture over the weekend. No radiation down the legs, no numbness, no bowel or bladder trouble. Paraspinal tenderness, straight leg raise negative. Heat, keep moving, ibuprofen with food for a week. Should settle."
+    },
+    {
+      "id": "note-006",
+      "date": "2026-01-17",
+      "kind": "phone note",
+      "text": "Thyroid labs back. TSH 2.9, free T4 normal. No change to the levothyroxine 100. Repeat in a year."
+    },
+    {
+      "id": "note-007",
+      "date": "2026-01-18",
+      "kind": "office visit",
+      "text": "Trouble sleeping for a couple of months, falls asleep fine but wakes at three and lies there. No snoring per the spouse, no daytime naps, two cups of coffee before noon. Went over sleep hygiene, no screens in bed, cut the afternoon caffeine. Will hold off on medication for now."
+    },
+    {
+      "id": "note-008",
+      "date": "2026-01-22",
+      "kind": "outside letter",
+      "text": "Optometry report forwarded for the record. Routine refraction, mild astigmatism, new glasses prescribed, retinas healthy, pressures 17 and 13. No ocular pathology noted."
+    },
+    {
+      "id": "note-009",
+      "date": "2026-01-29",
+      "kind": "outside letter",
+      "text": "From the referring physician: please evaluate and treat as you see fit. We have exhausted what we can do in primary care and the patient is motivated. Recent labs enclosed, all within normal limits."
+    },
+    {
+      "id": "note-010",
+      "date": "2026-01-29",
+      "kind": "office visit",
+      "text": "Knee pain going down stairs, left side, no injury, no locking or giving way. Patellar grind positive, no effusion, ligaments stable. Patellofemoral pain. Quad strengthening sheet, ice after activity, cushioned shoes."
+    },
+    {
+      "id": "note-011",
+      "date": "2026-02-01",
+      "kind": "outside letter",
+      "text": "Gastroenterology note received. Screening colonoscopy completed, two small polyps removed, benign on pathology, repeat in 10 years."
+    },
+    {
+      "id": "note-012",
+      "date": "2026-02-02",
+      "kind": "pathology report",
+      "text": "Core needle biopsy, right upper lobe mass: adenocarcinoma, TTF-1 positive, napsin A positive, p40 negative. Consistent with primary lung adenocarcinoma."
+    },
+    {
+      "id": "note-013",
+      "date": "2026-02-06",
+      "kind": "office visit",
+      "text": "Ear fullness and muffled hearing on the right for a week after a cold. Canal clear, drum dull with fluid behind it, no infection. Serous otitis. Decongestant, swallow and yawn, recheck in three weeks if not better."
+    },
+    {
+      "id": "note-014",
+      "date": "2026-02-06",
+      "kind": "phone note",
+      "text": "Work note requested for a sick day last Tuesday. Faxed to the employer."
+    },
+    {
+      "id": "note-015",
+      "date": "2026-02-08",
+      "kind": "office visit",
+      "text": "Here with a cough and congestion for 5 days, low grade temp at home, no shortness of breath. Lungs clear, throat a little red, ears fine. Looks viral. Fluids, rest, honey for the cough, come back if he gets a fever over 101 or it goes past two weeks."
+    },
+    {
+      "id": "note-016",
+      "date": "2026-02-08",
+      "kind": "phone note",
+      "text": "Pharmacy called about the refill on the omeprazole 40. Approved 90 days. He mentioned the heartburn is better since cutting back on coffee."
+    },
+    {
+      "id": "note-017",
+      "date": "2026-02-09",
+      "kind": "imaging",
+      "text": "PET/CT: 4.3 centimeter hypermetabolic right upper lobe mass, hypermetabolic right hilar and subcarinal nodes, two hypermetabolic hepatic lesions in segments 6 and 7, and a lytic hypermetabolic lesion in the left iliac wing. Stage IV disease."
+    },
+    {
+      "id": "note-018",
+      "date": "2026-02-11",
+      "kind": "phone note",
+      "text": "Called his with the cholesterol results. Total 198, LDL 125, HDL 50, triglycerides 114. Discussed diet and walking. He wants to try lifestyle first for six months before we talk about a statin. Agreed."
+    },
+    {
+      "id": "note-019",
+      "date": "2026-02-13",
+      "kind": "molecular pathology report",
+      "text": "PD-L1 immunohistochemistry (22C3): tumor proportion score 90 percent. Next-generation sequencing: EGFR, ALK, ROS1, BRAF V600E, KRAS G12C, MET exon 14, RET, and NTRK: no actionable alteration detected. Tumor mutational burden 9 per megabase."
+    },
+    {
+      "id": "note-020",
+      "date": "2026-02-16",
+      "kind": "office visit",
+      "text": "59 year old man seen in medical oncology with his daughter. Presented with three months of cough and 12 pounds of weight loss. Long discussion of goals: he wants treatment aimed at living longer and feeling well. Former smoker, 35 pack years, quit 9 years ago. His history otherwise: osteoarthritis of the hands, seasonal allergies. Allergies: codeine makes him sick. Quit smoking 7 years ago, no alcohol, drives for a living. Family history noncontributory for what we are talking about today. Stage IV lung adenocarcinoma with liver and bone metastases. Not a surgical or curative radiation candidate. ECOG 1. Still working part time, walks the dog every morning, some fatigue by evening and a cough. No prior systemic therapy. This is first-line treatment for metastatic disease."
+    },
+    {
+      "id": "note-021",
+      "date": "2026-02-17",
+      "kind": "office visit",
+      "text": "A1c came back 6.4. Prediabetic range, same as last year. Walking program, cut the soda, recheck in six months. He is motivated."
     },
     {
       "id": "note-022",
-      "date": "2026-05-31",
-      "kind": "office visit",
-      "text": "Here with a cough and congestion for 8 days, low grade temp at home, no shortness of breath. Lungs clear, throat a little red, ears fine. Looks viral. Fluids, rest, honey for the cough, come back if she gets a fever over 101 or it goes past two weeks."
+      "date": "2026-02-17",
+      "kind": "outside letter",
+      "text": "Letter from the dentist's office confirming routine cleaning and exam completed, no active infection, no dental work pending. Sent at our request for the surgical file."
     },
     {
       "id": "note-023",
-      "date": "2026-06-03",
-      "kind": "office visit",
-      "text": "A1c came back 6.1. Prediabetic range, same as last year. Walking program, cut the soda, recheck in six months. She is motivated."
+      "date": "2026-02-18",
+      "kind": "tumor board note",
+      "text": "Thoracic tumor board. Case presented. Consensus: single-agent immunotherapy first-line given the biomarker profile and performance status, palliative radiation to the iliac lesion if it becomes painful. Molecular results reviewed by the group."
     },
     {
       "id": "note-024",
-      "date": "2026-06-06",
-      "kind": "preoperative visit",
-      "text": "Pre-op for stage one, thighs. Consent signed. Marked standing. Garments ordered."
+      "date": "2026-02-19",
+      "kind": "office visit",
+      "text": "Vitamin D came back 19. Started 2000 units daily, recheck in three months. Also talked about calcium from food rather than pills."
     },
     {
       "id": "note-025",
-      "date": "2026-06-12",
+      "date": "2026-02-23",
       "kind": "office visit",
-      "text": "Annual physical. Feels well overall. Sleeping fine, appetite fine, no chest pain, no shortness of breath. Flu shot given in the left arm today. Due for a tetanus booster, she will think about it. Labs ordered, fasting."
+      "text": "Back to review the plan. Consented for pembrolizumab 200 milligrams every 3 weeks. Reviewed immune-related side effects, what to call about, and the port placement scheduled for later this week. Vitals today 142 over 87, pulse 68."
+    },
+    {
+      "id": "note-026",
+      "date": "2026-02-25",
+      "kind": "office visit",
+      "text": "Twisted the left ankle stepping off a curb 5 days ago. Swelling over the lateral malleolus, tender over the ATFL, can bear weight. Ottawa negative, no film. Brace, ice, ibuprofen, elevate. Should be fine in a couple weeks."
+    },
+    {
+      "id": "note-027",
+      "date": "2026-02-26",
+      "kind": "infusion note",
+      "text": "Infusion visit, cycle 1 day 1. Vitals stable, labs acceptable, pembrolizumab 200 milligrams intravenous over 30 minutes, tolerated without reaction. Return in 3 weeks."
     }
   ],
   "expected": {
-    "warranted": false,
-    "subtype": "absent",
+    "warranted": true,
     "criteriaMet": [
       "crit-1",
-      "crit-3"
+      "crit-2",
+      "crit-3",
+      "crit-4",
+      "crit-5"
     ],
     "support": {
       "crit-1": [
-        "note-004"
+        "note-012",
+        "note-017",
+        "note-020"
       ],
-      "crit-2": [],
+      "crit-2": [
+        "note-019"
+      ],
       "crit-3": [
-        "note-004"
+        "note-019"
+      ],
+      "crit-4": [
+        "note-020"
+      ],
+      "crit-5": [
+        "note-020"
       ]
     },
     "distractors": [
       "note-001",
+      "note-002",
       "note-003",
+      "note-004",
       "note-005",
       "note-006",
       "note-007",
       "note-008",
-      "note-009",
-      "note-012",
+      "note-010",
+      "note-011",
       "note-013",
       "note-014",
+      "note-015",
       "note-016",
-      "note-017",
       "note-018",
-      "note-019",
-      "note-020",
       "note-021",
       "note-022",
-      "note-023",
-      "note-025"
+      "note-024",
+      "note-026"
     ],
-    "note": "The chart never addresses crit-2 (conservative); no entry supports it, so an appeal would assert what the record does not contain."
+    "note": "The chart documents every criterion; the CARC 56 denial can be answered from the record."
   }
 }

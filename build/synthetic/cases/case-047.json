@@ -1,180 +1,221 @@
 {
   "id": "case-047",
+  "category": "wound care",
+  "setting": "outpatient",
+  "stakesUsd": 8000,
   "patient": {
     "alias": "SYN-047",
-    "age": 38,
-    "sex": "female"
+    "age": 65,
+    "sex": "male"
   },
   "procedure": {
-    "cpt": "15847",
-    "description": "panniculectomy with excision of excess skin and subcutaneous tissue of the abdomen"
+    "code": "15271",
+    "codeSystem": "CPT",
+    "description": "application of skin substitute graft to the foot, first 25 square centimeters, diabetic foot ulcer"
   },
   "payer": {
-    "name": "Lanternhill Health Plan",
-    "planType": "commercial HMO"
+    "name": "Copperfield Health",
+    "planType": "commercial EPO"
   },
   "denial": {
-    "carc": "50",
-    "carcText": "These are non-covered services because this is not deemed a 'medical necessity' by the payer.",
-    "text": "Lanternhill Health Plan denied the claim for CPT 15847 (panniculectomy with excision of excess skin and subcutaneous tissue of the abdomen) with date of service 2026-08-08. CARC 50: These are non-covered services because this is not deemed a 'medical necessity' by the payer. Payer remark: The documentation does not establish a functional impairment or failure of conservative treatment of the skin condition.",
-    "dateOfService": "2026-08-08"
+    "carc": "151",
+    "carcText": "Payment adjusted because the payer deems the information submitted does not support this many/frequency of services.",
+    "rarc": "N10",
+    "text": "Copperfield Health denied the claim for CPT 15271 (application of skin substitute graft to the foot, first 25 square centimeters, diabetic foot ulcer) with date of service 2026-02-17. CARC 151: Payment adjusted because the payer deems the information submitted does not support this many/frequency of services. RARC N10: Adjustment based on the findings of a review organization. Payer remark: The number of applications billed exceeds what the documentation supports for this wound.",
+    "dateOfService": "2026-02-17"
   },
   "criteria": [
     {
       "id": "crit-1",
-      "text": "Panniculus hangs at or below the level of the pubis (grade 2 or higher) as documented on examination."
+      "text": "Full-thickness diabetic foot ulcer, Wagner grade 1 or 2, present for at least 4 weeks, without exposed bone or tendon, active infection, or osteomyelitis."
     },
     {
       "id": "crit-2",
-      "text": "Recurrent or chronic intertrigo, cellulitis, or skin breakdown beneath the panniculus that has failed at least 3 months of conservative treatment such as topical antifungals, hygiene measures, and barrier products."
+      "text": "At least 4 weeks of standard wound care with documented serial measurements showing less than 50 percent reduction in wound area: sharp debridement, offloading, moist wound dressings, infection control, and glycemic management."
     },
     {
       "id": "crit-3",
-      "text": "Weight stable within 10 pounds for at least 12 months (or at least 18 months after bariatric surgery)."
+      "text": "Adequate arterial perfusion documented: ankle-brachial index of 0.7 or greater, toe pressure of 40 mmHg or greater, or transcutaneous oxygen pressure of 30 mmHg or greater."
     },
     {
       "id": "crit-4",
-      "text": "The panniculus interferes with activities of daily living or ambulation."
+      "text": "Hemoglobin A1c of 12 percent or less, an offloading device in place, and tobacco cessation counseling where applicable."
     }
   ],
   "chart": [
     {
       "id": "note-001",
-      "date": "2025-09-26",
-      "kind": "outside letter",
-      "text": "Mammogram report forwarded for the record. Bilateral screening, BI-RADS 1, negative, routine screening in one year."
+      "date": "2025-11-29",
+      "kind": "office visit",
+      "text": "Vitamin D came back 24. Started 1000 units daily, recheck in three months. Also talked about calcium from food rather than pills."
     },
     {
       "id": "note-002",
-      "date": "2025-09-29",
-      "kind": "office visit",
-      "text": "Trouble sleeping for a couple of months, falls asleep fine but wakes at three and lies there. No snoring per the spouse, no daytime naps, two cups of coffee before noon. Went over sleep hygiene, no screens in bed, cut the afternoon caffeine. Will hold off on medication for now."
+      "date": "2025-12-04",
+      "kind": "phone note",
+      "text": "Called his with the cholesterol results. Total 215, LDL 120, HDL 52, triglycerides 109. Discussed diet and walking. He wants to try lifestyle first for six months before we talk about a statin. Agreed."
     },
     {
       "id": "note-003",
-      "date": "2025-10-03",
-      "kind": "outside letter",
-      "text": "From the referring physician: please evaluate for surgical management. We have exhausted what we can do in primary care and the patient is motivated. Recent labs enclosed, all within normal limits."
-    },
-    {
-      "id": "note-004",
-      "date": "2025-10-21",
-      "kind": "office visit",
-      "text": "Low back strain after moving furniture over the weekend. No radiation down the legs, no numbness, no bowel or bladder trouble. Paraspinal tenderness, straight leg raise negative. Heat, keep moving, ibuprofen with food for a week. Should settle."
-    },
-    {
-      "id": "note-005",
-      "date": "2025-10-22",
-      "kind": "office visit",
-      "text": "Knee pain going down stairs, left side, no injury, no locking or giving way. Patellar grind positive, no effusion, ligaments stable. Patellofemoral pain. Quad strengthening sheet, ice after activity, cushioned shoes."
-    },
-    {
-      "id": "note-006",
-      "date": "2025-10-30",
-      "kind": "office visit",
-      "text": "38 year old woman here about the abdominal apron after her weight loss. Nice result on the weight. Discussed panniculectomy versus a full abdominoplasty and what insurance will and will not look at. Her history otherwise: migraines, rare now, prediabetes, diet controlled. Allergies: penicillin, rash. Never smoked, occasional beer, has three kids at home. Family history noncontributory for what we are talking about today. On exam the pannus hangs well below the pubis, I would call it grade 2, with maceration and an odor in the fold. She has been fighting the rash under the apron for better than a year, treated with nystatin, then clotrimazole, keeps it dry with powder and a cloth liner, and it comes right back. Two rounds of antibiotics from the PCP for cellulitis in the fold. Down 126 pounds after the sleeve in 2024. Weight has been steady at 179 give or take five for the last 20 months. Says she cannot walk more than a block without the skin fold chafing raw, has to lift it to wash underneath, cannot find pants that fit over it."
-    },
-    {
-      "id": "note-007",
-      "date": "2025-11-03",
-      "kind": "phone note",
-      "text": "Patient called about a tick bite on the shoulder after a hike. Tick removed whole, no rash, no fever. Watch for a bull's-eye rash or flu symptoms over the next month and call if either shows up."
-    },
-    {
-      "id": "note-008",
-      "date": "2025-11-14",
-      "kind": "office visit",
-      "text": "Annual physical. Feels well overall. Sleeping fine, appetite fine, no chest pain, no shortness of breath. Flu shot given in the left arm today. Due for a tetanus booster, she will think about it. Labs ordered, fasting."
-    },
-    {
-      "id": "note-009",
-      "date": "2026-01-13",
-      "kind": "phone note",
-      "text": "Pharmacy called about the refill on the omeprazole 40. Approved 90 days. She mentioned the heartburn is better since cutting back on coffee."
-    },
-    {
-      "id": "note-010",
-      "date": "2026-01-16",
-      "kind": "office visit",
-      "text": "Follow-up on the abdomen. Went back over the operation, drains, the scar, recovery of four to six weeks. She understands this is skin and fat removal for the skin problems, not a tummy tuck. Vitals today 135 over 86, pulse 64. Rash is back again despite 6 months of the antifungal and barrier routine. Fold is red and weeping today. Weight 177 today, holding."
-    },
-    {
-      "id": "note-011",
-      "date": "2026-01-31",
-      "kind": "phone note",
-      "text": "Work note requested for a sick day last Tuesday. Faxed to the employer."
-    },
-    {
-      "id": "note-012",
-      "date": "2026-02-04",
-      "kind": "office visit",
-      "text": "Blood pressure check. 135 over 72 today, 135 over 84 on repeat. She has been taking the lisinopril 40 most days, admits to missing weekends. Low salt talk again. Keep the dose, recheck in 12 weeks."
-    },
-    {
-      "id": "note-013",
-      "date": "2026-03-03",
-      "kind": "outside letter",
-      "text": "Dermatology consult note received. Two actinic keratoses on the forehead treated with cryotherapy. Annual skin check recommended, sunscreen counseling done."
-    },
-    {
-      "id": "note-014",
-      "date": "2026-04-01",
-      "kind": "phone note",
-      "text": "Called her with the cholesterol results. Total 205, LDL 114, HDL 55, triglycerides 103. Discussed diet and walking. She wants to try lifestyle first for six months before we talk about a statin. Agreed."
-    },
-    {
-      "id": "note-015",
-      "date": "2026-04-03",
-      "kind": "phone note",
-      "text": "She called asking where things stand with the insurance. Told her the paperwork went in and we are waiting to hear. Reviewed what to do in the meantime."
-    },
-    {
-      "id": "note-016",
-      "date": "2026-04-08",
+      "date": "2025-12-12",
       "kind": "office visit",
       "text": "Burning with urination for two days, going frequently, no fever, no back pain. Urine dip positive for leukocytes and nitrites. Nitrofurantoin for five days, push fluids, call if fever or flank pain."
     },
     {
-      "id": "note-017",
-      "date": "2026-04-27",
+      "id": "note-004",
+      "date": "2025-12-15",
       "kind": "office visit",
-      "text": "Here with a cough and congestion for 7 days, low grade temp at home, no shortness of breath. Lungs clear, throat a little red, ears fine. Looks viral. Fluids, rest, honey for the cough, come back if she gets a fever over 101 or it goes past two weeks."
+      "text": "Ear fullness and muffled hearing on the right for a week after a cold. Canal clear, drum dull with fluid behind it, no infection. Serous otitis. Decongestant, swallow and yawn, recheck in three weeks if not better."
+    },
+    {
+      "id": "note-005",
+      "date": "2025-12-15",
+      "kind": "phone note",
+      "text": "He called asking about travel vaccines for a trip in the spring. Advised hepatitis A and a typhoid booster, referred to the travel clinic. Nothing else needed from us."
+    },
+    {
+      "id": "note-006",
+      "date": "2025-12-20",
+      "kind": "outside letter",
+      "text": "Optometry report forwarded for the record. Routine refraction, mild astigmatism, new glasses prescribed, retinas healthy, pressures 13 and 13. No ocular pathology noted."
+    },
+    {
+      "id": "note-007",
+      "date": "2025-12-22",
+      "kind": "outside letter",
+      "text": "From the referring physician: please evaluate and treat as you see fit. We have exhausted what we can do in primary care and the patient is motivated. Recent labs enclosed, all within normal limits."
+    },
+    {
+      "id": "note-008",
+      "date": "2025-12-30",
+      "kind": "outside letter",
+      "text": "Gastroenterology note received. Screening colonoscopy completed, two small polyps removed, benign on pathology, repeat in 5 years."
+    },
+    {
+      "id": "note-009",
+      "date": "2025-12-31",
+      "kind": "phone note",
+      "text": "Thyroid labs back. TSH 2.8, free T4 normal. No change to the levothyroxine 75. Repeat in a year."
+    },
+    {
+      "id": "note-010",
+      "date": "2026-01-02",
+      "kind": "phone note",
+      "text": "Work note requested for a sick day last Thursday. Faxed to the employer."
+    },
+    {
+      "id": "note-011",
+      "date": "2026-01-02",
+      "kind": "office visit",
+      "text": "Here with a cough and congestion for 6 days, low grade temp at home, no shortness of breath. Lungs clear, throat a little red, ears fine. Looks viral. Fluids, rest, honey for the cough, come back if he gets a fever over 101 or it goes past two weeks."
+    },
+    {
+      "id": "note-012",
+      "date": "2026-01-04",
+      "kind": "phone note",
+      "text": "Patient called about a tick bite on the scalp after a hike. Tick removed whole, no rash, no fever. Watch for a bull's-eye rash or flu symptoms over the next month and call if either shows up."
+    },
+    {
+      "id": "note-013",
+      "date": "2026-01-06",
+      "kind": "office visit",
+      "text": "Mole on the right calf that his spouse noticed. About 6 millimeters, even color, regular border, no change he is aware of. Looks benign. Photo in the chart for comparison, recheck in a year or sooner if it changes."
+    },
+    {
+      "id": "note-014",
+      "date": "2026-01-09",
+      "kind": "office visit",
+      "text": "Twisted the right ankle stepping off a curb 5 days ago. Swelling over the lateral malleolus, tender over the ATFL, can bear weight. Ottawa negative, no film. Brace, ice, ibuprofen, elevate. Should be fine in a couple weeks."
+    },
+    {
+      "id": "note-015",
+      "date": "2026-01-10",
+      "kind": "office visit",
+      "text": "Knee pain going down stairs, left side, no injury, no locking or giving way. Patellar grind positive, no effusion, ligaments stable. Patellofemoral pain. Quad strengthening sheet, ice after activity, cushioned shoes."
+    },
+    {
+      "id": "note-016",
+      "date": "2026-01-13",
+      "kind": "wound care visit",
+      "text": "65 year old man with type 2 diabetes for 20 years and peripheral neuropathy, new to the wound center, referred by podiatry. Did not notice the ulcer until his daughter saw blood on the sock. His history otherwise: osteoarthritis of the hands. Allergies: codeine makes him sick. Never smoked, occasional beer, has three kids at home. Family history noncontributory for what we are talking about today. Plantar right forefoot ulcer under the first metatarsal head, present 9 weeks, 3.3 by 2.1 centimeters and 0.3 deep, full thickness into subcutaneous tissue, does not probe to bone, no exposed tendon, Wagner grade 2. No cellulitis, no drainage, no odor. Offloading boot dispensed today, fitted, he agrees to wear it for all weight bearing. Nonsmoker."
+    },
+    {
+      "id": "note-017",
+      "date": "2026-01-13",
+      "kind": "office visit",
+      "text": "Low back strain after moving furniture over the weekend. No radiation down the legs, no numbness, no bowel or bladder trouble. Paraspinal tenderness, straight leg raise negative. Heat, keep moving, ibuprofen with food for a week. Should settle."
     },
     {
       "id": "note-018",
-      "date": "2026-05-12",
-      "kind": "outside letter",
-      "text": "Optometry report forwarded for the record. Routine refraction, mild astigmatism, new glasses prescribed, retinas healthy, pressures 16 and 14. No ocular pathology noted."
+      "date": "2026-01-15",
+      "kind": "laboratory result",
+      "text": "Hemoglobin A1c 7.8 percent. Creatinine 1.5. Albumin 3.8."
     },
     {
       "id": "note-019",
-      "date": "2026-06-17",
-      "kind": "office visit",
-      "text": "Check-in while we wait on the insurance. No change in the complaints. Reviewed the risks and recovery one more time, she remains sure about going ahead."
+      "date": "2026-01-18",
+      "kind": "outside letter",
+      "text": "Letter from the dentist's office confirming routine cleaning and exam completed, no active infection, no dental work pending. Sent at our request for the surgical file."
     },
     {
       "id": "note-020",
-      "date": "2026-07-10",
-      "kind": "office visit",
-      "text": "Twisted the right ankle stepping off a curb 2 days ago. Swelling over the lateral malleolus, tender over the ATFL, can bear weight. Ottawa negative, no film. Brace, ice, ibuprofen, elevate. Should be fine in a couple weeks."
+      "date": "2026-01-20",
+      "kind": "imaging",
+      "text": "Right foot three views: no osteomyelitis, no soft tissue gas, no foreign body. Neuropathic changes at the midfoot."
     },
     {
       "id": "note-021",
-      "date": "2026-07-14",
-      "kind": "office visit",
-      "text": "Mole on the right calf that her spouse noticed. About 7 millimeters, even color, regular border, no change she is aware of. Looks benign. Photo in the chart for comparison, recheck in a year or sooner if it changes."
+      "date": "2026-01-20",
+      "kind": "wound care visit",
+      "text": "Week 1 of standard care. Sharp debridement to healthy bleeding tissue, collagen dressing, offloading boot worn per patient. 3.3 by 2.1."
     },
     {
       "id": "note-022",
-      "date": "2026-07-31",
-      "kind": "preoperative visit",
-      "text": "Pre-op. Consent signed. Marked the resection with her standing. Nicotine negative. Hold the metformin the morning of."
+      "date": "2026-01-20",
+      "kind": "vascular laboratory",
+      "text": "Arterial studies. Ankle-brachial index right 0.99, left 1.00, triphasic waveforms, right toe pressure 61 mmHg. Adequate perfusion for healing."
     },
     {
       "id": "note-023",
-      "date": "2026-07-31",
+      "date": "2026-01-25",
+      "kind": "office visit",
+      "text": "Blood pressure check. 137 over 88 today, 144 over 76 on repeat. He has been taking the lisinopril 10 most days, admits to missing weekends. Low salt talk again. Keep the dose, recheck in 8 weeks."
+    },
+    {
+      "id": "note-024",
+      "date": "2026-01-27",
+      "kind": "wound care visit",
+      "text": "Week 2. Sharp debridement, collagen dressing. 3.2 by 2.1. Boot compliance good."
+    },
+    {
+      "id": "note-025",
+      "date": "2026-02-03",
+      "kind": "wound care visit",
+      "text": "Week 3. Sharp debridement, collagen dressing. 3.1 by 2.0. Slow."
+    },
+    {
+      "id": "note-026",
+      "date": "2026-02-08",
+      "kind": "office visit",
+      "text": "Annual physical. Feels well overall. Sleeping fine, appetite fine, no chest pain, no shortness of breath. Flu shot given in the left arm today. Due for a tetanus booster, he will think about it. Labs ordered, fasting."
+    },
+    {
+      "id": "note-027",
+      "date": "2026-02-10",
+      "kind": "wound care visit",
+      "text": "Week 4. 3.1 by 2.0, area 6.2 square centimeters, down from 6.9 at the start, about 10 percent reduction after 4 weeks of standard care with debridement, offloading, and moist dressings. Less than 50 percent; qualifies for a cellular tissue product. Sharp debridement today."
+    },
+    {
+      "id": "note-028",
+      "date": "2026-02-11",
       "kind": "outside letter",
-      "text": "Letter from the dentist's office confirming routine cleaning and exam completed, no active infection, no dental work pending. Sent at our request for the surgical file."
+      "text": "Dermatology consult note received. Two actinic keratoses on the forehead treated with cryotherapy. Annual skin check recommended, sunscreen counseling done."
+    },
+    {
+      "id": "note-029",
+      "date": "2026-02-17",
+      "kind": "procedure note",
+      "text": "Application of a cellular tissue-based product to the right plantar forefoot ulcer after sharp debridement, 4 square centimeters, secured with a nonadherent dressing and the offloading boot. Weekly follow-up."
     }
   ],
   "expected": {
@@ -187,39 +228,44 @@
     ],
     "support": {
       "crit-1": [
-        "note-006"
+        "note-016",
+        "note-020"
       ],
       "crit-2": [
-        "note-006",
-        "note-010"
+        "note-021",
+        "note-024",
+        "note-025",
+        "note-027"
       ],
       "crit-3": [
-        "note-006",
-        "note-010"
+        "note-022"
       ],
       "crit-4": [
-        "note-006"
+        "note-016",
+        "note-018"
       ]
     },
     "distractors": [
       "note-001",
       "note-002",
+      "note-003",
       "note-004",
       "note-005",
-      "note-007",
+      "note-006",
       "note-008",
       "note-009",
+      "note-010",
       "note-011",
       "note-012",
       "note-013",
       "note-014",
-      "note-016",
+      "note-015",
       "note-017",
-      "note-018",
-      "note-020",
-      "note-021",
-      "note-023"
+      "note-019",
+      "note-023",
+      "note-026",
+      "note-028"
     ],
-    "note": "The chart documents every criterion; the CARC 50 denial can be answered from the record."
+    "note": "The chart documents every criterion; the CARC 151 denial can be answered from the record."
   }
 }

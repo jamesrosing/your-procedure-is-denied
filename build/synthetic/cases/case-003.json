@@ -1,168 +1,168 @@
 {
   "id": "case-003",
+  "category": "plastic surgery",
+  "setting": "outpatient",
+  "stakesUsd": 12000,
   "patient": {
     "alias": "SYN-003",
-    "age": 43,
+    "age": 56,
     "sex": "female"
   },
   "procedure": {
-    "cpt": "15847",
-    "description": "panniculectomy with excision of excess skin and subcutaneous tissue of the abdomen"
+    "code": "19357",
+    "codeSystem": "CPT",
+    "description": "breast reconstruction with tissue expander"
   },
   "payer": {
-    "name": "Copperfield Health",
-    "planType": "commercial EPO"
+    "name": "Saltmarsh Benefits Administrators",
+    "planType": "self-funded employer plan"
   },
   "denial": {
-    "carc": "50",
-    "carcText": "These are non-covered services because this is not deemed a 'medical necessity' by the payer.",
-    "text": "Copperfield Health denied the claim for CPT 15847 (panniculectomy with excision of excess skin and subcutaneous tissue of the abdomen) with date of service 2026-06-23. CARC 50: These are non-covered services because this is not deemed a 'medical necessity' by the payer. Payer remark: The documentation does not establish a functional impairment or failure of conservative treatment of the skin condition.",
-    "dateOfService": "2026-06-23"
+    "carc": "197",
+    "carcText": "Precertification/authorization/notification/pre-treatment absent.",
+    "text": "Saltmarsh Benefits Administrators denied the claim for CPT 19357 (breast reconstruction with tissue expander) with date of service 2026-07-28. CARC 197: Precertification/authorization/notification/pre-treatment absent. Payer remark: No authorization is on file. A retrospective medical necessity review may be requested with supporting clinical documentation within 180 days.",
+    "dateOfService": "2026-07-28"
   },
   "criteria": [
     {
       "id": "crit-1",
-      "text": "Panniculus hangs at or below the level of the pubis (grade 2 or higher) as documented on examination."
+      "text": "Documented mastectomy for breast cancer, or prophylactic mastectomy for a qualifying risk, with reconstruction requested by the patient. Reconstruction after a covered mastectomy is a mandated benefit under the Women’s Health and Cancer Rights Act."
     },
     {
       "id": "crit-2",
-      "text": "Recurrent or chronic intertrigo, cellulitis, or skin breakdown beneath the panniculus that has failed at least 3 months of conservative treatment such as topical antifungals, hygiene measures, and barrier products."
+      "text": "An operative plan for staged reconstruction (tissue expander placement followed by implant exchange) appropriate to the patient’s radiation status and tissue quality."
     },
     {
       "id": "crit-3",
-      "text": "Weight stable within 10 pounds for at least 6 months."
-    },
-    {
-      "id": "crit-4",
-      "text": "The panniculus interferes with activities of daily living or ambulation."
+      "text": "Medical clearance for the planned surgery is documented."
     }
   ],
   "chart": [
     {
       "id": "note-001",
-      "date": "2025-04-16",
+      "date": "2026-03-24",
       "kind": "office visit",
-      "text": "Vitamin D came back 18. Started 1000 units daily, recheck in three months. Also talked about calcium from food rather than pills."
+      "text": "A1c came back 6.5. Prediabetic range, same as last year. Walking program, cut the soda, recheck in six months. She is motivated."
     },
     {
       "id": "note-002",
-      "date": "2025-04-29",
-      "kind": "outside letter",
-      "text": "From the referring physician: please evaluate for surgical management. We have exhausted what we can do in primary care and the patient is motivated. Recent labs enclosed, all within normal limits."
+      "date": "2026-03-25",
+      "kind": "phone note",
+      "text": "Pharmacy called about the refill on the omeprazole 40. Approved 90 days. She mentioned the heartburn is better since cutting back on coffee."
     },
     {
       "id": "note-003",
-      "date": "2025-05-15",
+      "date": "2026-04-05",
+      "kind": "outside letter",
+      "text": "Dermatology consult note received. Two actinic keratoses on the forehead treated with cryotherapy. Annual skin check recommended, sunscreen counseling done."
+    },
+    {
+      "id": "note-004",
+      "date": "2026-04-10",
+      "kind": "office visit",
+      "text": "Twisted the right ankle stepping off a curb 5 days ago. Swelling over the lateral malleolus, tender over the ATFL, can bear weight. Ottawa negative, no film. Brace, ice, ibuprofen, elevate. Should be fine in a couple weeks."
+    },
+    {
+      "id": "note-005",
+      "date": "2026-04-14",
       "kind": "office visit",
       "text": "Knee pain going down stairs, right side, no injury, no locking or giving way. Patellar grind positive, no effusion, ligaments stable. Patellofemoral pain. Quad strengthening sheet, ice after activity, cushioned shoes."
     },
     {
-      "id": "note-004",
-      "date": "2025-05-27",
-      "kind": "office visit",
-      "text": "43 year old woman here about the abdominal apron after her weight loss. Nice result on the weight. Discussed panniculectomy versus a full abdominoplasty and what insurance will and will not look at. Her history otherwise: hypothyroidism on levothyroxine, reflux on omeprazole as needed. Allergies: sulfa, hives as a child. Quit smoking 15 years ago, no alcohol, retired. Family history noncontributory for what we are talking about today. On exam the pannus hangs well below the pubis, I would call it grade 3, with maceration and an odor in the fold. She has been fighting the rash under the apron for better than a year, treated with nystatin, then clotrimazole, keeps it dry with powder and a cloth liner, and it comes right back. Two rounds of antibiotics from the PCP for cellulitis in the fold. Down 111 pounds after the sleeve in 2023. Weight has been steady at 196 give or take five for the last 14 months. Says she cannot walk more than a block without the skin fold chafing raw, has to lift it to wash underneath, cannot find pants that fit over it."
-    },
-    {
-      "id": "note-005",
-      "date": "2025-06-26",
-      "kind": "phone note",
-      "text": "Patient called about a tick bite on the calf after a hike. Tick removed whole, no rash, no fever. Watch for a bull's-eye rash or flu symptoms over the next month and call if either shows up."
-    },
-    {
       "id": "note-006",
-      "date": "2025-07-11",
+      "date": "2026-04-16",
       "kind": "office visit",
-      "text": "Follow-up on the abdomen. Went back over the operation, drains, the scar, recovery of four to six weeks. She understands this is skin and fat removal for the skin problems, not a tummy tuck. Vitals today 141 over 73, pulse 72. Rash is back again despite 9 months of the antifungal and barrier routine. Fold is red and weeping today. Weight 194 today, holding."
+      "text": "Here with a cough and congestion for 4 days, low grade temp at home, no shortness of breath. Lungs clear, throat a little red, ears fine. Looks viral. Fluids, rest, honey for the cough, come back if she gets a fever over 101 or it goes past two weeks."
     },
     {
       "id": "note-007",
-      "date": "2025-08-17",
+      "date": "2026-04-19",
       "kind": "office visit",
       "text": "Seasonal allergies acting up, itchy eyes, sneezing, clear drainage, worse outdoors. No wheeze. Cetirizine at night and the saline rinse. Fine with that."
     },
     {
       "id": "note-008",
-      "date": "2025-10-11",
-      "kind": "office visit",
-      "text": "Here with a cough and congestion for 9 days, low grade temp at home, no shortness of breath. Lungs clear, throat a little red, ears fine. Looks viral. Fluids, rest, honey for the cough, come back if she gets a fever over 101 or it goes past two weeks."
+      "date": "2026-04-21",
+      "kind": "outside letter",
+      "text": "From the breast surgeon: right total mastectomy performed 7 months ago for a 1.7 centimeter invasive ductal carcinoma, sentinel nodes negative, margins clear. She has completed adjuvant chemotherapy and wishes to proceed with reconstruction."
     },
     {
       "id": "note-009",
-      "date": "2025-10-29",
-      "kind": "phone note",
-      "text": "She called asking where things stand with the insurance. Told her the paperwork went in and we are waiting to hear. Reviewed what to do in the meantime."
-    },
-    {
-      "id": "note-010",
-      "date": "2025-11-12",
-      "kind": "outside letter",
-      "text": "Dermatology consult note received. Two actinic keratoses on the forehead treated with cryotherapy. Annual skin check recommended, sunscreen counseling done."
-    },
-    {
-      "id": "note-011",
-      "date": "2025-11-18",
-      "kind": "office visit",
-      "text": "Interval visit. Nothing new since last time, symptoms as described before, she is managing. Went over the plan again and answered questions from her spouse."
-    },
-    {
-      "id": "note-012",
-      "date": "2025-11-26",
-      "kind": "outside letter",
-      "text": "Optometry report forwarded for the record. Routine refraction, mild astigmatism, new glasses prescribed, retinas healthy, pressures 15 and 14. No ocular pathology noted."
-    },
-    {
-      "id": "note-013",
-      "date": "2025-12-03",
-      "kind": "outside letter",
-      "text": "Mammogram report forwarded for the record. Bilateral screening, BI-RADS 1, negative, routine screening in one year."
-    },
-    {
-      "id": "note-014",
-      "date": "2026-01-27",
-      "kind": "office visit",
-      "text": "Twisted the right ankle stepping off a curb 4 days ago. Swelling over the lateral malleolus, tender over the ATFL, can bear weight. Ottawa negative, no film. Brace, ice, ibuprofen, elevate. Should be fine in a couple weeks."
-    },
-    {
-      "id": "note-015",
-      "date": "2026-01-30",
-      "kind": "office visit",
-      "text": "Mole on the right calf that her spouse noticed. About 7 millimeters, even color, regular border, no change she is aware of. Looks benign. Photo in the chart for comparison, recheck in a year or sooner if it changes."
-    },
-    {
-      "id": "note-016",
-      "date": "2026-03-04",
-      "kind": "office visit",
-      "text": "A1c came back 6.5. Prediabetic range, same as last year. Walking program, cut the soda, recheck in six months. She is motivated."
-    },
-    {
-      "id": "note-017",
-      "date": "2026-03-18",
-      "kind": "office visit",
-      "text": "Burning with urination for two days, going frequently, no fever, no back pain. Urine dip positive for leukocytes and nitrites. Nitrofurantoin for five days, push fluids, call if fever or flank pain."
-    },
-    {
-      "id": "note-018",
-      "date": "2026-05-16",
-      "kind": "office visit",
-      "text": "Blood pressure check. 123 over 76 today, 130 over 87 on repeat. She has been taking the lisinopril 40 most days, admits to missing weekends. Low salt talk again. Keep the dose, recheck in 6 weeks."
-    },
-    {
-      "id": "note-019",
-      "date": "2026-05-24",
+      "date": "2026-05-02",
       "kind": "outside letter",
       "text": "Letter from the dentist's office confirming routine cleaning and exam completed, no active infection, no dental work pending. Sent at our request for the surgical file."
     },
     {
-      "id": "note-020",
-      "date": "2026-05-27",
+      "id": "note-010",
+      "date": "2026-05-04",
+      "kind": "office visit",
+      "text": "Burning with urination for two days, going frequently, no fever, no back pain. Urine dip positive for leukocytes and nitrites. Nitrofurantoin for five days, push fluids, call if fever or flank pain."
+    },
+    {
+      "id": "note-011",
+      "date": "2026-05-05",
+      "kind": "office visit",
+      "text": "56 year old woman referred by the breast surgeon for reconstruction. Went over expanders versus flaps, she prefers the expander route, fewer operations and no donor site. Her history otherwise: migraines, rare now, hypertension on lisinopril, mild asthma, albuterol maybe twice a year. Allergies: no drug allergies. Does not smoke, a glass of wine on weekends, works retail. Family history noncontributory for what we are talking about today. Status post right mastectomy 7 months ago for a 1.7 centimeter invasive ductal. Done with chemo. She wants reconstruction and has thought hard about it. No radiation planned per oncology. Good skin envelope, no infection, mastectomy flap healed. Plan is a right tissue expander under the pectoralis now, exchange to a permanent implant in about 3 months, and a left lift for symmetry later."
+    },
+    {
+      "id": "note-012",
+      "date": "2026-05-06",
       "kind": "phone note",
-      "text": "Work note requested for a sick day last Monday. Faxed to the employer."
+      "text": "Work note requested for a sick day last Tuesday. Faxed to the employer."
+    },
+    {
+      "id": "note-013",
+      "date": "2026-05-14",
+      "kind": "phone note",
+      "text": "Called her with the cholesterol results. Total 208, LDL 107, HDL 56, triglycerides 179. Discussed diet and walking. She wants to try lifestyle first for six months before we talk about a statin. Agreed."
+    },
+    {
+      "id": "note-014",
+      "date": "2026-05-22",
+      "kind": "office visit",
+      "text": "Annual physical. Feels well overall. Sleeping fine, appetite fine, no chest pain, no shortness of breath. Flu shot given in the left arm today. Due for a tetanus booster, she will think about it. Labs ordered, fasting."
+    },
+    {
+      "id": "note-015",
+      "date": "2026-05-24",
+      "kind": "office visit",
+      "text": "Back with her sister to go over the plan again. Questions answered. Ready to schedule. Vitals today 131 over 84, pulse 75."
+    },
+    {
+      "id": "note-016",
+      "date": "2026-06-15",
+      "kind": "phone note",
+      "text": "Message from the patient about scheduling. Wants a date in the next couple of months if the insurance comes through. Passed to the scheduler."
+    },
+    {
+      "id": "note-017",
+      "date": "2026-07-04",
+      "kind": "phone note",
+      "text": "Patient called about a tick bite on the shoulder after a hike. Tick removed whole, no rash, no fever. Watch for a bull's-eye rash or flu symptoms over the next month and call if either shows up."
+    },
+    {
+      "id": "note-018",
+      "date": "2026-07-13",
+      "kind": "office visit",
+      "text": "Blood pressure check. 145 over 76 today, 127 over 93 on repeat. She has been taking the lisinopril 20 most days, admits to missing weekends. Low salt talk again. Keep the dose, recheck in 6 weeks."
+    },
+    {
+      "id": "note-019",
+      "date": "2026-07-17",
+      "kind": "preoperative visit",
+      "text": "Pre-op. Cleared by her PCP, letter in the chart, labs and EKG fine. Consent signed for right tissue expander placement."
+    },
+    {
+      "id": "note-020",
+      "date": "2026-07-21",
+      "kind": "office visit",
+      "text": "Mole on the right calf that her spouse noticed. About 7 millimeters, even color, regular border, no change she is aware of. Looks benign. Photo in the chart for comparison, recheck in a year or sooner if it changes."
     },
     {
       "id": "note-021",
-      "date": "2026-06-05",
-      "kind": "preoperative visit",
-      "text": "Pre-op. Consent signed. Marked the resection with her standing. Nicotine negative. Hold the metformin the morning of."
+      "date": "2026-07-23",
+      "kind": "outside letter",
+      "text": "Gastroenterology note received. Screening colonoscopy completed, two small polyps removed, benign on pathology, repeat in 5 years."
     }
   ],
   "expected": {
@@ -170,42 +170,38 @@
     "criteriaMet": [
       "crit-1",
       "crit-2",
-      "crit-3",
-      "crit-4"
+      "crit-3"
     ],
     "support": {
       "crit-1": [
-        "note-004"
+        "note-008",
+        "note-011"
       ],
       "crit-2": [
-        "note-004",
-        "note-006"
+        "note-011"
       ],
       "crit-3": [
-        "note-004",
-        "note-006"
-      ],
-      "crit-4": [
-        "note-004"
+        "note-019"
       ]
     },
     "distractors": [
       "note-001",
+      "note-002",
       "note-003",
+      "note-004",
       "note-005",
+      "note-006",
       "note-007",
-      "note-008",
+      "note-009",
       "note-010",
       "note-012",
       "note-013",
       "note-014",
-      "note-015",
-      "note-016",
       "note-017",
       "note-018",
-      "note-019",
-      "note-020"
+      "note-020",
+      "note-021"
     ],
-    "note": "The chart documents every criterion; the CARC 50 denial can be answered from the record."
+    "note": "The chart documents every criterion; the CARC 197 denial can be answered from the record."
   }
 }

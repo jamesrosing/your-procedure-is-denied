@@ -105,7 +105,7 @@ export function facilityDistractors(rng: Rng, sex: 'female' | 'male', n: number)
     () => ({ kind: 'nursing note', text: `Pneumococcal vaccine status reviewed, up to date per state registry. Influenza vaccine offered and accepted, given left deltoid.` }),
     () => ({ kind: 'nursing note', text: `Dentures labeled and placed in the denture cup at the bedside. Patient prefers them out at night. Oral care done.` }),
     () => ({ kind: 'medication record', text: `Home ${rng.pick(['levothyroxine', 'amlodipine', 'atorvastatin', 'omeprazole'])} resumed at the home dose this morning after review with the attending. No interactions flagged.` }),
-    () => ({ kind: 'nursing note', text: `Daily weight ${rng.int(140, 210)} pounds, up ${rng.int(0, 2)} from yesterday. Intake and output recorded. Patient ambulated to the bathroom with standby assistance.` }),
+    () => ({ kind: 'nursing note', text: `Daily weight ${rng.int(140, 210)} pounds, up ${rng.int(0, 2)} from yesterday. Intake and output recorded. Repositioned per schedule, skin checked.` }),
   ];
   const picks = rng.shuffle(bank).slice(0, Math.min(n, bank.length));
   return picks.map(make => make());

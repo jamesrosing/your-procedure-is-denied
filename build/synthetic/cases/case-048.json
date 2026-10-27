@@ -1,222 +1,250 @@
 {
   "id": "case-048",
+  "category": "cardiology",
+  "setting": "outpatient",
+  "stakesUsd": 35000,
   "patient": {
     "alias": "SYN-048",
-    "age": 35,
+    "age": 62,
     "sex": "male"
   },
   "procedure": {
-    "cpt": "64721",
-    "description": "neuroplasty and/or transposition, median nerve at carpal tunnel"
+    "code": "33249",
+    "codeSystem": "CPT",
+    "description": "insertion of implantable cardioverter-defibrillator with transvenous lead"
   },
   "payer": {
     "name": "Prairie Commons Medicaid Plan",
     "planType": "Medicaid managed care"
   },
   "denial": {
-    "carc": "4",
-    "carcText": "The procedure code is inconsistent with the modifier used.",
-    "text": "Prairie Commons Medicaid Plan denied the claim for CPT 64721 (neuroplasty and/or transposition, median nerve at carpal tunnel) with date of service 2026-08-06. CARC 4: The procedure code is inconsistent with the modifier used. Payer remark: Modifier 50 was billed together with modifier RT on the same line. Resubmit a corrected claim.",
-    "dateOfService": "2026-08-06"
+    "carc": "50",
+    "carcText": "These are non-covered services because this is not deemed a 'medical necessity' by the payer.",
+    "text": "Prairie Commons Medicaid Plan denied the claim for CPT 33249 (insertion of implantable cardioverter-defibrillator with transvenous lead) with date of service 2026-05-09. CARC 50: These are non-covered services because this is not deemed a 'medical necessity' by the payer. Payer remark: Documentation does not establish an ejection fraction of 35 percent or less after an adequate trial of guideline-directed medical therapy.",
+    "dateOfService": "2026-05-09"
   },
   "criteria": [
     {
       "id": "crit-1",
-      "text": "Symptoms consistent with carpal tunnel syndrome, such as nocturnal paresthesias in the median nerve distribution with a positive Tinel or Phalen sign, present for at least 6 weeks."
+      "text": "Left ventricular ejection fraction of 35 percent or less on echocardiography, nuclear study, or cardiac MRI, measured after at least 90 days of guideline-directed medical therapy."
     },
     {
       "id": "crit-2",
-      "text": "Failure of at least 6 weeks of conservative management including neutral wrist splinting, together with NSAIDs, activity modification, or a corticosteroid injection."
+      "text": "New York Heart Association class II or III heart failure symptoms."
     },
     {
       "id": "crit-3",
-      "text": "Electrodiagnostic testing (nerve conduction study or electromyography) confirming median neuropathy at the wrist, unless thenar atrophy or constant sensory loss is present."
+      "text": "At least 90 days of guideline-directed medical therapy including a beta blocker and an ACE inhibitor, ARB, or ARNI, with a mineralocorticoid receptor antagonist and an SGLT2 inhibitor as tolerated, at maximally tolerated doses."
+    },
+    {
+      "id": "crit-4",
+      "text": "More than 40 days after any myocardial infarction and more than 90 days after any coronary revascularization."
+    },
+    {
+      "id": "crit-5",
+      "text": "Expected survival with good functional status of more than one year."
     }
   ],
   "chart": [
     {
       "id": "note-001",
-      "date": "2025-09-06",
-      "kind": "outside letter",
-      "text": "From the referring physician: please evaluate for surgical management. We have exhausted what we can do in primary care and the patient is motivated. Recent labs enclosed, all within normal limits."
+      "date": "2025-11-18",
+      "kind": "office visit",
+      "text": "A1c came back 6.8. Prediabetic range, same as last year. Walking program, cut the soda, recheck in six months. He is motivated."
     },
     {
       "id": "note-002",
-      "date": "2025-09-18",
-      "kind": "phone note",
-      "text": "Thyroid labs back. TSH 1.2, free T4 normal. No change to the levothyroxine 100. Repeat in a year."
+      "date": "2025-11-21",
+      "kind": "office visit",
+      "text": "Blood pressure check. 137 over 76 today, 120 over 92 on repeat. He has been taking the lisinopril 10 most days, admits to missing weekends. Low salt talk again. Keep the dose, recheck in 6 weeks."
     },
     {
       "id": "note-003",
-      "date": "2025-10-01",
-      "kind": "office visit",
-      "text": "35 year old man here for the right hand, referred by the PCP. Works on a keyboard all day. Discussed carpal tunnel release, open versus endoscopic, recovery. His history otherwise: prediabetes, diet controlled, hypothyroidism on levothyroxine, reflux on omeprazole as needed. Surgeries: a knee scope. Allergies: sulfa, hives as a child. Never smoked, occasional beer, lives alone. Family history noncontributory for what we are talking about today. 11 months of numbness and tingling in the thumb, index, and middle fingers on the right, wakes him at night, shakes it out. Positive Tinel at the right wrist, Phalen positive in about 20 seconds. Some early thenar weakness, no atrophy yet. Splinted at night for 9 weeks, naproxen twice a day, moved the mouse to the other hand, and had a steroid shot in the right carpal tunnel from the PCP that helped for about three weeks and wore off."
-    },
-    {
-      "id": "note-004",
-      "date": "2025-11-13",
-      "kind": "phone note",
-      "text": "He called asking about travel vaccines for a trip in early summer. Advised hepatitis A and a typhoid booster, referred to the travel clinic. Nothing else needed from us."
-    },
-    {
-      "id": "note-005",
-      "date": "2025-11-15",
-      "kind": "nerve conduction study",
-      "text": "Nerve conduction study, right upper extremity. Median sensory peak latency 5.4 milliseconds across the wrist, prolonged. Median motor distal latency 6.1 milliseconds, prolonged. Ulnar normal. Consistent with moderate right median neuropathy at the wrist."
-    },
-    {
-      "id": "note-006",
-      "date": "2025-12-07",
-      "kind": "office visit",
-      "text": "Back to review the plan for the right hand. Still symptomatic. Wants to proceed. Vitals today 128 over 69, pulse 71."
-    },
-    {
-      "id": "note-007",
-      "date": "2025-12-17",
-      "kind": "outside letter",
-      "text": "Optometry report forwarded for the record. Routine refraction, mild astigmatism, new glasses prescribed, retinas healthy, pressures 17 and 13. No ocular pathology noted."
-    },
-    {
-      "id": "note-008",
-      "date": "2026-01-13",
-      "kind": "phone note",
-      "text": "Message from the patient about scheduling. Wants a date in the next couple of months if the insurance comes through. Passed to the surgery scheduler."
-    },
-    {
-      "id": "note-009",
-      "date": "2026-01-20",
+      "date": "2025-11-24",
       "kind": "office visit",
       "text": "Knee pain going down stairs, right side, no injury, no locking or giving way. Patellar grind positive, no effusion, ligaments stable. Patellofemoral pain. Quad strengthening sheet, ice after activity, cushioned shoes."
     },
     {
+      "id": "note-004",
+      "date": "2025-12-03",
+      "kind": "outside letter",
+      "text": "From the referring physician: please evaluate and treat as you see fit. We have exhausted what we can do in primary care and the patient is motivated. Recent labs enclosed, all within normal limits."
+    },
+    {
+      "id": "note-005",
+      "date": "2025-12-05",
+      "kind": "office visit",
+      "text": "Here with a cough and congestion for 4 days, low grade temp at home, no shortness of breath. Lungs clear, throat a little red, ears fine. Looks viral. Fluids, rest, honey for the cough, come back if he gets a fever over 101 or it goes past two weeks."
+    },
+    {
+      "id": "note-006",
+      "date": "2025-12-09",
+      "kind": "outside letter",
+      "text": "Optometry report forwarded for the record. Routine refraction, mild astigmatism, new glasses prescribed, retinas healthy, pressures 18 and 16. No ocular pathology noted."
+    },
+    {
+      "id": "note-007",
+      "date": "2025-12-28",
+      "kind": "office visit",
+      "text": "62 year old man in cardiology clinic for ischemic cardiomyopathy after his infarction. Reviewed the plan: optimize medications, repeat the echo in 3 months, and decide on a defibrillator then. He understands the device is for sudden death prevention, not symptoms. His history otherwise: anxiety, sees a counselor. Allergies: codeine makes him sick. Never smoked, occasional beer, lives alone. Family history noncontributory for what we are talking about today. Anterior ST-elevation infarction 12 months ago, drug-eluting stent to the proximal left anterior descending at that time. No revascularization since; no residual ischemia on the follow-up stress study. No other life-limiting illness, independent, still working. Expected survival well over a year."
+    },
+    {
+      "id": "note-008",
+      "date": "2025-12-31",
+      "kind": "echocardiogram",
+      "text": "Transthoracic echocardiogram. Left ventricular ejection fraction 27 percent by biplane Simpson’s, anterior and apical akinesis, mild mitral regurgitation, no thrombus."
+    },
+    {
+      "id": "note-009",
+      "date": "2026-01-02",
+      "kind": "medication record",
+      "text": "Carvedilol 25 twice daily, sacubitril-valsartan 97/103 twice daily, spironolactone 25 daily, empagliflozin 10 daily. All four started after the infarction and titrated to these doses by the second cardiology visit; doses unchanged since."
+    },
+    {
       "id": "note-010",
-      "date": "2026-02-25",
-      "kind": "office visit",
-      "text": "Burning with urination for two days, going frequently, no fever, no back pain. Urine dip positive for leukocytes and nitrites. Nitrofurantoin for five days, push fluids, call if fever or flank pain."
-    },
-    {
-      "id": "note-011",
-      "date": "2026-02-27",
-      "kind": "phone note",
-      "text": "Work note requested for a sick day last Tuesday. Faxed to the employer."
-    },
-    {
-      "id": "note-012",
-      "date": "2026-03-01",
-      "kind": "office visit",
-      "text": "Follow-up. Same story, no better. He asked about timing around work and family, we talked through it. Still wants to proceed."
-    },
-    {
-      "id": "note-013",
-      "date": "2026-03-03",
-      "kind": "office visit",
-      "text": "Seasonal allergies acting up, itchy eyes, sneezing, clear drainage, worse outdoors. No wheeze. Cetirizine at night and the saline rinse. Fine with that."
-    },
-    {
-      "id": "note-014",
-      "date": "2026-03-05",
+      "date": "2026-01-30",
       "kind": "outside letter",
       "text": "Dermatology consult note received. Two actinic keratoses on the forehead treated with cryotherapy. Annual skin check recommended, sunscreen counseling done."
     },
     {
+      "id": "note-011",
+      "date": "2026-02-02",
+      "kind": "phone note",
+      "text": "Message from the patient about scheduling. Wants a date in the next couple of months if the insurance comes through. Passed to the scheduler."
+    },
+    {
+      "id": "note-012",
+      "date": "2026-02-07",
+      "kind": "phone note",
+      "text": "Thyroid labs back. TSH 3.5, free T4 normal. No change to the levothyroxine 50. Repeat in a year."
+    },
+    {
+      "id": "note-013",
+      "date": "2026-02-12",
+      "kind": "phone note",
+      "text": "He called asking about travel vaccines for a trip in the spring. Advised hepatitis A and a typhoid booster, referred to the travel clinic. Nothing else needed from us."
+    },
+    {
+      "id": "note-014",
+      "date": "2026-02-14",
+      "kind": "office visit",
+      "text": "Seasonal allergies acting up, itchy eyes, sneezing, clear drainage, worse outdoors. No wheeze. Cetirizine at night and the saline rinse. Fine with that."
+    },
+    {
       "id": "note-015",
-      "date": "2026-03-16",
-      "kind": "office visit",
-      "text": "Trouble sleeping for a couple of months, falls asleep fine but wakes at three and lies there. No snoring per the spouse, no daytime naps, two cups of coffee before noon. Went over sleep hygiene, no screens in bed, cut the afternoon caffeine. Will hold off on medication for now."
-    },
-    {
-      "id": "note-016",
-      "date": "2026-03-21",
-      "kind": "office visit",
-      "text": "Blood pressure check. 135 over 91 today, 138 over 77 on repeat. He has been taking the lisinopril 40 most days, admits to missing weekends. Low salt talk again. Keep the dose, recheck in 12 weeks."
-    },
-    {
-      "id": "note-017",
-      "date": "2026-03-31",
-      "kind": "office visit",
-      "text": "A1c came back 6.3. Prediabetic range, same as last year. Walking program, cut the soda, recheck in six months. He is motivated."
-    },
-    {
-      "id": "note-018",
-      "date": "2026-04-08",
-      "kind": "office visit",
-      "text": "Mole on the upper back that his spouse noticed. About 5 millimeters, even color, regular border, no change he is aware of. Looks benign. Photo in the chart for comparison, recheck in a year or sooner if it changes."
-    },
-    {
-      "id": "note-019",
-      "date": "2026-04-23",
-      "kind": "outside letter",
-      "text": "Letter from the dentist's office confirming routine cleaning and exam completed, no active infection, no dental work pending. Sent at our request for the surgical file."
-    },
-    {
-      "id": "note-020",
-      "date": "2026-04-24",
+      "date": "2026-02-16",
       "kind": "office visit",
       "text": "Low back strain after moving furniture over the weekend. No radiation down the legs, no numbness, no bowel or bladder trouble. Paraspinal tenderness, straight leg raise negative. Heat, keep moving, ibuprofen with food for a week. Should settle."
     },
     {
-      "id": "note-021",
-      "date": "2026-04-28",
+      "id": "note-016",
+      "date": "2026-02-23",
+      "kind": "phone note",
+      "text": "Pharmacy called about the refill on the omeprazole 40. Approved 90 days. He mentioned the heartburn is better since cutting back on coffee."
+    },
+    {
+      "id": "note-017",
+      "date": "2026-03-08",
+      "kind": "phone note",
+      "text": "Patient called about a tick bite on the shoulder after a hike. Tick removed whole, no rash, no fever. Watch for a bull's-eye rash or flu symptoms over the next month and call if either shows up."
+    },
+    {
+      "id": "note-018",
+      "date": "2026-03-12",
       "kind": "office visit",
-      "text": "Ear fullness and muffled hearing on the right for a week after a cold. Canal clear, drum dull with fluid behind it, no infection. Serous otitis. Decongestant, swallow and yawn, recheck in three weeks if not better."
+      "text": "Burning with urination for two days, going frequently, no fever, no back pain. Urine dip positive for leukocytes and nitrites. Nitrofurantoin for five days, push fluids, call if fever or flank pain."
+    },
+    {
+      "id": "note-019",
+      "date": "2026-03-14",
+      "kind": "office visit",
+      "text": "Trouble sleeping for a couple of months, falls asleep fine but wakes at three and lies there. No snoring per the spouse, no daytime naps, two cups of coffee before noon. Went over sleep hygiene, no screens in bed, cut the afternoon caffeine. Will hold off on medication for now."
+    },
+    {
+      "id": "note-020",
+      "date": "2026-03-18",
+      "kind": "office visit",
+      "text": "Mole on the left forearm that his spouse noticed. About 4 millimeters, even color, regular border, no change he is aware of. Looks benign. Photo in the chart for comparison, recheck in a year or sooner if it changes."
+    },
+    {
+      "id": "note-021",
+      "date": "2026-03-19",
+      "kind": "office visit",
+      "text": "Check-in while we wait on the insurance. No change in the complaints. Reviewed the risks and recovery one more time, he remains sure about going ahead."
     },
     {
       "id": "note-022",
-      "date": "2026-04-29",
-      "kind": "outside letter",
-      "text": "Gastroenterology note received. Screening colonoscopy completed, two small polyps removed, benign on pathology, repeat in 7 years."
+      "date": "2026-03-19",
+      "kind": "phone note",
+      "text": "Work note requested for a sick day last Tuesday. Faxed to the employer."
     },
     {
       "id": "note-023",
-      "date": "2026-06-01",
+      "date": "2026-03-19",
       "kind": "office visit",
-      "text": "Annual physical. Feels well overall. Sleeping fine, appetite fine, no chest pain, no shortness of breath. Flu shot given in the left arm today. Due for a tetanus booster, he will think about it. Labs ordered, fasting."
+      "text": "Vitamin D came back 24. Started 2000 units daily, recheck in three months. Also talked about calcium from food rather than pills."
     },
     {
       "id": "note-024",
-      "date": "2026-06-09",
-      "kind": "phone note",
-      "text": "Patient called about a tick bite on the scalp after a hike. Tick removed whole, no rash, no fever. Watch for a bull's-eye rash or flu symptoms over the next month and call if either shows up."
+      "date": "2026-04-02",
+      "kind": "office visit",
+      "text": "Three-month visit. Reviewed the repeat echocardiogram with him. Discussed primary prevention defibrillator, risks of implant, what a shock feels like, driving rules. Decision made today. Vitals today 137 over 81, pulse 81. Short of breath carrying groceries up one flight, fine on the flat, no orthopnea now. Class II to III. 94 days on full guideline-directed therapy at target doses, tolerating, potassium 4.4, blood pressure 108 over 64."
     },
     {
       "id": "note-025",
-      "date": "2026-07-25",
-      "kind": "office visit",
-      "text": "Vitamin D came back 20. Started 1000 units daily, recheck in three months. Also talked about calcium from food rather than pills."
+      "date": "2026-04-07",
+      "kind": "echocardiogram",
+      "text": "Repeat transthoracic echocardiogram after 3 months of optimized medical therapy. Left ventricular ejection fraction 27 percent by biplane Simpson’s, unchanged. Persistent anterior and apical akinesis."
     },
     {
       "id": "note-026",
-      "date": "2026-07-28",
+      "date": "2026-04-12",
+      "kind": "phone note",
+      "text": "Called his with the cholesterol results. Total 211, LDL 131, HDL 45, triglycerides 143. Discussed diet and walking. He wants to try lifestyle first for six months before we talk about a statin. Agreed."
+    },
+    {
+      "id": "note-027",
+      "date": "2026-05-02",
       "kind": "preoperative visit",
-      "text": "Pre-op. Consent signed for right open carpal tunnel release under local with sedation. Marked."
+      "text": "Pre-procedure visit for device implant. Hold the apixaban one dose, continue the rest. Chest X-ray and labs fine. Consent signed."
     }
   ],
   "expected": {
-    "warranted": false,
-    "subtype": "wrong-remedy",
+    "warranted": true,
     "criteriaMet": [
       "crit-1",
       "crit-2",
-      "crit-3"
+      "crit-3",
+      "crit-4",
+      "crit-5"
     ],
     "support": {
       "crit-1": [
-        "note-003"
+        "note-008",
+        "note-025"
       ],
       "crit-2": [
-        "note-003"
+        "note-024"
       ],
       "crit-3": [
-        "note-005"
+        "note-009",
+        "note-024"
+      ],
+      "crit-4": [
+        "note-007"
+      ],
+      "crit-5": [
+        "note-007"
       ]
     },
     "distractors": [
+      "note-001",
       "note-002",
-      "note-004",
-      "note-007",
-      "note-009",
+      "note-003",
+      "note-005",
+      "note-006",
       "note-010",
-      "note-011",
+      "note-012",
       "note-013",
       "note-014",
       "note-015",
@@ -225,12 +253,10 @@
       "note-018",
       "note-019",
       "note-020",
-      "note-021",
       "note-022",
       "note-023",
-      "note-024",
-      "note-025"
+      "note-026"
     ],
-    "note": "CARC 4 is an administrative denial the chart cannot answer: the remedy is a corrected claim with the right modifier, not a medical necessity appeal."
+    "note": "The chart documents every criterion; the CARC 50 denial can be answered from the record."
   }
 }
