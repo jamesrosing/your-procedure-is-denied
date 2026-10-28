@@ -260,8 +260,8 @@ describe('the title cards', () => {
       assert.match(line, /\.$/);
     }
   });
-  test('each card types at about thirty-five characters a second, holds once complete, and the cards never overlap', () => {
-    assert.equal(introTypeMs('abcd'), 112);
+  test('each card types at about twenty-eight characters a second, holds once complete, and the cards never overlap', () => {
+    assert.equal(introTypeMs('abcd'), 144);
     const s = introSchedule();
     for (const slot of s) assert.ok(slot.show < slot.typed && slot.typed < slot.hide);
     for (let i = 1; i < s.length; i++) assert.ok(s[i]!.show >= s[i - 1]!.hide, 'no overlap');

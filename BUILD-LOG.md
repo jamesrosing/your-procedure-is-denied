@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-10-28 08:05 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-10-28 08:10 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -239,3 +239,7 @@ Title card one reworded to Jim's line: the medical insurance carrier denies trea
 ### be17ec7 · 2026-10-28 01:05 · Title cards type out letter by letter
 
 Title cards type out letter by letter at about 35 characters a second with a blinking cursor, hold 1.4 s once complete, then fade; reduced motion shows the full text; schedule and copy tests updated; asset links v12
+
+### 6473f37 · 2026-10-28 08:05 · Build log: regenerate after be17ec7
+
+Title cards: set in the interface sans like the case header, the whole line laid out at once with each character revealed in place so the sentence never shifts, typing slowed to 36 ms per character; asset links v13

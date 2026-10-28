@@ -364,7 +364,7 @@ export function formatSeconds(ms: number): string {
 }
 
 // The title cards. One line at a time, large, typed out letter by letter at
-// about thirty-five characters a second, held a moment once complete, then
+// twenty-eight characters a second, held a moment once complete, then
 // faded. Typing paces the reading. Kept here so a test can hold the copy to
 // its discipline: three lines, at most twenty-four words each, sentence case,
 // no exclamation marks.
@@ -374,7 +374,7 @@ export const INTRO_LINES: readonly string[] = [
   'An open model drafts the appeal. A gate holds every sentence to the record.',
 ];
 
-export const INTRO_CHAR_MS = 28; // per typed character
+export const INTRO_CHAR_MS = 36; // per typed character
 export const INTRO_HOLD_MS = 1400; // after the last character
 export const INTRO_FADE_MS = 400;
 

@@ -439,14 +439,22 @@ function playIntro(): void {
     const el = lines[i];
     const text = INTRO_LINES[i] ?? '';
     if (!el) return;
+    // Lay the whole line out at once, every character hidden, so revealing
+    // them one by one never reflows or re-centers the sentence.
+    el.replaceChildren(...[...text].map(ch => { const sp = document.createElement('span'); sp.className = 'ch'; sp.textContent = ch; return sp; }));
+    const cursor = document.createElement('span');
+    cursor.className = 'cursor';
+    const chars = [...el.querySelectorAll<HTMLElement>('.ch')];
     introTimers.push(window.setTimeout(() => {
       el.classList.add('show', 'typing');
+      el.prepend(cursor);
       let n = 0;
       const tick = (): void => {
+        const c = chars[n];
+        if (c) { c.classList.add('on'); c.after(cursor); }
         n += 1;
-        el.textContent = text.slice(0, n);
-        if (n < text.length) introTimers.push(window.setTimeout(tick, INTRO_CHAR_MS));
-        else el.classList.remove('typing');
+        if (n < chars.length) introTimers.push(window.setTimeout(tick, INTRO_CHAR_MS));
+        else { el.classList.remove('typing'); cursor.remove(); }
       };
       tick();
     }, slot.show));
