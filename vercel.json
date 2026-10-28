@@ -1,7 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
-  "installCommand": "cd build && npm ci",
+  "installCommand": "cd build && npm ci --include=dev",
   "buildCommand": "cd build && npm run viewer",
   "outputDirectory": "build/viewer",
   "cleanUrls": true,

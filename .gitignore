@@ -45,3 +45,6 @@ Thumbs.db
 # Viewer build output (npm run viewer regenerates it)
 /build/viewer/app.js
 /build/viewer/data/
+
+# Vercel project link, local only
+.vercel/
