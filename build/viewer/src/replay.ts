@@ -286,6 +286,7 @@ export interface ScoreboardRow {
   agreed: number;
   blocked: number;
   errors: number; // answers that failed before the gate: request errors and unparseable drafts
+  falsePass: number; // the gate passed a draft on a case the key labels absent or near-miss: the referential limit
   sentencesVerified: number;
   latencyP50Ms: number;
   costPerCaseUsd: number;
@@ -318,6 +319,7 @@ export function scoreboardRow(file: ResultsFile): ScoreboardRow {
     agreed: (s.outcomes['correct-pass'] ?? 0) + (s.outcomes['correct-decline'] ?? 0),
     blocked: s.outcomes['blocked'] ?? 0,
     errors: s.outcomes['error'] ?? 0,
+    falsePass: s.outcomes['false-pass'] ?? 0,
     sentencesVerified: s.sentencesVerified,
     latencyP50Ms: s.latencyMs.p50,
     costPerCaseUsd: s.costUsd.perCase,

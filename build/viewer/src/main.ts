@@ -365,8 +365,9 @@ async function renderBoard(): Promise<void> {
   const rows = scoreboard(files);
   const anyAgentic = rows.some(r => r.agentic);
   const anyErrors = rows.some(r => r.errors > 0);
+  const anyFalsePass = rows.some(r => r.falsePass > 0);
   const head = document.createElement('tr');
-  const cols = ['Model', 'Agreed with the key', 'Gate blocked a draft', ...(anyErrors ? ['Answer failed'] : []), 'Sentences verified', 'Latency, median', 'Cost per appeal', ...(anyAgentic ? ['Entries read of chart', 'Key entries read'] : [])];
+  const cols = ['Model', 'Agreed with the key', 'Gate blocked a draft', ...(anyFalsePass ? ['Gate passed, key says no'] : []), ...(anyErrors ? ['Answer failed'] : []), 'Sentences verified', 'Latency, median', 'Cost per appeal', ...(anyAgentic ? ['Entries read of chart', 'Key entries read'] : [])];
   head.append(...cols.map(c => text('th', '', c)));
   const body = rows.map(r => {
     const tr = document.createElement('tr');
@@ -375,6 +376,7 @@ async function renderBoard(): Promise<void> {
     const agreed = text('td', r.agreed === r.cases ? 'strong' : '', `${r.agreed} of ${r.cases}`);
     const blocked = text('td', r.blocked > 0 ? 'red' : 'dim', String(r.blocked));
     tr.append(model, agreed, blocked);
+    if (anyFalsePass) tr.append(text('td', r.falsePass > 0 ? 'red' : 'dim', String(r.falsePass)));
     if (anyErrors) tr.append(text('td', r.errors > 0 ? 'red' : 'dim', String(r.errors)));
     tr.append(text('td', '', String(r.sentencesVerified)), text('td', '', formatSeconds(r.latencyP50Ms)), text('td', '', formatUsd(r.costPerCaseUsd)));
     if (anyAgentic) {
