@@ -246,7 +246,8 @@ function apply(state: ReplayState, step: Step, result: ViewerResult): ReplayStat
       next.verdict = step;
       next.done = true;
       next.counters.costUsd = result.costUsd;
-      for (const k of next.criteria) if (k.status === 'pending') k.status = 'unverified';
+      // An error means the gate never ran: the criteria were not checked, so they stay pending.
+      if (step.verdict !== 'error') for (const k of next.criteria) if (k.status === 'pending') k.status = 'unverified';
       break;
   }
   next.counters.entriesRead = next.read.length;
@@ -282,6 +283,7 @@ export interface ScoreboardRow {
   cases: number;
   agreed: number;
   blocked: number;
+  errors: number; // answers that failed before the gate: request errors and unparseable drafts
   sentencesVerified: number;
   latencyP50Ms: number;
   costPerCaseUsd: number;
@@ -311,6 +313,7 @@ export function scoreboardRow(file: ResultsFile): ScoreboardRow {
     cases: s.cases,
     agreed: (s.outcomes['correct-pass'] ?? 0) + (s.outcomes['correct-decline'] ?? 0),
     blocked: s.outcomes['blocked'] ?? 0,
+    errors: s.outcomes['error'] ?? 0,
     sentencesVerified: s.sentencesVerified,
     latencyP50Ms: s.latencyMs.p50,
     costPerCaseUsd: s.costUsd.perCase,

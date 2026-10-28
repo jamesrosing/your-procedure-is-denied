@@ -69,6 +69,9 @@ describe('buildTimeline without a trace', () => {
     assert.equal(steps.length, 1);
     assert.equal(steps[0]?.kind, 'verdict');
     if (steps[0]?.kind === 'verdict') assert.equal(steps[0].verdict, 'error');
+    const s = stateAt(steps, r, caseOf(passing), 1);
+    assert.ok(s.criteria.every(k => k.status === 'pending'), 'an error leaves the criteria unchecked, not unverified');
+    assert.equal(s.done, true);
   });
 });
 
@@ -187,6 +190,9 @@ describe('scoreboard', () => {
     const spark13 = rows.find(r => r.model.startsWith('muse-spark-1.3'))!;
     assert.equal(spark13.agreed, 50);
     assert.equal(spark13.blocked, 0);
+    assert.equal(spark13.errors, 0);
+    const openAgentic = rows.find(r => r.agentic && r.model.includes('Spark Open'));
+    if (openAgentic) assert.equal(openAgentic.errors, 1);
     assert.equal(spark13.sentencesVerified, spark.summary.sentencesVerified);
     assert.equal(spark13.latencyP50Ms, spark.summary.latencyMs.p50);
     assert.ok(spark13.costPerCaseUsd > 0.01 && spark13.costPerCaseUsd < 0.02);

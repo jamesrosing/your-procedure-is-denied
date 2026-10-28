@@ -352,19 +352,22 @@ async function renderBoard(): Promise<void> {
   }));
   const rows = scoreboard(files);
   const anyAgentic = rows.some(r => r.agentic);
+  const anyErrors = rows.some(r => r.errors > 0);
   const head = document.createElement('tr');
-  const cols = ['Model', 'Agreed with the key', 'Gate blocked a draft', 'Sentences verified', 'Latency, median', 'Cost per appeal', ...(anyAgentic ? ['Entries read of chart', 'Key entries read'] : [])];
+  const cols = ['Model', 'Agreed with the key', 'Gate blocked a draft', ...(anyErrors ? ['Answer failed'] : []), 'Sentences verified', 'Latency, median', 'Cost per appeal', ...(anyAgentic ? ['Entries read of chart', 'Key entries read'] : [])];
   head.append(...cols.map(c => text('th', '', c)));
   const body = rows.map(r => {
     const tr = document.createElement('tr');
-    const model = text('td', '', r.model);
-    if (r.agentic) model.append(text('span', 'agentic-tag', 'agentic, reads the chart by tool call'));
+    const model = text('td', 'model', r.model);
+    if (r.agentic) model.append(text('span', 'agentic-tag', 'agentic'));
     const agreed = text('td', r.agreed === r.cases ? 'strong' : '', `${r.agreed} of ${r.cases}`);
     const blocked = text('td', r.blocked > 0 ? 'red' : 'dim', String(r.blocked));
-    tr.append(model, agreed, blocked, text('td', '', String(r.sentencesVerified)), text('td', '', formatSeconds(r.latencyP50Ms)), text('td', '', formatUsd(r.costPerCaseUsd)));
+    tr.append(model, agreed, blocked);
+    if (anyErrors) tr.append(text('td', r.errors > 0 ? 'red' : 'dim', String(r.errors)));
+    tr.append(text('td', '', String(r.sentencesVerified)), text('td', '', formatSeconds(r.latencyP50Ms)), text('td', '', formatUsd(r.costPerCaseUsd)));
     if (anyAgentic) {
       tr.append(
-        text('td', r.entriesRead === null ? 'dim' : '', r.entriesRead === null ? 'whole chart in prompt' : `${r.entriesRead.toFixed(1)} of ${r.chartSize?.toFixed(1)}`),
+        text('td', r.entriesRead === null ? 'dim' : '', r.entriesRead === null ? 'chart in prompt' : `${r.entriesRead.toFixed(1)} of ${r.chartSize?.toFixed(1)}`),
         text('td', r.supportCoverage === null ? 'dim' : '', r.supportCoverage === null ? '' : `${Math.round(r.supportCoverage * 100)}%`),
       );
     }
