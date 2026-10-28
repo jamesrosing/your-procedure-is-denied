@@ -251,10 +251,10 @@ describe('the advisor step', () => {
 });
 
 describe('the title cards', () => {
-  test('three lines, at most fourteen words, sentence case, no exclamation marks', () => {
+  test('three lines, at most twenty-four words, sentence case, no exclamation marks', () => {
     assert.equal(INTRO_LINES.length, 3);
     for (const line of INTRO_LINES) {
-      assert.ok(line.split(/\s+/).length <= 14, line);
+      assert.ok(line.split(/\s+/).length <= 24, line);
       assert.ok(!line.includes('!'));
       assert.match(line, /^[A-Z]/);
       assert.match(line, /\.$/);

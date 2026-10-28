@@ -367,9 +367,9 @@ export function formatSeconds(ms: number): string {
 // read it: people read about four words a second on screen, so each card is
 // held one second to settle plus a quarter second per word, then fades. Kept
 // here so a test can hold the copy to its discipline: three lines, at most
-// fourteen words each, sentence case, no exclamation marks.
+// twenty-four words each, sentence case, no exclamation marks.
 export const INTRO_LINES: readonly string[] = [
-  'Your insurer denies your surgery in one second. Your doctor needs hours to answer.',
+  'Your medical insurance carrier will deny your treatment in a second. It will take your doctor hours to answer, if they ever do.',
   'Most denials are never appealed. Most that are appealed are overturned.',
   'An open model drafts the appeal. A gate holds every sentence to the record.',
 ];

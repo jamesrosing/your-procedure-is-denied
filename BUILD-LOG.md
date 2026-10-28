@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-10-28 08:02 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-10-28 08:04 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -223,3 +223,7 @@ Build log: `build/scripts/build-log.ts` (`npm run log`) generates `BUILD-LOG.md`
 ### 3b5c60d · 2026-10-28 01:02 · Viewer: title cards before the first replay
 
 Viewer title cards: three lines shown one at a time at full screen width (type up to 124px), each held one second plus a quarter second per word, then dissolving into the replay; plays when the page opens without a deep link, any key or click skips, the i key replays; reduced motion shows all three and waits. Copy names the health insurer, the surgery, and the appeal deficit. Without a deep link the page opens on the newest live-tool run. Tests for the copy discipline and the schedule; asset links v10; 109 tests
+
+### a517514 · 2026-10-28 08:02 · Build log: regenerate after 3b5c60d
+
+Title card one reworded to Jim's line: the medical insurance carrier denies treatment in a second, the doctor takes hours to answer, if they ever do; word cap raised to 24, the hold scales with it; asset links v11
