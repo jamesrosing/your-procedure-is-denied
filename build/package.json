@@ -15,7 +15,8 @@
     "viewer": "node --import tsx scripts/build-viewer.ts && tsc -p viewer/tsconfig.json",
     "viewer:serve": "python3 -m http.server 8787 --directory viewer",
     "advise": "node --env-file=../.env --import tsx scripts/advise.ts",
-    "regate": "node --import tsx scripts/regate.ts"
+    "regate": "node --import tsx scripts/regate.ts",
+    "log": "node --import tsx scripts/build-log.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^1.3.0",

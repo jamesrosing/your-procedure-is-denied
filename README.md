@@ -7,6 +7,7 @@
   <a href="#what-i-am-building">The work</a> ·
   <a href="#measured-in-public">Results</a> ·
   <a href="https://demo.hemeehr.com">Live replay</a> ·
+  <a href="#build-log">Build log</a> ·
   <a href="#from-the-inside">Contribute</a>
 </p>
 
@@ -175,6 +176,36 @@ The last three rows add a third tool, `policy_status`, a live query against CHAR
 Two things followed from reading those five cases, both built the same morning. The first is gate v1.3. When a sentence fails only because a number or a word is not in the entry it cites, the gate now looks for that token in the rest of the chart. If every missing token is in some other entry, the sentence comes back as needs-citation, naming the entry, instead of refuted. The draft is still blocked, because the rule is still one citation per sentence and every hard token in it; what changes is that the physician is told what to fix. Re-gating the nine kept runs under v1.3 changed seven sentence labels and no verdicts, and the ledger records the re-gate. The hint is honest about its limit: for the antianginal count it says the chart has a 3 somewhere else and that a count the chart never states must be rewritten, because the gate cannot tell a count from a figure. The second is the advisor. After the gate, a second model is shown each criterion with the quotes the draft cited for it and asked one question: do these quotes, read literally, satisfy the criterion? It answers supports, partial, or silent, with one sentence why, and the answer is stored with the model's name and shown beside the criterion in the viewer. It never feeds the gate and never changes an outcome. The gate answers whether a statement is in the record; the advisor answers whether the record satisfies the criterion, which is interpretation, so it is presented as an opinion with a name on it, for the physician to weigh. muse-wonder-1.0 advised the three live-CHART runs, 91 drafted cases, 363 criteria, for about $2.50. It called 73 percent of the cited quotes sufficient and 27 percent partial, and it never said silent. On the false pass it did what the gate cannot: for the intensity criterion it wrote that the quote "addresses a plan for 5 to 6 days per week, but is missing the at least 3 hours of therapy per day." It also doubted 97 criteria the gate had verified on cases the key labels warranted, most of them a quote that establishes the fact and not the surrounding clause, such as a survival estimate without the functional-status half of the criterion. That is a strict reader, which is the right default for an advisor whose job is to point at gaps; the physician decides which gaps matter. The first run with the tool found one more gate defect, "one hundred ten feet" read as a bare 100, fixed as gate v1.2 with a test; that run was superseded and is not reported. The tool is in `build/src/chart.ts` with tests against a stubbed transport, and it memoizes per authority so a 50-case run is a handful of metered queries, not fifty.
 
 <br>
+
+## Build log
+
+Every commit since the event began has a row in [NEW-WORK.md](NEW-WORK.md), every result file carries its model, mode, gate version, and any re-gate in its own header, and this section is regenerated from those sources after every push. Nothing in it is typed by hand.
+
+<!-- build-log:start -->
+_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-10-28 07:55 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
+
+38 commits since the `hackathon-start` tag, the last at 2026-10-28 00:49 (2b86e41). Gate v1.3. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
+
+| Started (UTC) | Model | Mode | Agreed | Blocked | False pass | Advisor |
+| --- | --- | --- | :---: | :---: | :---: | --- |
+| 2026-10-27 08:17 | muse-spark-1.3 | chart in prompt | 50 of 50 | 0 | 0 |  |
+| 2026-10-27 08:19 | muse-wonder-1.0 | chart in prompt | 49 of 50 | 0 | 0 |  |
+| 2026-10-27 08:20 | meta-models/muse-spark-open | chart in prompt | 49 of 50 | 1 | 0 |  |
+| 2026-10-28 03:20 | muse-spark-1.3 | agentic | 50 of 50 | 0 | 0 |  |
+| 2026-10-28 03:24 | muse-wonder-1.0 | agentic | 49 of 50 | 1 | 0 |  |
+| 2026-10-28 03:24 | meta-models/muse-spark-open | agentic | 48 of 50 | 1 | 0 |  |
+| 2026-10-28 06:48 | muse-spark-1.3 | agentic, live CHART | 49 of 50 | 1 | 0 | muse-wonder-1.0, 28 of 114 criteria partial |
+| 2026-10-28 06:51 | muse-wonder-1.0 | agentic, live CHART | 50 of 50 | 0 | 0 | muse-wonder-1.0, 28 of 122 criteria partial |
+| 2026-10-28 07:13 | meta-models/muse-spark-open | agentic, live CHART | 45 of 50 | 4 | 1 | muse-wonder-1.0, 41 of 127 criteria partial |
+
+Last five commits, newest first, with the ledger row each one carried:
+
+- **2b86e41 · 2026-10-28 00:49** · Gate v1.3 names the entry to cite; advisor beside each criterion, run on the three live-CHART runs; re-gate script. Gate v1.3 (`build/src/litmus.ts`): a sentence refuted only for hard tokens that all live in another entry of the same chart comes back as `needs-citation` naming that entry; the draft stays blocked, the physician is told what to add; a token in no entry stays refuted; the reason text says plainly that a count the chart never states must be rewritten.…
+- **a493073 · 2026-10-28 00:18** · Viewer: scoreboard headings wrap. Viewer scoreboard: column headings wrap so ten columns fit without horizontal scroll; asset links v9
+- **e6600f2 · 2026-10-28 00:17** · Live CHART run on Muse Spark Open: 45 of 50 with one referential-limit false pass reported; scoreboard shows gate misses. Live CHART run on Muse Spark Open (Baseten, concurrency 3 after a run at 8 lost 16 cases to HTTP 429 and was discarded): 45 of 50, 245 sentences, p50 7.3 s, $0.016 per case, 9.3 of 25.6 entries read, 97% of key entries, `policy_status` in all 50 cases (40 first), one metered query. Four blocks read: each a true sentence citing one entry for a fact in…
+- **42f6ef5 · 2026-10-28 00:06** · Viewer and README figures in the CHART Library composite of the heme design system. Viewer restyled to the CHART Library composite of the heme design system (Jim pointed at both Claude Design projects): ink-ramp light chrome with a dark remap behind a theme button (remembered per viewer), Google Sans Flex interface, JetBrains Mono for ids, dates, codes, money and provenance, EB Garamond for record text, quotes and the letter, the…
+- **9fe6a8d · 2026-10-27 23:55** · Viewer: apply deep links on hash change. Viewer: deep links apply on hash change in an open tab (run, case, board closed), not only at load; asset links v5
+<!-- build-log:end -->
 
 ## From the inside
 

@@ -1,0 +1,31 @@
+# Regenerates BUILD-LOG.md and the build-log section of README.md after every
+# push to main, from the git history, the ledger, and the results files. The
+# commit it makes touches only those two generated files and carries no ledger
+# row; NEW-WORK.md says so. It skips itself so it never loops.
+name: build log
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: write
+jobs:
+  log:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: cd build && npm ci --include=dev
+      - run: cd build && npm run log
+      - name: commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- BUILD-LOG.md README.md; then echo "log unchanged"; exit 0; fi
+          git add BUILD-LOG.md README.md
+          git commit -m "Build log: regenerate after ${GITHUB_SHA::7}"
+          git push
