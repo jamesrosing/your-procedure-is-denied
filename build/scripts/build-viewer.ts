@@ -21,7 +21,7 @@ const results = resultFiles.map(f => {
   cpSync(join(resultsDir, f), join(data, 'results', f));
   const parsed = JSON.parse(readFileSync(join(resultsDir, f), 'utf8')) as {
     run: { provider: string; model: string; effort: string; startedAt: string; cases: number; agentic?: boolean };
-    results: { trace?: unknown[] }[];
+    results: { trace?: { live?: boolean }[] }[];
   };
   return {
     file: f,
@@ -31,6 +31,7 @@ const results = resultFiles.map(f => {
     startedAt: parsed.run.startedAt,
     cases: parsed.run.cases,
     agentic: parsed.run.agentic === true || parsed.results.some(r => (r.trace?.length ?? 0) > 0),
+    live: parsed.results.some(r => (r.trace ?? []).some(t => t.live === true)),
   };
 });
 

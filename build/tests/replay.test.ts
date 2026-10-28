@@ -220,3 +220,13 @@ describe('scoreboard', () => {
     assert.equal(rows[1]?.agentic, true);
   });
 });
+
+describe('live-tool rows', () => {
+  test('a run whose traces carry a live query is flagged and sorted after the plain agentic rows', () => {
+    const rows = scoreboard(files);
+    const firstLive = rows.findIndex(r => r.live);
+    if (firstLive === -1) return; // no live run on disk yet
+    assert.ok(rows.slice(firstLive).every(r => r.live && r.agentic), 'live rows sit together at the end');
+    assert.ok(rows.slice(0, firstLive).every(r => !r.live));
+  });
+});

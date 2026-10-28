@@ -6,7 +6,7 @@
   <title>Your procedure is denied: replay</title>
   <meta name="description" content="Replays a synthetic denial case through a Meta model and the LITMUS gate: chart entries read, criteria met, sentences verified.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%276%27 fill=%27%230f1318%27/%3E%3Crect x=%277%27 y=%2714%27 width=%2718%27 height=%274%27 rx=%272%27 fill=%27%23ef6a6f%27/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="styles.css?v=3">
+  <link rel="stylesheet" href="styles.css?v=4">
 </head>
 <body>
   <header class="bar">
@@ -85,7 +85,7 @@
     <h2 id="board-h">Scoreboard</h2>
     <p class="board-sub">Fifty synthetic denials per run, effort low, through the same deterministic gate. Agreed with the key means the model's warranted decision matched the grading label and the gate passed or declined accordingly.</p>
     <table id="board-table"></table>
-    <p class="note">Agentic rows: the model reads the chart by tool call from an index instead of receiving it whole; entries read is the mean per case against the mean chart size, and key entries read is the share of grading-key evidence entries the model opened. Muse Spark Open on Baseten reports no thinking-token count on the Messages path, so its cost per appeal omits reasoning tokens. Fifty cases is a small set: one case is two percentage points.</p>
+    <p class="note">Agentic rows: the model reads the chart by tool call from an index instead of receiving it whole; entries read is the mean per case against the mean chart size, and key entries read is the share of grading-key evidence entries the model opened. A live CHART row adds a third tool, a query against the author's pre-existing coverage index for when the authority's criteria last changed; its answer appears under the criteria panel and never in the draft. Muse Spark Open on Baseten reports no thinking-token count on the Messages path, so its cost per appeal omits reasoning tokens. Fifty cases is a small set: one case is two percentage points.</p>
   </section>
 
   <footer class="foot">
@@ -93,6 +93,6 @@
     <a href="https://github.com/jamesrosing/your-procedure-is-denied/blob/main/NEW-WORK.md">What was built during the event</a>
   </footer>
 
-  <script src="app.js?v=3"></script>
+  <script src="app.js?v=4"></script>
 </body>
 </html>

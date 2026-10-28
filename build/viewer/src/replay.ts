@@ -280,6 +280,7 @@ export interface ScoreboardRow {
   model: string;
   provider: string;
   agentic: boolean;
+  live: boolean; // at least one case made a live query against an external data source (CHART)
   cases: number;
   agreed: number;
   blocked: number;
@@ -303,6 +304,7 @@ export function scoreboardRow(file: ResultsFile): ScoreboardRow {
   const s = file.summary;
   const results = file.results ?? [];
   const agentic = file.run.agentic === true || results.some(r => (r.trace?.length ?? 0) > 0);
+  const live = results.some(r => (r.trace ?? []).some(t => t.live === true));
   const reading = results.map(r => r.reading).filter((r): r is NonNullable<ViewerResult['reading']> => !!r);
   const mean = (f: (r: NonNullable<ViewerResult['reading']>) => number) => (reading.length ? reading.reduce((a, r) => a + f(r), 0) / reading.length : null);
   const supportTotal = reading.reduce((a, r) => a + r.supportTotal, 0);
@@ -310,6 +312,7 @@ export function scoreboardRow(file: ResultsFile): ScoreboardRow {
     model: MODEL_LABELS[file.run.model] ?? file.run.model,
     provider: file.run.provider,
     agentic,
+    live,
     cases: s.cases,
     agreed: (s.outcomes['correct-pass'] ?? 0) + (s.outcomes['correct-decline'] ?? 0),
     blocked: s.outcomes['blocked'] ?? 0,
@@ -323,7 +326,7 @@ export function scoreboardRow(file: ResultsFile): ScoreboardRow {
   };
 }
 
-// README order: the primary proposer, the quality ceiling, then open weights; agentic rows after.
+// README order: the primary proposer, the quality ceiling, then open weights; agentic rows after, live-tool rows last.
 const MODEL_RANK = ['muse-spark-1.3', 'muse-wonder-1.0', 'Muse Spark Open'];
 function rank(model: string): number {
   const i = MODEL_RANK.findIndex(m => model.startsWith(m));
@@ -333,7 +336,7 @@ function rank(model: string): number {
 export function scoreboard(files: ResultsFile[]): ScoreboardRow[] {
   return files
     .map(scoreboardRow)
-    .sort((a, b) => Number(a.agentic) - Number(b.agentic) || rank(a.model) - rank(b.model) || a.model.localeCompare(b.model));
+    .sort((a, b) => Number(a.agentic) - Number(b.agentic) || Number(a.live) - Number(b.live) || rank(a.model) - rank(b.model) || a.model.localeCompare(b.model));
 }
 
 export function formatUsd(n: number): string {

@@ -7,7 +7,7 @@ import {
 } from './replay.js';
 
 interface Manifest {
-  results: { file: string; provider: string; model: string; effort: string; startedAt: string; cases: number; agentic: boolean }[];
+  results: { file: string; provider: string; model: string; effort: string; startedAt: string; cases: number; agentic: boolean; live?: boolean }[];
   cases: string;
 }
 
@@ -359,7 +359,7 @@ async function renderBoard(): Promise<void> {
   const body = rows.map(r => {
     const tr = document.createElement('tr');
     const model = text('td', 'model', r.model);
-    if (r.agentic) model.append(text('span', 'agentic-tag', 'agentic'));
+    if (r.agentic) model.append(text('span', 'agentic-tag', r.live ? 'agentic, live CHART' : 'agentic'));
     const agreed = text('td', r.agreed === r.cases ? 'strong' : '', `${r.agreed} of ${r.cases}`);
     const blocked = text('td', r.blocked > 0 ? 'red' : 'dim', String(r.blocked));
     tr.append(model, agreed, blocked);
@@ -385,7 +385,7 @@ async function boot(): Promise<void> {
   ui.filePicker.replaceChildren(...session.manifest.results.map(m => {
     const o = document.createElement('option');
     o.value = m.file;
-    o.textContent = `${m.model}, ${m.provider}${m.agentic ? ', agentic' : ''}, ${m.startedAt.slice(0, 10)}`;
+    o.textContent = `${m.model}, ${m.provider}${m.agentic ? (m.live ? ', agentic, live CHART' : ', agentic') : ''}, ${m.startedAt.slice(0, 10)}`;
     return o;
   }));
   const params = new URLSearchParams(window.location.hash.slice(1));
