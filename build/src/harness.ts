@@ -369,8 +369,8 @@ async function main(): Promise<void> {
   const agentic = values.agentic === true;
   const chart = values.chart === true;
   if (chart && !agentic) throw new Error('--chart needs --agentic');
-  const chartKey = chart ? env('CHART_API_KEY') : undefined;
-  if (chart && !chartKey) throw new Error('CHART_API_KEY is not set');
+  const chartKey = chart ? env('CHART_API_KEY') ?? env('CHART_CUSTOM_TOKEN') : undefined;
+  if (chart && !chartKey) throw new Error('CHART_API_KEY (or CHART_CUSTOM_TOKEN) is not set');
   const tools: ToolDefinition[] = chart ? [POLICY_STATUS_TOOL] : [];
   const extra = chartKey ? policyStatusExecutor({ apiKey: chartKey }) : undefined;
   const effort = values.effort as Effort;
