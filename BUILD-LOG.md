@@ -234,4 +234,8 @@ Title card one reworded to Jim's line: the medical insurance carrier denies trea
 
 ### 10051f0 · 2026-10-28 08:04 · Build log: regenerate after 799d7b3
 
+(no ledger row)
+
+### be17ec7 · 2026-10-28 01:05 · Title cards type out letter by letter
+
 Title cards type out letter by letter at about 35 characters a second with a blinking cursor, hold 1.4 s once complete, then fade; reduced motion shows the full text; schedule and copy tests updated; asset links v12
