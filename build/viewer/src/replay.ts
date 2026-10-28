@@ -363,32 +363,34 @@ export function formatSeconds(ms: number): string {
   return `${(ms / 1000).toFixed(1)} s`;
 }
 
-// The title cards. One line at a time, large, held for as long as it takes to
-// read it: people read about four words a second on screen, so each card is
-// held one second to settle plus a quarter second per word, then fades. Kept
-// here so a test can hold the copy to its discipline: three lines, at most
-// twenty-four words each, sentence case, no exclamation marks.
+// The title cards. One line at a time, large, typed out letter by letter at
+// about thirty-five characters a second, held a moment once complete, then
+// faded. Typing paces the reading. Kept here so a test can hold the copy to
+// its discipline: three lines, at most twenty-four words each, sentence case,
+// no exclamation marks.
 export const INTRO_LINES: readonly string[] = [
   'Your medical insurance carrier will deny your treatment in a second. It will take your doctor hours to answer, if they ever do.',
   'Most denials are never appealed. Most that are appealed are overturned.',
   'An open model drafts the appeal. A gate holds every sentence to the record.',
 ];
 
-export const INTRO_FADE_MS = 500;
+export const INTRO_CHAR_MS = 28; // per typed character
+export const INTRO_HOLD_MS = 1400; // after the last character
+export const INTRO_FADE_MS = 400;
 
-export function introHoldMs(line: string): number {
-  const words = line.trim().split(/\s+/).filter(Boolean).length;
-  return 1000 + words * 250;
+export function introTypeMs(line: string): number {
+  return line.length * INTRO_CHAR_MS;
 }
 
-// When each card appears and leaves, from the start of the sequence.
-export function introSchedule(lines: readonly string[] = INTRO_LINES): { show: number; hide: number }[] {
-  const out: { show: number; hide: number }[] = [];
+// When each card starts typing, finishes, and leaves, from the start of the sequence.
+export function introSchedule(lines: readonly string[] = INTRO_LINES): { show: number; typed: number; hide: number }[] {
+  const out: { show: number; typed: number; hide: number }[] = [];
   let t = 300;
   for (const line of lines) {
     const show = t;
-    const hide = show + INTRO_FADE_MS + introHoldMs(line);
-    out.push({ show, hide });
+    const typed = show + introTypeMs(line);
+    const hide = typed + INTRO_HOLD_MS;
+    out.push({ show, typed, hide });
     t = hide + INTRO_FADE_MS;
   }
   return out;

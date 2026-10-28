@@ -2,7 +2,7 @@
 // results file and a case, and renders `stateAt` for the current cursor.
 // Everything that decides what a step means lives in replay.ts.
 import {
-  buildTimeline, firstLine, formatSeconds, formatUsd, INTRO_FADE_MS, INTRO_LINES, introSchedule, playDelayMs, scoreboard, stateAt,
+  buildTimeline, firstLine, formatSeconds, formatUsd, INTRO_CHAR_MS, INTRO_FADE_MS, INTRO_LINES, introSchedule, playDelayMs, scoreboard, stateAt,
   type ReplayState, type ResultsFile, type Step, type ViewerCase, type ViewerResult,
 } from './replay.js';
 
@@ -424,17 +424,33 @@ function playIntro(): void {
   introOpen = true;
   stop();
   const lines = [...ui.intro.querySelectorAll<HTMLElement>('.intro-line')];
-  lines.forEach((el, i) => { el.textContent = INTRO_LINES[i] ?? ''; el.classList.remove('show'); });
+  lines.forEach(el => { el.textContent = ''; el.classList.remove('show', 'typing'); });
   ui.intro.hidden = false;
   ui.intro.classList.remove('leaving');
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduced) { ui.intro.classList.add('all'); lines.forEach(el => el.classList.add('show')); return; }
+  if (reduced) {
+    ui.intro.classList.add('all');
+    lines.forEach((el, i) => { el.textContent = INTRO_LINES[i] ?? ''; el.classList.add('show'); });
+    return;
+  }
   ui.intro.classList.remove('all');
-  void ui.intro.offsetHeight; // commit the hidden state so the first fade runs
   const schedule = introSchedule();
   schedule.forEach((slot, i) => {
-    introTimers.push(window.setTimeout(() => lines[i]?.classList.add('show'), slot.show));
-    introTimers.push(window.setTimeout(() => lines[i]?.classList.remove('show'), slot.hide));
+    const el = lines[i];
+    const text = INTRO_LINES[i] ?? '';
+    if (!el) return;
+    introTimers.push(window.setTimeout(() => {
+      el.classList.add('show', 'typing');
+      let n = 0;
+      const tick = (): void => {
+        n += 1;
+        el.textContent = text.slice(0, n);
+        if (n < text.length) introTimers.push(window.setTimeout(tick, INTRO_CHAR_MS));
+        else el.classList.remove('typing');
+      };
+      tick();
+    }, slot.show));
+    introTimers.push(window.setTimeout(() => el.classList.remove('show'), slot.hide));
   });
   const last = schedule[schedule.length - 1];
   introTimers.push(window.setTimeout(endIntro, (last ? last.hide : 0) + INTRO_FADE_MS));

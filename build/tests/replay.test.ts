@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readdirSync, readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { buildTimeline, citedEntries, firstLine, INTRO_LINES, introHoldMs, introSchedule, playDelayMs, scoreboard, stateAt, type ResultsFile, type ViewerCase, type ViewerResult } from '../viewer/src/replay.js';
+import { buildTimeline, citedEntries, firstLine, INTRO_LINES, introTypeMs, introSchedule, playDelayMs, scoreboard, stateAt, type ResultsFile, type ViewerCase, type ViewerResult } from '../viewer/src/replay.js';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const resultsDir = join(here, '..', 'results');
@@ -260,11 +260,12 @@ describe('the title cards', () => {
       assert.match(line, /\.$/);
     }
   });
-  test('each card is held about a quarter second per word plus a second to settle, and the cards never overlap', () => {
-    assert.equal(introHoldMs('one two three four'), 2000);
+  test('each card types at about thirty-five characters a second, holds once complete, and the cards never overlap', () => {
+    assert.equal(introTypeMs('abcd'), 112);
     const s = introSchedule();
+    for (const slot of s) assert.ok(slot.show < slot.typed && slot.typed < slot.hide);
     for (let i = 1; i < s.length; i++) assert.ok(s[i]!.show >= s[i - 1]!.hide, 'no overlap');
     const total = s[s.length - 1]!.hide;
-    assert.ok(total > 9000 && total < 20000, String(total));
+    assert.ok(total > 9000 && total < 25000, String(total));
   });
 });

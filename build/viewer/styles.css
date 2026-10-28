@@ -100,7 +100,11 @@ h2 { font-size: 13.5px; font-weight: 500; color: var(--ink-7); }
 .intro.leaving { opacity: 0; pointer-events: none; }
 .intro-stage { display: grid; width: 94vw; max-width: none; }
 .intro-line { grid-area: 1 / 1; margin: 0; text-align: center; font-family: var(--read-serif); font-size: clamp(40px, 6.4vw, 124px); line-height: 1.12; letter-spacing: -0.012em; color: var(--ink-7); opacity: 0; transition: opacity 500ms var(--ease-out); }
-.intro-line.show { opacity: 1; }
+.intro-line.show { opacity: 1; transition: none; }
+.intro-line:not(.show) { transition: opacity 400ms var(--ease-out); }
+/* the cursor: a thin block after the last typed character, blinking while typing */
+.intro-line.typing::after { content: ''; display: inline-block; width: 0.08em; height: 0.9em; margin-left: 0.06em; vertical-align: -0.08em; background: var(--ink-7); animation: cursor 900ms steps(2, start) infinite; }
+@keyframes cursor { to { visibility: hidden; } }
 .intro.all .intro-stage { gap: 32px; }
 .intro.all .intro-line { grid-area: auto; font-size: clamp(24px, 2.4vw, 34px); }
 .intro-foot { position: absolute; left: 48px; right: 48px; bottom: 40px; display: flex; justify-content: space-between; align-items: center; gap: 24px; }
@@ -429,6 +433,7 @@ select:hover { border-color: var(--ink-3); }
 @keyframes arrive { from { opacity: 0; } to { opacity: 1; } }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation: none !important; }
+  .intro-line.typing::after { display: none; }
 }
 @media (max-width: 1100px) {
   .bar { grid-template-columns: 1fr 1fr; height: auto; padding: 8px 16px; gap: 8px 16px; }
