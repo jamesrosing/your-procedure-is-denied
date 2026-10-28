@@ -78,21 +78,25 @@ describe('policyStatusExecutor', () => {
     assert.match(out!.content, /criteria you were given still apply/);
     const captured: Captured[] = [];
     const run = policyStatusExecutor({ apiKey: 'k', fetch: fakeFetch(200, INDEX, captured) });
-    assert.equal((await run({ name: 'policy_status', input: { code: 'drop table', date_of_service: '2026-02-03' } }))?.ok, false);
+    assert.equal((await run({ name: 'policy_status', input: { code: 'drop; table', date_of_service: '2026-02-03' } }))?.ok, false);
     assert.equal((await run({ name: 'policy_status', input: { code: '92928', date_of_service: 'yesterday' } }))?.ok, false);
     assert.equal(captured.length, 0);
   });
 
-  test('one metered query per authority, code, and date for the life of the executor; failures are not cached', async () => {
+  test('one metered query per authority for the life of the executor, whatever the code; failures are not cached; printed codes are normalized', async () => {
     const captured: Captured[] = [];
     const run = policyStatusExecutor({ apiKey: 'k', fetch: fakeFetch(200, INDEX, captured) });
     const first = await run(CALL);
     const second = await run({ name: 'policy_status', input: { authority: 'CMS', code: '92928', date_of_service: '2026-02-03' } });
-    await run({ name: 'policy_status', input: { code: '33533', date_of_service: '2026-02-03' } });
-    assert.equal(captured.length, 2);
+    const third = await run({ name: 'policy_status', input: { code: 'MS-DRG 871', date_of_service: '2026-02-04' } });
+    assert.equal(captured.length, 1);
     assert.equal(second?.ok, true);
     assert.equal(second?.content, first?.content);
     assert.match(second!.note!, /cached this run/);
+    assert.match(third!.content, /queried for 871 as of 2026-02-04/);
+    await run({ name: 'policy_status', input: { authority: 'aetna', code: 'CMG 0104', date_of_service: '2026-02-03' } });
+    assert.equal(captured.length, 2);
+    assert.match(captured[1]!.url, /code=0104&/);
     const uncached = policyStatusExecutor({ apiKey: 'k', fetch: fakeFetch(200, INDEX, captured), cache: false });
     await uncached(CALL); await uncached(CALL);
     assert.equal(captured.length, 4);

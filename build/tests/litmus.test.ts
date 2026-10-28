@@ -160,6 +160,17 @@ describe('litmus: hard tokens', () => {
     assert.equal(run('Angiography measured eighty one percent stenosis, at ninety one he was fine.').status, 'refuted');
   });
 
+
+  test('hundreds are one number: one hundred ten is 110, two hundred is 200, three hundred twenty-five is 325, a hundred and five is 105 (found live, Oct 28, muse-spark-1.3 with CHART, case-032)', () => {
+    const src: GateSources = { ...sources, chart: [...chart, { id: 'note-005', date: '2025-09-03', kind: 'therapy note', text: 'Ambulation 40 feet to 110 feet with the rolling walker. Walked 200 feet. Stairs 325 steps. Dose 105 mg.' }] };
+    const run = (text: string, quote: string) => litmus(src, appeal([{ text, citation: 'note-005', quote }])).sentences[0]!;
+    assert.equal(run('Ambulation progressed from forty feet to one hundred ten feet with the rolling walker.', 'Ambulation 40 feet to 110 feet with the rolling walker').status, 'verified');
+    assert.equal(run('She then walked two hundred feet.', 'Walked 200 feet').status, 'verified');
+    assert.equal(run('Three hundred twenty-five steps and a hundred and five milligrams.', 'Stairs 325 steps. Dose 105 mg').status, 'verified');
+    const bad = run('She walked one hundred twenty feet.', 'Walked 200 feet');
+    assert.equal(bad.status, 'refuted');
+    assert.deepEqual(bad.missing, ['120']);
+  });
   test('a number from the payer criteria or the denial is admissible', () => {
     assert.equal(one('This exceeds the 6 month symptom requirement and answers the CARC 50 denial of CPT 19318.', 'note-001', Q_PAIN).status, 'verified');
   });

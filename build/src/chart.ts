@@ -85,7 +85,7 @@ export interface PolicyStatusOptions {
   baseURL?: string;
   fetch?: typeof fetch;
   timeoutMs?: number;
-  cache?: boolean; // default true: one metered query per authority, code, and date for the life of this executor
+  cache?: boolean; // default true: one metered query per authority for the life of this executor
 }
 
 const LABEL = 'live CHART query, prior-work data source';
@@ -94,9 +94,11 @@ export function policyStatusExecutor(options: PolicyStatusOptions): (call: ToolC
   const doFetch = options.fetch ?? fetch;
   const base = (options.baseURL ?? CHART_BASE_URL).replace(/\/$/, '');
   // The index is metered per request and its answer (when an authority's
-  // material last changed) is the same for every case in a run, so one
-  // executor shared across a run answers repeats from memory. Only successful
-  // answers are kept; a 402 or an outage is retried on the next call.
+  // material last changed) is the same for every case in a run: the live
+  // endpoint returns the whole authority table whatever code is passed. So the
+  // memo is keyed on the authority alone and one executor shared across a run
+  // makes one metered query per authority. Only successful answers are kept; a
+  // 402 or an outage is retried on the next call.
   const memo = new Map<string, ToolOutcome>();
   const query = async (authority: string, code: string, asOf: string): Promise<ToolOutcome> => {
     let res: Response;
@@ -134,13 +136,15 @@ export function policyStatusExecutor(options: PolicyStatusOptions): (call: ToolC
   return async call => {
     if (call.name !== 'policy_status') return null;
     const authority = String(call.input['authority'] ?? DEFAULT_AUTHORITY).trim().toLowerCase() || DEFAULT_AUTHORITY;
-    const code = String(call.input['code'] ?? '').trim();
+    // Models write codes the way denials print them: "MS-DRG 871", "CMG 0104",
+    // "HIPPS KDOB1". The index wants the bare code.
+    const code = String(call.input['code'] ?? '').trim().replace(/^(?:MS-?DRG|DRG|CMG|HIPPS|CPT|HCPCS|ICD-?10(?:-CM)?)[:\s]*/i, '').replace(/\s+/g, '');
     const asOf = String(call.input['date_of_service'] ?? '').trim();
     if (!/^[A-Za-z0-9.-]{1,12}$/.test(code)) return { ok: false, content: 'policy_status needs the procedure or diagnosis code on the denial', live: true, note: 'bad code' };
     if (!/^\d{4}-\d{2}-\d{2}$/.test(asOf)) return { ok: false, content: 'policy_status needs date_of_service as YYYY-MM-DD', live: true, note: 'bad date' };
-    const key = `${authority}|${code}|${asOf}`;
+    const key = authority;
     const hit = options.cache !== false ? memo.get(key) : undefined;
-    if (hit) return { ...hit, note: `${hit.note} (cached this run)` };
+    if (hit) return { ...hit, content: hit.content.replace(/queried for \S+ as of \d{4}-\d{2}-\d{2}/, `queried for ${code} as of ${asOf}`), note: `${hit.note} (cached this run)` };
     const out = await query(authority, code, asOf);
     if (out.ok && options.cache !== false) memo.set(key, out);
     return out;

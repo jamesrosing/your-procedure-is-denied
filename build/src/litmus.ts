@@ -27,7 +27,7 @@
 import { createHash } from 'node:crypto';
 import { CITATION_ID, type Appeal } from './schema.js';
 
-export const LITMUS_VERSION = 'build/src/litmus.ts v1.1 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number';
+export const LITMUS_VERSION = 'build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number';
 
 export interface GateEntry {
   id: string;
@@ -127,11 +127,27 @@ const TENS = 'twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety';
 const ONES = 'one|two|three|four|five|six|seven|eight|nine';
 const COMPOUND_RE = new RegExp(`\\b(${TENS})[ -](${ONES})\\b`, 'g');
 const ONES_VALUE: Record<string, number> = { one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9 };
+// "one hundred ten", "two hundred", "three hundred twenty-five", "a hundred and five":
+// one number each. Found live Oct 28 (muse-spark-1.3 with CHART, case-032): the
+// gate read "one hundred ten feet" as 1, 100, 10 and refuted a true sentence.
+const TEENS = 'ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen';
+const HUNDREDS_RE = new RegExp(
+  `\\b(${ONES}|a)[ -]hundred(?:[ -](?:and[ -])?(?:(${TENS})(?:[ -](${ONES}))?|(${TEENS})|(${ONES})))?\\b`,
+  'g',
+);
+function hundreds(_: string, h: string, tens?: string, tensOnes?: string, teen?: string, ones?: string): string {
+  let n = (h === 'a' ? 1 : ONES_VALUE[h]!) * 100;
+  if (tens) n += Number(NUMBER_WORDS[tens]) + (tensOnes ? ONES_VALUE[tensOnes]! : 0);
+  else if (teen) n += Number(NUMBER_WORDS[teen]);
+  else if (ones) n += ONES_VALUE[ones]!;
+  return String(n);
+}
 
 function prepare(text: string): string {
   return canon(text)
     .replace(/\bnote-\d{3}\b/g, ' ')
     .replace(/\bcrit-\d+\b/g, ' ')
+    .replace(HUNDREDS_RE, hundreds)
     .replace(COMPOUND_RE, (_, tens: string, ones: string) => String(Number(NUMBER_WORDS[tens]) + ONES_VALUE[ones]!))
     .replace(NUMBER_WORD_RE, w => NUMBER_WORDS[w]!);
 }
