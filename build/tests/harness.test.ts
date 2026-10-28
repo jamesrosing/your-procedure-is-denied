@@ -193,7 +193,7 @@ describe('agentic harness', async () => {
     assert.equal(unknown.ok, false);
   });
 
-  test('the agentic request puts the shared instructions in a cached block and the index, not the chart, in the second', () => {
+  test('the agentic request puts the shared instructions in a cached block and the index, not the chart, in the second', async () => {
     const req = buildAgenticRequest(warrantedCase, 'low', 12288);
     assert.equal(req.system[0]?.cache, true);
     assert.ok(req.system[0]!.text.length >= 4600, 'shared block too short to be cached');
@@ -204,6 +204,12 @@ describe('agentic harness', async () => {
     assert.deepEqual(req.tools.map(t => t.name), CHART_TOOLS.map(t => t.name));
     assert.ok(req.user.includes(`CARC ${warrantedCase.denial.carc}`));
     assert.ok(INSTRUCTIONS_AGENTIC.includes('list_entries'));
+    assert.ok(!req.system[1]!.text.includes('policy_status'));
+    const { POLICY_STATUS_TOOL } = await import('../src/chart.js');
+    const withChart = buildAgenticRequest(warrantedCase, 'low', 12288, { tools: [POLICY_STATUS_TOOL] });
+    assert.ok(withChart.system[1]!.text.includes('policy_status'));
+    assert.equal(withChart.system[0]!.text, req.system[0]!.text, 'the cached block must not change when a tool is added');
+    assert.deepEqual(withChart.tools.map(t => t.name), ['list_entries', 'read_entry', 'policy_status']);
   });
 
   test('runCase with agentic records the trace, the entries read against the chart, and whether the key entries were read; the gate is unchanged', async () => {

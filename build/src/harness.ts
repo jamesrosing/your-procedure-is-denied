@@ -11,6 +11,7 @@ import type { Usage } from './cost.js';
 import type { Appeal } from './schema.js';
 import { litmus, LITMUS_VERSION, type GateResult, type GateSources } from './litmus.js';
 import type { SyntheticCase } from './synthetic/types.js';
+import { POLICY_STATUS_TOOL, policyStatusExecutor, DEFAULT_AUTHORITY } from './chart.js';
 
 // The shared block is identical for every case and every model, and long
 // enough to clear the prompt cache minimum (the Oct 26 probe cached a 1,704
@@ -89,11 +90,15 @@ export function chartToolExecutor(c: SyntheticCase, extra?: (call: ToolCall) => 
 
 export function buildAgenticRequest(c: SyntheticCase, effort: Effort, maxTokens: number, options: { tools?: ToolDefinition[]; extra?: (call: ToolCall) => Promise<ToolOutcome | null> } = {}): AgenticRequest {
   const base = buildRequest(c, effort, maxTokens);
+  const hasPolicyStatus = (options.tools ?? []).some(t => t.name === POLICY_STATUS_TOOL.name);
+  const policyLine = hasPolicyStatus
+    ? `\n\nA third tool, policy_status, is a live query against CHART, a pre-existing coverage index. The payer here is fictional, so call it once with authority "${DEFAULT_AUTHORITY}", the code on the denial, and the date of service, before you decide; report what it says about freshness only in your reasoning, never as a chart fact.`
+    : '';
   return {
     ...base,
     system: [
       { text: INSTRUCTIONS_AGENTIC, cache: true },
-      { text: `Chart index for patient ${c.patient.alias}, ${c.patient.age} year old ${c.patient.sex}. Synthetic record. ${c.chart.length} entries.\n\n${chartIndex(c)}` },
+      { text: `Chart index for patient ${c.patient.alias}, ${c.patient.age} year old ${c.patient.sex}. Synthetic record. ${c.chart.length} entries.\n\n${chartIndex(c)}${policyLine}` },
     ],
     tools: [...CHART_TOOLS, ...(options.tools ?? [])],
     execute: chartToolExecutor(c, options.extra),
@@ -151,6 +156,7 @@ export interface CaseResult {
   warrantedMatch: boolean | null;
   citationPrecision: number | null; // verified evidence whose note is in the grading key, over verified evidence
   error?: string;
+  rawPreview?: string; // first characters of an unparseable answer, kept only because the data is synthetic
   draft?: Appeal; // kept because the data is synthetic; a real run would store only the gate record
   gate?: GateResult;
   turns?: number; // agentic runs: model turns in the tool loop
@@ -203,7 +209,7 @@ export async function runCase(provider: Provider, c: SyntheticCase, opts: RunOpt
     ...(agentic ? { turns: agentic.turns, trace: agentic.trace, reading: readingStats(c, agentic.trace) } : {}),
   };
   if (!result.draft.ok) {
-    return { ...common, outcome: 'error', warrantedMatch: null, citationPrecision: null, error: `parse failed: ${result.draft.error}` };
+    return { ...common, outcome: 'error', warrantedMatch: null, citationPrecision: null, error: `parse failed: ${result.draft.error}`, rawPreview: result.rawText.slice(0, 400) };
   }
   const appeal = result.draft.appeal;
   const gate = litmus(gateSources(c), appeal);
@@ -357,9 +363,16 @@ async function main(): Promise<void> {
       'max-tokens': { type: 'string', default: '12288' },
       label: { type: 'string' },
       agentic: { type: 'boolean', default: false },
+      chart: { type: 'boolean', default: false },
     },
   });
   const agentic = values.agentic === true;
+  const chart = values.chart === true;
+  if (chart && !agentic) throw new Error('--chart needs --agentic');
+  const chartKey = chart ? env('CHART_API_KEY') : undefined;
+  if (chart && !chartKey) throw new Error('CHART_API_KEY is not set');
+  const tools: ToolDefinition[] = chart ? [POLICY_STATUS_TOOL] : [];
+  const extra = chartKey ? policyStatusExecutor({ apiKey: chartKey }) : undefined;
   const effort = values.effort as Effort;
   if (!['low', 'medium'].includes(effort)) throw new Error('effort must be low or medium; high and xhigh are not run (see ROADMAP measurements)');
   const here = dirname(fileURLToPath(import.meta.url));
@@ -373,7 +386,7 @@ async function main(): Promise<void> {
   console.error(`running ${cases.length} case(s) on ${provider.label}/${provider.model}, effort ${effort}, concurrency ${concurrency}${agentic ? ', agentic' : ''}`);
 
   const results = await mapWithConcurrency(cases, concurrency, async c => {
-    const r = await runCase(provider, c, { effort, maxTokens, agentic });
+    const r = await runCase(provider, c, { effort, maxTokens, agentic, tools, ...(extra ? { extra } : {}) });
     const reading = r.reading ? ` read ${r.reading.entriesRead}/${r.reading.chartSize} key ${r.reading.supportRead}/${r.reading.supportTotal} turns ${r.turns}` : '';
     console.error(`${r.caseId} ${r.outcome.padEnd(15)} ${r.gate ? `${r.gate.verdict.padEnd(8)} verified ${r.gate.counts.verified}/${r.gate.counts.sentences}` : (r.error ?? '')}${reading} ${r.latencyMs}ms $${r.costUsd.toFixed(4)}`);
     return r;
@@ -383,8 +396,8 @@ async function main(): Promise<void> {
   const stamp = startedAt.replace(/[:.]/g, '-');
   const outDir = join(here, '..', 'results');
   mkdirSync(outDir, { recursive: true });
-  const file = join(outDir, `${values.label ?? provider.label}-${safeModel}-${effort}${agentic ? '-agentic' : ''}-${stamp}.json`);
-  writeFileSync(file, JSON.stringify({ run: { startedAt, finishedAt: new Date().toISOString(), provider: provider.label, model: provider.model, effort, concurrency, maxTokens, cases: cases.length, agentic, litmus: LITMUS_VERSION, synthetic: true }, summary, results }, null, 2) + '\n');
+  const file = join(outDir, `${values.label ?? provider.label}-${safeModel}-${effort}${agentic ? '-agentic' : ''}${chart ? '-chart' : ''}-${stamp}.json`);
+  writeFileSync(file, JSON.stringify({ run: { startedAt, finishedAt: new Date().toISOString(), provider: provider.label, model: provider.model, effort, concurrency, maxTokens, cases: cases.length, agentic, tools: ['list_entries', 'read_entry', ...tools.map(t => t.name)], litmus: LITMUS_VERSION, synthetic: true }, summary, results }, null, 2) + '\n');
   console.error(`wrote ${file}`);
   console.log(JSON.stringify(summary, null, 2));
 }

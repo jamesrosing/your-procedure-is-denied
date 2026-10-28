@@ -142,8 +142,12 @@ Three Meta models, 50 cases each, one run per model on October 27, 2026, effort 
 | muse-wonder-1.0 (Meta Model API) | 49 of 50 | 0 | 236 | 8.8 s | $0.037 |
 | Muse Spark Open (open weights, hosted on Baseten) | 49 of 50 | 1 | 233 | 4.3 s | $0.007[^open] |
 | muse-spark-1.3, agentic: reads the chart by tool call, 9.6 of 25.6 entries per case | 50 of 50 | 0 | 265 | 8.0 s | $0.017 |
+| muse-wonder-1.0, agentic, 8.7 of 25.6 entries per case | 49 of 50 | 1 | 244 | 10.0 s | $0.052 |
+| Muse Spark Open on Baseten, agentic, 9.4 of 25.6 entries per case | 48 of 50 | 1 | 239 | 9.9 s | $0.018[^open] |
 
-The fourth row is the agentic step, run October 28. The model no longer receives the chart. It gets an index, one line per entry with the id, date, kind, and opening words, and two tools, `list_entries` and `read_entry`, and reads what it decides it needs. It read 9.6 of 25.6 entries per case on average, 3.4 model turns per case, and reached 96 percent of the entries the grading key names as evidence, while agreeing with the key on every case. It read the chart the way a reviewer does: a modifier denial (CARC 4) was declined without opening a single entry, because the chart cannot answer it; the cases labeled absent, where the evidence is not there, were read almost completely (one chart of 27 entries was read entry by entry) before the model declined. Each case's results carry a trace of every tool call, and the [viewer](build/viewer/) replays it.
+The last three rows are the agentic step, run October 28. The model no longer receives the chart. It gets an index, one line per entry with the id, date, kind, and opening words, and two tools, `list_entries` and `read_entry`, and reads what it decides it needs. The three models read between 8.7 and 9.6 of 25.6 entries per case, in 2.3 to 3.5 model turns, and reached 93 to 98 percent of the entries the grading key names as evidence. They read the chart the way a reviewer does: a modifier denial (CARC 4) was declined without opening a single entry, because the chart cannot answer it; the cases labeled absent, where the evidence is not there, were read almost completely (one chart of 27 entries was read entry by entry) before the model declined. Each case's results carry a trace of every tool call, and the [viewer](build/viewer/) replays it.
+
+The agentic disagreements: muse-wonder-1.0 answered one absent wound-care case with warranted set to true and no evidence and no sentences at all, and the gate blocked it, which is the fail-closed design doing its job. Muse Spark Open blocked on the same count sentence as before ("three antianginals", true, unsourced) and once returned an answer that was not valid JSON (the case passes on a repeat call; the run file keeps the failure).
 
 The two disagreements:
 
@@ -166,7 +170,7 @@ Four of my grading keys were defective, and each was found by a model reading th
 - **The counts are small.** Fifty synthetic cases, one run per model, one seed. There are no repeat runs, so no estimate of run-to-run variance. The charts and the criteria were written by the same person, which makes the test easier than a real chart against a real policy.
 - **The data are synthetic.** The charts are generated in dictation voice from 18 templates. No result here says anything about performance on real records, and that measurement cannot be made in public.
 
-Next: the other two models run agentically, and a third tool that checks a payer policy's last-change date against CHART, the author's pre-existing coverage index.
+Next: a third tool, `policy_status`, a live query against CHART, the author's pre-existing coverage index, that reports when an authority's coverage material last changed and was last checked. The tool and its tests are in `build/src/chart.ts`; the run that uses it needs a CHART key.
 
 <br>
 
