@@ -362,3 +362,34 @@ export function formatUsd(n: number): string {
 export function formatSeconds(ms: number): string {
   return `${(ms / 1000).toFixed(1)} s`;
 }
+
+// The title cards. One line at a time, large, held for as long as it takes to
+// read it: people read about four words a second on screen, so each card is
+// held one second to settle plus a quarter second per word, then fades. Kept
+// here so a test can hold the copy to its discipline: three lines, at most
+// fourteen words each, sentence case, no exclamation marks.
+export const INTRO_LINES: readonly string[] = [
+  'Your insurer denies your surgery in one second. Your doctor needs hours to answer.',
+  'Most denials are never appealed. Most that are appealed are overturned.',
+  'An open model drafts the appeal. A gate holds every sentence to the record.',
+];
+
+export const INTRO_FADE_MS = 500;
+
+export function introHoldMs(line: string): number {
+  const words = line.trim().split(/\s+/).filter(Boolean).length;
+  return 1000 + words * 250;
+}
+
+// When each card appears and leaves, from the start of the sequence.
+export function introSchedule(lines: readonly string[] = INTRO_LINES): { show: number; hide: number }[] {
+  const out: { show: number; hide: number }[] = [];
+  let t = 300;
+  for (const line of lines) {
+    const show = t;
+    const hide = show + INTRO_FADE_MS + introHoldMs(line);
+    out.push({ show, hide });
+    t = hide + INTRO_FADE_MS;
+  }
+  return out;
+}

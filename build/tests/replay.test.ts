@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readdirSync, readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { buildTimeline, citedEntries, firstLine, playDelayMs, scoreboard, stateAt, type ResultsFile, type ViewerCase, type ViewerResult } from '../viewer/src/replay.js';
+import { buildTimeline, citedEntries, firstLine, INTRO_LINES, introHoldMs, introSchedule, playDelayMs, scoreboard, stateAt, type ResultsFile, type ViewerCase, type ViewerResult } from '../viewer/src/replay.js';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const resultsDir = join(here, '..', 'results');
@@ -247,5 +247,24 @@ describe('the advisor step', () => {
     assert.equal(after.verdict?.verdict, 'pass');
     assert.ok(after.done);
     assert.ok(after.criteria.every(k => k.id !== 'crit-99'));
+  });
+});
+
+describe('the title cards', () => {
+  test('three lines, at most fourteen words, sentence case, no exclamation marks', () => {
+    assert.equal(INTRO_LINES.length, 3);
+    for (const line of INTRO_LINES) {
+      assert.ok(line.split(/\s+/).length <= 14, line);
+      assert.ok(!line.includes('!'));
+      assert.match(line, /^[A-Z]/);
+      assert.match(line, /\.$/);
+    }
+  });
+  test('each card is held about a quarter second per word plus a second to settle, and the cards never overlap', () => {
+    assert.equal(introHoldMs('one two three four'), 2000);
+    const s = introSchedule();
+    for (let i = 1; i < s.length; i++) assert.ok(s[i]!.show >= s[i - 1]!.hide, 'no overlap');
+    const total = s[s.length - 1]!.hide;
+    assert.ok(total > 9000 && total < 20000, String(total));
   });
 });

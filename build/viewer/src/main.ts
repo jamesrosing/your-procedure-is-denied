@@ -2,7 +2,7 @@
 // results file and a case, and renders `stateAt` for the current cursor.
 // Everything that decides what a step means lives in replay.ts.
 import {
-  buildTimeline, firstLine, formatSeconds, formatUsd, playDelayMs, scoreboard, stateAt,
+  buildTimeline, firstLine, formatSeconds, formatUsd, INTRO_FADE_MS, INTRO_LINES, introSchedule, playDelayMs, scoreboard, stateAt,
   type ReplayState, type ResultsFile, type Step, type ViewerCase, type ViewerResult,
 } from './replay.js';
 
@@ -52,6 +52,8 @@ const ui = {
   cElapsed: $<HTMLElement>('c-elapsed'),
   progress: $<HTMLElement>('progress'),
   boardSection: $<HTMLElement>('board'),
+  intro: $<HTMLElement>('intro'),
+  introSkip: $<HTMLButtonElement>('intro-skip'),
   boardTable: $<HTMLTableElement>('board-table'),
 };
 
@@ -401,6 +403,43 @@ async function renderBoard(): Promise<void> {
 
 // --- boot --------------------------------------------------------------------
 
+// --- title cards ---------------------------------------------------------------
+// Plays when the page opens without a deep link, and on the i key. Any key or
+// click skips. With reduced motion the three lines show at once and wait.
+
+let introTimers: number[] = [];
+let introOpen = false;
+
+function endIntro(): void {
+  if (!introOpen) return;
+  introOpen = false;
+  for (const t of introTimers) window.clearTimeout(t);
+  introTimers = [];
+  ui.intro.classList.add('leaving');
+  window.setTimeout(() => { ui.intro.hidden = true; ui.intro.classList.remove('leaving'); }, INTRO_FADE_MS);
+}
+
+function playIntro(): void {
+  if (introOpen) return;
+  introOpen = true;
+  stop();
+  const lines = [...ui.intro.querySelectorAll<HTMLElement>('.intro-line')];
+  lines.forEach((el, i) => { el.textContent = INTRO_LINES[i] ?? ''; el.classList.remove('show'); });
+  ui.intro.hidden = false;
+  ui.intro.classList.remove('leaving');
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduced) { ui.intro.classList.add('all'); lines.forEach(el => el.classList.add('show')); return; }
+  ui.intro.classList.remove('all');
+  void ui.intro.offsetHeight; // commit the hidden state so the first fade runs
+  const schedule = introSchedule();
+  schedule.forEach((slot, i) => {
+    introTimers.push(window.setTimeout(() => lines[i]?.classList.add('show'), slot.show));
+    introTimers.push(window.setTimeout(() => lines[i]?.classList.remove('show'), slot.hide));
+  });
+  const last = schedule[schedule.length - 1];
+  introTimers.push(window.setTimeout(endIntro, (last ? last.hide : 0) + INTRO_FADE_MS));
+}
+
 // A deep link is `#file=<results file>&case=<case id>`. Applied at boot and
 // whenever the hash changes on an open page (a link pasted into the same tab),
 // so a link always lands on its case with the board closed. selectCase writes
@@ -435,9 +474,19 @@ async function boot(): Promise<void> {
     o.textContent = `${m.model}, ${m.provider}${m.agentic ? (m.live ? ', agentic, live CHART' : ', agentic') : ''}, ${m.startedAt.slice(0, 10)}`;
     return o;
   }));
+  // Read before applyHash, which writes the case into the hash.
+  const deepLinked = window.location.hash.length > 1;
+  // Without a deep link, open on the newest run that used every tool.
+  if (!deepLinked) {
+    const newest = [...session.manifest.results].reverse().find(m => m.live) ?? session.manifest.results[session.manifest.results.length - 1];
+    if (newest) ui.filePicker.value = newest.file;
+  }
   await applyHash();
   void renderBoard();
   window.addEventListener('hashchange', () => { void applyHash(); });
+  ui.introSkip.addEventListener('click', endIntro);
+  ui.intro.addEventListener('click', endIntro);
+  if (!deepLinked) playIntro();
 
   ui.filePicker.addEventListener('change', () => { void selectFile(ui.filePicker.value); });
   ui.casePicker.addEventListener('change', () => selectCase(ui.casePicker.value));
@@ -458,7 +507,9 @@ async function boot(): Promise<void> {
   });
   window.addEventListener('keydown', e => {
     if (e.target instanceof HTMLSelectElement || e.target instanceof HTMLInputElement) return;
+    if (introOpen) { e.preventDefault(); endIntro(); return; }
     switch (e.key) {
+      case 'i': case 'I': playIntro(); break;
       case ' ': e.preventDefault(); play(); break;
       case 'ArrowRight': e.preventDefault(); stop(); seek(session.cursor + 1); break;
       case 'ArrowLeft': e.preventDefault(); stop(); seek(session.cursor - 1); break;
