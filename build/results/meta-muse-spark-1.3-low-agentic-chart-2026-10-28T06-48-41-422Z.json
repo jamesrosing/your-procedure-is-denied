@@ -14,8 +14,16 @@
       "read_entry",
       "policy_status"
     ],
-    "litmus": "build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number",
-    "synthetic": true
+    "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+    "synthetic": true,
+    "regated": [
+      {
+        "from": "build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number",
+        "to": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+        "at": "2026-10-28T07:43:28.928Z",
+        "changedVerdicts": 0
+      }
+    ]
   },
   "summary": {
     "cases": 50,
@@ -125,6 +133,19 @@
         "blocked": 1,
         "correct-pass": 2
       }
+    },
+    "advice": {
+      "provider": "meta",
+      "model": "muse-wonder-1.0",
+      "cases": 30,
+      "criteria": 114,
+      "supports": 86,
+      "partial": 28,
+      "silent": 0,
+      "gateVerifiedAdvisorDoubts": 28,
+      "falsePassesFlagged": 0,
+      "falsePasses": 0,
+      "costUsd": 0.8223760000000002
     }
   },
   "results": [
@@ -381,7 +402,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -544,11 +565,41 @@
           "verified": 8,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 10,
           "evidenceVerified": 10
         },
         "inputHash": "8124ef68c5a91ffdb6730959e363052eb50a78d98d092e5b90487fff3b8a9230"
+      },
+      "advice": {
+        "provider": "meta",
+        "model": "muse-wonder-1.0",
+        "effort": "low",
+        "latencyMs": 6688,
+        "costUsd": 0.023568,
+        "items": [
+          {
+            "criterion": "crit-1",
+            "verdict": "supports",
+            "why": "Quotes document PT and OT each 5 days this week and daily skilled nursing through day 28, establishing daily skilled services."
+          },
+          {
+            "criterion": "crit-2",
+            "verdict": "partial",
+            "why": "Quotes document measurable gains in transfer assistance and ambulation distance, but do not state that the progress was toward goals in the plan of care."
+          },
+          {
+            "criterion": "crit-3",
+            "verdict": "supports",
+            "why": "Quotes state the patient lives alone without daytime caregiver help, needs assistance for every transfer and cannot manage 14 stairs, and home health could not provide twice-daily transfer assistance and daily injections, establishing inpatient-only provision."
+          },
+          {
+            "criterion": "crit-4",
+            "verdict": "supports",
+            "why": "Quote documents admission to the skilled unit after a 4-day inpatient hospital stay, satisfying the at-least-3-day preceding stay element."
+          }
+        ]
       }
     },
     {
@@ -774,7 +825,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -952,11 +1003,36 @@
           "verified": 8,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 12,
           "evidenceVerified": 12
         },
         "inputHash": "407a717b4df8c8e61b0547e6368d825006e56e330534586f76aa489c80cb21f7"
+      },
+      "advice": {
+        "provider": "meta",
+        "model": "muse-wonder-1.0",
+        "effort": "low",
+        "latencyMs": 3858,
+        "costUsd": 0.015024,
+        "items": [
+          {
+            "criterion": "crit-1",
+            "verdict": "supports",
+            "why": "The quotes establish a left lumpectomy for 0.9 cm invasive ductal carcinoma and adjuvant whole-breast radiation recommended."
+          },
+          {
+            "criterion": "crit-2",
+            "verdict": "supports",
+            "why": "The quotes show a 3D conformal plan with mean heart dose 6.7 Gy and ipsilateral lung V20 23 percent, stated to fail the heart constraint and require IMRT to meet constraints."
+          },
+          {
+            "criterion": "crit-3",
+            "verdict": "partial",
+            "why": "The quotes document whole left breast 42.56 Gy in 16 fractions with target volumes contoured and plan reviewed and approved, but do not identify the treating radiation oncologist as the documenting or approving clinician."
+          }
+        ]
       }
     },
     {
@@ -1145,7 +1221,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -1283,11 +1359,36 @@
           "verified": 8,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 7,
           "evidenceVerified": 7
         },
         "inputHash": "71be184863bd52035f0062d60a5fb3f52a9b904fdd4f77818dec7dec04b68028"
+      },
+      "advice": {
+        "provider": "meta",
+        "model": "muse-wonder-1.0",
+        "effort": "low",
+        "latencyMs": 3286,
+        "costUsd": 0.012531200000000001,
+        "items": [
+          {
+            "criterion": "crit-1",
+            "verdict": "supports",
+            "why": "The quotes document a right total mastectomy for 1.7 cm invasive ductal carcinoma and the patient's stated wish to proceed with reconstruction."
+          },
+          {
+            "criterion": "crit-2",
+            "verdict": "supports",
+            "why": "The quotes state a staged right tissue expander now with implant exchange in about 3 months, no radiation planned, and a good healed skin envelope with no infection."
+          },
+          {
+            "criterion": "crit-3",
+            "verdict": "supports",
+            "why": "The quote states the patient was cleared by her PCP with the letter in the chart and labs and EKG fine."
+          }
+        ]
       }
     },
     {
@@ -1452,7 +1553,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -1503,6 +1604,7 @@
           "verified": 0,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 4,
           "evidenceVerified": 4
@@ -1738,7 +1840,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -1926,11 +2028,46 @@
           "verified": 11,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 10,
           "evidenceVerified": 10
         },
         "inputHash": "3af21a35ebf6c69e126cbd55f5aa8ebdaf076a605d2939b28b1f53c66db22e35"
+      },
+      "advice": {
+        "provider": "meta",
+        "model": "muse-wonder-1.0",
+        "effort": "low",
+        "latencyMs": 9838,
+        "costUsd": 0.032392,
+        "items": [
+          {
+            "criterion": "crit-1",
+            "verdict": "supports",
+            "why": "The quotes report an ejection fraction of 28 percent by biplane Simpson’s after 3 months, also specified as 92 days, of optimized guideline-directed therapy."
+          },
+          {
+            "criterion": "crit-2",
+            "verdict": "supports",
+            "why": "The quotes state class II to III with exertional shortness of breath carrying groceries up one flight."
+          },
+          {
+            "criterion": "crit-3",
+            "verdict": "supports",
+            "why": "The quotes list carvedilol, sacubitril-valsartan, spironolactone, and empagliflozin and state 92 days on full guideline-directed therapy at target doses."
+          },
+          {
+            "criterion": "crit-4",
+            "verdict": "supports",
+            "why": "The quotes place the myocardial infarction and drug-eluting stent 10 months earlier, with no revascularization since, exceeding both 40-day and 90-day thresholds."
+          },
+          {
+            "criterion": "crit-5",
+            "verdict": "partial",
+            "why": "The quote states expected survival well over a year but does not mention good functional status."
+          }
+        ]
       }
     },
     {
@@ -2181,7 +2318,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -2336,11 +2473,41 @@
           "verified": 9,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 8,
           "evidenceVerified": 8
         },
         "inputHash": "c166aabb0ae1a3059dc5deb2094c5405edcd5f38294857fe07b1872f7c63d13e"
+      },
+      "advice": {
+        "provider": "meta",
+        "model": "muse-wonder-1.0",
+        "effort": "low",
+        "latencyMs": 8454,
+        "costUsd": 0.022892,
+        "items": [
+          {
+            "criterion": "crit-1",
+            "verdict": "supports",
+            "why": "The quotes state 15 months of upper back and neck pain tied to breast weight, plus shoulder grooving and recurrent intertrigo, satisfying the duration, attribution, and symptom elements."
+          },
+          {
+            "criterion": "crit-2",
+            "verdict": "supports",
+            "why": "The quotes state 9 months of conservative measures including physical therapy, a supportive bra, ibuprofen, and nystatin for intertrigo, without durable relief."
+          },
+          {
+            "criterion": "crit-3",
+            "verdict": "supports",
+            "why": "The quote estimates 717 grams on the right and 700 grams on the left, exceeding 500 grams per breast."
+          },
+          {
+            "criterion": "crit-4",
+            "verdict": "partial",
+            "why": "The quotes document a photo series with grooving visible in the AP view, but do not state that the photographs show macromastia, the missing element."
+          }
+        ]
       }
     },
     {
@@ -2631,7 +2798,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -2771,11 +2938,46 @@
           "verified": 8,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 7,
           "evidenceVerified": 7
         },
         "inputHash": "61a3e5377d3c6ebfe8cac89bbfc3613e76f713e8a552444554259e2dcde932c1"
+      },
+      "advice": {
+        "provider": "meta",
+        "model": "muse-wonder-1.0",
+        "effort": "low",
+        "latencyMs": 9740,
+        "costUsd": 0.0264952,
+        "items": [
+          {
+            "criterion": "crit-1",
+            "verdict": "partial",
+            "why": "The quote lists three ordered disciplines including PT and OT, but ordering alone does not establish active and ongoing intervention."
+          },
+          {
+            "criterion": "crit-2",
+            "verdict": "partial",
+            "why": "The quote shows 195 minutes a day on 6 of 7 days, but does not state those minutes were therapy or that the patient could reasonably be expected to actively participate."
+          },
+          {
+            "criterion": "crit-3",
+            "verdict": "partial",
+            "why": "The quotes show measurable improvement in transfers and ambulation, but do not document expected improvement of practical value within a prescribed period against goals in an individualized plan of care."
+          },
+          {
+            "criterion": "crit-4",
+            "verdict": "partial",
+            "why": "The quotes show face-to-face contact and three physician visits this week, but do not establish a rehabilitation physician managing medical and rehabilitation needs."
+          },
+          {
+            "criterion": "crit-5",
+            "verdict": "partial",
+            "why": "The quote states a skilled nursing facility would not provide daily physician oversight, but does not establish that the patient required that oversight or that the patient's needs could not otherwise be met there."
+          }
+        ]
       }
     },
     {
@@ -2917,7 +3119,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -2993,6 +3195,7 @@
           "verified": 0,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 7,
           "evidenceVerified": 7
@@ -3211,7 +3414,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -3374,11 +3577,41 @@
           "verified": 9,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 9,
           "evidenceVerified": 9
         },
         "inputHash": "66cb042f19e7121d89a91c41764a02ed7f8b46e1586c051b01bba260e9e94c0c"
+      },
+      "advice": {
+        "provider": "meta",
+        "model": "muse-wonder-1.0",
+        "effort": "low",
+        "latencyMs": 5821,
+        "costUsd": 0.0218232,
+        "items": [
+          {
+            "criterion": "crit-1",
+            "verdict": "supports",
+            "why": "quotes state rest pain, a 3-month non-healing left heel ulcer, and Rutherford 5, satisfying CLTI."
+          },
+          {
+            "criterion": "crit-2",
+            "verdict": "supports",
+            "why": "quotes give an ankle-brachial index of 0.38 (at or below 0.4) and a toe pressure of 18 mmHg (below 30 mmHg)."
+          },
+          {
+            "criterion": "crit-3",
+            "verdict": "partial",
+            "why": "quote states a left superficial femoral artery occlusion over 12 centimeters but does not state the imaging modality or that the lesion is amenable to endovascular treatment."
+          },
+          {
+            "criterion": "crit-4",
+            "verdict": "supports",
+            "why": "quotes list aspirin and atorvastatin and document smoking cessation with further counseling."
+          }
+        ]
       }
     },
     {
@@ -3604,7 +3837,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -3783,11 +4016,41 @@
           "verified": 9,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 11,
           "evidenceVerified": 11
         },
         "inputHash": "bf334800f5036e92d1a1c5eadabecb434b35673ef9918bde196ee7107cdfe443"
+      },
+      "advice": {
+        "provider": "meta",
+        "model": "muse-wonder-1.0",
+        "effort": "low",
+        "latencyMs": 11714,
+        "costUsd": 0.038283199999999996,
+        "items": [
+          {
+            "criterion": "crit-1",
+            "verdict": "supports",
+            "why": "The quotes establish neuropathic-type trunk and limb pain for 22 months after fusion, described as burning down both legs, persisting despite gabapentin and duloxetine, 18 weeks of PT, and epidural and medial branch injections."
+          },
+          {
+            "criterion": "crit-2",
+            "verdict": "partial",
+            "why": "The quotes address substance use, somatic symptom disorder, and a mild PHQ-9 score and state clearance for trial, but do not state that a psychological evaluation found no untreated psychiatric condition that would preclude benefit."
+          },
+          {
+            "criterion": "crit-3",
+            "verdict": "supports",
+            "why": "The quotes document trial day 5, pain reduction from 8/10 to 3/10 (62 percent), and functional improvement including walking 30 minutes daily, sleeping through the night, and halving oxycodone use."
+          },
+          {
+            "criterion": "crit-4",
+            "verdict": "supports",
+            "why": "The quotes state post-operative MRI and CT show solid fusion without recurrent stenosis or hardware problems, and the spine surgeon has nothing further to offer surgically."
+          }
+        ]
       }
     },
     {
@@ -4068,7 +4331,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -4271,11 +4534,41 @@
           "verified": 10,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 13,
           "evidenceVerified": 13
         },
         "inputHash": "b257fd491d59e5fcdeafd2233ea5bb99e05ee4f9c59c7adcd41028808f4b73d8"
+      },
+      "advice": {
+        "provider": "meta",
+        "model": "muse-wonder-1.0",
+        "effort": "low",
+        "latencyMs": 11217,
+        "costUsd": 0.028759200000000002,
+        "items": [
+          {
+            "criterion": "crit-1",
+            "verdict": "supports",
+            "why": "The quotes state Kellgren-Lawrence grade 4 and complete loss of the medial joint space with bone-on-bone contact."
+          },
+          {
+            "criterion": "crit-2",
+            "verdict": "supports",
+            "why": "The quotes document meloxicam and acetaminophen for the better part of a year, 8 weeks of PT, activity modification with cane use, an intra-articular triamcinolone injection, and 9 months of conservative care without durable benefit."
+          },
+          {
+            "criterion": "crit-3",
+            "verdict": "supports",
+            "why": "The quotes describe pain with every step and inability to do stairs without a rail, with range of motion of 5 to 105 degrees and varus thrust on gait."
+          },
+          {
+            "criterion": "crit-4",
+            "verdict": "supports",
+            "why": "The quotes state BMI 35, no current smoking, A1c 6.3, and medical and dental clearance in the chart."
+          }
+        ]
       }
     },
     {
@@ -4407,7 +4700,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -4465,6 +4758,7 @@
           "verified": 0,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 5,
           "evidenceVerified": 5
@@ -4715,7 +5009,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -4894,11 +5188,21 @@
           "verified": 10,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 10,
           "evidenceVerified": 10
         },
         "inputHash": "af81a0cb834c279475c07ed0958e3f49c17bf92655e6de71c7c474477af49fe7"
+      },
+      "advice": {
+        "provider": "meta",
+        "model": "muse-wonder-1.0",
+        "effort": "low",
+        "latencyMs": 12949,
+        "costUsd": 0.0433432,
+        "items": [],
+        "error": "advice is not valid JSON"
       }
     },
     {
@@ -5060,7 +5364,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -5135,6 +5439,7 @@
           "verified": 0,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 7,
           "evidenceVerified": 7
@@ -5269,7 +5574,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -5327,6 +5632,7 @@
           "verified": 0,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 5,
           "evidenceVerified": 5
@@ -5601,7 +5907,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -5660,6 +5966,7 @@
           "verified": 0,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 5,
           "evidenceVerified": 5
@@ -5880,7 +6187,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -6028,11 +6335,46 @@
           "verified": 9,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 7,
           "evidenceVerified": 7
         },
         "inputHash": "d4581323d118169706ffc6b806d21c5f3fdee1a018e625c76ab53cffdcb3c44a"
+      },
+      "advice": {
+        "provider": "meta",
+        "model": "muse-wonder-1.0",
+        "effort": "low",
+        "latencyMs": 9320,
+        "costUsd": 0.0326272,
+        "items": [
+          {
+            "criterion": "crit-1",
+            "verdict": "partial",
+            "why": "The quotes show lung adenocarcinoma, Stage IV disease, and no surgical/curative-radiation candidacy, but do not state histologic confirmation or explicitly classify it as non-small cell lung cancer."
+          },
+          {
+            "criterion": "crit-2",
+            "verdict": "partial",
+            "why": "The quote shows a tumor proportion score of 90 percent but does not identify that score as PD-L1."
+          },
+          {
+            "criterion": "crit-3",
+            "verdict": "supports",
+            "why": "The quote states no actionable alteration was detected for both EGFR and ALK."
+          },
+          {
+            "criterion": "crit-4",
+            "verdict": "supports",
+            "why": "ECOG 1 is within the required range of 0 to 2."
+          },
+          {
+            "criterion": "crit-5",
+            "verdict": "supports",
+            "why": "The quote states no prior systemic therapy at all, which establishes no prior systemic therapy for metastatic disease."
+          }
+        ]
       }
     },
     {
@@ -6263,7 +6605,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -6418,11 +6760,41 @@
           "verified": 8,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 9,
           "evidenceVerified": 9
         },
         "inputHash": "bf9ea83a864c8444f9b496ccf99e5e26556c3a01a1d083a77b0fed3e14660099"
+      },
+      "advice": {
+        "provider": "meta",
+        "model": "muse-wonder-1.0",
+        "effort": "low",
+        "latencyMs": 22559,
+        "costUsd": 0.0413032,
+        "items": [
+          {
+            "criterion": "crit-1",
+            "verdict": "supports",
+            "why": "It gives a Harvey-Bradshaw Index of 13 and deep terminal-ileum ulcers, meeting both the ≥8 disease-activity threshold and the endoscopic evidence alternative."
+          },
+          {
+            "criterion": "crit-2",
+            "verdict": "supports",
+            "why": "It shows failure of a prednisone taper with flare at 10 mg and no Harvey-Bradshaw improvement after five months of adequately dosed azathioprine with therapeutic metabolite levels."
+          },
+          {
+            "criterion": "crit-3",
+            "verdict": "partial",
+            "why": "It documents negative interferon-gamma release assay and hepatitis B surface antigen and core antibody results, but does not establish that the screening occurred before the first infliximab dose."
+          },
+          {
+            "criterion": "crit-4",
+            "verdict": "partial",
+            "why": "It shows a gastroenterology-directed order with week 2 and week 6 doses scheduled, but 300 mg is not 5 mg/kg for 67 kg, which requires 335 mg, and no week 0 dose is stated."
+          }
+        ]
       }
     },
     {
@@ -6708,7 +7080,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -6935,11 +7307,41 @@
           "verified": 11,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 15,
           "evidenceVerified": 15
         },
         "inputHash": "81606d0bd516c2b4a6c7ede695fbbf54e6a58bfedb4eb51daccfc4f00b9e40b8"
+      },
+      "advice": {
+        "provider": "meta",
+        "model": "muse-wonder-1.0",
+        "effort": "low",
+        "latencyMs": 11050,
+        "costUsd": 0.0256592,
+        "items": [
+          {
+            "criterion": "crit-1",
+            "verdict": "supports",
+            "why": "The quotes state Kellgren-Lawrence grade 4, complete loss of medial joint space with bone-on-bone contact, and 7 degrees of varus."
+          },
+          {
+            "criterion": "crit-2",
+            "verdict": "supports",
+            "why": "The quotes document meloxicam and acetaminophen use, giving up yard work and using a cane, 8 weeks of PT, an intra-articular triamcinolone injection, and 4 months of conservative care without durable benefit."
+          },
+          {
+            "criterion": "crit-3",
+            "verdict": "supports",
+            "why": "The quotes document pain with every step, inability to do stairs, kneel, or rise from a low chair without assistance, range of motion of 5 to 105 degrees, and varus thrust with gait."
+          },
+          {
+            "criterion": "crit-4",
+            "verdict": "supports",
+            "why": "The quotes state BMI 35, never smoked, A1c 6.3, and dental and medical clearance in the chart."
+          }
+        ]
       }
     },
     {
@@ -7165,7 +7567,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -7329,11 +7731,46 @@
           "verified": 8,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 10,
           "evidenceVerified": 10
         },
         "inputHash": "36fa57cb355140bfd99c8930b6ab6717982b72698ba3a727e2f1203cd994b004"
+      },
+      "advice": {
+        "provider": "meta",
+        "model": "muse-wonder-1.0",
+        "effort": "low",
+        "latencyMs": 12175,
+        "costUsd": 0.0281112,
+        "items": [
+          {
+            "criterion": "crit-1",
+            "verdict": "partial",
+            "why": "Quotes establish stage IV lung adenocarcinoma with liver and bone metastases and that the patient is not a surgical or curative radiation candidate, but none states histological confirmation."
+          },
+          {
+            "criterion": "crit-2",
+            "verdict": "partial",
+            "why": "The quote gives a tumor proportion score of 90 percent, but does not state that the score is for PD-L1 or specify single-agent versus combination therapy."
+          },
+          {
+            "criterion": "crit-3",
+            "verdict": "supports",
+            "why": "The quote states no actionable alteration was detected for EGFR or ALK, covering both the absence of an EGFR sensitizing mutation and an ALK rearrangement."
+          },
+          {
+            "criterion": "crit-4",
+            "verdict": "supports",
+            "why": "The quote states ECOG 1, which is within the required 0 to 2 range."
+          },
+          {
+            "criterion": "crit-5",
+            "verdict": "supports",
+            "why": "The quotes state no prior systemic therapy and that this is first-line treatment for metastatic disease."
+          }
+        ]
       }
     },
     {
@@ -7579,7 +8016,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -7758,11 +8195,21 @@
           "verified": 9,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 11,
           "evidenceVerified": 11
         },
         "inputHash": "10731795c9bf79fe986d4191b866cd189b87dbe566c92997f6cd684a9b80dd45"
+      },
+      "advice": {
+        "provider": "meta",
+        "model": "muse-wonder-1.0",
+        "effort": "low",
+        "latencyMs": 33263,
+        "costUsd": 0.0433352,
+        "items": [],
+        "error": "advice is not valid JSON"
       }
     },
     {
@@ -7914,7 +8361,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -7990,6 +8437,7 @@
           "verified": 0,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 7,
           "evidenceVerified": 7
@@ -8137,7 +8585,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -8156,6 +8604,7 @@
           "verified": 0,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 0,
           "evidenceVerified": 0
@@ -8471,7 +8920,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -8643,11 +9092,46 @@
           "verified": 9,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 10,
           "evidenceVerified": 10
         },
         "inputHash": "28202125cb7201cf7418c76852f5e021e1b0ff26be1b9bc7a1061f0bda73cf5f"
+      },
+      "advice": {
+        "provider": "meta",
+        "model": "muse-wonder-1.0",
+        "effort": "low",
+        "latencyMs": 15157,
+        "costUsd": 0.0212672,
+        "items": [
+          {
+            "criterion": "crit-1",
+            "verdict": "supports",
+            "why": "The quotes show three disciplines ordered including PT and OT, with daily minutes for PT, OT, and SLP, establishing active intervention by at least two disciplines including PT/OT."
+          },
+          {
+            "criterion": "crit-2",
+            "verdict": "supports",
+            "why": "The quotes show 210 minutes of therapy a day on 6 of 7 days and an expectation she would tolerate three hours a day, meeting the intensity and expected participation elements."
+          },
+          {
+            "criterion": "crit-3",
+            "verdict": "supports",
+            "why": "The quotes state 14-day goals for transfers and 150 feet with a hemi-walker and document improvement to minimal assist of one and ambulating 160 feet with supervision, showing measurable improvement documented against the goals."
+          },
+          {
+            "criterion": "crit-4",
+            "verdict": "partial",
+            "why": "The quotes show a face-to-face encounter and three physician visits this week but do not establish that all three visits were face-to-face by a rehabilitation physician to manage medical and rehabilitation needs, which is the missing element."
+          },
+          {
+            "criterion": "crit-5",
+            "verdict": "supports",
+            "why": "The quote states a skilled nursing facility would not provide the daily physician oversight she needs, establishing her needs cannot be met at that less intensive level."
+          }
+        ]
       }
     },
     {
@@ -8856,7 +9340,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -9010,11 +9494,36 @@
           "verified": 8,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 9,
           "evidenceVerified": 9
         },
         "inputHash": "ffff50cc7313a587d04983b268a7b74fe2a3c7a10970423dd25f34d82ce17ac6"
+      },
+      "advice": {
+        "provider": "meta",
+        "model": "muse-wonder-1.0",
+        "effort": "low",
+        "latencyMs": 7831,
+        "costUsd": 0.0216112,
+        "items": [
+          {
+            "criterion": "crit-1",
+            "verdict": "supports",
+            "why": "The quotes show left lumpectomy for 1.7 centimeter invasive ductal carcinoma with adjuvant whole-breast radiation recommended."
+          },
+          {
+            "criterion": "crit-2",
+            "verdict": "supports",
+            "why": "The quotes document a three-dimensional conformal plan with mean heart dose 6.1 Gy and ipsilateral lung V20 22 percent, state it fails the heart constraint, and state IMRT is required to meet constraints."
+          },
+          {
+            "criterion": "crit-3",
+            "verdict": "partial",
+            "why": "The quotes document whole left breast and lumpectomy cavity target, doses, and fractionation, but do not state they were documented by the treating radiation oncologist."
+          }
+        ]
       }
     },
     {
@@ -9240,7 +9749,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -9387,11 +9896,41 @@
           "verified": 8,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 8,
           "evidenceVerified": 8
         },
         "inputHash": "5510b03b64a2fcb8c224ef6072fb40d2d7b2b2e7e7190b9263e9111a3f5ee691"
+      },
+      "advice": {
+        "provider": "meta",
+        "model": "muse-wonder-1.0",
+        "effort": "low",
+        "latencyMs": 5476,
+        "costUsd": 0.026171200000000002,
+        "items": [
+          {
+            "criterion": "crit-1",
+            "verdict": "supports",
+            "why": "The quotes state 22 months of upper back and neck pain tied to breast weight, plus shoulder grooving and recurrent inframammary intertrigo."
+          },
+          {
+            "criterion": "crit-2",
+            "verdict": "supports",
+            "why": "The quotes state 9 months of conservative measures without durable relief, including a supportive bra, 12 weeks of physical therapy, ibuprofen, and nystatin powder for intertrigo with only temporary or partial relief."
+          },
+          {
+            "criterion": "crit-3",
+            "verdict": "supports",
+            "why": "The quote estimates resection of 703 grams on the right and 651 grams on the left, both exceeding 500 grams per breast."
+          },
+          {
+            "criterion": "crit-4",
+            "verdict": "supports",
+            "why": "The quotes state a standard pre-op photo series was taken and that shoulder grooving is visible in the AP view, with grade 3 ptosis documented."
+          }
+        ]
       }
     },
     {
@@ -9556,7 +10095,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "blocked",
         "reasons": [
           "no cited sentences: a warranted draft with nothing to verify is blocked",
@@ -9579,6 +10118,7 @@
           "verified": 0,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 0,
           "evidenceVerified": 0
@@ -9725,7 +10265,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -9784,6 +10324,7 @@
           "verified": 0,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 5,
           "evidenceVerified": 5
@@ -10065,7 +10606,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -10131,6 +10672,7 @@
           "verified": 0,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 6,
           "evidenceVerified": 6
@@ -10414,7 +10956,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -10585,11 +11127,41 @@
           "verified": 9,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 10,
           "evidenceVerified": 10
         },
         "inputHash": "8ec2bf2f251bd3acb67a27f0bc3557c566f0aad5e44b17a2ed1d4858d4c022ec"
+      },
+      "advice": {
+        "provider": "meta",
+        "model": "muse-wonder-1.0",
+        "effort": "low",
+        "latencyMs": 9299,
+        "costUsd": 0.0318512,
+        "items": [
+          {
+            "criterion": "crit-1",
+            "verdict": "supports",
+            "why": "Quotes state 14 months of conservative care without durable benefit including PT, meloxicam and gabapentin, stopped lifting at work, and two epidural steroid injections."
+          },
+          {
+            "criterion": "crit-2",
+            "verdict": "supports",
+            "why": "Quotes state 6 mm anterolisthesis, 6 mm flexion-extension translation and 12 degrees angular motion, with severe stenosis compressing the traversing L5 roots."
+          },
+          {
+            "criterion": "crit-3",
+            "verdict": "supports",
+            "why": "Quotes state bilateral leg pain to the lateral calves and tops of the feet with standing/walking, walking limited to 200 feet and relieved by leaning, and right extensor hallucis longus weakness 4/5 corresponding to L5."
+          },
+          {
+            "criterion": "crit-4",
+            "verdict": "supports",
+            "why": "Quote states PHQ-9 score 4, no substance use, and never smoked, addressing psychosocial screening, substance use, and nicotine-free status."
+          }
+        ]
       }
     },
     {
@@ -10769,7 +11341,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -10812,6 +11384,7 @@
           "verified": 0,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 3,
           "evidenceVerified": 3
@@ -11022,7 +11595,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -11169,11 +11742,41 @@
           "verified": 8,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 8,
           "evidenceVerified": 8
         },
         "inputHash": "d53a264d4437d5a6404e56665f3fbc198df3c52e4305253f73f4511a82ed707f"
+      },
+      "advice": {
+        "provider": "meta",
+        "model": "muse-wonder-1.0",
+        "effort": "low",
+        "latencyMs": 7719,
+        "costUsd": 0.0302552,
+        "items": [
+          {
+            "criterion": "crit-1",
+            "verdict": "supports",
+            "why": "The quotes show PT 5 days and OT 5 days plus daily skilled nursing enoxaparin, meeting the daily skilled and at least 5-days-per-week therapy elements."
+          },
+          {
+            "criterion": "crit-2",
+            "verdict": "partial",
+            "why": "The quotes show measurable improvement in transfers and ambulation distance but do not state that the progress was toward goals in the plan of care or during the preceding 7 days, which is the missing element."
+          },
+          {
+            "criterion": "crit-3",
+            "verdict": "supports",
+            "why": "The quotes state home health could not provide the needed twice-daily transfer assistance and daily injections for a person living alone who cannot manage entry stairs, establishing that the services could as a practical matter only be provided inpatient."
+          },
+          {
+            "criterion": "crit-4",
+            "verdict": "supports",
+            "why": "The quote documents a 4-day inpatient hospital stay for hip fracture repair immediately preceding the admission, satisfying the at least 3-day qualifying stay element."
+          }
+        ]
       }
     },
     {
@@ -11328,7 +11931,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -11395,6 +11998,7 @@
           "verified": 0,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 6,
           "evidenceVerified": 6
@@ -11644,7 +12248,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -11712,6 +12316,7 @@
           "verified": 0,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 6,
           "evidenceVerified": 6
@@ -11897,7 +12502,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -12036,11 +12641,41 @@
           "verified": 8,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 7,
           "evidenceVerified": 7
         },
         "inputHash": "a035c495a505ef038eaf6746fa91a543133c9bd4af86dadbabe49ccfff3929fb"
+      },
+      "advice": {
+        "provider": "meta",
+        "model": "muse-wonder-1.0",
+        "effort": "low",
+        "latencyMs": 7547,
+        "costUsd": 0.021248,
+        "items": [
+          {
+            "criterion": "crit-1",
+            "verdict": "supports",
+            "why": "The quote explicitly states \"Stage IV sigmoid adenocarcinoma with synchronous liver metastases.\""
+          },
+          {
+            "criterion": "crit-2",
+            "verdict": "supports",
+            "why": "\"She wants treatment\" and \"Results will determine whether she is a candidate for anti-EGFR antibody therapy, BRAF-directed therapy, HER2-directed therapy, or immunotherapy\" show treatment is sought and results will inform therapy selection."
+          },
+          {
+            "criterion": "crit-3",
+            "verdict": "supports",
+            "why": "\"No prior molecular testing on this tumor\" establishes the same tumor panel has not previously been performed."
+          },
+          {
+            "criterion": "crit-4",
+            "verdict": "supports",
+            "why": "The quote states the panel covers KRAS, NRAS, BRAF, HER2 amplification, microsatellite status, and NTRK fusions \"per NCCN for metastatic colorectal cancer.\""
+          }
+        ]
       }
     },
     {
@@ -12326,7 +12961,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -12521,11 +13156,41 @@
           "verified": 8,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 14,
           "evidenceVerified": 14
         },
         "inputHash": "df0a848aca0a3ce21156886168afd63e5209725cd5862ecc75498384be645763"
+      },
+      "advice": {
+        "provider": "meta",
+        "model": "muse-wonder-1.0",
+        "effort": "low",
+        "latencyMs": 7396,
+        "costUsd": 0.0223592,
+        "items": [
+          {
+            "criterion": "crit-1",
+            "verdict": "supports",
+            "why": "The quotes state BMI 41.5, which meets the 40-or-more threshold, and also list type 2 diabetes, obstructive sleep apnea, and hypertension."
+          },
+          {
+            "criterion": "crit-2",
+            "verdict": "partial",
+            "why": "The quotes document six supervised visits with weight, food log/diet plan, and exercise, but contain no dates showing the visits were monthly for at least 6 consecutive months within the past 2 years or physician-supervised."
+          },
+          {
+            "criterion": "crit-3",
+            "verdict": "partial",
+            "why": "The quotes state no binge eating disorder, no purging, and no substance use, but do not address any other psychiatric condition that would impair adherence."
+          },
+          {
+            "criterion": "crit-4",
+            "verdict": "supports",
+            "why": "The quotes state the staged postoperative diet, protein goals, and lifelong supplementation were reviewed and that teach-back was successful."
+          }
+        ]
       }
     },
     {
@@ -12682,7 +13347,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -12750,6 +13415,7 @@
           "verified": 0,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 6,
           "evidenceVerified": 6
@@ -12930,7 +13596,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -13044,11 +13710,36 @@
           "verified": 7,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 5,
           "evidenceVerified": 5
         },
         "inputHash": "9dafb5044e946289d02e4e57bb593a2c7abad0c74f724c814493b60174255088"
+      },
+      "advice": {
+        "provider": "meta",
+        "model": "muse-wonder-1.0",
+        "effort": "low",
+        "latencyMs": 4861,
+        "costUsd": 0.0176912,
+        "items": [
+          {
+            "criterion": "crit-1",
+            "verdict": "supports",
+            "why": "The quotes state class III angina persisting despite three antianginal medications at target doses, meeting the class, medication-count, and dose elements."
+          },
+          {
+            "criterion": "crit-2",
+            "verdict": "supports",
+            "why": "The quotes state a large reversible perfusion defect of 12 percent of the left ventricle and a fractional flow reserve of 0.69, meeting the specified ischemia thresholds."
+          },
+          {
+            "criterion": "crit-3",
+            "verdict": "supports",
+            "why": "The quote states an 82 percent stenosis of the proximal left anterior descending, exceeding the 70 percent threshold."
+          }
+        ]
       }
     },
     {
@@ -13418,7 +14109,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -13493,6 +14184,7 @@
           "verified": 0,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 7,
           "evidenceVerified": 7
@@ -13669,7 +14361,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -13760,6 +14452,7 @@
           "verified": 0,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 9,
           "evidenceVerified": 9
@@ -13988,7 +14681,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -14151,11 +14844,41 @@
           "verified": 9,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 9,
           "evidenceVerified": 9
         },
         "inputHash": "7fc9889a780e89a0856bc2f3eb41e886323a5d05e5f974caf870661814874919"
+      },
+      "advice": {
+        "provider": "meta",
+        "model": "muse-wonder-1.0",
+        "effort": "low",
+        "latencyMs": 4301,
+        "costUsd": 0.0198352,
+        "items": [
+          {
+            "criterion": "crit-1",
+            "verdict": "supports",
+            "why": "The quotes establish a non-healing left heel ulcer for 3 months, ischemic rest pain, and Rutherford 5, satisfying chronic limb-threatening ischemia."
+          },
+          {
+            "criterion": "crit-2",
+            "verdict": "supports",
+            "why": "The quotes show left ankle-brachial index 0.30, which is 0.4 or less, and left toe pressure 26 mmHg, which is below 30 mmHg."
+          },
+          {
+            "criterion": "crit-3",
+            "verdict": "partial",
+            "why": "The quote establishes a left superficial femoral artery occlusion over 16 centimeters but does not state the imaging modality (duplex, CT angiography, or angiography) or that the lesion is amenable to endovascular treatment."
+          },
+          {
+            "criterion": "crit-4",
+            "verdict": "supports",
+            "why": "The quotes document aspirin as an antiplatelet agent, atorvastatin as a statin, and counseling with offered nicotine replacement for smoking cessation."
+          }
+        ]
       }
     },
     {
@@ -14366,7 +15089,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -14505,11 +15228,41 @@
           "verified": 7,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 8,
           "evidenceVerified": 8
         },
         "inputHash": "88895dcc642af80976aa15fec834c314f04c0c490982042cfd3770401f074e51"
+      },
+      "advice": {
+        "provider": "meta",
+        "model": "muse-wonder-1.0",
+        "effort": "low",
+        "latencyMs": 7542,
+        "costUsd": 0.0256432,
+        "items": [
+          {
+            "criterion": "crit-1",
+            "verdict": "supports",
+            "why": "Quotes report a TIA 4 days ago with left arm and face symptoms attributed to symptomatic right carotid disease with 81% NASCET stenosis, satisfying the symptomatic within-6-months and 50–99% elements."
+          },
+          {
+            "criterion": "crit-2",
+            "verdict": "partial",
+            "why": "Quotes provide duplex velocity criteria consistent with 70–99% stenosis and an 81% NASCET measurement, but give no CT or MR angiography confirmation when indicated."
+          },
+          {
+            "criterion": "crit-3",
+            "verdict": "supports",
+            "why": "Quotes show aspirin 81 and clopidogrel 75 started and continued, plus atorvastatin 80 nightly, addressing both antiplatelet therapy and high-intensity statin therapy."
+          },
+          {
+            "criterion": "crit-4",
+            "verdict": "supports",
+            "why": "Quote states endarterectomy is being scheduled within 2 weeks of the event with the operating room booked 9 days from today."
+          }
+        ]
       }
     },
     {
@@ -14780,7 +15533,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -14983,11 +15736,41 @@
           "verified": 11,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 12,
           "evidenceVerified": 12
         },
         "inputHash": "e14b9a7d3f2bae9c065923abd8e20fb350cbd4995fb9edaffe41bb0ff8057204"
+      },
+      "advice": {
+        "provider": "meta",
+        "model": "muse-wonder-1.0",
+        "effort": "low",
+        "latencyMs": 9645,
+        "costUsd": 0.037227199999999995,
+        "items": [
+          {
+            "criterion": "crit-1",
+            "verdict": "supports",
+            "why": "The quotes document 8 months of conservative care including 12 weeks of physical therapy, meloxicam and gabapentin, stopping lifting at work, and two epidural steroid injections with only transient relief."
+          },
+          {
+            "criterion": "crit-2",
+            "verdict": "supports",
+            "why": "The quotes document L4-L5 grade 1 anterolisthesis of 5 millimeters, 6 millimeters of flexion-extension translation and 10 degrees of angular motion, with severe stenosis compressing the traversing L5 roots."
+          },
+          {
+            "criterion": "crit-3",
+            "verdict": "supports",
+            "why": "The quotes document bilateral L5-distribution leg pain with neurogenic claudication features and a corresponding L5 deficit of extensor hallucis longus strength 4 out of 5 on the right."
+          },
+          {
+            "criterion": "crit-4",
+            "verdict": "supports",
+            "why": "The quotes document psychosocial screening with PHQ-9 score 5, no substance use or alcohol use, and nicotine-free status by never smoking or having quit 14 years ago, exceeding 6 weeks."
+          }
+        ]
       }
     },
     {
@@ -15317,7 +16100,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -15408,6 +16191,7 @@
           "verified": 0,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 9,
           "evidenceVerified": 9
@@ -15772,7 +16556,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -15863,6 +16647,7 @@
           "verified": 0,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 9,
           "evidenceVerified": 9
@@ -16032,7 +16817,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -16100,6 +16885,7 @@
           "verified": 0,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 6,
           "evidenceVerified": 6
@@ -16400,7 +17186,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -16595,11 +17381,41 @@
           "verified": 10,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 12,
           "evidenceVerified": 12
         },
         "inputHash": "2716ec92b0744872d4534144592d57c4302c0eb3320114b896448d7db7b8a7f1"
+      },
+      "advice": {
+        "provider": "meta",
+        "model": "muse-wonder-1.0",
+        "effort": "low",
+        "latencyMs": 9410,
+        "costUsd": 0.0330112,
+        "items": [
+          {
+            "criterion": "crit-1",
+            "verdict": "supports",
+            "why": "The quotes establish a full-thickness Wagner grade 2 ulcer present 9 weeks, with no exposed tendon or probing to bone, no cellulitis/drainage/odor, and no osteomyelitis."
+          },
+          {
+            "criterion": "crit-2",
+            "verdict": "partial",
+            "why": "The quotes show about 10% reduction (6.9 to 6.2 sq cm) after 4 weeks with debridement, offloading, and moist/collagen dressings, but do not address infection control or glycemic management."
+          },
+          {
+            "criterion": "crit-3",
+            "verdict": "supports",
+            "why": "The quotes give an ankle-brachial index of 0.99 on the right and a right toe pressure of 61 mmHg, both above the required thresholds."
+          },
+          {
+            "criterion": "crit-4",
+            "verdict": "supports",
+            "why": "The quotes give hemoglobin A1c 7.8%, an offloading boot in place, and never-smoked status making tobacco cessation counseling not applicable."
+          }
+        ]
       }
     },
     {
@@ -16805,7 +17621,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -16953,11 +17769,46 @@
           "verified": 8,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 8,
           "evidenceVerified": 8
         },
         "inputHash": "d2fbeb7d21d0d93aadc1210e40d558aa56383583e95845e344f6a908a8f8536c"
+      },
+      "advice": {
+        "provider": "meta",
+        "model": "muse-wonder-1.0",
+        "effort": "low",
+        "latencyMs": 9539,
+        "costUsd": 0.028419200000000002,
+        "items": [
+          {
+            "criterion": "crit-1",
+            "verdict": "supports",
+            "why": "The quotes state a left ventricular ejection fraction of 27 percent on a repeat transthoracic echocardiogram after 3 months of optimized therapy, with 94 days on full guideline-directed therapy."
+          },
+          {
+            "criterion": "crit-2",
+            "verdict": "supports",
+            "why": "The quote describes exertional dyspnea and explicitly classifies the symptoms as Class II to III."
+          },
+          {
+            "criterion": "crit-3",
+            "verdict": "supports",
+            "why": "The quotes list carvedilol, sacubitril-valsartan, spironolactone, and empagliflozin and state 94 days on full guideline-directed therapy at target doses while tolerating it."
+          },
+          {
+            "criterion": "crit-4",
+            "verdict": "supports",
+            "why": "The quote places both the anterior myocardial infarction and drug-eluting stent placement 12 months ago, with no revascularization since, exceeding both time thresholds."
+          },
+          {
+            "criterion": "crit-5",
+            "verdict": "supports",
+            "why": "The quote states no life-limiting illness, independence, continued work, and expected survival well over a year."
+          }
+        ]
       }
     },
     {
@@ -17246,7 +18097,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -17433,11 +18284,41 @@
           "verified": 9,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 12,
           "evidenceVerified": 12
         },
         "inputHash": "5e9556be4051515eb305a23a8b793241563e640545f934001ff570606f143ae9"
+      },
+      "advice": {
+        "provider": "meta",
+        "model": "muse-wonder-1.0",
+        "effort": "low",
+        "latencyMs": 9229,
+        "costUsd": 0.0288192,
+        "items": [
+          {
+            "criterion": "crit-1",
+            "verdict": "partial",
+            "why": "Quotes show a full-thickness Wagner grade 2 foot ulcer for 6 weeks without exposed bone or tendon, infection signs, or osteomyelitis, but never state the ulcer is diabetic."
+          },
+          {
+            "criterion": "crit-2",
+            "verdict": "partial",
+            "why": "Quotes show 4 weeks of debridement, offloading, and moist dressings with serial areas of 6.4 to 5.7 sq cm (11% reduction), but do not document infection control or glycemic management."
+          },
+          {
+            "criterion": "crit-3",
+            "verdict": "supports",
+            "why": "The left ankle-brachial index of 0.96 exceeds 0.7 and the left toe pressure of 61 mmHg exceeds 40 mmHg, meeting the perfusion threshold."
+          },
+          {
+            "criterion": "crit-4",
+            "verdict": "supports",
+            "why": "Hemoglobin A1c is 8.8 percent, an offloading boot was fitted for all weight bearing, and tobacco counseling is not applicable because the patient quit smoking 10 years ago."
+          }
+        ]
       }
     },
     {
@@ -17648,7 +18529,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -17819,11 +18700,41 @@
           "verified": 9,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 10,
           "evidenceVerified": 10
         },
         "inputHash": "304d7bf22c7722a73f65c21d2377566cab8f89a65b0fa85a7fabb3664996a2f3"
+      },
+      "advice": {
+        "provider": "meta",
+        "model": "muse-wonder-1.0",
+        "effort": "low",
+        "latencyMs": 6622,
+        "costUsd": 0.0208192,
+        "items": [
+          {
+            "criterion": "crit-1",
+            "verdict": "supports",
+            "why": "The quotes establish Rutherford 5 with ischemic rest pain and a right heel ulcer persisting for 3 months despite offloading and weekly wound care."
+          },
+          {
+            "criterion": "crit-2",
+            "verdict": "supports",
+            "why": "The quotes provide an ankle-brachial index of 0.36, at or below 0.4, and a toe pressure of 26 mmHg, below 30 mmHg."
+          },
+          {
+            "criterion": "crit-3",
+            "verdict": "partial",
+            "why": "The quotes demonstrate a 10-centimeter superficial femoral artery occlusion with popliteal reconstitution but do not identify a qualifying imaging modality or state that the lesion is amenable to endovascular treatment."
+          },
+          {
+            "criterion": "crit-4",
+            "verdict": "supports",
+            "why": "The quotes document aspirin and atorvastatin use plus counseling with nicotine replacement offered, covering antiplatelet, statin, and smoking-cessation elements."
+          }
+        ]
       }
     }
   ]

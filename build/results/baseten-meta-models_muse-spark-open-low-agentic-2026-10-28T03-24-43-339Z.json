@@ -9,8 +9,16 @@
     "maxTokens": 12288,
     "cases": 50,
     "agentic": true,
-    "litmus": "build/src/litmus.ts v1.1 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number",
-    "synthetic": true
+    "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+    "synthetic": true,
+    "regated": [
+      {
+        "from": "build/src/litmus.ts v1.1 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number",
+        "to": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+        "at": "2026-10-28T07:43:28.788Z",
+        "changedVerdicts": 0
+      }
+    ]
   },
   "summary": {
     "cases": 50,
@@ -345,7 +353,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.1 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -492,6 +500,7 @@
           "verified": 8,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 8,
           "evidenceVerified": 8
@@ -684,7 +693,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.1 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -838,6 +847,7 @@
           "verified": 8,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 9,
           "evidenceVerified": 9
@@ -985,7 +995,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.1 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -1099,6 +1109,7 @@
           "verified": 6,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 6,
           "evidenceVerified": 6
@@ -1255,7 +1266,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.1 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -1306,6 +1317,7 @@
           "verified": 0,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 4,
           "evidenceVerified": 4
@@ -1503,7 +1515,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.1 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -1667,6 +1679,7 @@
           "verified": 8,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 10,
           "evidenceVerified": 10
@@ -1892,7 +1905,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.1 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -2039,6 +2052,7 @@
           "verified": 8,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 8,
           "evidenceVerified": 8
@@ -2339,7 +2353,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.1 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -2511,6 +2525,7 @@
           "verified": 9,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 10,
           "evidenceVerified": 10
@@ -2634,7 +2649,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.1 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -2710,6 +2725,7 @@
           "verified": 0,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 7,
           "evidenceVerified": 7
@@ -2882,7 +2898,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.1 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -3005,6 +3021,7 @@
           "verified": 7,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 6,
           "evidenceVerified": 6
@@ -3200,7 +3217,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.1 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -3347,6 +3364,7 @@
           "verified": 8,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 8,
           "evidenceVerified": 8
@@ -3624,7 +3642,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.1 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -3835,6 +3853,7 @@
           "verified": 10,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 14,
           "evidenceVerified": 14
@@ -3881,7 +3900,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.1 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -3898,6 +3917,7 @@
           "verified": 0,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 0,
           "evidenceVerified": 0
@@ -4103,7 +4123,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.1 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -4250,6 +4270,7 @@
           "verified": 8,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 8,
           "evidenceVerified": 8
@@ -4386,7 +4407,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.1 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -4437,6 +4458,7 @@
           "verified": 0,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 4,
           "evidenceVerified": 4
@@ -4492,7 +4514,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.1 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -4509,6 +4531,7 @@
           "verified": 0,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 0,
           "evidenceVerified": 0
@@ -4780,7 +4803,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.1 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -4839,6 +4862,7 @@
           "verified": 0,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 5,
           "evidenceVerified": 5
@@ -5036,7 +5060,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.1 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -5184,6 +5208,7 @@
           "verified": 8,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 8,
           "evidenceVerified": 8
@@ -5384,7 +5409,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.1 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -5523,6 +5548,7 @@
           "verified": 7,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 8,
           "evidenceVerified": 8
@@ -5803,7 +5829,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.1 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -6022,6 +6048,7 @@
           "verified": 12,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 13,
           "evidenceVerified": 13
@@ -6227,7 +6254,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.1 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -6375,6 +6402,7 @@
           "verified": 8,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 8,
           "evidenceVerified": 8
@@ -6615,7 +6643,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.1 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -6770,6 +6798,7 @@
           "verified": 7,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 10,
           "evidenceVerified": 10
@@ -6898,7 +6927,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.1 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -6966,6 +6995,7 @@
           "verified": 0,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 6,
           "evidenceVerified": 6
@@ -7332,7 +7362,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.1 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -7416,6 +7446,7 @@
           "verified": 0,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 8,
           "evidenceVerified": 8
@@ -7721,7 +7752,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.1 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -7901,6 +7932,7 @@
           "verified": 10,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 10,
           "evidenceVerified": 10
@@ -8078,7 +8110,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.1 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -8208,6 +8240,7 @@
           "verified": 8,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 6,
           "evidenceVerified": 6
@@ -8375,7 +8408,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.1 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -8506,6 +8539,7 @@
           "verified": 7,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 7,
           "evidenceVerified": 7
@@ -8875,7 +8909,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.1 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -8998,6 +9032,7 @@
           "verified": 0,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 13,
           "evidenceVerified": 13
@@ -9149,7 +9184,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.1 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -9208,6 +9243,7 @@
           "verified": 0,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 5,
           "evidenceVerified": 5
@@ -9404,7 +9440,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.1 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -9454,6 +9490,7 @@
           "verified": 0,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 4,
           "evidenceVerified": 4
@@ -9782,7 +9819,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.1 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -9833,6 +9870,7 @@
           "verified": 0,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 4,
           "evidenceVerified": 4
@@ -10058,7 +10096,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.1 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -10205,6 +10243,7 @@
           "verified": 8,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 8,
           "evidenceVerified": 8
@@ -10333,7 +10372,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.1 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -10400,6 +10439,7 @@
           "verified": 0,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 6,
           "evidenceVerified": 6
@@ -10638,7 +10678,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.1 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -10722,6 +10762,7 @@
           "verified": 0,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 8,
           "evidenceVerified": 8
@@ -10879,7 +10920,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.1 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -11010,6 +11051,7 @@
           "verified": 7,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 7,
           "evidenceVerified": 7
@@ -11270,7 +11312,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.1 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -11441,6 +11483,7 @@
           "verified": 9,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 10,
           "evidenceVerified": 10
@@ -11607,7 +11650,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.1 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -11675,6 +11718,7 @@
           "verified": 0,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 6,
           "evidenceVerified": 6
@@ -11845,10 +11889,10 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.1 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "blocked",
         "reasons": [
-          "sentence 2 refuted: unsourced-token: 3"
+          "sentence 2 needs-citation: needs-citation: 3 not in note-014 but in note-003; cite that entry as well"
         ],
         "errored": false,
         "sentences": [
@@ -11873,10 +11917,13 @@
             "text": "Her regimen at that time included three antianginals maintained at stable doses for 4 months, exceeding the requirement for at least two agents.",
             "citation": "note-014",
             "quote": "Metoprolol succinate 100 daily, amlodipine 10 daily, isosorbide mononitrate 60 daily, all at these doses for the past 4 months",
-            "reason": "unsourced-token: 3",
-            "status": "refuted",
+            "reason": "needs-citation: 3 not in note-014 but in note-003; cite that entry as well",
+            "status": "needs-citation",
             "missing": [
               "3"
+            ],
+            "alsoCite": [
+              "note-003"
             ]
           },
           {
@@ -11971,7 +12018,8 @@
           "sentences": 8,
           "verified": 7,
           "unresolved": 0,
-          "refuted": 1,
+          "refuted": 0,
+          "needsCitation": 1,
           "error": 0,
           "evidence": 5,
           "evidenceVerified": 5
@@ -12305,7 +12353,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.1 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -12364,6 +12412,7 @@
           "verified": 0,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 5,
           "evidenceVerified": 5
@@ -12410,7 +12459,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.1 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -12428,6 +12477,7 @@
           "verified": 0,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 0,
           "evidenceVerified": 0
@@ -12623,7 +12673,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.1 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -12770,6 +12820,7 @@
           "verified": 8,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 8,
           "evidenceVerified": 8
@@ -12962,7 +13013,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.1 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -13101,6 +13152,7 @@
           "verified": 7,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 8,
           "evidenceVerified": 8
@@ -13351,7 +13403,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.1 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -13538,6 +13590,7 @@
           "verified": 10,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 11,
           "evidenceVerified": 11
@@ -13829,7 +13882,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.1 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -13872,6 +13925,7 @@
           "verified": 0,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 3,
           "evidenceVerified": 3
@@ -14228,7 +14282,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.1 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -14327,6 +14381,7 @@
           "verified": 0,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 10,
           "evidenceVerified": 10
@@ -14475,7 +14530,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.1 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -14543,6 +14598,7 @@
           "verified": 0,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 6,
           "evidenceVerified": 6
@@ -14820,7 +14876,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.1 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -15047,6 +15103,7 @@
           "verified": 11,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 15,
           "evidenceVerified": 15
@@ -15249,7 +15306,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.1 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -15421,6 +15478,7 @@
           "verified": 8,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 11,
           "evidenceVerified": 11
@@ -15661,7 +15719,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.1 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -15832,6 +15890,7 @@
           "verified": 9,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 10,
           "evidenceVerified": 9
@@ -16037,7 +16096,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.1 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number",
+        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -16184,6 +16243,7 @@
           "verified": 8,
           "unresolved": 0,
           "refuted": 0,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 8,
           "evidenceVerified": 8

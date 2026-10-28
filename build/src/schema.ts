@@ -97,3 +97,57 @@ export function parseAppeal(text: string): ParsedAppeal {
   }
   return { ok: true, appeal: result.data };
 }
+
+// --- the advisor -------------------------------------------------------------
+// A second, visible opinion beside each criterion: does the quoted evidence,
+// read literally, satisfy the criterion? It never feeds the gate. The gate
+// answers whether a statement is in the record; the advisor answers whether
+// the record satisfies the criterion, which is interpretation, and so it is
+// shown with the model's name beside the criterion for the physician to weigh.
+
+export const ADVICE_SCHEMA = {
+  type: 'object',
+  additionalProperties: false,
+  required: ['items'],
+  properties: {
+    items: {
+      type: 'array',
+      description: 'one item per payer criterion, in the order given',
+      items: {
+        type: 'object',
+        additionalProperties: false,
+        required: ['criterion', 'verdict', 'why'],
+        properties: {
+          criterion: { type: 'string', description: 'the criterion id, e.g. crit-2' },
+          verdict: { type: 'string', enum: ['supports', 'partial', 'silent'], description: 'supports: the quotes establish every element of the criterion; partial: the quotes address some elements and not others; silent: the quotes do not address the criterion' },
+          why: { type: 'string', description: 'one sentence naming which element the quotes establish or lack; use only the quotes, add no facts' },
+        },
+      },
+    },
+  },
+} as const;
+
+const adviceSchema = z.object({
+  items: z.array(z.object({
+    criterion: z.string(),
+    verdict: z.enum(['supports', 'partial', 'silent']),
+    why: z.string().default(''),
+  })).default([]),
+});
+export type Advice = z.infer<typeof adviceSchema>;
+export type ParsedAdvice = { ok: true; advice: Advice } | { ok: false; error: string };
+
+export function parseAdvice(text: string): ParsedAdvice {
+  let raw: unknown;
+  try {
+    raw = JSON.parse(text);
+  } catch {
+    return { ok: false, error: 'advice is not valid JSON' };
+  }
+  const result = adviceSchema.safeParse(raw);
+  if (!result.success) {
+    const issue = result.error.issues[0];
+    return { ok: false, error: `advice failed the contract at ${issue?.path.join('.') || 'root'}: ${issue?.message ?? 'unknown'}` };
+  }
+  return { ok: true, advice: result.data };
+}

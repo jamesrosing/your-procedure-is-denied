@@ -78,11 +78,32 @@ export interface AgenticResult extends ProposeResult {
   trace: TraceEvent[];
 }
 
+// A plain structured question, used by the advisor: system, user, a JSON
+// schema for the answer, and the text back. No tools, no appeal contract.
+export interface AskRequest {
+  system: SystemBlock[];
+  user: string;
+  schema: Record<string, unknown>;
+  effort: Effort;
+  maxTokens: number;
+}
+
+export interface AskResult {
+  provider: string;
+  model: string;
+  stopReason: string | null;
+  latencyMs: number;
+  usage: Usage;
+  costUsd: number;
+  rawText: string;
+}
+
 export interface Provider {
   readonly label: string;
   readonly model: string;
   propose(request: ProposeRequest): Promise<ProposeResult>;
   proposeAgentic?(request: AgenticRequest): Promise<AgenticResult>;
+  ask?(request: AskRequest): Promise<AskResult>;
 }
 
 // Fields the Meta Model API answers with HTTP 400 (dev.meta.ai/docs/protocols/messages,
@@ -207,6 +228,20 @@ export function messagesProvider(options: MessagesProviderOptions): Provider {
         turns,
         trace,
       };
+    },
+
+    async ask(request: AskRequest): Promise<AskResult> {
+      const started = Date.now();
+      const response = await client.messages.create({
+        model: options.model,
+        max_tokens: request.maxTokens,
+        system: systemBlocks(request),
+        output_config: { effort: request.effort, format: { type: 'json_schema', schema: request.schema } },
+        messages: [{ role: 'user', content: request.user }],
+      });
+      const latencyMs = Date.now() - started;
+      const usage = readUsage(response);
+      return { provider: options.label, model: response.model, stopReason: response.stop_reason, latencyMs, usage, costUsd: costUsd(priceKey, usage), rawText: textOf(response) };
     },
 
     async propose(request: ProposeRequest): Promise<ProposeResult> {

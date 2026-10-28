@@ -184,6 +184,15 @@ function renderCriteria(state: ReplayState): void {
     } else if (k.status === 'unverified') {
       li.append(text('div', 'none', '⚠ No evidence found in the chart for this criterion.'));
     }
+    if (k.advice) {
+      // The advisor's opinion: interpretation, named, beside the criterion, never a gate input.
+      const a = document.createElement('div');
+      a.className = 'advice';
+      a.dataset['verdict'] = k.advice.verdict;
+      const glyph = k.advice.verdict === 'supports' ? '✓' : k.advice.verdict === 'partial' ? '◐' : '◌';
+      a.append(text('span', 'advice-tag', `advisor ${k.advice.model}`), text('span', 'advice-verdict', `${glyph} ${k.advice.verdict}`), text('span', 'advice-why', k.advice.why));
+      li.append(a);
+    }
     return li;
   }));
   const met = state.criteria.filter(k => k.status === 'verified').length;
@@ -213,7 +222,7 @@ function renderSentences(state: ReplayState): void {
     } else {
       why.append(text('b', '', `${s.status} `), text('span', '', `${s.reason} (cited ${s.citation})`));
     }
-    li.append(text('div', 'text', s.text), text('span', 'stamp', `${s.status === 'verified' ? '✓' : '⚠'} ${s.status}`), why);
+    li.append(text('div', 'text', s.text), text('span', 'stamp', `${s.status === 'verified' ? '✓' : s.status === 'needs-citation' ? '◐' : '⚠'} ${s.status === 'needs-citation' ? 'needs citation' : s.status}`), why);
     ui.sentences.append(li);
   }
   for (const li of ui.sentences.children) (li as HTMLElement).classList.toggle('named', named !== undefined && (li as HTMLElement).dataset['index'] === String(named));

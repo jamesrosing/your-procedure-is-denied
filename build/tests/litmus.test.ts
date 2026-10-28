@@ -183,10 +183,12 @@ describe('litmus: hard tokens', () => {
     assert.deepEqual(s.missing, ['650']);
   });
 
-  test('a fact in a different, uncited entry is not admissible', () => {
+  test('a fact in a different, uncited entry is not admissible; since v1.3 the record names the entry to add and the draft stays blocked', () => {
     const s = one('Blood pressure was 128 over 82.', 'note-002', Q_PT);
-    assert.equal(s.status, 'refuted');
+    assert.equal(s.status, 'needs-citation');
     assert.deepEqual(s.missing, ['128', '82']);
+    assert.deepEqual(s.alsoCite, ['note-003']);
+    assert.equal(litmus(sources, appeal([{ text: 'Blood pressure was 128 over 82.', citation: 'note-002', quote: Q_PT }])).verdict, 'blocked');
   });
 
   test('the cited entry date is admissible in either form', () => {
@@ -197,8 +199,9 @@ describe('litmus: hard tokens', () => {
 
   test('laterality is a hard token in anatomical context only', () => {
     const s = one('Resection on the left breast was estimated at 724 grams.', 'note-002', Q_PT.replace('12', '12'));
-    assert.equal(s.status, 'refuted');
+    assert.equal(s.status, 'needs-citation');
     assert.deepEqual(s.missing, ['724', 'left']);
+    assert.deepEqual(s.alsoCite, ['note-001']);
     assert.equal(one('Resection on the left breast was estimated at 724 grams.', 'note-001', 'I am estimating 724 grams on the right').status, 'verified');
     assert.equal(one('The patient reserves the right to further appeal.', 'note-002', Q_PT).status, 'verified');
   });
@@ -241,5 +244,31 @@ describe('litmus: provenance', () => {
     // @ts-expect-error status 'verified' carries a brand that no other module can supply
     const forged: SentenceRecord = { index: 0, text: 'x', citation: 'note-001', quote: 'a b', status: 'verified', reason: 'verified' };
     assert.equal(forged.status, 'verified');
+  });
+});
+
+describe('needs-citation (v1.3)', () => {
+  const src: GateSources = { ...sources, chart: [...chart, { id: 'note-004', date: '2025-09-02', kind: 'plan of care', text: 'Goal: ambulate 150 feet with a hemi-walker by discharge.' }, { id: 'note-005', date: '2025-09-20', kind: 'discharge summary', text: 'Transfers supervision, ambulating 160 feet with a hemi-walker and supervision.' }] };
+  test('a true sentence whose number lives in another entry is returned as needs-citation naming that entry, and the draft stays blocked', () => {
+    const v = litmus(src, appeal([{ text: 'At discharge she ambulated 160 feet, beyond the 150-foot goal.', citation: 'note-005', quote: 'ambulating 160 feet with a hemi-walker' }]));
+    const s = v.sentences[0]!;
+    assert.equal(s.status, 'needs-citation');
+    assert.deepEqual(s.missing, ['150']);
+    assert.deepEqual(s.alsoCite, ['note-004']);
+    assert.match(s.reason, /the chart has it in note-004/);
+    assert.equal(v.verdict, 'blocked');
+    assert.ok(v.reasons.some(r => r.startsWith('sentence 0 needs-citation')));
+    assert.equal(v.counts.needsCitation, 1);
+  });
+  test('a number in no entry at all stays refuted; a count the chart never states stays refuted', () => {
+    assert.equal(litmus(src, appeal([{ text: 'At discharge she ambulated 160 feet, beyond the 175-foot goal.', citation: 'note-005', quote: 'ambulating 160 feet with a hemi-walker' }])).sentences[0]!.status, 'refuted');
+    const seven: GateSources = { ...sources, chart: [...chart, { id: 'note-006', date: '2025-09-02', kind: 'medication record', text: 'Metoprolol succinate 100 daily, amlodipine 10 daily, isosorbide mononitrate 60 daily.' }] };
+    assert.equal(litmus(seven, appeal([{ text: 'She was on seven antianginal agents.', citation: 'note-006', quote: 'Metoprolol succinate 100 daily' }])).sentences[0]!.status, 'refuted');
+  });
+  test('tokens spread over two other entries name both', () => {
+    const two: GateSources = { ...src, chart: [...src.chart, { id: 'note-006', date: '2025-09-21', kind: 'laboratory result', text: 'Hemoglobin 11.2 on the morning of discharge.' }] };
+    const v = litmus(two, appeal([{ text: 'She walked 160 feet against a 150 foot goal, with a hemoglobin of 11.2.', citation: 'note-005', quote: 'ambulating 160 feet' }]));
+    assert.equal(v.sentences[0]!.status, 'needs-citation');
+    assert.deepEqual(v.sentences[0]!.alsoCite, ['note-004', 'note-006']);
   });
 });

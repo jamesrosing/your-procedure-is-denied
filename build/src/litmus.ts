@@ -27,7 +27,7 @@
 import { createHash } from 'node:crypto';
 import { CITATION_ID, type Appeal } from './schema.js';
 
-export const LITMUS_VERSION = 'build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number';
+export const LITMUS_VERSION = 'build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked';
 
 export interface GateEntry {
   id: string;
@@ -48,7 +48,13 @@ export interface GateSources {
   facts?: string[]; // other admissible case facts, e.g. the patient's age line
 }
 
-export type SentenceStatus = 'verified' | 'unresolved' | 'refuted' | 'error';
+// needs-citation: every hard token the cited entry lacks is present in another
+// entry of the same chart. The sentence may well be true, but the rule is one
+// citation per sentence and every hard token in it, so the draft is still
+// blocked; the record names the entry to add, so the physician is told what to
+// fix rather than that the machine disagrees. A token found nowhere in the
+// chart stays refuted: that is the invented-fact case the gate exists for.
+export type SentenceStatus = 'verified' | 'unresolved' | 'refuted' | 'needs-citation' | 'error';
 
 // Only this module holds the symbol, so only this module can build a record
 // whose status is 'verified'. Other code can read the status; it cannot mint it.
@@ -61,13 +67,14 @@ interface SentenceBase {
   quote: string;
   reason: string; // a short code plus detail, e.g. 'unsourced-token: 16'
   missing?: string[]; // hard tokens with no admissible source
+  alsoCite?: string[]; // needs-citation: chart entries that together source every missing token
 }
 export interface VerifiedSentence extends SentenceBase {
   status: 'verified';
   readonly [VERIFIED]: true;
 }
 export interface UnverifiedSentence extends SentenceBase {
-  status: 'unresolved' | 'refuted' | 'error';
+  status: 'unresolved' | 'refuted' | 'needs-citation' | 'error';
 }
 export type SentenceRecord = VerifiedSentence | UnverifiedSentence;
 
@@ -96,7 +103,7 @@ export interface GateResult {
   sentences: SentenceRecord[];
   evidence: EvidenceRecord[];
   criteria: Record<string, 'verified' | 'unverified'>;
-  counts: { sentences: number; verified: number; unresolved: number; refuted: number; error: number; evidence: number; evidenceVerified: number };
+  counts: { sentences: number; verified: number; unresolved: number; refuted: number; needsCitation: number; error: number; evidence: number; evidenceVerified: number };
   inputHash: string; // sha256 of the sources and the draft, for the provenance record
 }
 
@@ -222,6 +229,37 @@ function checkHardTokens(text: string, allowed: Set<string>): Check {
   return { ok: true };
 }
 
+// The smallest set of other entries that, together, source every missing
+// token: each token is matched to the first entry (in chart order) that holds
+// it. Null when any token is in no entry at all.
+function sourcedElsewhere(chart: GateEntry[], citedId: string, missing: string[]): string[] | null {
+  const found: string[] = [];
+  const tokensOf = new Map<string, Set<string>>();
+  for (const token of missing) {
+    let holder: string | null = null;
+    for (const entry of chart) {
+      if (entry.id === citedId) continue;
+      let set = tokensOf.get(entry.id);
+      if (!set) {
+        set = new Set<string>();
+        // An entry that cannot be read is skipped here, never thrown: the
+        // cited entry's own check already decided this sentence's status.
+        try {
+          sourceTokens(entry.text, set);
+          if (entry.date) sourceTokens(entry.date, set);
+        } catch {
+          set = new Set<string>();
+        }
+        tokensOf.set(entry.id, set);
+      }
+      if (set.has(token)) { holder = entry.id; break; }
+    }
+    if (holder === null) return null;
+    if (!found.includes(holder)) found.push(holder);
+  }
+  return found;
+}
+
 // --- the gate ----------------------------------------------------------------
 
 export function litmus(sources: GateSources, appeal: Appeal): GateResult {
@@ -246,7 +284,11 @@ export function litmus(sources: GateSources, appeal: Appeal): GateResult {
       sourceTokens(r.entry.text, allowed);
       if (r.entry.date) sourceTokens(r.entry.date, allowed);
       const h = checkHardTokens(s.text, allowed);
-      if (!h.ok) return { ...base, status: h.status, reason: h.reason, ...(h.missing ? { missing: h.missing } : {}) };
+      if (!h.ok) {
+        const elsewhere = h.missing ? sourcedElsewhere(sources.chart, r.entry.id, h.missing) : null;
+        if (elsewhere) return { ...base, status: 'needs-citation', reason: `needs-citation: ${h.missing!.join(', ')} not in ${r.entry.id}; the chart has it in ${elsewhere.join(', ')}. If that entry is the source, cite it as well; if it is a count or figure the chart never states, rewrite the sentence`, missing: h.missing!, alsoCite: elsewhere };
+        return { ...base, status: h.status, reason: h.reason, ...(h.missing ? { missing: h.missing } : {}) };
+      }
       return { ...base, status: 'verified', reason: 'verified: quote found in the cited entry; every hard token sourced from the entry, the criteria, the denial, or the case facts', [VERIFIED]: true };
     } catch (error: unknown) {
       return { ...base, status: 'error', reason: `error: ${error instanceof Error ? error.message : String(error)}` };
@@ -276,6 +318,7 @@ export function litmus(sources: GateSources, appeal: Appeal): GateResult {
     verified: tally('verified'),
     unresolved: tally('unresolved'),
     refuted: tally('refuted'),
+    needsCitation: tally('needs-citation'),
     error: tally('error'),
     evidence: evidence.length,
     evidenceVerified: evidence.filter(e => e.status === 'verified').length,

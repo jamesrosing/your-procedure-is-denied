@@ -13,7 +13,9 @@
     "synthetic": "node --import tsx src/synthetic/generate.ts",
     "harness": "node --env-file=../.env --import tsx src/harness.ts",
     "viewer": "node --import tsx scripts/build-viewer.ts && tsc -p viewer/tsconfig.json",
-    "viewer:serve": "python3 -m http.server 8787 --directory viewer"
+    "viewer:serve": "python3 -m http.server 8787 --directory viewer",
+    "advise": "node --env-file=../.env --import tsx scripts/advise.ts",
+    "regate": "node --import tsx scripts/regate.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^1.3.0",

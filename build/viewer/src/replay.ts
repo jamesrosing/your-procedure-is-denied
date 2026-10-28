@@ -34,7 +34,7 @@ export interface ViewerCase {
   expected: { warranted: boolean; subtype?: string; support: Record<string, string[]>; note: string };
 }
 
-export type RecordStatus = 'verified' | 'unresolved' | 'refuted' | 'error';
+export type RecordStatus = 'verified' | 'unresolved' | 'refuted' | 'needs-citation' | 'error';
 
 export interface TraceEvent {
   step: number;
@@ -71,6 +71,8 @@ export interface ViewerResult {
   };
   trace?: TraceEvent[];
   reading?: { entriesRead: number; chartSize: number; supportRead: number; supportTotal: number };
+  // the advisor's opinion per criterion, with the model's name; never a gate input
+  advice?: { provider: string; model: string; items: { criterion: string; verdict: 'supports' | 'partial' | 'silent'; why: string }[]; error?: string };
 }
 
 export interface ResultsFile {
@@ -94,6 +96,7 @@ export type Step =
   | { kind: 'read-all'; entryIds: string[]; atMs: number }
   | { kind: 'evidence'; criterion: string; citation: string; quote: string; status: RecordStatus; reason: string; atMs: number }
   | { kind: 'sentence'; index: number; text: string; citation: string; quote: string; status: RecordStatus; reason: string; atMs: number }
+  | { kind: 'advice'; model: string; items: { criterion: string; verdict: 'supports' | 'partial' | 'silent'; why: string }[]; atMs: number }
   | { kind: 'verdict'; verdict: 'pass' | 'blocked' | 'declined' | 'error'; reasons: string[]; declinedReason?: string; blockedSentence?: number; error?: string; atMs: number };
 
 export interface CriterionState {
@@ -101,6 +104,7 @@ export interface CriterionState {
   text: string;
   status: 'pending' | 'verified' | 'unverified';
   evidence: { citation: string; quote: string; status: RecordStatus; reason: string }[];
+  advice?: { model: string; verdict: 'supports' | 'partial' | 'silent'; why: string }; // the advisor's opinion, shown after the gate
 }
 
 export interface SentenceState {
@@ -191,6 +195,9 @@ export function buildTimeline(result: ViewerResult, c: ViewerCase): Step[] {
     ...(gate.verdict === 'blocked' && blocked ? { blockedSentence: blocked.index } : {}),
     atMs: result.latencyMs,
   });
+  if (result.advice && result.advice.items.length > 0) {
+    steps.push({ kind: 'advice', model: result.advice.model, items: result.advice.items, atMs: result.latencyMs + 1 });
+  }
   return steps;
 }
 
@@ -242,6 +249,12 @@ function apply(state: ReplayState, step: Step, result: ViewerResult): ReplayStat
     case 'sentence':
       next.sentences.push({ index: step.index, text: step.text, citation: step.citation, quote: step.quote, status: step.status, reason: step.reason });
       next.open = step.citation;
+      break;
+    case 'advice':
+      for (const item of step.items) {
+        const k = next.criteria.find(x => x.id === item.criterion);
+        if (k) k.advice = { model: step.model, verdict: item.verdict, why: item.why };
+      }
       break;
     case 'verdict':
       next.verdict = step;

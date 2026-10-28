@@ -274,6 +274,15 @@ select:hover { border-color: var(--ink-3); }
 .quote .why { grid-column: 1 / -1; font-family: var(--font-sans); font-size: 11px; font-weight: 500; color: var(--state-blocked); }
 .criterion .none { grid-column: 2; font-size: 12.5px; font-weight: 500; color: var(--state-blocked); }
 
+/* the advisor beside the criterion: a named opinion on whether the quotes satisfy it */
+.criterion .advice { grid-column: 2; display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: baseline; font-size: 12px; color: var(--ink-6); padding-top: 2px; animation: arrive var(--motion-base) var(--ease-out); }
+.criterion .advice-tag { font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-5); border: var(--hairline); border-radius: var(--radius-sm); padding: 0 6px; height: 18px; display: inline-flex; align-items: center; white-space: nowrap; }
+.criterion .advice-verdict { font-family: var(--font-mono); font-size: 11px; font-weight: 500; white-space: nowrap; }
+.criterion .advice[data-verdict="supports"] .advice-verdict { color: var(--state-pass); }
+.criterion .advice[data-verdict="partial"] .advice-verdict { color: var(--state-failed); }
+.criterion .advice[data-verdict="silent"] .advice-verdict { color: var(--state-blocked); }
+.criterion .advice-why { flex-basis: 100%; color: var(--ink-6); }
+
 .lookups { border-top: var(--hairline); flex: 0 0 auto; background: var(--ink-0); }
 .lookups:empty { display: none; }
 .lookups li { padding: 8px 16px; font-size: 12px; color: var(--ink-6); display: flex; gap: 10px; align-items: baseline; }
@@ -318,6 +327,10 @@ select:hover { border-color: var(--ink-3); }
   box-shadow: inset 0 -1.5px 0 var(--state-blocked);
 }
 .sentence[data-status="refuted"] .stamp, .sentence[data-status="unresolved"] .stamp, .sentence[data-status="error"] .stamp { color: var(--state-blocked); }
+/* needs-citation: true as far as the chart goes, cited to the wrong entry; held back, and told which entry to add */
+.sentence[data-status="needs-citation"] .text { background: color-mix(in oklab, var(--state-failed) 16%, transparent); box-shadow: inset 0 -1.5px 0 var(--state-failed); }
+.sentence[data-status="needs-citation"] .stamp { color: var(--state-failed); }
+.sentence[data-status="needs-citation"] .why.bad, .sentence[data-status="needs-citation"] .why.bad b { color: var(--state-failed); }
 .sentence.named { background: var(--ink-1); }
 .sentence .why { grid-column: 1 / -1; font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-5); }
 .sentence .why b { font-weight: 500; color: var(--ink-6); }

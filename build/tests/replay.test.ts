@@ -158,7 +158,7 @@ describe('stateAt', () => {
     assert.ok(named !== undefined);
     const sentence = s.sentences.find(x => x.index === named);
     assert.ok(sentence && sentence.status !== 'verified');
-    assert.ok(sentence.reason.startsWith('unsourced-token') || sentence.reason.startsWith('quote-'), sentence.reason);
+    assert.ok(sentence.reason.startsWith('unsourced-token') || sentence.reason.startsWith('needs-citation') || sentence.reason.startsWith('quote-'), sentence.reason);
   });
 
   test('a declined case resolves the unsupported criterion as unverified and shows the reason', () => {
@@ -228,5 +228,24 @@ describe('live-tool rows', () => {
     if (firstLive === -1) return; // no live run on disk yet
     assert.ok(rows.slice(firstLive).every(r => r.live && r.agentic), 'live rows sit together at the end');
     assert.ok(rows.slice(0, firstLive).every(r => !r.live));
+  });
+});
+
+describe('the advisor step', () => {
+  test('advice attaches to its criterion after the verdict and never changes the gate status or the verdict', () => {
+    const c = cases.get('case-001')!;
+    const base = files.find(f => f.results.some(r => r.caseId === 'case-001' && r.gate?.verdict === 'pass'))!.results.find(r => r.caseId === 'case-001')!;
+    const r = { ...base, advice: { provider: 'meta', model: 'muse-wonder-1.0', items: [{ criterion: 'crit-1', verdict: 'partial' as const, why: 'answers frequency, not intensity' }, { criterion: 'crit-99', verdict: 'silent' as const, why: '' }] } };
+    const steps = buildTimeline(r, c);
+    assert.equal(steps[steps.length - 1]!.kind, 'advice');
+    assert.equal(steps[steps.length - 2]!.kind, 'verdict');
+    const before = stateAt(steps, r, c, steps.length - 1);
+    const after = stateAt(steps, r, c, steps.length);
+    assert.equal(before.criteria[0]!.advice, undefined);
+    assert.deepEqual(after.criteria[0]!.advice, { model: 'muse-wonder-1.0', verdict: 'partial', why: 'answers frequency, not intensity' });
+    assert.equal(after.criteria[0]!.status, before.criteria[0]!.status);
+    assert.equal(after.verdict?.verdict, 'pass');
+    assert.ok(after.done);
+    assert.ok(after.criteria.every(k => k.id !== 'crit-99'));
   });
 });

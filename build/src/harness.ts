@@ -243,7 +243,7 @@ export interface Summary {
   outcomes: Partial<Record<Outcome, number>>;
   agreementRate: number; // correct-pass + correct-decline over cases
   gatePassRate: number | null; // passes over drafts that claimed warranted and reached the gate
-  ungroundedSentencesCaught: number; // refuted + unresolved sentences
+  ungroundedSentencesCaught: number; // refuted + unresolved + needs-citation sentences: everything the gate held back
   sentencesVerified: number;
   checkErrors: number;
   latencyMs: { mean: number; p50: number; p95: number };
@@ -289,7 +289,7 @@ export function summarize(results: CaseResult[]): Summary {
     outcomes,
     agreementRate: ((outcomes['correct-pass'] ?? 0) + (outcomes['correct-decline'] ?? 0)) / n,
     gatePassRate: gated.length > 0 ? gated.filter(r => r.gate!.verdict === 'pass').length / gated.length : null,
-    ungroundedSentencesCaught: sum(r => (r.gate ? r.gate.counts.refuted + r.gate.counts.unresolved : 0)),
+    ungroundedSentencesCaught: sum(r => (r.gate ? r.gate.counts.refuted + r.gate.counts.unresolved + (r.gate.counts.needsCitation ?? 0) : 0)),
     sentencesVerified: sum(r => r.gate?.counts.verified ?? 0),
     checkErrors: sum(r => r.gate?.counts.error ?? 0),
     latencyMs: {
@@ -325,7 +325,7 @@ function env(name: string): string | undefined {
   return v && v.trim() ? v : undefined;
 }
 
-function selectProvider(name: string, model: string | undefined): Provider {
+export function selectProvider(name: string, model: string | undefined): Provider {
   switch (name) {
     case 'meta': {
       const key = env('MODEL_API_KEY');
