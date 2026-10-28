@@ -250,4 +250,8 @@ Title cards: set in the interface sans like the case header, the whole line laid
 
 ### a83d4c5 · 2026-10-28 08:10 · Build log: regenerate after 951863a
 
+(no ledger row)
+
+### c119e09 · 2026-10-28 01:12 · Title cards: monospace, block cursor stays, two-second hold
+
 Title cards in JetBrains Mono with a block cursor that keeps blinking after the line is typed; each card holds 2 s once complete; asset links v14
