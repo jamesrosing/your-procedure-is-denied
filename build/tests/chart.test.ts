@@ -13,21 +13,25 @@ function fakeFetch(status: number, body: unknown, captured: Captured[] = []): ty
   }) as typeof fetch;
 }
 
+// The live shape, as returned on Oct 28, 2026 (one row kept per case).
 const INDEX = {
-  generated: '2026-09-29',
+  generated_at: '2026-09-29T04:58:00.233Z',
+  corpus: { documents: 37838, policies: 25014 },
   authorities: [
-    { id: 'cms', authority: 'Centers for Medicare & Medicaid Services', kind: 'federal agency', documents: 14676, policies: 357, last_change: '2026-09-27', oldest_live_check: '2026-09-28' },
-    { id: 'aetna', authority: 'Aetna', kind: 'national payer', documents: 0, policies: 0, last_change: null, oldest_live_check: null },
+    { id: 'cms', name: 'Centers for Medicare & Medicaid Services', kind: 'federal_agency', access_class: null, documents: 14676, cataloged: 13960, policies: 357, last_changed: '2026-09-27T06:42:47.268Z', oldest_check: '2026-09-28T01:05:46.494Z', endpoints: { total: 14534, retired: 15, delisted: 0 } },
+    { id: 'aetna', name: 'Aetna', kind: 'national_payer', access_class: null, documents: 0, cataloged: 0, policies: 0, last_changed: null, oldest_check: null, endpoints: { total: 0, retired: 0, delisted: 0 } },
   ],
+  policies: [{ id: 'cms:NCD-20.4', authority_id: 'cms', external_id: 'NCD-20.4', title: 'Implantable Cardioverter Defibrillators', effective_start: '2018-02-15', effective_end: null, catalog_status: 'cataloged' }],
 };
 
 describe('parseAuthorityStatus', () => {
-  test('finds the authority row wherever the index keeps it and reads the freshness fields', () => {
+  test('reads the live shape, trims timestamps to the day, and still finds rows under older names', () => {
     const s = parseAuthorityStatus(INDEX, 'cms');
     assert.deepEqual(s, { id: 'cms', name: 'Centers for Medicare & Medicaid Services', lastChange: '2026-09-27', lastCheck: '2026-09-28', policies: 357, documents: 14676 });
     assert.deepEqual(parseAuthorityStatus(INDEX.authorities, 'CMS')?.lastChange, '2026-09-27');
     assert.deepEqual(parseAuthorityStatus({ rows: INDEX.authorities }, 'cms')?.policies, 357);
     assert.deepEqual(parseAuthorityStatus([{ id: 'cms', lastChange: '2026-09-27', 'last-check': '2026-09-28' }], 'cms'), { id: 'cms', lastChange: '2026-09-27', lastCheck: '2026-09-28' });
+    assert.deepEqual(parseAuthorityStatus([{ id: 'cms', authority: 'CMS', last_change: '2026-09-27', oldest_live_check: '2026-09-28' }], 'cms'), { id: 'cms', name: 'CMS', lastChange: '2026-09-27', lastCheck: '2026-09-28' });
   });
 
   test('an authority with nothing indexed reports no dates; an unknown authority is null', () => {

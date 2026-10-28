@@ -48,3 +48,6 @@ Thumbs.db
 
 # Vercel project link, local only
 .vercel/
+
+# index-tool artifact
+/PROJECT_INDEX.json

@@ -40,8 +40,8 @@ export interface AuthorityStatus {
 
 const KEYS = {
   name: ['authority', 'name', 'label'],
-  lastChange: ['last_change', 'lastChange', 'last-change', 'last_changed', 'changed_at'],
-  lastCheck: ['oldest_live_check', 'oldestLiveCheck', 'last_check', 'lastCheck', 'last-check', 'checked_at', 'last_verified'],
+  lastChange: ['last_changed', 'last_change', 'lastChange', 'last-change', 'changed_at'],
+  lastCheck: ['oldest_check', 'oldest_live_check', 'oldestLiveCheck', 'last_check', 'lastCheck', 'last-check', 'checked_at', 'last_verified'],
   policies: ['policies', 'policy_count'],
   documents: ['documents', 'document_count'],
 };
@@ -51,9 +51,9 @@ function pick(row: Record<string, unknown>, names: string[]): unknown {
   return undefined;
 }
 
-// The index's JSON shape is not published; the freshness page it is built from
-// lists one row per authority with id, authority, kind, documents, policies,
-// last change, and oldest live check. Find the rows wherever they sit.
+// The index (confirmed live Oct 28, 2026) is {generated_at, corpus, authorities:[{id, name,
+// kind, documents, cataloged, policies, last_changed, oldest_check, endpoints}], policies:[...]}.
+// The finder stays lenient so a renamed field degrades to 'not reported' rather than a failure.
 function rows(body: unknown): Record<string, unknown>[] {
   if (Array.isArray(body)) return body.filter((x): x is Record<string, unknown> => !!x && typeof x === 'object');
   if (body && typeof body === 'object') {
@@ -68,7 +68,8 @@ export function parseAuthorityStatus(body: unknown, authority: string): Authorit
   const want = authority.trim().toLowerCase();
   const row = rows(body).find(r => String(r['id'] ?? '').toLowerCase() === want || String(r['authority_id'] ?? '').toLowerCase() === want);
   if (!row) return null;
-  const str = (v: unknown) => (v === undefined ? undefined : String(v));
+  // Timestamps come back as ISO instants; the model only needs the day.
+  const str = (v: unknown) => (v === undefined ? undefined : String(v).replace(/T\d\d:\d\d:\d\d(\.\d+)?Z$/, ''));
   const num = (v: unknown) => (typeof v === 'number' ? v : typeof v === 'string' && v.trim() !== '' && Number.isFinite(Number(v)) ? Number(v) : undefined);
   const out: AuthorityStatus = { id: authority };
   const name = str(pick(row, KEYS.name)); if (name) out.name = name;
