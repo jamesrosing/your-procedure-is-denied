@@ -27,6 +27,12 @@ const ui = {
   end: $<HTMLButtonElement>('btn-end'),
   speed: $<HTMLSelectElement>('speed'),
   board: $<HTMLButtonElement>('btn-board'),
+  tabReplay: $<HTMLButtonElement>('tab-replay'),
+  theme: $<HTMLButtonElement>('btn-theme'),
+  ctxCrumb: $<HTMLElement>('ctx-crumb'),
+  ctxTitle: $<HTMLElement>('ctx-title'),
+  ctxMeta: $<HTMLElement>('ctx-meta'),
+  ctxStamp: $<HTMLElement>('ctx-stamp'),
   stage: $<HTMLElement>('stage'),
   context: $<HTMLElement>('context'),
   entries: $<HTMLOListElement>('entries'),
@@ -93,16 +99,23 @@ function text(tag: string, cls: string, content: string): HTMLElement {
 // --- rendering ---------------------------------------------------------------
 
 function renderContext(c: ViewerCase, r: ViewerResult): void {
-  ui.context.replaceChildren(
-    text('span', 'who', `${c.id}, ${c.patient.alias}, ${c.patient.age} year old ${c.patient.sex}`),
-    (() => {
-      const el = document.createElement('span');
-      el.className = 'what';
-      el.append(text('b', '', `${c.procedure.codeSystem} ${c.procedure.code}`), ` ${c.procedure.description}. ${c.payer.name}, ${c.payer.planType}.`);
-      return el;
-    })(),
-    text('span', 'carc', `CARC ${c.denial.carc}`),
-    text('span', 'stakes', `${r.category}, about $${c.stakesUsd.toLocaleString()} at stake`),
+  const run = session.file?.run;
+  const sep = () => text('span', 'sep', '›');
+  ui.ctxCrumb.replaceChildren(text('span', 'mono', c.id), sep(), text('span', '', c.patient.alias), sep(), text('span', '', `${c.patient.age} year old ${c.patient.sex}`));
+  ui.ctxTitle.textContent = c.procedure.description;
+  ui.ctxMeta.replaceChildren(
+    text('span', 'mono', `${c.procedure.codeSystem} ${c.procedure.code}`),
+    text('span', 'mono strong', `CARC ${c.denial.carc}`),
+    text('span', '', `${c.payer.name}, ${c.payer.planType}`),
+    text('span', '', r.category),
+    text('span', '', `about $${c.stakesUsd.toLocaleString()} at stake`),
+  );
+  const gate = r.gate?.litmus ?? '';
+  const gateVersion = /v\d+\.\d+/.exec(gate)?.[0] ?? '';
+  ui.ctxStamp.replaceChildren(
+    ...(run ? [text('span', '', `model ${run.model}`), text('span', '', `provider ${run.provider}`), text('span', '', `effort ${run.effort}`), text('span', '', `run ${run.startedAt.slice(0, 10)}`)] : []),
+    ...(gateVersion ? [text('span', '', `gate litmus ${gateVersion}`)] : []),
+    text('span', '', 'synthetic record'),
   );
 }
 
@@ -151,7 +164,7 @@ function renderCriteria(state: ReplayState): void {
     const li = document.createElement('li');
     li.className = 'criterion';
     li.dataset['status'] = k.status;
-    const box = text('span', 'box', k.status === 'verified' ? '✓' : k.status === 'unverified' ? '–' : '');
+    const box = text('span', 'box', k.status === 'verified' ? '✓' : k.status === 'unverified' ? '⚠' : '');
     const t = document.createElement('div');
     t.className = 'text';
     t.append(text('span', 'cid', k.id), k.text);
@@ -169,7 +182,7 @@ function renderCriteria(state: ReplayState): void {
       }
       li.append(ev);
     } else if (k.status === 'unverified') {
-      li.append(text('div', 'none', 'No evidence found in the chart for this criterion.'));
+      li.append(text('div', 'none', '⚠ No evidence found in the chart for this criterion.'));
     }
     return li;
   }));
@@ -200,7 +213,7 @@ function renderSentences(state: ReplayState): void {
     } else {
       why.append(text('b', '', `${s.status} `), text('span', '', `${s.reason} (cited ${s.citation})`));
     }
-    li.append(text('div', 'text', s.text), text('span', 'stamp', s.status), why);
+    li.append(text('div', 'text', s.text), text('span', 'stamp', `${s.status === 'verified' ? '✓' : '⚠'} ${s.status}`), why);
     ui.sentences.append(li);
   }
   for (const li of ui.sentences.children) (li as HTMLElement).classList.toggle('named', named !== undefined && (li as HTMLElement).dataset['index'] === String(named));
@@ -215,24 +228,22 @@ function renderVerdict(state: ReplayState): void {
   if (!v) { ui.verdict.hidden = true; ui.verdict.replaceChildren(); return; }
   ui.verdict.hidden = false;
   ui.verdict.dataset['verdict'] = v.verdict;
+  const stateRow = (name: string, head: string) => {
+    const row = text('div', 'state', '');
+    row.append(text('span', 'state-name', name), text('span', 'state-head', head));
+    return row;
+  };
   const parts: HTMLElement[] = [];
   if (v.verdict === 'pass') {
-    parts.push(text('div', '', ''));
-    parts[0]!.append(text('b', '', 'Passed the gate. '), `${state.counters.sentencesVerified} of ${state.counters.sentencesTotal} sentences verified against the chart. Ready for the physician to read and sign.`);
+    parts.push(stateRow('PASS', `${state.counters.sentencesVerified} of ${state.counters.sentencesTotal} sentences verified against the chart; ready for the physician to read and sign`));
   } else if (v.verdict === 'blocked') {
-    const head = text('div', '', '');
     const bad = v.blockedSentence !== undefined ? state.sentences.find(s => s.index === v.blockedSentence) : undefined;
-    head.append(text('b', '', 'Blocked. '), bad ? `“${bad.text}” did not verify. Nothing leaves until every sentence does.` : 'Nothing leaves until every sentence and every criterion verifies.');
-    parts.push(head);
+    parts.push(stateRow('BLOCKED', bad ? `“${bad.text}” did not verify; nothing leaves until every sentence does` : 'nothing leaves until every sentence and every criterion verifies'));
     for (const r of v.reasons) parts.push(text('div', 'reason', r));
   } else if (v.verdict === 'declined') {
-    const head = text('div', '', '');
-    head.append(text('b', '', 'No appeal. '), 'The model read the chart and declined to draft.');
-    parts.push(head, text('div', 'reason', v.declinedReason ?? ''));
+    parts.push(stateRow('DECLINED', 'the model read the chart and declined to draft'), text('div', 'reason', v.declinedReason ?? ''));
   } else {
-    const head = text('div', '', '');
-    head.append(text('b', '', 'Error. '), v.error ?? 'The request failed before the gate ran.');
-    parts.push(head);
+    parts.push(stateRow('FAILED', v.error ?? 'the request failed before the gate ran'));
   }
   ui.verdict.replaceChildren(...parts);
 }
@@ -338,7 +349,8 @@ function selectCase(caseId: string): void {
 }
 
 function showBoard(on: boolean): void {
-  ui.board.setAttribute('aria-pressed', String(on));
+  ui.board.setAttribute('aria-selected', String(on));
+  ui.tabReplay.setAttribute('aria-selected', String(!on));
   ui.boardSection.hidden = !on;
   ui.stage.hidden = on;
   if (on) { stop(); render(); }
@@ -423,7 +435,16 @@ async function boot(): Promise<void> {
   ui.back.addEventListener('click', () => { stop(); seek(session.cursor - 1); });
   ui.restart.addEventListener('click', () => { stop(); seek(0); });
   ui.end.addEventListener('click', () => { stop(); seek(session.steps.length); });
-  ui.board.addEventListener('click', () => showBoard(ui.boardSection.hasAttribute('hidden')));
+  ui.board.addEventListener('click', () => showBoard(true));
+  ui.tabReplay.addEventListener('click', () => showBoard(false));
+  const paintTheme = () => { ui.theme.textContent = document.documentElement.dataset['theme'] === 'dark' ? 'light theme' : 'dark theme'; };
+  paintTheme();
+  ui.theme.addEventListener('click', () => {
+    const dark = document.documentElement.dataset['theme'] !== 'dark';
+    if (dark) document.documentElement.dataset['theme'] = 'dark'; else delete document.documentElement.dataset['theme'];
+    try { localStorage.setItem('ypid-theme', dark ? 'dark' : 'light'); } catch { /* per-viewer convenience only */ }
+    paintTheme();
+  });
   window.addEventListener('keydown', e => {
     if (e.target instanceof HTMLSelectElement || e.target instanceof HTMLInputElement) return;
     switch (e.key) {

@@ -5,43 +5,58 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Your procedure is denied: replay</title>
   <meta name="description" content="Replays a synthetic denial case through a Meta model and the LITMUS gate: chart entries read, criteria met, sentences verified.">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%276%27 fill=%27%230f1318%27/%3E%3Crect x=%277%27 y=%2714%27 width=%2718%27 height=%274%27 rx=%272%27 fill=%27%23ef6a6f%27/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="styles.css?v=5">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%274%27 fill=%27%2314181C%27/%3E%3Crect x=%278%27 y=%2715%27 width=%2716%27 height=%272%27 fill=%27%23FFFFFF%27/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="styles.css?v=7">
+  <script>
+    // Theme before first paint; the choice is a per-viewer convenience.
+    try { var t = localStorage.getItem('ypid-theme'); if (t === 'dark') document.documentElement.dataset.theme = 'dark'; } catch (e) {}
+  </script>
 </head>
 <body>
   <header class="bar">
     <div class="brand">
       <span class="brand-name">Your procedure is denied</span>
-      <span class="brand-sub">one denial, replayed through the model and the gate</span>
+      <span class="brand-sub">replay</span>
     </div>
+    <nav class="tabs" role="tablist" aria-label="Surface">
+      <button id="tab-replay" class="tab" role="tab" aria-selected="true">Replay</button>
+      <button id="btn-board" class="tab" role="tab" aria-selected="false" title="Scoreboard (S)">Scoreboard</button>
+    </nav>
     <div class="pickers">
       <label class="picker">
-        <span>Run</span>
+        <span>run</span>
         <select id="file-picker" aria-label="Results file"></select>
       </label>
       <label class="picker">
-        <span>Case</span>
+        <span>case</span>
         <select id="case-picker" aria-label="Case"></select>
       </label>
     </div>
     <div class="transport" role="group" aria-label="Playback">
-      <button id="btn-restart" class="btn ghost" title="Restart (Home)" aria-label="Restart">|&#8249;</button>
-      <button id="btn-back" class="btn ghost" title="Step back (left arrow)" aria-label="Step back">&#8249;</button>
+      <button id="btn-restart" class="btn" title="Restart (Home)" aria-label="Restart">|&#8249;</button>
+      <button id="btn-back" class="btn" title="Step back (left arrow)" aria-label="Step back">&#8249;</button>
       <button id="btn-play" class="btn primary" title="Play or pause (space)">Play</button>
-      <button id="btn-step" class="btn ghost" title="Step (right arrow)" aria-label="Step forward">&#8250;</button>
-      <button id="btn-end" class="btn ghost" title="Jump to the verdict (End)" aria-label="Jump to end">&#8250;|</button>
+      <button id="btn-step" class="btn" title="Step (right arrow)" aria-label="Step forward">&#8250;</button>
+      <button id="btn-end" class="btn" title="Jump to the verdict (End)" aria-label="Jump to end">&#8250;|</button>
       <select id="speed" class="speed" aria-label="Speed">
         <option value="0.5">0.5x</option>
         <option value="1" selected>1x</option>
         <option value="2">2x</option>
         <option value="4">4x</option>
       </select>
-      <button id="btn-board" class="btn ghost toggle" title="Scoreboard (S)" aria-pressed="false">Scoreboard</button>
+      <button id="btn-theme" class="btn" title="Switch theme">dark theme</button>
     </div>
   </header>
 
   <main id="stage" class="stage" data-verdict="">
-    <section class="context" id="context" aria-live="polite"></section>
+    <section class="context" id="context" aria-live="polite">
+      <div class="crumb" id="ctx-crumb"></div>
+      <h1 class="ctx-title" id="ctx-title"></h1>
+      <div class="ctx-meta" id="ctx-meta"></div>
+      <div class="stamp" id="ctx-stamp"></div>
+    </section>
 
     <div class="panels">
       <section class="panel chart" aria-labelledby="chart-h">
@@ -68,7 +83,7 @@
         </header>
         <div class="verdict" id="verdict" hidden></div>
         <ol class="sentences" id="sentences"></ol>
-        <p class="empty" id="draft-empty">Nothing written yet. The gate stamps each sentence as it arrives.</p>
+        <p class="empty" id="draft-empty">◌ Nothing written yet. The gate stamps each sentence as it arrives.</p>
       </section>
     </div>
 
@@ -82,17 +97,20 @@
   </main>
 
   <section id="board" class="board" hidden aria-labelledby="board-h">
-    <h2 id="board-h">Scoreboard</h2>
-    <p class="board-sub">Fifty synthetic denials per run, effort low, through the same deterministic gate. Agreed with the key means the model's warranted decision matched the grading label and the gate passed or declined accordingly.</p>
+    <div class="board-head">
+      <h2 id="board-h">Scoreboard</h2>
+      <p class="board-sub">Fifty synthetic denials per run, effort low, through the same deterministic gate. Agreed with the key means the model's warranted decision matched the grading label and the gate passed or declined accordingly.</p>
+    </div>
     <table id="board-table"></table>
     <p class="note">Agentic rows: the model reads the chart by tool call from an index instead of receiving it whole; entries read is the mean per case against the mean chart size, and key entries read is the share of grading-key evidence entries the model opened. A live CHART row adds a third tool, a query against the author's pre-existing coverage index for when the authority's criteria last changed; its answer appears under the criteria panel and never in the draft. Muse Spark Open on Baseten reports no thinking-token count on the Messages path, so its cost per appeal omits reasoning tokens. Fifty cases is a small set: one case is two percentage points.</p>
   </section>
 
   <footer class="foot">
-    Hackathon work, Meta Global AI Developer Hackathon, October 26 to November 4, 2026. Synthetic data only: no real patient record appears anywhere in this repository.
-    <a href="https://github.com/jamesrosing/your-procedure-is-denied/blob/main/NEW-WORK.md">What was built during the event</a>
+    <span>Hackathon work, Meta Global AI Developer Hackathon, October 26 to November 4, 2026. Synthetic data only: no real patient record appears anywhere in this repository.
+    <a href="https://github.com/jamesrosing/your-procedure-is-denied/blob/main/NEW-WORK.md">What was built during the event</a></span>
+    <span class="keys">space · ← → · home end · s</span>
   </footer>
 
-  <script src="app.js?v=5"></script>
+  <script src="app.js?v=7"></script>
 </body>
 </html>

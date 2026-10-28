@@ -61,6 +61,7 @@ export interface ViewerResult {
     sentences: { text: string; citation: string; quote: string }[];
   };
   gate?: {
+    litmus?: string; // the gate version string recorded with the verdict
     verdict: 'pass' | 'blocked' | 'declined';
     reasons: string[];
     declinedReason?: string;
