@@ -226,4 +226,8 @@ Viewer title cards: three lines shown one at a time at full screen width (type u
 
 ### a517514 · 2026-10-28 08:02 · Build log: regenerate after 3b5c60d
 
+(no ledger row)
+
+### 799d7b3 · 2026-10-28 01:04 · Title card one: the carrier, the treatment, and the doctor who may never answer
+
 Title card one reworded to Jim's line: the medical insurance carrier denies treatment in a second, the doctor takes hours to answer, if they ever do; word cap raised to 24, the hold scales with it; asset links v11
