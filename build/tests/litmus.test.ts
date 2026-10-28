@@ -148,6 +148,18 @@ describe('litmus: hard tokens', () => {
     assert.equal(one('The patient completed sixteen weeks of therapy.', 'note-002', Q_PT).status, 'refuted');
   });
 
+  test('compound number words are one number: eighty-one is 81, not 80 and 1; ninety-nine is 99 (found live, Oct 28, muse-spark-1.3 agentic case-042)', () => {
+    const src: GateSources = { ...sources, chart: [...chart, { id: 'note-004', date: '2025-09-02', kind: 'imaging', text: 'CT angiography: right internal carotid artery 81 percent stenosis by NASCET criteria. Duplex consistent with 70 to 99 percent stenosis.' }] };
+    const run = (text: string) => litmus(src, appeal([{ text, citation: 'note-004', quote: '81 percent stenosis by NASCET criteria' }])).sentences[0]!;
+    assert.equal(run('Angiography measured stenosis at eighty-one percent by NASCET method.').status, 'verified');
+    assert.equal(run('Duplex placed the lesion in the seventy to ninety-nine percent range.').status, 'verified');
+    assert.equal(run('Duplex placed the lesion in the seventy to ninety nine percent range.').status, 'verified');
+    const bad = run('Angiography measured stenosis at eighty-five percent.');
+    assert.equal(bad.status, 'refuted');
+    assert.deepEqual(bad.missing, ['85']);
+    assert.equal(run('Angiography measured eighty one percent stenosis, at ninety one he was fine.').status, 'refuted');
+  });
+
   test('a number from the payer criteria or the denial is admissible', () => {
     assert.equal(one('This exceeds the 6 month symptom requirement and answers the CARC 50 denial of CPT 19318.', 'note-001', Q_PAIN).status, 'verified');
   });

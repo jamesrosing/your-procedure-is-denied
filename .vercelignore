@@ -1,0 +1,6 @@
+# Only the viewer and what builds it are needed on Vercel. Leading slashes: these are root paths, not build/scripts or build/tests.
+/prior-work/
+/assets/
+/tests/
+/scripts/
+/.playwright-mcp/

@@ -32,10 +32,57 @@ export interface ProposeResult {
   rawText: string; // kept for the verifier; the harness stores it only for synthetic runs
 }
 
+// --- the agentic path --------------------------------------------------------
+// The model gets an index of the chart and tools to read entries, and the
+// provider loops on tool_use until end_turn. Every tool call is recorded in a
+// trace with its timestamp so a results file can replay what the model read.
+
+export interface ToolDefinition {
+  name: string;
+  description: string;
+  inputSchema: Record<string, unknown>;
+}
+
+export interface ToolCall {
+  name: string;
+  input: Record<string, unknown>;
+}
+
+export interface ToolOutcome {
+  ok: boolean;
+  content: string; // what the model sees
+  entryId?: string; // for read_entry: the entry fetched
+  live?: boolean; // a query against an external data source, labeled as such downstream
+  note?: string; // short human-readable note for the trace
+}
+
+export interface TraceEvent {
+  step: number;
+  tool: string;
+  input: Record<string, unknown>;
+  entryId?: string;
+  atMs: number; // since the case started
+  ok: boolean;
+  live?: boolean;
+  note?: string;
+}
+
+export interface AgenticRequest extends ProposeRequest {
+  tools: ToolDefinition[];
+  execute: (call: ToolCall) => Promise<ToolOutcome>;
+  maxTurns?: number; // model turns, each ending in tool_use or end_turn; default 24
+}
+
+export interface AgenticResult extends ProposeResult {
+  turns: number;
+  trace: TraceEvent[];
+}
+
 export interface Provider {
   readonly label: string;
   readonly model: string;
   propose(request: ProposeRequest): Promise<ProposeResult>;
+  proposeAgentic?(request: AgenticRequest): Promise<AgenticResult>;
 }
 
 // Fields the Meta Model API answers with HTTP 400 (dev.meta.ai/docs/protocols/messages,
@@ -79,31 +126,101 @@ export function messagesProvider(options: MessagesProviderOptions): Provider {
   });
   const priceKey = options.priceKey ?? options.model;
 
+  const readUsage = (response: Anthropic.Message): Usage => {
+    const u = (response.usage ?? {}) as MetaUsage;
+    return {
+      inputTokens: count(u.input_tokens, 'input_tokens'),
+      cachedInputTokens: count(u.cache_read_input_tokens, 'cache_read_input_tokens', true),
+      cacheWriteTokens: count(u.cache_creation_input_tokens, 'cache_creation_input_tokens', true),
+      outputTokens: count(u.output_tokens, 'output_tokens'),
+      thinkingTokens: count(u.output_tokens_details?.thinking_tokens, 'thinking_tokens', true),
+    };
+  };
+  const systemBlocks = (request: ProposeRequest) => request.system.map(b => ({ type: 'text' as const, text: b.text, ...(b.cache ? { cache_control: { type: 'ephemeral' as const } } : {}) }));
+  const textOf = (response: Anthropic.Message) => response.content.filter((b): b is Anthropic.TextBlock => b.type === 'text').map(b => b.text).join('');
+
   return {
     label: options.label,
     model: options.model,
+
+    async proposeAgentic(request: AgenticRequest): Promise<AgenticResult> {
+      const started = Date.now();
+      const maxTurns = request.maxTurns ?? 24;
+      const messages: Anthropic.MessageParam[] = [{ role: 'user', content: request.user }];
+      const trace: TraceEvent[] = [];
+      const usage: Usage = { inputTokens: 0, cachedInputTokens: 0, cacheWriteTokens: 0, outputTokens: 0, thinkingTokens: 0 };
+      let turns = 0;
+      let response: Anthropic.Message | null = null;
+      while (turns < maxTurns) {
+        // tool_choice stays at its default (auto): the Meta endpoint rejects a named tool.
+        response = await client.messages.create({
+          model: options.model,
+          max_tokens: request.maxTokens,
+          system: systemBlocks(request),
+          tools: request.tools.map(t => ({ name: t.name, description: t.description, input_schema: t.inputSchema as Anthropic.Tool['input_schema'] })),
+          output_config: { effort: request.effort, format: { type: 'json_schema', schema: APPEAL_SCHEMA } },
+          messages,
+        });
+        turns += 1;
+        const u = readUsage(response);
+        usage.inputTokens += u.inputTokens;
+        usage.cachedInputTokens += u.cachedInputTokens;
+        usage.cacheWriteTokens += u.cacheWriteTokens;
+        usage.outputTokens += u.outputTokens;
+        usage.thinkingTokens += u.thinkingTokens;
+        const toolUses = response.content.filter((b): b is Anthropic.ToolUseBlock => b.type === 'tool_use');
+        if (response.stop_reason !== 'tool_use' || toolUses.length === 0) break;
+        const results: Anthropic.ToolResultBlockParam[] = [];
+        for (const call of toolUses) {
+          const input = (call.input ?? {}) as Record<string, unknown>;
+          const atMs = Date.now() - started;
+          let outcome: ToolOutcome;
+          try {
+            outcome = await request.execute({ name: call.name, input });
+          } catch (error: unknown) {
+            outcome = { ok: false, content: `tool failed: ${error instanceof Error ? error.constructor.name : 'Error'}`, note: 'tool threw' };
+          }
+          trace.push({
+            step: trace.length, tool: call.name, input, atMs, ok: outcome.ok,
+            ...(outcome.entryId ? { entryId: outcome.entryId } : {}),
+            ...(outcome.live ? { live: true } : {}),
+            ...(outcome.note ? { note: outcome.note } : {}),
+          });
+          results.push({ type: 'tool_result', tool_use_id: call.id, content: outcome.content, ...(outcome.ok ? {} : { is_error: true }) });
+        }
+        messages.push({ role: 'assistant', content: response.content as Anthropic.ContentBlockParam[] });
+        messages.push({ role: 'user', content: results });
+      }
+      const latencyMs = Date.now() - started;
+      const ended = response !== null && response.stop_reason !== 'tool_use';
+      const rawText = response && ended ? textOf(response) : '';
+      const stopReason = ended ? response!.stop_reason : 'max_turns';
+      return {
+        provider: options.label,
+        model: response?.model ?? options.model,
+        stopReason,
+        latencyMs,
+        usage,
+        costUsd: costUsd(priceKey, usage),
+        draft: rawText ? parseAppeal(rawText) : { ok: false, error: `no text in response (stop reason ${stopReason})` },
+        rawText,
+        turns,
+        trace,
+      };
+    },
+
     async propose(request: ProposeRequest): Promise<ProposeResult> {
       const started = Date.now();
       const response = await client.messages.create({
         model: options.model,
         max_tokens: request.maxTokens,
-        system: request.system.map(b => ({ type: 'text' as const, text: b.text, ...(b.cache ? { cache_control: { type: 'ephemeral' as const } } : {}) })),
+        system: systemBlocks(request),
         output_config: { effort: request.effort, format: { type: 'json_schema', schema: APPEAL_SCHEMA } },
         messages: [{ role: 'user', content: request.user }],
       });
       const latencyMs = Date.now() - started;
-      const u = (response.usage ?? {}) as MetaUsage;
-      const usage: Usage = {
-        inputTokens: count(u.input_tokens, 'input_tokens'),
-        cachedInputTokens: count(u.cache_read_input_tokens, 'cache_read_input_tokens', true),
-        cacheWriteTokens: count(u.cache_creation_input_tokens, 'cache_creation_input_tokens', true),
-        outputTokens: count(u.output_tokens, 'output_tokens'),
-        thinkingTokens: count(u.output_tokens_details?.thinking_tokens, 'thinking_tokens', true),
-      };
-      const rawText = response.content
-        .filter((b): b is Anthropic.TextBlock => b.type === 'text')
-        .map(b => b.text)
-        .join('');
+      const usage = readUsage(response);
+      const rawText = textOf(response);
       return {
         provider: options.label,
         model: response.model,

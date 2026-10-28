@@ -27,7 +27,7 @@
 import { createHash } from 'node:crypto';
 import { CITATION_ID, type Appeal } from './schema.js';
 
-export const LITMUS_VERSION = 'build/src/litmus.ts v1 (2026-10-27): exact-quote referential gate from the LITMUS papers';
+export const LITMUS_VERSION = 'build/src/litmus.ts v1.1 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number';
 
 export interface GateEntry {
   id: string;
@@ -121,11 +121,18 @@ const NUMBER_WORDS: Record<string, string> = {
   seventy: '70', eighty: '80', ninety: '90', hundred: '100',
 };
 const NUMBER_WORD_RE = new RegExp(`\\b(${Object.keys(NUMBER_WORDS).join('|')})\\b`, 'g');
+// "eighty-one" or "eighty one" is 81, one number, not 80 and 1. Spoken dictation
+// and model prose both write compounds; the gate must read them as the clinician meant.
+const TENS = 'twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety';
+const ONES = 'one|two|three|four|five|six|seven|eight|nine';
+const COMPOUND_RE = new RegExp(`\\b(${TENS})[ -](${ONES})\\b`, 'g');
+const ONES_VALUE: Record<string, number> = { one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9 };
 
 function prepare(text: string): string {
   return canon(text)
     .replace(/\bnote-\d{3}\b/g, ' ')
     .replace(/\bcrit-\d+\b/g, ' ')
+    .replace(COMPOUND_RE, (_, tens: string, ones: string) => String(Number(NUMBER_WORDS[tens]) + ONES_VALUE[ones]!))
     .replace(NUMBER_WORD_RE, w => NUMBER_WORDS[w]!);
 }
 

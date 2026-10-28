@@ -141,11 +141,16 @@ Three Meta models, 50 cases each, one run per model on October 27, 2026, effort 
 | muse-spark-1.3 (Meta Model API) | 50 of 50 | 0 | 247 | 16.3 s | $0.013 |
 | muse-wonder-1.0 (Meta Model API) | 49 of 50 | 0 | 236 | 8.8 s | $0.037 |
 | Muse Spark Open (open weights, hosted on Baseten) | 49 of 50 | 1 | 233 | 4.3 s | $0.007[^open] |
+| muse-spark-1.3, agentic: reads the chart by tool call, 9.6 of 25.6 entries per case | 50 of 50 | 0 | 265 | 8.0 s | $0.017 |
+
+The fourth row is the agentic step, run October 28. The model no longer receives the chart. It gets an index, one line per entry with the id, date, kind, and opening words, and two tools, `list_entries` and `read_entry`, and reads what it decides it needs. It read 9.6 of 25.6 entries per case on average, 3.4 model turns per case, and reached 96 percent of the entries the grading key names as evidence, while agreeing with the key on every case. It read the chart the way a reviewer does: a modifier denial (CARC 4) was declined without opening a single entry, because the chart cannot answer it; the cases labeled absent, where the evidence is not there, were read almost completely (one chart of 27 entries was read entry by entry) before the model declined. Each case's results carry a trace of every tool call, and the [viewer](build/viewer/) replays it.
 
 The two disagreements:
 
 - **muse-wonder-1.0 declined a wound-care case the key calls warranted.** The criterion lists infection control and glycemic management among the components of standard wound care. The weekly notes document debridement, dressings, and offloading, and the chart holds a normal A1c and a clean wound elsewhere. The model read the criterion strictly and said the record did not meet it. That is a judgment a physician could share. It is not an invented fact.
 - **The gate blocked one Muse Spark Open draft.** The sentence said the patient was on three antianginal agents, citing a note that lists metoprolol, amlodipine, and isosorbide. The count is correct, and the gate blocked it anyway, because the number three appears nowhere in the record. The gate cannot count. See the limitations below.
+
+The agentic run also found a defect in the gate. A draft wrote "seventy to ninety-nine percent" and "eighty-one percent", both exactly what the cited imaging entries say, and the gate refuted both sentences because it read "ninety-nine" as 90 and 9 and "eighty-one" as 80 and 1. Compound number words are now read as one number (a widening that lets no invented fact through), and the run was repeated under the corrected gate; the ledger records the blocked run.
 
 Every warranted draft from all three models cited the chart entries the key expected, with citation precision above 95 percent, and across the three runs no model invented a quote. One did in an earlier, superseded run: muse-wonder-1.0 wrote "Proceededed" inside a quotation, and the gate refuted the sentence. That is the check doing its job.
 
@@ -161,7 +166,7 @@ Four of my grading keys were defective, and each was found by a model reading th
 - **The counts are small.** Fifty synthetic cases, one run per model, one seed. There are no repeat runs, so no estimate of run-to-run variance. The charts and the criteria were written by the same person, which makes the test easier than a real chart against a real policy.
 - **The data are synthetic.** The charts are generated in dictation voice from 18 templates. No result here says anything about performance on real records, and that measurement cannot be made in public.
 
-Next, the agentic step: the model fetches chart entries by tool call instead of receiving the whole chart, and the same 50 cases run again.
+Next: the other two models run agentically, and a third tool that checks a payer policy's last-change date against CHART, the author's pre-existing coverage index.
 
 <br>
 

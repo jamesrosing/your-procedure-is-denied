@@ -194,7 +194,8 @@ describe('scoreboard', () => {
     assert.equal(spark13.entriesRead, null);
     const open = rows.find(r => r.model.includes('Spark Open'))!;
     assert.equal(open.blocked, 1);
-    assert.deepEqual(rows.map(r => r.model.split(' ')[0]), ['muse-spark-1.3', 'muse-wonder-1.0', 'Muse']);
+    assert.deepEqual(rows.filter(r => !r.agentic).map(r => r.model.split(' ')[0]), ['muse-spark-1.3', 'muse-wonder-1.0', 'Muse']);
+    assert.ok(rows.every((r, i) => i === 0 || Number(r.agentic) >= Number(rows[i - 1]!.agentic)), 'agentic rows come last');
   });
 
   test('an agentic file reports entries read against chart size and support coverage', () => {

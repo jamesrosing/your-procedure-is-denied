@@ -116,3 +116,83 @@ describe('openAiProvider', () => {
     await assert.rejects(p.propose(REQ), /usage/);
   });
 });
+
+describe('messagesProvider.proposeAgentic', () => {
+  const INDEX_REQ = {
+    ...REQ,
+    tools: [
+      { name: 'list_entries', description: 'list', inputSchema: { type: 'object', properties: {}, additionalProperties: false } },
+      { name: 'read_entry', description: 'read', inputSchema: { type: 'object', required: ['id'], properties: { id: { type: 'string' } }, additionalProperties: false } },
+    ],
+    maxTurns: 6,
+  };
+
+  function sequence(replies: Record<string, unknown>[], captured: Captured[]): typeof fetch {
+    let i = 0;
+    return (async (input: string | URL | Request, init?: RequestInit) => {
+      const headers: Record<string, string> = {};
+      new Headers(init?.headers).forEach((v, k) => { headers[k] = v; });
+      captured.push({ url: String(input), headers, body: JSON.parse(String(init?.body)) });
+      const reply = replies[Math.min(i++, replies.length - 1)]!;
+      return new Response(JSON.stringify(reply), { status: 200, headers: { 'content-type': 'application/json' } });
+    }) as typeof fetch;
+  }
+
+  const TOOL_TURN = {
+    ...REPLY,
+    content: [
+      { type: 'redacted_thinking', data: 'x' },
+      { type: 'tool_use', id: 'tu_1', name: 'read_entry', input: { id: 'note-001' } },
+      { type: 'tool_use', id: 'tu_2', name: 'read_entry', input: { id: 'note-999' } },
+    ],
+    stop_reason: 'tool_use',
+    usage: { input_tokens: 100, output_tokens: 50, cache_read_input_tokens: 1000, output_tokens_details: { thinking_tokens: 30 } },
+  };
+  const FINAL_TURN = { ...REPLY, usage: { input_tokens: 200, output_tokens: 400, cache_read_input_tokens: 1100, output_tokens_details: { thinking_tokens: 300 } } };
+
+  test('loops on tool_use, feeds each result back, sums usage, and records a trace', async () => {
+    const captured: Captured[] = [];
+    const calls: { name: string; input: Record<string, unknown> }[] = [];
+    const p = messagesProvider({ label: 'meta', baseURL: 'https://api.meta.ai', authToken: 'k', model: 'muse-spark-1.3', fetch: sequence([TOOL_TURN, FINAL_TURN], captured) });
+    const r = await p.proposeAgentic!({
+      ...INDEX_REQ,
+      execute: async call => {
+        calls.push(call);
+        const id = String(call.input['id']);
+        return id === 'note-001' ? { ok: true, content: '[note-001] text', entryId: id } : { ok: false, content: 'no such entry', entryId: id, note: 'no such entry' };
+      },
+    });
+    assert.equal(captured.length, 2);
+    const first = captured[0]!.body;
+    const tools = first['tools'] as { name: string; input_schema: unknown }[];
+    assert.deepEqual(tools.map(t => t.name), ['list_entries', 'read_entry']);
+    assert.ok(tools[1]!.input_schema, 'tool schema is sent as input_schema');
+    assert.ok(!('tool_choice' in first), 'tool_choice is left at its default (auto)');
+    for (const f of FORBIDDEN_FIELDS) assert.ok(!(f in first), `${f} must not be sent`);
+    assert.equal((first['output_config'] as { effort: string }).effort, 'low');
+    const second = captured[1]!.body;
+    const msgs = second['messages'] as { role: string; content: unknown }[];
+    assert.equal(msgs.length, 3);
+    assert.equal(msgs[1]?.role, 'assistant');
+    assert.equal(msgs[2]?.role, 'user');
+    const results = msgs[2]!.content as { type: string; tool_use_id: string; content: string; is_error?: boolean }[];
+    assert.deepEqual(results.map(x => [x.type, x.tool_use_id, x.content, x.is_error ?? false]), [['tool_result', 'tu_1', '[note-001] text', false], ['tool_result', 'tu_2', 'no such entry', true]]);
+    assert.deepEqual(calls.map(c => c.input['id']), ['note-001', 'note-999']);
+    assert.deepEqual(r.usage, { inputTokens: 300, cachedInputTokens: 2100, cacheWriteTokens: 0, outputTokens: 450, thinkingTokens: 330 });
+    assert.equal(r.turns, 2);
+    assert.equal(r.stopReason, 'end_turn');
+    assert.equal(r.draft.ok, true);
+    assert.deepEqual(r.trace.map(t => [t.step, t.tool, t.entryId, t.ok]), [[0, 'read_entry', 'note-001', true], [1, 'read_entry', 'note-999', false]]);
+    assert.ok(r.trace.every(t => t.atMs >= 0));
+    assert.ok(r.costUsd > 0);
+  });
+
+  test('a loop that never ends is cut at maxTurns and reported, not run forever', async () => {
+    const p = messagesProvider({ label: 'meta', baseURL: 'https://api.meta.ai', authToken: 'k', model: 'muse-spark-1.3', fetch: sequence([TOOL_TURN], []) });
+    const r = await p.proposeAgentic!({ ...INDEX_REQ, maxTurns: 3, execute: async () => ({ ok: true, content: 'x' }) });
+    assert.equal(r.turns, 3);
+    assert.equal(r.stopReason, 'max_turns');
+    assert.equal(r.draft.ok, false);
+    assert.equal(r.trace.length, 6);
+  });
+});

@@ -163,3 +163,89 @@ describe('summarize', () => {
     assert.equal(s.citationPrecision, 1);
   });
 });
+
+describe('agentic harness', async () => {
+  const { chartIndex, chartToolExecutor, CHART_TOOLS, buildAgenticRequest, INSTRUCTIONS_AGENTIC } = await import('../src/harness.js');
+  type AgenticProvider = Provider & { proposeAgentic: NonNullable<Provider['proposeAgentic']> };
+
+  test('the chart index carries id, date, kind, and the opening words of each entry, never the whole text', () => {
+    const index = chartIndex(warrantedCase);
+    for (const e of warrantedCase.chart) assert.ok(index.includes(`${e.id} ${e.date} ${e.kind}`), `${e.id} missing from the index`);
+    const longest = warrantedCase.chart.reduce((a, b) => (a.text.length > b.text.length ? a : b));
+    assert.ok(!index.includes(longest.text), 'the index must not contain a full entry');
+    assert.ok(index.split('\n').length >= warrantedCase.chart.length);
+  });
+
+  test('list_entries returns the index and read_entry returns one entry in full, or an error for an unknown id', async () => {
+    const execute = chartToolExecutor(warrantedCase);
+    const list = await execute({ name: 'list_entries', input: {} });
+    assert.equal(list.ok, true);
+    assert.ok(list.content.includes(warrantedCase.chart[0]!.id));
+    const e = warrantedCase.chart[3]!;
+    const read = await execute({ name: 'read_entry', input: { id: e.id } });
+    assert.equal(read.ok, true);
+    assert.equal(read.entryId, e.id);
+    assert.ok(read.content.includes(`[${e.id}] ${e.date} ${e.kind}`) && read.content.includes(e.text));
+    const bad = await execute({ name: 'read_entry', input: { id: 'note-999' } });
+    assert.equal(bad.ok, false);
+    assert.equal(bad.entryId, 'note-999');
+    const unknown = await execute({ name: 'policy_status', input: {} });
+    assert.equal(unknown.ok, false);
+  });
+
+  test('the agentic request puts the shared instructions in a cached block and the index, not the chart, in the second', () => {
+    const req = buildAgenticRequest(warrantedCase, 'low', 12288);
+    assert.equal(req.system[0]?.cache, true);
+    assert.ok(req.system[0]!.text.length >= 4600, 'shared block too short to be cached');
+    assert.ok(req.system[0]!.text.includes('read_entry'));
+    assert.ok(!req.system[0]!.text.includes(warrantedCase.id));
+    const longest = warrantedCase.chart.reduce((a, b) => (a.text.length > b.text.length ? a : b));
+    assert.ok(!req.system[1]!.text.includes(longest.text));
+    assert.deepEqual(req.tools.map(t => t.name), CHART_TOOLS.map(t => t.name));
+    assert.ok(req.user.includes(`CARC ${warrantedCase.denial.carc}`));
+    assert.ok(INSTRUCTIONS_AGENTIC.includes('list_entries'));
+  });
+
+  test('runCase with agentic records the trace, the entries read against the chart, and whether the key entries were read; the gate is unchanged', async () => {
+    const c = warrantedCase;
+    const appeal = perfectDraft(c);
+    const supportIds = [...new Set(Object.values(c.expected.support).flat())];
+    const toRead = [supportIds[0]!, c.expected.distractors[0]!];
+    const provider: AgenticProvider = {
+      label: 'fake', model: 'fake-1',
+      async propose() { throw new Error('agentic run must not call propose'); },
+      async proposeAgentic(req) {
+        const trace = [];
+        await req.execute({ name: 'list_entries', input: {} });
+        trace.push({ step: 0, tool: 'list_entries', input: {}, atMs: 10, ok: true });
+        for (const id of toRead) {
+          const out = await req.execute({ name: 'read_entry', input: { id } });
+          trace.push({ step: trace.length, tool: 'read_entry', input: { id }, entryId: out.entryId!, atMs: 20 * trace.length, ok: out.ok });
+        }
+        return {
+          provider: 'fake', model: 'fake-1', stopReason: 'end_turn', latencyMs: 300,
+          usage: { inputTokens: 2000, cachedInputTokens: 3000, cacheWriteTokens: 0, outputTokens: 900, thinkingTokens: 400 },
+          costUsd: 0.01, draft: { ok: true, appeal }, rawText: JSON.stringify(appeal), turns: 4, trace,
+        };
+      },
+    };
+    const r = await runCase(provider, c, { effort: 'low', maxTokens: 12288, agentic: true });
+    assert.equal(r.outcome, 'correct-pass');
+    assert.equal(r.turns, 4);
+    assert.equal(r.trace?.length, 3);
+    assert.deepEqual(r.reading, { entriesRead: 2, chartSize: c.chart.length, supportRead: 1, supportTotal: supportIds.length });
+    assert.equal(r.gate?.verdict, 'pass');
+    const plain = await runCase(fakeProvider(appeal), c, { effort: 'low', maxTokens: 12288 });
+    assert.equal(plain.gate?.inputHash, r.gate?.inputHash, 'same draft, same gate record');
+  });
+
+  test('summarize reports mean entries read, mean chart size, and support coverage over agentic results', () => {
+    const base = { category: 'x', setting: 'outpatient', stakesUsd: 1, expected: { warranted: true }, provider: 'fake', model: 'fake-1', stopReason: 'end_turn', latencyMs: 10, usage: { inputTokens: 1, cachedInputTokens: 0, cacheWriteTokens: 0, outputTokens: 1, thinkingTokens: 0 }, costUsd: 0.001, outcome: 'correct-pass' as const, warrantedMatch: true, citationPrecision: 1 };
+    const s = summarize([
+      { ...base, caseId: 'case-001', turns: 4, reading: { entriesRead: 6, chartSize: 20, supportRead: 3, supportTotal: 4 } },
+      { ...base, caseId: 'case-002', turns: 2, reading: { entriesRead: 10, chartSize: 30, supportRead: 2, supportTotal: 2 } },
+    ]);
+    assert.deepEqual(s.reading, { entriesReadPerCase: 8, chartSizePerCase: 25, supportCoverage: 5 / 6, turnsPerCase: 3 });
+    assert.equal(summarize([{ ...base, caseId: 'case-001' }]).reading, undefined);
+  });
+});

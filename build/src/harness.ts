@@ -6,7 +6,7 @@ import { readdirSync, readFileSync, mkdirSync, writeFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { parseArgs } from 'node:util';
-import { messagesProvider, openAiProvider, type Effort, type Provider, type ProposeRequest } from './provider.js';
+import { messagesProvider, openAiProvider, type AgenticRequest, type Effort, type Provider, type ProposeRequest, type ToolCall, type ToolDefinition, type ToolOutcome, type TraceEvent } from './provider.js';
 import type { Usage } from './cost.js';
 import type { Appeal } from './schema.js';
 import { litmus, LITMUS_VERSION, type GateResult, type GateSources } from './litmus.js';
@@ -41,6 +41,65 @@ CARC 29: the time limit for filing has expired. A filing question, not a medical
 CARC 119: the benefit maximum has been reached. A benefits question under the plan document, not a medical-necessity appeal.
 
 A worked example of the form, with invented content. Chart entry note-004 reads: "Finished 12 weeks of PT across the street, says it helped while she was there and then right back to baseline." Criterion crit-2 reads: "At least 3 months of conservative treatment without adequate relief." Good evidence: {criterion: "crit-2", citation: "note-004", quote: "Finished 12 weeks of PT across the street, says it helped while she was there and then right back to baseline"}. Good sentence: {text: "The record documents twelve weeks of physical therapy without lasting relief, which exceeds the 3 months the policy requires.", citation: "note-004", quote: "Finished 12 weeks of PT across the street, says it helped while she was there and then right back to baseline"}. The sentence may translate PT into physical therapy and 12 weeks into twelve weeks; the quote may not. The 3 months comes from the criterion, so it is sourced. A sentence claiming 16 weeks would be blocked.`;
+
+// The agentic variant: the model sees an index, not the chart, and reads
+// entries by tool call. The shared block stays identical across cases so the
+// prompt cache holds; only the index block and the denial vary.
+export const INSTRUCTIONS_AGENTIC = INSTRUCTIONS.replace(
+  'You will receive a chart of dated entries, each headed by an id like note-012, then a denial and the payer\'s coverage criteria, numbered crit-1, crit-2, and so on.',
+  `You will receive an index of the chart, one line per entry with its id (like note-012), date, kind, and opening words, then a denial and the payer's coverage criteria, numbered crit-1, crit-2, and so on. You do not have the entries themselves. Two tools fetch them: list_entries returns the index again, and read_entry returns the full text of one entry by id. Read every entry whose index line could bear on a criterion, and read any entry before you quote it: a quote must come from an entry you have read in full, copied exactly, and the verifier will refute a quote from an entry you only saw in the index. Most entries in a chart are routine traffic that does not bear on the denial; you do not need to read those. When you have read what you need, answer with the JSON object and nothing else.`,
+);
+
+export function chartIndex(c: SyntheticCase): string {
+  return c.chart.map(e => `${e.id} ${e.date} ${e.kind}: ${firstWords(e.text, 12)}`).join('\n');
+}
+
+function firstWords(text: string, n: number): string {
+  const words = text.split(/\s+/);
+  return words.length <= n ? text : `${words.slice(0, n).join(' ')} ...`;
+}
+
+export const CHART_TOOLS: ToolDefinition[] = [
+  {
+    name: 'list_entries',
+    description: 'Lists every entry in the chart: id, date, kind, and opening words. The same index you were given.',
+    inputSchema: { type: 'object', properties: {}, additionalProperties: false },
+  },
+  {
+    name: 'read_entry',
+    description: 'Returns the full text of one chart entry by id, e.g. note-012. Quote only from entries you have read with this tool.',
+    inputSchema: { type: 'object', required: ['id'], properties: { id: { type: 'string', description: 'the entry id, like note-012' } }, additionalProperties: false },
+  },
+];
+
+export function chartToolExecutor(c: SyntheticCase, extra?: (call: ToolCall) => Promise<ToolOutcome | null>): (call: ToolCall) => Promise<ToolOutcome> {
+  return async call => {
+    if (call.name === 'list_entries') return { ok: true, content: chartIndex(c), note: `${c.chart.length} entries` };
+    if (call.name === 'read_entry') {
+      const id = String(call.input['id'] ?? '').trim();
+      const e = c.chart.find(x => x.id === id);
+      if (!e) return { ok: false, content: `no such entry: ${id.slice(0, 40) || '(empty)'}. Ids look like note-012; call list_entries to see them.`, entryId: id, note: 'no such entry' };
+      return { ok: true, content: `[${e.id}] ${e.date} ${e.kind}\n${e.text}`, entryId: e.id };
+    }
+    const handled = extra ? await extra(call) : null;
+    if (handled) return handled;
+    return { ok: false, content: `unknown tool: ${call.name}`, note: 'unknown tool' };
+  };
+}
+
+export function buildAgenticRequest(c: SyntheticCase, effort: Effort, maxTokens: number, options: { tools?: ToolDefinition[]; extra?: (call: ToolCall) => Promise<ToolOutcome | null> } = {}): AgenticRequest {
+  const base = buildRequest(c, effort, maxTokens);
+  return {
+    ...base,
+    system: [
+      { text: INSTRUCTIONS_AGENTIC, cache: true },
+      { text: `Chart index for patient ${c.patient.alias}, ${c.patient.age} year old ${c.patient.sex}. Synthetic record. ${c.chart.length} entries.\n\n${chartIndex(c)}` },
+    ],
+    tools: [...CHART_TOOLS, ...(options.tools ?? [])],
+    execute: chartToolExecutor(c, options.extra),
+    maxTurns: 24,
+  };
+}
 
 export function renderChart(c: SyntheticCase): string {
   return c.chart.map(e => `[${e.id}] ${e.date} ${e.kind}\n${e.text}`).join('\n\n');
@@ -94,11 +153,24 @@ export interface CaseResult {
   error?: string;
   draft?: Appeal; // kept because the data is synthetic; a real run would store only the gate record
   gate?: GateResult;
+  turns?: number; // agentic runs: model turns in the tool loop
+  trace?: TraceEvent[]; // agentic runs: every tool call, in order, with timestamps
+  reading?: { entriesRead: number; chartSize: number; supportRead: number; supportTotal: number }; // agentic runs: what was read against the grading key
 }
 
 export interface RunOptions {
   effort: Effort;
   maxTokens: number;
+  agentic?: boolean;
+  tools?: ToolDefinition[]; // extra tools for the agentic path
+  extra?: (call: ToolCall) => Promise<ToolOutcome | null>;
+}
+
+export function readingStats(c: SyntheticCase, trace: TraceEvent[]): NonNullable<CaseResult['reading']> {
+  const chartIds = new Set(c.chart.map(e => e.id));
+  const read = new Set(trace.filter(t => t.tool === 'read_entry' && t.ok && t.entryId && chartIds.has(t.entryId)).map(t => t.entryId!));
+  const support = new Set(Object.values(c.expected.support).flat());
+  return { entriesRead: read.size, chartSize: c.chart.length, supportRead: [...support].filter(id => read.has(id)).length, supportTotal: support.size };
 }
 
 const EMPTY_USAGE: Usage = { inputTokens: 0, cachedInputTokens: 0, cacheWriteTokens: 0, outputTokens: 0, thinkingTokens: 0 };
@@ -110,15 +182,26 @@ export async function runCase(provider: Provider, c: SyntheticCase, opts: RunOpt
     provider: provider.label, model: provider.model,
   };
   let result;
+  let agentic: { turns: number; trace: TraceEvent[] } | null = null;
   try {
-    result = await provider.propose(buildRequest(c, opts.effort, opts.maxTokens));
+    if (opts.agentic) {
+      if (!provider.proposeAgentic) throw new Error(`${provider.label} has no agentic path`);
+      const r = await provider.proposeAgentic(buildAgenticRequest(c, opts.effort, opts.maxTokens, { ...(opts.tools ? { tools: opts.tools } : {}), ...(opts.extra ? { extra: opts.extra } : {}) }));
+      result = r;
+      agentic = { turns: r.turns, trace: r.trace };
+    } else {
+      result = await provider.propose(buildRequest(c, opts.effort, opts.maxTokens));
+    }
   } catch (error: unknown) {
     // Error class and HTTP status only: SDK messages can echo the request body.
     const status = (error as { status?: number }).status;
     const kind = error instanceof Error ? error.constructor.name : 'Error';
     return { ...base, stopReason: null, latencyMs: 0, usage: EMPTY_USAGE, costUsd: 0, outcome: 'error', warrantedMatch: null, citationPrecision: null, error: `request failed: ${kind}${status ? ` (HTTP ${status})` : ''}` };
   }
-  const common = { ...base, stopReason: result.stopReason, latencyMs: result.latencyMs, usage: result.usage, costUsd: result.costUsd };
+  const common = {
+    ...base, stopReason: result.stopReason, latencyMs: result.latencyMs, usage: result.usage, costUsd: result.costUsd,
+    ...(agentic ? { turns: agentic.turns, trace: agentic.trace, reading: readingStats(c, agentic.trace) } : {}),
+  };
   if (!result.draft.ok) {
     return { ...common, outcome: 'error', warrantedMatch: null, citationPrecision: null, error: `parse failed: ${result.draft.error}` };
   }
@@ -162,6 +245,7 @@ export interface Summary {
   costUsd: { total: number; perCase: number };
   stakesUsd: { total: number; defended: number; warranted: number };
   citationPrecision: number | null;
+  reading?: { entriesReadPerCase: number; chartSizePerCase: number; supportCoverage: number; turnsPerCase: number }; // agentic runs only
   bySubtype: Record<string, Partial<Record<Outcome, number>>>;
   byCategory: Record<string, Partial<Record<Outcome, number>>>;
 }
@@ -187,6 +271,13 @@ export function summarize(results: CaseResult[]): Summary {
   const sum = (f: (r: CaseResult) => number) => results.reduce((n, r) => n + f(r), 0);
   const n = results.length || 1;
   const precisions = results.map(r => r.citationPrecision).filter((p): p is number => p !== null);
+  const read = results.filter(r => r.reading);
+  const reading = read.length === 0 ? undefined : {
+    entriesReadPerCase: read.reduce((a, r) => a + r.reading!.entriesRead, 0) / read.length,
+    chartSizePerCase: read.reduce((a, r) => a + r.reading!.chartSize, 0) / read.length,
+    supportCoverage: read.reduce((a, r) => a + r.reading!.supportRead, 0) / Math.max(1, read.reduce((a, r) => a + r.reading!.supportTotal, 0)),
+    turnsPerCase: read.reduce((a, r) => a + (r.turns ?? 0), 0) / read.length,
+  };
   return {
     cases: results.length,
     outcomes,
@@ -215,6 +306,7 @@ export function summarize(results: CaseResult[]): Summary {
       warranted: sum(r => (r.expected.warranted ? r.stakesUsd : 0)),
     },
     citationPrecision: precisions.length ? precisions.reduce((a, b) => a + b, 0) / precisions.length : null,
+    ...(reading ? { reading } : {}),
     bySubtype,
     byCategory,
   };
@@ -264,8 +356,10 @@ async function main(): Promise<void> {
       case: { type: 'string', multiple: true },
       'max-tokens': { type: 'string', default: '12288' },
       label: { type: 'string' },
+      agentic: { type: 'boolean', default: false },
     },
   });
+  const agentic = values.agentic === true;
   const effort = values.effort as Effort;
   if (!['low', 'medium'].includes(effort)) throw new Error('effort must be low or medium; high and xhigh are not run (see ROADMAP measurements)');
   const here = dirname(fileURLToPath(import.meta.url));
@@ -276,11 +370,12 @@ async function main(): Promise<void> {
   const concurrency = Number(values.concurrency);
   const maxTokens = Number(values['max-tokens']);
   const startedAt = new Date().toISOString();
-  console.error(`running ${cases.length} case(s) on ${provider.label}/${provider.model}, effort ${effort}, concurrency ${concurrency}`);
+  console.error(`running ${cases.length} case(s) on ${provider.label}/${provider.model}, effort ${effort}, concurrency ${concurrency}${agentic ? ', agentic' : ''}`);
 
   const results = await mapWithConcurrency(cases, concurrency, async c => {
-    const r = await runCase(provider, c, { effort, maxTokens });
-    console.error(`${r.caseId} ${r.outcome.padEnd(15)} ${r.gate ? `${r.gate.verdict.padEnd(8)} verified ${r.gate.counts.verified}/${r.gate.counts.sentences}` : (r.error ?? '')} ${r.latencyMs}ms $${r.costUsd.toFixed(4)}`);
+    const r = await runCase(provider, c, { effort, maxTokens, agentic });
+    const reading = r.reading ? ` read ${r.reading.entriesRead}/${r.reading.chartSize} key ${r.reading.supportRead}/${r.reading.supportTotal} turns ${r.turns}` : '';
+    console.error(`${r.caseId} ${r.outcome.padEnd(15)} ${r.gate ? `${r.gate.verdict.padEnd(8)} verified ${r.gate.counts.verified}/${r.gate.counts.sentences}` : (r.error ?? '')}${reading} ${r.latencyMs}ms $${r.costUsd.toFixed(4)}`);
     return r;
   });
   const summary = summarize(results);
@@ -288,8 +383,8 @@ async function main(): Promise<void> {
   const stamp = startedAt.replace(/[:.]/g, '-');
   const outDir = join(here, '..', 'results');
   mkdirSync(outDir, { recursive: true });
-  const file = join(outDir, `${values.label ?? provider.label}-${safeModel}-${effort}-${stamp}.json`);
-  writeFileSync(file, JSON.stringify({ run: { startedAt, finishedAt: new Date().toISOString(), provider: provider.label, model: provider.model, effort, concurrency, maxTokens, cases: cases.length, litmus: LITMUS_VERSION, synthetic: true }, summary, results }, null, 2) + '\n');
+  const file = join(outDir, `${values.label ?? provider.label}-${safeModel}-${effort}${agentic ? '-agentic' : ''}-${stamp}.json`);
+  writeFileSync(file, JSON.stringify({ run: { startedAt, finishedAt: new Date().toISOString(), provider: provider.label, model: provider.model, effort, concurrency, maxTokens, cases: cases.length, agentic, litmus: LITMUS_VERSION, synthetic: true }, summary, results }, null, 2) + '\n');
   console.error(`wrote ${file}`);
   console.log(JSON.stringify(summary, null, 2));
 }
