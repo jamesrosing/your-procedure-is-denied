@@ -79,6 +79,26 @@ describe('policyStatusExecutor', () => {
     assert.equal(captured.length, 0);
   });
 
+  test('one metered query per authority, code, and date for the life of the executor; failures are not cached', async () => {
+    const captured: Captured[] = [];
+    const run = policyStatusExecutor({ apiKey: 'k', fetch: fakeFetch(200, INDEX, captured) });
+    const first = await run(CALL);
+    const second = await run({ name: 'policy_status', input: { authority: 'CMS', code: '92928', date_of_service: '2026-02-03' } });
+    await run({ name: 'policy_status', input: { code: '33533', date_of_service: '2026-02-03' } });
+    assert.equal(captured.length, 2);
+    assert.equal(second?.ok, true);
+    assert.equal(second?.content, first?.content);
+    assert.match(second!.note!, /cached this run/);
+    const uncached = policyStatusExecutor({ apiKey: 'k', fetch: fakeFetch(200, INDEX, captured), cache: false });
+    await uncached(CALL); await uncached(CALL);
+    assert.equal(captured.length, 4);
+    let status = 402;
+    const flaky = policyStatusExecutor({ apiKey: 'k', fetch: (async (...a: Parameters<typeof fetch>) => fakeFetch(status, status === 200 ? INDEX : { error: 'x' })(...a)) as typeof fetch });
+    assert.equal((await flaky(CALL))?.ok, false);
+    status = 200;
+    assert.equal((await flaky(CALL))?.ok, true);
+  });
+
   test('a network failure is reported by error class, not thrown into the tool loop', async () => {
     const run = policyStatusExecutor({ apiKey: 'k', fetch: (async () => { throw new TypeError('fetch failed'); }) as typeof fetch });
     const out = await run(CALL);
