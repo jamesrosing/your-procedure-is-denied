@@ -378,6 +378,30 @@ async function renderBoard(): Promise<void> {
 
 // --- boot --------------------------------------------------------------------
 
+// A deep link is `#file=<results file>&case=<case id>`. Applied at boot and
+// whenever the hash changes on an open page (a link pasted into the same tab),
+// so a link always lands on its case with the board closed. selectCase writes
+// the same hash back, which fires this again as a no-op.
+async function applyHash(): Promise<void> {
+  const params = new URLSearchParams(window.location.hash.slice(1));
+  const wantedFile = params.get('file');
+  const wantedCase = params.get('case');
+  const fileChanged = !!wantedFile && wantedFile !== ui.filePicker.value && session.manifest.results.some(m => m.file === wantedFile);
+  const caseChanged = !!wantedCase && wantedCase !== session.result?.caseId;
+  if (!fileChanged && !caseChanged && session.file) return;
+  if (fileChanged) ui.filePicker.value = wantedFile;
+  if (wantedCase) {
+    // selectFile keeps the picker's current case when the file has it; seed it.
+    const o = document.createElement('option');
+    o.value = wantedCase;
+    ui.casePicker.replaceChildren(o);
+    ui.casePicker.value = wantedCase;
+  }
+  if (fileChanged || !session.file) await selectFile(ui.filePicker.value);
+  else if (wantedCase) selectCase(wantedCase);
+  if (!ui.boardSection.hasAttribute('hidden')) showBoard(false);
+}
+
 async function boot(): Promise<void> {
   session.manifest = await fetchJson<Manifest>('data/index.json');
   const cases = await fetchJson<ViewerCase[]>(`data/${session.manifest.cases}`);
@@ -388,18 +412,9 @@ async function boot(): Promise<void> {
     o.textContent = `${m.model}, ${m.provider}${m.agentic ? (m.live ? ', agentic, live CHART' : ', agentic') : ''}, ${m.startedAt.slice(0, 10)}`;
     return o;
   }));
-  const params = new URLSearchParams(window.location.hash.slice(1));
-  const wantedFile = params.get('file');
-  if (wantedFile && session.manifest.results.some(m => m.file === wantedFile)) ui.filePicker.value = wantedFile;
-  const wantedCase = params.get('case');
-  if (wantedCase) {
-    const o = document.createElement('option');
-    o.value = wantedCase;
-    ui.casePicker.replaceChildren(o);
-    ui.casePicker.value = wantedCase;
-  }
-  await selectFile(ui.filePicker.value);
+  await applyHash();
   void renderBoard();
+  window.addEventListener('hashchange', () => { void applyHash(); });
 
   ui.filePicker.addEventListener('change', () => { void selectFile(ui.filePicker.value); });
   ui.casePicker.addEventListener('change', () => selectCase(ui.casePicker.value));
