@@ -1,0 +1,215 @@
+import { describe, test } from 'node:test';
+import assert from 'node:assert/strict';
+import { readdirSync, readFileSync } from 'node:fs';
+import { join, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { buildTimeline, citedEntries, firstLine, playDelayMs, scoreboard, stateAt, type ResultsFile, type ViewerCase, type ViewerResult } from '../viewer/src/replay.js';
+
+const here = dirname(fileURLToPath(import.meta.url));
+const resultsDir = join(here, '..', 'results');
+const casesDir = join(here, '..', 'synthetic', 'cases');
+
+const files: ResultsFile[] = readdirSync(resultsDir).filter(f => f.endsWith('.json')).sort().map(f => JSON.parse(readFileSync(join(resultsDir, f), 'utf8')) as ResultsFile);
+const cases = new Map<string, ViewerCase>(readdirSync(casesDir).filter(f => f.endsWith('.json')).map(f => {
+  const c = JSON.parse(readFileSync(join(casesDir, f), 'utf8')) as ViewerCase;
+  return [c.id, c];
+}));
+
+const spark = files.find(f => f.run.model === 'muse-spark-1.3')!;
+const passing = spark.results.find(r => r.outcome === 'correct-pass')!;
+const declined = spark.results.find(r => r.outcome === 'correct-decline')!;
+const caseOf = (r: ViewerResult) => cases.get(r.caseId)!;
+
+describe('firstLine', () => {
+  test('keeps a short line and cuts a long one at a word boundary', () => {
+    assert.equal(firstLine('PT evaluation on admission.'), 'PT evaluation on admission.');
+    const long = firstLine('79 year old man admitted for skilled rehabilitation. History of osteoporosis, hypertension, chronic kidney disease stage 3.', 40);
+    assert.ok(long.length <= 41 && long.endsWith('…'), long);
+    assert.ok(!long.includes(' …'), 'no trailing space before the ellipsis');
+  });
+});
+
+describe('buildTimeline without a trace', () => {
+  test('lights every cited entry at once, then attaches evidence, then stamps sentences, then the verdict', () => {
+    const steps = buildTimeline(passing, caseOf(passing));
+    assert.equal(steps[0]?.kind, 'read-all');
+    const cited = citedEntries(passing);
+    assert.ok(cited.length > 0);
+    if (steps[0]?.kind === 'read-all') assert.deepEqual(steps[0].entryIds, cited);
+    const kinds = steps.map(s => s.kind);
+    const lastRead = kinds.lastIndexOf('read-all');
+    const firstEvidence = kinds.indexOf('evidence');
+    const firstSentence = kinds.indexOf('sentence');
+    assert.ok(lastRead < firstEvidence && firstEvidence < firstSentence, kinds.join(','));
+    assert.equal(kinds[kinds.length - 1], 'verdict');
+    assert.equal(kinds.filter(k => k === 'sentence').length, passing.gate!.sentences.length);
+    assert.equal(kinds.filter(k => k === 'evidence').length, passing.gate!.evidence.length);
+  });
+
+  test('timestamps never go backwards and end at the call latency', () => {
+    const steps = buildTimeline(passing, caseOf(passing));
+    for (let i = 1; i < steps.length; i++) assert.ok(steps[i]!.atMs >= steps[i - 1]!.atMs, `step ${i}`);
+    assert.equal(steps[steps.length - 1]!.atMs, passing.latencyMs);
+  });
+
+  test('a declined case ends in a declined verdict carrying the model reason and no sentences', () => {
+    const steps = buildTimeline(declined, caseOf(declined));
+    const last = steps[steps.length - 1]!;
+    assert.equal(last.kind, 'verdict');
+    if (last.kind === 'verdict') {
+      assert.equal(last.verdict, 'declined');
+      assert.ok(last.declinedReason && last.declinedReason.length > 0);
+    }
+    assert.equal(steps.filter(s => s.kind === 'sentence').length, 0);
+  });
+
+  test('a request error becomes an error verdict', () => {
+    const r: ViewerResult = { caseId: passing.caseId, category: passing.category, outcome: 'error', latencyMs: 0, costUsd: 0, error: 'request failed: APIError (HTTP 500)' };
+    const steps = buildTimeline(r, caseOf(passing));
+    assert.equal(steps.length, 1);
+    assert.equal(steps[0]?.kind, 'verdict');
+    if (steps[0]?.kind === 'verdict') assert.equal(steps[0].verdict, 'error');
+  });
+});
+
+describe('buildTimeline with a trace', () => {
+  const c = caseOf(passing);
+  const traced: ViewerResult = {
+    ...passing,
+    trace: [
+      { step: 0, tool: 'list_entries', input: {}, atMs: 900, ok: true, note: '26 entries' },
+      { step: 1, tool: 'read_entry', input: { id: 'note-001' }, entryId: 'note-001', atMs: 2100, ok: true },
+      { step: 2, tool: 'read_entry', input: { id: 'note-013' }, entryId: 'note-013', atMs: 3400, ok: true },
+      { step: 3, tool: 'read_entry', input: { id: 'note-999' }, entryId: 'note-999', atMs: 3900, ok: false, note: 'no such entry' },
+      { step: 4, tool: 'policy_status', input: { code: 'KDOB1' }, atMs: 5000, ok: true, live: true, note: 'criteria last verified 2026-10-20' },
+    ],
+  };
+
+  test('one read step per entry fetched, in trace order; unknown ids are dropped; other tools become lookups', () => {
+    const steps = buildTimeline(traced, c);
+    const reads = steps.filter(s => s.kind === 'read');
+    assert.deepEqual(reads.map(s => (s.kind === 'read' ? s.entryId : '')), ['note-001', 'note-013']);
+    const lookups = steps.filter(s => s.kind === 'lookup');
+    assert.equal(lookups.length, 2);
+    assert.ok(lookups.some(l => l.kind === 'lookup' && l.live && l.tool === 'policy_status'));
+    assert.ok(!steps.some(s => s.kind === 'read-all'));
+    const firstEvidence = steps.findIndex(s => s.kind === 'evidence');
+    assert.ok(steps[firstEvidence]!.atMs >= 5000, 'gate records come after the last tool call');
+  });
+
+  test('unread entries stay dim: the state lists only entries the trace fetched', () => {
+    const steps = buildTimeline(traced, c);
+    const final = stateAt(steps, traced, c, steps.length);
+    assert.deepEqual(final.read, ['note-001', 'note-013']);
+    assert.equal(final.counters.entriesRead, 2);
+    assert.equal(final.counters.chartSize, c.chart.length);
+    assert.equal(final.lookups.length, 2);
+  });
+});
+
+describe('stateAt', () => {
+  const c = caseOf(passing);
+  const steps = buildTimeline(passing, c);
+
+  test('cursor 0 is the untouched chart: nothing read, every criterion pending, no sentences, no verdict', () => {
+    const s = stateAt(steps, passing, c, 0);
+    assert.equal(s.read.length, 0);
+    assert.ok(s.criteria.every(k => k.status === 'pending' && k.evidence.length === 0));
+    assert.equal(s.sentences.length, 0);
+    assert.equal(s.verdict, null);
+    assert.equal(s.done, false);
+    assert.equal(s.counters.sentencesTotal, passing.gate!.sentences.length);
+    assert.equal(s.counters.costUsd, 0);
+  });
+
+  test('is a pure fold: the state at k matches applying k steps, and the cursor is clamped', () => {
+    const mid = Math.floor(steps.length / 2);
+    const s = stateAt(steps, passing, c, mid);
+    assert.equal(s.cursor, mid);
+    const applied = steps.slice(0, mid);
+    assert.equal(s.sentences.length, applied.filter(x => x.kind === 'sentence').length);
+    assert.equal(s.counters.elapsedMs, applied[applied.length - 1]!.atMs);
+    assert.equal(stateAt(steps, passing, c, 999).cursor, steps.length);
+    assert.equal(stateAt(steps, passing, c, -3).cursor, 0);
+  });
+
+  test('the final state carries the verdict, the cost, every criterion resolved, and the verified count', () => {
+    const s = stateAt(steps, passing, c, steps.length);
+    assert.ok(s.done);
+    assert.equal(s.verdict?.verdict, 'pass');
+    assert.equal(s.counters.costUsd, passing.costUsd);
+    assert.equal(s.counters.elapsedMs, passing.latencyMs);
+    assert.ok(s.criteria.every(k => k.status !== 'pending'));
+    assert.equal(s.counters.sentencesVerified, passing.gate!.sentences.filter(x => x.status === 'verified').length);
+    for (const k of s.criteria) assert.equal(k.status, passing.gate!.criteria[k.id], k.id);
+  });
+
+  test('a blocked draft names the first unverified sentence', () => {
+    const blocked = files.flatMap(f => f.results).find(r => r.gate?.verdict === 'blocked');
+    assert.ok(blocked, 'the committed runs include one blocked draft');
+    const bc = caseOf(blocked);
+    const bs = buildTimeline(blocked, bc);
+    const s = stateAt(bs, blocked, bc, bs.length);
+    assert.equal(s.verdict?.verdict, 'blocked');
+    const named = s.verdict?.blockedSentence;
+    assert.ok(named !== undefined);
+    const sentence = s.sentences.find(x => x.index === named);
+    assert.ok(sentence && sentence.status !== 'verified');
+    assert.ok(sentence.reason.startsWith('unsourced-token') || sentence.reason.startsWith('quote-'), sentence.reason);
+  });
+
+  test('a declined case resolves the unsupported criterion as unverified and shows the reason', () => {
+    const dc = caseOf(declined);
+    const ds = buildTimeline(declined, dc);
+    const s = stateAt(ds, declined, dc, ds.length);
+    assert.equal(s.verdict?.verdict, 'declined');
+    assert.ok(s.criteria.some(k => k.status === 'unverified'));
+    assert.equal(s.sentences.length, 0);
+  });
+});
+
+describe('playDelayMs', () => {
+  test('compresses model latency, with a floor and a ceiling, and speeds up', () => {
+    const c = caseOf(passing);
+    const steps = buildTimeline(passing, c);
+    for (let i = 0; i < steps.length; i++) {
+      const d = playDelayMs(steps, i);
+      assert.ok(d >= 220 && d <= 1400, `step ${i}: ${d}`);
+    }
+    assert.equal(playDelayMs(steps, 1, 2), playDelayMs(steps, 1) / 2);
+  });
+});
+
+describe('scoreboard', () => {
+  test('one row per results file with the README columns, non-agentic rows first', () => {
+    const rows = scoreboard(files);
+    assert.equal(rows.length, files.length);
+    const spark13 = rows.find(r => r.model.startsWith('muse-spark-1.3'))!;
+    assert.equal(spark13.agreed, 50);
+    assert.equal(spark13.blocked, 0);
+    assert.equal(spark13.sentencesVerified, spark.summary.sentencesVerified);
+    assert.equal(spark13.latencyP50Ms, spark.summary.latencyMs.p50);
+    assert.ok(spark13.costPerCaseUsd > 0.01 && spark13.costPerCaseUsd < 0.02);
+    assert.equal(spark13.agentic, false);
+    assert.equal(spark13.entriesRead, null);
+    const open = rows.find(r => r.model.includes('Spark Open'))!;
+    assert.equal(open.blocked, 1);
+    assert.deepEqual(rows.map(r => r.model.split(' ')[0]), ['muse-spark-1.3', 'muse-wonder-1.0', 'Muse']);
+  });
+
+  test('an agentic file reports entries read against chart size and support coverage', () => {
+    const agentic: ResultsFile = {
+      run: { ...spark.run, agentic: true },
+      summary: spark.summary,
+      results: spark.results.slice(0, 2).map((r, i) => ({ ...r, trace: [{ step: 0, tool: 'read_entry', input: {}, entryId: 'note-001', atMs: 1, ok: true }], reading: { entriesRead: 6 + i, chartSize: 26, supportRead: 3, supportTotal: 4 } })),
+    };
+    const [row] = scoreboard([agentic]);
+    assert.equal(row?.agentic, true);
+    assert.equal(row?.entriesRead, 6.5);
+    assert.equal(row?.chartSize, 26);
+    assert.equal(row?.supportCoverage, 0.75);
+    const rows = scoreboard([agentic, spark]);
+    assert.equal(rows[0]?.agentic, false);
+    assert.equal(rows[1]?.agentic, true);
+  });
+});

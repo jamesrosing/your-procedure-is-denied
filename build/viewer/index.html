@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Your procedure is denied: replay</title>
+  <meta name="description" content="Replays a synthetic denial case through a Meta model and the LITMUS gate: chart entries read, criteria met, sentences verified.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="bar">
+    <div class="brand">
+      <span class="brand-name">Your procedure is denied</span>
+      <span class="brand-sub">one denial, replayed through the model and the gate</span>
+    </div>
+    <div class="pickers">
+      <label class="picker">
+        <span>Run</span>
+        <select id="file-picker" aria-label="Results file"></select>
+      </label>
+      <label class="picker">
+        <span>Case</span>
+        <select id="case-picker" aria-label="Case"></select>
+      </label>
+    </div>
+    <div class="transport" role="group" aria-label="Playback">
+      <button id="btn-restart" class="btn ghost" title="Restart (Home)" aria-label="Restart">|&#8249;</button>
+      <button id="btn-back" class="btn ghost" title="Step back (left arrow)" aria-label="Step back">&#8249;</button>
+      <button id="btn-play" class="btn primary" title="Play or pause (space)">Play</button>
+      <button id="btn-step" class="btn ghost" title="Step (right arrow)" aria-label="Step forward">&#8250;</button>
+      <button id="btn-end" class="btn ghost" title="Jump to the verdict (End)" aria-label="Jump to end">&#8250;|</button>
+      <select id="speed" class="speed" aria-label="Speed">
+        <option value="0.5">0.5x</option>
+        <option value="1" selected>1x</option>
+        <option value="2">2x</option>
+        <option value="4">4x</option>
+      </select>
+      <button id="btn-board" class="btn ghost toggle" title="Scoreboard (S)" aria-pressed="false">Scoreboard</button>
+    </div>
+  </header>
+
+  <main id="stage" class="stage" data-verdict="">
+    <section class="context" id="context" aria-live="polite"></section>
+
+    <div class="panels">
+      <section class="panel chart" aria-labelledby="chart-h">
+        <header class="panel-head">
+          <h2 id="chart-h">Chart</h2>
+          <span class="panel-meta" id="chart-meta"></span>
+        </header>
+        <ol class="entries" id="entries"></ol>
+      </section>
+
+      <section class="panel criteria" aria-labelledby="crit-h">
+        <header class="panel-head">
+          <h2 id="crit-h">Payer criteria</h2>
+          <span class="panel-meta" id="crit-meta"></span>
+        </header>
+        <ol class="criteria-list" id="criteria"></ol>
+        <ul class="lookups" id="lookups"></ul>
+      </section>
+
+      <section class="panel draft" aria-labelledby="draft-h">
+        <header class="panel-head">
+          <h2 id="draft-h">Draft appeal</h2>
+          <span class="panel-meta" id="draft-meta"></span>
+        </header>
+        <div class="verdict" id="verdict" hidden></div>
+        <ol class="sentences" id="sentences"></ol>
+        <p class="empty" id="draft-empty">Nothing written yet. The gate stamps each sentence as it arrives.</p>
+      </section>
+    </div>
+
+    <section class="counters" aria-label="Counters">
+      <div class="counter"><span class="num" id="c-read">0</span><span class="lbl" id="c-read-l">of 0 entries read</span></div>
+      <div class="counter"><span class="num" id="c-verified">0</span><span class="lbl" id="c-verified-l">of 0 sentences verified</span></div>
+      <div class="counter"><span class="num" id="c-cost">$0.000</span><span class="lbl">this appeal cost</span></div>
+      <div class="counter"><span class="num" id="c-elapsed">0.0 s</span><span class="lbl">model time elapsed</span></div>
+      <div class="progress" aria-hidden="true"><div class="progress-fill" id="progress"></div></div>
+    </section>
+  </main>
+
+  <section id="board" class="board" hidden aria-labelledby="board-h">
+    <h2 id="board-h">Scoreboard</h2>
+    <p class="board-sub">Fifty synthetic denials per run, effort low, through the same deterministic gate. Agreed with the key means the model's warranted decision matched the grading label and the gate passed or declined accordingly.</p>
+    <table id="board-table"></table>
+    <p class="note">Muse Spark Open on Baseten reports no thinking-token count on the Messages path, so its cost per appeal omits reasoning tokens. Fifty cases is a small set: one case is two percentage points.</p>
+  </section>
+
+  <footer class="foot">
+    Hackathon work, Meta Global AI Developer Hackathon, October 26 to November 4, 2026. Synthetic data only: no real patient record appears anywhere in this repository.
+    <a href="https://github.com/jamesrosing/your-procedure-is-denied/blob/main/NEW-WORK.md">What was built during the event</a>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

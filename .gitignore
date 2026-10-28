@@ -41,3 +41,7 @@ Thumbs.db
 
 # Browser tool scratch output, never committed
 .playwright-mcp/
+
+# Viewer build output (npm run viewer regenerates it)
+/build/viewer/app.js
+/build/viewer/data/
