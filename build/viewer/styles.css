@@ -99,13 +99,13 @@ h2 { font-size: 13.5px; font-weight: 500; color: var(--ink-7); }
 .intro[hidden] { display: none; }
 .intro.leaving { opacity: 0; pointer-events: none; }
 .intro-stage { display: grid; width: 94vw; max-width: none; }
-.intro-line { grid-area: 1 / 1; margin: 0; text-align: center; font-family: var(--font-sans); font-weight: 450; font-size: clamp(36px, 5.6vw, 108px); line-height: 1.15; letter-spacing: -0.017em; color: var(--ink-7); opacity: 0; transition: opacity 500ms var(--ease-out); }
+.intro-line { grid-area: 1 / 1; margin: 0; text-align: center; font-family: var(--font-mono); font-weight: 400; font-size: clamp(30px, 4.3vw, 82px); line-height: 1.25; letter-spacing: -0.01em; color: var(--ink-7); opacity: 0; transition: opacity 500ms var(--ease-out); }
 .intro-line.show { opacity: 1; transition: none; }
 .intro-line:not(.show) { transition: opacity 400ms var(--ease-out); }
 /* the cursor: a thin block after the last typed character, blinking while typing */
 .intro-line .ch { visibility: hidden; }
 .intro-line .ch.on { visibility: visible; }
-.intro-line .cursor { display: inline-block; width: 0.08em; height: 0.9em; margin-left: 0.04em; vertical-align: -0.08em; background: var(--ink-7); animation: cursor 900ms steps(2, start) infinite; }
+.intro-line .cursor { display: inline-block; width: 0.55em; height: 1em; margin-left: 0.05em; vertical-align: -0.12em; background: var(--ink-7); animation: cursor 900ms steps(2, start) infinite; }
 @keyframes cursor { to { visibility: hidden; } }
 .intro.all .intro-stage { gap: 32px; }
 .intro.all .intro-line { grid-area: auto; font-size: clamp(24px, 2.4vw, 34px); }

@@ -454,7 +454,7 @@ function playIntro(): void {
         if (c) { c.classList.add('on'); c.after(cursor); }
         n += 1;
         if (n < chars.length) introTimers.push(window.setTimeout(tick, INTRO_CHAR_MS));
-        else { el.classList.remove('typing'); cursor.remove(); }
+        else el.classList.remove('typing'); // the cursor stays, blinking, until the card fades
       };
       tick();
     }, slot.show));

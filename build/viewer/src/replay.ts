@@ -375,7 +375,7 @@ export const INTRO_LINES: readonly string[] = [
 ];
 
 export const INTRO_CHAR_MS = 36; // per typed character
-export const INTRO_HOLD_MS = 1400; // after the last character
+export const INTRO_HOLD_MS = 2000; // after the last character, cursor still blinking
 export const INTRO_FADE_MS = 400;
 
 export function introTypeMs(line: string): number {

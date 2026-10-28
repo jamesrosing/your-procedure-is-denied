@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-10-28 08:10 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-10-28 08:12 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -247,3 +247,7 @@ Title cards type out letter by letter at about 35 characters a second with a bli
 ### 951863a · 2026-10-28 01:10 · Title cards: sans, fixed layout while typing, slightly slower
 
 Title cards: set in the interface sans like the case header, the whole line laid out at once with each character revealed in place so the sentence never shifts, typing slowed to 36 ms per character; asset links v13
+
+### a83d4c5 · 2026-10-28 08:10 · Build log: regenerate after 951863a
+
+Title cards in JetBrains Mono with a block cursor that keeps blinking after the line is typed; each card holds 2 s once complete; asset links v14

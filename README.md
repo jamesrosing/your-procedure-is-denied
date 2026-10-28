@@ -182,9 +182,9 @@ Two things followed from reading those five cases, both built the same morning. 
 Every commit since the event began has a row in [NEW-WORK.md](NEW-WORK.md), every result file carries its model, mode, gate version, and any re-gate in its own header, and this section is regenerated from those sources after every push. Nothing in it is typed by hand.
 
 <!-- build-log:start -->
-_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-10-28 08:10 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
+_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-10-28 08:12 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
 
-47 commits since the `hackathon-start` tag, the last at 2026-10-28 01:10 (951863a). Gate v1.3. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
+48 commits since the `hackathon-start` tag, the last at 2026-10-28 08:10 (a83d4c5). Gate v1.3. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
 
 | Started (UTC) | Model | Mode | Agreed | Blocked | False pass | Advisor |
 | --- | --- | --- | :---: | :---: | :---: | --- |
@@ -200,11 +200,11 @@ _Generated from the git history, the ledger, and the result files by `npm run lo
 
 Last five commits, newest first, with the ledger row each one carried:
 
+- **a83d4c5 · 2026-10-28 08:10** · Build log: regenerate after 951863a. Title cards in JetBrains Mono with a block cursor that keeps blinking after the line is typed; each card holds 2 s once complete; asset links v14
 - **951863a · 2026-10-28 01:10** · Title cards: sans, fixed layout while typing, slightly slower. Title cards: set in the interface sans like the case header, the whole line laid out at once with each character revealed in place so the sentence never shifts, typing slowed to 36 ms per character; asset links v13
 - **6473f37 · 2026-10-28 08:05** · Build log: regenerate after be17ec7. (no ledger row)
 - **be17ec7 · 2026-10-28 01:05** · Title cards type out letter by letter. Title cards type out letter by letter at about 35 characters a second with a blinking cursor, hold 1.4 s once complete, then fade; reduced motion shows the full text; schedule and copy tests updated; asset links v12
 - **10051f0 · 2026-10-28 08:04** · Build log: regenerate after 799d7b3. (no ledger row)
-- **799d7b3 · 2026-10-28 01:04** · Title card one: the carrier, the treatment, and the doctor who may never answer. Title card one reworded to Jim's line: the medical insurance carrier denies treatment in a second, the doctor takes hours to answer, if they ever do; word cap raised to 24, the hold scales with it; asset links v11
 <!-- build-log:end -->
 
 ## From the inside
