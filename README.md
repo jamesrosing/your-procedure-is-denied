@@ -7,6 +7,7 @@
   <a href="#a-standard-not-a-product">The standard</a> ·
   <a href="#what-i-am-building">The work</a> ·
   <a href="#measured-in-public">Results</a> ·
+  <a href="https://demo.hemeehr.com">Live replay</a> ·
   <a href="#from-the-inside">Contribute</a>
 </p>
 
@@ -145,7 +146,7 @@ Three Meta models, 50 cases each, one run per model on October 27, 2026, effort 
 | muse-wonder-1.0, agentic, 8.7 of 25.6 entries per case | 49 of 50 | 1 | 244 | 10.0 s | $0.052 |
 | Muse Spark Open on Baseten, agentic, 9.4 of 25.6 entries per case | 48 of 50 | 1 | 239 | 9.9 s | $0.018[^open] |
 
-The last three rows are the agentic step, run October 28. The model no longer receives the chart. It gets an index, one line per entry with the id, date, kind, and opening words, and two tools, `list_entries` and `read_entry`, and reads what it decides it needs. The three models read between 8.7 and 9.6 of 25.6 entries per case, in 2.3 to 3.5 model turns, and reached 93 to 98 percent of the entries the grading key names as evidence. They read the chart the way a reviewer does: a modifier denial (CARC 4) was declined without opening a single entry, because the chart cannot answer it; the cases labeled absent, where the evidence is not there, were read almost completely (one chart of 27 entries was read entry by entry) before the model declined. Each case's results carry a trace of every tool call, and the [viewer](build/viewer/) replays it.
+The last three rows are the agentic step, run October 28. The model no longer receives the chart. It gets an index, one line per entry with the id, date, kind, and opening words, and two tools, `list_entries` and `read_entry`, and reads what it decides it needs. The three models read between 8.7 and 9.6 of 25.6 entries per case, in 2.3 to 3.5 model turns, and reached 93 to 98 percent of the entries the grading key names as evidence. They read the chart the way a reviewer does: a modifier denial (CARC 4) was declined without opening a single entry, because the chart cannot answer it; the cases labeled absent, where the evidence is not there, were read almost completely (one chart of 27 entries was read entry by entry) before the model declined. Each case's results carry a trace of every tool call, and the viewer replays it, one tool call at a time, at [demo.hemeehr.com](https://demo.hemeehr.com) (source in [`build/viewer/`](build/viewer/)).
 
 The agentic disagreements: muse-wonder-1.0 answered one absent wound-care case with warranted set to true and no evidence and no sentences at all, and the gate blocked it, which is the fail-closed design doing its job. Muse Spark Open blocked on the same count sentence as before ("three antianginals", true, unsourced) and once returned an answer that was not valid JSON (the case passes on a repeat call; the run file keeps the failure).
 
