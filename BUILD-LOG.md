@@ -242,4 +242,8 @@ Title cards type out letter by letter at about 35 characters a second with a bli
 
 ### 6473f37 · 2026-10-28 08:05 · Build log: regenerate after be17ec7
 
+(no ledger row)
+
+### 951863a · 2026-10-28 01:10 · Title cards: sans, fixed layout while typing, slightly slower
+
 Title cards: set in the interface sans like the case header, the whole line laid out at once with each character revealed in place so the sentence never shifts, typing slowed to 36 ms per character; asset links v13
