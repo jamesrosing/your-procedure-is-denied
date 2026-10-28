@@ -218,4 +218,8 @@ Build log: `build/scripts/build-log.ts` (`npm run log`) generates `BUILD-LOG.md`
 
 ### 162a2a7 · 2026-10-28 07:55 · Build log: regenerate after a60c2a3
 
+(no ledger row)
+
+### 3b5c60d · 2026-10-28 01:02 · Viewer: title cards before the first replay
+
 Viewer title cards: three lines shown one at a time at full screen width (type up to 124px), each held one second plus a quarter second per word, then dissolving into the replay; plays when the page opens without a deep link, any key or click skips, the i key replays; reduced motion shows all three and waits. Copy names the health insurer, the surgery, and the appeal deficit. Without a deep link the page opens on the newest live-tool run. Tests for the copy discipline and the schedule; asset links v10; 109 tests
