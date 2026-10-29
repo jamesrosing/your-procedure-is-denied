@@ -2,7 +2,7 @@
 // results file and a case, and renders `stateAt` for the current cursor.
 // Everything that decides what a step means lives in replay.ts.
 import {
-  buildTimeline, firstLine, formatSeconds, formatUsd, INTRO_CHAR_MS, INTRO_END_PAUSE_MS, INTRO_FADE_MS, INTRO_LINES, INTRO_MOVE_MS, INTRO_NOTES, INTRO_STAMP, introSchedule, playDelayMs, scoreboard, stateAt,
+  buildTimeline, carcHelp, codeSystemHelp, firstLine, formatSeconds, formatUsd, INTRO_CHAR_MS, LABEL_HELP, payerRemark, INTRO_END_PAUSE_MS, INTRO_FADE_MS, INTRO_LINES, INTRO_MOVE_MS, INTRO_NOTES, INTRO_STAMP, introSchedule, playDelayMs, scoreboard, stateAt,
   type ReplayState, type ResultsFile, type Step, type ViewerCase, type ViewerResult,
 } from './replay.js';
 
@@ -55,6 +55,7 @@ const ui = {
   intro: $<HTMLElement>('intro'),
   introStage: $<HTMLElement>('intro-stage'),
   strip: $<HTMLElement>('strip'),
+  payerReason: $<HTMLElement>('payer-reason'),
   preamble: $<HTMLElement>('preamble'),
   preambleText: $<HTMLElement>('preamble-text'),
   preambleNotes: $<HTMLElement>('preamble-notes'),
@@ -115,20 +116,34 @@ function renderContext(c: ViewerCase, r: ViewerResult): void {
   const sep = () => text('span', 'sep', '›');
   ui.ctxCrumb.replaceChildren(text('span', 'mono', c.id), sep(), text('span', '', c.patient.alias), sep(), text('span', '', `${c.patient.age} year old ${c.patient.sex}`));
   ui.ctxTitle.textContent = c.procedure.description;
+  // Each label explains itself on hover; the narration says the same once.
+  const help = (el: HTMLElement, title: string): HTMLElement => { el.title = title; return el; };
   ui.ctxMeta.replaceChildren(
-    text('span', 'mono', `${c.procedure.codeSystem} ${c.procedure.code}`),
-    text('span', 'mono strong', `CARC ${c.denial.carc}`),
-    text('span', '', `${c.payer.name}, ${c.payer.planType}`),
-    text('span', '', r.category),
-    text('span', '', `about $${c.stakesUsd.toLocaleString()} at stake`),
+    help(text('span', 'mono', `${c.procedure.codeSystem} ${c.procedure.code}`), codeSystemHelp(c.procedure.codeSystem)),
+    help(text('span', 'mono strong', `CARC ${c.denial.carc}`), carcHelp(c)),
+    help(text('span', '', `${c.payer.name}, ${c.payer.planType}`), 'The payer that denied the claim, a fictional plan, and its plan type.'),
+    help(text('span', '', r.category), LABEL_HELP['category'] ?? ''),
+    help(text('span', '', `about $${c.stakesUsd.toLocaleString()} at stake`), LABEL_HELP['stakes'] ?? ''),
   );
   const gate = r.gate?.litmus ?? '';
   const gateVersion = /v\d+\.\d+/.exec(gate)?.[0] ?? '';
   ui.ctxStamp.replaceChildren(
-    ...(run ? [text('span', '', `model ${run.model}`), text('span', '', `provider ${run.provider}`), text('span', '', `effort ${run.effort}`), text('span', '', `run ${run.startedAt.slice(0, 10)}`)] : []),
-    ...(gateVersion ? [text('span', '', `gate litmus ${gateVersion}`)] : []),
-    text('span', '', 'synthetic record'),
+    ...(run ? [help(text('span', '', `model ${run.model}`), LABEL_HELP['model'] ?? ''), help(text('span', '', `provider ${run.provider}`), LABEL_HELP['provider'] ?? ''), help(text('span', '', `effort ${run.effort}`), LABEL_HELP['effort'] ?? ''), help(text('span', '', `run ${run.startedAt.slice(0, 10)}`), LABEL_HELP['run'] ?? '')] : []),
+    ...(gateVersion ? [help(text('span', '', `gate litmus ${gateVersion}`), LABEL_HELP['gate'] ?? '')] : []),
+    help(text('span', '', 'synthetic record'), LABEL_HELP['synthetic'] ?? ''),
   );
+  // The payer's own reason, above the criteria, so the insurer's claim sits
+  // over the record's quotes that answer it.
+  const remark = payerRemark(c);
+  if (remark) {
+    const q = document.createElement('q');
+    q.textContent = remark;
+    ui.payerReason.replaceChildren(text('span', 'lbl', `the payer's reason, CARC ${c.denial.carc}`), q);
+    ui.payerReason.hidden = false;
+  } else {
+    ui.payerReason.replaceChildren();
+    ui.payerReason.hidden = true;
+  }
 }
 
 // The chart index is built once per case and then only its data-state changes,
@@ -474,7 +489,8 @@ let introOpen = false;
 
 function showPreamble(on: boolean): void {
   if (on) {
-    ui.preambleText.textContent = INTRO_LINES.join(' ');
+    // The footnote markers are set apart so they read at paragraph size.
+    ui.preambleText.replaceChildren(...INTRO_LINES.join(' ').split(/([\u00b9\u00b2\u00b3])/).map(part => /^[\u00b9\u00b2\u00b3]$/.test(part) ? text('span', 'mark', part) : document.createTextNode(part)));
     ui.preambleNotes.textContent = INTRO_NOTES;
     ui.preambleStamp.textContent = INTRO_STAMP;
   }
@@ -545,7 +561,7 @@ function playIntro(): void {
     if (!el) return;
     // Lay the whole line out at once, every character hidden, so revealing
     // them one by one never reflows the line.
-    el.replaceChildren(...[...text].map(ch => { const sp = document.createElement('span'); sp.className = 'ch'; sp.textContent = ch; return sp; }));
+    el.replaceChildren(...[...text].map(ch => { const sp = document.createElement('span'); sp.className = /[\u00b9\u00b2\u00b3]/.test(ch) ? 'ch mark' : 'ch'; sp.textContent = ch; return sp; }));
     const cursor = document.createElement('span');
     cursor.className = 'cursor';
     const chars = [...el.querySelectorAll<HTMLElement>('.ch')];

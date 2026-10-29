@@ -28,7 +28,7 @@ export interface ViewerCase {
   patient: { alias: string; age: number; sex: string };
   procedure: { code: string; codeSystem: string; description: string };
   payer: { name: string; planType: string };
-  denial: { carc: string; text: string; dateOfService: string };
+  denial: { carc: string; carcText?: string; rarc?: string; text: string; dateOfService: string };
   criteria: ViewerCriterion[];
   chart: ViewerEntry[];
   expected: { warranted: boolean; subtype?: string; support: Record<string, string[]>; note: string };
@@ -128,6 +128,46 @@ export interface ReplayState {
   verdict: Extract<Step, { kind: 'verdict' }> | null;
   counters: { entriesRead: number; chartSize: number; sentencesVerified: number; sentencesTotal: number; costUsd: number; elapsedMs: number };
   done: boolean;
+}
+
+// The payer's own reason for the denial, the sentence after "Payer remark:" in
+// the denial text, so the viewer can set the insurer's claim above the
+// criteria and the record's quotes that answer it. Null when the denial
+// carries no remark.
+export function payerRemark(c: ViewerCase): string | null {
+  const m = /Payer remark:\s*(.+)$/s.exec(c.denial.text);
+  const r = m?.[1]?.trim();
+  return r && r.length > 0 ? r : null;
+}
+
+// Plain-words help for the labels in the case header, shown on hover; the
+// narration says the same once. Two cold readers asked what the labels were.
+export const LABEL_HELP: Record<string, string> = {
+  model: 'The Meta model that drafted this appeal.',
+  provider: 'Where the model ran: meta is the Meta Model API; baseten is the open-weights model on Baseten.',
+  effort: 'The reasoning effort the model was asked for; every run here used low.',
+  run: 'The date of this run.',
+  gate: 'The version of the deterministic check that verifies every sentence against the chart.',
+  synthetic: 'A synthetic patient and chart; no real record appears anywhere in this repository.',
+  stakes: 'An approximate dollar value of the service that was denied.',
+  category: 'The area of care this denial falls in.',
+};
+
+const CODE_SYSTEM_HELP: Record<string, string> = {
+  HIPPS: 'HIPPS: the billing code for a skilled nursing stay and its level of care.',
+  CMG: 'CMG: the billing code for an inpatient rehabilitation stay.',
+  'MS-DRG': 'MS-DRG: the billing code for an inpatient hospital stay.',
+  CPT: 'CPT: the billing code for the procedure.',
+  HCPCS: 'HCPCS: the billing code for the drug, device, or service.',
+};
+
+export function codeSystemHelp(codeSystem: string): string {
+  return CODE_SYSTEM_HELP[codeSystem] ?? `${codeSystem}: the billing code for this service.`;
+}
+
+export function carcHelp(c: ViewerCase): string {
+  const text = c.denial.carcText ? ` ${c.denial.carcText}` : '';
+  return `CARC ${c.denial.carc}: the claim adjustment reason code the payer put on the denial.${text}`;
 }
 
 // The index shows one line per entry: the date, the kind, and the opening words.

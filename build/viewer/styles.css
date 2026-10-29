@@ -131,6 +131,16 @@ h2 { font-size: 13.5px; font-weight: 500; color: var(--ink-7); }
 .btn-about { margin-left: 12px; padding: 0; border: 0; background: none; color: var(--heading); font: inherit; cursor: pointer; }
 .btn-about:hover { color: var(--brand); text-decoration: underline; }
 
+/* --- the payer's own reason, above the criteria ---------------------------- */
+.payer-reason { padding: 9px 16px 10px; border-bottom: var(--hairline); background: var(--ink-1); }
+.payer-reason[hidden] { display: none; }
+.payer-reason .lbl { display: block; font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-5); margin-bottom: 3px; }
+.payer-reason q { quotes: "\201C" "\201D"; font-family: var(--read-serif); font-size: 14px; line-height: 1.45; color: var(--ink-7); }
+
+/* footnote markers in the opening and the paragraph: set apart so they are seen */
+.intro-line .ch.mark { color: var(--heading); font-weight: 700; }
+.preamble-text .mark { color: var(--heading); font-weight: 700; }
+
 /* --- the live query as a strip ------------------------------------------- */
 /* For the one step the CHART query is the last thing that happened, the
    criteria list gives way to four nodes: the payer, the authority asked about,

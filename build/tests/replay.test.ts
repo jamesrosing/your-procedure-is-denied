@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readdirSync, readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { buildTimeline, citedEntries, firstLine, INTRO_END_PAUSE_MS, INTRO_FADE_MS, INTRO_LINES, INTRO_MOVE_MS, INTRO_NOTES, INTRO_STAMP, introTypeMs, introSchedule, LOOKUP_DWELL_MS, lookupStrip, playDelayMs, scoreboard, stateAt, type ResultsFile, type ViewerCase, type ViewerResult } from '../viewer/src/replay.js';
+import { buildTimeline, citedEntries, firstLine, carcHelp, codeSystemHelp, INTRO_END_PAUSE_MS, INTRO_FADE_MS, INTRO_LINES, INTRO_MOVE_MS, INTRO_NOTES, INTRO_STAMP, introTypeMs, introSchedule, LABEL_HELP, LOOKUP_DWELL_MS, lookupStrip, payerRemark, playDelayMs, scoreboard, stateAt, type ResultsFile, type ViewerCase, type ViewerResult } from '../viewer/src/replay.js';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const resultsDir = join(here, '..', 'results');
@@ -340,5 +340,27 @@ describe('the live CHART query, shown as a strip while it is the last step appli
     assert.equal(playDelayMs(steps, at + 1, 1), Math.max(LOOKUP_DWELL_MS, playDelayMs(steps.map((s, i) => i === at ? { ...s, live: false } : s), at + 1, 1)));
     assert.equal(playDelayMs(steps, at + 1, 2), playDelayMs(steps, at + 1, 1) / 2);
     assert.ok(playDelayMs(steps, at, 1) <= 1400, 'the step into the lookup is paced as before');
+  });
+});
+
+describe('the payer\'s own reason and the header help', () => {
+  test('every case carries the payer\'s remark, and it is the sentence after the remark label, nothing else', () => {
+    for (const c of cases.values()) {
+      const r = payerRemark(c);
+      assert.ok(r && r.length > 20, c.id);
+      assert.ok(!r.includes('Payer remark:'), c.id);
+      assert.ok(!r.startsWith('CARC'), c.id);
+      assert.ok(c.denial.text.endsWith(r), c.id);
+    }
+    assert.equal(payerRemark({ ...cases.get('case-001')!, denial: { ...cases.get('case-001')!.denial, text: 'Denied. CARC 50: not medically necessary.' } }), null);
+  });
+  test('every code system in the set has plain-words help, the CARC help names the code and its text, and every stamp label has help', () => {
+    for (const c of cases.values()) {
+      assert.ok(codeSystemHelp(c.procedure.codeSystem).length > 20, c.procedure.codeSystem);
+      const h = carcHelp(c);
+      assert.ok(h.includes(`CARC ${c.denial.carc}`), c.id);
+      if (c.denial.carcText) assert.ok(h.includes(c.denial.carcText), c.id);
+    }
+    for (const key of ['model', 'provider', 'effort', 'run', 'gate', 'synthetic', 'stakes', 'category']) assert.ok((LABEL_HELP[key] ?? '').length > 15, key);
   });
 });
