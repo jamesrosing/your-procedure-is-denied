@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-10-29 08:33 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-10-29 17:13 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -315,3 +315,11 @@ The cards end by travelling (`build/viewer/`): the block of three lines shrinks 
 ### 2516a20 · 2026-10-29 01:31 · Title cards in the author's words: payment depends on what the doctor documented, judged against that payer's coverage rules; those rules differ by payer, and federal investigators found Medicare Advantage plans denying care that met Medicare's own criteria; this project places the payer policy in force on the date of service beside the doctor's record. Budget test 24 s
 
 Title cards in Jim's words (`build/viewer/src/replay.ts`): payment depends on what the doctor documented, judged against that payer's coverage rules; those rules differ by payer, and federal investigators found Medicare Advantage plans denying care that met Medicare's own criteria (both markers to the HHS Inspector General's 2022 report); this project places the payer policy in force on the date of service beside the doctor's record so each side can be checked against the other. Six rows at 1080p, the scrim's solid band deepened to fit; the budget test moves from 20 to 24 s (23.34 s to the first replay frame at the unchanged pace). Asset links v19
+
+### f55898d · 2026-10-29 08:33 · Build log: regenerate after 2516a20
+
+(no ledger row)
+
+### 0e347d9 · 2026-10-29 01:48 · Title block holds two seconds longer before it travels, the travel takes 700 ms, and typed characters are scheduled at absolute times so long lines do not drift; budget test 26 s
+
+The finished title block holds two seconds longer before it travels, and the travel takes 700 ms instead of 400 (`INTRO_END_PAUSE_MS`, `INTRO_MOVE_MS` in `build/viewer/src/replay.ts`; the scrim and caption band fade over the same time); the budget test holds the pause and moves to 26 s (25.64 s to the first replay frame). Each typed character is now due at an absolute time from the start instead of chained timers, so long lines no longer drift (the last line had landed about half a second late, eating the hold); measured hold after the last line 4.05 s. Asset links v20
