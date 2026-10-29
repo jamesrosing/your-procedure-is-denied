@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-10-29 08:23 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-10-29 08:33 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -307,3 +307,11 @@ Title cards footnoted (`build/viewer/`): the two statements that warrant a sourc
 ### f6aa618 · 2026-10-29 01:07 · The cards end by travelling into a preamble paragraph at the bottom of the page, sources and stamp beneath, dismiss and restore; the live CHART query shown as a four-node strip with the answer typed, held 3.2 s in playback; closing line names its subject
 
 The cards end by travelling (`build/viewer/`): the block of three lines shrinks and slides down into a preamble paragraph at the bottom of the page, the sources and the provenance stamp under it, with a dismiss button; the p key or the footer's "about this page" brings it back, and the stage gives up the height only while it is open. The closing line names its subject ("This project sets ..."); the word cap is thirty. The live CHART query is now shown as a strip: for the one step the query is the last thing that happened, the criteria list gives way to four nodes, the payer, the authority asked, the index that answered, and the answer typed out, with the question (tool, code, date of service) beneath, then the criteria return with the query's line. Pure parts in `build/viewer/src/replay.ts`: lookup steps carry their question from the trace, `lookupStrip` builds the four nodes, `stateAt` carries the strip for exactly one step, and playback dwells at least 3.2 s on a live query (`LOOKUP_DWELL_MS`); three tests. Reduced motion skips the travel and the typing. 135 tests; asset links v18
+
+### 3e005bb · 2026-10-29 08:23 · Build log: regenerate after f6aa618
+
+(no ledger row)
+
+### 2516a20 · 2026-10-29 01:31 · Title cards in the author's words: payment depends on what the doctor documented, judged against that payer's coverage rules; those rules differ by payer, and federal investigators found Medicare Advantage plans denying care that met Medicare's own criteria; this project places the payer policy in force on the date of service beside the doctor's record. Budget test 24 s
+
+Title cards in Jim's words (`build/viewer/src/replay.ts`): payment depends on what the doctor documented, judged against that payer's coverage rules; those rules differ by payer, and federal investigators found Medicare Advantage plans denying care that met Medicare's own criteria (both markers to the HHS Inspector General's 2022 report); this project places the payer policy in force on the date of service beside the doctor's record so each side can be checked against the other. Six rows at 1080p, the scrim's solid band deepened to fit; the budget test moves from 20 to 24 s (23.34 s to the first replay frame at the unchanged pace). Asset links v19
