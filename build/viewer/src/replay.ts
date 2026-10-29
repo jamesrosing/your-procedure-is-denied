@@ -28,7 +28,7 @@ export interface ViewerCase {
   patient: { alias: string; age: number; sex: string };
   procedure: { code: string; codeSystem: string; description: string };
   payer: { name: string; planType: string };
-  denial: { carc: string; carcText?: string; rarc?: string; text: string; dateOfService: string };
+  denial: { carc: string; carcText?: string; rarc?: string; text: string; dateOfService: string; serviceEnd?: string };
   criteria: ViewerCriterion[];
   chart: ViewerEntry[];
   expected: { warranted: boolean; subtype?: string; support: Record<string, string[]>; note: string };
@@ -152,6 +152,38 @@ export const LABEL_HELP: Record<string, string> = {
   stakes: 'An approximate dollar value of the service that was denied.',
   category: 'The area of care this denial falls in.',
 };
+
+// What kind of denial this is, in the case header. Every case in the set is a
+// claim denied after the service was given: the payer's remittance with a
+// claim adjustment reason code. None is a prior-authorization request. The
+// three CARC 197 cases are claims denied because no authorization was on file.
+export function denialKind(c: ViewerCase): string {
+  const when = c.denial.serviceEnd ? `${c.denial.dateOfService} to ${c.denial.serviceEnd}` : `on ${c.denial.dateOfService}`;
+  if (c.denial.carc === '197') return `claim denied, no authorization on file, for care ${when}`;
+  return `claim denied after the service, given ${when}`;
+}
+
+export const DENIAL_KIND_HELP = "Every case here is a claim denied after the service was given: the payer's remittance carrying a claim adjustment reason code. None is a prior-authorization request. Three claims (CARC 197) were denied because no authorization was on file; two plans allow a retrospective medical-necessity review and the chart answers it, and one plan refuses that review, so a medical-necessity appeal is the wrong instrument.";
+
+// One line under each column header saying what the column holds, and what
+// the stamps in it mean. The draft column says what PASS is not.
+export const PANEL_HELP = {
+  chart: "The physician's record for this patient: dated entries in dictation voice, about half of them unrelated to the denial. An entry lights when the model reads it.",
+  criteria: "The payer's written coverage rules for this service, under the payer's own reason for the denial. A criterion lights when the draft cites verified evidence for it.",
+  draft: "The appeal the model drafts to this denial, one sentence at a time, each stamped by the gate against the chart. PASS means every sentence is in the record, not that the appeal would prevail.",
+} as const;
+
+// The result stamp, on hover. PASS is the gate's word, not a verdict on the
+// appeal: the physician who signs decides whether the record satisfies the criteria.
+export const VERDICT_HELP = {
+  pass: "PASS: the model judged that the record supports an appeal, and the gate found every quoted phrase in the entry it cites and every number, date, code, and side sourced. It does not say the record satisfies the criteria or that the appeal would prevail; the physician who reads and signs decides that.",
+  blocked: "BLOCKED: the model drafted an appeal, and at least one sentence did not verify against the chart, or a criterion had no verified evidence. Nothing leaves. The physician is shown what failed and why.",
+  declined: "DECLINED: the model read the chart and decided the record does not support a medical-necessity appeal, and said why. For 20 of the 50 cases this is the answer the grading key expects.",
+  error: "FAILED: the request did not complete, for instance an answer that was not valid JSON, so the gate never ran. The run file keeps the failure.",
+} as const;
+
+// Where the fifty cases came from, for the about panel and the scoreboard.
+export const DATA_NOTE = "The fifty cases are synthetic, built by a seeded program (build/src/synthetic/generate.ts, seed 20261027) from 18 service templates in the categories where denial dollars concentrate, so the committed files are reproducible and a test checks them against the generator. 30 cases are warranted: the chart documents every criterion. 20 are not: 7 never address a criterion, 6 raise it but fall short, 4 are administrative denials a medical-necessity appeal cannot answer, and 3 are plan exclusions. The six payers are fictional, and their criteria were written for the benchmark from publicly described policy patterns, not any insurer's policy. Each chart is 15 to 40 dated entries in dictation voice, about half of them routine traffic unrelated to the denial. A patient is an alias, an age, and a sex. No real record appears anywhere.";
 
 const CODE_SYSTEM_HELP: Record<string, string> = {
   HIPPS: 'HIPPS: the billing code for a skilled nursing stay and its level of care.',

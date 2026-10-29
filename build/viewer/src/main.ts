@@ -2,7 +2,7 @@
 // results file and a case, and renders `stateAt` for the current cursor.
 // Everything that decides what a step means lives in replay.ts.
 import {
-  buildTimeline, carcHelp, codeSystemHelp, firstLine, formatSeconds, formatUsd, INTRO_CHAR_MS, LABEL_HELP, payerRemark, INTRO_END_PAUSE_MS, INTRO_FADE_MS, INTRO_LINES, INTRO_MOVE_MS, INTRO_NOTES, INTRO_STAMP, introSchedule, playDelayMs, scoreboard, stateAt,
+  buildTimeline, carcHelp, codeSystemHelp, DATA_NOTE, denialKind, DENIAL_KIND_HELP, firstLine, PANEL_HELP, VERDICT_HELP, formatSeconds, formatUsd, INTRO_CHAR_MS, LABEL_HELP, payerRemark, INTRO_END_PAUSE_MS, INTRO_FADE_MS, INTRO_LINES, INTRO_MOVE_MS, INTRO_NOTES, INTRO_STAMP, introSchedule, playDelayMs, scoreboard, stateAt,
   type ReplayState, type ResultsFile, type Step, type ViewerCase, type ViewerResult,
 } from './replay.js';
 
@@ -59,6 +59,7 @@ const ui = {
   preamble: $<HTMLElement>('preamble'),
   preambleText: $<HTMLElement>('preamble-text'),
   preambleNotes: $<HTMLElement>('preamble-notes'),
+  preambleData: $<HTMLElement>('preamble-data'),
   preambleStamp: $<HTMLElement>('preamble-stamp'),
   preambleClose: $<HTMLButtonElement>('preamble-close'),
   about: $<HTMLButtonElement>('btn-about'),
@@ -66,6 +67,9 @@ const ui = {
   introSources: $<HTMLElement>('intro-sources'),
   introSkip: $<HTMLButtonElement>('intro-skip'),
   boardTable: $<HTMLTableElement>('board-table'),
+  boardData: $<HTMLElement>('board-data'),
+  panelSub: { chart: $<HTMLElement>('chart-sub'), criteria: $<HTMLElement>('crit-sub'), draft: $<HTMLElement>('draft-sub') },
+  panelHead: { chart: $<HTMLElement>('chart-h'), criteria: $<HTMLElement>('crit-h'), draft: $<HTMLElement>('draft-h') },
 };
 
 interface Session {
@@ -121,6 +125,7 @@ function renderContext(c: ViewerCase, r: ViewerResult): void {
   ui.ctxMeta.replaceChildren(
     help(text('span', 'mono', `${c.procedure.codeSystem} ${c.procedure.code}`), codeSystemHelp(c.procedure.codeSystem)),
     help(text('span', 'mono strong', `CARC ${c.denial.carc}`), carcHelp(c)),
+    help(text('span', '', denialKind(c)), DENIAL_KIND_HELP),
     help(text('span', '', `${c.payer.name}, ${c.payer.planType}`), 'The payer that denied the claim, a fictional plan, and its plan type.'),
     help(text('span', '', r.category), LABEL_HELP['category'] ?? ''),
     help(text('span', '', `about $${c.stakesUsd.toLocaleString()} at stake`), LABEL_HELP['stakes'] ?? ''),
@@ -315,7 +320,9 @@ function renderVerdict(state: ReplayState): void {
   ui.verdict.dataset['verdict'] = v.verdict;
   const stateRow = (name: string, head: string) => {
     const row = text('div', 'state', '');
-    row.append(text('span', 'state-name', name), text('span', 'state-head', head));
+    const stamp = text('span', 'state-name', name);
+    stamp.title = VERDICT_HELP[v.verdict];
+    row.append(stamp, text('span', 'state-head', head));
     return row;
   };
   const parts: HTMLElement[] = [];
@@ -492,6 +499,7 @@ function showPreamble(on: boolean): void {
     // The footnote markers are set apart so they read at paragraph size.
     ui.preambleText.replaceChildren(...INTRO_LINES.join(' ').split(/([\u00b9\u00b2\u00b3])/).map(part => /^[\u00b9\u00b2\u00b3]$/.test(part) ? text('span', 'mark', part) : document.createTextNode(part)));
     ui.preambleNotes.textContent = INTRO_NOTES;
+    ui.preambleData.textContent = DATA_NOTE;
     ui.preambleStamp.textContent = INTRO_STAMP;
   }
   ui.preamble.hidden = !on;
@@ -647,6 +655,9 @@ async function boot(): Promise<void> {
   ui.end.addEventListener('click', () => { stop(); seek(session.steps.length); });
   ui.board.addEventListener('click', () => showBoard(true));
   ui.tabReplay.addEventListener('click', () => showBoard(false));
+  // Each column says in one line what it holds; the header repeats it on hover.
+  for (const key of ['chart', 'criteria', 'draft'] as const) { ui.panelSub[key].textContent = PANEL_HELP[key]; ui.panelHead[key].title = PANEL_HELP[key]; }
+  ui.boardData.textContent = DATA_NOTE;
   const paintTheme = () => { ui.theme.textContent = document.documentElement.dataset['theme'] === 'dark' ? 'light theme' : 'dark theme'; };
   paintTheme();
   ui.theme.addEventListener('click', () => {

@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readdirSync, readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { buildTimeline, citedEntries, firstLine, carcHelp, codeSystemHelp, INTRO_END_PAUSE_MS, INTRO_FADE_MS, INTRO_LINES, INTRO_MOVE_MS, INTRO_NOTES, INTRO_STAMP, introTypeMs, introSchedule, LABEL_HELP, LOOKUP_DWELL_MS, lookupStrip, payerRemark, playDelayMs, scoreboard, stateAt, type ResultsFile, type ViewerCase, type ViewerResult } from '../viewer/src/replay.js';
+import { buildTimeline, citedEntries, firstLine, carcHelp, codeSystemHelp, DATA_NOTE, denialKind, DENIAL_KIND_HELP, PANEL_HELP, VERDICT_HELP, INTRO_END_PAUSE_MS, INTRO_FADE_MS, INTRO_LINES, INTRO_MOVE_MS, INTRO_NOTES, INTRO_STAMP, introTypeMs, introSchedule, LABEL_HELP, LOOKUP_DWELL_MS, lookupStrip, payerRemark, playDelayMs, scoreboard, stateAt, type ResultsFile, type ViewerCase, type ViewerResult } from '../viewer/src/replay.js';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const resultsDir = join(here, '..', 'results');
@@ -362,5 +362,45 @@ describe('the payer\'s own reason and the header help', () => {
       if (c.denial.carcText) assert.ok(h.includes(c.denial.carcText), c.id);
     }
     for (const key of ['model', 'provider', 'effort', 'run', 'gate', 'synthetic', 'stakes', 'category']) assert.ok((LABEL_HELP[key] ?? '').length > 15, key);
+  });
+});
+
+describe('what the three columns are, what kind of denial each case is, and where the data came from', () => {
+  test('every case is a claim denied after the service was given, never a prior-authorization request; the three CARC 197 cases are claims denied for a missing authorization', () => {
+    let missingAuth = 0;
+    for (const c of cases.values()) {
+      assert.match(c.denial.text, /^\S.* denied the claim for /, c.id);
+      const k = denialKind(c);
+      assert.ok(k.length > 20, c.id);
+      assert.ok(!/prior authorization request|pre-?service/i.test(k), c.id);
+      if (c.denial.carc === '197') { missingAuth++; assert.match(k, /no authorization on file/, c.id); }
+      else assert.match(k, /^claim denied after the service/, c.id);
+      if (c.denial.serviceEnd) assert.ok(k.includes(c.denial.serviceEnd), c.id); else assert.ok(k.includes(c.denial.dateOfService), c.id);
+    }
+    assert.equal(missingAuth, 3);
+    assert.match(DENIAL_KIND_HELP, /after the service/);
+    assert.match(DENIAL_KIND_HELP, /prior.authorization/i);
+  });
+  test('each column says in one line what it holds, and the draft column says what PASS does and does not mean', () => {
+    for (const key of ['chart', 'criteria', 'draft'] as const) {
+      assert.ok(PANEL_HELP[key].length > 40, key);
+      assert.ok(PANEL_HELP[key].split(/\s+/).length <= 40, key);
+      assert.ok(!PANEL_HELP[key].includes('!'));
+    }
+    assert.match(PANEL_HELP.draft, /PASS/);
+    assert.match(PANEL_HELP.draft, /not/);
+    for (const key of ['pass', 'blocked', 'declined', 'error'] as const) assert.ok(VERDICT_HELP[key].length > 40, key);
+    assert.match(VERDICT_HELP.pass, /physician/);
+    assert.doesNotMatch(VERDICT_HELP.pass, /\bwin\b|legitimate|correct\b/);
+  });
+  test('the data note states how the fifty cases were made: a seeded generator, the templates, the thirty and twenty split, fictional payers, no real record', () => {
+    assert.match(DATA_NOTE, /seed/i);
+    assert.match(DATA_NOTE, /18 (service )?templates/);
+    assert.match(DATA_NOTE, /\b30\b/);
+    assert.match(DATA_NOTE, /\b20\b/);
+    assert.match(DATA_NOTE, /fictional/);
+    assert.match(DATA_NOTE, /no real/i);
+    assert.match(DATA_NOTE, /generate\.ts/);
+    assert.ok(!DATA_NOTE.includes('!'));
   });
 });

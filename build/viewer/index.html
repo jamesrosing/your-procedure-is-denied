@@ -8,7 +8,7 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%274%27 fill=%27%2314181C%27/%3E%3Crect x=%278%27 y=%2715%27 width=%2716%27 height=%272%27 fill=%27%23FFFFFF%27/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=22">
+  <link rel="stylesheet" href="styles.css?v=23">
   <script>
     // Theme before first paint; the choice is a per-viewer convenience.
     try { var t = localStorage.getItem('ypid-theme'); if (t === 'dark') document.documentElement.dataset.theme = 'dark'; } catch (e) {}
@@ -79,6 +79,7 @@
           <h2 id="chart-h">Chart</h2>
           <span class="panel-meta" id="chart-meta"></span>
         </header>
+        <p class="panel-sub" id="chart-sub"></p>
         <ol class="entries" id="entries"></ol>
       </section>
 
@@ -87,6 +88,7 @@
           <h2 id="crit-h">Payer criteria</h2>
           <span class="panel-meta" id="crit-meta"></span>
         </header>
+        <p class="panel-sub" id="crit-sub"></p>
         <div class="payer-reason" id="payer-reason" hidden></div>
         <div class="strip" id="strip" hidden aria-live="polite"></div>
         <ol class="criteria-list" id="criteria"></ol>
@@ -98,6 +100,7 @@
           <h2 id="draft-h">Draft appeal</h2>
           <span class="panel-meta" id="draft-meta"></span>
         </header>
+        <p class="panel-sub" id="draft-sub"></p>
         <div class="verdict" id="verdict" hidden></div>
         <ol class="sentences" id="sentences"></ol>
         <p class="empty" id="draft-empty">◌ Nothing written yet. The gate stamps each sentence as it arrives.</p>
@@ -119,12 +122,14 @@
       <p class="board-sub">Fifty synthetic denials per run, effort low, through the same deterministic gate. Agreed with the key means the model's warranted decision matched the grading label and the gate passed or declined accordingly.</p>
     </div>
     <table id="board-table"></table>
+    <p class="note" id="board-data"></p>
     <p class="note">Agentic rows: the model reads the chart by tool call from an index instead of receiving it whole; entries read is the mean per case against the mean chart size, and key entries read is the share of grading-key evidence entries the model opened. Gate passed, key says no counts drafts the gate passed on a case the key labels absent: every sentence was in the record, but the record did not satisfy the criterion, which is the referential limit the physician's signature covers. A live CHART row adds a third tool, a query against the author's pre-existing coverage index for when the authority's criteria last changed; its answer appears under the criteria panel and never in the draft. Muse Spark Open on Baseten reports no thinking-token count on the Messages path, so its cost per appeal omits reasoning tokens. Fifty cases is a small set: one case is two percentage points.</p>
   </section>
 
   <aside id="preamble" class="preamble" hidden aria-label="About this page">
     <p id="preamble-text" class="preamble-text"></p>
     <p id="preamble-notes" class="preamble-notes"></p>
+    <p id="preamble-data" class="preamble-notes"></p>
     <p id="preamble-stamp" class="preamble-notes"></p>
     <button id="preamble-close" class="btn preamble-close" title="Dismiss (p)" aria-label="Dismiss">×</button>
   </aside>
@@ -136,6 +141,6 @@
     <span class="keys">space · ← → · home end · s · i · p</span>
   </footer>
 
-  <script src="app.js?v=22"></script>
+  <script src="app.js?v=23"></script>
 </body>
 </html>

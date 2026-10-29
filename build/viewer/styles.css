@@ -127,7 +127,7 @@ h2 { font-size: 13.5px; font-weight: 500; color: var(--ink-7); }
 .preamble[hidden] { display: none; }
 .preamble-text { margin: 0; grid-column: 1; font-family: var(--font-mono); font-size: 14px; line-height: 1.5; color: var(--ink-7); max-width: 150ch; }
 .preamble-notes { margin: 0; grid-column: 1; font-family: var(--font-mono); font-size: 11px; line-height: 1.5; color: var(--ink-5); }
-.preamble-close { grid-column: 2; grid-row: 1 / span 3; align-self: start; width: 28px; height: 28px; padding: 0; font-size: 18px; line-height: 1; }
+.preamble-close { grid-column: 2; grid-row: 1 / span 4; align-self: start; width: 28px; height: 28px; padding: 0; font-size: 18px; line-height: 1; }
 .btn-about { margin-left: 12px; padding: 0; border: 0; background: none; color: var(--heading); font: inherit; cursor: pointer; }
 .btn-about:hover { color: var(--brand); text-decoration: underline; }
 
@@ -277,6 +277,8 @@ select:hover { border-color: var(--ink-3); }
   body.cards .panel-head h2 { color: var(--ink-4); transition: none; }
 }
 .panel-meta { color: var(--ink-5); font-size: 11px; font-family: var(--font-mono); white-space: nowrap; }
+/* one line under each header: what the column holds, in plain words */
+.panel-sub { margin: 0; padding: 6px 16px 7px; border-bottom: var(--hairline); font-size: 11.5px; line-height: 1.4; color: var(--ink-5); }
 .panel ol, .panel ul { list-style: none; margin: 0; padding: 0; overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--ink-3) transparent; }
 .panel ol { flex: 1; }
 
