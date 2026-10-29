@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-10-29 05:59 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-10-29 06:13 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -278,3 +278,12 @@ README: primary-source check of every statistic spoken in the video or shown on 
 
 Results added: `repeats/baseten-meta-models_muse-spark-open-low-agentic-chart-2026-10-29T04-29-17-118Z.json`, `repeats/baseten-meta-models_muse-spark-open-low-agentic-chart-2026-10-29T04-31-36-875Z.json`, `repeats/meta-muse-spark-1.3-low-agentic-chart-2026-10-29T04-29-16-858Z.json`, `repeats/meta-muse-spark-1.3-low-agentic-chart-2026-10-29T04-30-27-555Z.json`, `repeats/meta-muse-wonder-1.0-low-agentic-chart-2026-10-29T04-31-38-694Z.json`, `repeats/meta-muse-wonder-1.0-low-agentic-chart-2026-10-29T04-33-41-439Z.json`.
 Repeat runs: each live-CHART configuration run twice more with the same 50 cases and settings (`build/results/repeats/`, six files, re-gated to v1.4). muse-wonder-1.0 50 of 50 both times; muse-spark-1.3 47 and 50 (the 47: three empty warranted answers on absent cases, all blocked by the gate); Muse Spark Open on Baseten 48 and 42 (the 42: seven blocks, every one a true sentence citing one entry for facts that live in two or a rounded figure the chart never states, plus the case-023 referential-limit false pass again). Zero fabricated quotes in all six. README gains a run-to-run variance bullet under Limitations, and the small-counts bullet no longer says there are no repeat runs
+
+### b693de6 · 2026-10-29 05:59 · Build log: regenerate after 78a2105
+
+(no ledger row)
+
+### 6f31fd6 · 2026-10-28 23:12 · Two more Spark Open repeats on the Baseten hackathon credit with the dated model id; Spark Open reported across five runs
+
+Results added: `repeats/baseten-meta-models_muse-spark-open-1026-low-agentic-chart-2026-10-29T06-00-58-292Z.json`, `repeats/baseten-meta-models_muse-spark-open-1026-low-agentic-chart-2026-10-29T06-03-20-472Z.json`.
+Two more Spark Open repeats on the Baseten hackathon credit with the dated id `meta-models/muse-spark-open-1026` (`build/results/repeats/`, gate v1.4 at run time): 46 of 50 (three blocks: case-023 drafted warranted on the absent case and blocked on a 150-foot goal cited to the discharge note that says 160, the antianginal count again, and a day count the chart never states; one invalid-JSON answer, case-030) and 48 of 50 (the count sentence; one invalid-JSON answer, case-043). Spark Open now has five runs, 42 to 48. README variance bullet says which key and id each pair used. The Baseten Messages path reports zero thinking tokens on the hackathon key too
