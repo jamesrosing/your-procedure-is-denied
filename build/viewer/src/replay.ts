@@ -363,15 +363,20 @@ export function formatSeconds(ms: number): string {
   return `${(ms / 1000).toFixed(1)} s`;
 }
 
-// The title cards. One line at a time, large, typed out letter by letter at
-// twenty-eight characters a second, held a moment once complete, then
-// faded. Typing paces the reading. Kept here so a test can hold the copy to
-// its discipline: three lines, at most twenty-four words each, sentence case,
-// no exclamation marks.
+// The title cards: four lines typed out letter by letter at about
+// twenty-eight characters a second, each held a moment once complete and kept
+// while the next types, so the block gathers at the top of the page as one
+// short paragraph while the replay waits below; then the block fades and the
+// page comes into focus. Typing paces the reading. Kept here so a test can
+// hold the copy to its discipline: four lines, at most twenty-four words each,
+// sentence case, no exclamation marks; the first line states what was
+// pre-existing and what was built this week, as the event rule asks; the last
+// says no patient is advised and who signs.
 export const INTRO_LINES: readonly string[] = [
-  'Your medical insurance carrier will deny your treatment in a second. It will take your doctor hours to answer, if they ever do.',
-  'Most denials are never appealed. Most that are appealed are overturned.',
-  'An open model drafts the appeal. A gate holds every sentence to the record.',
+  "Pre-existing: heme, writ, CHART, the LITMUS papers. Built this week: the rest.",
+  "Below, left to right: the chart, the payer's own criteria, the appeal.",
+  "A Meta model drafts the appeal. A gate holds every sentence to the chart.",
+  "No advice to patients. A physician reads and signs.",
 ];
 
 export const INTRO_CHAR_MS = 36; // per typed character

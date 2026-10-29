@@ -405,7 +405,10 @@ async function renderBoard(): Promise<void> {
 
 // --- title cards ---------------------------------------------------------------
 // Plays when the page opens without a deep link, and on the i key. Any key or
-// click skips. With reduced motion the three lines show at once and wait.
+// click skips. With reduced motion the four lines show at once and wait. The
+// lines type one after another and stay, gathering at the top of the page
+// over the case itself, rewound to the untouched chart; the reveal lights the
+// three column headers left to right (styles.css).
 
 let introTimers: number[] = [];
 let introOpen = false;
@@ -416,6 +419,7 @@ function endIntro(): void {
   for (const t of introTimers) window.clearTimeout(t);
   introTimers = [];
   ui.intro.classList.add('leaving');
+  document.body.classList.remove('cards');
   window.setTimeout(() => { ui.intro.hidden = true; ui.intro.classList.remove('leaving'); }, INTRO_FADE_MS);
 }
 
@@ -423,29 +427,31 @@ function playIntro(): void {
   if (introOpen) return;
   introOpen = true;
   stop();
+  seek(0);
+  document.body.classList.add('cards');
   const lines = [...ui.intro.querySelectorAll<HTMLElement>('.intro-line')];
   lines.forEach(el => { el.textContent = ''; el.classList.remove('show', 'typing'); });
   ui.intro.hidden = false;
   ui.intro.classList.remove('leaving');
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reduced) {
-    ui.intro.classList.add('all');
     lines.forEach((el, i) => { el.textContent = INTRO_LINES[i] ?? ''; el.classList.add('show'); });
     return;
   }
-  ui.intro.classList.remove('all');
   const schedule = introSchedule();
   schedule.forEach((slot, i) => {
     const el = lines[i];
     const text = INTRO_LINES[i] ?? '';
     if (!el) return;
     // Lay the whole line out at once, every character hidden, so revealing
-    // them one by one never reflows or re-centers the sentence.
+    // them one by one never reflows the line.
     el.replaceChildren(...[...text].map(ch => { const sp = document.createElement('span'); sp.className = 'ch'; sp.textContent = ch; return sp; }));
     const cursor = document.createElement('span');
     cursor.className = 'cursor';
     const chars = [...el.querySelectorAll<HTMLElement>('.ch')];
     introTimers.push(window.setTimeout(() => {
+      // Only the newest line carries the cursor; the ones above keep their place.
+      lines[i - 1]?.querySelector('.cursor')?.remove();
       el.classList.add('show', 'typing');
       el.prepend(cursor);
       let n = 0;
@@ -454,14 +460,15 @@ function playIntro(): void {
         if (c) { c.classList.add('on'); c.after(cursor); }
         n += 1;
         if (n < chars.length) introTimers.push(window.setTimeout(tick, INTRO_CHAR_MS));
-        else el.classList.remove('typing'); // the cursor stays, blinking, until the card fades
+        else el.classList.remove('typing'); // the cursor stays, blinking, until the next line or the fade
       };
       tick();
     }, slot.show));
-    introTimers.push(window.setTimeout(() => el.classList.remove('show'), slot.hide));
   });
+  // The block and the scrim leave together on one fade, so the first replay
+  // frame is the last line's hide plus the fade: the figure the budget test holds.
   const last = schedule[schedule.length - 1];
-  introTimers.push(window.setTimeout(endIntro, (last ? last.hide : 0) + INTRO_FADE_MS));
+  introTimers.push(window.setTimeout(endIntro, last ? last.hide : 0));
 }
 
 // A deep link is `#file=<results file>&case=<case id>`. Applied at boot and

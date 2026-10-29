@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readdirSync, readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { buildTimeline, citedEntries, firstLine, INTRO_LINES, introTypeMs, introSchedule, playDelayMs, scoreboard, stateAt, type ResultsFile, type ViewerCase, type ViewerResult } from '../viewer/src/replay.js';
+import { buildTimeline, citedEntries, firstLine, INTRO_FADE_MS, INTRO_LINES, introTypeMs, introSchedule, playDelayMs, scoreboard, stateAt, type ResultsFile, type ViewerCase, type ViewerResult } from '../viewer/src/replay.js';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const resultsDir = join(here, '..', 'results');
@@ -251,14 +251,44 @@ describe('the advisor step', () => {
 });
 
 describe('the title cards', () => {
-  test('three lines, at most twenty-four words, sentence case, no exclamation marks', () => {
-    assert.equal(INTRO_LINES.length, 3);
+  test('four lines, at most twenty-four words, sentence case, no exclamation marks; the first names what was pre-existing and what was built this week, the last says no patient is advised and who signs', () => {
+    assert.equal(INTRO_LINES.length, 4);
     for (const line of INTRO_LINES) {
       assert.ok(line.split(/\s+/).length <= 24, line);
       assert.ok(!line.includes('!'));
       assert.match(line, /^[A-Z]/);
       assert.match(line, /\.$/);
     }
+    const first = INTRO_LINES[0]!;
+    for (const name of ['heme', 'writ', 'CHART', 'LITMUS']) assert.ok(first.includes(name), name);
+    assert.match(first, /Pre-existing/);
+    assert.match(first, /this week/);
+    const last = INTRO_LINES[INTRO_LINES.length - 1]!;
+    assert.match(last, /No advice to patients/);
+    assert.match(last, /physician reads and signs\.$/);
+  });
+  test('the opening reaches the first replay frame within the twenty-second video budget', () => {
+    const s = introSchedule();
+    const firstReplayFrame = s[s.length - 1]!.hide + INTRO_FADE_MS;
+    assert.ok(firstReplayFrame <= 20_000, `${firstReplayFrame} ms from the first frame to the first replay frame`);
+  });
+  test('behind the cards nothing is lit: at cursor 0 every entry is dim, no criterion has evidence, a check, or an opinion, and the draft is empty, for every result in every file', () => {
+    let checked = 0;
+    for (const f of files) for (const r of f.results) {
+      const c = cases.get(r.caseId)!;
+      const s = stateAt(buildTimeline(r, c), r, c, 0);
+      assert.deepEqual(s.read, [], r.caseId);
+      assert.equal(s.open, null, r.caseId);
+      assert.deepEqual(s.lookups, [], r.caseId);
+      assert.ok(s.criteria.every(k => k.status === 'pending' && k.evidence.length === 0 && k.advice === undefined), r.caseId);
+      assert.deepEqual(s.sentences, [], r.caseId);
+      assert.equal(s.verdict, null, r.caseId);
+      assert.equal(s.counters.entriesRead, 0, r.caseId);
+      assert.equal(s.counters.sentencesVerified, 0, r.caseId);
+      assert.equal(s.done, false, r.caseId);
+      checked += 1;
+    }
+    assert.ok(checked >= 450, String(checked));
   });
   test('each card types at about twenty-eight characters a second, holds once complete, and the cards never overlap', () => {
     assert.equal(introTypeMs('abcd'), 144);
