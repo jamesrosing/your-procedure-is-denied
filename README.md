@@ -186,9 +186,9 @@ Two things followed from reading those five cases, both built the same morning. 
 Every commit since the event began has a row in [NEW-WORK.md](NEW-WORK.md), every result file carries its model, mode, gate version, and any re-gate in its own header, and this section is regenerated from those sources after every push. Nothing in it is typed by hand.
 
 <!-- build-log:start -->
-_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-10-29 04:53 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
+_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-10-29 05:59 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
 
-52 commits since the `hackathon-start` tag, the last at 2026-10-28 21:53 (a39857c). Gate v1.4. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
+54 commits since the `hackathon-start` tag, the last at 2026-10-28 22:59 (78a2105). Gate v1.4. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
 
 | Started (UTC) | Model | Mode | Agreed | Blocked | False pass | Advisor |
 | --- | --- | --- | :---: | :---: | :---: | --- |
@@ -204,11 +204,11 @@ _Generated from the git history, the ledger, and the result files by `npm run lo
 
 Last five commits, newest first, with the ledger row each one carried:
 
+- **78a2105 · 2026-10-28 22:59** · Repeat runs: two more per live-CHART configuration in build/results/repeats; run-to-run variance reported as ranges under Limitations. Repeat runs: each live-CHART configuration run twice more with the same 50 cases and settings (`build/results/repeats/`, six files, re-gated to v1.4). muse-wonder-1.0 50 of 50 both times; muse-spark-1.3 47 and 50 (the 47: three empty warranted answers on absent cases, all blocked by the gate); Muse Spark Open on Baseten 48 and 42 (the 42: seven blocks,…
+- **1e4ead3 · 2026-10-29 04:53** · Build log: regenerate after a39857c. (no ledger row)
 - **a39857c · 2026-10-28 21:53** · README: primary-source check of every statistic; KFF footnote rewritten, WISeR services per CMS, framing paragraph, the gate's measured catch rate under Limitations. README: primary-source check of every statistic spoken in the video or shown on a title card. The KFF short link had died and KFF now serves the 2024 edition at the 2023 slug; footnote rewritten (2023 figures kept, the 81.7 percent overturn rate attributed as the 2023 rate through AHA News, the 2024 figures noted: 52.8 million requests, 4.1 million…
 - **3b0a483 · 2026-10-28 21:52** · Mutation harness over the 2,201 verified sentences; gate v1.4 closes the 48 swapped-side passes it found; nine runs re-gated with no verdict change; harness --out-dir for repeat runs. Mutation harness (`build/scripts/mutate.ts`, `npm run mutate`, 13 tests): each of the 2,201 sentences the nine kept runs verified gets one fabrication at a time, 9,475 in all, and the gate runs on each. Under gate v1.3: numbers replaced by values absent from every admissible source, citations moved to an entry lacking the quote, a word dropped from the…
 - **ce40903 · 2026-10-28 08:12** · Build log: regenerate after c119e09. (no ledger row)
-- **c119e09 · 2026-10-28 01:12** · Title cards: monospace, block cursor stays, two-second hold. Title cards in JetBrains Mono with a block cursor that keeps blinking after the line is typed; each card holds 2 s once complete; asset links v14
-- **a83d4c5 · 2026-10-28 08:10** · Build log: regenerate after 951863a. (no ledger row)
 <!-- build-log:end -->
 
 ## From the inside

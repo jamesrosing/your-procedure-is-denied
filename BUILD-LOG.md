@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-10-29 04:53 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-10-29 05:59 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -269,3 +269,12 @@ Mutation harness (`build/scripts/mutate.ts`, `npm run mutate`, 13 tests): each o
 ### a39857c · 2026-10-28 21:53 · README: primary-source check of every statistic; KFF footnote rewritten, WISeR services per CMS, framing paragraph, the gate's measured catch rate under Limitations
 
 README: primary-source check of every statistic spoken in the video or shown on a title card. The KFF short link had died and KFF now serves the 2024 edition at the 2023 slug; footnote rewritten (2023 figures kept, the 81.7 percent overturn rate attributed as the 2023 rate through AHA News, the 2024 figures noted: 52.8 million requests, 4.1 million denied, 80.7 percent of appeals overturned). WISeR services corrected from "knee replacements", copied from Medical Economics, to knee arthroscopy for osteoarthritis per CMS's own list, with a CMS footnote. AMA, Cigna, UnitedHealth court order, and Senate figures confirmed at their sources (the Senate PDF only through Healthcare Dive; it blocks automated download). A framing paragraph near the top, what this is and is not. A paragraph under Limitations reporting what the mutation harness measured, with the referential limit as counts
+
+### 1e4ead3 · 2026-10-29 04:53 · Build log: regenerate after a39857c
+
+(no ledger row)
+
+### 78a2105 · 2026-10-28 22:59 · Repeat runs: two more per live-CHART configuration in build/results/repeats; run-to-run variance reported as ranges under Limitations
+
+Results added: `repeats/baseten-meta-models_muse-spark-open-low-agentic-chart-2026-10-29T04-29-17-118Z.json`, `repeats/baseten-meta-models_muse-spark-open-low-agentic-chart-2026-10-29T04-31-36-875Z.json`, `repeats/meta-muse-spark-1.3-low-agentic-chart-2026-10-29T04-29-16-858Z.json`, `repeats/meta-muse-spark-1.3-low-agentic-chart-2026-10-29T04-30-27-555Z.json`, `repeats/meta-muse-wonder-1.0-low-agentic-chart-2026-10-29T04-31-38-694Z.json`, `repeats/meta-muse-wonder-1.0-low-agentic-chart-2026-10-29T04-33-41-439Z.json`.
+Repeat runs: each live-CHART configuration run twice more with the same 50 cases and settings (`build/results/repeats/`, six files, re-gated to v1.4). muse-wonder-1.0 50 of 50 both times; muse-spark-1.3 47 and 50 (the 47: three empty warranted answers on absent cases, all blocked by the gate); Muse Spark Open on Baseten 48 and 42 (the 42: seven blocks, every one a true sentence citing one entry for facts that live in two or a rounded figure the chart never states, plus the case-023 referential-limit false pass again). Zero fabricated quotes in all six. README gains a run-to-run variance bullet under Limitations, and the small-counts bullet no longer says there are no repeat runs
