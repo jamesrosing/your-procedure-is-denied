@@ -53,6 +53,14 @@ const ui = {
   progress: $<HTMLElement>('progress'),
   boardSection: $<HTMLElement>('board'),
   intro: $<HTMLElement>('intro'),
+  introStage: $<HTMLElement>('intro-stage'),
+  strip: $<HTMLElement>('strip'),
+  preamble: $<HTMLElement>('preamble'),
+  preambleText: $<HTMLElement>('preamble-text'),
+  preambleNotes: $<HTMLElement>('preamble-notes'),
+  preambleStamp: $<HTMLElement>('preamble-stamp'),
+  preambleClose: $<HTMLButtonElement>('preamble-close'),
+  about: $<HTMLButtonElement>('btn-about'),
   introStamp: $<HTMLElement>('intro-stamp'),
   introSources: $<HTMLElement>('intro-sources'),
   introSkip: $<HTMLButtonElement>('intro-skip'),
@@ -164,6 +172,7 @@ function renderEntries(state: ReplayState, steps: Step[]): void {
 }
 
 function renderCriteria(state: ReplayState): void {
+  renderStrip(state);
   ui.criteria.replaceChildren(...state.criteria.map(k => {
     const li = document.createElement('li');
     li.className = 'criterion';
@@ -207,6 +216,54 @@ function renderCriteria(state: ReplayState): void {
     li.append(text('span', '', `${l.tool}: ${l.note}`));
     return li;
   }));
+}
+
+// The live query strip. The answer types out once per visit to the step; a
+// re-render at the same cursor leaves it alone.
+let stripTimers: number[] = [];
+let stripKey = '';
+function renderStrip(state: ReplayState): void {
+  const strip = state.strip;
+  const key = strip ? `${session.rendered.file ?? ''}|${session.result?.caseId ?? ''}|${state.cursor}` : '';
+  if (!strip) {
+    if (!ui.strip.hidden) { ui.strip.hidden = true; ui.criteria.hidden = false; ui.lookups.hidden = false; }
+    for (const t of stripTimers) window.clearTimeout(t);
+    stripTimers = []; stripKey = '';
+    return;
+  }
+  if (key === stripKey && !ui.strip.hidden) return;
+  for (const t of stripTimers) window.clearTimeout(t);
+  stripTimers = []; stripKey = key;
+  const node = (cls: string, label: string, value: string) => {
+    const n = document.createElement('div');
+    n.className = `node ${cls}`;
+    n.append(text('span', 'lbl', label), text('span', 'val', value));
+    return n;
+  };
+  const arrow = () => text('span', 'arrow', '→');
+  const answer = node('answer', 'answer', '');
+  const q = text('div', 'q', '');
+  q.append(text('span', 'live-tag', 'live CHART query, prior-work data source'), text('span', '', strip.question));
+  ui.strip.replaceChildren(node('payer', 'payer', strip.payer), arrow(), node('authority', 'authority asked', strip.authority), arrow(), node('index', 'index', strip.index), arrow(), answer, q);
+  ui.criteria.hidden = true;
+  ui.lookups.hidden = true; // the strip carries the query's line; the list returns with the criteria
+  ui.strip.hidden = false;
+  const val = answer.querySelector<HTMLElement>('.val')!;
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduced) { val.textContent = strip.answer; return; }
+  // Type the answer after the nodes have arrived, at the title cards' pace.
+  const chars = [...strip.answer];
+  const cursor = text('span', 'cursor', '');
+  val.append(cursor);
+  let n = 0;
+  const tick = (): void => {
+    const ch = chars[n];
+    if (ch !== undefined) cursor.before(document.createTextNode(ch));
+    n += 1;
+    if (n < chars.length) stripTimers.push(window.setTimeout(tick, INTRO_CHAR_MS));
+    else stripTimers.push(window.setTimeout(() => cursor.remove(), 900));
+  };
+  stripTimers.push(window.setTimeout(tick, 560));
 }
 
 function renderSentences(state: ReplayState): void {
@@ -415,6 +472,19 @@ async function renderBoard(): Promise<void> {
 let introTimers: number[] = [];
 let introOpen = false;
 
+function showPreamble(on: boolean): void {
+  if (on) {
+    ui.preambleText.textContent = INTRO_LINES.join(' ');
+    ui.preambleNotes.textContent = INTRO_NOTES;
+    ui.preambleStamp.textContent = INTRO_STAMP;
+  }
+  ui.preamble.hidden = !on;
+}
+
+// The cards end by travelling: the block of lines shrinks and slides down to
+// where the preamble paragraph sits at the bottom of the page, while the scrim
+// lifts and the column headers light; then the paragraph takes over. Reduced
+// motion, or an ended animation, goes straight to the paragraph.
 function endIntro(): void {
   if (!introOpen) return;
   introOpen = false;
@@ -422,7 +492,29 @@ function endIntro(): void {
   introTimers = [];
   ui.intro.classList.add('leaving');
   document.body.classList.remove('cards');
-  window.setTimeout(() => { ui.intro.hidden = true; ui.intro.classList.remove('leaving'); }, INTRO_FADE_MS);
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const finish = (): void => { ui.intro.hidden = true; ui.intro.classList.remove('leaving'); ui.introStage.style.transform = ''; ui.preamble.style.visibility = ''; };
+  showPreamble(true);
+  if (reduced || typeof ui.introStage.animate !== 'function') { finish(); return; }
+  ui.preamble.style.visibility = 'hidden';
+  const first = ui.introStage.getBoundingClientRect();
+  const last = ui.preambleText.getBoundingClientRect();
+  if (first.width === 0 || first.height === 0) { finish(); return; }
+  const dx = last.left - first.left;
+  const dy = last.top - first.top;
+  // One scale for both axes, the ratio of the two type sizes, so the glyphs
+  // keep their shape and arrive at the paragraph's size; the paragraph then
+  // takes over with its own line breaks.
+  const line = ui.introStage.querySelector<HTMLElement>('.intro-line');
+  const from = line ? parseFloat(getComputedStyle(line).fontSize) : 35;
+  const to = parseFloat(getComputedStyle(ui.preambleText).fontSize) || 14;
+  const scale = Math.max(0.05, to / from);
+  const run = ui.introStage.animate(
+    [{ transform: 'translate(0px, 0px) scale(1)', opacity: 1 }, { transform: `translate(${dx}px, ${dy}px) scale(${scale})`, opacity: 0.4 }],
+    { duration: INTRO_FADE_MS, easing: 'cubic-bezier(0.2, 0.8, 0.2, 1)', fill: 'forwards' },
+  );
+  run.addEventListener('finish', () => { run.cancel(); finish(); });
+  run.addEventListener('cancel', finish);
 }
 
 function playIntro(): void {
@@ -430,6 +522,7 @@ function playIntro(): void {
   introOpen = true;
   stop();
   seek(0);
+  showPreamble(false);
   document.body.classList.add('cards');
   const lines = [...ui.intro.querySelectorAll<HTMLElement>('.intro-line')];
   lines.forEach(el => { el.textContent = ''; el.classList.remove('show', 'typing'); });
@@ -521,6 +614,8 @@ async function boot(): Promise<void> {
   window.addEventListener('hashchange', () => { void applyHash(); });
   ui.introSkip.addEventListener('click', endIntro);
   ui.intro.addEventListener('click', endIntro);
+  ui.preambleClose.addEventListener('click', () => showPreamble(false));
+  ui.about.addEventListener('click', () => showPreamble(true));
   if (!deepLinked) playIntro();
 
   ui.filePicker.addEventListener('change', () => { void selectFile(ui.filePicker.value); });
@@ -551,6 +646,7 @@ async function boot(): Promise<void> {
       case 'Home': e.preventDefault(); stop(); seek(0); break;
       case 'End': e.preventDefault(); stop(); seek(session.steps.length); break;
       case 's': case 'S': showBoard(ui.boardSection.hasAttribute('hidden')); break;
+      case 'p': case 'P': showPreamble(ui.preamble.hidden !== false); break;
     }
   });
 }

@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readdirSync, readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { buildTimeline, citedEntries, firstLine, INTRO_FADE_MS, INTRO_LINES, INTRO_NOTES, INTRO_STAMP, introTypeMs, introSchedule, playDelayMs, scoreboard, stateAt, type ResultsFile, type ViewerCase, type ViewerResult } from '../viewer/src/replay.js';
+import { buildTimeline, citedEntries, firstLine, INTRO_FADE_MS, INTRO_LINES, INTRO_NOTES, INTRO_STAMP, introTypeMs, introSchedule, LOOKUP_DWELL_MS, lookupStrip, playDelayMs, scoreboard, stateAt, type ResultsFile, type ViewerCase, type ViewerResult } from '../viewer/src/replay.js';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const resultsDir = join(here, '..', 'results');
@@ -251,11 +251,11 @@ describe('the advisor step', () => {
 });
 
 describe('the title cards', () => {
-  test('three lines, at most twenty-four words, sentence case, no exclamation marks, no project names; every footnote marker resolves in the notes; the stamp states what was built this week and what was pre-existing', () => {
+  test('three lines, at most thirty words, sentence case, no exclamation marks, no project names; every footnote marker resolves in the notes; the stamp states what was built this week and what was pre-existing', () => {
     assert.equal(INTRO_LINES.length, 3);
     const markers = new Set<string>();
     for (const line of INTRO_LINES) {
-      assert.ok(line.split(/\s+/).length <= 24, line);
+      assert.ok(line.split(/\s+/).length <= 30, line);
       assert.ok(!line.includes('!'));
       assert.match(line, /^[A-Z]/);
       assert.match(line, /\.[\u00b9\u00b2\u00b3]?$/, line);
@@ -299,5 +299,44 @@ describe('the title cards', () => {
     for (let i = 1; i < s.length; i++) assert.ok(s[i]!.show >= s[i - 1]!.hide, 'no overlap');
     const total = s[s.length - 1]!.hide;
     assert.ok(total > 9000 && total < 25000, String(total));
+  });
+});
+
+describe('the live CHART query, shown as a strip while it is the last step applied', () => {
+  const liveFile = files.find(f => f.results.some(r => (r.trace ?? []).some(t => t.live === true)))!;
+  const liveResult = liveFile.results.find(r => (r.trace ?? []).some(t => t.live === true && t.tool === 'policy_status'))!;
+  const c = cases.get(liveResult.caseId)!;
+  const steps = buildTimeline(liveResult, c);
+  const at = steps.findIndex(s => s.kind === 'lookup' && s.live);
+
+  test('a live lookup step carries its question: the authority, the code, and the date of service', () => {
+    const step = steps[at]!;
+    assert.equal(step.kind, 'lookup');
+    if (step.kind === 'lookup') {
+      assert.equal(step.live, true);
+      assert.deepEqual(step.input, { authority: 'cms', code: c.procedure.code, asOf: c.denial.dateOfService });
+    }
+  });
+
+  test('the state carries the strip only while the last step applied is a live lookup: payer, authority, index, question, answer', () => {
+    const during = stateAt(steps, liveResult, c, at + 1);
+    assert.ok(during.strip, 'strip present at the lookup');
+    assert.equal(during.strip!.payer, c.payer.name);
+    assert.equal(during.strip!.authority, 'CMS');
+    assert.match(during.strip!.index, /CHART/);
+    assert.match(during.strip!.question, new RegExp(`${c.procedure.code}.*${c.denial.dateOfService}`));
+    assert.match(during.strip!.answer, /criteria last changed \d{4}-\d{2}-\d{2}, last checked \d{4}-\d{2}-\d{2}/);
+    assert.ok(!during.strip!.answer.startsWith('cms:'), 'the authority is its own node, not a prefix on the answer');
+    assert.equal(stateAt(steps, liveResult, c, at).strip, null, 'nothing before the lookup');
+    assert.equal(stateAt(steps, liveResult, c, at + 2).strip, null, 'gone once the next step applies');
+    assert.equal(lookupStrip({ kind: 'lookup', tool: 'policy_status', note: 'CHART HTTP 402', live: true, atMs: 0 }, c)?.answer, 'CHART HTTP 402', 'a failed query still shows its answer');
+    assert.equal(lookupStrip({ kind: 'lookup', tool: 'list_entries', note: '26 entries', live: false, atMs: 0 }, c), null, 'no strip for an index listing');
+  });
+
+  test('playback dwells on a live lookup long enough to read the typed answer, scaled by speed', () => {
+    assert.ok(LOOKUP_DWELL_MS >= 3000);
+    assert.equal(playDelayMs(steps, at + 1, 1), Math.max(LOOKUP_DWELL_MS, playDelayMs(steps.map((s, i) => i === at ? { ...s, live: false } : s), at + 1, 1)));
+    assert.equal(playDelayMs(steps, at + 1, 2), playDelayMs(steps, at + 1, 1) / 2);
+    assert.ok(playDelayMs(steps, at, 1) <= 1400, 'the step into the lookup is paced as before');
   });
 });

@@ -92,7 +92,7 @@ export interface ResultsFile {
 
 export type Step =
   | { kind: 'read'; entryId: string; tool: string; live: boolean; note?: string; atMs: number }
-  | { kind: 'lookup'; tool: string; note: string; live: boolean; atMs: number }
+  | { kind: 'lookup'; tool: string; note: string; live: boolean; input?: LookupQuestion; atMs: number }
   | { kind: 'read-all'; entryIds: string[]; atMs: number }
   | { kind: 'evidence'; criterion: string; citation: string; quote: string; status: RecordStatus; reason: string; atMs: number }
   | { kind: 'sentence'; index: number; text: string; citation: string; quote: string; status: RecordStatus; reason: string; atMs: number }
@@ -121,7 +121,8 @@ export interface ReplayState {
   total: number;
   read: string[]; // entry ids lit, in the order they were read
   open: string | null; // the entry whose text is slid open, the last one read
-  lookups: { tool: string; note: string; live: boolean }[];
+  lookups: { tool: string; note: string; live: boolean; input?: LookupQuestion }[];
+  strip: LookupStrip | null; // the live CHART query as a strip, only while it is the last step applied
   criteria: CriterionState[];
   sentences: SentenceState[];
   verdict: Extract<Step, { kind: 'verdict' }> | null;
@@ -147,6 +148,32 @@ export function citedEntries(result: ViewerResult): string[] {
   return ids;
 }
 
+// The question a live query asked, as the trace recorded it.
+export interface LookupQuestion { authority: string; code: string; asOf: string }
+
+export function lookupQuestion(input: Record<string, unknown> | undefined): LookupQuestion | undefined {
+  if (!input) return undefined;
+  const authority = String(input['authority'] ?? '').trim().toLowerCase();
+  const code = String(input['code'] ?? '').trim();
+  const asOf = String(input['date_of_service'] ?? input['asOf'] ?? '').trim();
+  if (!authority && !code && !asOf) return undefined;
+  return { authority: authority || 'cms', code, asOf };
+}
+
+// The live CHART query as four nodes: the payer whose denial this is, the
+// authority asked about, the index that answered, and the answer, typed out.
+// Shown in place of the criteria list for the one step the query is the
+// last thing that happened, then the criteria return with the query's line.
+export interface LookupStrip { payer: string; authority: string; index: string; question: string; answer: string }
+
+export function lookupStrip(step: Step, c: ViewerCase): LookupStrip | null {
+  if (step.kind !== 'lookup' || !step.live) return null;
+  const authorityId = step.input?.authority ?? 'cms';
+  const answer = step.note.replace(new RegExp(`^${authorityId.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}:\\s*`, 'i'), '');
+  const question = step.input ? `${step.tool}: ${step.input.code} as of ${step.input.asOf}` : step.tool;
+  return { payer: c.payer.name, authority: authorityId.toUpperCase(), index: 'CHART coverage index, prior-work data source', question, answer };
+}
+
 export function buildTimeline(result: ViewerResult, c: ViewerCase): Step[] {
   const steps: Step[] = [];
   const chartIds = new Set(c.chart.map(e => e.id));
@@ -158,7 +185,8 @@ export function buildTimeline(result: ViewerResult, c: ViewerCase): Step[] {
       if (t.tool === 'read_entry' && t.entryId && chartIds.has(t.entryId)) {
         steps.push({ kind: 'read', entryId: t.entryId, tool: t.tool, live: t.live ?? false, ...(t.note ? { note: t.note } : {}), atMs: t.atMs });
       } else if (t.tool !== 'read_entry') {
-        steps.push({ kind: 'lookup', tool: t.tool, note: t.note ?? (t.ok ? 'ok' : 'failed'), live: t.live ?? false, atMs: t.atMs });
+        const input = lookupQuestion(t.input);
+        steps.push({ kind: 'lookup', tool: t.tool, note: t.note ?? (t.ok ? 'ok' : 'failed'), live: t.live ?? false, ...(input ? { input } : {}), atMs: t.atMs });
       }
       readingEnds = Math.max(readingEnds, t.atMs);
     }
@@ -208,6 +236,7 @@ export function initialState(steps: Step[], result: ViewerResult, c: ViewerCase)
     read: [],
     open: null,
     lookups: [],
+    strip: null,
     criteria: c.criteria.map(k => ({ id: k.id, text: k.text, status: 'pending', evidence: [] })),
     sentences: [],
     verdict: null,
@@ -216,9 +245,10 @@ export function initialState(steps: Step[], result: ViewerResult, c: ViewerCase)
   };
 }
 
-function apply(state: ReplayState, step: Step, result: ViewerResult): ReplayState {
+function apply(state: ReplayState, step: Step, result: ViewerResult, c: ViewerCase): ReplayState {
   const next: ReplayState = {
     ...state,
+    strip: null,
     read: state.read.slice(),
     lookups: state.lookups.slice(),
     criteria: state.criteria.map(k => ({ ...k, evidence: k.evidence.slice() })),
@@ -235,7 +265,8 @@ function apply(state: ReplayState, step: Step, result: ViewerResult): ReplayStat
       next.open = step.entryIds[step.entryIds.length - 1] ?? null;
       break;
     case 'lookup':
-      next.lookups.push({ tool: step.tool, note: step.note, live: step.live });
+      next.lookups.push({ tool: step.tool, note: step.note, live: step.live, ...(step.input ? { input: step.input } : {}) });
+      next.strip = lookupStrip(step, c);
       break;
     case 'evidence': {
       const k = next.criteria.find(x => x.id === step.criterion);
@@ -272,7 +303,7 @@ function apply(state: ReplayState, step: Step, result: ViewerResult): ReplayStat
 export function stateAt(steps: Step[], result: ViewerResult, c: ViewerCase, cursor: number): ReplayState {
   const k = Math.max(0, Math.min(cursor, steps.length));
   let state = initialState(steps, result, c);
-  for (let i = 0; i < k; i++) state = apply(state, steps[i]!, result);
+  for (let i = 0; i < k; i++) state = apply(state, steps[i]!, result, c);
   state.cursor = k;
   state.done = k >= steps.length;
   return state;
@@ -282,11 +313,17 @@ export function stateAt(steps: Step[], result: ViewerResult, c: ViewerCase, curs
 // latency is compressed so a 16 second call replays in a few seconds, with a
 // floor so each step registers on screen.
 export function playDelayMs(steps: Step[], cursor: number, speed = 1): number {
-  const prev = cursor > 0 ? steps[cursor - 1]?.atMs ?? 0 : 0;
+  const before = cursor > 0 ? steps[cursor - 1] : undefined;
+  const prev = before?.atMs ?? 0;
   const cur = steps[cursor]?.atMs ?? prev;
   const real = Math.max(0, cur - prev);
-  return Math.max(220, Math.min(1400, real / 8)) / speed;
+  let wait = Math.max(220, Math.min(1400, real / 8));
+  // A live query is shown as a strip with its answer typed out; hold it long enough to read.
+  if (before?.kind === 'lookup' && before.live) wait = Math.max(wait, LOOKUP_DWELL_MS);
+  return wait / speed;
 }
+
+export const LOOKUP_DWELL_MS = 3200;
 
 // --- the scoreboard ----------------------------------------------------------
 
@@ -371,13 +408,13 @@ export function formatSeconds(ms: number): string {
 // the project: how care is paid for in the United States, what payers have
 // been cited for, and what this does about it. No project names: a cold viewer
 // cannot know them. Kept here so a test can hold the copy to its discipline:
-// three lines, at most twenty-four words each, sentence case, no exclamation
+// three lines, at most thirty words each, sentence case, no exclamation
 // marks, no jargon; a statement that warrants a source carries a superscript
 // marker that INTRO_NOTES resolves.
 export const INTRO_LINES: readonly string[] = [
   "In the United States, insurers and Medicare pay for care by what the doctor documents, judged by each payer's rules.",
   "Rules differ by payer.\u00b9 Medicare Advantage plans were cited for automatic denials.\u00b2",
-  "This sets the payer's current policy beside the doctor's record, so both are accountable. It aims to level the playing field for the provider.",
+  "This project sets the payer's current policy beside the doctor's record, so both are accountable. It aims to level the playing field for providers.",
 ];
 
 // The sources for the marked statements, small, at the bottom with the stamp.
