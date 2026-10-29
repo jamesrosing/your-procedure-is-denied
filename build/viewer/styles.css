@@ -99,7 +99,7 @@ h2 { font-size: 13.5px; font-weight: 500; color: var(--ink-7); }
    step, under a scrim that is nearly solid beneath the text and light over
    the three columns, so what the lines describe stays visible below them.
    The one orchestrated moment on the page; nothing else moves on its own. */
-.intro { position: fixed; inset: 0; z-index: 100; display: grid; align-content: start; justify-items: center; padding: 44px 2vw 0; background: linear-gradient(to bottom, color-mix(in oklab, var(--ink-0) 92%, transparent) 0, color-mix(in oklab, var(--ink-0) 92%, transparent) 270px, color-mix(in oklab, var(--ink-0) 42%, transparent) 400px, color-mix(in oklab, var(--ink-0) 42%, transparent) 100%); opacity: 1; transition: opacity 400ms var(--ease-out); }
+.intro { position: fixed; inset: 0; z-index: 100; display: grid; align-content: start; justify-items: center; padding: 44px 2vw 0; background: linear-gradient(to bottom, color-mix(in oklab, var(--ink-0) 92%, transparent) 0, color-mix(in oklab, var(--ink-0) 92%, transparent) 320px, color-mix(in oklab, var(--ink-0) 42%, transparent) 450px, color-mix(in oklab, var(--ink-0) 42%, transparent) 100%); opacity: 1; transition: opacity 400ms var(--ease-out); }
 .intro[hidden] { display: none; }
 .intro.leaving { opacity: 0; pointer-events: none; }
 .intro-stage { display: grid; gap: 10px; width: max-content; max-width: 96vw; }
@@ -110,7 +110,8 @@ h2 { font-size: 13.5px; font-weight: 500; color: var(--ink-7); }
 .intro-line .ch.on { visibility: visible; }
 .intro-line .cursor { display: inline-block; width: 0.55em; height: 1em; margin-left: 0.05em; vertical-align: -0.12em; background: var(--ink-7); animation: cursor 900ms steps(2, start) infinite; }
 @keyframes cursor { to { visibility: hidden; } }
-.intro-foot { position: absolute; right: 24px; bottom: 44px; display: flex; justify-content: flex-end; }
+.intro-foot { position: absolute; left: 24px; right: 24px; bottom: 10px; display: flex; justify-content: space-between; align-items: center; gap: 24px; }
+.intro-stamp { font-family: var(--font-mono); font-size: clamp(11px, 0.8vw, 15px); line-height: 1.4; color: var(--ink-6); background: var(--ink-0); padding: 5px 10px; border-radius: var(--radius-sm); }
 
 /* --- top bar: 56px, light, hairline -------------------------------------- */
 

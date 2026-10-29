@@ -363,21 +363,26 @@ export function formatSeconds(ms: number): string {
   return `${(ms / 1000).toFixed(1)} s`;
 }
 
-// The title cards: four lines typed out letter by letter at about
+// The title cards: three lines typed out letter by letter at about
 // twenty-eight characters a second, each held a moment once complete and kept
 // while the next types, so the block gathers at the top of the page as one
 // short paragraph while the replay waits below; then the block fades and the
-// page comes into focus. Typing paces the reading. Kept here so a test can
-// hold the copy to its discipline: four lines, at most twenty-four words each,
-// sentence case, no exclamation marks; the first line states what was
-// pre-existing and what was built this week, as the event rule asks; the last
-// says no patient is advised and who signs.
+// page comes into focus. Written from far out, for someone who has never seen
+// the project: how care is paid for in the United States, what payers have
+// been cited for, and what this does about it. No project names: a cold viewer
+// cannot know them. Kept here so a test can hold the copy to its discipline:
+// three lines, at most twenty-four words each, sentence case, no exclamation
+// marks, no jargon.
 export const INTRO_LINES: readonly string[] = [
-  "Pre-existing: heme, writ, CHART, the LITMUS papers. Built this week: the rest.",
-  "Below, left to right: the chart, the payer's own criteria, the appeal.",
-  "A Meta model drafts the appeal. A gate holds every sentence to the chart.",
-  "No advice to patients. A physician reads and signs.",
+  "In the United States, insurers and Medicare pay for care based on the doctor's documentation, judged by each payer's rules.",
+  "Rules differ by payer. Payers have been cited for denying care automatically.",
+  "This sets the payer's current policy beside the doctor's documentation, so both are accountable. Insurers hold the cards. This levels the field.",
 ];
+
+// The provenance stamp, small, on screen from the first frame: the event rule
+// asks that the video open with one line stating what was pre-existing and
+// what was built this week. Plain words, the one proper noun glossed.
+export const INTRO_STAMP = "Built this week: everything shown here. Pre-existing, not shown: the author's record system, appeal engine, coverage index, and the published LITMUS standard.";
 
 export const INTRO_CHAR_MS = 36; // per typed character
 export const INTRO_HOLD_MS = 2000; // after the last character, cursor still blinking

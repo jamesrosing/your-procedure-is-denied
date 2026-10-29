@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readdirSync, readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { buildTimeline, citedEntries, firstLine, INTRO_FADE_MS, INTRO_LINES, introTypeMs, introSchedule, playDelayMs, scoreboard, stateAt, type ResultsFile, type ViewerCase, type ViewerResult } from '../viewer/src/replay.js';
+import { buildTimeline, citedEntries, firstLine, INTRO_FADE_MS, INTRO_LINES, INTRO_STAMP, introTypeMs, introSchedule, playDelayMs, scoreboard, stateAt, type ResultsFile, type ViewerCase, type ViewerResult } from '../viewer/src/replay.js';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const resultsDir = join(here, '..', 'results');
@@ -251,21 +251,18 @@ describe('the advisor step', () => {
 });
 
 describe('the title cards', () => {
-  test('four lines, at most twenty-four words, sentence case, no exclamation marks; the first names what was pre-existing and what was built this week, the last says no patient is advised and who signs', () => {
-    assert.equal(INTRO_LINES.length, 4);
+  test('three lines, at most twenty-four words, sentence case, no exclamation marks, no project names; the stamp states what was built this week and what was pre-existing', () => {
+    assert.equal(INTRO_LINES.length, 3);
     for (const line of INTRO_LINES) {
       assert.ok(line.split(/\s+/).length <= 24, line);
       assert.ok(!line.includes('!'));
       assert.match(line, /^[A-Z]/);
       assert.match(line, /\.$/);
+      assert.doesNotMatch(line, /\b(heme|writ|CHART|LITMUS|HIPPS|CARC|Muse)\b/, line);
     }
-    const first = INTRO_LINES[0]!;
-    for (const name of ['heme', 'writ', 'CHART', 'LITMUS']) assert.ok(first.includes(name), name);
-    assert.match(first, /Pre-existing/);
-    assert.match(first, /this week/);
-    const last = INTRO_LINES[INTRO_LINES.length - 1]!;
-    assert.match(last, /No advice to patients/);
-    assert.match(last, /physician reads and signs\.$/);
+    assert.match(INTRO_STAMP, /^Built this week: /);
+    assert.match(INTRO_STAMP, /Pre-existing/);
+    assert.ok(!INTRO_STAMP.includes('!'));
   });
   test('the opening reaches the first replay frame within the twenty-second video budget', () => {
     const s = introSchedule();

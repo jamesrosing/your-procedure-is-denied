@@ -2,7 +2,7 @@
 // results file and a case, and renders `stateAt` for the current cursor.
 // Everything that decides what a step means lives in replay.ts.
 import {
-  buildTimeline, firstLine, formatSeconds, formatUsd, INTRO_CHAR_MS, INTRO_FADE_MS, INTRO_LINES, introSchedule, playDelayMs, scoreboard, stateAt,
+  buildTimeline, firstLine, formatSeconds, formatUsd, INTRO_CHAR_MS, INTRO_FADE_MS, INTRO_LINES, INTRO_STAMP, introSchedule, playDelayMs, scoreboard, stateAt,
   type ReplayState, type ResultsFile, type Step, type ViewerCase, type ViewerResult,
 } from './replay.js';
 
@@ -53,6 +53,7 @@ const ui = {
   progress: $<HTMLElement>('progress'),
   boardSection: $<HTMLElement>('board'),
   intro: $<HTMLElement>('intro'),
+  introStamp: $<HTMLElement>('intro-stamp'),
   introSkip: $<HTMLButtonElement>('intro-skip'),
   boardTable: $<HTMLTableElement>('board-table'),
 };
@@ -405,7 +406,7 @@ async function renderBoard(): Promise<void> {
 
 // --- title cards ---------------------------------------------------------------
 // Plays when the page opens without a deep link, and on the i key. Any key or
-// click skips. With reduced motion the four lines show at once and wait. The
+// click skips. With reduced motion the three lines show at once and wait. The
 // lines type one after another and stay, gathering at the top of the page
 // over the case itself, rewound to the untouched chart; the reveal lights the
 // three column headers left to right (styles.css).
@@ -431,6 +432,7 @@ function playIntro(): void {
   document.body.classList.add('cards');
   const lines = [...ui.intro.querySelectorAll<HTMLElement>('.intro-line')];
   lines.forEach(el => { el.textContent = ''; el.classList.remove('show', 'typing'); });
+  ui.introStamp.textContent = INTRO_STAMP;
   ui.intro.hidden = false;
   ui.intro.classList.remove('leaving');
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
