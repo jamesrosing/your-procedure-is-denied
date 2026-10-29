@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-10-29 17:13 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-10-29 17:41 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -323,3 +323,11 @@ Title cards in Jim's words (`build/viewer/src/replay.ts`): payment depends on wh
 ### 0e347d9 · 2026-10-29 01:48 · Title block holds two seconds longer before it travels, the travel takes 700 ms, and typed characters are scheduled at absolute times so long lines do not drift; budget test 26 s
 
 The finished title block holds two seconds longer before it travels, and the travel takes 700 ms instead of 400 (`INTRO_END_PAUSE_MS`, `INTRO_MOVE_MS` in `build/viewer/src/replay.ts`; the scrim and caption band fade over the same time); the budget test holds the pause and moves to 26 s (25.64 s to the first replay frame). Each typed character is now due at an absolute time from the start instead of chained timers, so long lines no longer drift (the last line had landed about half a second late, eating the hold); measured hold after the last line 4.05 s. Asset links v20
+
+### 83bf7dd · 2026-10-29 17:13 · Build log: regenerate after 0e347d9
+
+(no ledger row)
+
+### 0f4e153 · 2026-10-29 10:17 · The opening ends on who signs: it drafts; a physician signs
+
+The opening ends on who signs: "It drafts; a physician signs." closes the third line, held together with no-break spaces so it never splits across rows; the copy test asserts the ending and allows thirty-two words; the scrim's solid band deepened for seven rows; budget test 27 s (26.72 s to the first replay frame). Asset links v21

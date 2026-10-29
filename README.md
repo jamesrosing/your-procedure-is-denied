@@ -189,9 +189,9 @@ Two things followed from reading those five cases, both built the same morning. 
 Every commit since the event began has a row in [NEW-WORK.md](NEW-WORK.md), every result file carries its model, mode, gate version, and any re-gate in its own header, and this section is regenerated from those sources after every push. Nothing in it is typed by hand.
 
 <!-- build-log:start -->
-_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-10-29 17:13 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
+_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-10-29 17:41 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
 
-65 commits since the `hackathon-start` tag, the last at 2026-10-29 01:48 (0e347d9). Gate v1.4. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
+67 commits since the `hackathon-start` tag, the last at 2026-10-29 10:17 (0f4e153). Gate v1.4. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
 
 | Started (UTC) | Model | Mode | Agreed | Blocked | False pass | Advisor |
 | --- | --- | --- | :---: | :---: | :---: | --- |
@@ -207,11 +207,11 @@ _Generated from the git history, the ledger, and the result files by `npm run lo
 
 Last five commits, newest first, with the ledger row each one carried:
 
+- **0f4e153 · 2026-10-29 10:17** · The opening ends on who signs: it drafts; a physician signs. The opening ends on who signs: "It drafts; a physician signs." closes the third line, held together with no-break spaces so it never splits across rows; the copy test asserts the ending and allows thirty-two words; the scrim's solid band deepened for seven rows; budget test 27 s (26.72 s to the first replay frame). Asset links v21
+- **83bf7dd · 2026-10-29 17:13** · Build log: regenerate after 0e347d9. (no ledger row)
 - **0e347d9 · 2026-10-29 01:48** · Title block holds two seconds longer before it travels, the travel takes 700 ms, and typed characters are scheduled at absolute times so long lines do not drift; budget test 26 s. The finished title block holds two seconds longer before it travels, and the travel takes 700 ms instead of 400 (`INTRO_END_PAUSE_MS`, `INTRO_MOVE_MS` in `build/viewer/src/replay.ts`; the scrim and caption band fade over the same time); the budget test holds the pause and moves to 26 s (25.64 s to the first replay frame). Each typed character is now due…
 - **f55898d · 2026-10-29 08:33** · Build log: regenerate after 2516a20. (no ledger row)
 - **2516a20 · 2026-10-29 01:31** · Title cards in the author's words: payment depends on what the doctor documented, judged against that payer's coverage rules; those rules differ by payer, and federal investigators found Medicare Advantage plans denying care that met Medicare's own criteria; this project places the payer policy in force on the date of service beside the doctor's record. Budget test 24 s. Title cards in Jim's words (`build/viewer/src/replay.ts`): payment depends on what the doctor documented, judged against that payer's coverage rules; those rules differ by payer, and federal investigators found Medicare Advantage plans denying care that met Medicare's own criteria (both markers to the HHS Inspector General's 2022 report); this project…
-- **3e005bb · 2026-10-29 08:23** · Build log: regenerate after f6aa618. (no ledger row)
-- **f6aa618 · 2026-10-29 01:07** · The cards end by travelling into a preamble paragraph at the bottom of the page, sources and stamp beneath, dismiss and restore; the live CHART query shown as a four-node strip with the answer typed, held 3.2 s in playback; closing line names its subject. The cards end by travelling (`build/viewer/`): the block of three lines shrinks and slides down into a preamble paragraph at the bottom of the page, the sources and the provenance stamp under it, with a dismiss button; the p key or the footer's "about this page" brings it back, and the stage gives up the height only while it is open. The closing line…
 <!-- build-log:end -->
 
 ## From the inside
