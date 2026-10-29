@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-10-28 08:12 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-10-29 04:53 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -12,15 +12,15 @@ Every file carries its own header: model, mode, gate version at the run, any lat
 
 | Started (UTC) | Model | Mode | Agreed | Blocked | False pass | Failed | Gate at run | Re-gated to | Advisor |
 | --- | --- | --- | :---: | :---: | :---: | :---: | :---: | :---: | --- |
-| 2026-10-27 08:17 | muse-spark-1.3 (meta) | chart in prompt | 50 of 50 | 0 | 0 | 0 | v1 | v1.3 |  |
-| 2026-10-27 08:19 | muse-wonder-1.0 (meta) | chart in prompt | 49 of 50 | 0 | 0 | 0 | v1 | v1.3 |  |
-| 2026-10-27 08:20 | meta-models/muse-spark-open (baseten) | chart in prompt | 49 of 50 | 1 | 0 | 0 | v1 | v1.3 |  |
-| 2026-10-28 03:20 | muse-spark-1.3 (meta) | agentic | 50 of 50 | 0 | 0 | 0 | v1.1 | v1.3 |  |
-| 2026-10-28 03:24 | muse-wonder-1.0 (meta) | agentic | 49 of 50 | 1 | 0 | 0 | v1.1 | v1.3 |  |
-| 2026-10-28 03:24 | meta-models/muse-spark-open (baseten) | agentic | 48 of 50 | 1 | 0 | 1 | v1.1 | v1.3 |  |
-| 2026-10-28 06:48 | muse-spark-1.3 (meta) | agentic, live CHART | 49 of 50 | 1 | 0 | 0 | v1.2 | v1.3 | muse-wonder-1.0: 30 cases, 86 supports, 28 partial, 0 silent |
-| 2026-10-28 06:51 | muse-wonder-1.0 (meta) | agentic, live CHART | 50 of 50 | 0 | 0 | 0 | v1.2 | v1.3 | muse-wonder-1.0: 30 cases, 94 supports, 28 partial, 0 silent |
-| 2026-10-28 07:13 | meta-models/muse-spark-open (baseten) | agentic, live CHART | 45 of 50 | 4 | 1 | 0 | v1.2 | v1.3 | muse-wonder-1.0: 31 cases, 86 supports, 41 partial, 0 silent, flagged 1 of 1 false passes |
+| 2026-10-27 08:17 | muse-spark-1.3 (meta) | chart in prompt | 50 of 50 | 0 | 0 | 0 | v1 | v1.4 |  |
+| 2026-10-27 08:19 | muse-wonder-1.0 (meta) | chart in prompt | 49 of 50 | 0 | 0 | 0 | v1 | v1.4 |  |
+| 2026-10-27 08:20 | meta-models/muse-spark-open (baseten) | chart in prompt | 49 of 50 | 1 | 0 | 0 | v1 | v1.4 |  |
+| 2026-10-28 03:20 | muse-spark-1.3 (meta) | agentic | 50 of 50 | 0 | 0 | 0 | v1.1 | v1.4 |  |
+| 2026-10-28 03:24 | muse-wonder-1.0 (meta) | agentic | 49 of 50 | 1 | 0 | 0 | v1.1 | v1.4 |  |
+| 2026-10-28 03:24 | meta-models/muse-spark-open (baseten) | agentic | 48 of 50 | 1 | 0 | 1 | v1.1 | v1.4 |  |
+| 2026-10-28 06:48 | muse-spark-1.3 (meta) | agentic, live CHART | 49 of 50 | 1 | 0 | 0 | v1.2 | v1.4 |  |
+| 2026-10-28 06:51 | muse-wonder-1.0 (meta) | agentic, live CHART | 50 of 50 | 0 | 0 | 0 | v1.2 | v1.4 |  |
+| 2026-10-28 07:13 | meta-models/muse-spark-open (baseten) | agentic, live CHART | 45 of 50 | 4 | 1 | 0 | v1.2 | v1.4 |  |
 
 ## Runs superseded or discarded
 
@@ -46,6 +46,7 @@ Each commit that changed the version string in `build/src/litmus.ts`. The gate i
 - 2026-10-27 20:22 d57cf6c: build/src/litmus.ts v1.1 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number
 - 2026-10-27 23:48 8db4fc3: build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number
 - 2026-10-28 00:49 2b86e41: build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked
+- 2026-10-28 21:52 3b0a483: build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list
 
 ## Commits since `hackathon-start`
 
@@ -255,3 +256,16 @@ Title cards: set in the interface sans like the case header, the whole line laid
 ### c119e09 · 2026-10-28 01:12 · Title cards: monospace, block cursor stays, two-second hold
 
 Title cards in JetBrains Mono with a block cursor that keeps blinking after the line is typed; each card holds 2 s once complete; asset links v14
+
+### ce40903 · 2026-10-28 08:12 · Build log: regenerate after c119e09
+
+(no ledger row)
+
+### 3b0a483 · 2026-10-28 21:52 · Mutation harness over the 2,201 verified sentences; gate v1.4 closes the 48 swapped-side passes it found; nine runs re-gated with no verdict change; harness --out-dir for repeat runs
+
+Results added: `mutations/report-v1.3.json`, `mutations/report.json`.
+Mutation harness (`build/scripts/mutate.ts`, `npm run mutate`, 13 tests): each of the 2,201 sentences the nine kept runs verified gets one fabrication at a time, 9,475 in all, and the gate runs on each. Under gate v1.3: numbers replaced by values absent from every admissible source, citations moved to an entry lacking the quote, a word dropped from the quote, and dates shifted were caught 100 percent; 48 swapped sides passed, all in contexts outside the anatomy word list (left ventricle, left forefoot ulcer, left total knee arthroplasty). Gate v1.4 (`build/src/litmus.ts`, three tests): a side is a hard token wherever it names a side, idioms masked; the nine kept runs re-gated, 0 labels and 0 verdicts changed, recorded under `run.regated`. Under v1.4 the harness catches 5,781 of 5,781 hard corruptions; 1,308 presence collisions and 2,386 soft corruptions (negation flips, pronoun swaps) pass by design and are now counted. Reports in `build/results/mutations/`, the v1.3 report kept as `report-v1.3.json`. Harness gains `--out-dir` (5 tests) so repeat runs can be written to `build/results/repeats/` without joining the scoreboard. 130 tests
+
+### a39857c · 2026-10-28 21:53 · README: primary-source check of every statistic; KFF footnote rewritten, WISeR services per CMS, framing paragraph, the gate's measured catch rate under Limitations
+
+README: primary-source check of every statistic spoken in the video or shown on a title card. The KFF short link had died and KFF now serves the 2024 edition at the 2023 slug; footnote rewritten (2023 figures kept, the 81.7 percent overturn rate attributed as the 2023 rate through AHA News, the 2024 figures noted: 52.8 million requests, 4.1 million denied, 80.7 percent of appeals overturned). WISeR services corrected from "knee replacements", copied from Medical Economics, to knee arthroscopy for osteoarthritis per CMS's own list, with a CMS footnote. AMA, Cigna, UnitedHealth court order, and Senate figures confirmed at their sources (the Senate PDF only through Healthcare Dive; it blocks automated download). A framing paragraph near the top, what this is and is not. A paragraph under Limitations reporting what the mutation harness measured, with the referential limit as counts

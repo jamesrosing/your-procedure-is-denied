@@ -185,9 +185,9 @@ Two things followed from reading those five cases, both built the same morning. 
 Every commit since the event began has a row in [NEW-WORK.md](NEW-WORK.md), every result file carries its model, mode, gate version, and any re-gate in its own header, and this section is regenerated from those sources after every push. Nothing in it is typed by hand.
 
 <!-- build-log:start -->
-_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-10-28 08:12 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
+_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-10-29 04:53 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
 
-49 commits since the `hackathon-start` tag, the last at 2026-10-28 01:12 (c119e09). Gate v1.3. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
+52 commits since the `hackathon-start` tag, the last at 2026-10-28 21:53 (a39857c). Gate v1.4. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
 
 | Started (UTC) | Model | Mode | Agreed | Blocked | False pass | Advisor |
 | --- | --- | --- | :---: | :---: | :---: | --- |
@@ -197,17 +197,17 @@ _Generated from the git history, the ledger, and the result files by `npm run lo
 | 2026-10-28 03:20 | muse-spark-1.3 | agentic | 50 of 50 | 0 | 0 |  |
 | 2026-10-28 03:24 | muse-wonder-1.0 | agentic | 49 of 50 | 1 | 0 |  |
 | 2026-10-28 03:24 | meta-models/muse-spark-open | agentic | 48 of 50 | 1 | 0 |  |
-| 2026-10-28 06:48 | muse-spark-1.3 | agentic, live CHART | 49 of 50 | 1 | 0 | muse-wonder-1.0, 28 of 114 criteria partial |
-| 2026-10-28 06:51 | muse-wonder-1.0 | agentic, live CHART | 50 of 50 | 0 | 0 | muse-wonder-1.0, 28 of 122 criteria partial |
-| 2026-10-28 07:13 | meta-models/muse-spark-open | agentic, live CHART | 45 of 50 | 4 | 1 | muse-wonder-1.0, 41 of 127 criteria partial |
+| 2026-10-28 06:48 | muse-spark-1.3 | agentic, live CHART | 49 of 50 | 1 | 0 |  |
+| 2026-10-28 06:51 | muse-wonder-1.0 | agentic, live CHART | 50 of 50 | 0 | 0 |  |
+| 2026-10-28 07:13 | meta-models/muse-spark-open | agentic, live CHART | 45 of 50 | 4 | 1 |  |
 
 Last five commits, newest first, with the ledger row each one carried:
 
+- **a39857c · 2026-10-28 21:53** · README: primary-source check of every statistic; KFF footnote rewritten, WISeR services per CMS, framing paragraph, the gate's measured catch rate under Limitations. README: primary-source check of every statistic spoken in the video or shown on a title card. The KFF short link had died and KFF now serves the 2024 edition at the 2023 slug; footnote rewritten (2023 figures kept, the 81.7 percent overturn rate attributed as the 2023 rate through AHA News, the 2024 figures noted: 52.8 million requests, 4.1 million…
+- **3b0a483 · 2026-10-28 21:52** · Mutation harness over the 2,201 verified sentences; gate v1.4 closes the 48 swapped-side passes it found; nine runs re-gated with no verdict change; harness --out-dir for repeat runs. Mutation harness (`build/scripts/mutate.ts`, `npm run mutate`, 13 tests): each of the 2,201 sentences the nine kept runs verified gets one fabrication at a time, 9,475 in all, and the gate runs on each. Under gate v1.3: numbers replaced by values absent from every admissible source, citations moved to an entry lacking the quote, a word dropped from the…
+- **ce40903 · 2026-10-28 08:12** · Build log: regenerate after c119e09. (no ledger row)
 - **c119e09 · 2026-10-28 01:12** · Title cards: monospace, block cursor stays, two-second hold. Title cards in JetBrains Mono with a block cursor that keeps blinking after the line is typed; each card holds 2 s once complete; asset links v14
 - **a83d4c5 · 2026-10-28 08:10** · Build log: regenerate after 951863a. (no ledger row)
-- **951863a · 2026-10-28 01:10** · Title cards: sans, fixed layout while typing, slightly slower. Title cards: set in the interface sans like the case header, the whole line laid out at once with each character revealed in place so the sentence never shifts, typing slowed to 36 ms per character; asset links v13
-- **6473f37 · 2026-10-28 08:05** · Build log: regenerate after be17ec7. (no ledger row)
-- **be17ec7 · 2026-10-28 01:05** · Title cards type out letter by letter. Title cards type out letter by letter at about 35 characters a second with a blinking cursor, hold 1.4 s once complete, then fade; reduced motion shows the full text; schedule and copy tests updated; asset links v12
 <!-- build-log:end -->
 
 ## From the inside
