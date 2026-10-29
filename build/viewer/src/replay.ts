@@ -412,18 +412,15 @@ export function formatSeconds(ms: number): string {
 // marks, no jargon; a statement that warrants a source carries a superscript
 // marker that INTRO_NOTES resolves.
 export const INTRO_LINES: readonly string[] = [
-  "In the United States, insurers and Medicare pay for care by what the doctor documents, judged by each payer's rules.",
-  "Rules differ by payer.\u00b9 Medicare Advantage plans were cited for automatic denials.\u00b2",
-  "This project sets the payer's current policy beside the doctor's record, so both are accountable. It aims to level the playing field for providers.",
+  "In the United States, when a doctor bills a health insurer or Medicare, payment depends on what the doctor documented, judged against that payer's coverage rules.",
+  "Those rules differ by payer.\u00b9 Federal investigators have found Medicare Advantage plans denying care that met Medicare's own criteria.\u00b2",
+  "This project places the payer policy in force on the date of service beside the doctor's record, so each side can be checked against the other.",
 ];
 
 // The sources for the marked statements, small, at the bottom with the stamp.
 // A test holds every marker in the lines to an entry here.
-export const INTRO_NOTES = "\u00b9 HHS Office of Inspector General, report OEI-09-18-00260, April 2022 \u00b7 \u00b2 U.S. Senate Permanent Subcommittee on Investigations report, October 2024; Cigna PxDx class action, E.D. Cal., July 2023";
+export const INTRO_NOTES = "\u00b9 \u00b2 HHS Office of Inspector General, report OEI-09-18-00260, April 2022: Medicare Advantage plans applied clinical criteria not in Medicare coverage rules, and 13 percent of the requests they denied met those rules";
 
-// The provenance stamp, small, on screen from the first frame: the event rule
-// asks that the video open with one line stating what was pre-existing and
-// what was built this week. Plain words, the one proper noun glossed.
 export const INTRO_STAMP = "Built this week: everything shown here. Pre-existing, not shown: the author's record system, appeal engine, coverage index, and the published LITMUS standard.";
 
 export const INTRO_CHAR_MS = 36; // per typed character

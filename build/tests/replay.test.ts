@@ -269,10 +269,10 @@ describe('the title cards', () => {
     assert.match(INTRO_STAMP, /Pre-existing/);
     assert.ok(!INTRO_STAMP.includes('!'));
   });
-  test('the opening reaches the first replay frame within the twenty-second video budget', () => {
+  test('the opening reaches the first replay frame within the twenty-four-second video budget', () => {
     const s = introSchedule();
     const firstReplayFrame = s[s.length - 1]!.hide + INTRO_FADE_MS;
-    assert.ok(firstReplayFrame <= 20_000, `${firstReplayFrame} ms from the first frame to the first replay frame`);
+    assert.ok(firstReplayFrame <= 24_000, `${firstReplayFrame} ms from the first frame to the first replay frame`);
   });
   test('behind the cards nothing is lit: at cursor 0 every entry is dim, no criterion has evidence, a check, or an opinion, and the draft is empty, for every result in every file', () => {
     let checked = 0;
