@@ -251,17 +251,18 @@ describe('the advisor step', () => {
 });
 
 describe('the title cards', () => {
-  test('three lines, at most thirty words, sentence case, no exclamation marks, no project names; every footnote marker resolves in the notes; the stamp states what was built this week and what was pre-existing', () => {
+  test('three lines, at most thirty-two words, sentence case, no exclamation marks, no project names; every footnote marker resolves in the notes; the last line ends on who signs; the stamp states what was built this week and what was pre-existing', () => {
     assert.equal(INTRO_LINES.length, 3);
     const markers = new Set<string>();
     for (const line of INTRO_LINES) {
-      assert.ok(line.split(/\s+/).length <= 30, line);
+      assert.ok(line.split(/\s+/).length <= 32, line);
       assert.ok(!line.includes('!'));
       assert.match(line, /^[A-Z]/);
       assert.match(line, /\.[\u00b9\u00b2\u00b3]?$/, line);
       assert.doesNotMatch(line, /\b(heme|writ|CHART|LITMUS|HIPPS|CARC|Muse)\b/, line);
       for (const m of line.match(/[\u00b9\u00b2\u00b3]/g) ?? []) markers.add(m);
     }
+    assert.match(INTRO_LINES[INTRO_LINES.length - 1]!, /a\u00a0physician\u00a0signs\.$/, 'the opening ends on who signs');
     assert.ok(markers.size >= 2, 'the cited statements carry markers');
     for (const m of markers) assert.ok(INTRO_NOTES.includes(`${m} `), `note for ${m}`);
     assert.match(INTRO_NOTES, /^\u00b9 /);
@@ -269,11 +270,11 @@ describe('the title cards', () => {
     assert.match(INTRO_STAMP, /Pre-existing/);
     assert.ok(!INTRO_STAMP.includes('!'));
   });
-  test('the finished block holds at least two seconds before it travels, and the opening reaches the first replay frame within the twenty-six-second video budget', () => {
+  test('the finished block holds at least two seconds before it travels, and the opening reaches the first replay frame within the twenty-seven-second video budget', () => {
     assert.ok(INTRO_END_PAUSE_MS >= 2000);
     const s = introSchedule();
     const firstReplayFrame = s[s.length - 1]!.hide + INTRO_END_PAUSE_MS + INTRO_MOVE_MS;
-    assert.ok(firstReplayFrame <= 26_000, `${firstReplayFrame} ms from the first frame to the first replay frame`);
+    assert.ok(firstReplayFrame <= 27_000, `${firstReplayFrame} ms from the first frame to the first replay frame`);
   });
   test('behind the cards nothing is lit: at cursor 0 every entry is dim, no criterion has evidence, a check, or an opinion, and the draft is empty, for every result in every file', () => {
     let checked = 0;

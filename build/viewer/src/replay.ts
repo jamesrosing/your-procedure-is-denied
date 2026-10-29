@@ -408,13 +408,14 @@ export function formatSeconds(ms: number): string {
 // the project: how care is paid for in the United States, what payers have
 // been cited for, and what this does about it. No project names: a cold viewer
 // cannot know them. Kept here so a test can hold the copy to its discipline:
-// three lines, at most thirty words each, sentence case, no exclamation
+// three lines, at most thirty-two words each, sentence case, no exclamation
 // marks, no jargon; a statement that warrants a source carries a superscript
 // marker that INTRO_NOTES resolves.
 export const INTRO_LINES: readonly string[] = [
   "In the United States, when a doctor bills a health insurer or Medicare, payment depends on what the doctor documented, judged against that payer's coverage rules.",
   "Those rules differ by payer.\u00b9 Federal investigators have found Medicare Advantage plans denying care that met Medicare's own criteria.\u00b2",
-  "This project places the payer policy in force on the date of service beside the doctor's record, so each side can be checked against the other.",
+  // The closing sentence is held together with no-break spaces so it never splits across rows.
+  "This project places the payer policy in force on the date of service beside the doctor's record, so each side can be checked against the other. It\u00a0drafts;\u00a0a\u00a0physician\u00a0signs.",
 ];
 
 // The sources for the marked statements, small, at the bottom with the stamp.

@@ -102,7 +102,7 @@ h2 { font-size: 13.5px; font-weight: 500; color: var(--ink-7); }
 .intro { position: fixed; inset: 0; z-index: 100; display: grid; align-content: start; justify-items: center; padding: 44px 2vw 0; }
 .intro[hidden] { display: none; }
 /* the scrim is its own layer so the lines can travel while it lifts */
-.intro-scrim { position: absolute; inset: 0; background: linear-gradient(to bottom, color-mix(in oklab, var(--ink-0) 92%, transparent) 0, color-mix(in oklab, var(--ink-0) 92%, transparent) 370px, color-mix(in oklab, var(--ink-0) 42%, transparent) 500px, color-mix(in oklab, var(--ink-0) 42%, transparent) 100%); opacity: 1; transition: opacity 700ms var(--ease-out); } /* INTRO_MOVE_MS */
+.intro-scrim { position: absolute; inset: 0; background: linear-gradient(to bottom, color-mix(in oklab, var(--ink-0) 92%, transparent) 0, color-mix(in oklab, var(--ink-0) 92%, transparent) 420px, color-mix(in oklab, var(--ink-0) 42%, transparent) 550px, color-mix(in oklab, var(--ink-0) 42%, transparent) 100%); opacity: 1; transition: opacity 700ms var(--ease-out); } /* INTRO_MOVE_MS */
 .intro.leaving { pointer-events: none; }
 .intro.leaving .intro-scrim, .intro.leaving .intro-foot { opacity: 0; }
 .intro-stage { position: relative; display: grid; gap: 10px; width: max-content; max-width: 92vw; transform-origin: 0 0; }
