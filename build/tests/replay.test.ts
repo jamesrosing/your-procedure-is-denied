@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readdirSync, readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { buildTimeline, citedEntries, firstLine, INTRO_FADE_MS, INTRO_LINES, INTRO_STAMP, introTypeMs, introSchedule, playDelayMs, scoreboard, stateAt, type ResultsFile, type ViewerCase, type ViewerResult } from '../viewer/src/replay.js';
+import { buildTimeline, citedEntries, firstLine, INTRO_FADE_MS, INTRO_LINES, INTRO_NOTES, INTRO_STAMP, introTypeMs, introSchedule, playDelayMs, scoreboard, stateAt, type ResultsFile, type ViewerCase, type ViewerResult } from '../viewer/src/replay.js';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const resultsDir = join(here, '..', 'results');
@@ -251,15 +251,20 @@ describe('the advisor step', () => {
 });
 
 describe('the title cards', () => {
-  test('three lines, at most twenty-four words, sentence case, no exclamation marks, no project names; the stamp states what was built this week and what was pre-existing', () => {
+  test('three lines, at most twenty-four words, sentence case, no exclamation marks, no project names; every footnote marker resolves in the notes; the stamp states what was built this week and what was pre-existing', () => {
     assert.equal(INTRO_LINES.length, 3);
+    const markers = new Set<string>();
     for (const line of INTRO_LINES) {
       assert.ok(line.split(/\s+/).length <= 24, line);
       assert.ok(!line.includes('!'));
       assert.match(line, /^[A-Z]/);
-      assert.match(line, /\.$/);
+      assert.match(line, /\.[\u00b9\u00b2\u00b3]?$/, line);
       assert.doesNotMatch(line, /\b(heme|writ|CHART|LITMUS|HIPPS|CARC|Muse)\b/, line);
+      for (const m of line.match(/[\u00b9\u00b2\u00b3]/g) ?? []) markers.add(m);
     }
+    assert.ok(markers.size >= 2, 'the cited statements carry markers');
+    for (const m of markers) assert.ok(INTRO_NOTES.includes(`${m} `), `note for ${m}`);
+    assert.match(INTRO_NOTES, /^\u00b9 /);
     assert.match(INTRO_STAMP, /^Built this week: /);
     assert.match(INTRO_STAMP, /Pre-existing/);
     assert.ok(!INTRO_STAMP.includes('!'));

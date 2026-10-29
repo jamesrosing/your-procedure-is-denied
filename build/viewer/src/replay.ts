@@ -372,12 +372,17 @@ export function formatSeconds(ms: number): string {
 // been cited for, and what this does about it. No project names: a cold viewer
 // cannot know them. Kept here so a test can hold the copy to its discipline:
 // three lines, at most twenty-four words each, sentence case, no exclamation
-// marks, no jargon.
+// marks, no jargon; a statement that warrants a source carries a superscript
+// marker that INTRO_NOTES resolves.
 export const INTRO_LINES: readonly string[] = [
-  "In the United States, insurers and Medicare pay for care based on the doctor's documentation, judged by each payer's rules.",
-  "Rules differ by payer. Payers have been cited for denying care automatically.",
-  "This sets the payer's current policy beside the doctor's documentation, so both are accountable. Insurers hold the cards. This levels the field.",
+  "In the United States, insurers and Medicare pay for care by what the doctor documents, judged by each payer's rules.",
+  "Rules differ by payer.\u00b9 Medicare Advantage plans were cited for automatic denials.\u00b2",
+  "This sets the payer's current policy beside the doctor's record, so both are accountable. It aims to level the playing field for the provider.",
 ];
+
+// The sources for the marked statements, small, at the bottom with the stamp.
+// A test holds every marker in the lines to an entry here.
+export const INTRO_NOTES = "\u00b9 HHS Office of Inspector General, report OEI-09-18-00260, April 2022 \u00b7 \u00b2 U.S. Senate Permanent Subcommittee on Investigations report, October 2024; Cigna PxDx class action, E.D. Cal., July 2023";
 
 // The provenance stamp, small, on screen from the first frame: the event rule
 // asks that the video open with one line stating what was pre-existing and

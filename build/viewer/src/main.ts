@@ -2,7 +2,7 @@
 // results file and a case, and renders `stateAt` for the current cursor.
 // Everything that decides what a step means lives in replay.ts.
 import {
-  buildTimeline, firstLine, formatSeconds, formatUsd, INTRO_CHAR_MS, INTRO_FADE_MS, INTRO_LINES, INTRO_STAMP, introSchedule, playDelayMs, scoreboard, stateAt,
+  buildTimeline, firstLine, formatSeconds, formatUsd, INTRO_CHAR_MS, INTRO_FADE_MS, INTRO_LINES, INTRO_NOTES, INTRO_STAMP, introSchedule, playDelayMs, scoreboard, stateAt,
   type ReplayState, type ResultsFile, type Step, type ViewerCase, type ViewerResult,
 } from './replay.js';
 
@@ -54,6 +54,7 @@ const ui = {
   boardSection: $<HTMLElement>('board'),
   intro: $<HTMLElement>('intro'),
   introStamp: $<HTMLElement>('intro-stamp'),
+  introSources: $<HTMLElement>('intro-sources'),
   introSkip: $<HTMLButtonElement>('intro-skip'),
   boardTable: $<HTMLTableElement>('board-table'),
 };
@@ -433,6 +434,7 @@ function playIntro(): void {
   const lines = [...ui.intro.querySelectorAll<HTMLElement>('.intro-line')];
   lines.forEach(el => { el.textContent = ''; el.classList.remove('show', 'typing'); });
   ui.introStamp.textContent = INTRO_STAMP;
+  ui.introSources.textContent = INTRO_NOTES;
   ui.intro.hidden = false;
   ui.intro.classList.remove('leaving');
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
