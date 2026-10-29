@@ -272,3 +272,35 @@ describe('needs-citation (v1.3)', () => {
     assert.deepEqual(v.sentences[0]!.alsoCite, ['note-004', 'note-006']);
   });
 });
+
+// Gate v1.4: a side is a hard token wherever it names a side, not only before
+// the words in a fixed anatomy list. Found by the mutation harness on Oct 28:
+// "left ventricle", "left forefoot ulcer", "right great toe extensor", "left
+// total knee arthroplasty" all passed with the side swapped under v1.3.
+describe('laterality anywhere it names a side (v1.4)', () => {
+  const sideChart = [
+    { id: 'note-001', date: '2026-02-03', kind: 'imaging', text: 'Stress imaging showed a large reversible defect involving 12 percent of the left ventricle.' },
+    { id: 'note-002', date: '2026-02-10', kind: 'office visit', text: 'Pain improved after the injection; discharged home the same day.' },
+  ];
+  const sideSources: GateSources = { chart: sideChart, criteria: [{ id: 'crit-1', text: 'Reversible ischemia on stress imaging.' }], denial: ['Northwind denied CPT 92928. CARC 50.'], facts: ['SYN-038, 66 year old woman'] };
+
+  test('the side of a ventricle swapped against the cited entry is not verified', () => {
+    const r = litmus(sideSources, appeal([{ text: 'Stress imaging showed a reversible defect involving 12 percent of the right ventricle.', citation: 'note-001', quote: 'reversible defect involving 12 percent' }], []));
+    assert.notEqual(r.sentences[0]!.status, 'verified');
+    assert.match(r.sentences[0]!.reason, /right/);
+  });
+
+  test('the side as written in the entry stays verified', () => {
+    const r = litmus(sideSources, appeal([{ text: 'Stress imaging showed a reversible defect involving 12 percent of the left ventricle.', citation: 'note-001', quote: 'reversible defect involving 12 percent' }], []));
+    assert.equal(r.sentences[0]!.status, 'verified');
+  });
+
+  test('left as a verb and right as an idiom are not sides', () => {
+    const r = litmus(sideSources, appeal([
+      { text: 'The patient left the clinic after the injection.', citation: 'note-002', quote: 'after the injection' },
+      { text: 'She was right back to her routine after the injection.', citation: 'note-002', quote: 'after the injection' },
+    ], []));
+    assert.equal(r.sentences[0]!.status, 'verified');
+    assert.equal(r.sentences[1]!.status, 'verified');
+  });
+});

@@ -15,8 +15,8 @@
 //   1. Resolve the citation to one chart entry. Unknown or malformed: unresolved.
 //   2. The quote must appear verbatim in that entry's text (whitespace, case,
 //      and quote glyphs normalized, nothing else). Absent or trivial: refuted.
-//   3. Every hard token in the sentence (numbers, dates, codes, laterality in
-//      anatomical context) must appear in the cited entry, the payer criteria,
+//   3. Every hard token in the sentence (numbers, dates, codes, and a side,
+//      left or right) must appear in the cited entry, the payer criteria,
 //      the denial, or the stated case facts. Anything else: refuted, token named.
 //      The whole cited entry counts, not only the quoted span: the gate exists
 //      to catch invented facts, not to grade quoting form, and the clinician who
@@ -27,7 +27,7 @@
 import { createHash } from 'node:crypto';
 import { CITATION_ID, type Appeal } from './schema.js';
 
-export const LITMUS_VERSION = 'build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked';
+export const LITMUS_VERSION = 'build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list';
 
 export interface GateEntry {
   id: string;
@@ -163,8 +163,13 @@ function stripZeros(n: string): string {
   return n.replace(/^0+(?=\d)/, '');
 }
 
-const ANATOMY = '(?:breast|side|sided|hand|wrist|eye|lid|knee|hip|ankle|foot|heel|arm|leg|thigh|calf|shoulder|ear|nostril|nasal|airway|turbinate|implant|mastectomy|carpal|upper|lower|internal|carotid|femoral|popliteal|superficial|anterior|hemiparesis|neglect|lumpectomy|iliac|lobe)';
-const LATERAL_CONTEXT = new RegExp(`\\b(left|right)(?=[ -]${ANATOMY}\\b)|\\bon the (left|right)\\b|\\b(left|right)-sided\\b`, 'g');
+// v1.4: a side is a hard token wherever it names a side. v1.3 recognized a side
+// only before a fixed list of anatomical words, and the mutation harness
+// (scripts/mutate.ts, Oct 28) found 48 swapped sides passing in contexts outside
+// that list: "left ventricle", "left forefoot ulcer", "right great toe extensor",
+// "left total knee arthroplasty". The uses of left and right that are not sides
+// ("left the clinic", "right back to baseline") are masked before the check.
+const SIDE_IDIOM = /\bright (?:back|away|now|after|before|here|there|then|to|at)\b|\bleft (?:the|a|an|against|behind|over|off|out|in|to|for|at|on|with|without|home|early|before|after|us|him|her|them|it|from)\b/g;
 
 // Hard tokens of a sentence: the facts that must have an admissible source.
 function sentenceHardTokens(text: string): Set<string> {
@@ -174,7 +179,7 @@ function sentenceHardTokens(text: string): Set<string> {
   for (const m of t.matchAll(/\b(\d{1,2})\/(\d{1,2})\/(\d{2,4})\b/g)) out.add(m[0]);
   for (const m of t.matchAll(/\d+(?:\.\d+)?/g)) out.add(stripZeros(m[0]));
   for (const m of t.matchAll(/\b[a-z]\d{2}(?:\.\d+)?\b/g)) out.add(m[0]);
-  for (const m of t.matchAll(LATERAL_CONTEXT)) out.add(m[1] ?? m[2] ?? m[3] ?? '');
+  for (const m of t.replace(SIDE_IDIOM, ' ').matchAll(/\b(left|right)\b/g)) out.add(m[1]!);
   if (/\bbilateral(?:ly)?\b/.test(t)) out.add('bilateral');
   out.delete('');
   return out;

@@ -14,13 +14,19 @@
       "read_entry",
       "policy_status"
     ],
-    "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+    "litmus": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
     "synthetic": true,
     "regated": [
       {
         "from": "build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number",
         "to": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
         "at": "2026-10-28T07:43:28.826Z",
+        "changedVerdicts": 0
+      },
+      {
+        "from": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+        "to": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
+        "at": "2026-10-29T04:47:10.276Z",
         "changedVerdicts": 0
       }
     ]
@@ -140,19 +146,6 @@
         "correct-decline": 1,
         "correct-pass": 2
       }
-    },
-    "advice": {
-      "provider": "meta",
-      "model": "muse-wonder-1.0",
-      "cases": 31,
-      "criteria": 127,
-      "supports": 86,
-      "partial": 41,
-      "silent": 0,
-      "gateVerifiedAdvisorDoubts": 41,
-      "falsePassesFlagged": 1,
-      "falsePasses": 1,
-      "costUsd": 0.8598408000000001
     }
   },
   "results": [
@@ -369,7 +362,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+        "litmus": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -741,7 +734,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+        "litmus": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -1072,7 +1065,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+        "litmus": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -1352,7 +1345,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+        "litmus": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -1658,7 +1651,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+        "litmus": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -2077,7 +2070,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+        "litmus": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -2552,7 +2545,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+        "litmus": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -2855,7 +2848,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+        "litmus": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -3130,7 +3123,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+        "litmus": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -3479,7 +3472,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+        "litmus": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -3908,11 +3901,11 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+        "litmus": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
         "verdict": "blocked",
         "reasons": [
-          "sentence 1 needs-citation: needs-citation: 1 not in note-009 but in note-015; cite that entry as well",
-          "sentence 5 needs-citation: needs-citation: 8 not in note-013 but in note-010; cite that entry as well"
+          "sentence 1 needs-citation: needs-citation: 1 not in note-009; the chart has it in note-015. If that entry is the source, cite it as well; if it is a count or figure the chart never states, rewrite the sentence",
+          "sentence 5 needs-citation: needs-citation: 8 not in note-013; the chart has it in note-010. If that entry is the source, cite it as well; if it is a count or figure the chart never states, rewrite the sentence"
         ],
         "errored": false,
         "sentences": [
@@ -3929,7 +3922,7 @@
             "text": "The same imaging report documents Kellgren-Lawrence grade 4, consistent with payer criterion 1.",
             "citation": "note-009",
             "quote": "Kellgren-Lawrence grade 4",
-            "reason": "needs-citation: 1 not in note-009 but in note-015; cite that entry as well",
+            "reason": "needs-citation: 1 not in note-009; the chart has it in note-015. If that entry is the source, cite it as well; if it is a count or figure the chart never states, rewrite the sentence",
             "status": "needs-citation",
             "missing": [
               "1"
@@ -3967,7 +3960,7 @@
             "text": "Supervised conservative care included an injection and 8 weeks of PT as noted in the record.",
             "citation": "note-013",
             "quote": "Intra-articular corticosteroid injection, left knee, triamcinolone 40 with lidocaine",
-            "reason": "needs-citation: 8 not in note-013 but in note-010; cite that entry as well",
+            "reason": "needs-citation: 8 not in note-013; the chart has it in note-010. If that entry is the source, cite it as well; if it is a count or figure the chart never states, rewrite the sentence",
             "status": "needs-citation",
             "missing": [
               "8"
@@ -4192,7 +4185,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+        "litmus": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -4463,7 +4456,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+        "litmus": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -4798,7 +4791,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+        "litmus": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -4956,7 +4949,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+        "litmus": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -5278,7 +5271,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+        "litmus": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -5530,7 +5523,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+        "litmus": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -5925,7 +5918,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+        "litmus": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -6360,7 +6353,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+        "litmus": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -6798,7 +6791,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+        "litmus": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -7241,7 +7234,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+        "litmus": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -7640,7 +7633,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+        "litmus": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -8066,7 +8059,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+        "litmus": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -8583,10 +8576,10 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+        "litmus": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
         "verdict": "blocked",
         "reasons": [
-          "sentence 8 needs-citation: needs-citation: 150 not in note-028 but in note-002; cite that entry as well"
+          "sentence 8 needs-citation: needs-citation: 150 not in note-028; the chart has it in note-002. If that entry is the source, cite it as well; if it is a count or figure the chart never states, rewrite the sentence"
         ],
         "errored": false,
         "sentences": [
@@ -8659,7 +8652,7 @@
             "text": "At discharge on day 14 functional goals were met with supervision transfers and ambulation beyond the 150-foot target.",
             "citation": "note-028",
             "quote": "Transfers supervision, ambulating 160 feet with a hemi-walker and supervision, regular diet with thin liquids, feeding modified independent",
-            "reason": "needs-citation: 150 not in note-028 but in note-002; cite that entry as well",
+            "reason": "needs-citation: 150 not in note-028; the chart has it in note-002. If that entry is the source, cite it as well; if it is a count or figure the chart never states, rewrite the sentence",
             "status": "needs-citation",
             "missing": [
               "150"
@@ -9000,7 +8993,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+        "litmus": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -9405,7 +9398,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+        "litmus": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -9936,7 +9929,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+        "litmus": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -10166,7 +10159,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+        "litmus": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -10505,7 +10498,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+        "litmus": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -10814,7 +10807,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+        "litmus": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -11197,7 +11190,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+        "litmus": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -11455,7 +11448,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+        "litmus": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -11770,7 +11763,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+        "litmus": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -12084,7 +12077,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+        "litmus": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -12334,7 +12327,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+        "litmus": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -12722,7 +12715,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+        "litmus": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -13060,7 +13053,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+        "litmus": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -13304,10 +13297,10 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+        "litmus": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
         "verdict": "blocked",
         "reasons": [
-          "sentence 2 needs-citation: needs-citation: 3 not in note-014 but in note-003; cite that entry as well"
+          "sentence 2 needs-citation: needs-citation: 3 not in note-014; the chart has it in note-003. If that entry is the source, cite it as well; if it is a count or figure the chart never states, rewrite the sentence"
         ],
         "errored": false,
         "sentences": [
@@ -13332,7 +13325,7 @@
             "text": "Her regimen included three antianginal agents documented at stable optimal dosing.",
             "citation": "note-014",
             "quote": "Metoprolol succinate 100 daily, amlodipine 10 daily, isosorbide mononitrate 60 daily, all at these doses for the past 4 months",
-            "reason": "needs-citation: 3 not in note-014 but in note-003; cite that entry as well",
+            "reason": "needs-citation: 3 not in note-014; the chart has it in note-003. If that entry is the source, cite it as well; if it is a count or figure the chart never states, rewrite the sentence",
             "status": "needs-citation",
             "missing": [
               "3"
@@ -13813,7 +13806,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+        "litmus": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -14063,7 +14056,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+        "litmus": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -14349,7 +14342,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+        "litmus": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -14734,7 +14727,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+        "litmus": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -15155,10 +15148,10 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+        "litmus": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
         "verdict": "blocked",
         "reasons": [
-          "sentence 5 needs-citation: needs-citation: bilateral not in note-010 but in note-005; cite that entry as well"
+          "sentence 5 needs-citation: needs-citation: bilateral not in note-010; the chart has it in note-005. If that entry is the source, cite it as well; if it is a count or figure the chart never states, rewrite the sentence"
         ],
         "errored": false,
         "sentences": [
@@ -15207,7 +15200,7 @@
             "text": "Flexion-extension films also demonstrate \"10 degrees of angular motion.\" meeting the angulation criterion, with stenosis described as \"severe central and bilateral lateral recess stenosis compressing the traversing L5 roots.\"",
             "citation": "note-010",
             "quote": "10 degrees of angular motion.",
-            "reason": "needs-citation: bilateral not in note-010 but in note-005; cite that entry as well",
+            "reason": "needs-citation: bilateral not in note-010; the chart has it in note-005. If that entry is the source, cite it as well; if it is a count or figure the chart never states, rewrite the sentence",
             "status": "needs-citation",
             "missing": [
               "bilateral"
@@ -15672,7 +15665,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+        "litmus": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -16067,7 +16060,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+        "litmus": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -16320,7 +16313,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+        "litmus": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -16649,7 +16642,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+        "litmus": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -17068,7 +17061,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+        "litmus": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -17527,7 +17520,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+        "litmus": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -17936,7 +17929,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked",
+        "litmus": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
         "verdict": "pass",
         "reasons": [],
         "errored": false,

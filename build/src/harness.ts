@@ -3,7 +3,7 @@
 // results file per run. Concurrency is capped so a 429 or a schema bug cannot
 // cost a whole run. Effort is low on every call unless overridden.
 import { readdirSync, readFileSync, mkdirSync, writeFileSync } from 'node:fs';
-import { join, dirname } from 'node:path';
+import { resolve, join, dirname } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { parseArgs } from 'node:util';
 import { messagesProvider, openAiProvider, type AgenticRequest, type Effort, type Provider, type ProposeRequest, type ToolCall, type ToolDefinition, type ToolOutcome, type TraceEvent } from './provider.js';
@@ -347,6 +347,19 @@ export function selectProvider(name: string, model: string | undefined): Provide
   }
 }
 
+// Where a run lands. Without --out-dir, results/ next to the source; a relative
+// --out-dir is resolved against the working directory so repeat runs can go to
+// results/repeats/ without appearing on the viewer's scoreboard or in the log.
+export function resolveOutDir(here: string, outDir: string | undefined): string {
+  return outDir ? resolve(outDir) : join(here, '..', 'results');
+}
+
+export function resultFileName(run: { label: string; model: string; effort: string; agentic: boolean; chart: boolean; startedAt: string }): string {
+  const safeModel = run.model.replace(/[^a-z0-9.-]+/gi, '_');
+  const stamp = run.startedAt.replace(/[:.]/g, '-');
+  return `${run.label}-${safeModel}-${run.effort}${run.agentic ? '-agentic' : ''}${run.chart ? '-chart' : ''}-${stamp}.json`;
+}
+
 export function loadCases(dir: string): SyntheticCase[] {
   return readdirSync(dir).filter(f => f.endsWith('.json')).sort().map(f => JSON.parse(readFileSync(join(dir, f), 'utf8')) as SyntheticCase);
 }
@@ -362,6 +375,7 @@ async function main(): Promise<void> {
       case: { type: 'string', multiple: true },
       'max-tokens': { type: 'string', default: '12288' },
       label: { type: 'string' },
+      'out-dir': { type: 'string' },
       agentic: { type: 'boolean', default: false },
       chart: { type: 'boolean', default: false },
     },
@@ -392,11 +406,9 @@ async function main(): Promise<void> {
     return r;
   });
   const summary = summarize(results);
-  const safeModel = provider.model.replace(/[^a-z0-9.-]+/gi, '_');
-  const stamp = startedAt.replace(/[:.]/g, '-');
-  const outDir = join(here, '..', 'results');
+  const outDir = resolveOutDir(here, values['out-dir']);
   mkdirSync(outDir, { recursive: true });
-  const file = join(outDir, `${values.label ?? provider.label}-${safeModel}-${effort}${agentic ? '-agentic' : ''}${chart ? '-chart' : ''}-${stamp}.json`);
+  const file = join(outDir, resultFileName({ label: values.label ?? provider.label, model: provider.model, effort, agentic, chart, startedAt }));
   writeFileSync(file, JSON.stringify({ run: { startedAt, finishedAt: new Date().toISOString(), provider: provider.label, model: provider.model, effort, concurrency, maxTokens, cases: cases.length, agentic, tools: ['list_entries', 'read_entry', ...tools.map(t => t.name)], litmus: LITMUS_VERSION, synthetic: true }, summary, results }, null, 2) + '\n');
   console.error(`wrote ${file}`);
   console.log(JSON.stringify(summary, null, 2));
