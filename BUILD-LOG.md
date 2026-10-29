@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-10-29 17:41 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-10-29 18:25 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -331,3 +331,11 @@ The finished title block holds two seconds longer before it travels, and the tra
 ### 0f4e153 · 2026-10-29 10:17 · The opening ends on who signs: it drafts; a physician signs
 
 The opening ends on who signs: "It drafts; a physician signs." closes the third line, held together with no-break spaces so it never splits across rows; the copy test asserts the ending and allows thirty-two words; the scrim's solid band deepened for seven rows; budget test 27 s (26.72 s to the first replay frame). Asset links v21
+
+### 92dc31a · 2026-10-29 17:41 · Build log: regenerate after 0f4e153
+
+(no ledger row)
+
+### 69f1081 · 2026-10-29 11:22 · The payer's own reason above the criteria, labeled with its CARC code; every case header label explains itself on hover; footnote markers set apart in the heading color
+
+The payer's own reason on screen (`build/viewer/`): the sentence after "Payer remark:" in each denial now sits above the criteria list, labeled with its CARC code, so the insurer's claim is read against the record's quotes beneath it (`payerRemark`, one test over all 50 cases). Every label in the case header explains itself on hover: the billing code system, the CARC code with its text, the plan, the category, the stakes, the model, the provider, the effort, the run date, the gate version, the synthetic record (`codeSystemHelp`, `carcHelp`, `LABEL_HELP`, one test). The footnote markers in the opening lines and the paragraph are set in the heading color and bold so they are seen. 137 tests; asset links v22
