@@ -426,6 +426,13 @@ export const INTRO_STAMP = "Built this week: everything shown here. Pre-existing
 export const INTRO_CHAR_MS = 36; // per typed character
 export const INTRO_HOLD_MS = 2000; // after the last character, cursor still blinking
 export const INTRO_FADE_MS = 400;
+// After the last line is typed and held, the finished block stays this much
+// longer before it travels to the bottom of the page; the travel itself takes
+// INTRO_MOVE_MS (styles.css fades the scrim and the caption band over the same
+// time). Both are Jim's: "leave an additional 2 seconds at end of cards before
+// moving to bottom", with the move slowed a little.
+export const INTRO_END_PAUSE_MS = 2000;
+export const INTRO_MOVE_MS = 700;
 
 export function introTypeMs(line: string): number {
   return line.length * INTRO_CHAR_MS;

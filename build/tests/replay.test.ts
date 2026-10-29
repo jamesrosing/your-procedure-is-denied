@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readdirSync, readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { buildTimeline, citedEntries, firstLine, INTRO_FADE_MS, INTRO_LINES, INTRO_NOTES, INTRO_STAMP, introTypeMs, introSchedule, LOOKUP_DWELL_MS, lookupStrip, playDelayMs, scoreboard, stateAt, type ResultsFile, type ViewerCase, type ViewerResult } from '../viewer/src/replay.js';
+import { buildTimeline, citedEntries, firstLine, INTRO_END_PAUSE_MS, INTRO_FADE_MS, INTRO_LINES, INTRO_MOVE_MS, INTRO_NOTES, INTRO_STAMP, introTypeMs, introSchedule, LOOKUP_DWELL_MS, lookupStrip, playDelayMs, scoreboard, stateAt, type ResultsFile, type ViewerCase, type ViewerResult } from '../viewer/src/replay.js';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const resultsDir = join(here, '..', 'results');
@@ -269,10 +269,11 @@ describe('the title cards', () => {
     assert.match(INTRO_STAMP, /Pre-existing/);
     assert.ok(!INTRO_STAMP.includes('!'));
   });
-  test('the opening reaches the first replay frame within the twenty-four-second video budget', () => {
+  test('the finished block holds at least two seconds before it travels, and the opening reaches the first replay frame within the twenty-six-second video budget', () => {
+    assert.ok(INTRO_END_PAUSE_MS >= 2000);
     const s = introSchedule();
-    const firstReplayFrame = s[s.length - 1]!.hide + INTRO_FADE_MS;
-    assert.ok(firstReplayFrame <= 24_000, `${firstReplayFrame} ms from the first frame to the first replay frame`);
+    const firstReplayFrame = s[s.length - 1]!.hide + INTRO_END_PAUSE_MS + INTRO_MOVE_MS;
+    assert.ok(firstReplayFrame <= 26_000, `${firstReplayFrame} ms from the first frame to the first replay frame`);
   });
   test('behind the cards nothing is lit: at cursor 0 every entry is dim, no criterion has evidence, a check, or an opinion, and the draft is empty, for every result in every file', () => {
     let checked = 0;

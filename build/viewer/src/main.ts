@@ -2,7 +2,7 @@
 // results file and a case, and renders `stateAt` for the current cursor.
 // Everything that decides what a step means lives in replay.ts.
 import {
-  buildTimeline, firstLine, formatSeconds, formatUsd, INTRO_CHAR_MS, INTRO_FADE_MS, INTRO_LINES, INTRO_NOTES, INTRO_STAMP, introSchedule, playDelayMs, scoreboard, stateAt,
+  buildTimeline, firstLine, formatSeconds, formatUsd, INTRO_CHAR_MS, INTRO_END_PAUSE_MS, INTRO_FADE_MS, INTRO_LINES, INTRO_MOVE_MS, INTRO_NOTES, INTRO_STAMP, introSchedule, playDelayMs, scoreboard, stateAt,
   type ReplayState, type ResultsFile, type Step, type ViewerCase, type ViewerResult,
 } from './replay.js';
 
@@ -511,7 +511,7 @@ function endIntro(): void {
   const scale = Math.max(0.05, to / from);
   const run = ui.introStage.animate(
     [{ transform: 'translate(0px, 0px) scale(1)', opacity: 1 }, { transform: `translate(${dx}px, ${dy}px) scale(${scale})`, opacity: 0.4 }],
-    { duration: INTRO_FADE_MS, easing: 'cubic-bezier(0.2, 0.8, 0.2, 1)', fill: 'forwards' },
+    { duration: INTRO_MOVE_MS, easing: 'cubic-bezier(0.2, 0.8, 0.2, 1)', fill: 'forwards' },
   );
   run.addEventListener('finish', () => { run.cancel(); finish(); });
   run.addEventListener('cancel', finish);
@@ -536,6 +536,9 @@ function playIntro(): void {
     return;
   }
   const schedule = introSchedule();
+  // Every character is due at an absolute time from the start, so a chain of
+  // timers cannot drift and the last character lands when the schedule says.
+  const t0 = performance.now();
   schedule.forEach((slot, i) => {
     const el = lines[i];
     const text = INTRO_LINES[i] ?? '';
@@ -556,16 +559,17 @@ function playIntro(): void {
         const c = chars[n];
         if (c) { c.classList.add('on'); c.after(cursor); }
         n += 1;
-        if (n < chars.length) introTimers.push(window.setTimeout(tick, INTRO_CHAR_MS));
-        else el.classList.remove('typing'); // the cursor stays, blinking, until the next line or the fade
+        if (n < chars.length) introTimers.push(window.setTimeout(tick, Math.max(0, t0 + slot.show + n * INTRO_CHAR_MS - performance.now())));
+        else el.classList.remove('typing'); // the cursor stays, blinking, until the next line or the travel
       };
       tick();
     }, slot.show));
   });
-  // The block and the scrim leave together on one fade, so the first replay
-  // frame is the last line's hide plus the fade: the figure the budget test holds.
+  // The finished block holds a while longer, then it and the scrim leave
+  // together on one travel, so the first replay frame is the last line's hide
+  // plus the pause plus the move: the figure the budget test holds.
   const last = schedule[schedule.length - 1];
-  introTimers.push(window.setTimeout(endIntro, last ? last.hide : 0));
+  introTimers.push(window.setTimeout(endIntro, (last ? last.hide : 0) + INTRO_END_PAUSE_MS));
 }
 
 // A deep link is `#file=<results file>&case=<case id>`. Applied at boot and
