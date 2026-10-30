@@ -203,7 +203,7 @@ The gate's sensitivity cannot be read off runs in which no model fabricated anyt
 ## 3. Results
 
 <!-- results:start -->
-_Tables generated from the result files by `npm run log`; the prose below them is written by hand. Last regenerated 2026-10-30 04:42 UTC._
+_Tables generated from the result files by `npm run log`; the prose below them is written by hand. Last regenerated 2026-10-30 04:43 UTC._
 
 **Table 1. Kept runs.** 9 runs, 50 cases each, effort low. Agreed is correct-pass plus correct-decline against the grading key, with a 95% Wilson interval. Blocked is a draft the gate stopped. False pass is a draft the gate passed on a case the key labels unsupported. Entries read applies to the agentic modes.
 
@@ -335,9 +335,9 @@ Meta and Cerebral Valley for the event; Baseten for hosting the open-weights mod
 Every commit since the event began has a row in [NEW-WORK.md](NEW-WORK.md), every result file carries its model, mode, gate version, and any re-gate in its own header, and this section is regenerated from those sources after every push. Nothing in it is typed by hand.
 
 <!-- build-log:start -->
-_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-10-30 04:42 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
+_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-10-30 04:43 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
 
-72 commits since the `hackathon-start` tag, the last at 2026-10-30 00:20 (bb0a0f8). Gate v1.4. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
+73 commits since the `hackathon-start` tag, the last at 2026-10-29 21:42 (ca40557). Gate v1.4. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
 
 | Started (UTC) | Model | Mode | Agreed | Blocked | False pass | Advisor |
 | --- | --- | --- | :---: | :---: | :---: | --- |
@@ -353,11 +353,11 @@ _Generated from the git history, the ledger, and the result files by `npm run lo
 
 Last five commits, newest first, with the ledger row each one carried:
 
-- **bb0a0f8 · 2026-10-30 00:20** · Build log: regenerate after 37cb44e. The README becomes the paper: title line, keywords, a 250-word abstract, Introduction (the problem, the public record, the standard, what is not known, objective and hypothesis), Methods (study design with a pre-specified versus post hoc table drawn from the git history, the system under test, the fifty cases as controls, the gate, models and modes and…
+- **ca40557 · 2026-10-29 21:42** · The README becomes the paper: abstract, introduction with the gap and the hypothesis, methods with the pre-specified table, generated results with intervals and the gate's sensitivity by class, discussion, conclusion, declarations; Zenodo and citation metadata. The README becomes the paper: title line, keywords, a 250-word abstract, Introduction (the problem, the public record, the standard, what is not known, objective and hypothesis), Methods (study design with a pre-specified versus post hoc table drawn from the git history, the system under test, the fifty cases as controls, the gate, models and modes and…
+- **bb0a0f8 · 2026-10-30 00:20** · Build log: regenerate after 37cb44e. (no ledger row)
 - **37cb44e · 2026-10-29 16:14** · Each column says what it holds; the case header says what kind of denial it is; the result stamp and the about panel say what PASS means and where the fifty cases came from. What the three columns are, said on the page (`build/viewer/`): one line under each column header (the physician's record, entries lit as read; the payer's written rules under the payer's own reason, lit when the draft cites verified evidence; the appeal drafted one sentence at a time, each stamped by the gate, with PASS defined as every sentence in the…
 - **97c67cc · 2026-10-29 18:25** · Build log: regenerate after 69f1081. (no ledger row)
 - **69f1081 · 2026-10-29 11:22** · The payer's own reason above the criteria, labeled with its CARC code; every case header label explains itself on hover; footnote markers set apart in the heading color. The payer's own reason on screen (`build/viewer/`): the sentence after "Payer remark:" in each denial now sits above the criteria list, labeled with its CARC code, so the insurer's claim is read against the record's quotes beneath it (`payerRemark`, one test over all 50 cases). Every label in the case header explains itself on hover: the billing code…
-- **92dc31a · 2026-10-29 17:41** · Build log: regenerate after 0f4e153. (no ledger row)
 <!-- build-log:end -->
 
 ## From the inside
