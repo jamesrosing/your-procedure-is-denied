@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-10-30 06:53 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-10-30 07:01 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -476,3 +476,11 @@ Abstract opens on the asymmetry in the author's words: insurers have automated c
 ### 47df8ac · 2026-10-29 23:53 · Ledger rows for the two abstract commits
 
 Ledger rows for 1f0adaf and 9ac9bf4
+
+### 267f94b · 2026-10-30 06:53 · Build log: regenerate after 47df8ac
+
+(no ledger row)
+
+### c0b4607 · 2026-10-30 00:01 · Abstract opening: the insurer has given the denial to a machine; the physician has been given nothing; the reply owed is a writ
+
+Abstract opening rewritten in the author's chosen cadence: the insurer has given the denial to a machine; the physician has been given nothing; the reply owed is a writ; a draft that asserts what the record does not hold, over a physician's name, is worse than none
