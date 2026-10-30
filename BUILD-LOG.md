@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-10-30 07:01 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-10-30 07:02 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -484,3 +484,11 @@ Ledger rows for 1f0adaf and 9ac9bf4
 ### c0b4607 · 2026-10-30 00:01 · Abstract opening: the insurer has given the denial to a machine; the physician has been given nothing; the reply owed is a writ
 
 Abstract opening rewritten in the author's chosen cadence: the insurer has given the denial to a machine; the physician has been given nothing; the reply owed is a writ; a draft that asserts what the record does not hold, over a physician's name, is worse than none
+
+### c5e2fc7 · 2026-10-30 07:01 · Build log: regenerate after c0b4607
+
+(no ledger row)
+
+### 3e54c98 · 2026-10-30 00:01 · Video close: no one had the evening; two seconds moved from shots 4 and 5 to shot 9; SRT regenerated
+
+Video close rewritten (`assets/video/`): shot 9 now speaks the author's line, most denials go unanswered not because the record was wrong but because no one had the evening, then the instrument and the signature; two seconds moved from shots 4 and 5 to the close; SRT regenerated

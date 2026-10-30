@@ -212,7 +212,7 @@ A post hoc run put the gate on the other side of the exchange (`npm run harness 
 ## 3. Results
 
 <!-- results:start -->
-_Tables generated from the result files by `npm run log`; the prose below them is written by hand. Last regenerated 2026-10-30 07:01 UTC._
+_Tables generated from the result files by `npm run log`; the prose below them is written by hand. Last regenerated 2026-10-30 07:02 UTC._
 
 **Table 1. Kept runs.** 9 runs, 50 cases each, effort low. Agreed is correct-pass plus correct-decline against the grading key, with a 95% Wilson interval. Blocked is a draft the gate stopped. False pass is a draft the gate passed on a case the key labels unsupported. Entries read applies to the agentic modes.
 
@@ -367,9 +367,9 @@ Meta and Cerebral Valley for the event; Baseten for hosting the open-weights mod
 Every commit since the event began has a row in [NEW-WORK.md](NEW-WORK.md), every result file carries its model, mode, gate version, and any re-gate in its own header, and this section is regenerated from those sources after every push. Nothing in it is typed by hand.
 
 <!-- build-log:start -->
-_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-10-30 07:01 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
+_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-10-30 07:02 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
 
-105 commits since the `hackathon-start` tag, the last at 2026-10-30 00:01 (c0b4607). Gate v1.4. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
+107 commits since the `hackathon-start` tag, the last at 2026-10-30 00:01 (3e54c98). Gate v1.4. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
 
 | Started (UTC) | Model | Mode | Agreed | Blocked | False pass | Advisor |
 | --- | --- | --- | :---: | :---: | :---: | --- |
@@ -385,11 +385,11 @@ _Generated from the git history, the ledger, and the result files by `npm run lo
 
 Last five commits, newest first, with the ledger row each one carried:
 
+- **3e54c98 · 2026-10-30 00:01** · Video close: no one had the evening; two seconds moved from shots 4 and 5 to shot 9; SRT regenerated. Video close rewritten (`assets/video/`): shot 9 now speaks the author's line, most denials go unanswered not because the record was wrong but because no one had the evening, then the instrument and the signature; two seconds moved from shots 4 and 5 to the close; SRT regenerated
+- **c5e2fc7 · 2026-10-30 07:01** · Build log: regenerate after c0b4607. (no ledger row)
 - **c0b4607 · 2026-10-30 00:01** · Abstract opening: the insurer has given the denial to a machine; the physician has been given nothing; the reply owed is a writ. Abstract opening rewritten in the author's chosen cadence: the insurer has given the denial to a machine; the physician has been given nothing; the reply owed is a writ; a draft that asserts what the record does not hold, over a physician's name, is worse than none
 - **267f94b · 2026-10-30 06:53** · Build log: regenerate after 47df8ac. (no ledger row)
 - **47df8ac · 2026-10-29 23:53** · Ledger rows for the two abstract commits. Ledger rows for 1f0adaf and 9ac9bf4
-- **2d60f9b · 2026-10-30 06:53** · Build log: regenerate after 9ac9bf4. (no ledger row)
-- **9ac9bf4 · 2026-10-29 23:53** · Abstract opens on the asymmetry: automated claim review in seconds, no automation on the submitter's side to test and answer the denial. Abstract opens on the asymmetry in the author's words: insurers have automated claim review that renders a denial in seconds, and the claim submitter has not adopted the same automation to test whether a denial is valid and to answer it
 <!-- build-log:end -->
 
 ## From the inside
