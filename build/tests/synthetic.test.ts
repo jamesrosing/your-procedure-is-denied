@@ -75,8 +75,8 @@ describe('synthetic denial set', () => {
     assert.equal(warranted.length, 30);
     assert.equal(not.length, 20);
     assert.ok(warranted.every(c => c.expected.subtype === undefined));
-    assert.equal(count(not, c => c.expected.subtype === 'absent'), 7);
-    assert.equal(count(not, c => c.expected.subtype === 'near-miss'), 6);
+    assert.equal(count(not, c => c.expected.subtype === 'absent'), 6);
+    assert.equal(count(not, c => c.expected.subtype === 'near-miss'), 7);
     assert.equal(count(not, c => c.expected.subtype === 'wrong-remedy'), 4);
     assert.equal(count(not, c => c.expected.subtype === 'exclusion'), 3);
   });

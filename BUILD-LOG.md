@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-10-30 19:46 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-10-30 20:14 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -50,7 +50,7 @@ Each commit that changed the version string in `build/src/litmus.ts`. The gate i
 
 ## Commits since `hackathon-start`
 
-Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 36 commits by github-actions[bot] are this log regenerating itself after a push; they touch only the generated files and carry no ledger row.
+Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 37 commits by github-actions[bot] are this log regenerating itself after a push; they touch only the generated files and carry no ledger row.
 
 ### 79e5e21 · 2026-10-26 20:38 · Add hackathon scaffolding: NEW-WORK.md and /build
 
@@ -540,3 +540,15 @@ README and build log: Table 1 gains a Care defended column (the billed value of 
 ### 66f638c · 2026-10-30 12:46 · Ledger: the viewer commit's hash after the rebase onto the bot's regenerate commit is 2fda55f
 
 Ledger: the viewer row's hash is 2fda55f, not 309d554; the commit was rebased onto the bot's regenerate commit 04e5b4f before it was pushed, which gave it a new hash
+
+### 60eacd5 · 2026-10-30 12:46 · Build log: regenerate after 66f638c
+
+(generated files only; no ledger row by design)
+
+### 47129a4 · 2026-10-30 13:14 · Viewer opens on the primary proposer's newest live run; litmus-gate README: npx forms and the publishing steps
+
+Viewer opens on the primary proposer: without a deep link the page lands on muse-spark-1.3's newest live run, then any model's newest live run, then the newest run (`newestRun` in `replay.ts`; test). Asset links v31. `build/litmus-gate/README.md`: the `npx -y litmus-gate` forms and the publishing steps (`npm login`, then `cd build && npm ci && cd litmus-gate && npm publish --access public`; `prepack` bundles; `npm pack --dry-run` shows three files)
+
+### next commit · the one that carries this regeneration
+
+Key: case-023 relabeled from absent to near-miss. Its screening note says "three disciplines at this intensity" and a progress note "the first full therapy day", lines it shares with its near-miss sibling case-034, so by the key's own definitions the chart raises the intensity criterion without meeting it. The generator carries a `labelAs` on the plan entry (`build/src/synthetic/generate.ts`) with the reason in the case's note; the chart text is the template's absent variant unchanged, so `npm run synthetic` changes only `case-023.json`'s label and note and every stored verdict and input hash reproduces. The twenty result files (kept, repeats, payer) carry the new label in `expected.subtype` and `summary.bySubtype` (a one-off script, the per-case outcome moved from absent to near-miss). Counts are now 6 absent and 7 near-miss in the test, README 2.3, the viewer's data note, and `build/synthetic/README.md`; README Results and Limitations say what changed and that the archived version carries the old label. The false pass still sits on this case

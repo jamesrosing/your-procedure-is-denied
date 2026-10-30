@@ -16,6 +16,9 @@ export const CASE_COUNT = 50;
 interface Plan {
   template: string;
   subtype?: NotWarrantedSubtype;
+  // The label the key records when it differs from the variant the template
+  // built, with the reason. The chart text is unchanged either way.
+  labelAs?: { subtype: NotWarrantedSubtype; note: string };
   failKey?: string;
   denialIndex: number;
   payer?: number; // pin a payer: post-acute cases go to the Medicare Advantage plan
@@ -24,12 +27,17 @@ interface Plan {
 const MA = 2; // Silverline Medicare Advantage
 const SELF_FUNDED = 4; // Saltmarsh Benefits Administrators
 
-// Fixed allocation: 30 warranted, 7 absent, 6 near-miss, 4 wrong-remedy, 3 exclusion,
+// Fixed allocation: 30 warranted, 6 absent, 7 near-miss, 4 wrong-remedy, 3 exclusion
+// (the stroke chart built as the absent variant is labeled near-miss, Oct 30, after
+// the archived version: its shared screening and progress lines name the intensity of
+// therapy, so by the key's own definition the chart raises the criterion without
+// meeting it; the text is the absent variant, unchanged, so every stored verdict and
+// hash on the case still reproduces),
 // weighted toward the categories where denial dollars concentrate.
 const PLAN: Plan[] = [
   { template: 'irfStroke', denialIndex: 0, payer: MA },
   { template: 'irfStroke', denialIndex: 1, payer: MA },
-  { template: 'irfStroke', subtype: 'absent', failKey: 'intensity', denialIndex: 0, payer: MA },
+  { template: 'irfStroke', subtype: 'absent', labelAs: { subtype: 'near-miss', note: 'The chart raises crit-2 (intensity) in passing, "three disciplines at this intensity" in the screening note and "the first full therapy day" in a progress note, and never documents three hours of therapy a day; relabeled from absent to near-miss on 2026-10-30 after the archived version, chart text unchanged.' }, failKey: 'intensity', denialIndex: 0, payer: MA },
   { template: 'irfStroke', subtype: 'near-miss', failKey: 'intensity', denialIndex: 0, payer: MA },
   { template: 'snfHipFracture', denialIndex: 0, payer: MA },
   { template: 'snfHipFracture', denialIndex: 0, payer: MA },
@@ -264,11 +272,11 @@ function build(rng: Rng, index: number, plan: Plan, payerIndex: number): Synthet
     chart,
     expected: {
       warranted: plan.subtype === undefined,
-      ...(plan.subtype ? { subtype: plan.subtype } : {}),
+      ...(plan.labelAs ? { subtype: plan.labelAs.subtype } : plan.subtype ? { subtype: plan.subtype } : {}),
       criteriaMet: supportedKeys.map(critId),
       support,
       distractors: distractorIds,
-      note: describe(built, plan, unsupported),
+      note: plan.labelAs?.note ?? describe(built, plan, unsupported),
     },
   };
 }

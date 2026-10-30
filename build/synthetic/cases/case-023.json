@@ -225,7 +225,7 @@
   ],
   "expected": {
     "warranted": false,
-    "subtype": "absent",
+    "subtype": "near-miss",
     "criteriaMet": [
       "crit-1",
       "crit-3",
@@ -272,6 +272,6 @@
       "note-028",
       "note-029"
     ],
-    "note": "The chart never addresses crit-2 (intensity); no entry supports it, so an appeal would assert what the record does not contain."
+    "note": "The chart raises crit-2 (intensity) in passing, \"three disciplines at this intensity\" in the screening note and \"the first full therapy day\" in a progress note, and never documents three hours of therapy a day; relabeled from absent to near-miss on 2026-10-30 after the archived version, chart text unchanged."
   }
 }

@@ -75,7 +75,8 @@
         "correct-pass": 30
       },
       "near-miss": {
-        "correct-decline": 6
+        "correct-decline": 6,
+        "blocked": 1
       },
       "exclusion": {
         "correct-decline": 3
@@ -85,7 +86,7 @@
       },
       "absent": {
         "correct-decline": 4,
-        "blocked": 3
+        "blocked": 2
       }
     },
     "byCategory": {
@@ -7678,7 +7679,7 @@
       "stakesUsd": 25000,
       "expected": {
         "warranted": false,
-        "subtype": "absent"
+        "subtype": "near-miss"
       },
       "provider": "meta",
       "model": "muse-spark-1.3",

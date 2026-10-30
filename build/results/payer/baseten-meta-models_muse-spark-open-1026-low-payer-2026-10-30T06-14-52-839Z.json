@@ -61,7 +61,7 @@
         "correct-decline": 30
       },
       "near-miss": {
-        "correct-pass": 6
+        "correct-pass": 7
       },
       "exclusion": {
         "correct-pass": 1,
@@ -71,7 +71,7 @@
         "correct-pass": 4
       },
       "absent": {
-        "correct-pass": 7
+        "correct-pass": 6
       }
     },
     "byCategory": {
@@ -4007,7 +4007,7 @@
       "stakesUsd": 25000,
       "expected": {
         "warranted": true,
-        "subtype": "absent"
+        "subtype": "near-miss"
       },
       "side": "payer",
       "provider": "baseten",

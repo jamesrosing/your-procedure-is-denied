@@ -70,7 +70,8 @@
         "blocked": 2
       },
       "near-miss": {
-        "correct-decline": 6
+        "correct-decline": 6,
+        "blocked": 1
       },
       "exclusion": {
         "correct-decline": 3
@@ -79,8 +80,7 @@
         "correct-decline": 4
       },
       "absent": {
-        "correct-decline": 6,
-        "blocked": 1
+        "correct-decline": 6
       }
     },
     "byCategory": {
@@ -7257,7 +7257,7 @@
       "stakesUsd": 25000,
       "expected": {
         "warranted": false,
-        "subtype": "absent"
+        "subtype": "near-miss"
       },
       "provider": "baseten",
       "model": "meta-models/muse-spark-open-1026",

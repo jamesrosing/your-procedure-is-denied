@@ -70,7 +70,7 @@
         "missed": 1
       },
       "near-miss": {
-        "correct-decline": 6
+        "correct-decline": 7
       },
       "exclusion": {
         "correct-decline": 3
@@ -79,7 +79,7 @@
         "correct-decline": 4
       },
       "absent": {
-        "correct-decline": 7
+        "correct-decline": 6
       }
     },
     "byCategory": {
@@ -4896,7 +4896,7 @@
       "stakesUsd": 25000,
       "expected": {
         "warranted": false,
-        "subtype": "absent"
+        "subtype": "near-miss"
       },
       "provider": "meta",
       "model": "muse-wonder-1.0",
