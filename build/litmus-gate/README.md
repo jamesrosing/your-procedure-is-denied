@@ -17,7 +17,7 @@ npm run gate -- check draft.json case.json --json   # the full gate record, as s
 npm run gate -- contract                            # the draft schema, the admissible sources, the rules
 ```
 
-`npm run gate:build` bundles it to `litmus-gate/dist/cli.js` (one file, dependencies external), which is what the `bin` entry and an eventual `npx litmus-gate` run.
+`npm run gate:build` bundles it to `litmus-gate/dist/cli.js` (one file, dependencies external), which is what the `bin` entry and `npx litmus-gate` run.
 
 `draft.json` follows the appeal contract: `warranted`, `reason`, `evidence[]` (criterion, citation, quote), `sentences[]` (text, citation, quote). `case.json` is either a case file as in [`build/synthetic/cases/`](../synthetic/cases/) or the explicit admissible set `{chart, criteria, denial: string[], facts?}`.
 
@@ -45,7 +45,7 @@ claude mcp add litmus-gate -- node /path/to/your-procedure-is-denied/build/litmu
 
 Any other MCP host takes the same command and arguments in its server configuration (`command: node`, `args: [".../dist/cli.js", "mcp"]`). Nothing leaves the process: the server reads the chart and the draft from the tool call and answers from memory.
 
-Once the package is on npm, no checkout is needed:
+The package is on npm as [`litmus-gate`](https://www.npmjs.com/package/litmus-gate) (0.1.0, Apache 2.0, published October 30, 2026), so no checkout is needed:
 
 ```
 claude mcp add litmus-gate -- npx -y litmus-gate mcp
