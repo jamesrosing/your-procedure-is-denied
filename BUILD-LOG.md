@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-10-30 06:49 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-10-30 06:53 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -458,5 +458,13 @@ Zenodo DOI reserved for the deposit of the submission commit, 10.5281/zenodo.237
 (no ledger row)
 
 ### 1f0adaf · 2026-10-29 23:49 · Abstract as a single unstructured paragraph: problem, question, methods, results, conclusion; one sentence on the payer-side run
+
+(no ledger row)
+
+### fa990e2 · 2026-10-30 06:49 · Build log: regenerate after 1f0adaf
+
+(no ledger row)
+
+### 9ac9bf4 · 2026-10-29 23:53 · Abstract opens on the asymmetry: automated claim review in seconds, no automation on the submitter's side to test and answer the denial
 
 Abstract rewritten as a single unstructured paragraph on the author's direction (problem, question, methods, results, conclusion, no section labels), with one sentence on the payer-side run; the same paragraph is the submission description's opening and the first X post's opening
