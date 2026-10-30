@@ -214,7 +214,7 @@ The gate also ships on its own, as a command-line tool and an MCP server ([`buil
 ## 3. Results
 
 <!-- results:start -->
-_Tables generated from the result files by `npm run log`; the prose below them is written by hand. Last regenerated 2026-10-30 20:14 UTC._
+_Tables generated from the result files by `npm run log`; the prose below them is written by hand. Last regenerated 2026-10-30 20:15 UTC._
 
 **Table 1. Kept runs.** 9 runs, 50 cases each, effort low. Agreed is correct-pass plus correct-decline against the grading key, with a 95% Wilson interval. Blocked is a draft the gate stopped. Missed is a decline on a case the key labels warranted. False pass is a draft the gate passed on a case the key labels unsupported. The five outcome columns sum to 50. Fabricated quotes counts quotes the gate refuted as not in the entry cited, in a sentence or in an evidence item, on any draft including declined ones. Care defended is the billed value of the warranted cases whose appeal passed the gate, out of the $568,500 billed across the thirty warranted cases ($940,000 across all fifty); the values are the synthetic set's, not a payer's. Entries read applies to the agentic modes.
 
@@ -374,9 +374,9 @@ Meta and Cerebral Valley for the event; Baseten for hosting the open-weights mod
 Every commit since the event began has a row in [NEW-WORK.md](NEW-WORK.md), every result file carries its model, mode, gate version, and any re-gate in its own header, and this section is regenerated from those sources after every push. Nothing in it is typed by hand.
 
 <!-- build-log:start -->
-_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-10-30 20:14 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
+_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-10-30 20:15 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
 
-121 commits since the `hackathon-start` tag, the last at 2026-10-30 13:14 (47129a4). Gate v1.4. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
+123 commits since the `hackathon-start` tag, the last at 2026-10-30 13:14 (89241db). Gate v1.4. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
 
 | Started (UTC) | Model | Mode | Agreed | Blocked | Missed | False pass | Advisor |
 | --- | --- | --- | :---: | :---: | :---: | :---: | --- |
@@ -392,11 +392,11 @@ _Generated from the git history, the ledger, and the result files by `npm run lo
 
 Last five authored commits, newest first, with the ledger row each one carried (the bot's regenerate commits are left out):
 
+- **89241db · 2026-10-30 13:14** · Abstract re-led with the other chair and the dollars; shot 6b in the cut at 2:10 in place of the Table 3 frame; captions regenerated. Abstract re-led on the author's instruction, opening cadence unchanged: the question adds the other chair (whether the same check, pointed the other way, holds the insurer's determination to the same record); the results lead with the dollars (muse-spark-1.3 defended the full $568,500 billed across the thirty warranted cases in each of its three runs, at…
+- **2b0fe36 · 2026-10-30 13:14** · Key: case-023 relabeled from absent to near-miss; chart text, verdicts, and hashes unchanged; twenty result files carry the label. Key: case-023 relabeled from absent to near-miss. Its screening note says "three disciplines at this intensity" and a progress note "the first full therapy day", lines it shares with its near-miss sibling case-034, so by the key's own definitions the chart raises the intensity criterion without meeting it. The generator carries a `labelAs` on the plan…
 - **47129a4 · 2026-10-30 13:14** · Viewer opens on the primary proposer's newest live run; litmus-gate README: npx forms and the publishing steps. Viewer opens on the primary proposer: without a deep link the page lands on muse-spark-1.3's newest live run, then any model's newest live run, then the newest run (`newestRun` in `replay.ts`; test). Asset links v31. `build/litmus-gate/README.md`: the `npx -y litmus-gate` forms and the publishing steps (`npm login`, then `cd build && npm ci && cd…
 - **66f638c · 2026-10-30 12:46** · Ledger: the viewer commit's hash after the rebase onto the bot's regenerate commit is 2fda55f. Ledger: the viewer row's hash is 2fda55f, not 309d554; the commit was rebased onto the bot's regenerate commit 04e5b4f before it was pushed, which gave it a new hash
 - **d82c391 · 2026-10-30 12:45** · README: care defended in Table 1 and the blocked split; Figure 9, the other chair; two Limitations; an optional payer-side shot. README and build log: Table 1 gains a Care defended column (the billed value of warranted cases whose appeal passed, out of the $568,500 billed across the thirty warranted cases, $940,000 across all fifty, the synthetic set's values) and a generated line after it splitting the eight blocked drafts into six on warranted cases (a true derivation not…
-- **2fda55f · 2026-10-30 12:44** · Viewer: the payer-side runs in the picker with their own words and no writ; a deep link keeps its step; case changes rewrite the address in place; an unknown case falls back; the default run is the newest by start time. Viewer (`build/viewer/`): the other chair in the page. The three payer-side runs of Table 4 (`results/payer/`) are listed last in the picker, labeled "payer side", and kept off the scoreboard; on that side the panel reads "Draft determination", PASS says a determination held to the record and that the reading of the criterion is not the gate's, DECLINED…
-- **c88886c · 2026-10-30 12:38** · The gate as a tool: litmus-gate CLI and MCP server over the same litmus() the harness and the viewer call. The gate as a tool (`build/litmus-gate/`): `litmus-gate check <draft.json> <case.json>` on the command line (exit 0 pass, 1 blocked, 2 declined, `--json` for the stored-record shape) and `litmus-gate mcp`, an MCP server over stdio on the TypeScript SDK v2 with three read-only tools, `litmus_verify_draft`, `litmus_check_sentence`, `litmus_contract`, and…
 <!-- build-log:end -->
 
 ## From the inside

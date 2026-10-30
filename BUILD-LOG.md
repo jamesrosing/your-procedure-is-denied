@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-10-30 20:14 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-10-30 20:15 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -549,6 +549,10 @@ Ledger: the viewer row's hash is 2fda55f, not 309d554; the commit was rebased on
 
 Viewer opens on the primary proposer: without a deep link the page lands on muse-spark-1.3's newest live run, then any model's newest live run, then the newest run (`newestRun` in `replay.ts`; test). Asset links v31. `build/litmus-gate/README.md`: the `npx -y litmus-gate` forms and the publishing steps (`npm login`, then `cd build && npm ci && cd litmus-gate && npm publish --access public`; `prepack` bundles; `npm pack --dry-run` shows three files)
 
-### next commit · the one that carries this regeneration
+### 2b0fe36 · 2026-10-30 13:14 · Key: case-023 relabeled from absent to near-miss; chart text, verdicts, and hashes unchanged; twenty result files carry the label
 
 Key: case-023 relabeled from absent to near-miss. Its screening note says "three disciplines at this intensity" and a progress note "the first full therapy day", lines it shares with its near-miss sibling case-034, so by the key's own definitions the chart raises the intensity criterion without meeting it. The generator carries a `labelAs` on the plan entry (`build/src/synthetic/generate.ts`) with the reason in the case's note; the chart text is the template's absent variant unchanged, so `npm run synthetic` changes only `case-023.json`'s label and note and every stored verdict and input hash reproduces. The twenty result files (kept, repeats, payer) carry the new label in `expected.subtype` and `summary.bySubtype` (a one-off script, the per-case outcome moved from absent to near-miss). Counts are now 6 absent and 7 near-miss in the test, README 2.3, the viewer's data note, and `build/synthetic/README.md`; README Results and Limitations say what changed and that the archived version carries the old label. The false pass still sits on this case
+
+### 89241db · 2026-10-30 13:14 · Abstract re-led with the other chair and the dollars; shot 6b in the cut at 2:10 in place of the Table 3 frame; captions regenerated
+
+Abstract re-led on the author's instruction, opening cadence unchanged: the question adds the other chair (whether the same check, pointed the other way, holds the insurer's determination to the same record); the results lead with the dollars (muse-spark-1.3 defended the full $568,500 billed across the thirty warranted cases in each of its three runs, at $0.63 to $0.96 for a run of fifty) and close on case-036 (one chart, two verified conclusions, no side taken); 442 words. Video: shot 6b, the other chair, is in the cut at 2:10 to 2:20 (case-036 at the verdict on both sides, two still frames, 21 words), in place of the Table 3 frame (7b); 7a moves to 2:20 to 2:33; `narration.srt` regenerated (36 cues); totals 352 and 371 words
