@@ -1,0 +1,34 @@
+cff-version: 1.2.0
+message: "If you use this work, cite it as below, and cite the LITMUS papers it implements."
+type: software
+title: "Your procedure is denied: fail-closed verification of model-drafted claim-denial appeals against the clinical record"
+authors:
+  - family-names: Rosing
+    given-names: James H.
+    affiliation: "Newport Beach, California"
+date-released: 2026-11-03
+repository-code: "https://github.com/jamesrosing/your-procedure-is-denied"
+url: "https://demo.hemeehr.com"
+license: Apache-2.0
+keywords:
+  - claim denial
+  - medical necessity appeal
+  - prior authorization
+  - large language models
+  - fail-closed verification
+  - LITMUS
+references:
+  - type: article
+    title: "Litmus: The Admissible Set"
+    authors:
+      - family-names: Rosing
+        given-names: James H.
+    doi: 10.5281/zenodo.21227402
+    year: 2026
+  - type: article
+    title: "Litmus: The Admissible Set (System Architecture)"
+    authors:
+      - family-names: Rosing
+        given-names: James H.
+    doi: 10.5281/zenodo.21227855
+    year: 2026
