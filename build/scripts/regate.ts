@@ -14,7 +14,7 @@ import { classify, gateSources, loadCases, summarize, type CaseResult, type Summ
 
 interface ResultsFile {
   run: Record<string, unknown> & { litmus?: string; regated?: { from: string; to: string; at: string; changedVerdicts: number }[] };
-  summary: Summary;
+  summary: Summary & { advice?: unknown }; // advice: the advisor's summary, written by scripts/advise.ts, never by the gate
   results: CaseResult[];
 }
 
@@ -29,11 +29,15 @@ export function regate(file: ResultsFile, casesById: Map<string, ReturnType<type
     if (gate.inputHash !== r.gate.inputHash) throw new Error(`${r.caseId}: gate inputs differ from the stored run (inputHash)`);
     if (gate.verdict !== r.gate.verdict) changedVerdicts += 1;
     changedStatuses += gate.sentences.filter((s, i) => s.status !== r.gate!.sentences[i]?.status).length;
-    return { ...r, outcome: classify(c.expected.warranted, gate.verdict), gate };
+    // The key the run was scored against is the one stored on the result: for
+    // a payer-side run it is the inverse of the case's physician key.
+    return { ...r, outcome: classify(r.expected.warranted, gate.verdict), gate };
   });
   const from = String(file.run.litmus ?? 'unknown');
   const run = { ...file.run, litmus: LITMUS_VERSION, regated: [...(file.run.regated ?? []), { from, to: LITMUS_VERSION, at: new Date().toISOString(), changedVerdicts }] };
-  return { file: { run, summary: summarize(results), results }, changedVerdicts, changedStatuses };
+  // summarize() knows nothing of the advisor; keep its summary when the file has one.
+  const summary = { ...summarize(results), ...(file.summary.advice !== undefined ? { advice: file.summary.advice } : {}) };
+  return { file: { run, summary, results }, changedVerdicts, changedStatuses };
 }
 
 async function main(): Promise<void> {

@@ -146,6 +146,19 @@
         "correct-decline": 1,
         "correct-pass": 2
       }
+    },
+    "advice": {
+      "provider": "meta",
+      "model": "muse-wonder-1.0",
+      "cases": 31,
+      "criteria": 127,
+      "supports": 86,
+      "partial": 41,
+      "silent": 0,
+      "gateVerifiedAdvisorDoubts": 41,
+      "falsePassesFlagged": 1,
+      "falsePasses": 1,
+      "costUsd": 0.8598408000000001
     }
   },
   "results": [

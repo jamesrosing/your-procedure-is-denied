@@ -139,6 +139,19 @@
         "blocked": 1,
         "correct-pass": 2
       }
+    },
+    "advice": {
+      "provider": "meta",
+      "model": "muse-wonder-1.0",
+      "cases": 30,
+      "criteria": 114,
+      "supports": 86,
+      "partial": 28,
+      "silent": 0,
+      "gateVerifiedAdvisorDoubts": 28,
+      "falsePassesFlagged": 0,
+      "falsePasses": 0,
+      "costUsd": 0.8223760000000002
     }
   },
   "results": [
