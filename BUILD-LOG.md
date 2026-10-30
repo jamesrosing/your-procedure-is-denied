@@ -50,7 +50,7 @@ Each commit that changed the version string in `build/src/litmus.ts`. The gate i
 
 ## Commits since `hackathon-start`
 
-Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 35 commits by github-actions[bot] are this log regenerating itself after a push; they touch only the generated files and carry no ledger row.
+Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 36 commits by github-actions[bot] are this log regenerating itself after a push; they touch only the generated files and carry no ledger row.
 
 ### 79e5e21 · 2026-10-26 20:38 · Add hackathon scaffolding: NEW-WORK.md and /build
 
@@ -527,8 +527,16 @@ The gate as a tool (`build/litmus-gate/`): `litmus-gate check <draft.json> <case
 
 ### 2fda55f · 2026-10-30 12:44 · Viewer: the payer-side runs in the picker with their own words and no writ; a deep link keeps its step; case changes rewrite the address in place; an unknown case falls back; the default run is the newest by start time
 
-(no ledger row)
+Viewer (`build/viewer/`): the other chair in the page. The three payer-side runs of Table 4 (`results/payer/`) are listed last in the picker, labeled "payer side", and kept off the scoreboard; on that side the panel reads "Draft determination", PASS says a determination held to the record and that the reading of the criterion is not the gate's, DECLINED says declined to deny, the case list says "determination verified" or "determination against a supporting record", and there is no writ (`sideText` in `replay.ts`). Addresses: a deep link's `step` is kept in the hash, so a reload lands on the same frame; changing case rewrites the address in place instead of pushing history; a case the file does not hold falls back to its first case instead of an empty page; the default run is the newest physician-side live run by start time, not by file name (`newestRun`). Three tests. Asset links v30; 189 tests
 
 ### d82c391 · 2026-10-30 12:45 · README: care defended in Table 1 and the blocked split; Figure 9, the other chair; two Limitations; an optional payer-side shot
 
 README and build log: Table 1 gains a Care defended column (the billed value of warranted cases whose appeal passed, out of the $568,500 billed across the thirty warranted cases, $940,000 across all fifty, the synthetic set's values) and a generated line after it splitting the eight blocked drafts into six on warranted cases (a true derivation not sourced) and two on unsupported cases (a baseless warranted answer stopped), with the runs that defended the full amount and what a run cost (`build/scripts/build-log.ts`). Figure 9, the other chair: case-036 passing on both sides of one chart, with both deep links. Two Limitations bullets: a sentence is not checked against its own quote (the collision class measures it; about a fifth of those sentences contradict their own quote and pass), and case-023's absent label is arguable against its near-miss sibling case-034, left as published with the note since the set is frozen at the archived version. Shot list: an optional ten-second shot 6b, the other chair, in place of 7b, with both links and 27 words
+
+### 85dda52 · 2026-10-30 12:46 · Build log: regenerate after d82c391
+
+(generated files only; no ledger row by design)
+
+### 66f638c · 2026-10-30 12:46 · Ledger: the viewer commit's hash after the rebase onto the bot's regenerate commit is 2fda55f
+
+Ledger: the viewer row's hash is 2fda55f, not 309d554; the commit was rebased onto the bot's regenerate commit 04e5b4f before it was pushed, which gave it a new hash

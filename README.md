@@ -376,7 +376,7 @@ Every commit since the event began has a row in [NEW-WORK.md](NEW-WORK.md), ever
 <!-- build-log:start -->
 _Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-10-30 19:46 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
 
-117 commits since the `hackathon-start` tag, the last at 2026-10-30 12:45 (d82c391). Gate v1.4. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
+119 commits since the `hackathon-start` tag, the last at 2026-10-30 12:46 (66f638c). Gate v1.4. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
 
 | Started (UTC) | Model | Mode | Agreed | Blocked | Missed | False pass | Advisor |
 | --- | --- | --- | :---: | :---: | :---: | :---: | --- |
@@ -392,11 +392,11 @@ _Generated from the git history, the ledger, and the result files by `npm run lo
 
 Last five authored commits, newest first, with the ledger row each one carried (the bot's regenerate commits are left out):
 
+- **66f638c · 2026-10-30 12:46** · Ledger: the viewer commit's hash after the rebase onto the bot's regenerate commit is 2fda55f. Ledger: the viewer row's hash is 2fda55f, not 309d554; the commit was rebased onto the bot's regenerate commit 04e5b4f before it was pushed, which gave it a new hash
 - **d82c391 · 2026-10-30 12:45** · README: care defended in Table 1 and the blocked split; Figure 9, the other chair; two Limitations; an optional payer-side shot. README and build log: Table 1 gains a Care defended column (the billed value of warranted cases whose appeal passed, out of the $568,500 billed across the thirty warranted cases, $940,000 across all fifty, the synthetic set's values) and a generated line after it splitting the eight blocked drafts into six on warranted cases (a true derivation not…
-- **2fda55f · 2026-10-30 12:44** · Viewer: the payer-side runs in the picker with their own words and no writ; a deep link keeps its step; case changes rewrite the address in place; an unknown case falls back; the default run is the newest by start time. (no ledger row)
+- **2fda55f · 2026-10-30 12:44** · Viewer: the payer-side runs in the picker with their own words and no writ; a deep link keeps its step; case changes rewrite the address in place; an unknown case falls back; the default run is the newest by start time. Viewer (`build/viewer/`): the other chair in the page. The three payer-side runs of Table 4 (`results/payer/`) are listed last in the picker, labeled "payer side", and kept off the scoreboard; on that side the panel reads "Draft determination", PASS says a determination held to the record and that the reading of the criterion is not the gate's, DECLINED…
 - **c88886c · 2026-10-30 12:38** · The gate as a tool: litmus-gate CLI and MCP server over the same litmus() the harness and the viewer call. The gate as a tool (`build/litmus-gate/`): `litmus-gate check <draft.json> <case.json>` on the command line (exit 0 pass, 1 blocked, 2 declined, `--json` for the stored-record shape) and `litmus-gate mcp`, an MCP server over stdio on the TypeScript SDK v2 with three read-only tools, `litmus_verify_draft`, `litmus_check_sentence`, `litmus_contract`, and…
 - **3496d82 · 2026-10-30 11:49** · Build log: pending row skips the bot, one time zone, missed and fabricated-quote columns computed; README fabrication claim narrowed to sentences; Figure 3 moved to case-038. Build log (`build/scripts/build-log.ts`): the ledger's pending row now goes to the newest authored commit without a row, skipping the bot's regenerate commit at HEAD, which had taken the "Video close" row and left 3e54c98 with none; every commit date rendered in one zone (Pacific) instead of each committer's own; a Missed column in Tables 1 and 2 and…
-- **fdbe3f7 · 2026-10-30 11:49** · Viewer scoreboard: a missed column, so every row's outcomes sum to its fifty cases. Viewer scoreboard (`build/viewer/src/replay.ts`, `main.ts`): a missed column, "Declined, key says yes", shown when any run has one, so every row's outcomes sum to its 50 cases; muse-wonder-1.0 with the chart in the prompt had read 49 / 0 / 0 / 0 with case-047 nowhere. Test: the five outcome counts of every scoreboard row sum to its cases. Asset links v29
 <!-- build-log:end -->
 
 ## From the inside
