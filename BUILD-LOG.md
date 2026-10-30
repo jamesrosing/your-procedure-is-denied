@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-10-30 04:43 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-10-30 04:45 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -355,3 +355,11 @@ What the three columns are, said on the page (`build/viewer/`): one line under e
 ### ca40557 · 2026-10-29 21:42 · The README becomes the paper: abstract, introduction with the gap and the hypothesis, methods with the pre-specified table, generated results with intervals and the gate's sensitivity by class, discussion, conclusion, declarations; Zenodo and citation metadata
 
 The README becomes the paper: title line, keywords, a 250-word abstract, Introduction (the problem, the public record, the standard, what is not known, objective and hypothesis), Methods (study design with a pre-specified versus post hoc table drawn from the git history, the system under test, the fifty cases as controls, the gate, models and modes and the live query, the advisor, outcome measures with Wilson intervals and the rule of three, reproducibility), Results (three generated tables between `results:start` and `results:end` markers, written by `build/scripts/build-log.ts` from the result files, the repeats, and the mutation report: kept runs with 95% intervals, repeat ranges, gate sensitivity by corruption class with the 95% upper bound on the miss rate; prose in past tense, no interpretation), Discussion (interpretation, the disagreements read, the referential limit, what the models found wrong with my test, context, limitations, what should come next), Conclusion, Acknowledgements, Declarations (competing interests, ethics, data and code availability; the models under test named), a LITMUS footnote. `build/src/stats.ts` (Wilson, rule of three, formatting) with three tests; 143 tests. `.zenodo.json` and `CITATION.cff` for the deposit at the submission commit
+
+### 1344160 · 2026-10-30 04:43 · Build log: regenerate after ca40557
+
+(no ledger row)
+
+### b09f7a2 · 2026-10-29 21:44 · Figures are frames: a deep link may name a step, and the paper's Results list six frames by address
+
+Figures are frames (`build/viewer/`): a deep link may carry `&step=<n>` or `&step=end` and the page lands on that frame of the replay (`parseStep`, clamped to the timeline, one test); the hash written back by the case picker drops the step so the next link in the same tab applies cleanly. README Results gains a Figures list, six frames by address: the flow, case-001 verified, case-027 blocked, case-044 declined, case-023 the referential limit, the live query strip at step 1. 144 tests; asset links v24
