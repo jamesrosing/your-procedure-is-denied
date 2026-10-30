@@ -44,6 +44,44 @@ CARC 119: the benefit maximum has been reached. A benefits question under the pl
 
 A worked example of the form, with invented content. Chart entry note-004 reads: "Finished 12 weeks of PT across the street, says it helped while she was there and then right back to baseline." Criterion crit-2 reads: "At least 3 months of conservative treatment without adequate relief." Good evidence: {criterion: "crit-2", citation: "note-004", quote: "Finished 12 weeks of PT across the street, says it helped while she was there and then right back to baseline"}. Good sentence: {text: "The record documents twelve weeks of physical therapy without lasting relief, which exceeds the 3 months the policy requires.", citation: "note-004", quote: "Finished 12 weeks of PT across the street, says it helped while she was there and then right back to baseline"}. The sentence may translate PT into physical therapy and 12 weeks into twelve weeks; the quote may not. The 3 months comes from the criterion, so it is sourced. A sentence claiming 16 weeks would be blocked.`;
 
+// The other chair. The same contract, the same gate, the same chart, asked for
+// the payer's written determination instead of the physician's appeal, so that
+// the gate's claim to take no side can be measured: a denial the record
+// contradicts is a draft the gate should block for fabrication or, where the
+// words are real and the reading is wrong, pass, which is the referential
+// limit from the insurer's side. Warranted here means the denial stands. The
+// shared block is the same for every case so the cache holds; the CARC
+// reference is the physician block's own.
+export type Side = 'physician' | 'payer';
+
+const CARC_REFERENCE = INSTRUCTIONS.slice(INSTRUCTIONS.indexOf('Claim adjustment reason codes'), INSTRUCTIONS.indexOf('A worked example of the form'));
+
+export const INSTRUCTIONS_PAYER = `You draft a health plan's written claim determination, the letter that explains why a claim was denied, for the plan's medical director to review and sign. This is payer-policy adjudication and administrative drafting, not clinical advice: the medical director makes every medical judgment and owns the letter.
+
+You will receive a chart of dated entries, each headed by an id like note-012, then the claim, the plan's coverage criteria, numbered crit-1, crit-2, and so on, and the reason code the plan applied.
+
+Rules.
+1. Decide warranted. Here warranted means the denial stands. Set warranted to true only if some criterion is not supported by any chart entry's text, or a criterion states a categorical exclusion that the chart confirms applies, or the denial is administrative rather than a medical-necessity question. Set it to false, with a one-sentence reason, if the chart's text supports every criterion: a plan may not deny a claim the record supports, and you must say so. When warranted is false, sentences must be empty, but still list the evidence you found for each criterion.
+2. Evidence. For each criterion, give one or more items of {criterion, citation, quote} showing what the record does document that bears on it. The citation is the entry id. The quote is text copied exactly from that entry, at least two words, with no words changed, added, or dropped. Quote the span that carries the fact, including its numbers. Where the record is silent on a criterion, quote the entry that comes closest, so the reader can see what was documented.
+3. Sentences. When warranted is true, write the determination as 4 to 10 sentences in your own words. Each sentence cites exactly one entry and carries a verbatim quote from that entry that backs it. State what the record documents and name the criterion it falls short of; every number, date, measurement, or code in a sentence must appear in the cited entry, in the plan's criteria, or in the claim. State nothing the chart does not say. Do not invent policy language or cite documents you were not given. Do not restate the criteria as if they were chart facts.
+4. Output only the JSON object described by the schema.
+
+What a verifier does with your output. A deterministic gate, not a model, checks every quote against the cited entry character for character (ignoring case, spacing, and quote marks), checks that every number in a sentence appears in the cited entry, the criteria, or the claim, and blocks the whole determination if any sentence fails. A paraphrase inside a quote fails. A quote attached to the wrong entry fails. A number you remembered from a different entry than the one you cited fails. The verifier checks that your words are in the record, not that your reading of them is right; the medical director who signs is the check on the reading. There is no partial credit, so quote carefully and cite the entry the words came from.
+
+${CARC_REFERENCE}A worked example of the form, with invented content. Chart entry note-004 reads: "Finished 6 weeks of PT across the street, says it helped a little and stopped going." Criterion crit-2 reads: "At least 3 months of conservative treatment without adequate relief." Good evidence: {criterion: "crit-2", citation: "note-004", quote: "Finished 6 weeks of PT across the street, says it helped a little and stopped going"}. Good sentence: {text: "The record documents six weeks of physical therapy against the 3 months of conservative treatment the policy requires, so crit-2 is not met.", citation: "note-004", quote: "Finished 6 weeks of PT across the street, says it helped a little and stopped going"}. The sentence may translate PT into physical therapy and 6 weeks into six weeks; the quote may not. The 3 months comes from the criterion, so it is sourced. A sentence claiming 4 weeks would be blocked. If the entry had read 12 weeks, the criterion would be met and warranted must be false.`;
+
+export const INSTRUCTIONS_PAYER_AGENTIC = INSTRUCTIONS_PAYER.replace(
+  'You will receive a chart of dated entries, each headed by an id like note-012, then the claim, the plan\'s coverage criteria, numbered crit-1, crit-2, and so on, and the reason code the plan applied.',
+  `You will receive an index of the chart, one line per entry with its id (like note-012), date, kind, and opening words, then the claim, the plan's coverage criteria, numbered crit-1, crit-2, and so on, and the reason code the plan applied. You do not have the entries themselves. Two tools fetch them: list_entries returns the index again, and read_entry returns the full text of one entry by id. Read every entry whose index line could bear on a criterion, and read any entry before you quote it: a quote must come from an entry you have read in full, copied exactly, and the verifier will refute a quote from an entry you only saw in the index. Most entries in a chart are routine traffic that does not bear on the claim; you do not need to read those. When you have read what you need, answer with the JSON object and nothing else.`,
+);
+
+// The key for a side. The appeal key says whether the record supports the
+// service; the denial is warranted exactly where it does not.
+export function expectedFor(c: SyntheticCase, side: Side = 'physician'): { warranted: boolean; subtype?: string } {
+  const warranted = side === 'payer' ? !c.expected.warranted : c.expected.warranted;
+  return { warranted, ...(c.expected.subtype ? { subtype: c.expected.subtype } : {}) };
+}
+
 // The agentic variant: the model sees an index, not the chart, and reads
 // entries by tool call. The shared block stays identical across cases so the
 // prompt cache holds; only the index block and the denial vary.
@@ -89,8 +127,9 @@ export function chartToolExecutor(c: SyntheticCase, extra?: (call: ToolCall) => 
   };
 }
 
-export function buildAgenticRequest(c: SyntheticCase, effort: Effort, maxTokens: number, options: { tools?: ToolDefinition[]; extra?: (call: ToolCall) => Promise<ToolOutcome | null> } = {}): AgenticRequest {
-  const base = buildRequest(c, effort, maxTokens);
+export function buildAgenticRequest(c: SyntheticCase, effort: Effort, maxTokens: number, options: { tools?: ToolDefinition[]; extra?: (call: ToolCall) => Promise<ToolOutcome | null>; side?: Side } = {}): AgenticRequest {
+  const side: Side = options.side ?? 'physician';
+  const base = buildRequest(c, effort, maxTokens, side);
   const hasPolicyStatus = (options.tools ?? []).some(t => t.name === POLICY_STATUS_TOOL.name);
   const policyLine = hasPolicyStatus
     ? `\n\nA third tool, policy_status, is a live query against CHART, a pre-existing coverage index. The payer here is fictional, so call it once with authority "${DEFAULT_AUTHORITY}", the code on the denial, and the date of service, before you decide; report what it says about freshness only in your reasoning, never as a chart fact.`
@@ -98,7 +137,7 @@ export function buildAgenticRequest(c: SyntheticCase, effort: Effort, maxTokens:
   return {
     ...base,
     system: [
-      { text: INSTRUCTIONS_AGENTIC, cache: true },
+      { text: side === 'payer' ? INSTRUCTIONS_PAYER_AGENTIC : INSTRUCTIONS_AGENTIC, cache: true },
       { text: `Chart index for patient ${c.patient.alias}, ${c.patient.age} year old ${c.patient.sex}. Synthetic record. ${c.chart.length} entries.\n\n${chartIndex(c)}${policyLine}` },
     ],
     tools: [...CHART_TOOLS, ...(options.tools ?? [])],
@@ -111,14 +150,15 @@ export function renderChart(c: SyntheticCase): string {
   return c.chart.map(e => `[${e.id}] ${e.date} ${e.kind}\n${e.text}`).join('\n\n');
 }
 
-export function buildRequest(c: SyntheticCase, effort: Effort, maxTokens: number): ProposeRequest {
+export function buildRequest(c: SyntheticCase, effort: Effort, maxTokens: number, side: Side = 'physician'): ProposeRequest {
   const criteria = c.criteria.map(k => `${k.id}: ${k.text}`).join('\n');
+  const ask = side === 'payer' ? 'Decide whether the denial is supported by the record and, if so, draft the determination.' : 'Decide whether an appeal is warranted and, if so, draft it.';
   return {
     system: [
-      { text: INSTRUCTIONS, cache: true },
+      { text: side === 'payer' ? INSTRUCTIONS_PAYER : INSTRUCTIONS, cache: true },
       { text: `Chart for patient ${c.patient.alias}, ${c.patient.age} year old ${c.patient.sex}. Synthetic record.\n\n${renderChart(c)}` },
     ],
-    user: `Denial (CARC ${c.denial.carc}): ${c.denial.text}\n\nService: ${c.procedure.codeSystem} ${c.procedure.code}, ${c.procedure.description}.\n\nPayer criteria (${c.payer.name}, ${c.payer.planType}):\n${criteria}\n\nDecide whether an appeal is warranted and, if so, draft it.`,
+    user: `Denial (CARC ${c.denial.carc}): ${c.denial.text}\n\nService: ${c.procedure.codeSystem} ${c.procedure.code}, ${c.procedure.description}.\n\nPayer criteria (${c.payer.name}, ${c.payer.planType}):\n${criteria}\n\n${ask}`,
     effort,
     maxTokens,
   };
@@ -140,7 +180,8 @@ export interface CaseResult {
   category: string;
   setting: string;
   stakesUsd: number;
-  expected: { warranted: boolean; subtype?: string };
+  expected: { warranted: boolean; subtype?: string }; // the key for the side run: for the payer side, warranted means the denial stands
+  side?: Side; // absent for the physician side, the default
   provider: string;
   model: string;
   stopReason: string | null;
@@ -165,6 +206,7 @@ export interface RunOptions {
   agentic?: boolean;
   tools?: ToolDefinition[]; // extra tools for the agentic path
   extra?: (call: ToolCall) => Promise<ToolOutcome | null>;
+  side?: Side; // payer: the same gate pointed at the insurer's determination
 }
 
 export function readingStats(c: SyntheticCase, trace: TraceEvent[]): NonNullable<CaseResult['reading']> {
@@ -177,9 +219,12 @@ export function readingStats(c: SyntheticCase, trace: TraceEvent[]): NonNullable
 const EMPTY_USAGE: Usage = { inputTokens: 0, cachedInputTokens: 0, cacheWriteTokens: 0, outputTokens: 0, thinkingTokens: 0 };
 
 export async function runCase(provider: Provider, c: SyntheticCase, opts: RunOptions): Promise<CaseResult> {
+  const side: Side = opts.side ?? 'physician';
+  const expected = expectedFor(c, side);
   const base = {
     caseId: c.id, category: c.category, setting: c.setting, stakesUsd: c.stakesUsd,
-    expected: { warranted: c.expected.warranted, ...(c.expected.subtype ? { subtype: c.expected.subtype } : {}) },
+    expected,
+    ...(side === 'payer' ? { side } : {}),
     provider: provider.label, model: provider.model,
   };
   let result;
@@ -187,11 +232,11 @@ export async function runCase(provider: Provider, c: SyntheticCase, opts: RunOpt
   try {
     if (opts.agentic) {
       if (!provider.proposeAgentic) throw new Error(`${provider.label} has no agentic path`);
-      const r = await provider.proposeAgentic(buildAgenticRequest(c, opts.effort, opts.maxTokens, { ...(opts.tools ? { tools: opts.tools } : {}), ...(opts.extra ? { extra: opts.extra } : {}) }));
+      const r = await provider.proposeAgentic(buildAgenticRequest(c, opts.effort, opts.maxTokens, { ...(opts.tools ? { tools: opts.tools } : {}), ...(opts.extra ? { extra: opts.extra } : {}), side }));
       result = r;
       agentic = { turns: r.turns, trace: r.trace };
     } else {
-      result = await provider.propose(buildRequest(c, opts.effort, opts.maxTokens));
+      result = await provider.propose(buildRequest(c, opts.effort, opts.maxTokens, side));
     }
   } catch (error: unknown) {
     // Error class and HTTP status only: SDK messages can echo the request body.
@@ -212,8 +257,8 @@ export async function runCase(provider: Provider, c: SyntheticCase, opts: RunOpt
   const onKey = verifiedEvidence.filter(e => (c.expected.support[e.criterion] ?? []).includes(e.citation)).length;
   return {
     ...common,
-    outcome: classify(c.expected.warranted, gate.verdict),
-    warrantedMatch: appeal.warranted === c.expected.warranted,
+    outcome: classify(expected.warranted, gate.verdict),
+    warrantedMatch: appeal.warranted === expected.warranted,
     citationPrecision: verifiedEvidence.length > 0 ? onKey / verifiedEvidence.length : null,
     draft: appeal,
     gate,
@@ -345,14 +390,15 @@ export function selectProvider(name: string, model: string | undefined): Provide
 // Where a run lands. Without --out-dir, results/ next to the source; a relative
 // --out-dir is resolved against the working directory so repeat runs can go to
 // results/repeats/ without appearing on the viewer's scoreboard or in the log.
-export function resolveOutDir(here: string, outDir: string | undefined): string {
-  return outDir ? resolve(outDir) : join(here, '..', 'results');
+export function resolveOutDir(here: string, outDir: string | undefined, side: Side = 'physician'): string {
+  // Payer-side runs never join the scoreboard: they default to results/payer, which the viewer and the build log do not read.
+  return outDir ? resolve(outDir) : side === 'payer' ? join(here, '..', 'results', 'payer') : join(here, '..', 'results');
 }
 
-export function resultFileName(run: { label: string; model: string; effort: string; agentic: boolean; chart: boolean; startedAt: string }): string {
+export function resultFileName(run: { label: string; model: string; effort: string; agentic: boolean; chart: boolean; startedAt: string; side?: Side }): string {
   const safeModel = run.model.replace(/[^a-z0-9.-]+/gi, '_');
   const stamp = run.startedAt.replace(/[:.]/g, '-');
-  return `${run.label}-${safeModel}-${run.effort}${run.agentic ? '-agentic' : ''}${run.chart ? '-chart' : ''}-${stamp}.json`;
+  return `${run.label}-${safeModel}-${run.effort}${run.agentic ? '-agentic' : ''}${run.chart ? '-chart' : ''}${run.side === 'payer' ? '-payer' : ''}-${stamp}.json`;
 }
 
 export function loadCases(dir: string): SyntheticCase[] {
@@ -373,8 +419,11 @@ async function main(): Promise<void> {
       'out-dir': { type: 'string' },
       agentic: { type: 'boolean', default: false },
       chart: { type: 'boolean', default: false },
+      side: { type: 'string', default: 'physician' },
     },
   });
+  const side = values.side as Side;
+  if (!['physician', 'payer'].includes(side)) throw new Error('side must be physician or payer');
   const agentic = values.agentic === true;
   const chart = values.chart === true;
   if (chart && !agentic) throw new Error('--chart needs --agentic');
@@ -392,19 +441,19 @@ async function main(): Promise<void> {
   const concurrency = Number(values.concurrency);
   const maxTokens = Number(values['max-tokens']);
   const startedAt = new Date().toISOString();
-  console.error(`running ${cases.length} case(s) on ${provider.label}/${provider.model}, effort ${effort}, concurrency ${concurrency}${agentic ? ', agentic' : ''}`);
+  console.error(`running ${cases.length} case(s) on ${provider.label}/${provider.model}, effort ${effort}, concurrency ${concurrency}${agentic ? ', agentic' : ''}${side === 'payer' ? ', payer side' : ''}`);
 
   const results = await mapWithConcurrency(cases, concurrency, async c => {
-    const r = await runCase(provider, c, { effort, maxTokens, agentic, tools, ...(extra ? { extra } : {}) });
+    const r = await runCase(provider, c, { effort, maxTokens, agentic, tools, side, ...(extra ? { extra } : {}) });
     const reading = r.reading ? ` read ${r.reading.entriesRead}/${r.reading.chartSize} key ${r.reading.supportRead}/${r.reading.supportTotal} turns ${r.turns}` : '';
     console.error(`${r.caseId} ${r.outcome.padEnd(15)} ${r.gate ? `${r.gate.verdict.padEnd(8)} verified ${r.gate.counts.verified}/${r.gate.counts.sentences}` : (r.error ?? '')}${reading} ${r.latencyMs}ms $${r.costUsd.toFixed(4)}`);
     return r;
   });
   const summary = summarize(results);
-  const outDir = resolveOutDir(here, values['out-dir']);
+  const outDir = resolveOutDir(here, values['out-dir'], side);
   mkdirSync(outDir, { recursive: true });
-  const file = join(outDir, resultFileName({ label: values.label ?? provider.label, model: provider.model, effort, agentic, chart, startedAt }));
-  writeFileSync(file, JSON.stringify({ run: { startedAt, finishedAt: new Date().toISOString(), provider: provider.label, model: provider.model, effort, concurrency, maxTokens, cases: cases.length, agentic, tools: ['list_entries', 'read_entry', ...tools.map(t => t.name)], litmus: LITMUS_VERSION, synthetic: true }, summary, results }, null, 2) + '\n');
+  const file = join(outDir, resultFileName({ label: values.label ?? provider.label, model: provider.model, effort, agentic, chart, startedAt, side }));
+  writeFileSync(file, JSON.stringify({ run: { startedAt, finishedAt: new Date().toISOString(), provider: provider.label, model: provider.model, effort, concurrency, maxTokens, cases: cases.length, agentic, side, tools: ['list_entries', 'read_entry', ...tools.map(t => t.name)], litmus: LITMUS_VERSION, synthetic: true }, summary, results }, null, 2) + '\n');
   console.error(`wrote ${file}`);
   console.log(JSON.stringify(summary, null, 2));
 }

@@ -1,6 +1,6 @@
 import { describe, test } from 'node:test';
 import assert from 'node:assert/strict';
-import { buildRequest, gateSources, classify, mapWithConcurrency, runCase, summarize, type CaseResult } from '../src/harness.js';
+import { buildRequest, gateSources, classify, expectedFor, INSTRUCTIONS_PAYER, mapWithConcurrency, resolveOutDir, resultFileName, runCase, summarize, type CaseResult } from '../src/harness.js';
 import type { Provider, ProposeRequest, ProposeResult } from '../src/provider.js';
 import type { Appeal } from '../src/schema.js';
 import { generateCases, SEED } from '../src/synthetic/generate.js';
@@ -260,5 +260,67 @@ describe('gateSources is shared with the viewer', () => {
   test('the harness and src/sources.ts export the same function', async () => {
     const shared = await import('../src/sources.js');
     assert.equal(gateSources, shared.gateSources);
+  });
+});
+
+describe('the payer side: the same gate pointed at the insurer', () => {
+  test('buildRequest for the payer side swaps the shared block and asks for the determination; the chart block is unchanged', () => {
+    const req = buildRequest(warrantedCase, 'low', 12288, 'payer');
+    const physician = buildRequest(warrantedCase, 'low', 12288);
+    assert.equal(req.system[0]!.text, INSTRUCTIONS_PAYER);
+    assert.equal(req.system[0]!.cache, true);
+    assert.equal(req.system[1]!.text, physician.system[1]!.text);
+    assert.match(req.user, /determination/i);
+    assert.ok(!req.user.includes('Decide whether an appeal is warranted'));
+    assert.ok(req.system[0]!.text.length >= 4600, `payer block is ${req.system[0]!.text.length} chars, too short to be cached`);
+    assert.ok(!req.system[0]!.text.includes(warrantedCase.id));
+  });
+
+  test('the payer instructions: a medical director signs, the same verifier, warranted means the denial stands, no clinical advice, and the verifier\'s limit is stated', () => {
+    for (const re of [/medical director/i, /deterministic gate/i, /warranted to true only if/i, /not clinical advice/i, /not that your reading/i]) assert.match(INSTRUCTIONS_PAYER, re);
+    assert.ok(!INSTRUCTIONS_PAYER.includes('!'));
+  });
+
+  test('the payer key is the appeal key inverted: a denial is warranted where the record fails a criterion', () => {
+    assert.equal(expectedFor(warrantedCase, 'payer').warranted, false);
+    assert.equal(expectedFor(declinedCase, 'payer').warranted, true);
+    assert.equal(expectedFor(declinedCase, 'payer').subtype, 'absent');
+    assert.deepEqual(expectedFor(warrantedCase, 'physician'), { warranted: true });
+  });
+
+  test('runCase on the payer side records the side, classifies against the inverted key, and runs the same gate', async () => {
+    const note = (id: string) => warrantedCase.chart.find(e => e.id === id)!;
+    const [crit, ids] = Object.entries(warrantedCase.expected.support)[0]!;
+    const cite = ids[0]!;
+    const quote = firstWords(note(cite).text, 6);
+    const declining: Appeal = { warranted: false, reason: 'the record documents every criterion', evidence: [{ criterion: crit, citation: cite, quote }], sentences: [] };
+    const r1 = await runCase(fakeProvider(declining), warrantedCase, { effort: 'low', maxTokens: 12288, agentic: false, side: 'payer' });
+    assert.equal(r1.side, 'payer');
+    assert.equal(r1.expected.warranted, false);
+    assert.equal(r1.outcome, 'correct-decline');
+    assert.equal(r1.warrantedMatch, true);
+
+    // The packet rule holds on this side too: every criterion needs verified evidence of what the record documents.
+    const allEvidence = perfectDraft().evidence;
+    const fabricated: Appeal = { warranted: true, evidence: allEvidence, sentences: [{ text: 'The record documents only 9999 sessions, short of the requirement.', citation: cite, quote }] };
+    const r2 = await runCase(fakeProvider(fabricated), warrantedCase, { effort: 'low', maxTokens: 12288, agentic: false, side: 'payer' });
+    assert.equal(r2.outcome, 'blocked');
+    assert.equal(r2.gate!.sentences[0]!.status, 'refuted');
+
+    const misreading: Appeal = { warranted: true, evidence: allEvidence, sentences: [{ text: 'The record does not establish this criterion.', citation: cite, quote }] };
+    const r3 = await runCase(fakeProvider(misreading), warrantedCase, { effort: 'low', maxTokens: 12288, agentic: false, side: 'payer' });
+    assert.equal(r3.outcome, 'false-pass', 'a denial with real quotes under a wrong reading passes the gate: the referential limit from the other chair');
+
+    const physician = await runCase(fakeProvider(perfectDraft()), warrantedCase, { effort: 'low', maxTokens: 12288, agentic: false });
+    assert.equal(physician.side, undefined);
+    assert.equal(physician.outcome, 'correct-pass');
+  });
+
+  test('payer-side files carry the side in their name and land in results/payer, which the viewer and the build log never read', () => {
+    const name = resultFileName({ label: 'meta', model: 'muse-spark-1.3', effort: 'low', agentic: false, chart: false, startedAt: '2026-10-30T07:00:00.000Z', side: 'payer' });
+    assert.equal(name, 'meta-muse-spark-1.3-low-payer-2026-10-30T07-00-00-000Z.json');
+    assert.equal(resultFileName({ label: 'meta', model: 'muse-spark-1.3', effort: 'low', agentic: false, chart: false, startedAt: '2026-10-30T07:00:00.000Z' }), 'meta-muse-spark-1.3-low-2026-10-30T07-00-00-000Z.json');
+    assert.equal(resolveOutDir('/repo/build/src', undefined, 'payer'), '/repo/build/src/../results/payer'.replace('/src/../', '/'));
+    assert.equal(resolveOutDir('/repo/build/src', undefined), '/repo/build/results');
   });
 });
