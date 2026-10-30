@@ -376,7 +376,7 @@ Every commit since the event began has a row in [NEW-WORK.md](NEW-WORK.md), ever
 <!-- build-log:start -->
 _Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-10-30 06:20 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
 
-95 commits since the `hackathon-start` tag, the last at 2026-10-29 23:19 (9367f42). Gate v1.4. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
+95 commits since the `hackathon-start` tag, the last at 2026-10-29 23:19 (73d29bd). Gate v1.4. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
 
 | Started (UTC) | Model | Mode | Agreed | Blocked | False pass | Advisor |
 | --- | --- | --- | :---: | :---: | :---: | --- |
@@ -392,7 +392,7 @@ _Generated from the git history, the ledger, and the result files by `npm run lo
 
 Last five commits, newest first, with the ledger row each one carried:
 
-- **9367f42 · 2026-10-29 23:19** · The other chair, kept: payer-side runs on three models (wonder 50 of 50, spark 1.3 49 of 50, Spark Open 48 of 50 with the one fabricated quote of any full run refuted); Table 4 generated post hoc from results/payer; README 2.1, 2.7, Results, 4.3. Payer-side runs kept (`build/results/payer/`, three files, chart in prompt, effort low, gate v1.4): muse-wonder-1.0 50 of 50 (declined to deny all 30 supporting records, verified determinations for all 20 failing ones); muse-spark-1.3 49 of 50 (one determination against a supporting record, case-036, six verified sentences reading visit 6 of 6 as not six…
+- **73d29bd · 2026-10-29 23:19** · The other chair, kept: payer-side runs on three models (wonder 50 of 50, spark 1.3 49 of 50, Spark Open 48 of 50 with the one fabricated quote of any full run refuted); Table 4 generated post hoc from results/payer; README 2.1, 2.7, Results, 4.3. Payer-side runs kept (`build/results/payer/`, three files, chart in prompt, effort low, gate v1.4): muse-wonder-1.0 50 of 50 (declined to deny all 30 supporting records, verified determinations for all 20 failing ones); muse-spark-1.3 49 of 50 (one determination against a supporting record, case-036, six verified sentences reading visit 6 of 6 as not six…
 - **d49cad8 · 2026-10-30 06:11** · Build log: regenerate after 4480204. (no ledger row)
 - **4480204 · 2026-10-29 23:11** · Harness: --side payer, the same gate pointed at the plan's determination; payer instructions, inverted key, side on results, results/payer default; 169 tests. The other chair (`build/src/harness.ts --side payer`): the same contract, the same gate, and the same chart asked for the plan's written claim determination instead of the physician's appeal, so the gate's claim to take no side can be measured. `INSTRUCTIONS_PAYER` (and its agentic variant) reuses the physician block's CARC reference; warranted means the…
 - **8bbac45 · 2026-10-30 06:06** · Build log: regenerate after 6afa77b. (no ledger row)
