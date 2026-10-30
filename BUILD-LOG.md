@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-10-30 07:02 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-10-30 18:49 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -10,17 +10,17 @@ Generated 2026-10-30 07:02 UTC by `build/scripts/build-log.ts` (`npm run log`) f
 
 Every file carries its own header: model, mode, gate version at the run, any later re-gate (the gate is a pure function of its inputs, so a re-gate changes labels, never inputs), and the advisor pass if one was run. Superseded or discarded runs are not in the directory; they are listed in the next section from the ledger.
 
-| Started (UTC) | Model | Mode | Agreed | Blocked | False pass | Failed | Gate at run | Re-gated to | Advisor |
-| --- | --- | --- | :---: | :---: | :---: | :---: | :---: | :---: | --- |
-| 2026-10-27 08:17 | muse-spark-1.3 (meta) | chart in prompt | 50 of 50 | 0 | 0 | 0 | v1 | v1.4 |  |
-| 2026-10-27 08:19 | muse-wonder-1.0 (meta) | chart in prompt | 49 of 50 | 0 | 0 | 0 | v1 | v1.4 |  |
-| 2026-10-27 08:20 | meta-models/muse-spark-open (baseten) | chart in prompt | 49 of 50 | 1 | 0 | 0 | v1 | v1.4 |  |
-| 2026-10-28 03:20 | muse-spark-1.3 (meta) | agentic | 50 of 50 | 0 | 0 | 0 | v1.1 | v1.4 |  |
-| 2026-10-28 03:24 | muse-wonder-1.0 (meta) | agentic | 49 of 50 | 1 | 0 | 0 | v1.1 | v1.4 |  |
-| 2026-10-28 03:24 | meta-models/muse-spark-open (baseten) | agentic | 48 of 50 | 1 | 0 | 1 | v1.1 | v1.4 |  |
-| 2026-10-28 06:48 | muse-spark-1.3 (meta) | agentic, live CHART | 49 of 50 | 1 | 0 | 0 | v1.2 | v1.4 |  |
-| 2026-10-28 06:51 | muse-wonder-1.0 (meta) | agentic, live CHART | 50 of 50 | 0 | 0 | 0 | v1.2 | v1.4 |  |
-| 2026-10-28 07:13 | meta-models/muse-spark-open (baseten) | agentic, live CHART | 45 of 50 | 4 | 1 | 0 | v1.2 | v1.4 |  |
+| Started (UTC) | Model | Mode | Agreed | Blocked | Missed | False pass | Failed | Fabricated quotes | Gate at run | Re-gated to | Advisor |
+| --- | --- | --- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | --- |
+| 2026-10-27 08:17 | muse-spark-1.3 (meta) | chart in prompt | 50 of 50 | 0 | 0 | 0 | 0 | 0 | v1 | v1.4 |  |
+| 2026-10-27 08:19 | muse-wonder-1.0 (meta) | chart in prompt | 49 of 50 | 0 | 1 | 0 | 0 | 0 | v1 | v1.4 |  |
+| 2026-10-27 08:20 | meta-models/muse-spark-open (baseten) | chart in prompt | 49 of 50 | 1 | 0 | 0 | 0 | 1 | v1 | v1.4 |  |
+| 2026-10-28 03:20 | muse-spark-1.3 (meta) | agentic | 50 of 50 | 0 | 0 | 0 | 0 | 1 | v1.1 | v1.4 |  |
+| 2026-10-28 03:24 | muse-wonder-1.0 (meta) | agentic | 49 of 50 | 1 | 0 | 0 | 0 | 0 | v1.1 | v1.4 |  |
+| 2026-10-28 03:24 | meta-models/muse-spark-open (baseten) | agentic | 48 of 50 | 1 | 0 | 0 | 1 | 0 | v1.1 | v1.4 |  |
+| 2026-10-28 06:48 | muse-spark-1.3 (meta) | agentic, live CHART | 49 of 50 | 1 | 0 | 0 | 0 | 0 | v1.2 | v1.4 | muse-wonder-1.0: 30 cases, 86 supports, 28 partial, 0 silent |
+| 2026-10-28 06:51 | muse-wonder-1.0 (meta) | agentic, live CHART | 50 of 50 | 0 | 0 | 0 | 0 | 0 | v1.2 | v1.4 | muse-wonder-1.0: 30 cases, 94 supports, 28 partial, 0 silent |
+| 2026-10-28 07:13 | meta-models/muse-spark-open (baseten) | agentic, live CHART | 45 of 50 | 4 | 0 | 1 | 0 | 0 | v1.2 | v1.4 | muse-wonder-1.0: 31 cases, 86 supports, 41 partial, 0 silent, flagged 1 of 1 false passes |
 
 ## Runs superseded or discarded
 
@@ -50,7 +50,7 @@ Each commit that changed the version string in `build/src/litmus.ts`. The gate i
 
 ## Commits since `hackathon-start`
 
-Oldest first. Each entry: hash, local time, subject, tags, results files added or removed, and the ledger row written with the commit.
+Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 33 commits by github-actions[bot] are this log regenerating itself after a push; they touch only the generated files and carry no ledger row.
 
 ### 79e5e21 · 2026-10-26 20:38 · Add hackathon scaffolding: NEW-WORK.md and /build
 
@@ -217,49 +217,49 @@ Gate v1.3 (`build/src/litmus.ts`): a sentence refuted only for hard tokens that 
 
 Build log: `build/scripts/build-log.ts` (`npm run log`) generates `BUILD-LOG.md` from the git history since `hackathon-start`, the ledger rows matched by hash, the gate version at every commit that changed it, and the run headers in `build/results/` (model, mode, gate at run, re-gates, advisor), plus the kept and superseded runs; it also rewrites a Build log section of the README between markers. `.github/workflows/build-log.yml` reruns it after every push to main and commits the two generated files as github-actions[bot] with no ledger row (the ledger says so). README navigation links the section
 
-### 162a2a7 · 2026-10-28 07:55 · Build log: regenerate after a60c2a3
+### 162a2a7 · 2026-10-28 00:55 · Build log: regenerate after a60c2a3
 
-(no ledger row)
+(generated files only; no ledger row by design)
 
 ### 3b5c60d · 2026-10-28 01:02 · Viewer: title cards before the first replay
 
 Viewer title cards: three lines shown one at a time at full screen width (type up to 124px), each held one second plus a quarter second per word, then dissolving into the replay; plays when the page opens without a deep link, any key or click skips, the i key replays; reduced motion shows all three and waits. Copy names the health insurer, the surgery, and the appeal deficit. Without a deep link the page opens on the newest live-tool run. Tests for the copy discipline and the schedule; asset links v10; 109 tests
 
-### a517514 · 2026-10-28 08:02 · Build log: regenerate after 3b5c60d
+### a517514 · 2026-10-28 01:02 · Build log: regenerate after 3b5c60d
 
-(no ledger row)
+(generated files only; no ledger row by design)
 
 ### 799d7b3 · 2026-10-28 01:04 · Title card one: the carrier, the treatment, and the doctor who may never answer
 
 Title card one reworded to Jim's line: the medical insurance carrier denies treatment in a second, the doctor takes hours to answer, if they ever do; word cap raised to 24, the hold scales with it; asset links v11
 
-### 10051f0 · 2026-10-28 08:04 · Build log: regenerate after 799d7b3
+### 10051f0 · 2026-10-28 01:04 · Build log: regenerate after 799d7b3
 
-(no ledger row)
+(generated files only; no ledger row by design)
 
 ### be17ec7 · 2026-10-28 01:05 · Title cards type out letter by letter
 
 Title cards type out letter by letter at about 35 characters a second with a blinking cursor, hold 1.4 s once complete, then fade; reduced motion shows the full text; schedule and copy tests updated; asset links v12
 
-### 6473f37 · 2026-10-28 08:05 · Build log: regenerate after be17ec7
+### 6473f37 · 2026-10-28 01:05 · Build log: regenerate after be17ec7
 
-(no ledger row)
+(generated files only; no ledger row by design)
 
 ### 951863a · 2026-10-28 01:10 · Title cards: sans, fixed layout while typing, slightly slower
 
 Title cards: set in the interface sans like the case header, the whole line laid out at once with each character revealed in place so the sentence never shifts, typing slowed to 36 ms per character; asset links v13
 
-### a83d4c5 · 2026-10-28 08:10 · Build log: regenerate after 951863a
+### a83d4c5 · 2026-10-28 01:10 · Build log: regenerate after 951863a
 
-(no ledger row)
+(generated files only; no ledger row by design)
 
 ### c119e09 · 2026-10-28 01:12 · Title cards: monospace, block cursor stays, two-second hold
 
 Title cards in JetBrains Mono with a block cursor that keeps blinking after the line is typed; each card holds 2 s once complete; asset links v14
 
-### ce40903 · 2026-10-28 08:12 · Build log: regenerate after c119e09
+### ce40903 · 2026-10-28 01:12 · Build log: regenerate after c119e09
 
-(no ledger row)
+(generated files only; no ledger row by design)
 
 ### 3b0a483 · 2026-10-28 21:52 · Mutation harness over the 2,201 verified sentences; gate v1.4 closes the 48 swapped-side passes it found; nine runs re-gated with no verdict change; harness --out-dir for repeat runs
 
@@ -270,27 +270,27 @@ Mutation harness (`build/scripts/mutate.ts`, `npm run mutate`, 13 tests): each o
 
 README: primary-source check of every statistic spoken in the video or shown on a title card. The KFF short link had died and KFF now serves the 2024 edition at the 2023 slug; footnote rewritten (2023 figures kept, the 81.7 percent overturn rate attributed as the 2023 rate through AHA News, the 2024 figures noted: 52.8 million requests, 4.1 million denied, 80.7 percent of appeals overturned). WISeR services corrected from "knee replacements", copied from Medical Economics, to knee arthroscopy for osteoarthritis per CMS's own list, with a CMS footnote. AMA, Cigna, UnitedHealth court order, and Senate figures confirmed at their sources (the Senate PDF only through Healthcare Dive; it blocks automated download). A framing paragraph near the top, what this is and is not. A paragraph under Limitations reporting what the mutation harness measured, with the referential limit as counts
 
-### 1e4ead3 · 2026-10-29 04:53 · Build log: regenerate after a39857c
+### 1e4ead3 · 2026-10-28 21:53 · Build log: regenerate after a39857c
 
-(no ledger row)
+(generated files only; no ledger row by design)
 
 ### 78a2105 · 2026-10-28 22:59 · Repeat runs: two more per live-CHART configuration in build/results/repeats; run-to-run variance reported as ranges under Limitations
 
 Results added: `repeats/baseten-meta-models_muse-spark-open-low-agentic-chart-2026-10-29T04-29-17-118Z.json`, `repeats/baseten-meta-models_muse-spark-open-low-agentic-chart-2026-10-29T04-31-36-875Z.json`, `repeats/meta-muse-spark-1.3-low-agentic-chart-2026-10-29T04-29-16-858Z.json`, `repeats/meta-muse-spark-1.3-low-agentic-chart-2026-10-29T04-30-27-555Z.json`, `repeats/meta-muse-wonder-1.0-low-agentic-chart-2026-10-29T04-31-38-694Z.json`, `repeats/meta-muse-wonder-1.0-low-agentic-chart-2026-10-29T04-33-41-439Z.json`.
 Repeat runs: each live-CHART configuration run twice more with the same 50 cases and settings (`build/results/repeats/`, six files, re-gated to v1.4). muse-wonder-1.0 50 of 50 both times; muse-spark-1.3 47 and 50 (the 47: three empty warranted answers on absent cases, all blocked by the gate); Muse Spark Open on Baseten 48 and 42 (the 42: seven blocks, every one a true sentence citing one entry for facts that live in two or a rounded figure the chart never states, plus the case-023 referential-limit false pass again). Zero fabricated quotes in all six. README gains a run-to-run variance bullet under Limitations, and the small-counts bullet no longer says there are no repeat runs
 
-### b693de6 · 2026-10-29 05:59 · Build log: regenerate after 78a2105
+### b693de6 · 2026-10-28 22:59 · Build log: regenerate after 78a2105
 
-(no ledger row)
+(generated files only; no ledger row by design)
 
 ### 6f31fd6 · 2026-10-28 23:12 · Two more Spark Open repeats on the Baseten hackathon credit with the dated model id; Spark Open reported across five runs
 
 Results added: `repeats/baseten-meta-models_muse-spark-open-1026-low-agentic-chart-2026-10-29T06-00-58-292Z.json`, `repeats/baseten-meta-models_muse-spark-open-1026-low-agentic-chart-2026-10-29T06-03-20-472Z.json`.
 Two more Spark Open repeats on the Baseten hackathon credit with the dated id `meta-models/muse-spark-open-1026` (`build/results/repeats/`, gate v1.4 at run time): 46 of 50 (three blocks: case-023 drafted warranted on the absent case and blocked on a 150-foot goal cited to the discharge note that says 160, the antianginal count again, and a day count the chart never states; one invalid-JSON answer, case-030) and 48 of 50 (the count sentence; one invalid-JSON answer, case-043). Spark Open now has five runs, 42 to 48. README variance bullet says which key and id each pair used. The Baseten Messages path reports zero thinking tokens on the hackathon key too
 
-### 60fb2e4 · 2026-10-29 06:13 · Build log: regenerate after 6f31fd6
+### 60fb2e4 · 2026-10-28 23:13 · Build log: regenerate after 6f31fd6
 
-(no ledger row)
+(generated files only; no ledger row by design)
 
 ### d249a33 · 2026-10-28 23:58 · Title cards rewritten for the video opening: four lines gather at the top over the replay page itself, dimmed; one fade reveals the page and lights the column headers left to right; budget and backdrop tests
 
@@ -308,187 +308,207 @@ Title cards footnoted (`build/viewer/`): the two statements that warrant a sourc
 
 The cards end by travelling (`build/viewer/`): the block of three lines shrinks and slides down into a preamble paragraph at the bottom of the page, the sources and the provenance stamp under it, with a dismiss button; the p key or the footer's "about this page" brings it back, and the stage gives up the height only while it is open. The closing line names its subject ("This project sets ..."); the word cap is thirty. The live CHART query is now shown as a strip: for the one step the query is the last thing that happened, the criteria list gives way to four nodes, the payer, the authority asked, the index that answered, and the answer typed out, with the question (tool, code, date of service) beneath, then the criteria return with the query's line. Pure parts in `build/viewer/src/replay.ts`: lookup steps carry their question from the trace, `lookupStrip` builds the four nodes, `stateAt` carries the strip for exactly one step, and playback dwells at least 3.2 s on a live query (`LOOKUP_DWELL_MS`); three tests. Reduced motion skips the travel and the typing. 135 tests; asset links v18
 
-### 3e005bb · 2026-10-29 08:23 · Build log: regenerate after f6aa618
+### 3e005bb · 2026-10-29 01:23 · Build log: regenerate after f6aa618
 
-(no ledger row)
+(generated files only; no ledger row by design)
 
 ### 2516a20 · 2026-10-29 01:31 · Title cards in the author's words: payment depends on what the doctor documented, judged against that payer's coverage rules; those rules differ by payer, and federal investigators found Medicare Advantage plans denying care that met Medicare's own criteria; this project places the payer policy in force on the date of service beside the doctor's record. Budget test 24 s
 
 Title cards in Jim's words (`build/viewer/src/replay.ts`): payment depends on what the doctor documented, judged against that payer's coverage rules; those rules differ by payer, and federal investigators found Medicare Advantage plans denying care that met Medicare's own criteria (both markers to the HHS Inspector General's 2022 report); this project places the payer policy in force on the date of service beside the doctor's record so each side can be checked against the other. Six rows at 1080p, the scrim's solid band deepened to fit; the budget test moves from 20 to 24 s (23.34 s to the first replay frame at the unchanged pace). Asset links v19
 
-### f55898d · 2026-10-29 08:33 · Build log: regenerate after 2516a20
+### f55898d · 2026-10-29 01:33 · Build log: regenerate after 2516a20
 
-(no ledger row)
+(generated files only; no ledger row by design)
 
 ### 0e347d9 · 2026-10-29 01:48 · Title block holds two seconds longer before it travels, the travel takes 700 ms, and typed characters are scheduled at absolute times so long lines do not drift; budget test 26 s
 
 The finished title block holds two seconds longer before it travels, and the travel takes 700 ms instead of 400 (`INTRO_END_PAUSE_MS`, `INTRO_MOVE_MS` in `build/viewer/src/replay.ts`; the scrim and caption band fade over the same time); the budget test holds the pause and moves to 26 s (25.64 s to the first replay frame). Each typed character is now due at an absolute time from the start instead of chained timers, so long lines no longer drift (the last line had landed about half a second late, eating the hold); measured hold after the last line 4.05 s. Asset links v20
 
-### 83bf7dd · 2026-10-29 17:13 · Build log: regenerate after 0e347d9
+### 83bf7dd · 2026-10-29 10:13 · Build log: regenerate after 0e347d9
 
-(no ledger row)
+(generated files only; no ledger row by design)
 
 ### 0f4e153 · 2026-10-29 10:17 · The opening ends on who signs: it drafts; a physician signs
 
 The opening ends on who signs: "It drafts; a physician signs." closes the third line, held together with no-break spaces so it never splits across rows; the copy test asserts the ending and allows thirty-two words; the scrim's solid band deepened for seven rows; budget test 27 s (26.72 s to the first replay frame). Asset links v21
 
-### 92dc31a · 2026-10-29 17:41 · Build log: regenerate after 0f4e153
+### 92dc31a · 2026-10-29 10:41 · Build log: regenerate after 0f4e153
 
-(no ledger row)
+(generated files only; no ledger row by design)
 
 ### 69f1081 · 2026-10-29 11:22 · The payer's own reason above the criteria, labeled with its CARC code; every case header label explains itself on hover; footnote markers set apart in the heading color
 
 The payer's own reason on screen (`build/viewer/`): the sentence after "Payer remark:" in each denial now sits above the criteria list, labeled with its CARC code, so the insurer's claim is read against the record's quotes beneath it (`payerRemark`, one test over all 50 cases). Every label in the case header explains itself on hover: the billing code system, the CARC code with its text, the plan, the category, the stakes, the model, the provider, the effort, the run date, the gate version, the synthetic record (`codeSystemHelp`, `carcHelp`, `LABEL_HELP`, one test). The footnote markers in the opening lines and the paragraph are set in the heading color and bold so they are seen. 137 tests; asset links v22
 
-### 97c67cc · 2026-10-29 18:25 · Build log: regenerate after 69f1081
+### 97c67cc · 2026-10-29 11:25 · Build log: regenerate after 69f1081
 
-(no ledger row)
+(generated files only; no ledger row by design)
 
 ### 37cb44e · 2026-10-29 16:14 · Each column says what it holds; the case header says what kind of denial it is; the result stamp and the about panel say what PASS means and where the fifty cases came from
 
 What the three columns are, said on the page (`build/viewer/`): one line under each column header (the physician's record, entries lit as read; the payer's written rules under the payer's own reason, lit when the draft cites verified evidence; the appeal drafted one sentence at a time, each stamped by the gate, with PASS defined as every sentence in the record, not that the appeal would prevail), repeated on the header's hover (`PANEL_HELP`); the result stamp explains itself on hover (`VERDICT_HELP`: PASS is the gate's word, the physician decides whether the record satisfies the criteria; DECLINED is the expected answer for 20 of 50). The case header now says what kind of denial each case is (`denialKind`, `DENIAL_KIND_HELP`): every one a claim denied after the service was given, none a prior-authorization request, the three CARC 197 cases claims denied for a missing authorization. Where the fifty cases came from, in the about panel and under the scoreboard (`DATA_NOTE`: seeded generator, 18 templates, the 30 and 20 split by subtype, fictional payers, no real record). README gains a subsection, The fifty cases, stating the kind of denial against the prior-authorization statistics above it and how the set was generated, with links to the generator, the templates, and the synthetic README. Three tests; 140 tests; asset links v23
 
-### bb0a0f8 · 2026-10-30 00:20 · Build log: regenerate after 37cb44e
+### bb0a0f8 · 2026-10-29 17:20 · Build log: regenerate after 37cb44e
 
-(no ledger row)
+(generated files only; no ledger row by design)
 
 ### ca40557 · 2026-10-29 21:42 · The README becomes the paper: abstract, introduction with the gap and the hypothesis, methods with the pre-specified table, generated results with intervals and the gate's sensitivity by class, discussion, conclusion, declarations; Zenodo and citation metadata
 
 The README becomes the paper: title line, keywords, a 250-word abstract, Introduction (the problem, the public record, the standard, what is not known, objective and hypothesis), Methods (study design with a pre-specified versus post hoc table drawn from the git history, the system under test, the fifty cases as controls, the gate, models and modes and the live query, the advisor, outcome measures with Wilson intervals and the rule of three, reproducibility), Results (three generated tables between `results:start` and `results:end` markers, written by `build/scripts/build-log.ts` from the result files, the repeats, and the mutation report: kept runs with 95% intervals, repeat ranges, gate sensitivity by corruption class with the 95% upper bound on the miss rate; prose in past tense, no interpretation), Discussion (interpretation, the disagreements read, the referential limit, what the models found wrong with my test, context, limitations, what should come next), Conclusion, Acknowledgements, Declarations (competing interests, ethics, data and code availability; the models under test named), a LITMUS footnote. `build/src/stats.ts` (Wilson, rule of three, formatting) with three tests; 143 tests. `.zenodo.json` and `CITATION.cff` for the deposit at the submission commit
 
-### 1344160 · 2026-10-30 04:43 · Build log: regenerate after ca40557
+### 1344160 · 2026-10-29 21:43 · Build log: regenerate after ca40557
 
-(no ledger row)
+(generated files only; no ledger row by design)
 
 ### b09f7a2 · 2026-10-29 21:44 · Figures are frames: a deep link may name a step, and the paper's Results list six frames by address
 
 Figures are frames (`build/viewer/`): a deep link may carry `&step=<n>` or `&step=end` and the page lands on that frame of the replay (`parseStep`, clamped to the timeline, one test); the hash written back by the case picker drops the step so the next link in the same tab applies cleanly. README Results gains a Figures list, six frames by address: the flow, case-001 verified, case-027 blocked, case-044 declined, case-023 the referential limit, the live query strip at step 1. 144 tests; asset links v24
 
-### ff765d5 · 2026-10-30 04:45 · Build log: regenerate after b09f7a2
+### ff765d5 · 2026-10-29 21:45 · Build log: regenerate after b09f7a2
 
-(no ledger row)
+(generated files only; no ledger row by design)
 
 ### 85a47ac · 2026-10-29 22:02 · README figures follow the reader's color scheme: dark variants of the four figures behind picture elements
 
 README figures in dark mode: `assets/header-dark.svg`, `attrition-dark.svg`, `timeline-dark.svg`, `flow-dark.svg`, each the light asset with its ink ramp remapped to the viewer's dark tokens (page to ink-0, boxes to surface, hairlines to ink-2, muted and mid strokes swapped, text to ink-6 and ink-7, navy to the heading blue); the four README images are now `<picture>` elements that serve the dark file under `prefers-color-scheme: dark`, so the page no longer shows four white panels on GitHub's dark theme
 
-### bd3502b · 2026-10-30 05:02 · Build log: regenerate after 85a47ac
+### bd3502b · 2026-10-29 22:02 · Build log: regenerate after 85a47ac
 
-(no ledger row)
+(generated files only; no ledger row by design)
 
 ### d62218b · 2026-10-29 22:16 · Abstract and Conclusion: the answer to a denial is a writ; the machine prepares the instrument, the physician issues it
 
 Abstract and Conclusion in Jim's framing: the answer to a denial is a writ, a formal written instrument issued under a signature that carries authority, demanding a specific response and binding its author to every word; the machine prepares the instrument and cannot issue it; the physician's signature is what makes the draft a writ
 
-### 3988217 · 2026-10-30 05:16 · Build log: regenerate after d62218b
+### 3988217 · 2026-10-29 22:16 · Build log: regenerate after d62218b
 
-(no ledger row)
+(generated files only; no ledger row by design)
 
 ### ff758ac · 2026-10-29 22:16 · Abstract trimmed toward 250 words
 
 Abstract trimmed toward 250 words
 
-### 05994f4 · 2026-10-30 05:16 · Build log: regenerate after ff758ac
+### 05994f4 · 2026-10-29 22:16 · Build log: regenerate after ff758ac
 
-(no ledger row)
+(generated files only; no ledger row by design)
 
 ### e71f8cd · 2026-10-29 22:16 · Abstract: methods and results tightened
 
 Abstract: Methods and Results tightened
 
-### f96b335 · 2026-10-30 05:17 · Build log: regenerate after e71f8cd
+### f96b335 · 2026-10-29 22:17 · Build log: regenerate after e71f8cd
 
-(no ledger row)
+(generated files only; no ledger row by design)
 
 ### 4caf86a · 2026-10-29 22:28 · README reviewed as a paper against the result files: advisor partials 90 of 97 on verified warranted drafts, case-023 advisor sentence whole, v1.4 credited to the spike-in, blocked drafts split six and two, invalid JSON counted in kept and repeats, collision caveat, 144 tests; chart sizes stated as realized (19 to 35, two thirds unrelated) in README, viewer note, synthetic README; ledger rows for d62218b, ff758ac, e71f8cd
 
 README reviewed as a paper against the result files, every number in the prose checked against the tables and the files: the advisor's partial calls on verified warranted drafts are 90 of 97, not 97; the case-023 advisor sentence quoted whole; the v1.4 defect credited to the spike-in, not to a refuted draft; the eight blocked drafts split as six blocked sentences and two empty answers; Muse Spark Open's invalid-JSON answers counted in the kept run as well as the repeats; the collision caveat added to the interpretation; test count 144; Figure 4 says all 22 entries were read. Chart sizes stated as realized (19 to 35 entries, mean 25.6, about two thirds unrelated) in the README, the viewer's data note (`DATA_NOTE`), and the synthetic README; asset links v25. Ledger rows added for d62218b, ff758ac, and e71f8cd
 
-### 9c46333 · 2026-10-30 05:29 · Build log: regenerate after 4caf86a
+### 9c46333 · 2026-10-29 22:29 · Build log: regenerate after 4caf86a
 
-(no ledger row)
+(generated files only; no ledger row by design)
 
 ### 1a87acf · 2026-10-29 22:35 · Video shot list and captions: nine shots mapped to the paper's sections, deep links with step addresses, spoken words sized to 140 words a minute, SRT cues
 
 The video as a video abstract (`assets/video/`): `SHOT-LIST.md` maps nine shots to the paper's sections (Introduction from the recorded opening, Methods and Results from the replay by deep link with `step=` addresses, Results from the scoreboard and Table 3, Discussion and Conclusion from the tests and the ledger), with the spoken words per shot sized to 140 words a minute against each slot and the source of every spoken number; `narration.srt` carries the same words as 37 caption cues on the shot times
 
-### eb2d3f4 · 2026-10-30 05:35 · Build log: regenerate after 1a87acf
+### eb2d3f4 · 2026-10-29 22:35 · Build log: regenerate after 1a87acf
 
-(no ledger row)
+(generated files only; no ledger row by design)
 
 ### ee60723 · 2026-10-29 23:00 · The gate in the browser: test the gate on any sentence once the verdict is on screen, re-checked by the same gate module bundled into the viewer; pure SHA-256 replaces node:crypto, checkSentence exported, sources and citation modules shared; README Methods 2.4 and Figure 7; shot 7a; 157 tests; asset links v26
 
 The gate in the browser (`build/viewer/src/gatecheck.ts`, `build/viewer/src/main.ts`): once a replay has reached its verdict, a "test the gate" control under every sentence lets a reader edit the sentence, its quote, or its citation, and the same gate the harness ran re-checks it in the page, stamping the result live with its reason; nothing is saved and the stored verdict is unchanged. To bundle the gate for a browser, `build/src/litmus.ts` now imports a plain TypeScript SHA-256 (`build/src/hash.ts`) instead of node:crypto, with a test that it reproduces every inputHash stored in the result files; the per-sentence check is exported as `checkSentence`, which `litmus()` applies to each sentence; the admissible sources move to `build/src/sources.ts`, shared by the harness, the scripts, and the viewer; the citation pattern moves to `build/src/citation.ts` so the bundle carries no schema library (app.js 60 KB). README: the in-browser gate cited in Methods 2.4 and as Figure 7; test count 157. Shot list and SRT revised: shot 7a tests the gate by hand on case-001, shot 7b is Table 3, slots rebalanced. 13 new tests, 157 total; asset links v26
 
-### 3bbec5b · 2026-10-30 06:01 · Build log: regenerate after ee60723
+### 3bbec5b · 2026-10-29 23:01 · Build log: regenerate after ee60723
 
-(no ledger row)
+(generated files only; no ledger row by design)
 
 ### 6afa77b · 2026-10-29 23:06 · The instrument: a passing draft rendered as the document the physician would sign, footnoted to the record, gate hash, blank signature line under a draft-unsigned-not-sent band; print and save; README 2.2 and Figure 8; shot 3; 164 tests; asset links v27
 
 The instrument (`build/viewer/src/writ.ts`): a passing draft rendered as the document the physician would sign, opened from the PASS line or the w key: the payer's reason quoted at the head, each sentence footnoted to the entry, date, kind, and verbatim quote the gate verified it against, the gate version and input hash at the foot, and a blank signature line under a band reading draft, unsigned, not sent; print shows only the sheet, save writes the plain-text rendering; it closes when the frame leaves PASS or the case changes; the false pass renders too, since PASS is the gate's word and the physician decides. README 2.2 and Figure 8; shot 3 ends on the instrument; 7 tests (one footnote per sentence over every passing result in three files, null for declined, blocked, and failed, fixed copy with no exclamation marks and no em dashes); 164 tests; asset links v27
 
-### 8bbac45 · 2026-10-30 06:06 · Build log: regenerate after 6afa77b
+### 8bbac45 · 2026-10-29 23:06 · Build log: regenerate after 6afa77b
 
-(no ledger row)
+(generated files only; no ledger row by design)
 
 ### 4480204 · 2026-10-29 23:11 · Harness: --side payer, the same gate pointed at the plan's determination; payer instructions, inverted key, side on results, results/payer default; 169 tests
 
 The other chair (`build/src/harness.ts --side payer`): the same contract, the same gate, and the same chart asked for the plan's written claim determination instead of the physician's appeal, so the gate's claim to take no side can be measured. `INSTRUCTIONS_PAYER` (and its agentic variant) reuses the physician block's CARC reference; warranted means the denial stands; `expectedFor` inverts the appeal key; results carry `side`, the file name carries `-payer`, and the default output directory is `results/payer/`, which the viewer and the build log never read. No run committed yet; a six-case probe was read first. 5 tests, 169 total
 
-### d49cad8 · 2026-10-30 06:11 · Build log: regenerate after 4480204
+### d49cad8 · 2026-10-29 23:11 · Build log: regenerate after 4480204
 
-(no ledger row)
+(generated files only; no ledger row by design)
 
 ### 73d29bd · 2026-10-29 23:19 · The other chair, kept: payer-side runs on three models (wonder 50 of 50, spark 1.3 49 of 50, Spark Open 48 of 50 with the one fabricated quote of any full run refuted); Table 4 generated post hoc from results/payer; README 2.1, 2.7, Results, 4.3
 
 Results added: `payer/baseten-meta-models_muse-spark-open-1026-low-payer-2026-10-30T06-14-52-839Z.json`, `payer/meta-muse-spark-1.3-low-payer-2026-10-30T06-12-28-712Z.json`, `payer/meta-muse-wonder-1.0-low-payer-2026-10-30T06-13-48-967Z.json`.
 Payer-side runs kept (`build/results/payer/`, three files, chart in prompt, effort low, gate v1.4): muse-wonder-1.0 50 of 50 (declined to deny all 30 supporting records, verified determinations for all 20 failing ones); muse-spark-1.3 49 of 50 (one determination against a supporting record, case-036, six verified sentences reading visit 6 of 6 as not six consecutive months); Muse Spark Open 48 of 50 (two blocks on exclusion cases, one of them the only fabricated quote in any full run, plan-document language the model was never given, refuted by the gate). Every disagreement read before the commit; a six-case probe (not kept) had muse-spark-1.3 set the denial flag on case-001 and write six sentences that support the care, which the gate passed. `build/scripts/build-log.ts` generates Table 4 from `results/payer/` between the results markers, labeled post hoc; README 2.1, 2.7, Results, and 4.3 carry the method, the numbers, and the reading
 
-### 0e131ee · 2026-10-30 06:20 · Build log: regenerate after 73d29bd
+### 0e131ee · 2026-10-29 23:20 · Build log: regenerate after 73d29bd
 
-(no ledger row)
+(generated files only; no ledger row by design)
 
 ### 591a839 · 2026-10-29 23:35 · Zenodo DOI 10.5281/zenodo.23794798 reserved for the deposit: Declarations, badge, CITATION.cff, .zenodo.json
 
 Zenodo DOI reserved for the deposit of the submission commit, 10.5281/zenodo.23794798: placed in the README Declarations and as a badge, in `CITATION.cff` (doi, version 1.0.0), and in `.zenodo.json` (version). The deposit itself is published at the v1.0.0 release
 
-### 69fb4c7 · 2026-10-30 06:35 · Build log: regenerate after 591a839 · tag v1.0.0
+### 69fb4c7 · 2026-10-29 23:35 · Build log: regenerate after 591a839
 
-(no ledger row)
+(generated files only; no ledger row by design)
 
 ### 1f0adaf · 2026-10-29 23:49 · Abstract as a single unstructured paragraph: problem, question, methods, results, conclusion; one sentence on the payer-side run
 
 Abstract rewritten as a single unstructured paragraph on the author's direction (problem, question, methods, results, conclusion, no section labels), with one sentence on the payer-side run; the same paragraph is the submission description's opening and the first X post's opening
 
-### fa990e2 · 2026-10-30 06:49 · Build log: regenerate after 1f0adaf
+### fa990e2 · 2026-10-29 23:49 · Build log: regenerate after 1f0adaf
 
-(no ledger row)
+(generated files only; no ledger row by design)
 
 ### 9ac9bf4 · 2026-10-29 23:53 · Abstract opens on the asymmetry: automated claim review in seconds, no automation on the submitter's side to test and answer the denial
 
 Abstract opens on the asymmetry in the author's words: insurers have automated claim review that renders a denial in seconds, and the claim submitter has not adopted the same automation to test whether a denial is valid and to answer it
 
-### 2d60f9b · 2026-10-30 06:53 · Build log: regenerate after 9ac9bf4
+### 2d60f9b · 2026-10-29 23:53 · Build log: regenerate after 9ac9bf4
 
-(no ledger row)
+(generated files only; no ledger row by design)
 
 ### 47df8ac · 2026-10-29 23:53 · Ledger rows for the two abstract commits
 
 Ledger rows for 1f0adaf and 9ac9bf4
 
-### 267f94b · 2026-10-30 06:53 · Build log: regenerate after 47df8ac
+### 267f94b · 2026-10-29 23:53 · Build log: regenerate after 47df8ac
 
-(no ledger row)
+(generated files only; no ledger row by design)
 
 ### c0b4607 · 2026-10-30 00:01 · Abstract opening: the insurer has given the denial to a machine; the physician has been given nothing; the reply owed is a writ
 
 Abstract opening rewritten in the author's chosen cadence: the insurer has given the denial to a machine; the physician has been given nothing; the reply owed is a writ; a draft that asserts what the record does not hold, over a physician's name, is worse than none
 
-### c5e2fc7 · 2026-10-30 07:01 · Build log: regenerate after c0b4607
+### c5e2fc7 · 2026-10-30 00:01 · Build log: regenerate after c0b4607
 
-(no ledger row)
+(generated files only; no ledger row by design)
 
 ### 3e54c98 · 2026-10-30 00:01 · Video close: no one had the evening; two seconds moved from shots 4 and 5 to shot 9; SRT regenerated
 
 Video close rewritten (`assets/video/`): shot 9 now speaks the author's line, most denials go unanswered not because the record was wrong but because no one had the evening, then the instrument and the signature; two seconds moved from shots 4 and 5 to the close; SRT regenerated
+
+### e8277f7 · 2026-10-30 00:02 · Build log: regenerate after 3e54c98 · tag v1.0.0
+
+(generated files only; no ledger row by design)
+
+### ee0f58a · 2026-10-30 11:23 · Re-gate scores each result against the key stored on it, and keeps the advisor summary
+
+Re-gate (`build/scripts/regate.ts`) scores each result against the key stored on it (`r.expected`), not the case's physician key: a payer-side file re-gated under a later gate would have had 48 to 50 of 50 outcomes inverted. It also keeps `summary.advice`, which `summarize()` does not know and the Oct 29 re-gate to v1.4 had dropped from the three live-CHART files, emptying the build log's Advisor column; the three summaries are recomputed from the per-case advice (the three sum to the $2.47 the README reports). Two tests; 171 tests
+
+### 279cfbc · 2026-10-30 11:25 · Viewer: Space stays with a focused button, modifier chords are the browser's, the writ opens only at PASS, print with the writ closed prints the page, citations escaped in selectors
+
+Viewer (`build/viewer/`): a focused button keeps Space for itself, so pressing it on the gate-check "check" button no longer restarts the replay and discards the edit; Ctrl, Alt, and Meta chords are left to the browser; the w key opens the writ only once the replay has shown PASS, not from a stored verdict at step 0; print with the writ closed prints the page, not a blank sheet (`styles.css`); the open citation is escaped before it is used as a selector, so a stray quote in a model's citation cannot throw inside render and stall playback. Asset links v28
+
+### fdbe3f7 · 2026-10-30 11:49 · Viewer scoreboard: a missed column, so every row's outcomes sum to its fifty cases
+
+Viewer scoreboard (`build/viewer/src/replay.ts`, `main.ts`): a missed column, "Declined, key says yes", shown when any run has one, so every row's outcomes sum to its 50 cases; muse-wonder-1.0 with the chart in the prompt had read 49 / 0 / 0 / 0 with case-047 nowhere. Test: the five outcome counts of every scoreboard row sum to its cases. Asset links v29
+
+### next commit · the one that carries this regeneration
+
+Build log (`build/scripts/build-log.ts`): the ledger's pending row now goes to the newest authored commit without a row, skipping the bot's regenerate commit at HEAD, which had taken the "Video close" row and left 3e54c98 with none; every commit date rendered in one zone (Pacific) instead of each committer's own; a Missed column in Tables 1 and 2 and both run tables, and a Fabricated quotes column in Table 1 computed from the result files over sentences and evidence items (Table 2's had been a literal 0; Table 4 uses the same count). README: the claim that no kept or repeat run contained a fabricated quote held for sentences and not for evidence items, where two refuted quotes sit on declined drafts (Spark Open chart in prompt case-040; muse-spark-1.3 agentic case-023); Abstract, 2.7, Results, 4.1, and 4.3 now say "in a sentence" and the Fabrication paragraph reports the two. Figure 3 moved from case-027 (an empty warranted answer, no sentence to name) to case-038 on the Spark Open live run, the three-antianginal count returned needs-citation. Docs: NEW-WORK.md and build/README.md said the log never reads `repeats/` or `payer/` (it reads both), that every commit has a ledger row (the bot's do not), and that the policy memo is keyed by authority, code, and date (authority alone). Six tests; 177 tests
