@@ -45,6 +45,24 @@ claude mcp add litmus-gate -- node /path/to/your-procedure-is-denied/build/litmu
 
 Any other MCP host takes the same command and arguments in its server configuration (`command: node`, `args: [".../dist/cli.js", "mcp"]`). Nothing leaves the process: the server reads the chart and the draft from the tool call and answers from memory.
 
+Once the package is on npm, no checkout is needed:
+
+```
+claude mcp add litmus-gate -- npx -y litmus-gate mcp
+npx -y litmus-gate check draft.json case.json
+```
+
+## Publishing
+
+From the repository, in a shell where `npm whoami` answers (run `npm login` once; it opens the browser):
+
+```
+cd build && npm ci
+cd litmus-gate && npm publish --access public
+```
+
+`prepack` runs the bundle step, so the tarball holds `dist/cli.js` and this README and nothing else (`npm pack --dry-run` shows the three files). The version in `package.json` is the one that ships; bump it before a second publish.
+
 `npm run gate:smoke` starts the built server over stdio as a host would, lists the tools, verifies a stored draft from the study, and exits non-zero if the verdict or the hash differs from the one in the result file.
 
 ## On data

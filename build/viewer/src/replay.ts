@@ -228,13 +228,15 @@ export function sideText(side: Side): SideText {
   };
 }
 
-// The run the page opens on without a deep link: the newest physician-side
-// run that used every tool, by start time; failing that, the newest run.
-export function newestRun<T extends { startedAt: string; live?: boolean; side?: 'payer' }>(runs: readonly T[]): T | undefined {
+// The run the page opens on without a deep link: the primary proposer's
+// (muse-spark-1.3) newest physician-side run that used every tool, by start
+// time; failing that, any model's newest live run; failing that, the newest run.
+export const PRIMARY_MODEL = 'muse-spark-1.3';
+export function newestRun<T extends { startedAt: string; live?: boolean; side?: 'payer'; model?: string }>(runs: readonly T[]): T | undefined {
   const own = runs.filter(r => r.side !== 'payer');
   const pool = own.length ? own : [...runs];
-  const byStart = [...pool].sort((a, b) => a.startedAt.localeCompare(b.startedAt));
-  return [...byStart].reverse().find(r => r.live) ?? byStart[byStart.length - 1];
+  const newestFirst = [...pool].sort((a, b) => b.startedAt.localeCompare(a.startedAt));
+  return newestFirst.find(r => r.live && r.model === PRIMARY_MODEL) ?? newestFirst.find(r => r.live) ?? newestFirst[0];
 }
 
 // The result stamp, on hover. PASS is the gate's word, not a verdict on the

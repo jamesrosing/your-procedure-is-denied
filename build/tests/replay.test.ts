@@ -243,10 +243,11 @@ describe('the other chair in the viewer', () => {
     assert.match(sideText('payer').passHead(6, 6), /6 of 6/);
   });
 
-  test('the default run is the newest physician-side live run by start time, not by file name', () => {
-    const m = (file: string, startedAt: string, live: boolean, side?: 'payer') => ({ file, startedAt, live, agentic: live, provider: 'p', model: 'm', effort: 'low', cases: 50, ...(side ? { side } : {}) });
-    const picked = newestRun([m('z-live-old.json', '2026-10-28T06:00:00Z', true), m('a-live-new.json', '2026-10-28T07:00:00Z', true), m('b-payer-newest.json', '2026-10-30T06:00:00Z', true, 'payer'), m('c-plain-newest.json', '2026-10-30T07:00:00Z', false)]);
-    assert.equal(picked?.file, 'a-live-new.json');
+  test('the default run is the primary proposer\'s newest physician-side live run by start time, not by file name', () => {
+    const m = (file: string, startedAt: string, live: boolean, model = 'm', side?: 'payer') => ({ file, startedAt, live, agentic: live, provider: 'p', model, effort: 'low', cases: 50, ...(side ? { side } : {}) });
+    const picked = newestRun([m('z-live-old.json', '2026-10-28T06:00:00Z', true, 'muse-spark-1.3'), m('a-live-new.json', '2026-10-28T07:00:00Z', true, 'meta-models/muse-spark-open'), m('b-payer-newest.json', '2026-10-30T06:00:00Z', true, 'muse-spark-1.3', 'payer'), m('c-plain-newest.json', '2026-10-30T07:00:00Z', false, 'muse-spark-1.3')]);
+    assert.equal(picked?.file, 'z-live-old.json', 'muse-spark-1.3 live beats a newer live run of another model and a newer payer-side run');
+    assert.equal(newestRun([m('x.json', '2026-10-28T06:00:00Z', true, 'muse-wonder-1.0'), m('y.json', '2026-10-28T07:00:00Z', true, 'meta-models/muse-spark-open')])?.file, 'y.json', 'without the primary, the newest live run');
     assert.equal(newestRun([m('only.json', '2026-10-27T00:00:00Z', false)])?.file, 'only.json');
     assert.equal(newestRun([]), undefined);
   });
