@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-10-30 05:02 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-10-30 05:16 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -371,3 +371,11 @@ Figures are frames (`build/viewer/`): a deep link may carry `&step=<n>` or `&ste
 ### 85a47ac · 2026-10-29 22:02 · README figures follow the reader's color scheme: dark variants of the four figures behind picture elements
 
 README figures in dark mode: `assets/header-dark.svg`, `attrition-dark.svg`, `timeline-dark.svg`, `flow-dark.svg`, each the light asset with its ink ramp remapped to the viewer's dark tokens (page to ink-0, boxes to surface, hairlines to ink-2, muted and mid strokes swapped, text to ink-6 and ink-7, navy to the heading blue); the four README images are now `<picture>` elements that serve the dark file under `prefers-color-scheme: dark`, so the page no longer shows four white panels on GitHub's dark theme
+
+### bd3502b · 2026-10-30 05:02 · Build log: regenerate after 85a47ac
+
+(no ledger row)
+
+### d62218b · 2026-10-29 22:16 · Abstract and Conclusion: the answer to a denial is a writ; the machine prepares the instrument, the physician issues it
+
+Abstract and Conclusion in Jim's framing: the answer to a denial is a writ, a formal written instrument issued under a signature that carries authority, demanding a specific response and binding its author to every word; the machine prepares the instrument and cannot issue it; the physician's signature is what makes the draft a writ

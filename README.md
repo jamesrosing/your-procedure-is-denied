@@ -215,7 +215,7 @@ The gate's sensitivity cannot be read off runs in which no model fabricated anyt
 ## 3. Results
 
 <!-- results:start -->
-_Tables generated from the result files by `npm run log`; the prose below them is written by hand. Last regenerated 2026-10-30 05:02 UTC._
+_Tables generated from the result files by `npm run log`; the prose below them is written by hand. Last regenerated 2026-10-30 05:16 UTC._
 
 **Table 1. Kept runs.** 9 runs, 50 cases each, effort low. Agreed is correct-pass plus correct-decline against the grading key, with a 95% Wilson interval. Blocked is a draft the gate stopped. False pass is a draft the gate passed on a case the key labels unsupported. Entries read applies to the agentic modes.
 
@@ -356,9 +356,9 @@ Meta and Cerebral Valley for the event; Baseten for hosting the open-weights mod
 Every commit since the event began has a row in [NEW-WORK.md](NEW-WORK.md), every result file carries its model, mode, gate version, and any re-gate in its own header, and this section is regenerated from those sources after every push. Nothing in it is typed by hand.
 
 <!-- build-log:start -->
-_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-10-30 05:02 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
+_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-10-30 05:16 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
 
-77 commits since the `hackathon-start` tag, the last at 2026-10-29 22:02 (85a47ac). Gate v1.4. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
+79 commits since the `hackathon-start` tag, the last at 2026-10-29 22:16 (d62218b). Gate v1.4. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
 
 | Started (UTC) | Model | Mode | Agreed | Blocked | False pass | Advisor |
 | --- | --- | --- | :---: | :---: | :---: | --- |
@@ -374,11 +374,11 @@ _Generated from the git history, the ledger, and the result files by `npm run lo
 
 Last five commits, newest first, with the ledger row each one carried:
 
+- **d62218b · 2026-10-29 22:16** · Abstract and Conclusion: the answer to a denial is a writ; the machine prepares the instrument, the physician issues it. Abstract and Conclusion in Jim's framing: the answer to a denial is a writ, a formal written instrument issued under a signature that carries authority, demanding a specific response and binding its author to every word; the machine prepares the instrument and cannot issue it; the physician's signature is what makes the draft a writ
+- **bd3502b · 2026-10-30 05:02** · Build log: regenerate after 85a47ac. (no ledger row)
 - **85a47ac · 2026-10-29 22:02** · README figures follow the reader's color scheme: dark variants of the four figures behind picture elements. README figures in dark mode: `assets/header-dark.svg`, `attrition-dark.svg`, `timeline-dark.svg`, `flow-dark.svg`, each the light asset with its ink ramp remapped to the viewer's dark tokens (page to ink-0, boxes to surface, hairlines to ink-2, muted and mid strokes swapped, text to ink-6 and ink-7, navy to the heading blue); the four README images are…
 - **ff765d5 · 2026-10-30 04:45** · Build log: regenerate after b09f7a2. (no ledger row)
 - **b09f7a2 · 2026-10-29 21:44** · Figures are frames: a deep link may name a step, and the paper's Results list six frames by address. Figures are frames (`build/viewer/`): a deep link may carry `&step=<n>` or `&step=end` and the page lands on that frame of the replay (`parseStep`, clamped to the timeline, one test); the hash written back by the case picker drops the step so the next link in the same tab applies cleanly. README Results gains a Figures list, six frames by address: the…
-- **1344160 · 2026-10-30 04:43** · Build log: regenerate after ca40557. (no ledger row)
-- **ca40557 · 2026-10-29 21:42** · The README becomes the paper: abstract, introduction with the gap and the hypothesis, methods with the pre-specified table, generated results with intervals and the gate's sensitivity by class, discussion, conclusion, declarations; Zenodo and citation metadata. The README becomes the paper: title line, keywords, a 250-word abstract, Introduction (the problem, the public record, the standard, what is not known, objective and hypothesis), Methods (study design with a pre-specified versus post hoc table drawn from the git history, the system under test, the fifty cases as controls, the gate, models and modes and…
 <!-- build-log:end -->
 
 ## From the inside
