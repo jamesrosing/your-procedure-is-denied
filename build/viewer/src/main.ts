@@ -7,6 +7,7 @@ import {
   type SentenceState,
 } from './replay.js';
 import { recheck, recheckLabel, EDIT_BUTTON, EDIT_HELP, EDIT_NOTE } from './gatecheck.js';
+import { writDocument, writText, WRIT_BUTTON, WRIT_HELP } from './writ.js';
 
 interface Manifest {
   results: { file: string; provider: string; model: string; effort: string; startedAt: string; cases: number; agentic: boolean; live?: boolean }[];
@@ -65,6 +66,20 @@ const ui = {
   preambleStamp: $<HTMLElement>('preamble-stamp'),
   preambleClose: $<HTMLButtonElement>('preamble-close'),
   about: $<HTMLButtonElement>('btn-about'),
+  writ: $<HTMLElement>('writ'),
+  writPrint: $<HTMLButtonElement>('writ-print'),
+  writText: $<HTMLButtonElement>('writ-text'),
+  writClose: $<HTMLButtonElement>('writ-close'),
+  writBand: $<HTMLElement>('writ-band'),
+  writHeading: $<HTMLElement>('writ-h'),
+  writTo: $<HTMLElement>('writ-to'),
+  writRe: $<HTMLElement>('writ-re'),
+  writReason: $<HTMLElement>('writ-reason'),
+  writOpening: $<HTMLElement>('writ-opening'),
+  writBody: $<HTMLElement>('writ-body'),
+  writFootnotes: $<HTMLOListElement>('writ-footnotes'),
+  writProvenance: $<HTMLElement>('writ-provenance'),
+  writSignature: $<HTMLElement>('writ-signature'),
   introStamp: $<HTMLElement>('intro-stamp'),
   introSources: $<HTMLElement>('intro-sources'),
   introSkip: $<HTMLButtonElement>('intro-skip'),
@@ -423,7 +438,17 @@ function renderVerdict(state: ReplayState): void {
   };
   const parts: HTMLElement[] = [];
   if (v.verdict === 'pass') {
-    parts.push(stateRow('PASS', `${state.counters.sentencesVerified} of ${state.counters.sentencesTotal} sentences verified against the chart; ready for the physician to read and sign`));
+    const row = stateRow('PASS', `${state.counters.sentencesVerified} of ${state.counters.sentencesTotal} sentences verified against the chart; ready for the physician to read and sign`);
+    if (session.result && session.caseData && session.file && writDocument(session.caseData, session.result, session.file.run)) {
+      const open = document.createElement('button');
+      open.type = 'button';
+      open.className = 'btn writ-open';
+      open.textContent = WRIT_BUTTON;
+      open.title = WRIT_HELP;
+      open.addEventListener('click', () => showWrit(true));
+      row.append(open);
+    }
+    parts.push(row);
   } else if (v.verdict === 'blocked') {
     const bad = v.blockedSentence !== undefined ? state.sentences.find(s => s.index === v.blockedSentence) : undefined;
     parts.push(stateRow('BLOCKED', bad ? `“${bad.text}” did not verify; nothing leaves until every sentence does` : 'nothing leaves until every sentence and every criterion verifies'));
@@ -434,6 +459,53 @@ function renderVerdict(state: ReplayState): void {
     parts.push(stateRow('FAILED', v.error ?? 'the request failed before the gate ran'));
   }
   ui.verdict.replaceChildren(...parts);
+}
+
+// The writ: the passing draft rendered as the instrument, under a band that
+// says it is a draft, unsigned, not sent. Print shows only the sheet; save
+// writes the plain-text rendering. Nothing is sent anywhere.
+function showWrit(open: boolean): void {
+  if (!open) { ui.writ.hidden = true; return; }
+  const c = session.caseData, r = session.result, f = session.file;
+  const doc = c && r && f ? writDocument(c, r, f.run) : null;
+  if (!doc) return;
+  ui.writBand.textContent = doc.band;
+  ui.writHeading.textContent = doc.heading;
+  ui.writTo.textContent = `To: ${doc.to}`;
+  ui.writRe.textContent = `Re: ${doc.re}`;
+  ui.writReason.replaceChildren();
+  ui.writReason.hidden = !doc.payerReason;
+  if (doc.payerReason) ui.writReason.append(text('span', 'lbl', 'the payer\u2019s reason'), document.createTextNode(doc.payerReason));
+  ui.writOpening.textContent = doc.opening;
+  ui.writBody.replaceChildren();
+  doc.sentences.forEach((s, i) => {
+    ui.writBody.append(document.createTextNode((i > 0 ? ' ' : '') + s.text));
+    ui.writBody.append(text('sup', '', String(s.n)));
+  });
+  ui.writFootnotes.replaceChildren(...doc.footnotes.map(fn => {
+    const li = document.createElement('li');
+    const q = document.createElement('q');
+    q.textContent = fn.quote;
+    li.append(text('span', 'src', `${fn.entryId}, ${fn.date}, ${fn.kind}: `), q);
+    return li;
+  }));
+  ui.writProvenance.textContent = doc.provenance;
+  ui.writSignature.textContent = doc.signature;
+  ui.writ.hidden = false;
+  ui.writ.scrollIntoView({ block: 'start', behavior: 'smooth' });
+}
+
+function saveWritText(): void {
+  const c = session.caseData, r = session.result, f = session.file;
+  const doc = c && r && f ? writDocument(c, r, f.run) : null;
+  if (!doc) return;
+  const blob = new Blob([writText(doc)], { type: 'text/plain;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `${c!.id}-draft-unsigned.txt`;
+  a.click();
+  window.setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
 function renderCounters(state: ReplayState): void {
@@ -460,6 +532,8 @@ function render(): void {
   renderCriteria(state);
   renderSentences(state);
   renderVerdict(state);
+  // The writ follows the verdict: off the PASS frame, or on another case, it closes.
+  if (!ui.writ.hidden && (!state.verdict || state.verdict.verdict !== 'pass')) ui.writ.hidden = true;
   renderCounters(state);
   ui.back.disabled = session.cursor === 0;
   ui.restart.disabled = session.cursor === 0;
@@ -767,6 +841,9 @@ async function boot(): Promise<void> {
     try { localStorage.setItem('ypid-theme', dark ? 'dark' : 'light'); } catch { /* per-viewer convenience only */ }
     paintTheme();
   });
+  ui.writClose.addEventListener('click', () => showWrit(false));
+  ui.writPrint.addEventListener('click', () => window.print());
+  ui.writText.addEventListener('click', saveWritText);
   ui.sentences.addEventListener('click', e => {
     const button = (e.target as HTMLElement).closest('button.edit');
     const li = button?.closest<HTMLElement>('li.sentence');
@@ -784,6 +861,8 @@ async function boot(): Promise<void> {
       case 'End': e.preventDefault(); stop(); seek(session.steps.length); break;
       case 's': case 'S': showBoard(ui.boardSection.hasAttribute('hidden')); break;
       case 'p': case 'P': showPreamble(ui.preamble.hidden !== false); break;
+      case 'w': case 'W': showWrit(ui.writ.hidden !== false); break;
+      case 'Escape': if (!ui.writ.hidden) showWrit(false); break;
     }
   });
 }

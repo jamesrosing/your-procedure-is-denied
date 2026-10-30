@@ -62,6 +62,7 @@ export interface ViewerResult {
   };
   gate?: {
     litmus?: string; // the gate version string recorded with the verdict
+    inputHash?: string; // sha256 of the sources and the draft, for the provenance record
     verdict: 'pass' | 'blocked' | 'declined';
     reasons: string[];
     declinedReason?: string;

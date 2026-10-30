@@ -178,7 +178,7 @@ The line between what was fixed before the reported runs and what changed after 
   <img alt="Flow: a denial arrives as an 835 remittance with reason codes; it is checked against the payer criteria in force on the date of service; a response is drafted from the chart with every statement citing a chart entry; the LITMUS gate checks every statement; if warranted, the physician reviews and signs; if not, the draft is blocked and the physician decides." src="assets/flow.svg" width="100%">
 </picture>
 
-A denial arrives with its reason code and the payer's remark. The model is given the payer's written criteria, the denial, the case facts, and the chart, and asked for one of two things: a decision that the record does not support an appeal, with the reason, or a draft in which every sentence carries one citation to one chart entry and a verbatim quote from it. The gate then checks every sentence. If the record does not support an appeal, the software says so instead of arguing anyway. Nothing is sent without a physician's signature.
+A denial arrives with its reason code and the payer's remark. The model is given the payer's written criteria, the denial, the case facts, and the chart, and asked for one of two things: a decision that the record does not support an appeal, with the reason, or a draft in which every sentence carries one citation to one chart entry and a verbatim quote from it. The gate then checks every sentence. If the record does not support an appeal, the software says so instead of arguing anyway. Nothing is sent without a physician's signature. The viewer renders a passing draft as that instrument ([`build/viewer/src/writ.ts`](build/viewer/src/writ.ts)): the payer's reason quoted at the head, each sentence footnoted to the entry, date, and verbatim quote the gate verified it against, the gate version and the input hash at the foot, and a blank signature line under a band that reads draft, unsigned, not sent (Figure 8). It can be printed or saved as text; the page sends nothing.
 
 ### 2.3 The fifty cases
 
@@ -210,7 +210,7 @@ The gate's sensitivity cannot be read off runs in which no model fabricated anyt
 
 ### 2.8 Reproducibility
 
-`npm test` runs the suite (157 tests). `npm run synthetic` regenerates the fifty cases byte for byte. `npm run harness` runs a model over the set and writes a result file whose header records the model, mode, gate version, and any later re-gate. `npm run mutate` reruns the spike-in. `npm run log` regenerates the build log and the tables in section 3 from the result files; nothing in those tables is typed by hand.
+`npm test` runs the suite (164 tests). `npm run synthetic` regenerates the fifty cases byte for byte. `npm run harness` runs a model over the set and writes a result file whose header records the model, mode, gate version, and any later re-gate. `npm run mutate` reruns the spike-in. `npm run log` regenerates the build log and the tables in section 3 from the result files; nothing in those tables is typed by hand.
 
 <br>
 
@@ -269,6 +269,7 @@ _Tables generated from the result files by `npm run log`; the prose below them i
 - Figure 5. The referential limit: [case-023, Muse Spark Open with the live query, at the verdict](https://demo.hemeehr.com/#file=baseten-meta-models_muse-spark-open-low-agentic-chart-2026-10-28T07-13-57-225Z.json&case=case-023&step=end). The quote "plan 5 to 6 days a week" beside the intensity criterion it does not meet, the gate's PASS, and the advisor's dissent.
 - Figure 6. The live policy query as a strip: [case-001, muse-spark-1.3, step 1](https://demo.hemeehr.com/#file=meta-muse-spark-1.3-low-agentic-chart-2026-10-28T06-48-41-422Z.json&case=case-001&step=1). The payer, the authority asked, the index, and the answer, labeled as a query against a prior-work data source.
 - Figure 7. The gate in the browser: [case-001 at the verdict](https://demo.hemeehr.com/#file=meta-muse-spark-1.3-low-agentic-chart-2026-10-28T06-48-41-422Z.json&case=case-001&step=end), then "test the gate" on the fourth sentence. Change 110 feet to 150 feet and the gate refutes the sentence, naming the token; change it to 300 feet, a figure that lives in a later entry, and it returns needs citation, naming that entry. Nothing is saved.
+- Figure 8. The instrument: [case-001 at the verdict](https://demo.hemeehr.com/#file=meta-muse-spark-1.3-low-agentic-chart-2026-10-28T06-48-41-422Z.json&case=case-001&step=end), then "the writ" on the PASS line (or the w key). Eight sentences, eight footnotes to the record, the gate's hash, and the blank signature line under the band: draft, unsigned, not sent.
 
 **Agreement.** Across the nine kept runs, agreement with the key was 45 to 50 of 50 (Table 1). muse-spark-1.3 agreed on 50, 50, and 49; muse-wonder-1.0 on 49, 49, and 50; Muse Spark Open on 49, 48, and 45. In the repeat runs (Table 2), muse-wonder-1.0 with the live query agreed on 50 of 50 in all three runs, muse-spark-1.3 ranged from 47 to 50, and Muse Spark Open from 42 to 48 across five runs on two keys and two model ids.
 

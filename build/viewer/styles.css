@@ -522,3 +522,31 @@ select:hover { border-color: var(--ink-3); }
   .stage { padding: 0 16px; }
   .counters { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* --- the writ: a passing draft as the instrument the physician would sign ----- */
+.writ { border-top: var(--hairline); background: var(--ink-1); padding: 16px 24px 32px; animation: arrive var(--motion-base) var(--ease-out); }
+.writ[hidden] { display: none; }
+.writ-tools { display: flex; align-items: center; gap: 8px; max-width: 76ch; margin: 0 auto 12px; }
+.writ-tools-lbl { flex: 1; font-family: var(--font-mono); font-size: 11px; color: var(--ink-5); }
+.writ-sheet { max-width: 76ch; margin: 0 auto; background: var(--surface); color: var(--ink-7); padding: 36px 44px 40px; border: var(--hairline); border-radius: var(--radius-md); box-shadow: 0 1px 2px rgba(0,0,0,.06), 0 8px 24px rgba(0,0,0,.06); font-family: var(--read-serif); font-size: 15.5px; line-height: 1.55; }
+.writ-band { margin: 0 0 22px; padding: 8px 12px; border: 1.5px solid var(--state-blocked); color: var(--state-blocked); font-family: var(--font-mono); font-size: 11px; line-height: 1.5; letter-spacing: 0.01em; }
+.writ-heading { margin: 0 0 14px; font-family: var(--font-sans, inherit); font-size: 20px; font-weight: 500; color: var(--heading); letter-spacing: 0.01em; }
+.writ-line { margin: 0 0 4px; font-size: 14px; color: var(--ink-6); }
+.writ-reason { margin: 18px 0; padding: 2px 0 2px 16px; border-left: 2px solid var(--ink-3); color: var(--ink-7); font-style: italic; }
+.writ-reason .lbl { display: block; font-family: var(--font-mono); font-size: 10.5px; font-style: normal; color: var(--ink-5); margin-bottom: 4px; }
+.writ-opening { margin: 0 0 14px; color: var(--ink-6); }
+.writ-body { margin: 0 0 24px; }
+.writ-body sup { font-family: var(--font-mono); font-size: 10px; color: var(--heading); margin-left: 1px; }
+.writ-foot-h { margin: 0 0 8px; font-family: var(--font-mono); font-size: 11px; font-weight: 500; color: var(--ink-5); text-transform: uppercase; letter-spacing: 0.06em; }
+.writ-footnotes { margin: 0 0 22px; padding: 0 0 0 1.6em; font-size: 13px; line-height: 1.5; }
+.writ-footnotes li { margin: 0 0 6px; }
+.writ-footnotes .src { font-family: var(--font-mono); font-size: 11px; color: var(--ink-5); }
+.writ-footnotes q { quotes: "\201C" "\201D"; color: var(--ink-7); }
+.writ-provenance { margin: 0 0 30px; padding-top: 12px; border-top: var(--hairline); font-family: var(--font-mono); font-size: 10.5px; line-height: 1.6; color: var(--ink-5); word-break: break-all; }
+.writ-signature { margin: 0; font-family: var(--font-mono); font-size: 12.5px; color: var(--ink-7); white-space: pre-wrap; }
+.verdict .btn.writ-open { height: 26px; font-size: 11.5px; margin-left: auto; }
+@media print {
+  body > *:not(#writ), .writ-tools { display: none !important; }
+  .writ { display: block !important; border: 0; background: #fff; padding: 0; }
+  .writ-sheet { box-shadow: none; border: 0; max-width: none; padding: 0; color: #000; }
+}

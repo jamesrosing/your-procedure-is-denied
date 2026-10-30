@@ -33,140 +33,144 @@ reason, and the appeal.
 It advises no patient.
 
 8
-00:00:46,000 --> 00:00:52,639
+00:00:46,000 --> 00:00:52,462
 Muse Spark 1.3 first asks CHART, my
 coverage index, when this payer's criteria
 last changed.
 
 9
-00:00:52,639 --> 00:00:57,066
+00:00:52,462 --> 00:00:56,769
 Then it opens the entries it needs, eleven
 of twenty-six.
 
 10
-00:00:57,066 --> 00:01:00,607
+00:00:56,769 --> 00:01:00,215
 Every sentence cites one entry and quotes
 it.
 
 11
-00:01:00,607 --> 00:01:13,000
+00:01:00,215 --> 00:01:12,277
 A deterministic gate, not a model, checks
 that the quote is in that entry and that
 every number, date, code, and side is
 sourced. Eight of eight. Pass.
 
 12
-00:01:13,000 --> 00:01:16,394
+00:01:12,277 --> 00:01:14,000
+Here is the instrument.
+
+13
+00:01:14,000 --> 00:01:17,182
 This chart never documents the sepsis
 criterion.
 
-13
-00:01:16,394 --> 00:01:24,152
+14
+00:01:17,182 --> 00:01:24,455
 Muse Wonder read all twenty-two entries
 looking for it, found nothing, and
 declined, naming the criterion.
 
-14
-00:01:24,152 --> 00:01:29,000
+15
+00:01:24,455 --> 00:01:29,000
 Declining is the right answer for twenty
 of the fifty.
 
-15
+16
 00:01:29,000 --> 00:01:34,000
 Here the model said warranted and gave
 nothing to verify.
 
-16
+17
 00:01:34,000 --> 00:01:40,000
 The gate blocked it and named the
 criterion without evidence. Fail closed.
 
-17
+18
 00:01:40,000 --> 00:01:44,384
 The chart never documents three hours of
 therapy a day.
 
-18
+19
 00:01:44,384 --> 00:01:54,027
 Muse Spark Open quoted 'plan 5 to 6 days a
 week', real words from a real entry, and
 the gate passed it.
 
-19
+20
 00:01:54,027 --> 00:02:01,479
 The gate verifies that a statement is in
 the record, not that the record satisfies
 the criterion.
 
-20
+21
 00:02:01,479 --> 00:02:04,548
 The paper names this the referential
 limit.
 
-21
+22
 00:02:04,548 --> 00:02:08,932
 A second model, a named opinion, pointed
 at the gap.
 
-22
+23
 00:02:08,932 --> 00:02:12,000
 The physician who signs is the check.
 
-23
+24
 00:02:12,000 --> 00:02:12,839
 Try it.
 
-24
+25
 00:02:12,839 --> 00:02:19,129
 Change one number in a verified sentence
 and the gate refutes it in the browser.
 
-25
+26
 00:02:19,129 --> 00:02:22,903
 I injected nine thousand four hundred
 seventy-five such changes;
 
-26
+27
 00:02:22,903 --> 00:02:25,000
 it caught every hard one.
 
-27
+28
 00:02:25,000 --> 00:02:30,217
 Nine runs, forty-five to fifty of fifty,
 no fabricated quote in seventeen.
 
-28
+29
 00:02:30,217 --> 00:02:35,000
 The negations and pronouns it cannot see
 are counted, not hidden.
 
-29
+30
 00:02:35,000 --> 00:02:45,400
 Three Meta models: Spark 1.3 and Wonder on
 the Meta API, Spark Open, open weights, on
 Baseten, one client with the base URL
 swapped.
 
-30
+31
 00:02:45,400 --> 00:02:48,000
 Two to five cents an appeal.
 
-31
-00:02:48,000 --> 00:02:49,920
-A hundred fifty-seven tests;
-
 32
+00:02:48,000 --> 00:02:49,920
+A hundred sixty-four tests;
+
+33
 00:02:49,920 --> 00:02:52,320
 every commit in the ledger.
 
-33
+34
 00:02:52,320 --> 00:02:54,720
 The machine prepares the instrument.
 
-34
+35
 00:02:54,720 --> 00:02:56,640
 It cannot issue it.
 
-35
+36
 00:02:56,640 --> 00:03:00,000
 The physician's signature makes it a writ.

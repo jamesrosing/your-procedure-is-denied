@@ -8,7 +8,7 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%274%27 fill=%27%2314181C%27/%3E%3Crect x=%278%27 y=%2715%27 width=%2716%27 height=%272%27 fill=%27%23FFFFFF%27/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=26">
+  <link rel="stylesheet" href="styles.css?v=27">
   <script>
     // Theme before first paint; the choice is a per-viewer convenience.
     try { var t = localStorage.getItem('ypid-theme'); if (t === 'dark') document.documentElement.dataset.theme = 'dark'; } catch (e) {}
@@ -126,6 +126,28 @@
     <p class="note">Agentic rows: the model reads the chart by tool call from an index instead of receiving it whole; entries read is the mean per case against the mean chart size, and key entries read is the share of grading-key evidence entries the model opened. Gate passed, key says no counts drafts the gate passed on a case the key labels absent: every sentence was in the record, but the record did not satisfy the criterion, which is the referential limit the physician's signature covers. A live CHART row adds a third tool, a query against the author's pre-existing coverage index for when the authority's criteria last changed; its answer appears under the criteria panel and never in the draft. Muse Spark Open on Baseten reports no thinking-token count on the Messages path, so its cost per appeal omits reasoning tokens. Fifty cases is a small set: one case is two percentage points.</p>
   </section>
 
+  <section id="writ" class="writ" hidden aria-labelledby="writ-h">
+    <div class="writ-tools">
+      <span class="writ-tools-lbl">the instrument, as the physician would sign it</span>
+      <button id="writ-print" class="btn" title="Print or save as PDF">print</button>
+      <button id="writ-text" class="btn" title="Save as plain text">save .txt</button>
+      <button id="writ-close" class="btn" title="Close (w or Escape)" aria-label="Close">×</button>
+    </div>
+    <article class="writ-sheet" id="writ-sheet">
+      <p class="writ-band" id="writ-band"></p>
+      <h2 id="writ-h" class="writ-heading"></h2>
+      <p class="writ-line" id="writ-to"></p>
+      <p class="writ-line" id="writ-re"></p>
+      <blockquote class="writ-reason" id="writ-reason"></blockquote>
+      <p class="writ-opening" id="writ-opening"></p>
+      <p class="writ-body" id="writ-body"></p>
+      <h3 class="writ-foot-h">Record cited</h3>
+      <ol class="writ-footnotes" id="writ-footnotes"></ol>
+      <p class="writ-provenance" id="writ-provenance"></p>
+      <p class="writ-signature" id="writ-signature"></p>
+    </article>
+  </section>
+
   <aside id="preamble" class="preamble" hidden aria-label="About this page">
     <p id="preamble-text" class="preamble-text"></p>
     <p id="preamble-notes" class="preamble-notes"></p>
@@ -141,6 +163,6 @@
     <span class="keys">space · ← → · home end · s · i · p</span>
   </footer>
 
-  <script src="app.js?v=26"></script>
+  <script src="app.js?v=27"></script>
 </body>
 </html>
