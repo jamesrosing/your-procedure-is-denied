@@ -459,7 +459,7 @@ Zenodo DOI reserved for the deposit of the submission commit, 10.5281/zenodo.237
 
 ### 1f0adaf · 2026-10-29 23:49 · Abstract as a single unstructured paragraph: problem, question, methods, results, conclusion; one sentence on the payer-side run
 
-(no ledger row)
+Abstract rewritten as a single unstructured paragraph on the author's direction (problem, question, methods, results, conclusion, no section labels), with one sentence on the payer-side run; the same paragraph is the submission description's opening and the first X post's opening
 
 ### fa990e2 · 2026-10-30 06:49 · Build log: regenerate after 1f0adaf
 
@@ -467,4 +467,12 @@ Zenodo DOI reserved for the deposit of the submission commit, 10.5281/zenodo.237
 
 ### 9ac9bf4 · 2026-10-29 23:53 · Abstract opens on the asymmetry: automated claim review in seconds, no automation on the submitter's side to test and answer the denial
 
-Abstract rewritten as a single unstructured paragraph on the author's direction (problem, question, methods, results, conclusion, no section labels), with one sentence on the payer-side run; the same paragraph is the submission description's opening and the first X post's opening
+Abstract opens on the asymmetry in the author's words: insurers have automated claim review that renders a denial in seconds, and the claim submitter has not adopted the same automation to test whether a denial is valid and to answer it
+
+### 2d60f9b · 2026-10-30 06:53 · Build log: regenerate after 9ac9bf4
+
+(no ledger row)
+
+### 47df8ac · 2026-10-29 23:53 · Ledger rows for the two abstract commits
+
+Ledger rows for 1f0adaf and 9ac9bf4

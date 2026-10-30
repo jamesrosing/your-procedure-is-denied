@@ -369,7 +369,7 @@ Every commit since the event began has a row in [NEW-WORK.md](NEW-WORK.md), ever
 <!-- build-log:start -->
 _Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-10-30 06:53 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
 
-101 commits since the `hackathon-start` tag, the last at 2026-10-29 23:53 (9ac9bf4). Gate v1.4. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
+103 commits since the `hackathon-start` tag, the last at 2026-10-29 23:53 (47df8ac). Gate v1.4. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
 
 | Started (UTC) | Model | Mode | Agreed | Blocked | False pass | Advisor |
 | --- | --- | --- | :---: | :---: | :---: | --- |
@@ -385,11 +385,11 @@ _Generated from the git history, the ledger, and the result files by `npm run lo
 
 Last five commits, newest first, with the ledger row each one carried:
 
-- **9ac9bf4 · 2026-10-29 23:53** · Abstract opens on the asymmetry: automated claim review in seconds, no automation on the submitter's side to test and answer the denial. Abstract rewritten as a single unstructured paragraph on the author's direction (problem, question, methods, results, conclusion, no section labels), with one sentence on the payer-side run; the same paragraph is the submission description's opening and the first X post's opening
+- **47df8ac · 2026-10-29 23:53** · Ledger rows for the two abstract commits. Ledger rows for 1f0adaf and 9ac9bf4
+- **2d60f9b · 2026-10-30 06:53** · Build log: regenerate after 9ac9bf4. (no ledger row)
+- **9ac9bf4 · 2026-10-29 23:53** · Abstract opens on the asymmetry: automated claim review in seconds, no automation on the submitter's side to test and answer the denial. Abstract opens on the asymmetry in the author's words: insurers have automated claim review that renders a denial in seconds, and the claim submitter has not adopted the same automation to test whether a denial is valid and to answer it
 - **fa990e2 · 2026-10-30 06:49** · Build log: regenerate after 1f0adaf. (no ledger row)
-- **1f0adaf · 2026-10-29 23:49** · Abstract as a single unstructured paragraph: problem, question, methods, results, conclusion; one sentence on the payer-side run. (no ledger row)
-- **69fb4c7 · 2026-10-30 06:35** · Build log: regenerate after 591a839 · tag v1.0.0. (no ledger row)
-- **591a839 · 2026-10-29 23:35** · Zenodo DOI 10.5281/zenodo.23794798 reserved for the deposit: Declarations, badge, CITATION.cff, .zenodo.json. Zenodo DOI reserved for the deposit of the submission commit, 10.5281/zenodo.23794798: placed in the README Declarations and as a badge, in `CITATION.cff` (doi, version 1.0.0), and in `.zenodo.json` (version). The deposit itself is published at the v1.0.0 release
+- **1f0adaf · 2026-10-29 23:49** · Abstract as a single unstructured paragraph: problem, question, methods, results, conclusion; one sentence on the payer-side run. Abstract rewritten as a single unstructured paragraph on the author's direction (problem, question, methods, results, conclusion, no section labels), with one sentence on the payer-side run; the same paragraph is the submission description's opening and the first X post's opening
 <!-- build-log:end -->
 
 ## From the inside
