@@ -215,7 +215,7 @@ The gate's sensitivity cannot be read off runs in which no model fabricated anyt
 ## 3. Results
 
 <!-- results:start -->
-_Tables generated from the result files by `npm run log`; the prose below them is written by hand. Last regenerated 2026-10-30 05:29 UTC._
+_Tables generated from the result files by `npm run log`; the prose below them is written by hand. Last regenerated 2026-10-30 05:35 UTC._
 
 **Table 1. Kept runs.** 9 runs, 50 cases each, effort low. Agreed is correct-pass plus correct-decline against the grading key, with a 95% Wilson interval. Blocked is a draft the gate stopped. False pass is a draft the gate passed on a case the key labels unsupported. Entries read applies to the agentic modes.
 
@@ -356,9 +356,9 @@ Meta and Cerebral Valley for the event; Baseten for hosting the open-weights mod
 Every commit since the event began has a row in [NEW-WORK.md](NEW-WORK.md), every result file carries its model, mode, gate version, and any re-gate in its own header, and this section is regenerated from those sources after every push. Nothing in it is typed by hand.
 
 <!-- build-log:start -->
-_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-10-30 05:29 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
+_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-10-30 05:35 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
 
-85 commits since the `hackathon-start` tag, the last at 2026-10-29 22:28 (4caf86a). Gate v1.4. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
+87 commits since the `hackathon-start` tag, the last at 2026-10-29 22:35 (1a87acf). Gate v1.4. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
 
 | Started (UTC) | Model | Mode | Agreed | Blocked | False pass | Advisor |
 | --- | --- | --- | :---: | :---: | :---: | --- |
@@ -374,11 +374,11 @@ _Generated from the git history, the ledger, and the result files by `npm run lo
 
 Last five commits, newest first, with the ledger row each one carried:
 
+- **1a87acf · 2026-10-29 22:35** · Video shot list and captions: nine shots mapped to the paper's sections, deep links with step addresses, spoken words sized to 140 words a minute, SRT cues. The video as a video abstract (`assets/video/`): `SHOT-LIST.md` maps nine shots to the paper's sections (Introduction from the recorded opening, Methods and Results from the replay by deep link with `step=` addresses, Results from the scoreboard and Table 3, Discussion and Conclusion from the tests and the ledger), with the spoken words per shot sized to…
+- **9c46333 · 2026-10-30 05:29** · Build log: regenerate after 4caf86a. (no ledger row)
 - **4caf86a · 2026-10-29 22:28** · README reviewed as a paper against the result files: advisor partials 90 of 97 on verified warranted drafts, case-023 advisor sentence whole, v1.4 credited to the spike-in, blocked drafts split six and two, invalid JSON counted in kept and repeats, collision caveat, 144 tests; chart sizes stated as realized (19 to 35, two thirds unrelated) in README, viewer note, synthetic README; ledger rows for d62218b, ff758ac, e71f8cd. README reviewed as a paper against the result files, every number in the prose checked against the tables and the files: the advisor's partial calls on verified warranted drafts are 90 of 97, not 97; the case-023 advisor sentence quoted whole; the v1.4 defect credited to the spike-in, not to a refuted draft; the eight blocked drafts split as six blocked…
 - **f96b335 · 2026-10-30 05:17** · Build log: regenerate after e71f8cd. (no ledger row)
 - **e71f8cd · 2026-10-29 22:16** · Abstract: methods and results tightened. Abstract: Methods and Results tightened
-- **05994f4 · 2026-10-30 05:16** · Build log: regenerate after ff758ac. (no ledger row)
-- **ff758ac · 2026-10-29 22:16** · Abstract trimmed toward 250 words. Abstract trimmed toward 250 words
 <!-- build-log:end -->
 
 ## From the inside

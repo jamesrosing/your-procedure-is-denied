@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-10-30 05:29 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-10-30 05:35 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -403,3 +403,11 @@ Abstract: Methods and Results tightened
 ### 4caf86a · 2026-10-29 22:28 · README reviewed as a paper against the result files: advisor partials 90 of 97 on verified warranted drafts, case-023 advisor sentence whole, v1.4 credited to the spike-in, blocked drafts split six and two, invalid JSON counted in kept and repeats, collision caveat, 144 tests; chart sizes stated as realized (19 to 35, two thirds unrelated) in README, viewer note, synthetic README; ledger rows for d62218b, ff758ac, e71f8cd
 
 README reviewed as a paper against the result files, every number in the prose checked against the tables and the files: the advisor's partial calls on verified warranted drafts are 90 of 97, not 97; the case-023 advisor sentence quoted whole; the v1.4 defect credited to the spike-in, not to a refuted draft; the eight blocked drafts split as six blocked sentences and two empty answers; Muse Spark Open's invalid-JSON answers counted in the kept run as well as the repeats; the collision caveat added to the interpretation; test count 144; Figure 4 says all 22 entries were read. Chart sizes stated as realized (19 to 35 entries, mean 25.6, about two thirds unrelated) in the README, the viewer's data note (`DATA_NOTE`), and the synthetic README; asset links v25. Ledger rows added for d62218b, ff758ac, and e71f8cd
+
+### 9c46333 · 2026-10-30 05:29 · Build log: regenerate after 4caf86a
+
+(no ledger row)
+
+### 1a87acf · 2026-10-29 22:35 · Video shot list and captions: nine shots mapped to the paper's sections, deep links with step addresses, spoken words sized to 140 words a minute, SRT cues
+
+The video as a video abstract (`assets/video/`): `SHOT-LIST.md` maps nine shots to the paper's sections (Introduction from the recorded opening, Methods and Results from the replay by deep link with `step=` addresses, Results from the scoreboard and Table 3, Discussion and Conclusion from the tests and the ledger), with the spoken words per shot sized to 140 words a minute against each slot and the source of every spoken number; `narration.srt` carries the same words as 37 caption cues on the shot times
