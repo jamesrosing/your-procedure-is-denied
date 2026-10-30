@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-10-30 05:17 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-10-30 05:29 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -378,7 +378,7 @@ README figures in dark mode: `assets/header-dark.svg`, `attrition-dark.svg`, `ti
 
 ### d62218b · 2026-10-29 22:16 · Abstract and Conclusion: the answer to a denial is a writ; the machine prepares the instrument, the physician issues it
 
-(no ledger row)
+Abstract and Conclusion in Jim's framing: the answer to a denial is a writ, a formal written instrument issued under a signature that carries authority, demanding a specific response and binding its author to every word; the machine prepares the instrument and cannot issue it; the physician's signature is what makes the draft a writ
 
 ### 3988217 · 2026-10-30 05:16 · Build log: regenerate after d62218b
 
@@ -386,7 +386,7 @@ README figures in dark mode: `assets/header-dark.svg`, `attrition-dark.svg`, `ti
 
 ### ff758ac · 2026-10-29 22:16 · Abstract trimmed toward 250 words
 
-(no ledger row)
+Abstract trimmed toward 250 words
 
 ### 05994f4 · 2026-10-30 05:16 · Build log: regenerate after ff758ac
 
@@ -394,4 +394,12 @@ README figures in dark mode: `assets/header-dark.svg`, `attrition-dark.svg`, `ti
 
 ### e71f8cd · 2026-10-29 22:16 · Abstract: methods and results tightened
 
-Abstract and Conclusion in Jim's framing: the answer to a denial is a writ, a formal written instrument issued under a signature that carries authority, demanding a specific response and binding its author to every word; the machine prepares the instrument and cannot issue it; the physician's signature is what makes the draft a writ
+Abstract: Methods and Results tightened
+
+### f96b335 · 2026-10-30 05:17 · Build log: regenerate after e71f8cd
+
+(no ledger row)
+
+### 4caf86a · 2026-10-29 22:28 · README reviewed as a paper against the result files: advisor partials 90 of 97 on verified warranted drafts, case-023 advisor sentence whole, v1.4 credited to the spike-in, blocked drafts split six and two, invalid JSON counted in kept and repeats, collision caveat, 144 tests; chart sizes stated as realized (19 to 35, two thirds unrelated) in README, viewer note, synthetic README; ledger rows for d62218b, ff758ac, e71f8cd
+
+README reviewed as a paper against the result files, every number in the prose checked against the tables and the files: the advisor's partial calls on verified warranted drafts are 90 of 97, not 97; the case-023 advisor sentence quoted whole; the v1.4 defect credited to the spike-in, not to a refuted draft; the eight blocked drafts split as six blocked sentences and two empty answers; Muse Spark Open's invalid-JSON answers counted in the kept run as well as the repeats; the collision caveat added to the interpretation; test count 144; Figure 4 says all 22 entries were read. Chart sizes stated as realized (19 to 35 entries, mean 25.6, about two thirds unrelated) in the README, the viewer's data note (`DATA_NOTE`), and the synthetic README; asset links v25. Ledger rows added for d62218b, ff758ac, and e71f8cd
