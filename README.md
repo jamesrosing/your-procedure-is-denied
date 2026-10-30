@@ -217,7 +217,7 @@ The gate's sensitivity cannot be read off runs in which no model fabricated anyt
 ## 3. Results
 
 <!-- results:start -->
-_Tables generated from the result files by `npm run log`; the prose below them is written by hand. Last regenerated 2026-10-30 06:01 UTC._
+_Tables generated from the result files by `npm run log`; the prose below them is written by hand. Last regenerated 2026-10-30 06:06 UTC._
 
 **Table 1. Kept runs.** 9 runs, 50 cases each, effort low. Agreed is correct-pass plus correct-decline against the grading key, with a 95% Wilson interval. Blocked is a draft the gate stopped. False pass is a draft the gate passed on a case the key labels unsupported. Entries read applies to the agentic modes.
 
@@ -360,9 +360,9 @@ Meta and Cerebral Valley for the event; Baseten for hosting the open-weights mod
 Every commit since the event began has a row in [NEW-WORK.md](NEW-WORK.md), every result file carries its model, mode, gate version, and any re-gate in its own header, and this section is regenerated from those sources after every push. Nothing in it is typed by hand.
 
 <!-- build-log:start -->
-_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-10-30 06:01 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
+_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-10-30 06:06 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
 
-89 commits since the `hackathon-start` tag, the last at 2026-10-29 23:00 (ee60723). Gate v1.4. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
+91 commits since the `hackathon-start` tag, the last at 2026-10-29 23:06 (6afa77b). Gate v1.4. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
 
 | Started (UTC) | Model | Mode | Agreed | Blocked | False pass | Advisor |
 | --- | --- | --- | :---: | :---: | :---: | --- |
@@ -378,11 +378,11 @@ _Generated from the git history, the ledger, and the result files by `npm run lo
 
 Last five commits, newest first, with the ledger row each one carried:
 
+- **6afa77b · 2026-10-29 23:06** · The instrument: a passing draft rendered as the document the physician would sign, footnoted to the record, gate hash, blank signature line under a draft-unsigned-not-sent band; print and save; README 2.2 and Figure 8; shot 3; 164 tests; asset links v27. The instrument (`build/viewer/src/writ.ts`): a passing draft rendered as the document the physician would sign, opened from the PASS line or the w key: the payer's reason quoted at the head, each sentence footnoted to the entry, date, kind, and verbatim quote the gate verified it against, the gate version and input hash at the foot, and a blank signature…
+- **3bbec5b · 2026-10-30 06:01** · Build log: regenerate after ee60723. (no ledger row)
 - **ee60723 · 2026-10-29 23:00** · The gate in the browser: test the gate on any sentence once the verdict is on screen, re-checked by the same gate module bundled into the viewer; pure SHA-256 replaces node:crypto, checkSentence exported, sources and citation modules shared; README Methods 2.4 and Figure 7; shot 7a; 157 tests; asset links v26. The gate in the browser (`build/viewer/src/gatecheck.ts`, `build/viewer/src/main.ts`): once a replay has reached its verdict, a "test the gate" control under every sentence lets a reader edit the sentence, its quote, or its citation, and the same gate the harness ran re-checks it in the page, stamping the result live with its reason; nothing is saved and…
 - **eb2d3f4 · 2026-10-30 05:35** · Build log: regenerate after 1a87acf. (no ledger row)
 - **1a87acf · 2026-10-29 22:35** · Video shot list and captions: nine shots mapped to the paper's sections, deep links with step addresses, spoken words sized to 140 words a minute, SRT cues. The video as a video abstract (`assets/video/`): `SHOT-LIST.md` maps nine shots to the paper's sections (Introduction from the recorded opening, Methods and Results from the replay by deep link with `step=` addresses, Results from the scoreboard and Table 3, Discussion and Conclusion from the tests and the ledger), with the spoken words per shot sized to…
-- **9c46333 · 2026-10-30 05:29** · Build log: regenerate after 4caf86a. (no ledger row)
-- **4caf86a · 2026-10-29 22:28** · README reviewed as a paper against the result files: advisor partials 90 of 97 on verified warranted drafts, case-023 advisor sentence whole, v1.4 credited to the spike-in, blocked drafts split six and two, invalid JSON counted in kept and repeats, collision caveat, 144 tests; chart sizes stated as realized (19 to 35, two thirds unrelated) in README, viewer note, synthetic README; ledger rows for d62218b, ff758ac, e71f8cd. README reviewed as a paper against the result files, every number in the prose checked against the tables and the files: the advisor's partial calls on verified warranted drafts are 90 of 97, not 97; the case-023 advisor sentence quoted whole; the v1.4 defect credited to the spike-in, not to a refuted draft; the eight blocked drafts split as six blocked…
 <!-- build-log:end -->
 
 ## From the inside

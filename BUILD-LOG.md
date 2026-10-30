@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-10-30 06:01 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-10-30 06:06 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -419,3 +419,11 @@ The video as a video abstract (`assets/video/`): `SHOT-LIST.md` maps nine shots 
 ### ee60723 · 2026-10-29 23:00 · The gate in the browser: test the gate on any sentence once the verdict is on screen, re-checked by the same gate module bundled into the viewer; pure SHA-256 replaces node:crypto, checkSentence exported, sources and citation modules shared; README Methods 2.4 and Figure 7; shot 7a; 157 tests; asset links v26
 
 The gate in the browser (`build/viewer/src/gatecheck.ts`, `build/viewer/src/main.ts`): once a replay has reached its verdict, a "test the gate" control under every sentence lets a reader edit the sentence, its quote, or its citation, and the same gate the harness ran re-checks it in the page, stamping the result live with its reason; nothing is saved and the stored verdict is unchanged. To bundle the gate for a browser, `build/src/litmus.ts` now imports a plain TypeScript SHA-256 (`build/src/hash.ts`) instead of node:crypto, with a test that it reproduces every inputHash stored in the result files; the per-sentence check is exported as `checkSentence`, which `litmus()` applies to each sentence; the admissible sources move to `build/src/sources.ts`, shared by the harness, the scripts, and the viewer; the citation pattern moves to `build/src/citation.ts` so the bundle carries no schema library (app.js 60 KB). README: the in-browser gate cited in Methods 2.4 and as Figure 7; test count 157. Shot list and SRT revised: shot 7a tests the gate by hand on case-001, shot 7b is Table 3, slots rebalanced. 13 new tests, 157 total; asset links v26
+
+### 3bbec5b · 2026-10-30 06:01 · Build log: regenerate after ee60723
+
+(no ledger row)
+
+### 6afa77b · 2026-10-29 23:06 · The instrument: a passing draft rendered as the document the physician would sign, footnoted to the record, gate hash, blank signature line under a draft-unsigned-not-sent band; print and save; README 2.2 and Figure 8; shot 3; 164 tests; asset links v27
+
+The instrument (`build/viewer/src/writ.ts`): a passing draft rendered as the document the physician would sign, opened from the PASS line or the w key: the payer's reason quoted at the head, each sentence footnoted to the entry, date, kind, and verbatim quote the gate verified it against, the gate version and input hash at the foot, and a blank signature line under a band reading draft, unsigned, not sent; print shows only the sheet, save writes the plain-text rendering; it closes when the frame leaves PASS or the case changes; the false pass renders too, since PASS is the gate's word and the physician decides. README 2.2 and Figure 8; shot 3 ends on the instrument; 7 tests (one footnote per sentence over every passing result in three files, null for declined, blocked, and failed, fixed copy with no exclamation marks and no em dashes); 164 tests; asset links v27
