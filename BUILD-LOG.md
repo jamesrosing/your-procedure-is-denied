@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-10-30 06:35 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-10-30 06:49 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -452,3 +452,11 @@ Payer-side runs kept (`build/results/payer/`, three files, chart in prompt, effo
 ### 591a839 · 2026-10-29 23:35 · Zenodo DOI 10.5281/zenodo.23794798 reserved for the deposit: Declarations, badge, CITATION.cff, .zenodo.json
 
 Zenodo DOI reserved for the deposit of the submission commit, 10.5281/zenodo.23794798: placed in the README Declarations and as a badge, in `CITATION.cff` (doi, version 1.0.0), and in `.zenodo.json` (version). The deposit itself is published at the v1.0.0 release
+
+### 69fb4c7 · 2026-10-30 06:35 · Build log: regenerate after 591a839 · tag v1.0.0
+
+(no ledger row)
+
+### 1f0adaf · 2026-10-29 23:49 · Abstract as a single unstructured paragraph: problem, question, methods, results, conclusion; one sentence on the payer-side run
+
+Abstract rewritten as a single unstructured paragraph on the author's direction (problem, question, methods, results, conclusion, no section labels), with one sentence on the payer-side run; the same paragraph is the submission description's opening and the first X post's opening
