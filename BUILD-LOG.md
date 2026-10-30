@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-10-30 04:45 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-10-30 05:02 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -363,3 +363,11 @@ The README becomes the paper: title line, keywords, a 250-word abstract, Introdu
 ### b09f7a2 · 2026-10-29 21:44 · Figures are frames: a deep link may name a step, and the paper's Results list six frames by address
 
 Figures are frames (`build/viewer/`): a deep link may carry `&step=<n>` or `&step=end` and the page lands on that frame of the replay (`parseStep`, clamped to the timeline, one test); the hash written back by the case picker drops the step so the next link in the same tab applies cleanly. README Results gains a Figures list, six frames by address: the flow, case-001 verified, case-027 blocked, case-044 declined, case-023 the referential limit, the live query strip at step 1. 144 tests; asset links v24
+
+### ff765d5 · 2026-10-30 04:45 · Build log: regenerate after b09f7a2
+
+(no ledger row)
+
+### 85a47ac · 2026-10-29 22:02 · README figures follow the reader's color scheme: dark variants of the four figures behind picture elements
+
+README figures in dark mode: `assets/header-dark.svg`, `attrition-dark.svg`, `timeline-dark.svg`, `flow-dark.svg`, each the light asset with its ink ramp remapped to the viewer's dark tokens (page to ink-0, boxes to surface, hairlines to ink-2, muted and mid strokes swapped, text to ink-6 and ink-7, navy to the heading blue); the four README images are now `<picture>` elements that serve the dark file under `prefers-color-scheme: dark`, so the page no longer shows four white panels on GitHub's dark theme
