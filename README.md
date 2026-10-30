@@ -196,9 +196,9 @@ Two things followed from reading those five cases, both built the same morning. 
 Every commit since the event began has a row in [NEW-WORK.md](NEW-WORK.md), every result file carries its model, mode, gate version, and any re-gate in its own header, and this section is regenerated from those sources after every push. Nothing in it is typed by hand.
 
 <!-- build-log:start -->
-_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-10-29 18:25 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
+_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-10-30 00:20 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
 
-69 commits since the `hackathon-start` tag, the last at 2026-10-29 11:22 (69f1081). Gate v1.4. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
+71 commits since the `hackathon-start` tag, the last at 2026-10-29 16:14 (37cb44e). Gate v1.4. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
 
 | Started (UTC) | Model | Mode | Agreed | Blocked | False pass | Advisor |
 | --- | --- | --- | :---: | :---: | :---: | --- |
@@ -214,11 +214,11 @@ _Generated from the git history, the ledger, and the result files by `npm run lo
 
 Last five commits, newest first, with the ledger row each one carried:
 
+- **37cb44e · 2026-10-29 16:14** · Each column says what it holds; the case header says what kind of denial it is; the result stamp and the about panel say what PASS means and where the fifty cases came from. What the three columns are, said on the page (`build/viewer/`): one line under each column header (the physician's record, entries lit as read; the payer's written rules under the payer's own reason, lit when the draft cites verified evidence; the appeal drafted one sentence at a time, each stamped by the gate, with PASS defined as every sentence in the…
+- **97c67cc · 2026-10-29 18:25** · Build log: regenerate after 69f1081. (no ledger row)
 - **69f1081 · 2026-10-29 11:22** · The payer's own reason above the criteria, labeled with its CARC code; every case header label explains itself on hover; footnote markers set apart in the heading color. The payer's own reason on screen (`build/viewer/`): the sentence after "Payer remark:" in each denial now sits above the criteria list, labeled with its CARC code, so the insurer's claim is read against the record's quotes beneath it (`payerRemark`, one test over all 50 cases). Every label in the case header explains itself on hover: the billing code…
 - **92dc31a · 2026-10-29 17:41** · Build log: regenerate after 0f4e153. (no ledger row)
 - **0f4e153 · 2026-10-29 10:17** · The opening ends on who signs: it drafts; a physician signs. The opening ends on who signs: "It drafts; a physician signs." closes the third line, held together with no-break spaces so it never splits across rows; the copy test asserts the ending and allows thirty-two words; the scrim's solid band deepened for seven rows; budget test 27 s (26.72 s to the first replay frame). Asset links v21
-- **83bf7dd · 2026-10-29 17:13** · Build log: regenerate after 0e347d9. (no ledger row)
-- **0e347d9 · 2026-10-29 01:48** · Title block holds two seconds longer before it travels, the travel takes 700 ms, and typed characters are scheduled at absolute times so long lines do not drift; budget test 26 s. The finished title block holds two seconds longer before it travels, and the travel takes 700 ms instead of 400 (`INTRO_END_PAUSE_MS`, `INTRO_MOVE_MS` in `build/viewer/src/replay.ts`; the scrim and caption band fade over the same time); the budget test holds the pause and moves to 26 s (25.64 s to the first replay frame). Each typed character is now due…
 <!-- build-log:end -->
 
 ## From the inside

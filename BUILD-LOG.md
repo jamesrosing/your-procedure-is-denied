@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-10-29 18:25 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-10-30 00:20 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -339,3 +339,11 @@ The opening ends on who signs: "It drafts; a physician signs." closes the third 
 ### 69f1081 · 2026-10-29 11:22 · The payer's own reason above the criteria, labeled with its CARC code; every case header label explains itself on hover; footnote markers set apart in the heading color
 
 The payer's own reason on screen (`build/viewer/`): the sentence after "Payer remark:" in each denial now sits above the criteria list, labeled with its CARC code, so the insurer's claim is read against the record's quotes beneath it (`payerRemark`, one test over all 50 cases). Every label in the case header explains itself on hover: the billing code system, the CARC code with its text, the plan, the category, the stakes, the model, the provider, the effort, the run date, the gate version, the synthetic record (`codeSystemHelp`, `carcHelp`, `LABEL_HELP`, one test). The footnote markers in the opening lines and the paragraph are set in the heading color and bold so they are seen. 137 tests; asset links v22
+
+### 97c67cc · 2026-10-29 18:25 · Build log: regenerate after 69f1081
+
+(no ledger row)
+
+### 37cb44e · 2026-10-29 16:14 · Each column says what it holds; the case header says what kind of denial it is; the result stamp and the about panel say what PASS means and where the fifty cases came from
+
+What the three columns are, said on the page (`build/viewer/`): one line under each column header (the physician's record, entries lit as read; the payer's written rules under the payer's own reason, lit when the draft cites verified evidence; the appeal drafted one sentence at a time, each stamped by the gate, with PASS defined as every sentence in the record, not that the appeal would prevail), repeated on the header's hover (`PANEL_HELP`); the result stamp explains itself on hover (`VERDICT_HELP`: PASS is the gate's word, the physician decides whether the record satisfies the criteria; DECLINED is the expected answer for 20 of 50). The case header now says what kind of denial each case is (`denialKind`, `DENIAL_KIND_HELP`): every one a claim denied after the service was given, none a prior-authorization request, the three CARC 197 cases claims denied for a missing authorization. Where the fifty cases came from, in the about panel and under the scoreboard (`DATA_NOTE`: seeded generator, 18 templates, the 30 and 20 split by subtype, fictional payers, no real record). README gains a subsection, The fifty cases, stating the kind of denial against the prior-authorization statistics above it and how the set was generated, with links to the generator, the templates, and the synthetic README. Three tests; 140 tests; asset links v23
