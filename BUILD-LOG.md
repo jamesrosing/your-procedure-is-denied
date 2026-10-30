@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-10-30 21:20 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-10-30 22:03 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -50,7 +50,7 @@ Each commit that changed the version string in `build/src/litmus.ts`. The gate i
 
 ## Commits since `hackathon-start`
 
-Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 38 commits by github-actions[bot] are this log regenerating itself after a push; they touch only the generated files and carry no ledger row.
+Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 39 commits by github-actions[bot] are this log regenerating itself after a push; they touch only the generated files and carry no ledger row.
 
 ### 79e5e21 · 2026-10-26 20:38 · Add hackathon scaffolding: NEW-WORK.md and /build
 
@@ -564,3 +564,11 @@ Abstract re-led on the author's instruction, opening cadence unchanged: the ques
 ### a2fb3d9 · 2026-10-30 14:20 · litmus-gate: license Apache-2.0, matching the repository
 
 `build/litmus-gate/package.json`: license Apache-2.0, matching the repository's LICENSE (it had said MIT). Found while checking what an npm publish would carry: the tarball is `dist/cli.js` (the gate module, its sources builder, citation pattern, schema, and hash, all already public in this repository), the package README, and `package.json`; no provider code, no CHART client, no base URL, no key
+
+### c7590ac · 2026-10-30 14:20 · Build log: regenerate after a2fb3d9
+
+(generated files only; no ledger row by design)
+
+### f4d67aa · 2026-10-30 15:03 · litmus-gate 0.1.0 is on npm; the READMEs and the ledger say so
+
+`litmus-gate` 0.1.0 published to npm (Apache 2.0, three files: the bundled CLI, the README, package.json; nothing beyond what this repository already holds) and run cold through `npx -y litmus-gate` against the registry copy; README 2.8, the package README, and the built list say so
