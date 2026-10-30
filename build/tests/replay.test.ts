@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readdirSync, readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { buildTimeline, citedEntries, firstLine, carcHelp, codeSystemHelp, DATA_NOTE, denialKind, DENIAL_KIND_HELP, PANEL_HELP, VERDICT_HELP, INTRO_END_PAUSE_MS, INTRO_FADE_MS, INTRO_LINES, INTRO_MOVE_MS, INTRO_NOTES, INTRO_STAMP, introTypeMs, introSchedule, LABEL_HELP, LOOKUP_DWELL_MS, lookupStrip, payerRemark, playDelayMs, scoreboard, stateAt, type ResultsFile, type ViewerCase, type ViewerResult } from '../viewer/src/replay.js';
+import { buildTimeline, citedEntries, firstLine, carcHelp, codeSystemHelp, DATA_NOTE, denialKind, DENIAL_KIND_HELP, PANEL_HELP, parseStep, VERDICT_HELP, INTRO_END_PAUSE_MS, INTRO_FADE_MS, INTRO_LINES, INTRO_MOVE_MS, INTRO_NOTES, INTRO_STAMP, introTypeMs, introSchedule, LABEL_HELP, LOOKUP_DWELL_MS, lookupStrip, payerRemark, playDelayMs, scoreboard, stateAt, type ResultsFile, type ViewerCase, type ViewerResult } from '../viewer/src/replay.js';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const resultsDir = join(here, '..', 'results');
@@ -402,5 +402,20 @@ describe('what the three columns are, what kind of denial each case is, and wher
     assert.match(DATA_NOTE, /no real/i);
     assert.match(DATA_NOTE, /generate\.ts/);
     assert.ok(!DATA_NOTE.includes('!'));
+  });
+});
+
+describe('a deep link can name a step, so a figure in the paper is a frame', () => {
+  test('step parses as a cursor or the word end, clamps to the timeline, and is absent otherwise', () => {
+    assert.equal(parseStep(null, 12), null);
+    assert.equal(parseStep('', 12), null);
+    assert.equal(parseStep('end', 12), 12);
+    assert.equal(parseStep('END', 12), 12);
+    assert.equal(parseStep('5', 12), 5);
+    assert.equal(parseStep('0', 12), 0);
+    assert.equal(parseStep('99', 12), 12);
+    assert.equal(parseStep('-3', 12), 0);
+    assert.equal(parseStep('abc', 12), null);
+    assert.equal(parseStep('2.5', 12), 2);
   });
 });

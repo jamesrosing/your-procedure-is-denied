@@ -140,6 +140,19 @@ export function payerRemark(c: ViewerCase): string | null {
   return r && r.length > 0 ? r : null;
 }
 
+// A deep link may name a step: `&step=7` or `&step=end`, so a figure in the
+// paper can point at one frame of a replay. Clamped to the timeline; null when
+// absent or unreadable.
+export function parseStep(value: string | null, total: number): number | null {
+  if (value === null) return null;
+  const v = value.trim();
+  if (v === '') return null;
+  if (v.toLowerCase() === 'end') return total;
+  const n = Number.parseInt(v, 10);
+  if (Number.isNaN(n)) return null;
+  return Math.max(0, Math.min(n, total));
+}
+
 // Plain-words help for the labels in the case header, shown on hover; the
 // narration says the same once. Two cold readers asked what the labels were.
 export const LABEL_HELP: Record<string, string> = {

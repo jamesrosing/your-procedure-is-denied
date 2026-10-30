@@ -246,6 +246,15 @@ _Tables generated from the result files by `npm run log`; the prose below them i
 
 <!-- results:end -->
 
+**Figures.** The figures of this paper are frames of the replay, addressed by deep link; `step=end` lands on the verdict and the arrow keys walk the trace from there.
+
+- Figure 1. The system under test: the flow in section 2.2.
+- Figure 2. A warranted case drafted and verified: [case-001, muse-spark-1.3 with the live query, at the verdict](https://demo.hemeehr.com/#file=meta-muse-spark-1.3-low-agentic-chart-2026-10-28T06-48-41-422Z.json&case=case-001&step=end). Eight sentences, each stamped against the entry it cites; the payer's reason above the criteria it is answered by.
+- Figure 3. The gate blocking a true sentence: [case-027, muse-spark-1.3 with the live query, at the verdict](https://demo.hemeehr.com/#file=meta-muse-spark-1.3-low-agentic-chart-2026-10-28T06-48-41-422Z.json&case=case-027&step=end). The sentence named, the reason, and the entry the gate says to cite.
+- Figure 4. A decline: [case-044, muse-wonder-1.0 with the live query, at the verdict](https://demo.hemeehr.com/#file=meta-muse-wonder-1.0-low-agentic-chart-2026-10-28T06-51-47-640Z.json&case=case-044&step=end). The chart read almost entry by entry before the model declined, with its reason.
+- Figure 5. The referential limit: [case-023, Muse Spark Open with the live query, at the verdict](https://demo.hemeehr.com/#file=baseten-meta-models_muse-spark-open-low-agentic-chart-2026-10-28T07-13-57-225Z.json&case=case-023&step=end). The quote "plan 5 to 6 days a week" beside the intensity criterion it does not meet, the gate's PASS, and the advisor's dissent.
+- Figure 6. The live policy query as a strip: [case-001, muse-spark-1.3, step 1](https://demo.hemeehr.com/#file=meta-muse-spark-1.3-low-agentic-chart-2026-10-28T06-48-41-422Z.json&case=case-001&step=1). The payer, the authority asked, the index, and the answer, labeled as a query against a prior-work data source.
+
 **Agreement.** Across the nine kept runs, agreement with the key was 45 to 50 of 50 (Table 1). muse-spark-1.3 agreed on 50, 50, and 49; muse-wonder-1.0 on 49, 49, and 50; Muse Spark Open on 49, 48, and 45. In the repeat runs (Table 2), muse-wonder-1.0 with the live query agreed on 50 of 50 in all three runs, muse-spark-1.3 ranged from 47 to 50, and Muse Spark Open from 42 to 48 across five runs on two keys and two model ids.
 
 **Fabrication.** No kept or repeat run contained a fabricated quote: in 17 runs, and in the 2,201 verified sentences of the kept nine, every quote was found verbatim in the entry it cited. One fabricated quote occurred in a superseded run before the kept ones: muse-wonder-1.0 wrote "Proceededed" inside a quotation and the gate refuted the sentence.

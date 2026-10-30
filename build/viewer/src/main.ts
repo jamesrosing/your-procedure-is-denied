@@ -2,7 +2,7 @@
 // results file and a case, and renders `stateAt` for the current cursor.
 // Everything that decides what a step means lives in replay.ts.
 import {
-  buildTimeline, carcHelp, codeSystemHelp, DATA_NOTE, denialKind, DENIAL_KIND_HELP, firstLine, PANEL_HELP, VERDICT_HELP, formatSeconds, formatUsd, INTRO_CHAR_MS, LABEL_HELP, payerRemark, INTRO_END_PAUSE_MS, INTRO_FADE_MS, INTRO_LINES, INTRO_MOVE_MS, INTRO_NOTES, INTRO_STAMP, introSchedule, playDelayMs, scoreboard, stateAt,
+  buildTimeline, carcHelp, codeSystemHelp, DATA_NOTE, denialKind, DENIAL_KIND_HELP, firstLine, PANEL_HELP, parseStep, VERDICT_HELP, formatSeconds, formatUsd, INTRO_CHAR_MS, LABEL_HELP, payerRemark, INTRO_END_PAUSE_MS, INTRO_FADE_MS, INTRO_LINES, INTRO_MOVE_MS, INTRO_NOTES, INTRO_STAMP, introSchedule, playDelayMs, scoreboard, stateAt,
   type ReplayState, type ResultsFile, type Step, type ViewerCase, type ViewerResult,
 } from './replay.js';
 
@@ -596,17 +596,21 @@ function playIntro(): void {
   introTimers.push(window.setTimeout(endIntro, (last ? last.hide : 0) + INTRO_END_PAUSE_MS));
 }
 
-// A deep link is `#file=<results file>&case=<case id>`. Applied at boot and
-// whenever the hash changes on an open page (a link pasted into the same tab),
-// so a link always lands on its case with the board closed. selectCase writes
-// the same hash back, which fires this again as a no-op.
+// A deep link is `#file=<results file>&case=<case id>`, optionally with
+// `&step=<n>` or `&step=end` to land on one frame, so a figure in the paper
+// is an address. Applied at boot and whenever the hash changes on an open
+// page (a link pasted into the same tab), so a link always lands on its case
+// with the board closed. selectCase writes the file and case back into the
+// hash without the step, which fires this again as a no-op.
 async function applyHash(): Promise<void> {
   const params = new URLSearchParams(window.location.hash.slice(1));
   const wantedFile = params.get('file');
   const wantedCase = params.get('case');
+  const wantedStep = params.get('step');
+  const landOnStep = (): void => { const n = parseStep(wantedStep, session.steps.length); if (n !== null) { stop(); seek(n); } };
   const fileChanged = !!wantedFile && wantedFile !== ui.filePicker.value && session.manifest.results.some(m => m.file === wantedFile);
   const caseChanged = !!wantedCase && wantedCase !== session.result?.caseId;
-  if (!fileChanged && !caseChanged && session.file) return;
+  if (!fileChanged && !caseChanged && session.file) { landOnStep(); return; }
   if (fileChanged) ui.filePicker.value = wantedFile;
   if (wantedCase) {
     // selectFile keeps the picker's current case when the file has it; seed it.
@@ -617,6 +621,7 @@ async function applyHash(): Promise<void> {
   }
   if (fileChanged || !session.file) await selectFile(ui.filePicker.value);
   else if (wantedCase) selectCase(wantedCase);
+  landOnStep();
   if (!ui.boardSection.hasAttribute('hidden')) showBoard(false);
 }
 
