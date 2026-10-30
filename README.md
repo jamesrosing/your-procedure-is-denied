@@ -220,7 +220,7 @@ A post hoc run put the gate on the other side of the exchange (`npm run harness 
 ## 3. Results
 
 <!-- results:start -->
-_Tables generated from the result files by `npm run log`; the prose below them is written by hand. Last regenerated 2026-10-30 06:20 UTC._
+_Tables generated from the result files by `npm run log`; the prose below them is written by hand. Last regenerated 2026-10-30 06:35 UTC._
 
 **Table 1. Kept runs.** 9 runs, 50 cases each, effort low. Agreed is correct-pass plus correct-decline against the grading key, with a 95% Wilson interval. Blocked is a draft the gate stopped. False pass is a draft the gate passed on a case the key labels unsupported. Entries read applies to the agentic modes.
 
@@ -375,9 +375,9 @@ Meta and Cerebral Valley for the event; Baseten for hosting the open-weights mod
 Every commit since the event began has a row in [NEW-WORK.md](NEW-WORK.md), every result file carries its model, mode, gate version, and any re-gate in its own header, and this section is regenerated from those sources after every push. Nothing in it is typed by hand.
 
 <!-- build-log:start -->
-_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-10-30 06:20 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
+_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-10-30 06:35 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
 
-95 commits since the `hackathon-start` tag, the last at 2026-10-29 23:19 (73d29bd). Gate v1.4. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
+97 commits since the `hackathon-start` tag, the last at 2026-10-29 23:35 (591a839). Gate v1.4. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
 
 | Started (UTC) | Model | Mode | Agreed | Blocked | False pass | Advisor |
 | --- | --- | --- | :---: | :---: | :---: | --- |
@@ -393,11 +393,11 @@ _Generated from the git history, the ledger, and the result files by `npm run lo
 
 Last five commits, newest first, with the ledger row each one carried:
 
+- **591a839 · 2026-10-29 23:35** · Zenodo DOI 10.5281/zenodo.23794798 reserved for the deposit: Declarations, badge, CITATION.cff, .zenodo.json. Zenodo DOI reserved for the deposit of the submission commit, 10.5281/zenodo.23794798: placed in the README Declarations and as a badge, in `CITATION.cff` (doi, version 1.0.0), and in `.zenodo.json` (version). The deposit itself is published at the v1.0.0 release
+- **0e131ee · 2026-10-30 06:20** · Build log: regenerate after 73d29bd. (no ledger row)
 - **73d29bd · 2026-10-29 23:19** · The other chair, kept: payer-side runs on three models (wonder 50 of 50, spark 1.3 49 of 50, Spark Open 48 of 50 with the one fabricated quote of any full run refuted); Table 4 generated post hoc from results/payer; README 2.1, 2.7, Results, 4.3. Payer-side runs kept (`build/results/payer/`, three files, chart in prompt, effort low, gate v1.4): muse-wonder-1.0 50 of 50 (declined to deny all 30 supporting records, verified determinations for all 20 failing ones); muse-spark-1.3 49 of 50 (one determination against a supporting record, case-036, six verified sentences reading visit 6 of 6 as not six…
 - **d49cad8 · 2026-10-30 06:11** · Build log: regenerate after 4480204. (no ledger row)
 - **4480204 · 2026-10-29 23:11** · Harness: --side payer, the same gate pointed at the plan's determination; payer instructions, inverted key, side on results, results/payer default; 169 tests. The other chair (`build/src/harness.ts --side payer`): the same contract, the same gate, and the same chart asked for the plan's written claim determination instead of the physician's appeal, so the gate's claim to take no side can be measured. `INSTRUCTIONS_PAYER` (and its agentic variant) reuses the physician block's CARC reference; warranted means the…
-- **8bbac45 · 2026-10-30 06:06** · Build log: regenerate after 6afa77b. (no ledger row)
-- **6afa77b · 2026-10-29 23:06** · The instrument: a passing draft rendered as the document the physician would sign, footnoted to the record, gate hash, blank signature line under a draft-unsigned-not-sent band; print and save; README 2.2 and Figure 8; shot 3; 164 tests; asset links v27. The instrument (`build/viewer/src/writ.ts`): a passing draft rendered as the document the physician would sign, opened from the PASS line or the w key: the payer's reason quoted at the head, each sentence footnoted to the entry, date, kind, and verbatim quote the gate verified it against, the gate version and input hash at the foot, and a blank signature…
 <!-- build-log:end -->
 
 ## From the inside

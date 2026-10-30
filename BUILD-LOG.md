@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-10-30 06:20 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-10-30 06:35 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -444,3 +444,11 @@ The other chair (`build/src/harness.ts --side payer`): the same contract, the sa
 
 Results added: `payer/baseten-meta-models_muse-spark-open-1026-low-payer-2026-10-30T06-14-52-839Z.json`, `payer/meta-muse-spark-1.3-low-payer-2026-10-30T06-12-28-712Z.json`, `payer/meta-muse-wonder-1.0-low-payer-2026-10-30T06-13-48-967Z.json`.
 Payer-side runs kept (`build/results/payer/`, three files, chart in prompt, effort low, gate v1.4): muse-wonder-1.0 50 of 50 (declined to deny all 30 supporting records, verified determinations for all 20 failing ones); muse-spark-1.3 49 of 50 (one determination against a supporting record, case-036, six verified sentences reading visit 6 of 6 as not six consecutive months); Muse Spark Open 48 of 50 (two blocks on exclusion cases, one of them the only fabricated quote in any full run, plan-document language the model was never given, refuted by the gate). Every disagreement read before the commit; a six-case probe (not kept) had muse-spark-1.3 set the denial flag on case-001 and write six sentences that support the care, which the gate passed. `build/scripts/build-log.ts` generates Table 4 from `results/payer/` between the results markers, labeled post hoc; README 2.1, 2.7, Results, and 4.3 carry the method, the numbers, and the reading
+
+### 0e131ee · 2026-10-30 06:20 · Build log: regenerate after 73d29bd
+
+(no ledger row)
+
+### 591a839 · 2026-10-29 23:35 · Zenodo DOI 10.5281/zenodo.23794798 reserved for the deposit: Declarations, badge, CITATION.cff, .zenodo.json
+
+Zenodo DOI reserved for the deposit of the submission commit, 10.5281/zenodo.23794798: placed in the README Declarations and as a badge, in `CITATION.cff` (doi, version 1.0.0), and in `.zenodo.json` (version). The deposit itself is published at the v1.0.0 release
