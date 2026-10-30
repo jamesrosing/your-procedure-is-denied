@@ -3,7 +3,7 @@
 // viewer/src/main.ts into one app.js. No server, no framework. viewer/data
 // and viewer/app.js are build output and are not committed.
 import { build } from 'esbuild';
-import { cpSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -15,12 +15,18 @@ const data = join(viewer, 'data');
 rmSync(data, { recursive: true, force: true });
 mkdirSync(join(data, 'results'), { recursive: true });
 
+// The kept physician-side runs, then the payer-side runs of README Table 4
+// (results/payer/), which the page lists last in the picker and keeps off the
+// scoreboard. Repeat runs (results/repeats/) are not shown.
 const resultsDir = join(root, 'results');
-const resultFiles = readdirSync(resultsDir).filter(f => f.endsWith('.json')).sort();
-const results = resultFiles.map(f => {
-  cpSync(join(resultsDir, f), join(data, 'results', f));
-  const parsed = JSON.parse(readFileSync(join(resultsDir, f), 'utf8')) as {
-    run: { provider: string; model: string; effort: string; startedAt: string; cases: number; agentic?: boolean };
+const listed = [
+  ...readdirSync(resultsDir).filter(f => f.endsWith('.json')).sort().map(f => ({ dir: resultsDir, f })),
+  ...(existsSync(join(resultsDir, 'payer')) ? readdirSync(join(resultsDir, 'payer')).filter(f => f.endsWith('.json')).sort().map(f => ({ dir: join(resultsDir, 'payer'), f })) : []),
+];
+const results = listed.map(({ dir, f }) => {
+  cpSync(join(dir, f), join(data, 'results', f));
+  const parsed = JSON.parse(readFileSync(join(dir, f), 'utf8')) as {
+    run: { provider: string; model: string; effort: string; startedAt: string; cases: number; agentic?: boolean; side?: 'payer' };
     results: { trace?: { live?: boolean }[] }[];
   };
   return {
@@ -32,6 +38,7 @@ const results = resultFiles.map(f => {
     cases: parsed.run.cases,
     agentic: parsed.run.agentic === true || parsed.results.some(r => (r.trace?.length ?? 0) > 0),
     live: parsed.results.some(r => (r.trace ?? []).some(t => t.live === true)),
+    ...(parsed.run.side === 'payer' ? { side: 'payer' as const } : {}),
   };
 });
 

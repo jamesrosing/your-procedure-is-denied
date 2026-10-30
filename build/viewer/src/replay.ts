@@ -76,8 +76,10 @@ export interface ViewerResult {
   advice?: { provider: string; model: string; items: { criterion: string; verdict: 'supports' | 'partial' | 'silent'; why: string }[]; error?: string };
 }
 
+export type Side = 'payer' | undefined; // absent: the physician's side, the default
+
 export interface ResultsFile {
-  run: { startedAt: string; provider: string; model: string; effort: string; cases: number; agentic?: boolean };
+  run: { startedAt: string; provider: string; model: string; effort: string; cases: number; agentic?: boolean; side?: 'payer' };
   summary: {
     cases: number;
     outcomes: Record<string, number>;
@@ -186,6 +188,54 @@ export const PANEL_HELP = {
   criteria: "The payer's written coverage rules for this service, under the payer's own reason for the denial. A criterion lights when the draft cites verified evidence for it.",
   draft: "The appeal the model drafts to this denial, one sentence at a time, each stamped by the gate against the chart. PASS means every sentence is in the record, not that the appeal would prevail.",
 } as const;
+
+// The words that change with the chair. On the payer side (build/results/payer/,
+// README Table 4) the draft is the plan's determination, a verified PASS is a
+// determination whose every sentence is in the record, DECLINED is the model
+// declining to deny, and there is no writ: the instrument is the physician's.
+export interface SideText {
+  side: Side;
+  draftHeading: string;
+  draftHelp: string;
+  passHead: (verified: number, total: number) => string;
+  declinedHead: string;
+  outcome: (o: string) => string;
+  writ: boolean;
+  stamp?: string; // a label for the context line
+}
+
+export function sideText(side: Side): SideText {
+  if (side === 'payer') {
+    return {
+      side,
+      draftHeading: 'Draft determination',
+      draftHelp: "The plan's written claim determination the model drafts, arguing the insurer's side, one sentence at a time, each stamped by the gate against the same chart. PASS means every sentence is in the record, not that the denial is right: whether the record fails the criterion is a reading the gate does not make.",
+      passHead: (verified, total) => `${verified} of ${total} sentences verified against the chart; a determination held to the record, and the reading of the criterion is not the gate's to make`,
+      declinedHead: 'the model read the chart and declined to deny',
+      outcome: o => ({ 'correct-pass': 'determination verified', 'correct-decline': 'declined to deny', blocked: 'blocked', missed: 'did not deny a failing record', 'false-pass': 'determination against a supporting record', error: 'error' }[o] ?? o),
+      writ: false,
+      stamp: 'payer side, post hoc',
+    };
+  }
+  return {
+    side,
+    draftHeading: 'Draft appeal',
+    draftHelp: PANEL_HELP.draft,
+    passHead: (verified, total) => `${verified} of ${total} sentences verified against the chart; ready for the physician to read and sign`,
+    declinedHead: 'the model read the chart and declined to draft',
+    outcome: o => ({ 'correct-pass': 'passed', 'correct-decline': 'declined', blocked: 'blocked', missed: 'missed', 'false-pass': 'false pass', error: 'error' }[o] ?? o),
+    writ: true,
+  };
+}
+
+// The run the page opens on without a deep link: the newest physician-side
+// run that used every tool, by start time; failing that, the newest run.
+export function newestRun<T extends { startedAt: string; live?: boolean; side?: 'payer' }>(runs: readonly T[]): T | undefined {
+  const own = runs.filter(r => r.side !== 'payer');
+  const pool = own.length ? own : [...runs];
+  const byStart = [...pool].sort((a, b) => a.startedAt.localeCompare(b.startedAt));
+  return [...byStart].reverse().find(r => r.live) ?? byStart[byStart.length - 1];
+}
 
 // The result stamp, on hover. PASS is the gate's word, not a verdict on the
 // appeal: the physician who signs decides whether the record satisfies the criteria.
@@ -474,8 +524,10 @@ function rank(model: string): number {
   return i === -1 ? MODEL_RANK.length : i;
 }
 
+// Payer-side runs (README Table 4) stay off the board, as the README says.
 export function scoreboard(files: ResultsFile[]): ScoreboardRow[] {
   return files
+    .filter(f => f.run.side !== 'payer')
     .map(scoreboardRow)
     .sort((a, b) => Number(a.agentic) - Number(b.agentic) || Number(a.live) - Number(b.live) || rank(a.model) - rank(b.model) || a.model.localeCompare(b.model));
 }

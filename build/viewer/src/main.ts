@@ -2,7 +2,7 @@
 // results file and a case, and renders `stateAt` for the current cursor.
 // Everything that decides what a step means lives in replay.ts.
 import {
-  buildTimeline, carcHelp, codeSystemHelp, DATA_NOTE, denialKind, DENIAL_KIND_HELP, firstLine, PANEL_HELP, parseStep, VERDICT_HELP, formatSeconds, formatUsd, INTRO_CHAR_MS, LABEL_HELP, payerRemark, INTRO_END_PAUSE_MS, INTRO_FADE_MS, INTRO_LINES, INTRO_MOVE_MS, INTRO_NOTES, INTRO_STAMP, introSchedule, playDelayMs, scoreboard, stateAt,
+  buildTimeline, carcHelp, codeSystemHelp, DATA_NOTE, denialKind, DENIAL_KIND_HELP, firstLine, PANEL_HELP, parseStep, VERDICT_HELP, formatSeconds, formatUsd, INTRO_CHAR_MS, LABEL_HELP, payerRemark, INTRO_END_PAUSE_MS, INTRO_FADE_MS, INTRO_LINES, INTRO_MOVE_MS, INTRO_NOTES, INTRO_STAMP, introSchedule, newestRun, playDelayMs, scoreboard, sideText, stateAt,
   type ReplayState, type ResultsFile, type Step, type ViewerCase, type ViewerResult,
   type SentenceState,
 } from './replay.js';
@@ -10,7 +10,7 @@ import { recheck, recheckLabel, EDIT_BUTTON, EDIT_HELP, EDIT_NOTE } from './gate
 import { writDocument, writText, WRIT_BUTTON, WRIT_HELP } from './writ.js';
 
 interface Manifest {
-  results: { file: string; provider: string; model: string; effort: string; startedAt: string; cases: number; agentic: boolean; live?: boolean }[];
+  results: { file: string; provider: string; model: string; effort: string; startedAt: string; cases: number; agentic: boolean; live?: boolean; side?: 'payer' }[];
   cases: string;
 }
 
@@ -134,6 +134,7 @@ function text(tag: string, cls: string, content: string): HTMLElement {
 
 function renderContext(c: ViewerCase, r: ViewerResult): void {
   const run = session.file?.run;
+  const side = sideText(run?.side);
   const sep = () => text('span', 'sep', '›');
   ui.ctxCrumb.replaceChildren(text('span', 'mono', c.id), sep(), text('span', '', c.patient.alias), sep(), text('span', '', `${c.patient.age} year old ${c.patient.sex}`));
   ui.ctxTitle.textContent = c.procedure.description;
@@ -152,8 +153,10 @@ function renderContext(c: ViewerCase, r: ViewerResult): void {
   ui.ctxStamp.replaceChildren(
     ...(run ? [help(text('span', '', `model ${run.model}`), LABEL_HELP['model'] ?? ''), help(text('span', '', `provider ${run.provider}`), LABEL_HELP['provider'] ?? ''), help(text('span', '', `effort ${run.effort}`), LABEL_HELP['effort'] ?? ''), help(text('span', '', `run ${run.startedAt.slice(0, 10)}`), LABEL_HELP['run'] ?? '')] : []),
     ...(gateVersion ? [help(text('span', '', `gate litmus ${gateVersion}`), LABEL_HELP['gate'] ?? '')] : []),
+    ...(side.stamp ? [help(text('span', 'strong', side.stamp), side.draftHelp)] : []),
     help(text('span', '', 'synthetic record'), LABEL_HELP['synthetic'] ?? ''),
   );
+  if (ui.panelHead.draft.textContent !== side.draftHeading) { ui.panelHead.draft.textContent = side.draftHeading; ui.panelHead.draft.title = side.draftHelp; ui.panelSub.draft.textContent = side.draftHelp; }
   // The payer's own reason, above the criteria, so the insurer's claim sits
   // over the record's quotes that answer it.
   const remark = payerRemark(c);
@@ -440,8 +443,9 @@ function renderVerdict(state: ReplayState): void {
   };
   const parts: HTMLElement[] = [];
   if (v.verdict === 'pass') {
-    const row = stateRow('PASS', `${state.counters.sentencesVerified} of ${state.counters.sentencesTotal} sentences verified against the chart; ready for the physician to read and sign`);
-    if (session.result && session.caseData && session.file && writDocument(session.caseData, session.result, session.file.run)) {
+    const side = sideText(session.file?.run.side);
+    const row = stateRow('PASS', side.passHead(state.counters.sentencesVerified, state.counters.sentencesTotal));
+    if (side.writ && session.result && session.caseData && session.file && writDocument(session.caseData, session.result, session.file.run)) {
       const open = document.createElement('button');
       open.type = 'button';
       open.className = 'btn writ-open';
@@ -456,7 +460,7 @@ function renderVerdict(state: ReplayState): void {
     parts.push(stateRow('BLOCKED', bad ? `“${bad.text}” did not verify; nothing leaves until every sentence does` : 'nothing leaves until every sentence and every criterion verifies'));
     for (const r of v.reasons) parts.push(text('div', 'reason', r));
   } else if (v.verdict === 'declined') {
-    parts.push(stateRow('DECLINED', 'the model read the chart and declined to draft'), text('div', 'reason', v.declinedReason ?? ''));
+    parts.push(stateRow('DECLINED', sideText(session.file?.run.side).declinedHead), text('div', 'reason', v.declinedReason ?? ''));
   } else {
     parts.push(stateRow('FAILED', v.error ?? 'the request failed before the gate ran'));
   }
@@ -468,6 +472,7 @@ function renderVerdict(state: ReplayState): void {
 // writes the plain-text rendering. Nothing is sent anywhere.
 function showWrit(open: boolean): void {
   if (!open) { ui.writ.hidden = true; return; }
+  if (!sideText(session.file?.run.side).writ) return; // the instrument is the physician's; the payer side has none
   const c = session.caseData, r = session.result, f = session.file;
   // The instrument exists only once the replay has reached its verdict: PASS
   // is the gate's word on screen, not a stored field read ahead of it.
@@ -581,7 +586,7 @@ function play(): void {
 // --- selection ---------------------------------------------------------------
 
 function outcomeLabel(o: string): string {
-  return { 'correct-pass': 'passed', 'correct-decline': 'declined', blocked: 'blocked', missed: 'missed', 'false-pass': 'false pass', error: 'error' }[o] ?? o;
+  return sideText(session.file?.run.side).outcome(o);
 }
 
 async function selectFile(name: string): Promise<void> {
@@ -604,18 +609,30 @@ async function selectFile(name: string): Promise<void> {
   selectCase(wanted);
 }
 
-function selectCase(caseId: string): void {
+// A case the file does not hold (a stale or mistyped link) falls back to the
+// file's first case rather than an empty page. The address is rewritten in
+// place: changing case is not a page a reader would want to go back to.
+function selectCase(caseId: string, step: string | null = null): void {
   stop();
   const file = session.file;
   if (!file) return;
-  const result = file.results.find(r => r.caseId === caseId) ?? null;
+  const result = file.results.find(r => r.caseId === caseId) ?? file.results[0] ?? null;
+  if (result && result.caseId !== caseId) { caseId = result.caseId; ui.casePicker.value = caseId; }
   const caseData = session.cases.get(caseId) ?? null;
   session.result = result;
   session.caseData = caseData;
   session.steps = result && caseData ? buildTimeline(result, caseData) : [];
   session.cursor = 0;
-  window.location.hash = `#file=${encodeURIComponent(ui.filePicker.value)}&case=${caseId}`;
+  writeAddress(caseId, step);
   render();
+}
+
+// The hash is the address of the frame on screen: file, case, and, when the
+// page was opened on one, the step. Written without a history entry, so the
+// back button leaves the page rather than walking through cases.
+function writeAddress(caseId: string, step: string | null): void {
+  const next = `#file=${encodeURIComponent(ui.filePicker.value)}&case=${caseId}${step !== null && step !== '' ? `&step=${encodeURIComponent(step)}` : ''}`;
+  if (window.location.hash !== next) history.replaceState(null, '', next);
 }
 
 function showBoard(on: boolean): void {
@@ -780,14 +797,19 @@ function playIntro(): void {
 // `&step=<n>` or `&step=end` to land on one frame, so a figure in the paper
 // is an address. Applied at boot and whenever the hash changes on an open
 // page (a link pasted into the same tab), so a link always lands on its case
-// with the board closed. selectCase writes the file and case back into the
-// hash without the step, which fires this again as a no-op.
+// with the board closed. selectCase rewrites the address in place (no history
+// entry, no hashchange), keeping the step a link arrived with so a reload
+// lands on the same frame.
 async function applyHash(): Promise<void> {
   const params = new URLSearchParams(window.location.hash.slice(1));
   const wantedFile = params.get('file');
   const wantedCase = params.get('case');
   const wantedStep = params.get('step');
-  const landOnStep = (): void => { const n = parseStep(wantedStep, session.steps.length); if (n !== null) { stop(); seek(n); } };
+  const landOnStep = (): void => {
+    const n = parseStep(wantedStep, session.steps.length);
+    if (n !== null) { stop(); seek(n); }
+    if (session.result) writeAddress(session.result.caseId, n !== null ? wantedStep : null);
+  };
   const fileChanged = !!wantedFile && wantedFile !== ui.filePicker.value && session.manifest.results.some(m => m.file === wantedFile);
   const caseChanged = !!wantedCase && wantedCase !== session.result?.caseId;
   if (!fileChanged && !caseChanged && session.file) { landOnStep(); return; }
@@ -812,14 +834,14 @@ async function boot(): Promise<void> {
   ui.filePicker.replaceChildren(...session.manifest.results.map(m => {
     const o = document.createElement('option');
     o.value = m.file;
-    o.textContent = `${m.model}, ${m.provider}${m.agentic ? (m.live ? ', agentic, live CHART' : ', agentic') : ''}, ${m.startedAt.slice(0, 10)}`;
+    o.textContent = `${m.model}, ${m.provider}${m.agentic ? (m.live ? ', agentic, live CHART' : ', agentic') : ''}${m.side === 'payer' ? ', payer side' : ''}, ${m.startedAt.slice(0, 10)}`;
     return o;
   }));
   // Read before applyHash, which writes the case into the hash.
   const deepLinked = window.location.hash.length > 1;
   // Without a deep link, open on the newest run that used every tool.
   if (!deepLinked) {
-    const newest = [...session.manifest.results].reverse().find(m => m.live) ?? session.manifest.results[session.manifest.results.length - 1];
+    const newest = newestRun(session.manifest.results);
     if (newest) ui.filePicker.value = newest.file;
   }
   await applyHash();

@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readdirSync, readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { buildTimeline, citedEntries, firstLine, carcHelp, codeSystemHelp, DATA_NOTE, denialKind, DENIAL_KIND_HELP, PANEL_HELP, parseStep, VERDICT_HELP, INTRO_END_PAUSE_MS, INTRO_FADE_MS, INTRO_LINES, INTRO_MOVE_MS, INTRO_NOTES, INTRO_STAMP, introTypeMs, introSchedule, LABEL_HELP, LOOKUP_DWELL_MS, lookupStrip, payerRemark, playDelayMs, scoreboard, stateAt, type ResultsFile, type ViewerCase, type ViewerResult } from '../viewer/src/replay.js';
+import { newestRun, sideText, buildTimeline, citedEntries, firstLine, carcHelp, codeSystemHelp, DATA_NOTE, denialKind, DENIAL_KIND_HELP, PANEL_HELP, parseStep, VERDICT_HELP, INTRO_END_PAUSE_MS, INTRO_FADE_MS, INTRO_LINES, INTRO_MOVE_MS, INTRO_NOTES, INTRO_STAMP, introTypeMs, introSchedule, LABEL_HELP, LOOKUP_DWELL_MS, lookupStrip, payerRemark, playDelayMs, scoreboard, stateAt, type ResultsFile, type ViewerCase, type ViewerResult } from '../viewer/src/replay.js';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const resultsDir = join(here, '..', 'results');
@@ -222,6 +222,33 @@ describe('scoreboard', () => {
     const rows = scoreboard([agentic, spark]);
     assert.equal(rows[0]?.agentic, false);
     assert.equal(rows[1]?.agentic, true);
+  });
+});
+
+describe('the other chair in the viewer', () => {
+  test('a payer-side file is kept off the scoreboard, as the README says of Table 4', () => {
+    const payer: ResultsFile = { ...spark, run: { ...spark.run, side: 'payer' } };
+    const rows = scoreboard([...files, payer]);
+    assert.equal(rows.length, files.length);
+  });
+
+  test('labels follow the side: a verified payer determination is not a passed appeal, and the writ belongs to the physician', () => {
+    assert.equal(sideText(undefined).outcome('correct-pass'), 'passed');
+    assert.equal(sideText('payer').outcome('correct-pass'), 'determination verified');
+    assert.equal(sideText('payer').outcome('correct-decline'), 'declined to deny');
+    assert.equal(sideText('payer').outcome('false-pass'), 'determination against a supporting record');
+    assert.equal(sideText(undefined).writ, true);
+    assert.equal(sideText('payer').writ, false);
+    assert.match(sideText('payer').draftHeading, /determination/i);
+    assert.match(sideText('payer').passHead(6, 6), /6 of 6/);
+  });
+
+  test('the default run is the newest physician-side live run by start time, not by file name', () => {
+    const m = (file: string, startedAt: string, live: boolean, side?: 'payer') => ({ file, startedAt, live, agentic: live, provider: 'p', model: 'm', effort: 'low', cases: 50, ...(side ? { side } : {}) });
+    const picked = newestRun([m('z-live-old.json', '2026-10-28T06:00:00Z', true), m('a-live-new.json', '2026-10-28T07:00:00Z', true), m('b-payer-newest.json', '2026-10-30T06:00:00Z', true, 'payer'), m('c-plain-newest.json', '2026-10-30T07:00:00Z', false)]);
+    assert.equal(picked?.file, 'a-live-new.json');
+    assert.equal(newestRun([m('only.json', '2026-10-27T00:00:00Z', false)])?.file, 'only.json');
+    assert.equal(newestRun([]), undefined);
   });
 });
 
