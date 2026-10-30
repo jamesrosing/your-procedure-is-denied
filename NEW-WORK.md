@@ -135,4 +135,5 @@ Every commit made during the event, oldest first. A commit's hash is recorded by
 | 2026-10-30 | 591a839 | Zenodo DOI reserved for the deposit of the submission commit, 10.5281/zenodo.23794798: placed in the README Declarations and as a badge, in `CITATION.cff` (doi, version 1.0.0), and in `.zenodo.json` (version). The deposit itself is published at the v1.0.0 release |
 | 2026-10-30 | 1f0adaf | Abstract rewritten as a single unstructured paragraph on the author's direction (problem, question, methods, results, conclusion, no section labels), with one sentence on the payer-side run; the same paragraph is the submission description's opening and the first X post's opening |
 | 2026-10-30 | 9ac9bf4 | Abstract opens on the asymmetry in the author's words: insurers have automated claim review that renders a denial in seconds, and the claim submitter has not adopted the same automation to test whether a denial is valid and to answer it |
-| 2026-10-30 | pending | Ledger rows for 1f0adaf and 9ac9bf4 |
+| 2026-10-30 | 47df8ac | Ledger rows for 1f0adaf and 9ac9bf4 |
+| 2026-10-30 | pending | Abstract opening rewritten in the author's chosen cadence: the insurer has given the denial to a machine; the physician has been given nothing; the reply owed is a writ; a draft that asserts what the record does not hold, over a physician's name, is worse than none |
