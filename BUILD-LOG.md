@@ -378,4 +378,12 @@ README figures in dark mode: `assets/header-dark.svg`, `attrition-dark.svg`, `ti
 
 ### d62218b · 2026-10-29 22:16 · Abstract and Conclusion: the answer to a denial is a writ; the machine prepares the instrument, the physician issues it
 
+(no ledger row)
+
+### 3988217 · 2026-10-30 05:16 · Build log: regenerate after d62218b
+
+(no ledger row)
+
+### ff758ac · 2026-10-29 22:16 · Abstract trimmed toward 250 words
+
 Abstract and Conclusion in Jim's framing: the answer to a denial is a writ, a formal written instrument issued under a signature that carries authority, demanding a specific response and binding its author to every word; the machine prepares the instrument and cannot issue it; the physician's signature is what makes the draft a writ

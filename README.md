@@ -358,7 +358,7 @@ Every commit since the event began has a row in [NEW-WORK.md](NEW-WORK.md), ever
 <!-- build-log:start -->
 _Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-10-30 05:16 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
 
-79 commits since the `hackathon-start` tag, the last at 2026-10-29 22:16 (d62218b). Gate v1.4. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
+81 commits since the `hackathon-start` tag, the last at 2026-10-29 22:16 (ff758ac). Gate v1.4. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
 
 | Started (UTC) | Model | Mode | Agreed | Blocked | False pass | Advisor |
 | --- | --- | --- | :---: | :---: | :---: | --- |
@@ -374,11 +374,11 @@ _Generated from the git history, the ledger, and the result files by `npm run lo
 
 Last five commits, newest first, with the ledger row each one carried:
 
-- **d62218b · 2026-10-29 22:16** · Abstract and Conclusion: the answer to a denial is a writ; the machine prepares the instrument, the physician issues it. Abstract and Conclusion in Jim's framing: the answer to a denial is a writ, a formal written instrument issued under a signature that carries authority, demanding a specific response and binding its author to every word; the machine prepares the instrument and cannot issue it; the physician's signature is what makes the draft a writ
+- **ff758ac · 2026-10-29 22:16** · Abstract trimmed toward 250 words. Abstract and Conclusion in Jim's framing: the answer to a denial is a writ, a formal written instrument issued under a signature that carries authority, demanding a specific response and binding its author to every word; the machine prepares the instrument and cannot issue it; the physician's signature is what makes the draft a writ
+- **3988217 · 2026-10-30 05:16** · Build log: regenerate after d62218b. (no ledger row)
+- **d62218b · 2026-10-29 22:16** · Abstract and Conclusion: the answer to a denial is a writ; the machine prepares the instrument, the physician issues it. (no ledger row)
 - **bd3502b · 2026-10-30 05:02** · Build log: regenerate after 85a47ac. (no ledger row)
 - **85a47ac · 2026-10-29 22:02** · README figures follow the reader's color scheme: dark variants of the four figures behind picture elements. README figures in dark mode: `assets/header-dark.svg`, `attrition-dark.svg`, `timeline-dark.svg`, `flow-dark.svg`, each the light asset with its ink ramp remapped to the viewer's dark tokens (page to ink-0, boxes to surface, hairlines to ink-2, muted and mid strokes swapped, text to ink-6 and ink-7, navy to the heading blue); the four README images are…
-- **ff765d5 · 2026-10-30 04:45** · Build log: regenerate after b09f7a2. (no ledger row)
-- **b09f7a2 · 2026-10-29 21:44** · Figures are frames: a deep link may name a step, and the paper's Results list six frames by address. Figures are frames (`build/viewer/`): a deep link may carry `&step=<n>` or `&step=end` and the page lands on that frame of the replay (`parseStep`, clamped to the timeline, one test); the hash written back by the case picker drops the step so the next link in the same tab applies cleanly. README Results gains a Figures list, six frames by address: the…
 <!-- build-log:end -->
 
 ## From the inside
