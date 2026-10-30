@@ -17,6 +17,7 @@
 <p align="center">
   <a href="https://doi.org/10.5281/zenodo.21227402"><img alt="LITMUS paper DOI" src="https://zenodo.org/badge/DOI/10.5281/zenodo.21227402.svg"></a>
   <a href="https://doi.org/10.5281/zenodo.21227855"><img alt="LITMUS architecture DOI" src="https://zenodo.org/badge/DOI/10.5281/zenodo.21227855.svg"></a>
+  <a href="https://doi.org/10.5281/zenodo.23794798"><img alt="This repository, Zenodo deposit DOI" src="https://zenodo.org/badge/DOI/10.5281/zenodo.23794798.svg"></a>
   <img alt="Data: synthetic only" src="https://img.shields.io/badge/data-synthetic%20only-2b333d">
   <img alt="Meta Global AI Developer Hackathon, Oct 26 to Nov 4, 2026" src="https://img.shields.io/badge/Meta%20Global%20AI%20Developer%20Hackathon-Oct%2026%20to%20Nov%204%2C%202026-2b333d">
 </p>
@@ -365,7 +366,7 @@ Meta and Cerebral Valley for the event; Baseten for hosting the open-weights mod
 
 **Ethics.** All data are synthetic. No human subjects, no patient data, no institutional review. The generator emits no names, dates of birth, record numbers, member numbers, or claim numbers, and a test checks the committed files against the generator.
 
-**Data and code availability.** The set, the gate, the harness, every result file, the mutation report, the advisor output, and the viewer are in [`/build`](build/) under Apache-2.0; the written content is CC BY 4.0. A Zenodo deposit of the repository at the submission commit, citing the LITMUS papers,[^litmus] will carry a DOI.
+**Data and code availability.** The set, the gate, the harness, every result file, the mutation report, the advisor output, and the viewer are in [`/build`](build/) under Apache-2.0; the written content is CC BY 4.0. The repository at the submission commit is deposited at Zenodo, [doi:10.5281/zenodo.23794798](https://doi.org/10.5281/zenodo.23794798), citing the LITMUS papers.[^litmus]
 
 <br>
 

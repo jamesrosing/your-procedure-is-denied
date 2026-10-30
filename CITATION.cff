@@ -1,6 +1,8 @@
 cff-version: 1.2.0
 message: "If you use this work, cite it as below, and cite the LITMUS papers it implements."
 type: software
+doi: 10.5281/zenodo.23794798
+version: 1.0.0
 title: "Your procedure is denied: fail-closed verification of model-drafted claim-denial appeals against the clinical record"
 authors:
   - family-names: Rosing

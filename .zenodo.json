@@ -1,6 +1,7 @@
 {
   "title": "Your procedure is denied: fail-closed verification of model-drafted claim-denial appeals against the clinical record, a 50-case synthetic benchmark of three Meta models",
   "upload_type": "software",
+  "version": "1.0.0",
   "description": "<p>A physician's response to a payer's claim denial, drafted by a Meta model from the chart and held to the record by a deterministic gate reimplemented from the LITMUS papers. Fifty synthetic denials with a grading key, three models in three modes, nine kept runs and eight repeats, and a 9,475-fabrication spike-in that measures the gate's sensitivity. No real patient data. Built during the Meta Global AI Developer Hackathon, October 26 to November 4, 2026. The README is the manuscript; the result files, the gate, the harness, and the viewer are in /build.</p>",
   "creators": [
     { "name": "Rosing, James H.", "affiliation": "Newport Beach, California" }
