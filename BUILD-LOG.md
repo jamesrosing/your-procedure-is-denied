@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-10-30 05:35 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-10-30 06:01 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -411,3 +411,11 @@ README reviewed as a paper against the result files, every number in the prose c
 ### 1a87acf · 2026-10-29 22:35 · Video shot list and captions: nine shots mapped to the paper's sections, deep links with step addresses, spoken words sized to 140 words a minute, SRT cues
 
 The video as a video abstract (`assets/video/`): `SHOT-LIST.md` maps nine shots to the paper's sections (Introduction from the recorded opening, Methods and Results from the replay by deep link with `step=` addresses, Results from the scoreboard and Table 3, Discussion and Conclusion from the tests and the ledger), with the spoken words per shot sized to 140 words a minute against each slot and the source of every spoken number; `narration.srt` carries the same words as 37 caption cues on the shot times
+
+### eb2d3f4 · 2026-10-30 05:35 · Build log: regenerate after 1a87acf
+
+(no ledger row)
+
+### ee60723 · 2026-10-29 23:00 · The gate in the browser: test the gate on any sentence once the verdict is on screen, re-checked by the same gate module bundled into the viewer; pure SHA-256 replaces node:crypto, checkSentence exported, sources and citation modules shared; README Methods 2.4 and Figure 7; shot 7a; 157 tests; asset links v26
+
+The gate in the browser (`build/viewer/src/gatecheck.ts`, `build/viewer/src/main.ts`): once a replay has reached its verdict, a "test the gate" control under every sentence lets a reader edit the sentence, its quote, or its citation, and the same gate the harness ran re-checks it in the page, stamping the result live with its reason; nothing is saved and the stored verdict is unchanged. To bundle the gate for a browser, `build/src/litmus.ts` now imports a plain TypeScript SHA-256 (`build/src/hash.ts`) instead of node:crypto, with a test that it reproduces every inputHash stored in the result files; the per-sentence check is exported as `checkSentence`, which `litmus()` applies to each sentence; the admissible sources move to `build/src/sources.ts`, shared by the harness, the scripts, and the viewer; the citation pattern moves to `build/src/citation.ts` so the bundle carries no schema library (app.js 60 KB). README: the in-browser gate cited in Methods 2.4 and as Figure 7; test count 157. Shot list and SRT revised: shot 7a tests the gate by hand on case-001, shot 7b is Table 3, slots rebalanced. 13 new tests, 157 total; asset links v26
