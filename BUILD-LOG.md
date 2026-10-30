@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-10-30 06:06 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-10-30 06:11 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -427,3 +427,11 @@ The gate in the browser (`build/viewer/src/gatecheck.ts`, `build/viewer/src/main
 ### 6afa77b · 2026-10-29 23:06 · The instrument: a passing draft rendered as the document the physician would sign, footnoted to the record, gate hash, blank signature line under a draft-unsigned-not-sent band; print and save; README 2.2 and Figure 8; shot 3; 164 tests; asset links v27
 
 The instrument (`build/viewer/src/writ.ts`): a passing draft rendered as the document the physician would sign, opened from the PASS line or the w key: the payer's reason quoted at the head, each sentence footnoted to the entry, date, kind, and verbatim quote the gate verified it against, the gate version and input hash at the foot, and a blank signature line under a band reading draft, unsigned, not sent; print shows only the sheet, save writes the plain-text rendering; it closes when the frame leaves PASS or the case changes; the false pass renders too, since PASS is the gate's word and the physician decides. README 2.2 and Figure 8; shot 3 ends on the instrument; 7 tests (one footnote per sentence over every passing result in three files, null for declined, blocked, and failed, fixed copy with no exclamation marks and no em dashes); 164 tests; asset links v27
+
+### 8bbac45 · 2026-10-30 06:06 · Build log: regenerate after 6afa77b
+
+(no ledger row)
+
+### 4480204 · 2026-10-29 23:11 · Harness: --side payer, the same gate pointed at the plan's determination; payer instructions, inverted key, side on results, results/payer default; 169 tests
+
+The other chair (`build/src/harness.ts --side payer`): the same contract, the same gate, and the same chart asked for the plan's written claim determination instead of the physician's appeal, so the gate's claim to take no side can be measured. `INSTRUCTIONS_PAYER` (and its agentic variant) reuses the physician block's CARC reference; warranted means the denial stands; `expectedFor` inverts the appeal key; results carry `side`, the file name carries `-payer`, and the default output directory is `results/payer/`, which the viewer and the build log never read. No run committed yet; a six-case probe was read first. 5 tests, 169 total
