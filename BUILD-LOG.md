@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-10-30 20:15 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-10-30 21:20 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -50,7 +50,7 @@ Each commit that changed the version string in `build/src/litmus.ts`. The gate i
 
 ## Commits since `hackathon-start`
 
-Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 37 commits by github-actions[bot] are this log regenerating itself after a push; they touch only the generated files and carry no ledger row.
+Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 38 commits by github-actions[bot] are this log regenerating itself after a push; they touch only the generated files and carry no ledger row.
 
 ### 79e5e21 · 2026-10-26 20:38 · Add hackathon scaffolding: NEW-WORK.md and /build
 
@@ -556,3 +556,11 @@ Key: case-023 relabeled from absent to near-miss. Its screening note says "three
 ### 89241db · 2026-10-30 13:14 · Abstract re-led with the other chair and the dollars; shot 6b in the cut at 2:10 in place of the Table 3 frame; captions regenerated
 
 Abstract re-led on the author's instruction, opening cadence unchanged: the question adds the other chair (whether the same check, pointed the other way, holds the insurer's determination to the same record); the results lead with the dollars (muse-spark-1.3 defended the full $568,500 billed across the thirty warranted cases in each of its three runs, at $0.63 to $0.96 for a run of fifty) and close on case-036 (one chart, two verified conclusions, no side taken); 442 words. Video: shot 6b, the other chair, is in the cut at 2:10 to 2:20 (case-036 at the verdict on both sides, two still frames, 21 words), in place of the Table 3 frame (7b); 7a moves to 2:20 to 2:33; `narration.srt` regenerated (36 cues); totals 352 and 371 words
+
+### 693c4f7 · 2026-10-30 13:15 · Build log: regenerate after 89241db
+
+(generated files only; no ledger row by design)
+
+### a2fb3d9 · 2026-10-30 14:20 · litmus-gate: license Apache-2.0, matching the repository
+
+`build/litmus-gate/package.json`: license Apache-2.0, matching the repository's LICENSE (it had said MIT). Found while checking what an npm publish would carry: the tarball is `dist/cli.js` (the gate module, its sources builder, citation pattern, schema, and hash, all already public in this repository), the package README, and `package.json`; no provider code, no CHART client, no base URL, no key
