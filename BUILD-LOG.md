@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-10-30 18:50 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-10-30 19:38 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -50,7 +50,7 @@ Each commit that changed the version string in `build/src/litmus.ts`. The gate i
 
 ## Commits since `hackathon-start`
 
-Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 33 commits by github-actions[bot] are this log regenerating itself after a push; they touch only the generated files and carry no ledger row.
+Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 34 commits by github-actions[bot] are this log regenerating itself after a push; they touch only the generated files and carry no ledger row.
 
 ### 79e5e21 · 2026-10-26 20:38 · Add hackathon scaffolding: NEW-WORK.md and /build
 
@@ -512,3 +512,11 @@ Viewer scoreboard (`build/viewer/src/replay.ts`, `main.ts`): a missed column, "D
 ### 3496d82 · 2026-10-30 11:49 · Build log: pending row skips the bot, one time zone, missed and fabricated-quote columns computed; README fabrication claim narrowed to sentences; Figure 3 moved to case-038
 
 Build log (`build/scripts/build-log.ts`): the ledger's pending row now goes to the newest authored commit without a row, skipping the bot's regenerate commit at HEAD, which had taken the "Video close" row and left 3e54c98 with none; every commit date rendered in one zone (Pacific) instead of each committer's own; a Missed column in Tables 1 and 2 and both run tables, and a Fabricated quotes column in Table 1 computed from the result files over sentences and evidence items (Table 2's had been a literal 0; Table 4 uses the same count). README: the claim that no kept or repeat run contained a fabricated quote held for sentences and not for evidence items, where two refuted quotes sit on declined drafts (Spark Open chart in prompt case-040; muse-spark-1.3 agentic case-023); Abstract, 2.7, Results, 4.1, and 4.3 now say "in a sentence" and the Fabrication paragraph reports the two. Figure 3 moved from case-027 (an empty warranted answer, no sentence to name) to case-038 on the Spark Open live run, the three-antianginal count returned needs-citation. Docs: NEW-WORK.md and build/README.md said the log never reads `repeats/` or `payer/` (it reads both), that every commit has a ledger row (the bot's do not), and that the policy memo is keyed by authority, code, and date (authority alone). Six tests; 177 tests
+
+### 8e7d8b5 · 2026-10-30 11:50 · Build log: regenerate after 3496d82
+
+(generated files only; no ledger row by design)
+
+### c88886c · 2026-10-30 12:38 · The gate as a tool: litmus-gate CLI and MCP server over the same litmus() the harness and the viewer call
+
+The gate as a tool (`build/litmus-gate/`): `litmus-gate check <draft.json> <case.json>` on the command line (exit 0 pass, 1 blocked, 2 declined, `--json` for the stored-record shape) and `litmus-gate mcp`, an MCP server over stdio on the TypeScript SDK v2 with three read-only tools, `litmus_verify_draft`, `litmus_check_sentence`, `litmus_contract`, and the contract as a resource; both wrap `build/src/litmus.ts` unchanged. Sources are accepted as a case file or as the explicit admissible set; drafts go through the harness's own `parseAppeal`, so a draft that fails here fails there. Nine tests (library, in-process MCP client, spawned CLI; one re-gates a kept run and matches every verdict and hash) and a stdio smoke script against the esbuild bundle; `@modelcontextprotocol/server` added, client as a dev dependency. README 2.8 and `build/README.md` point at it. 186 tests
