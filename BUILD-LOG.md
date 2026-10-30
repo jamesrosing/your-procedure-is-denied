@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-10-30 19:45 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-10-30 19:46 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -526,5 +526,9 @@ The gate as a tool (`build/litmus-gate/`): `litmus-gate check <draft.json> <case
 (generated files only; no ledger row by design)
 
 ### 2fda55f · 2026-10-30 12:44 · Viewer: the payer-side runs in the picker with their own words and no writ; a deep link keeps its step; case changes rewrite the address in place; an unknown case falls back; the default run is the newest by start time
+
+(no ledger row)
+
+### d82c391 · 2026-10-30 12:45 · README: care defended in Table 1 and the blocked split; Figure 9, the other chair; two Limitations; an optional payer-side shot
 
 README and build log: Table 1 gains a Care defended column (the billed value of warranted cases whose appeal passed, out of the $568,500 billed across the thirty warranted cases, $940,000 across all fifty, the synthetic set's values) and a generated line after it splitting the eight blocked drafts into six on warranted cases (a true derivation not sourced) and two on unsupported cases (a baseless warranted answer stopped), with the runs that defended the full amount and what a run cost (`build/scripts/build-log.ts`). Figure 9, the other chair: case-036 passing on both sides of one chart, with both deep links. Two Limitations bullets: a sentence is not checked against its own quote (the collision class measures it; about a fifth of those sentences contradict their own quote and pass), and case-023's absent label is arguable against its near-miss sibling case-034, left as published with the note since the set is frozen at the archived version. Shot list: an optional ten-second shot 6b, the other chair, in place of 7b, with both links and 27 words

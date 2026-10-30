@@ -214,7 +214,7 @@ The gate also ships on its own, as a command-line tool and an MCP server ([`buil
 ## 3. Results
 
 <!-- results:start -->
-_Tables generated from the result files by `npm run log`; the prose below them is written by hand. Last regenerated 2026-10-30 19:45 UTC._
+_Tables generated from the result files by `npm run log`; the prose below them is written by hand. Last regenerated 2026-10-30 19:46 UTC._
 
 **Table 1. Kept runs.** 9 runs, 50 cases each, effort low. Agreed is correct-pass plus correct-decline against the grading key, with a 95% Wilson interval. Blocked is a draft the gate stopped. Missed is a decline on a case the key labels warranted. False pass is a draft the gate passed on a case the key labels unsupported. The five outcome columns sum to 50. Fabricated quotes counts quotes the gate refuted as not in the entry cited, in a sentence or in an evidence item, on any draft including declined ones. Care defended is the billed value of the warranted cases whose appeal passed the gate, out of the $568,500 billed across the thirty warranted cases ($940,000 across all fifty); the values are the synthetic set's, not a payer's. Entries read applies to the agentic modes.
 
@@ -374,9 +374,9 @@ Meta and Cerebral Valley for the event; Baseten for hosting the open-weights mod
 Every commit since the event began has a row in [NEW-WORK.md](NEW-WORK.md), every result file carries its model, mode, gate version, and any re-gate in its own header, and this section is regenerated from those sources after every push. Nothing in it is typed by hand.
 
 <!-- build-log:start -->
-_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-10-30 19:45 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
+_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-10-30 19:46 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
 
-116 commits since the `hackathon-start` tag, the last at 2026-10-30 12:44 (2fda55f). Gate v1.4. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
+117 commits since the `hackathon-start` tag, the last at 2026-10-30 12:45 (d82c391). Gate v1.4. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
 
 | Started (UTC) | Model | Mode | Agreed | Blocked | Missed | False pass | Advisor |
 | --- | --- | --- | :---: | :---: | :---: | :---: | --- |
@@ -392,11 +392,11 @@ _Generated from the git history, the ledger, and the result files by `npm run lo
 
 Last five authored commits, newest first, with the ledger row each one carried (the bot's regenerate commits are left out):
 
-- **2fda55f · 2026-10-30 12:44** · Viewer: the payer-side runs in the picker with their own words and no writ; a deep link keeps its step; case changes rewrite the address in place; an unknown case falls back; the default run is the newest by start time. README and build log: Table 1 gains a Care defended column (the billed value of warranted cases whose appeal passed, out of the $568,500 billed across the thirty warranted cases, $940,000 across all fifty, the synthetic set's values) and a generated line after it splitting the eight blocked drafts into six on warranted cases (a true derivation not…
+- **d82c391 · 2026-10-30 12:45** · README: care defended in Table 1 and the blocked split; Figure 9, the other chair; two Limitations; an optional payer-side shot. README and build log: Table 1 gains a Care defended column (the billed value of warranted cases whose appeal passed, out of the $568,500 billed across the thirty warranted cases, $940,000 across all fifty, the synthetic set's values) and a generated line after it splitting the eight blocked drafts into six on warranted cases (a true derivation not…
+- **2fda55f · 2026-10-30 12:44** · Viewer: the payer-side runs in the picker with their own words and no writ; a deep link keeps its step; case changes rewrite the address in place; an unknown case falls back; the default run is the newest by start time. (no ledger row)
 - **c88886c · 2026-10-30 12:38** · The gate as a tool: litmus-gate CLI and MCP server over the same litmus() the harness and the viewer call. The gate as a tool (`build/litmus-gate/`): `litmus-gate check <draft.json> <case.json>` on the command line (exit 0 pass, 1 blocked, 2 declined, `--json` for the stored-record shape) and `litmus-gate mcp`, an MCP server over stdio on the TypeScript SDK v2 with three read-only tools, `litmus_verify_draft`, `litmus_check_sentence`, `litmus_contract`, and…
 - **3496d82 · 2026-10-30 11:49** · Build log: pending row skips the bot, one time zone, missed and fabricated-quote columns computed; README fabrication claim narrowed to sentences; Figure 3 moved to case-038. Build log (`build/scripts/build-log.ts`): the ledger's pending row now goes to the newest authored commit without a row, skipping the bot's regenerate commit at HEAD, which had taken the "Video close" row and left 3e54c98 with none; every commit date rendered in one zone (Pacific) instead of each committer's own; a Missed column in Tables 1 and 2 and…
 - **fdbe3f7 · 2026-10-30 11:49** · Viewer scoreboard: a missed column, so every row's outcomes sum to its fifty cases. Viewer scoreboard (`build/viewer/src/replay.ts`, `main.ts`): a missed column, "Declined, key says yes", shown when any run has one, so every row's outcomes sum to its 50 cases; muse-wonder-1.0 with the chart in the prompt had read 49 / 0 / 0 / 0 with case-047 nowhere. Test: the five outcome counts of every scoreboard row sum to its cases. Asset links v29
-- **279cfbc · 2026-10-30 11:25** · Viewer: Space stays with a focused button, modifier chords are the browser's, the writ opens only at PASS, print with the writ closed prints the page, citations escaped in selectors. Viewer (`build/viewer/`): a focused button keeps Space for itself, so pressing it on the gate-check "check" button no longer restarts the replay and discards the edit; Ctrl, Alt, and Meta chords are left to the browser; the w key opens the writ only once the replay has shown PASS, not from a stored verdict at step 0; print with the writ closed prints the…
 <!-- build-log:end -->
 
 ## From the inside
