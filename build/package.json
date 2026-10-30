@@ -17,13 +17,18 @@
     "advise": "node --env-file=../.env --import tsx scripts/advise.ts",
     "regate": "node --import tsx scripts/regate.ts",
     "log": "node --import tsx scripts/build-log.ts",
-    "mutate": "node --import tsx scripts/mutate.ts"
+    "mutate": "node --import tsx scripts/mutate.ts",
+    "gate": "node --import tsx litmus-gate/src/cli.ts",
+    "gate:build": "esbuild litmus-gate/src/cli.ts --bundle --platform=node --format=esm --target=node20 --packages=external --outfile=litmus-gate/dist/cli.js",
+    "gate:smoke": "npm run gate:build && node --import tsx litmus-gate/scripts/smoke.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^1.3.0",
+    "@modelcontextprotocol/server": "^2.4.0",
     "zod": "^4.6.7"
   },
   "devDependencies": {
+    "@modelcontextprotocol/client": "^2.4.0",
     "@types/node": "^26.6.5",
     "esbuild": "^0.25.4",
     "tsx": "^4.23.15",

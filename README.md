@@ -205,7 +205,9 @@ A post hoc run put the gate on the other side of the exchange (`npm run harness 
 
 ### 2.8 Reproducibility
 
-`npm test` runs the suite (164 tests). `npm run synthetic` regenerates the fifty cases byte for byte. `npm run harness` runs a model over the set and writes a result file whose header records the model, mode, gate version, and any later re-gate. `npm run mutate` reruns the spike-in. `npm run log` regenerates the build log and the tables in section 3 from the result files; nothing in those tables is typed by hand.
+`npm test` runs the suite (186 tests). `npm run synthetic` regenerates the fifty cases byte for byte. `npm run harness` runs a model over the set and writes a result file whose header records the model, mode, gate version, and any later re-gate. `npm run mutate` reruns the spike-in. `npm run log` regenerates the build log and the tables in section 3 from the result files; nothing in those tables is typed by hand.
+
+The gate also ships on its own, as a command-line tool and an MCP server ([`build/litmus-gate/`](build/litmus-gate/)): `npm run gate -- check draft.json case.json` returns the verdict with exit code 0, 1, or 2 for pass, blocked, or declined, and `litmus-gate mcp` serves `litmus_verify_draft`, `litmus_check_sentence`, and `litmus_contract` over stdio to any agent host, so a drafting agent can be held to the record before its draft is shown to anyone. Both wrap the module the harness and the viewer call, and a test checks that they reproduce every stored verdict and hash of a kept run.
 
 <br>
 

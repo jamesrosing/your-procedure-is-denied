@@ -1,0 +1,20 @@
+{
+  "name": "litmus-gate",
+  "version": "0.1.0",
+  "description": "The LITMUS referential gate as a CLI and an MCP server: verifies that every sentence of a drafted appeal quotes the chart entry it cites and that every number, date, code, and side has an admissible source. Deterministic, no model inside, fails closed.",
+  "license": "MIT",
+  "type": "module",
+  "bin": { "litmus-gate": "dist/cli.js" },
+  "files": ["dist", "README.md"],
+  "scripts": {
+    "build": "cd .. && npm run gate:build",
+    "prepack": "npm run build"
+  },
+  "engines": { "node": ">=20.3" },
+  "dependencies": {
+    "@modelcontextprotocol/server": "^2.4.0",
+    "zod": "^4.6.7"
+  },
+  "keywords": ["mcp", "verification", "appeal", "clinical", "fail-closed", "litmus"],
+  "repository": { "type": "git", "url": "https://github.com/jamesrosing/your-procedure-is-denied", "directory": "build/litmus-gate" }
+}

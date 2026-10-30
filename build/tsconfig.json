@@ -10,7 +10,16 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "noEmit": true,
-    "types": ["node"]
+    "types": [
+      "node"
+    ]
   },
-  "include": ["src/**/*.ts", "tests/**/*.ts", "scripts/**/*.ts", "viewer/src/replay.ts"]
+  "include": [
+    "src/**/*.ts",
+    "tests/**/*.ts",
+    "scripts/**/*.ts",
+    "viewer/src/replay.ts",
+    "litmus-gate/src/**/*.ts",
+    "litmus-gate/scripts/**/*.ts"
+  ]
 }
