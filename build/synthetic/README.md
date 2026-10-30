@@ -43,7 +43,7 @@ CARC codes used: 4, 11, 29, 50, 56, 96, 119, 151, 167, 197. Payers alternate bet
 | `payer` | fictional payer name and plan type |
 | `denial` | CARC code and its standard text, optional RARC, the denial as the payer worded it, the date of service, and for continued stays the last denied day |
 | `criteria` | the payer's coverage criteria as numbered items `crit-1`, `crit-2`, ... |
-| `chart` | 15 to 40 dated entries `note-001`, `note-002`, ... in dictation voice, each with a kind and free text |
+| `chart` | 19 to 35 dated entries `note-001`, `note-002`, ... in dictation voice, each with a kind and free text; about two thirds are routine traffic unrelated to the denial |
 | `expected` | the grading key: `warranted`, an optional `subtype` when not warranted, the criteria the chart meets, which notes support each criterion, which notes are unrelated, and a one-line rationale |
 
 Charts are written the way clinicians dictate, not the way a payer checklist reads. The therapy note says "ambulation 40 feet to 110 feet with the rolling walker and contact guard"; the criterion says "documented, measurable functional progress toward the goals in the plan of care." Translating one into the other is the proposer's job, and quoting the chart's own words is how the gate checks it. Roughly half the entries in every chart are routine traffic (a fall-risk assessment, a cholesterol call, a dietitian consult) so a citation has to land on the right entry.
