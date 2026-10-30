@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-10-30 05:16 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-10-30 05:17 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -385,5 +385,13 @@ README figures in dark mode: `assets/header-dark.svg`, `attrition-dark.svg`, `ti
 (no ledger row)
 
 ### ff758ac · 2026-10-29 22:16 · Abstract trimmed toward 250 words
+
+(no ledger row)
+
+### 05994f4 · 2026-10-30 05:16 · Build log: regenerate after ff758ac
+
+(no ledger row)
+
+### e71f8cd · 2026-10-29 22:16 · Abstract: methods and results tightened
 
 Abstract and Conclusion in Jim's framing: the answer to a denial is a writ, a formal written instrument issued under a signature that carries authority, demanding a specific response and binding its author to every word; the machine prepares the instrument and cannot issue it; the physician's signature is what makes the draft a writ

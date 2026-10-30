@@ -215,7 +215,7 @@ The gate's sensitivity cannot be read off runs in which no model fabricated anyt
 ## 3. Results
 
 <!-- results:start -->
-_Tables generated from the result files by `npm run log`; the prose below them is written by hand. Last regenerated 2026-10-30 05:16 UTC._
+_Tables generated from the result files by `npm run log`; the prose below them is written by hand. Last regenerated 2026-10-30 05:17 UTC._
 
 **Table 1. Kept runs.** 9 runs, 50 cases each, effort low. Agreed is correct-pass plus correct-decline against the grading key, with a 95% Wilson interval. Blocked is a draft the gate stopped. False pass is a draft the gate passed on a case the key labels unsupported. Entries read applies to the agentic modes.
 
@@ -356,9 +356,9 @@ Meta and Cerebral Valley for the event; Baseten for hosting the open-weights mod
 Every commit since the event began has a row in [NEW-WORK.md](NEW-WORK.md), every result file carries its model, mode, gate version, and any re-gate in its own header, and this section is regenerated from those sources after every push. Nothing in it is typed by hand.
 
 <!-- build-log:start -->
-_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-10-30 05:16 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
+_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-10-30 05:17 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
 
-81 commits since the `hackathon-start` tag, the last at 2026-10-29 22:16 (ff758ac). Gate v1.4. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
+83 commits since the `hackathon-start` tag, the last at 2026-10-29 22:16 (e71f8cd). Gate v1.4. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
 
 | Started (UTC) | Model | Mode | Agreed | Blocked | False pass | Advisor |
 | --- | --- | --- | :---: | :---: | :---: | --- |
@@ -374,11 +374,11 @@ _Generated from the git history, the ledger, and the result files by `npm run lo
 
 Last five commits, newest first, with the ledger row each one carried:
 
-- **ff758ac · 2026-10-29 22:16** · Abstract trimmed toward 250 words. Abstract and Conclusion in Jim's framing: the answer to a denial is a writ, a formal written instrument issued under a signature that carries authority, demanding a specific response and binding its author to every word; the machine prepares the instrument and cannot issue it; the physician's signature is what makes the draft a writ
+- **e71f8cd · 2026-10-29 22:16** · Abstract: methods and results tightened. Abstract and Conclusion in Jim's framing: the answer to a denial is a writ, a formal written instrument issued under a signature that carries authority, demanding a specific response and binding its author to every word; the machine prepares the instrument and cannot issue it; the physician's signature is what makes the draft a writ
+- **05994f4 · 2026-10-30 05:16** · Build log: regenerate after ff758ac. (no ledger row)
+- **ff758ac · 2026-10-29 22:16** · Abstract trimmed toward 250 words. (no ledger row)
 - **3988217 · 2026-10-30 05:16** · Build log: regenerate after d62218b. (no ledger row)
 - **d62218b · 2026-10-29 22:16** · Abstract and Conclusion: the answer to a denial is a writ; the machine prepares the instrument, the physician issues it. (no ledger row)
-- **bd3502b · 2026-10-30 05:02** · Build log: regenerate after 85a47ac. (no ledger row)
-- **85a47ac · 2026-10-29 22:02** · README figures follow the reader's color scheme: dark variants of the four figures behind picture elements. README figures in dark mode: `assets/header-dark.svg`, `attrition-dark.svg`, `timeline-dark.svg`, `flow-dark.svg`, each the light asset with its ink ramp remapped to the viewer's dark tokens (page to ink-0, boxes to surface, hairlines to ink-2, muted and mid strokes swapped, text to ink-6 and ink-7, navy to the heading blue); the four README images are…
 <!-- build-log:end -->
 
 ## From the inside
