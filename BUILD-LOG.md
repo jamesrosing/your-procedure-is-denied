@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-10-30 06:11 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-10-30 06:20 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -435,3 +435,12 @@ The instrument (`build/viewer/src/writ.ts`): a passing draft rendered as the doc
 ### 4480204 · 2026-10-29 23:11 · Harness: --side payer, the same gate pointed at the plan's determination; payer instructions, inverted key, side on results, results/payer default; 169 tests
 
 The other chair (`build/src/harness.ts --side payer`): the same contract, the same gate, and the same chart asked for the plan's written claim determination instead of the physician's appeal, so the gate's claim to take no side can be measured. `INSTRUCTIONS_PAYER` (and its agentic variant) reuses the physician block's CARC reference; warranted means the denial stands; `expectedFor` inverts the appeal key; results carry `side`, the file name carries `-payer`, and the default output directory is `results/payer/`, which the viewer and the build log never read. No run committed yet; a six-case probe was read first. 5 tests, 169 total
+
+### d49cad8 · 2026-10-30 06:11 · Build log: regenerate after 4480204
+
+(no ledger row)
+
+### 9367f42 · 2026-10-29 23:19 · The other chair, kept: payer-side runs on three models (wonder 50 of 50, spark 1.3 49 of 50, Spark Open 48 of 50 with the one fabricated quote of any full run refuted); Table 4 generated post hoc from results/payer; README 2.1, 2.7, Results, 4.3
+
+Results added: `payer/baseten-meta-models_muse-spark-open-1026-low-payer-2026-10-30T06-14-52-839Z.json`, `payer/meta-muse-spark-1.3-low-payer-2026-10-30T06-12-28-712Z.json`, `payer/meta-muse-wonder-1.0-low-payer-2026-10-30T06-13-48-967Z.json`.
+Payer-side runs kept (`build/results/payer/`, three files, chart in prompt, effort low, gate v1.4): muse-wonder-1.0 50 of 50 (declined to deny all 30 supporting records, verified determinations for all 20 failing ones); muse-spark-1.3 49 of 50 (one determination against a supporting record, case-036, six verified sentences reading visit 6 of 6 as not six consecutive months); Muse Spark Open 48 of 50 (two blocks on exclusion cases, one of them the only fabricated quote in any full run, plan-document language the model was never given, refuted by the gate). Every disagreement read before the commit; a six-case probe (not kept) had muse-spark-1.3 set the denial flag on case-001 and write six sentences that support the care, which the gate passed. `build/scripts/build-log.ts` generates Table 4 from `results/payer/` between the results markers, labeled post hoc; README 2.1, 2.7, Results, and 4.3 carry the method, the numbers, and the reading

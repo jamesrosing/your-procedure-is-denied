@@ -57,7 +57,7 @@ function ledgerRows(): Map<string, { date: string; text: string }> {
 interface RunFile {
   file: string;
   run: { startedAt: string; provider: string; model: string; effort: string; cases: number; agentic?: boolean; tools?: string[]; litmus?: string; regated?: { from: string; to: string; at: string; changedVerdicts: number }[]; concurrency?: number };
-  summary: { outcomes: Record<string, number>; sentencesVerified: number; ungroundedSentencesCaught?: number; citationPrecision?: number; reading?: { entriesReadPerCase: number; chartSizePerCase: number; supportCoverage: number; turnsPerCase: number }; costUsd: { perCase: number }; latencyMs: { p50: number }; advice?: { model: string; cases: number; criteria: number; supports: number; partial: number; silent: number; falsePassesFlagged: number; falsePasses: number } };
+  summary: { outcomes: Record<string, number>; bySubtype?: Record<string, Record<string, number>>; sentencesVerified: number; ungroundedSentencesCaught?: number; citationPrecision?: number; reading?: { entriesReadPerCase: number; chartSizePerCase: number; supportCoverage: number; turnsPerCase: number }; costUsd: { perCase: number }; latencyMs: { p50: number }; advice?: { model: string; cases: number; criteria: number; supports: number; partial: number; silent: number; falsePassesFlagged: number; falsePasses: number } };
 }
 
 function runs(sub = ''): RunFile[] {
@@ -221,6 +221,28 @@ function main(): void {
       }
       b.push('');
     } catch { /* no mutation report yet */ }
+
+    // Table 4, post hoc: the same gate pointed at the plan's determination.
+    // Files under results/payer/ are written by `harness --side payer`; the
+    // key is inverted there (warranted means the denial stands), so
+    // correct-decline is a supporting record the model declined to deny and
+    // correct-pass a failing record with a verified determination.
+    let payer: RunFile[] = [];
+    try { payer = runs('payer'); } catch { /* no payer-side runs */ }
+    if (payer.length) {
+      const fabricated = (r: RunFile): number => ((r as unknown as { results: { gate?: { sentences: { status: string; reason: string }[] } }[] }).results ?? []).reduce((n, c) => n + (c.gate?.sentences ?? []).filter(st => st.status === 'refuted' && st.reason.startsWith('quote-')).length, 0);
+      const supporting = (r: RunFile): number => Object.values(r.summary.bySubtype?.['warranted'] ?? {}).reduce((a, b) => a + b, 0);
+      const failing = (r: RunFile): number => r.run.cases - supporting(r);
+      b.push(`**Table 4. The other chair (post hoc).** The same models asked for the plan's written claim determination over the same ${payer[0]!.run.cases} charts, under the same contract and gate (\`build/results/payer/\`, ${payer.length} files, chart in prompt, effort low). The key is inverted: a denial is warranted exactly where the record fails a criterion. These runs are kept apart from Tables 1 and 2 and from the viewer's scoreboard.`);
+      b.push('');
+      b.push('| Model | Declined to deny a record that supports the service | Verified determination where the record fails a criterion | Determination written against a supporting record | Blocked | Failed | Fabricated quotes | Sentences verified | Median latency | Cost per case |');
+      b.push('| --- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |');
+      for (const r of payer) {
+        const o = r.summary.outcomes;
+        b.push(`| ${modelName(r)} (${host(r)}) | ${o['correct-decline'] ?? 0} of ${supporting(r)} | ${o['correct-pass'] ?? 0} of ${failing(r)} | ${o['false-pass'] ?? 0} | ${o['blocked'] ?? 0} | ${o['error'] ?? 0} | ${fabricated(r)} | ${r.summary.sentencesVerified} | ${(r.summary.latencyMs.p50 / 1000).toFixed(1)} s | $${r.summary.costUsd.perCase.toFixed(3)} |`);
+      }
+      b.push('');
+    }
     b.push(re);
     const next0 = readme0.slice(0, readme0.indexOf(rs)) + b.join('\n') + readme0.slice(readme0.indexOf(re) + re.length);
     if (next0 !== readme0) writeFileSync(readmePath0, next0);

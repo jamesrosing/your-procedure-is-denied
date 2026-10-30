@@ -168,7 +168,7 @@ The line between what was fixed before the reported runs and what changed after 
 | --- | --- |
 | The fifty cases and their grading keys. Four keys were corrected during development runs between 00:40 and 01:17 PT, each defect found by a model reading the chart (section 4.4); no case file changed after the kept runs began. | The agentic mode and its two chart tools (October 27, 20:22 PT) and the live policy query (October 27, 23:44 PT). |
 | The gate (v1) and the appeal contract: one citation per sentence, a verbatim quote, every hard token sourced. Fact sourcing was widened from the quoted span to the whole cited entry after a development run (00:50 PT). | Gate v1.1 to v1.4: compound number words read as one number, hundreds included, a needs-citation label naming the entry that holds a missing token, and a side treated as a hard token wherever it names one. Every kept run was re-gated under each version with the change recorded in the file; re-gating to v1.3 changed seven sentence labels and no verdict, to v1.4 none. |
-| The primary measure, agreement with the key, and the outcome categories. | The advisor (October 28), the mutation harness (October 28), the repeat runs (October 28 to 29), the viewer, and this document. |
+| The primary measure, agreement with the key, and the outcome categories. | The advisor (October 28), the mutation harness (October 28), the repeat runs (October 28 to 29), the payer-side runs (October 29, section 2.7), the viewer, and this document. |
 | Three models, effort low, eight cases in flight. | |
 
 ### 2.2 The system under test
@@ -208,6 +208,8 @@ The primary measure is agreement with the grading key: a case counts as agreed w
 
 The gate's sensitivity cannot be read off runs in which no model fabricated anything, so it was measured by spike-in: each sentence the kept runs verified was corrupted one way at a time and re-gated ([`build/scripts/mutate.ts`](build/scripts/mutate.ts)). Corruptions were classed as hard (a number replaced by a value absent from every admissible source, the citation moved to an entry lacking the quote, a word dropped from the quote, a date shifted, a side swapped), collision (a wrong number or side that happens to appear in an admissible source), and soft (a negation flipped, a pronoun swapped). Sensitivity is the share caught; where none was missed, the 95 percent upper bound on the miss rate is given by the rule of three. Agreement counts carry 95 percent Wilson intervals. Run-to-run variance was measured by repeating each live-query configuration with the same cases and settings. Fifty cases is a small set: one case is two percentage points.
 
+A post hoc run put the gate on the other side of the exchange (`npm run harness -- --side payer`, added October 29 after the kept runs). The same three models, over the same fifty charts and criteria, were asked for the plan's written claim determination instead of the physician's appeal, under the same contract and the same gate, with the key inverted: a denial is warranted exactly where the record fails a criterion ([`build/src/harness.ts`](build/src/harness.ts), `INSTRUCTIONS_PAYER`). The outcomes mirror the primary ones: declined to deny where the record supports the service, a verified determination where it does not, a determination written against a record that supports the service (the symmetric false pass), blocked, and failed. These runs are kept apart in `build/results/payer/` and do not enter Tables 1 and 2 or the viewer's scoreboard.
+
 ### 2.8 Reproducibility
 
 `npm test` runs the suite (164 tests). `npm run synthetic` regenerates the fifty cases byte for byte. `npm run harness` runs a model over the set and writes a result file whose header records the model, mode, gate version, and any later re-gate. `npm run mutate` reruns the spike-in. `npm run log` regenerates the build log and the tables in section 3 from the result files; nothing in those tables is typed by hand.
@@ -217,7 +219,7 @@ The gate's sensitivity cannot be read off runs in which no model fabricated anyt
 ## 3. Results
 
 <!-- results:start -->
-_Tables generated from the result files by `npm run log`; the prose below them is written by hand. Last regenerated 2026-10-30 06:11 UTC._
+_Tables generated from the result files by `npm run log`; the prose below them is written by hand. Last regenerated 2026-10-30 06:20 UTC._
 
 **Table 1. Kept runs.** 9 runs, 50 cases each, effort low. Agreed is correct-pass plus correct-decline against the grading key, with a 95% Wilson interval. Blocked is a draft the gate stopped. False pass is a draft the gate passed on a case the key labels unsupported. Entries read applies to the agentic modes.
 
@@ -258,6 +260,14 @@ _Tables generated from the result files by `npm run log`; the prose below them i
 | soft | pronoun swapped | 522 | 0 | 0% |  |
 | **soft, all** | | **2,386** | **0** | **0%** |  |
 
+**Table 4. The other chair (post hoc).** The same models asked for the plan's written claim determination over the same 50 charts, under the same contract and gate (`build/results/payer/`, 3 files, chart in prompt, effort low). The key is inverted: a denial is warranted exactly where the record fails a criterion. These runs are kept apart from Tables 1 and 2 and from the viewer's scoreboard.
+
+| Model | Declined to deny a record that supports the service | Verified determination where the record fails a criterion | Determination written against a supporting record | Blocked | Failed | Fabricated quotes | Sentences verified | Median latency | Cost per case |
+| --- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| muse-spark-1.3 (Meta Model API) | 29 of 30 | 20 of 20 | 1 | 0 | 0 | 0 | 122 | 10.7 s | $0.013 |
+| muse-wonder-1.0 (Meta Model API) | 30 of 30 | 20 of 20 | 0 | 0 | 0 | 0 | 102 | 6.5 s | $0.036 |
+| Muse Spark Open (open weights on Baseten) | 30 of 30 | 18 of 20 | 0 | 2 | 0 | 1 | 108 | 3.4 s | $0.007 |
+
 <!-- results:end -->
 
 **Figures.** The figures of this paper are frames of the replay, addressed by deep link; `step=end` lands on the verdict and the arrow keys walk the trace from there.
@@ -291,6 +301,8 @@ _Tables generated from the result files by `npm run log`; the prose below them i
 
 **Cost and latency.** Median latency per case was 4.3 to 16.3 seconds and cost $0.007 to $0.054 (Table 1); Muse Spark Open reported no reasoning tokens through the Baseten endpoint, so its cost may be understated.[^open]
 
+**The other chair (post hoc).** Asked for the plan's determination (Table 4), muse-wonder-1.0 declined to deny all 30 records that support the service and wrote a verified determination for all 20 that do not. muse-spark-1.3 declined to deny 29 of 30 and wrote one determination against a supporting record (case-036, bariatric surgery): six verified sentences, the fourth reading "supervised weight management visit 6 of 6" as not documenting six consecutive months; the gate passed it. Muse Spark Open declined to deny all 30, wrote 18 verified determinations, and was blocked twice, both on plan-exclusion cases: once for a sentence citing one entry for a figure (the exon 19 deletion) that lives in another, and once for a quote that does not appear in the cited entry, plan-document language the model was never given ("regardless of BMI or comorbidities"), the only fabricated quote in any full run on either side. Every determination written where the record fails named the unmet criterion against what the record does document. In a six-case probe before these runs, muse-spark-1.3 set the denial flag on case-001, a record that meets every criterion, and then wrote six verified sentences each of which supports the care; the gate passed it. The flag did not recur in the full run.
+
 <br>
 
 ## 4. Discussion
@@ -310,6 +322,8 @@ The secondary question also answered itself. Given an index and two tools, the m
 ### 4.3 The referential limit
 
 Case-023 is the most important result here, and it is on the public scoreboard rather than in a superseded run. The gate checks that every statement is in the record, not that the record satisfies the criterion. "Plan 5 to 6 days a week" answers the frequency half of a criterion and not the intensity half, and the gate passed it because the words are real. The LITMUS papers name this the referential limit: "it is a referential warrant, and it verifies consistency, not correctness." The spike-in puts a number on the same limit from the other side: 1,308 wrong values that happened to exist in an admissible source passed, and 2,386 changes with no hard token in them, a flipped negation or a swapped pronoun, passed. The advisor caught case-023 and the gate cannot, which is the division of labor the design intends: the gate answers whether a statement is in the record, the advisor offers an opinion on whether the record satisfies the criterion, and the physician who signs is the check on the second question. The viewer shows the case with the criterion text beside the quote so a reader can see the gap.
+
+The post hoc run from the other chair (Table 4) says the same thing from the insurer's side. The gate held the plan's determination to the same record it holds the physician's appeal to, and it took no side: the one fabricated quote in any full run, plan-exclusion language a model invented while arguing the insurer's case, was refuted, and a determination that misread a six-visit program as short of six months passed because its words were in the record. What the gate cannot see is the flag. In the probe, a model set the denial to stand and then wrote six sentences that each support the care; every sentence verified, and only a reader can see that the letter argues against its own conclusion. The standard applies to the insurer's algorithm as much as to this one, and so does its limit.
 
 ### 4.4 What the models found wrong with my test
 
@@ -360,9 +374,9 @@ Meta and Cerebral Valley for the event; Baseten for hosting the open-weights mod
 Every commit since the event began has a row in [NEW-WORK.md](NEW-WORK.md), every result file carries its model, mode, gate version, and any re-gate in its own header, and this section is regenerated from those sources after every push. Nothing in it is typed by hand.
 
 <!-- build-log:start -->
-_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-10-30 06:11 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
+_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-10-30 06:20 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
 
-93 commits since the `hackathon-start` tag, the last at 2026-10-29 23:11 (4480204). Gate v1.4. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
+95 commits since the `hackathon-start` tag, the last at 2026-10-29 23:19 (9367f42). Gate v1.4. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
 
 | Started (UTC) | Model | Mode | Agreed | Blocked | False pass | Advisor |
 | --- | --- | --- | :---: | :---: | :---: | --- |
@@ -378,11 +392,11 @@ _Generated from the git history, the ledger, and the result files by `npm run lo
 
 Last five commits, newest first, with the ledger row each one carried:
 
+- **9367f42 · 2026-10-29 23:19** · The other chair, kept: payer-side runs on three models (wonder 50 of 50, spark 1.3 49 of 50, Spark Open 48 of 50 with the one fabricated quote of any full run refuted); Table 4 generated post hoc from results/payer; README 2.1, 2.7, Results, 4.3. Payer-side runs kept (`build/results/payer/`, three files, chart in prompt, effort low, gate v1.4): muse-wonder-1.0 50 of 50 (declined to deny all 30 supporting records, verified determinations for all 20 failing ones); muse-spark-1.3 49 of 50 (one determination against a supporting record, case-036, six verified sentences reading visit 6 of 6 as not six…
+- **d49cad8 · 2026-10-30 06:11** · Build log: regenerate after 4480204. (no ledger row)
 - **4480204 · 2026-10-29 23:11** · Harness: --side payer, the same gate pointed at the plan's determination; payer instructions, inverted key, side on results, results/payer default; 169 tests. The other chair (`build/src/harness.ts --side payer`): the same contract, the same gate, and the same chart asked for the plan's written claim determination instead of the physician's appeal, so the gate's claim to take no side can be measured. `INSTRUCTIONS_PAYER` (and its agentic variant) reuses the physician block's CARC reference; warranted means the…
 - **8bbac45 · 2026-10-30 06:06** · Build log: regenerate after 6afa77b. (no ledger row)
 - **6afa77b · 2026-10-29 23:06** · The instrument: a passing draft rendered as the document the physician would sign, footnoted to the record, gate hash, blank signature line under a draft-unsigned-not-sent band; print and save; README 2.2 and Figure 8; shot 3; 164 tests; asset links v27. The instrument (`build/viewer/src/writ.ts`): a passing draft rendered as the document the physician would sign, opened from the PASS line or the w key: the payer's reason quoted at the head, each sentence footnoted to the entry, date, kind, and verbatim quote the gate verified it against, the gate version and input hash at the foot, and a blank signature…
-- **3bbec5b · 2026-10-30 06:01** · Build log: regenerate after ee60723. (no ledger row)
-- **ee60723 · 2026-10-29 23:00** · The gate in the browser: test the gate on any sentence once the verdict is on screen, re-checked by the same gate module bundled into the viewer; pure SHA-256 replaces node:crypto, checkSentence exported, sources and citation modules shared; README Methods 2.4 and Figure 7; shot 7a; 157 tests; asset links v26. The gate in the browser (`build/viewer/src/gatecheck.ts`, `build/viewer/src/main.ts`): once a replay has reached its verdict, a "test the gate" control under every sentence lets a reader edit the sentence, its quote, or its citation, and the same gate the harness ran re-checks it in the page, stamping the result live with its reason; nothing is saved and…
 <!-- build-log:end -->
 
 ## From the inside
