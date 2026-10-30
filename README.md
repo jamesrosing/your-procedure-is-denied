@@ -212,7 +212,7 @@ A post hoc run put the gate on the other side of the exchange (`npm run harness 
 ## 3. Results
 
 <!-- results:start -->
-_Tables generated from the result files by `npm run log`; the prose below them is written by hand. Last regenerated 2026-10-30 18:49 UTC._
+_Tables generated from the result files by `npm run log`; the prose below them is written by hand. Last regenerated 2026-10-30 18:50 UTC._
 
 **Table 1. Kept runs.** 9 runs, 50 cases each, effort low. Agreed is correct-pass plus correct-decline against the grading key, with a 95% Wilson interval. Blocked is a draft the gate stopped. Missed is a decline on a case the key labels warranted. False pass is a draft the gate passed on a case the key labels unsupported. The five outcome columns sum to 50. Fabricated quotes counts quotes the gate refuted as not in the entry cited, in a sentence or in an evidence item, on any draft including declined ones. Entries read applies to the agentic modes.
 
@@ -367,9 +367,9 @@ Meta and Cerebral Valley for the event; Baseten for hosting the open-weights mod
 Every commit since the event began has a row in [NEW-WORK.md](NEW-WORK.md), every result file carries its model, mode, gate version, and any re-gate in its own header, and this section is regenerated from those sources after every push. Nothing in it is typed by hand.
 
 <!-- build-log:start -->
-_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-10-30 18:49 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
+_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-10-30 18:50 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
 
-111 commits since the `hackathon-start` tag, the last at 2026-10-30 11:49 (fdbe3f7). Gate v1.4. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
+112 commits since the `hackathon-start` tag, the last at 2026-10-30 11:49 (3496d82). Gate v1.4. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
 
 | Started (UTC) | Model | Mode | Agreed | Blocked | Missed | False pass | Advisor |
 | --- | --- | --- | :---: | :---: | :---: | :---: | --- |
@@ -385,11 +385,11 @@ _Generated from the git history, the ledger, and the result files by `npm run lo
 
 Last five authored commits, newest first, with the ledger row each one carried (the bot's regenerate commits are left out):
 
+- **3496d82 · 2026-10-30 11:49** · Build log: pending row skips the bot, one time zone, missed and fabricated-quote columns computed; README fabrication claim narrowed to sentences; Figure 3 moved to case-038. Build log (`build/scripts/build-log.ts`): the ledger's pending row now goes to the newest authored commit without a row, skipping the bot's regenerate commit at HEAD, which had taken the "Video close" row and left 3e54c98 with none; every commit date rendered in one zone (Pacific) instead of each committer's own; a Missed column in Tables 1 and 2 and…
 - **fdbe3f7 · 2026-10-30 11:49** · Viewer scoreboard: a missed column, so every row's outcomes sum to its fifty cases. Viewer scoreboard (`build/viewer/src/replay.ts`, `main.ts`): a missed column, "Declined, key says yes", shown when any run has one, so every row's outcomes sum to its 50 cases; muse-wonder-1.0 with the chart in the prompt had read 49 / 0 / 0 / 0 with case-047 nowhere. Test: the five outcome counts of every scoreboard row sum to its cases. Asset links v29
 - **279cfbc · 2026-10-30 11:25** · Viewer: Space stays with a focused button, modifier chords are the browser's, the writ opens only at PASS, print with the writ closed prints the page, citations escaped in selectors. Viewer (`build/viewer/`): a focused button keeps Space for itself, so pressing it on the gate-check "check" button no longer restarts the replay and discards the edit; Ctrl, Alt, and Meta chords are left to the browser; the w key opens the writ only once the replay has shown PASS, not from a stored verdict at step 0; print with the writ closed prints the…
 - **ee0f58a · 2026-10-30 11:23** · Re-gate scores each result against the key stored on it, and keeps the advisor summary. Re-gate (`build/scripts/regate.ts`) scores each result against the key stored on it (`r.expected`), not the case's physician key: a payer-side file re-gated under a later gate would have had 48 to 50 of 50 outcomes inverted. It also keeps `summary.advice`, which `summarize()` does not know and the Oct 29 re-gate to v1.4 had dropped from the three…
 - **3e54c98 · 2026-10-30 00:01** · Video close: no one had the evening; two seconds moved from shots 4 and 5 to shot 9; SRT regenerated. Video close rewritten (`assets/video/`): shot 9 now speaks the author's line, most denials go unanswered not because the record was wrong but because no one had the evening, then the instrument and the signature; two seconds moved from shots 4 and 5 to the close; SRT regenerated
-- **c0b4607 · 2026-10-30 00:01** · Abstract opening: the insurer has given the denial to a machine; the physician has been given nothing; the reply owed is a writ. Abstract opening rewritten in the author's chosen cadence: the insurer has given the denial to a machine; the physician has been given nothing; the reply owed is a writ; a draft that asserts what the record does not hold, over a physician's name, is worse than none
 <!-- build-log:end -->
 
 ## From the inside
