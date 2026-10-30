@@ -421,6 +421,7 @@ export interface ScoreboardRow {
   cases: number;
   agreed: number;
   blocked: number;
+  missed: number; // the model declined a case the key labels warranted: a judgment call, not an invented fact
   errors: number; // answers that failed before the gate: request errors and unparseable drafts
   falsePass: number; // the gate passed a draft on a case the key labels absent or near-miss: the referential limit
   sentencesVerified: number;
@@ -454,6 +455,7 @@ export function scoreboardRow(file: ResultsFile): ScoreboardRow {
     cases: s.cases,
     agreed: (s.outcomes['correct-pass'] ?? 0) + (s.outcomes['correct-decline'] ?? 0),
     blocked: s.outcomes['blocked'] ?? 0,
+    missed: s.outcomes['missed'] ?? 0,
     errors: s.outcomes['error'] ?? 0,
     falsePass: s.outcomes['false-pass'] ?? 0,
     sentencesVerified: s.sentencesVerified,

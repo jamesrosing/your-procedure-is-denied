@@ -200,6 +200,10 @@ describe('scoreboard', () => {
     assert.equal(spark13.entriesRead, null);
     const open = rows.find(r => r.model.includes('Spark Open'))!;
     assert.equal(open.blocked, 1);
+    // Every outcome has a column: a chart-in-prompt row's counts sum to its cases.
+    for (const r of rows) assert.equal(r.agreed + r.blocked + r.missed + r.falsePass + r.errors, r.cases, `${r.model}: outcomes sum to ${r.cases}`);
+    const wonder = rows.find(r => r.model.startsWith('muse-wonder-1.0') && !r.agentic)!;
+    assert.equal(wonder.missed, wonder.cases - wonder.agreed - wonder.blocked - wonder.falsePass - wonder.errors);
     assert.deepEqual(rows.filter(r => !r.agentic).map(r => r.model.split(' ')[0]), ['muse-spark-1.3', 'muse-wonder-1.0', 'Muse']);
     assert.ok(rows.every((r, i) => i === 0 || Number(r.agentic) >= Number(rows[i - 1]!.agentic)), 'agentic rows come last');
   });
