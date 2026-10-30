@@ -203,7 +203,9 @@ function renderEntries(state: ReplayState, steps: Step[]): void {
     if (tag.textContent !== label) tag.textContent = label;
     tag.classList.toggle('live', s?.kind === 'read' && s.live === true);
   }
-  const open = state.open ? ui.entries.querySelector<HTMLElement>(`[data-id="${state.open}"]`) : null;
+  // state.open is a citation the model wrote; escape it so a stray quote or
+  // bracket cannot throw inside render and stall playback.
+  const open = state.open ? ui.entries.querySelector<HTMLElement>(`[data-id="${CSS.escape(state.open)}"]`) : null;
   open?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
   ui.chartMeta.textContent = `${state.counters.chartSize} entries, ${state.read.length} read`;
 }
@@ -467,7 +469,10 @@ function renderVerdict(state: ReplayState): void {
 function showWrit(open: boolean): void {
   if (!open) { ui.writ.hidden = true; return; }
   const c = session.caseData, r = session.result, f = session.file;
-  const doc = c && r && f ? writDocument(c, r, f.run) : null;
+  // The instrument exists only once the replay has reached its verdict: PASS
+  // is the gate's word on screen, not a stored field read ahead of it.
+  const reached = c && r ? stateAt(session.steps, r, c, session.cursor).verdict?.verdict === 'pass' : false;
+  const doc = reached && c && r && f ? writDocument(c, r, f.run) : null;
   if (!doc) return;
   ui.writBand.textContent = doc.band;
   ui.writHeading.textContent = doc.heading;
@@ -497,7 +502,10 @@ function showWrit(open: boolean): void {
 
 function saveWritText(): void {
   const c = session.caseData, r = session.result, f = session.file;
-  const doc = c && r && f ? writDocument(c, r, f.run) : null;
+  // The instrument exists only once the replay has reached its verdict: PASS
+  // is the gate's word on screen, not a stored field read ahead of it.
+  const reached = c && r ? stateAt(session.steps, r, c, session.cursor).verdict?.verdict === 'pass' : false;
+  const doc = reached && c && r && f ? writDocument(c, r, f.run) : null;
   if (!doc) return;
   const blob = new Blob([writText(doc)], { type: 'text/plain;charset=utf-8' });
   const url = URL.createObjectURL(blob);
@@ -851,6 +859,9 @@ async function boot(): Promise<void> {
   });
   window.addEventListener('keydown', e => {
     if (e.target instanceof HTMLSelectElement || e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
+    // A focused button keeps Space and Enter for itself (the gate-check "check"
+    // button, the transport); a held modifier is the browser's shortcut, not ours.
+    if (e.target instanceof HTMLButtonElement || e.ctrlKey || e.metaKey || e.altKey) return;
     if (introOpen) { e.preventDefault(); endIntro(); return; }
     switch (e.key) {
       case 'i': case 'I': playIntro(); break;

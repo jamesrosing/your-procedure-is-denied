@@ -546,7 +546,8 @@ select:hover { border-color: var(--ink-3); }
 .writ-signature { margin: 0; font-family: var(--font-mono); font-size: 12.5px; color: var(--ink-7); white-space: pre-wrap; }
 .verdict .btn.writ-open { height: 26px; font-size: 11.5px; margin-left: auto; }
 @media print {
-  body > *:not(#writ), .writ-tools { display: none !important; }
-  .writ { display: block !important; border: 0; background: #fff; padding: 0; }
+  /* Only an open writ prints as the sheet alone; with it closed, print the page as it is. */
+  body:has(.writ:not([hidden])) > *:not(#writ), .writ-tools { display: none !important; }
+  .writ:not([hidden]) { display: block !important; border: 0; background: #fff; padding: 0; }
   .writ-sheet { box-shadow: none; border: 0; max-width: none; padding: 0; color: #000; }
 }
