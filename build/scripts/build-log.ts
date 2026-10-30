@@ -91,8 +91,8 @@ function ledgerRows(): Map<string, { date: string; text: string }> {
 interface RunFile {
   file: string;
   run: { startedAt: string; provider: string; model: string; effort: string; cases: number; agentic?: boolean; tools?: string[]; litmus?: string; regated?: { from: string; to: string; at: string; changedVerdicts: number }[]; concurrency?: number };
-  summary: { outcomes: Record<string, number>; bySubtype?: Record<string, Record<string, number>>; sentencesVerified: number; ungroundedSentencesCaught?: number; citationPrecision?: number; reading?: { entriesReadPerCase: number; chartSizePerCase: number; supportCoverage: number; turnsPerCase: number }; costUsd: { perCase: number }; latencyMs: { p50: number }; advice?: { model: string; cases: number; criteria: number; supports: number; partial: number; silent: number; falsePassesFlagged: number; falsePasses: number } };
-  results?: { caseId: string; gate?: { sentences?: Quoted[]; evidence?: Quoted[] } }[];
+  summary: { outcomes: Record<string, number>; bySubtype?: Record<string, Record<string, number>>; sentencesVerified: number; ungroundedSentencesCaught?: number; citationPrecision?: number; reading?: { entriesReadPerCase: number; chartSizePerCase: number; supportCoverage: number; turnsPerCase: number }; costUsd: { perCase: number; total?: number }; latencyMs: { p50: number }; stakesUsd?: { total: number; defended: number; warranted: number }; advice?: { model: string; cases: number; criteria: number; supports: number; partial: number; silent: number; falsePassesFlagged: number; falsePasses: number } };
+  results?: { caseId: string; outcome?: string; expected?: { warranted: boolean }; gate?: { sentences?: Quoted[]; evidence?: Quoted[] } }[];
 }
 
 function runs(sub = ''): RunFile[] {
@@ -188,15 +188,29 @@ function main(): void {
     const b: string[] = [rs];
     b.push(`_Tables generated from the result files by \`npm run log\`; the prose below them is written by hand. Last regenerated ${new Date().toISOString().slice(0, 16).replace('T', ' ')} UTC._`);
     b.push('');
-    b.push(`**Table 1. Kept runs.** ${kept.length} runs, 50 cases each, effort low. Agreed is correct-pass plus correct-decline against the grading key, with a 95% Wilson interval. Blocked is a draft the gate stopped. Missed is a decline on a case the key labels warranted. False pass is a draft the gate passed on a case the key labels unsupported. The five outcome columns sum to 50. Fabricated quotes counts quotes the gate refuted as not in the entry cited, in a sentence or in an evidence item, on any draft including declined ones. Entries read applies to the agentic modes.`);
+    const usd = (n: number): string => `$${Math.round(n).toLocaleString('en-US')}`;
+    const warrantedStake = kept[0]?.summary.stakesUsd?.warranted ?? 0;
+    const totalStake = kept[0]?.summary.stakesUsd?.total ?? 0;
+    b.push(`**Table 1. Kept runs.** ${kept.length} runs, 50 cases each, effort low. Agreed is correct-pass plus correct-decline against the grading key, with a 95% Wilson interval. Blocked is a draft the gate stopped. Missed is a decline on a case the key labels warranted. False pass is a draft the gate passed on a case the key labels unsupported. The five outcome columns sum to 50. Fabricated quotes counts quotes the gate refuted as not in the entry cited, in a sentence or in an evidence item, on any draft including declined ones. Care defended is the billed value of the warranted cases whose appeal passed the gate, out of the ${usd(warrantedStake)} billed across the thirty warranted cases (${usd(totalStake)} across all fifty); the values are the synthetic set's, not a payer's. Entries read applies to the agentic modes.`);
     b.push('');
-    b.push('| Model | Mode | Agreed | 95% interval | Blocked | Missed | False pass | Failed | Fabricated quotes | Sentences verified | Citation precision | Entries read per case | Median latency | Cost per case |');
-    b.push('| --- | --- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |');
+    b.push('| Model | Mode | Agreed | 95% interval | Blocked | Missed | False pass | Failed | Fabricated quotes | Care defended | Sentences verified | Citation precision | Entries read per case | Median latency | Cost per case |');
+    b.push('| --- | --- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |');
     for (const r of kept) {
       const o = r.summary.outcomes;
       const rd = r.summary.reading;
-      b.push(`| ${modelName(r)} (${host(r)}) | ${mode(r.run)} | ${agreedOf(r)} of ${r.run.cases} | ${formatInterval(agreedOf(r), r.run.cases)} | ${o['blocked'] ?? 0} | ${o['missed'] ?? 0} | ${o['false-pass'] ?? 0} | ${o['error'] ?? 0} | ${fabricatedQuotes(r)} | ${r.summary.sentencesVerified} | ${r.summary.citationPrecision !== undefined ? `${Math.round(r.summary.citationPrecision * 100)}%` : ''} | ${rd ? `${rd.entriesReadPerCase.toFixed(1)} of ${rd.chartSizePerCase.toFixed(1)}` : 'all' } | ${(r.summary.latencyMs.p50 / 1000).toFixed(1)} s | $${r.summary.costUsd.perCase.toFixed(3)} |`);
+      const st = r.summary.stakesUsd;
+      b.push(`| ${modelName(r)} (${host(r)}) | ${mode(r.run)} | ${agreedOf(r)} of ${r.run.cases} | ${formatInterval(agreedOf(r), r.run.cases)} | ${o['blocked'] ?? 0} | ${o['missed'] ?? 0} | ${o['false-pass'] ?? 0} | ${o['error'] ?? 0} | ${fabricatedQuotes(r)} | ${st ? usd(st.defended) : ''} | ${r.summary.sentencesVerified} | ${r.summary.citationPrecision !== undefined ? `${Math.round(r.summary.citationPrecision * 100)}%` : ''} | ${rd ? `${rd.entriesReadPerCase.toFixed(1)} of ${rd.chartSizePerCase.toFixed(1)}` : 'all' } | ${(r.summary.latencyMs.p50 / 1000).toFixed(1)} s | $${r.summary.costUsd.perCase.toFixed(3)} |`);
     }
+    b.push('');
+    // Blocked is two things: a true derivation stopped on a warranted case (a
+    // lost appeal) and a baseless warranted answer stopped on an unsupported
+    // case (the design working). The taxonomy keeps one column; this line
+    // splits it from the per-case records.
+    const blockedOn = (warranted: boolean): number => kept.reduce((n, r) => n + (r.results ?? []).filter(c => c.outcome === 'blocked' && c.expected?.warranted === warranted).length, 0);
+    const fullRuns = kept.filter(r => r.summary.stakesUsd && r.summary.stakesUsd.defended === r.summary.stakesUsd.warranted);
+    const runCosts = fullRuns.map(r => r.summary.costUsd.perCase * r.run.cases);
+    const fullNote = fullRuns.length ? ` The full ${usd(warrantedStake)} was defended in ${fullRuns.length} of ${kept.length} runs (${fullRuns.map(r => `${modelName(r)}, ${mode(r.run)}`).join('; ')}), at $${Math.min(...runCosts).toFixed(2)} to $${Math.max(...runCosts).toFixed(2)} for the fifty cases of a run.` : '';
+    b.push(`Of the ${blockedOn(true) + blockedOn(false)} blocked drafts in the kept runs, ${blockedOn(true)} were on cases the key labels warranted (a true derivation the gate could not source; an appeal not sent) and ${blockedOn(false)} on cases it labels unsupported (a warranted answer with nothing to verify, stopped).${fullNote}`);
     b.push('');
     const repeats = runs('repeats');
     if (repeats.length) {

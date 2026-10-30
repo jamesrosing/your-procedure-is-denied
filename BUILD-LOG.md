@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-10-30 19:38 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-10-30 19:45 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -50,7 +50,7 @@ Each commit that changed the version string in `build/src/litmus.ts`. The gate i
 
 ## Commits since `hackathon-start`
 
-Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 34 commits by github-actions[bot] are this log regenerating itself after a push; they touch only the generated files and carry no ledger row.
+Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 35 commits by github-actions[bot] are this log regenerating itself after a push; they touch only the generated files and carry no ledger row.
 
 ### 79e5e21 · 2026-10-26 20:38 · Add hackathon scaffolding: NEW-WORK.md and /build
 
@@ -520,3 +520,11 @@ Build log (`build/scripts/build-log.ts`): the ledger's pending row now goes to t
 ### c88886c · 2026-10-30 12:38 · The gate as a tool: litmus-gate CLI and MCP server over the same litmus() the harness and the viewer call
 
 The gate as a tool (`build/litmus-gate/`): `litmus-gate check <draft.json> <case.json>` on the command line (exit 0 pass, 1 blocked, 2 declined, `--json` for the stored-record shape) and `litmus-gate mcp`, an MCP server over stdio on the TypeScript SDK v2 with three read-only tools, `litmus_verify_draft`, `litmus_check_sentence`, `litmus_contract`, and the contract as a resource; both wrap `build/src/litmus.ts` unchanged. Sources are accepted as a case file or as the explicit admissible set; drafts go through the harness's own `parseAppeal`, so a draft that fails here fails there. Nine tests (library, in-process MCP client, spawned CLI; one re-gates a kept run and matches every verdict and hash) and a stdio smoke script against the esbuild bundle; `@modelcontextprotocol/server` added, client as a dev dependency. README 2.8 and `build/README.md` point at it. 186 tests
+
+### 04e5b4f · 2026-10-30 12:38 · Build log: regenerate after c88886c
+
+(generated files only; no ledger row by design)
+
+### 2fda55f · 2026-10-30 12:44 · Viewer: the payer-side runs in the picker with their own words and no writ; a deep link keeps its step; case changes rewrite the address in place; an unknown case falls back; the default run is the newest by start time
+
+README and build log: Table 1 gains a Care defended column (the billed value of warranted cases whose appeal passed, out of the $568,500 billed across the thirty warranted cases, $940,000 across all fifty, the synthetic set's values) and a generated line after it splitting the eight blocked drafts into six on warranted cases (a true derivation not sourced) and two on unsupported cases (a baseless warranted answer stopped), with the runs that defended the full amount and what a run cost (`build/scripts/build-log.ts`). Figure 9, the other chair: case-036 passing on both sides of one chart, with both deep links. Two Limitations bullets: a sentence is not checked against its own quote (the collision class measures it; about a fifth of those sentences contradict their own quote and pass), and case-023's absent label is arguable against its near-miss sibling case-034, left as published with the note since the set is frozen at the archived version. Shot list: an optional ten-second shot 6b, the other chair, in place of 7b, with both links and 27 words
