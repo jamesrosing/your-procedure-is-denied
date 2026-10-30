@@ -4,7 +4,9 @@
 import {
   buildTimeline, carcHelp, codeSystemHelp, DATA_NOTE, denialKind, DENIAL_KIND_HELP, firstLine, PANEL_HELP, parseStep, VERDICT_HELP, formatSeconds, formatUsd, INTRO_CHAR_MS, LABEL_HELP, payerRemark, INTRO_END_PAUSE_MS, INTRO_FADE_MS, INTRO_LINES, INTRO_MOVE_MS, INTRO_NOTES, INTRO_STAMP, introSchedule, playDelayMs, scoreboard, stateAt,
   type ReplayState, type ResultsFile, type Step, type ViewerCase, type ViewerResult,
+  type SentenceState,
 } from './replay.js';
+import { recheck, recheckLabel, EDIT_BUTTON, EDIT_HELP, EDIT_NOTE } from './gatecheck.js';
 
 interface Manifest {
   results: { file: string; provider: string; model: string; effort: string; startedAt: string; cases: number; agentic: boolean; live?: boolean }[];
@@ -286,6 +288,25 @@ function renderStrip(state: ReplayState): void {
   stripTimers.push(window.setTimeout(tick, 560));
 }
 
+// A sentence as the gate judged it: text, citation, quote, status, reason. Kept
+// per rendered row so the in-browser editor can restore it after an edit.
+interface SentenceOriginal { text: string; citation: string; quote: string; status: SentenceState['status']; reason: string }
+const originals = new WeakMap<HTMLElement, SentenceOriginal>();
+
+function stampText(status: SentenceState['status']): string {
+  return `${status === 'verified' ? '✓' : status === 'needs-citation' ? '◐' : '⚠'} ${recheckLabel(status)}`;
+}
+
+function fillWhy(why: HTMLElement, s: SentenceOriginal): void {
+  why.className = s.status === 'verified' ? 'why' : 'why bad';
+  why.replaceChildren();
+  if (s.status === 'verified') {
+    why.append(text('b', '', 'verified '), text('span', 'src', `${s.citation}: `), (() => { const q = document.createElement('q'); q.textContent = s.quote; return q; })());
+  } else {
+    why.append(text('b', '', `${recheckLabel(s.status)} `), text('span', '', `${s.reason} (cited ${s.citation})`));
+  }
+}
+
 function renderSentences(state: ReplayState): void {
   const named = state.verdict?.kind === 'verdict' ? state.verdict.blockedSentence : undefined;
   const existing = ui.sentences.children.length;
@@ -296,20 +317,95 @@ function renderSentences(state: ReplayState): void {
     li.className = 'sentence';
     li.dataset['status'] = s.status;
     li.dataset['index'] = String(s.index);
+    const original: SentenceOriginal = { text: s.text, citation: s.citation, quote: s.quote, status: s.status, reason: s.reason };
+    originals.set(li, original);
     const why = document.createElement('div');
-    why.className = s.status === 'verified' ? 'why' : 'why bad';
-    if (s.status === 'verified') {
-      why.append(text('b', '', 'verified '), text('span', 'src', `${s.citation}: `), (() => { const q = document.createElement('q'); q.textContent = s.quote; return q; })());
-    } else {
-      why.append(text('b', '', `${s.status} `), text('span', '', `${s.reason} (cited ${s.citation})`));
-    }
-    li.append(text('div', 'text', s.text), text('span', 'stamp', `${s.status === 'verified' ? '✓' : s.status === 'needs-citation' ? '◐' : '⚠'} ${s.status === 'needs-citation' ? 'needs citation' : s.status}`), why);
+    fillWhy(why, original);
+    const edit = document.createElement('button');
+    edit.type = 'button';
+    edit.className = 'edit';
+    edit.textContent = EDIT_BUTTON;
+    edit.title = EDIT_HELP;
+    li.append(text('div', 'text', s.text), text('span', 'stamp', stampText(s.status)), why, edit);
     ui.sentences.append(li);
   }
+  // The gate can be tested by hand once the replay has reached its verdict.
+  ui.sentences.dataset['editable'] = state.verdict ? 'true' : 'false';
   for (const li of ui.sentences.children) (li as HTMLElement).classList.toggle('named', named !== undefined && (li as HTMLElement).dataset['index'] === String(named));
   ui.sentences.lastElementChild?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
   ui.draftEmpty.hidden = state.sentences.length > 0 || state.verdict !== null;
   ui.draftMeta.textContent = state.counters.sentencesTotal > 0 ? `${state.counters.sentencesVerified} of ${state.counters.sentencesTotal} sentences verified` : '';
+}
+
+// The gate in the browser: the reader edits a sentence, its quote, or its
+// citation, and the same gate the harness ran re-checks it against the same
+// case. Nothing is saved; restore puts the stored record back.
+function openEditor(li: HTMLElement): void {
+  const original = originals.get(li);
+  const c = session.caseData;
+  if (!original || !c || li.dataset['editing']) return;
+  li.dataset['editing'] = 'true';
+  const textEl = li.querySelector<HTMLElement>('.text')!;
+  const stamp = li.querySelector<HTMLElement>('.stamp')!;
+  const why = li.querySelector<HTMLElement>('.why')!;
+  textEl.replaceChildren();
+  const sentence = document.createElement('textarea');
+  sentence.className = 'edit-text';
+  sentence.value = original.text;
+  sentence.rows = 3;
+  sentence.setAttribute('aria-label', 'the sentence');
+  textEl.append(sentence);
+
+  const form = document.createElement('div');
+  form.className = 'editor';
+  const quote = document.createElement('textarea');
+  quote.className = 'edit-quote';
+  quote.value = original.quote;
+  quote.rows = 2;
+  quote.setAttribute('aria-label', 'the quote');
+  const cite = document.createElement('select');
+  cite.className = 'edit-cite';
+  cite.setAttribute('aria-label', 'the cited entry');
+  for (const e of c.chart) {
+    const opt = document.createElement('option');
+    opt.value = e.id;
+    opt.textContent = `${e.id} · ${e.date} · ${e.kind}`;
+    opt.selected = e.id === original.citation;
+    cite.append(opt);
+  }
+  const check = document.createElement('button');
+  check.type = 'button';
+  check.className = 'btn primary small';
+  check.textContent = 'check';
+  const restore = document.createElement('button');
+  restore.type = 'button';
+  restore.className = 'btn small';
+  restore.textContent = 'restore';
+  const row = text('div', 'row', '');
+  row.append(check, restore);
+  const note = text('div', 'edit-note', EDIT_HELP);
+  form.append(text('label', '', 'quote'), quote, text('label', '', 'cites'), cite, row, note);
+  li.append(form);
+  sentence.focus();
+
+  check.addEventListener('click', () => {
+    const out = recheck(c, { text: sentence.value, citation: cite.value, quote: quote.value });
+    const version = /v\d+(?:\.\d+)?/.exec(out.gate)?.[0] ?? '';
+    li.dataset['status'] = out.status;
+    li.dataset['edited'] = 'true';
+    stamp.textContent = stampText(out.status);
+    fillWhy(why, { text: sentence.value, citation: cite.value, quote: quote.value, status: out.status, reason: out.reason });
+    note.textContent = `${EDIT_NOTE} (gate ${version})`;
+  });
+  restore.addEventListener('click', () => {
+    li.dataset['status'] = original.status;
+    delete li.dataset['edited'];
+    delete li.dataset['editing'];
+    textEl.replaceChildren(document.createTextNode(original.text));
+    stamp.textContent = stampText(original.status);
+    fillWhy(why, original);
+    form.remove();
+  });
 }
 
 function renderVerdict(state: ReplayState): void {
@@ -671,8 +767,13 @@ async function boot(): Promise<void> {
     try { localStorage.setItem('ypid-theme', dark ? 'dark' : 'light'); } catch { /* per-viewer convenience only */ }
     paintTheme();
   });
+  ui.sentences.addEventListener('click', e => {
+    const button = (e.target as HTMLElement).closest('button.edit');
+    const li = button?.closest<HTMLElement>('li.sentence');
+    if (button && li) openEditor(li);
+  });
   window.addEventListener('keydown', e => {
-    if (e.target instanceof HTMLSelectElement || e.target instanceof HTMLInputElement) return;
+    if (e.target instanceof HTMLSelectElement || e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
     if (introOpen) { e.preventDefault(); endIntro(); return; }
     switch (e.key) {
       case 'i': case 'I': playIntro(); break;

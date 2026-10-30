@@ -24,8 +24,9 @@
 //   4. A check that throws is an error, never a refutation and never a pass.
 // There is no resemblance threshold and no keyword list. The evidence is the
 // clinician's own words, which no payer vocabulary can require.
-import { createHash } from 'node:crypto';
-import { CITATION_ID, type Appeal } from './schema.js';
+import { sha256Hex } from './hash.js';
+import { CITATION_ID } from './citation.js';
+import type { Appeal } from './schema.js';
 
 export const LITMUS_VERSION = 'build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list';
 
@@ -267,38 +268,53 @@ function sourcedElsewhere(chart: GateEntry[], citedId: string, missing: string[]
 
 // --- the gate ----------------------------------------------------------------
 
-export function litmus(sources: GateSources, appeal: Appeal): GateResult {
-  const inputHash = createHash('sha256')
-    .update(JSON.stringify({ chart: sources.chart, criteria: sources.criteria, denial: sources.denial, facts: sources.facts ?? [], appeal }))
-    .digest('hex');
-
+// Tokens every sentence of a case may carry: from the payer criteria, the
+// denial, and the stated case facts. The cited entry's own tokens are added
+// per sentence.
+function sharedTokens(sources: GateSources): Set<string> {
   const shared = new Set<string>();
   for (const c of sources.criteria) sourceTokens(c.text, shared);
   for (const d of sources.denial) sourceTokens(d, shared);
   for (const x of sources.facts ?? []) sourceTokens(x, shared);
+  return shared;
+}
+
+export interface SentenceInput { text: string; citation: string; quote: string }
+
+// One sentence through the gate. This is the function litmus() applies to each
+// sentence of a draft; it is exported so the viewer can re-check a sentence a
+// reader has edited, in the browser, with the same code and the same sources
+// (viewer/src/gatecheck.ts). The optional shared set lets litmus() compute the
+// case-level tokens once per draft.
+export function checkSentence(sources: GateSources, s: SentenceInput, index = 0, shared: Set<string> = sharedTokens(sources)): SentenceRecord {
+  const base: SentenceBase = { index, text: s.text, citation: s.citation, quote: s.quote, reason: '' };
+  try {
+    const r = resolve(sources.chart, s.citation);
+    if (!r.ok) return { ...base, status: r.status, reason: r.reason };
+    const q = checkQuote(r.entry, s.quote);
+    if (!q.ok) return { ...base, status: q.status, reason: q.reason };
+    const allowed = new Set(shared);
+    sourceTokens(r.entry.text, allowed);
+    if (r.entry.date) sourceTokens(r.entry.date, allowed);
+    const h = checkHardTokens(s.text, allowed);
+    if (!h.ok) {
+      const elsewhere = h.missing ? sourcedElsewhere(sources.chart, r.entry.id, h.missing) : null;
+      if (elsewhere) return { ...base, status: 'needs-citation', reason: `needs-citation: ${h.missing!.join(', ')} not in ${r.entry.id}; the chart has it in ${elsewhere.join(', ')}. If that entry is the source, cite it as well; if it is a count or figure the chart never states, rewrite the sentence`, missing: h.missing!, alsoCite: elsewhere };
+      return { ...base, status: h.status, reason: h.reason, ...(h.missing ? { missing: h.missing } : {}) };
+    }
+    return { ...base, status: 'verified', reason: 'verified: quote found in the cited entry; every hard token sourced from the entry, the criteria, the denial, or the case facts', [VERIFIED]: true };
+  } catch (error: unknown) {
+    return { ...base, status: 'error', reason: `error: ${error instanceof Error ? error.message : String(error)}` };
+  }
+}
+
+export function litmus(sources: GateSources, appeal: Appeal): GateResult {
+  const inputHash = sha256Hex(JSON.stringify({ chart: sources.chart, criteria: sources.criteria, denial: sources.denial, facts: sources.facts ?? [], appeal }));
+
+  const shared = sharedTokens(sources);
   const criterionIds = new Set(sources.criteria.map(c => c.id));
 
-  const sentences: SentenceRecord[] = appeal.sentences.map((s, index) => {
-    const base: SentenceBase = { index, text: s.text, citation: s.citation, quote: s.quote, reason: '' };
-    try {
-      const r = resolve(sources.chart, s.citation);
-      if (!r.ok) return { ...base, status: r.status, reason: r.reason };
-      const q = checkQuote(r.entry, s.quote);
-      if (!q.ok) return { ...base, status: q.status, reason: q.reason };
-      const allowed = new Set(shared);
-      sourceTokens(r.entry.text, allowed);
-      if (r.entry.date) sourceTokens(r.entry.date, allowed);
-      const h = checkHardTokens(s.text, allowed);
-      if (!h.ok) {
-        const elsewhere = h.missing ? sourcedElsewhere(sources.chart, r.entry.id, h.missing) : null;
-        if (elsewhere) return { ...base, status: 'needs-citation', reason: `needs-citation: ${h.missing!.join(', ')} not in ${r.entry.id}; the chart has it in ${elsewhere.join(', ')}. If that entry is the source, cite it as well; if it is a count or figure the chart never states, rewrite the sentence`, missing: h.missing!, alsoCite: elsewhere };
-        return { ...base, status: h.status, reason: h.reason, ...(h.missing ? { missing: h.missing } : {}) };
-      }
-      return { ...base, status: 'verified', reason: 'verified: quote found in the cited entry; every hard token sourced from the entry, the criteria, the denial, or the case facts', [VERIFIED]: true };
-    } catch (error: unknown) {
-      return { ...base, status: 'error', reason: `error: ${error instanceof Error ? error.message : String(error)}` };
-    }
-  });
+  const sentences: SentenceRecord[] = appeal.sentences.map((s, index) => checkSentence(sources, s, index, shared));
 
   const evidence: EvidenceRecord[] = appeal.evidence.map((e, index) => {
     const base: EvidenceBase = { index, criterion: e.criterion, citation: e.citation, quote: e.quote, reason: '' };

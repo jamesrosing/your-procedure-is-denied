@@ -8,7 +8,10 @@
 // words, and the physician reviews criterion, quote, and sentence side by side.
 import { z } from 'zod';
 
-export const CITATION_ID = /^note-\d{3}$/;
+// The citation id pattern lives in its own module so the gate (and the viewer's
+// browser bundle) can import it without pulling in zod.
+export { CITATION_ID } from './citation.js';
+import { CITATION_ID } from './citation.js';
 
 export const APPEAL_SCHEMA = {
   type: 'object',

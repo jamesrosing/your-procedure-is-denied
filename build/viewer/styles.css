@@ -419,6 +419,21 @@ select:hover { border-color: var(--ink-3); }
 .sentence .why q { font-family: var(--read-serif); font-size: 12.5px; color: var(--ink-6); }
 .sentence .why.bad, .sentence .why.bad b { color: var(--state-blocked); }
 
+/* the gate in the browser: once the verdict is on screen, any sentence can be
+   edited and re-checked by the same gate, in the page; nothing is saved */
+.sentence .edit { grid-column: 2; justify-self: end; height: 22px; padding: 0 8px; font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-5); background: transparent; border: var(--hairline); border-radius: var(--radius-sm); cursor: pointer; transition: color var(--motion-quick), border-color var(--motion-quick); }
+.sentence .edit:hover { color: var(--heading); border-color: var(--heading); }
+.sentences:not([data-editable="true"]) .edit, .sentence[data-editing] .edit { display: none; }
+.sentence .edit-text { width: 100%; box-sizing: border-box; font: inherit; line-height: inherit; color: inherit; background: var(--surface); border: 1px solid var(--heading); border-radius: var(--radius-sm); padding: 4px 6px; resize: vertical; }
+.sentence .editor { grid-column: 1 / -1; display: grid; grid-template-columns: auto 1fr; gap: 6px 10px; align-items: start; font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-5); padding: 4px 0 2px; }
+.sentence .editor label { align-self: center; }
+.sentence .editor textarea, .sentence .editor select { width: 100%; box-sizing: border-box; font-family: var(--read-serif); font-size: 13px; line-height: 1.4; color: var(--ink-7); background: var(--surface); border: var(--hairline); border-radius: var(--radius-sm); padding: 4px 6px; resize: vertical; }
+.sentence .editor select { font-family: var(--font-mono); font-size: 11px; }
+.sentence .editor .row { grid-column: 1 / -1; display: flex; gap: 8px; align-items: center; }
+.sentence .editor .btn.small { height: 26px; font-size: 11.5px; }
+.sentence .editor .edit-note { grid-column: 1 / -1; color: var(--ink-5); max-width: 70ch; }
+.sentence[data-edited] .stamp::after { content: " · live"; color: var(--ink-5); font-weight: 400; }
+
 .empty { color: var(--ink-4); font-size: 12.5px; padding: 16px 20px; margin: 0; }
 .empty[hidden] { display: none; }
 

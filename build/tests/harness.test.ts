@@ -255,3 +255,10 @@ describe('agentic harness', async () => {
     assert.equal(summarize([{ ...base, caseId: 'case-001' }]).reading, undefined);
   });
 });
+
+describe('gateSources is shared with the viewer', () => {
+  test('the harness and src/sources.ts export the same function', async () => {
+    const shared = await import('../src/sources.js');
+    assert.equal(gateSources, shared.gateSources);
+  });
+});

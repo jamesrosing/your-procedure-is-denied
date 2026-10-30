@@ -9,7 +9,8 @@ import { parseArgs } from 'node:util';
 import { messagesProvider, openAiProvider, type AgenticRequest, type Effort, type Provider, type ProposeRequest, type ToolCall, type ToolDefinition, type ToolOutcome, type TraceEvent } from './provider.js';
 import type { Usage } from './cost.js';
 import type { Appeal } from './schema.js';
-import { litmus, LITMUS_VERSION, type GateResult, type GateSources } from './litmus.js';
+import { litmus, LITMUS_VERSION, type GateResult } from './litmus.js';
+import { gateSources } from './sources.js';
 import type { SyntheticCase } from './synthetic/types.js';
 import { POLICY_STATUS_TOOL, policyStatusExecutor, DEFAULT_AUTHORITY } from './chart.js';
 
@@ -123,14 +124,8 @@ export function buildRequest(c: SyntheticCase, effort: Effort, maxTokens: number
   };
 }
 
-export function gateSources(c: SyntheticCase): GateSources {
-  return {
-    chart: c.chart,
-    criteria: c.criteria,
-    denial: [c.denial.text, `CARC ${c.denial.carc}`, c.denial.dateOfService, ...(c.denial.serviceEnd ? [c.denial.serviceEnd] : []), ...(c.denial.rarc ? [c.denial.rarc] : [])],
-    facts: [`Patient ${c.patient.alias}, ${c.patient.age} year old ${c.patient.sex}`, `${c.procedure.codeSystem} ${c.procedure.code} ${c.procedure.description}`, `${c.payer.name}, ${c.payer.planType}`],
-  };
-}
+// The admissible sources for a case live in src/sources.ts, shared with the viewer's in-browser recheck.
+export { gateSources };
 
 export type Outcome = 'correct-pass' | 'correct-decline' | 'blocked' | 'missed' | 'false-pass' | 'error';
 
