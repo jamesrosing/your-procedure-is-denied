@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-10-31 21:26 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-10-31 22:44 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -51,7 +51,7 @@ Each commit that changed the version string in `build/src/litmus.ts`. The gate i
 
 ## Commits since `hackathon-start`
 
-Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 49 commits by github-actions[bot] are this log regenerating itself after a push; they touch only the generated files and carry no ledger row.
+Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 50 commits by github-actions[bot] are this log regenerating itself after a push; they touch only the generated files and carry no ledger row.
 
 ### 79e5e21 · 2026-10-26 20:38 · Add hackathon scaffolding: NEW-WORK.md and /build
 
@@ -657,3 +657,11 @@ Viewer (`build/viewer/src/main.ts`): the step in a deep link survives boot again
 ### 8295722 · 2026-10-31 14:26 · Viewer: a Figures tab lists the paper's figures and tables, read from README.md at build time; each figure link lands on its frame; asset links v35
 
 Viewer: a Figures tab (the f key, `view=figures` in the address) lists the paper's 13 figures and 7 tables with their captions; each figure's deep link lands on its frame in place, files and sections open on GitHub, Table 1 also opens the Scoreboard. The list is read from README.md when the page is built (`build/viewer/src/figures.ts`, `data/figures.json`), so it cannot drift from the paper; `tests/figures.test.ts` holds every figure and table of the README to the parse (9 tests, 245 in all). Asset links v35. README: one sentence under Figures
+
+### 9bd2131 · 2026-10-31 14:26 · Build log: regenerate after 8295722
+
+(generated files only; no ledger row by design)
+
+### 49a719d · 2026-10-31 15:43 · Viewer: the header's unlinked replay label is removed; the four tabs stand alone in the row; asset links v36
+
+Viewer (`build/viewer/index.html`, `styles.css`): the header's second, unlinked "replay" label beside the title is removed; the four tabs (Replay, Scoreboard, Compare, Figures) stand alone in the row, confirmed headless at 1440 and 1000 px wide; asset links v36. No change to tests (245 pass).
