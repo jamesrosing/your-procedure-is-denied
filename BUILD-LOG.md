@@ -629,6 +629,6 @@ Zenodo version 1.1.0 published by the author (version DOI 10.5281/zenodo.2383151
 
 (generated files only; no ledger row by design)
 
-### next commit · the one that carries this regeneration
+### 3700151 · 2026-10-31 00:48 · Viewer: the stage keeps its height while the writ is open, so the counters no longer overlap the band; asset links v33
 
 Viewer (`build/viewer/styles.css`): with the writ open, the stage kept shrinking under the sheet until its counters were drawn over the writ's band at 1920 by 1080 (seen in a headless take of shot 3); the stage now keeps the height it has alone while the writ is open, so the page scrolls to the sheet with nothing over it. Asset links v33
