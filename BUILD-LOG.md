@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-10-31 06:53 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-10-31 06:54 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -595,6 +595,7 @@ The effort sweep (post hoc; README 2.10, Table 6): muse-spark-1.3 and Muse Spark
 
 (generated files only; no ledger row by design)
 
-### next commit · the one that carries this regeneration
+### c47c6e2 · 2026-10-30 23:53 · The denial as a letter and its intake: fifty deterministic remittance letter images, document intake of eight fields by muse-spark-1.3 with a JSON schema, one post hoc run in results/intake, Table 7, Methods 2.11 · tag event-07-intake
 
+Results added: `intake/meta-muse-spark-1.3-low-intake-2026-10-31T06-46-16-120Z.json`.
 The denial as a letter and its intake (post hoc; README 2.11, Table 7). `build/src/synthetic/letters.ts` renders each of the 50 denials as a one-page remittance letter image (1275 by 1650 px, deterministic from the case file: fictional letterhead, alias with age and sex, one claim line with code, dates, billed amount, CARC and RARC, the payer's remark, appeal rights with the payer's window; no identifiers, and the page says so) through Playwright's Chromium via `playwright-core` (`npm run letters`); the 50 PNGs are committed under `build/synthetic/letters/` with a manifest of HTML and PNG hashes, and `tests/letters.test.ts` regenerates every letter's HTML and two of the images and compares bytes (the image test skips where that Chromium is not installed). `build/src/intake.ts` (`npm run intake`) sends each image to muse-spark-1.3 as a base64 image block with a JSON schema for eight fields and scores each against the case file; one run into `results/intake/` ($0.27, $0.0054 a letter, median 2.8 s): 46 of 50 letters with all eight fields correct, and the 4 errors one glyph, the HIPPS code KDOB1 read as KD0B1 in the monospace face. Table 7 in `build-log.ts` (`intakeRows`). Eleven tests; 232 tests

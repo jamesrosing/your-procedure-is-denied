@@ -234,7 +234,7 @@ Each image was then sent to muse-spark-1.3 as a base64 image block with a JSON s
 ## 3. Results
 
 <!-- results:start -->
-_Tables generated from the result files by `npm run log`; the prose below them is written by hand. Last regenerated 2026-10-31 06:53 UTC._
+_Tables generated from the result files by `npm run log`; the prose below them is written by hand. Last regenerated 2026-10-31 06:54 UTC._
 
 **Table 1. Kept runs.** 9 runs, 50 cases each, effort low. Agreed is correct-pass plus correct-decline against the grading key, with a 95% Wilson interval. Blocked is a draft the gate stopped. Missed is a decline on a case the key labels warranted. False pass is a draft the gate passed on a case the key labels unsupported. The five outcome columns sum to 50. Fabricated quotes counts quotes the gate refuted as not in the entry cited, in a sentence or in an evidence item, on any draft including declined ones. Care defended is the billed value of the warranted cases whose appeal passed the gate, out of the $568,500 billed across the thirty warranted cases ($940,000 across all fifty); the values are the synthetic set's, not a payer's. Entries read applies to the agentic modes.
 
@@ -436,9 +436,9 @@ Meta and Cerebral Valley for the event; Baseten for hosting the open-weights mod
 Every commit since the event began has a row in [NEW-WORK.md](NEW-WORK.md), every result file carries its model, mode, gate version, and any re-gate in its own header, and this section is regenerated from those sources after every push. Nothing in it is typed by hand.
 
 <!-- build-log:start -->
-_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-10-31 06:53 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
+_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-10-31 06:54 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
 
-132 commits since the `hackathon-start` tag, the last at 2026-10-30 23:51 (2e2739e). Gate v1.4. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
+133 commits since the `hackathon-start` tag, the last at 2026-10-30 23:53 (c47c6e2). Gate v1.4. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
 
 | Started (UTC) | Model | Mode | Agreed | Blocked | Missed | False pass | Advisor |
 | --- | --- | --- | :---: | :---: | :---: | :---: | --- |
@@ -454,11 +454,11 @@ _Generated from the git history, the ledger, and the result files by `npm run lo
 
 Last five authored commits, newest first, with the ledger row each one carried (the bot's regenerate commits are left out):
 
+- **c47c6e2 · 2026-10-30 23:53** · The denial as a letter and its intake: fifty deterministic remittance letter images, document intake of eight fields by muse-spark-1.3 with a JSON schema, one post hoc run in results/intake, Table 7, Methods 2.11 · tag event-07-intake. The denial as a letter and its intake (post hoc; README 2.11, Table 7). `build/src/synthetic/letters.ts` renders each of the 50 denials as a one-page remittance letter image (1275 by 1650 px, deterministic from the case file: fictional letterhead, alias with age and sex, one claim line with code, dates, billed amount, CARC and RARC, the payer's remark,…
 - **cb56bbd · 2026-10-30 23:50** · The effort sweep: muse-spark-1.3 and Muse Spark Open at medium and high in the live-CHART configuration, four post hoc runs in results/effort, Table 6, Methods 2.10. The effort sweep (post hoc; README 2.10, Table 6): muse-spark-1.3 and Muse Spark Open in the live-CHART configuration at effort medium and high, the same 50 cases and settings, into `results/effort/` (four files; Spark 1.3 $1.60 and $1.73, Spark Open $1.19 and $2.14). Spark 1.3: 47 of 50 at medium (one empty warranted answer, one decline on a warranted…
 - **090c0d4 · 2026-10-30 23:39** · The repair turn and the stated reason: --repair N on the harness, a required why on the chart tools, three post hoc runs in results/repair, Table 5, the viewer re-stamps and a Compare tab, a live run with a record hash · tag event-06-repair. The repair turn and the stated reason (post hoc; README 2.9, Table 5). `build/src/harness.ts --repair N` (default 0): when the gate blocks a warranted draft, the gate's record goes back to the model verbatim in the same exchange (sentence index, status, reason, alsoCite entries, draft-level reasons; `repairMessage`), the model keeps its tools and reads…
 - **f4d67aa · 2026-10-30 15:03** · litmus-gate 0.1.0 is on npm; the READMEs and the ledger say so. `litmus-gate` 0.1.0 published to npm (Apache 2.0, three files: the bundled CLI, the README, package.json; nothing beyond what this repository already holds) and run cold through `npx -y litmus-gate` against the registry copy; README 2.8, the package README, and the built list say so
 - **a2fb3d9 · 2026-10-30 14:20** · litmus-gate: license Apache-2.0, matching the repository. `build/litmus-gate/package.json`: license Apache-2.0, matching the repository's LICENSE (it had said MIT). Found while checking what an npm publish would carry: the tarball is `dist/cli.js` (the gate module, its sources builder, citation pattern, schema, and hash, all already public in this repository), the package README, and `package.json`; no provider…
-- **89241db · 2026-10-30 13:14** · Abstract re-led with the other chair and the dollars; shot 6b in the cut at 2:10 in place of the Table 3 frame; captions regenerated. Abstract re-led on the author's instruction, opening cadence unchanged: the question adds the other chair (whether the same check, pointed the other way, holds the insurer's determination to the same record); the results lead with the dollars (muse-spark-1.3 defended the full $568,500 billed across the thirty warranted cases in each of its three runs, at…
 <!-- build-log:end -->
 
 ## From the inside
