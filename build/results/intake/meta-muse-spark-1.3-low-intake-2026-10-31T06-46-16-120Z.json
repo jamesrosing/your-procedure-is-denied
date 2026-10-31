@@ -1,0 +1,3304 @@
+{
+  "run": {
+    "startedAt": "2026-10-31T06:46:16.120Z",
+    "finishedAt": "2026-10-31T06:46:57.187Z",
+    "provider": "meta",
+    "model": "muse-spark-1.3",
+    "effort": "low",
+    "cases": 50,
+    "letters": "build/synthetic/letters",
+    "fields": [
+      "carc",
+      "remark",
+      "dateOfService",
+      "serviceEnd",
+      "code",
+      "codeSystem",
+      "billedUsd",
+      "payerName"
+    ],
+    "synthetic": true,
+    "administrative": "document intake of a remittance letter; nothing clinical is read or judged"
+  },
+  "summary": {
+    "cases": 50,
+    "fieldsCorrect": {
+      "carc": 50,
+      "remark": 50,
+      "dateOfService": 50,
+      "serviceEnd": 50,
+      "code": 46,
+      "codeSystem": 50,
+      "billedUsd": 50,
+      "payerName": 50
+    },
+    "allCorrect": 46,
+    "failed": 0,
+    "costUsd": {
+      "total": 0.2722107500000001,
+      "perCase": 0.005444215000000002
+    },
+    "latencyMs": {
+      "mean": 3121,
+      "p50": 2754,
+      "p95": 4827
+    },
+    "tokens": {
+      "input": 154300,
+      "output": 22965,
+      "thinking": 18310
+    }
+  },
+  "results": [
+    {
+      "caseId": "case-001",
+      "latencyMs": 4988,
+      "usage": {
+        "inputTokens": 3086,
+        "cachedInputTokens": 0,
+        "cacheWriteTokens": 0,
+        "outputTokens": 481,
+        "thinkingTokens": 379
+      },
+      "costUsd": 0.00590175,
+      "stopReason": "end_turn",
+      "got": {
+        "billedUsd": 8000,
+        "carc": "50",
+        "code": "KD0B1",
+        "codeSystem": "HIPPS",
+        "dateOfService": "2026-09-13",
+        "payerName": "Silverline Medicare Advantage",
+        "remark": "Based on review of the clinical record, the member no longer required daily skilled services as of day 15 and could have been safely managed at home with home health services.",
+        "serviceEnd": "2026-09-26"
+      },
+      "fields": {
+        "carc": {
+          "expected": "50",
+          "got": "50",
+          "correct": true
+        },
+        "remark": {
+          "expected": "Based on review of the clinical record, the member no longer required daily skilled services as of day 15 and could have been safely managed at home with home health services.",
+          "got": "Based on review of the clinical record, the member no longer required daily skilled services as of day 15 and could have been safely managed at home with home health services.",
+          "correct": true
+        },
+        "dateOfService": {
+          "expected": "2026-09-13",
+          "got": "2026-09-13",
+          "correct": true
+        },
+        "serviceEnd": {
+          "expected": "2026-09-26",
+          "got": "2026-09-26",
+          "correct": true
+        },
+        "code": {
+          "expected": "KDOB1",
+          "got": "KD0B1",
+          "correct": false
+        },
+        "codeSystem": {
+          "expected": "HIPPS",
+          "got": "HIPPS",
+          "correct": true
+        },
+        "billedUsd": {
+          "expected": 8000,
+          "got": 8000,
+          "correct": true
+        },
+        "payerName": {
+          "expected": "Silverline Medicare Advantage",
+          "got": "Silverline Medicare Advantage",
+          "correct": true
+        }
+      }
+    },
+    {
+      "caseId": "case-002",
+      "latencyMs": 4685,
+      "usage": {
+        "inputTokens": 3086,
+        "cachedInputTokens": 0,
+        "cacheWriteTokens": 0,
+        "outputTokens": 393,
+        "thinkingTokens": 291
+      },
+      "costUsd": 0.00552775,
+      "stopReason": "end_turn",
+      "got": {
+        "billedUsd": 25000,
+        "carc": "50",
+        "code": "77301",
+        "codeSystem": "CPT",
+        "dateOfService": "2026-07-25",
+        "payerName": "Lanternhill Health Plan",
+        "remark": "Intensity modulated radiation therapy is not medically necessary for breast cancer; three-dimensional conformal radiation therapy is the covered standard.",
+        "serviceEnd": ""
+      },
+      "fields": {
+        "carc": {
+          "expected": "50",
+          "got": "50",
+          "correct": true
+        },
+        "remark": {
+          "expected": "Intensity modulated radiation therapy is not medically necessary for breast cancer; three-dimensional conformal radiation therapy is the covered standard.",
+          "got": "Intensity modulated radiation therapy is not medically necessary for breast cancer; three-dimensional conformal radiation therapy is the covered standard.",
+          "correct": true
+        },
+        "dateOfService": {
+          "expected": "2026-07-25",
+          "got": "2026-07-25",
+          "correct": true
+        },
+        "serviceEnd": {
+          "expected": null,
+          "got": null,
+          "correct": true
+        },
+        "code": {
+          "expected": "77301",
+          "got": "77301",
+          "correct": true
+        },
+        "codeSystem": {
+          "expected": "CPT",
+          "got": "CPT",
+          "correct": true
+        },
+        "billedUsd": {
+          "expected": 25000,
+          "got": 25000,
+          "correct": true
+        },
+        "payerName": {
+          "expected": "Lanternhill Health Plan",
+          "got": "Lanternhill Health Plan",
+          "correct": true
+        }
+      }
+    },
+    {
+      "caseId": "case-003",
+      "latencyMs": 3405,
+      "usage": {
+        "inputTokens": 3086,
+        "cachedInputTokens": 0,
+        "cacheWriteTokens": 0,
+        "outputTokens": 429,
+        "thinkingTokens": 329
+      },
+      "costUsd": 0.00568075,
+      "stopReason": "end_turn",
+      "got": {
+        "billedUsd": 12000,
+        "carc": "197",
+        "code": "19357",
+        "codeSystem": "CPT",
+        "dateOfService": "2026-07-28",
+        "payerName": "Saltmarsh Benefits Administrators",
+        "remark": "No authorization is on file. A retrospective medical necessity review may be requested with supporting clinical documentation within 180 days.",
+        "serviceEnd": ""
+      },
+      "fields": {
+        "carc": {
+          "expected": "197",
+          "got": "197",
+          "correct": true
+        },
+        "remark": {
+          "expected": "No authorization is on file. A retrospective medical necessity review may be requested with supporting clinical documentation within 180 days.",
+          "got": "No authorization is on file. A retrospective medical necessity review may be requested with supporting clinical documentation within 180 days.",
+          "correct": true
+        },
+        "dateOfService": {
+          "expected": "2026-07-28",
+          "got": "2026-07-28",
+          "correct": true
+        },
+        "serviceEnd": {
+          "expected": null,
+          "got": null,
+          "correct": true
+        },
+        "code": {
+          "expected": "19357",
+          "got": "19357",
+          "correct": true
+        },
+        "codeSystem": {
+          "expected": "CPT",
+          "got": "CPT",
+          "correct": true
+        },
+        "billedUsd": {
+          "expected": 12000,
+          "got": 12000,
+          "correct": true
+        },
+        "payerName": {
+          "expected": "Saltmarsh Benefits Administrators",
+          "got": "Saltmarsh Benefits Administrators",
+          "correct": true
+        }
+      }
+    },
+    {
+      "caseId": "case-004",
+      "latencyMs": 4827,
+      "usage": {
+        "inputTokens": 3086,
+        "cachedInputTokens": 0,
+        "cacheWriteTokens": 0,
+        "outputTokens": 510,
+        "thinkingTokens": 436
+      },
+      "costUsd": 0.006025,
+      "stopReason": "end_turn",
+      "got": {
+        "billedUsd": 15000,
+        "carc": "50",
+        "code": "37227",
+        "codeSystem": "CPT",
+        "dateOfService": "2026-07-05",
+        "payerName": "Northwind Mutual Health",
+        "remark": "Documentation does not establish limb-threatening ischemia or failure of supervised exercise therapy.",
+        "serviceEnd": ""
+      },
+      "fields": {
+        "carc": {
+          "expected": "50",
+          "got": "50",
+          "correct": true
+        },
+        "remark": {
+          "expected": "Documentation does not establish limb-threatening ischemia or failure of supervised exercise therapy.",
+          "got": "Documentation does not establish limb-threatening ischemia or failure of supervised exercise therapy.",
+          "correct": true
+        },
+        "dateOfService": {
+          "expected": "2026-07-05",
+          "got": "2026-07-05",
+          "correct": true
+        },
+        "serviceEnd": {
+          "expected": null,
+          "got": null,
+          "correct": true
+        },
+        "code": {
+          "expected": "37227",
+          "got": "37227",
+          "correct": true
+        },
+        "codeSystem": {
+          "expected": "CPT",
+          "got": "CPT",
+          "correct": true
+        },
+        "billedUsd": {
+          "expected": 15000,
+          "got": 15000,
+          "correct": true
+        },
+        "payerName": {
+          "expected": "Northwind Mutual Health",
+          "got": "Northwind Mutual Health",
+          "correct": true
+        }
+      }
+    },
+    {
+      "caseId": "case-005",
+      "latencyMs": 3323,
+      "usage": {
+        "inputTokens": 3086,
+        "cachedInputTokens": 0,
+        "cacheWriteTokens": 0,
+        "outputTokens": 461,
+        "thinkingTokens": 378
+      },
+      "costUsd": 0.00581675,
+      "stopReason": "end_turn",
+      "got": {
+        "billedUsd": 35000,
+        "carc": "50",
+        "code": "33249",
+        "codeSystem": "CPT",
+        "dateOfService": "2026-02-06",
+        "payerName": "Copperfield Health",
+        "remark": "Documentation does not establish an ejection fraction of 35 percent or less after an adequate trial of guideline-directed medical therapy.",
+        "serviceEnd": ""
+      },
+      "fields": {
+        "carc": {
+          "expected": "50",
+          "got": "50",
+          "correct": true
+        },
+        "remark": {
+          "expected": "Documentation does not establish an ejection fraction of 35 percent or less after an adequate trial of guideline-directed medical therapy.",
+          "got": "Documentation does not establish an ejection fraction of 35 percent or less after an adequate trial of guideline-directed medical therapy.",
+          "correct": true
+        },
+        "dateOfService": {
+          "expected": "2026-02-06",
+          "got": "2026-02-06",
+          "correct": true
+        },
+        "serviceEnd": {
+          "expected": null,
+          "got": null,
+          "correct": true
+        },
+        "code": {
+          "expected": "33249",
+          "got": "33249",
+          "correct": true
+        },
+        "codeSystem": {
+          "expected": "CPT",
+          "got": "CPT",
+          "correct": true
+        },
+        "billedUsd": {
+          "expected": 35000,
+          "got": 35000,
+          "correct": true
+        },
+        "payerName": {
+          "expected": "Copperfield Health",
+          "got": "Copperfield Health",
+          "correct": true
+        }
+      }
+    },
+    {
+      "caseId": "case-006",
+      "latencyMs": 2515,
+      "usage": {
+        "inputTokens": 2717,
+        "cachedInputTokens": 369,
+        "cacheWriteTokens": 0,
+        "outputTokens": 353,
+        "thinkingTokens": 279
+      },
+      "costUsd": 0.004951850000000001,
+      "stopReason": "end_turn",
+      "got": {
+        "billedUsd": 9000,
+        "carc": "96",
+        "code": "19318",
+        "codeSystem": "CPT",
+        "dateOfService": "2026-05-06",
+        "payerName": "Prairie Commons Medicaid Plan",
+        "remark": "The procedure was determined to be cosmetic and is excluded from coverage.",
+        "serviceEnd": ""
+      },
+      "fields": {
+        "carc": {
+          "expected": "96",
+          "got": "96",
+          "correct": true
+        },
+        "remark": {
+          "expected": "The procedure was determined to be cosmetic and is excluded from coverage.",
+          "got": "The procedure was determined to be cosmetic and is excluded from coverage.",
+          "correct": true
+        },
+        "dateOfService": {
+          "expected": "2026-05-06",
+          "got": "2026-05-06",
+          "correct": true
+        },
+        "serviceEnd": {
+          "expected": null,
+          "got": null,
+          "correct": true
+        },
+        "code": {
+          "expected": "19318",
+          "got": "19318",
+          "correct": true
+        },
+        "codeSystem": {
+          "expected": "CPT",
+          "got": "CPT",
+          "correct": true
+        },
+        "billedUsd": {
+          "expected": 9000,
+          "got": 9000,
+          "correct": true
+        },
+        "payerName": {
+          "expected": "Prairie Commons Medicaid Plan",
+          "got": "Prairie Commons Medicaid Plan",
+          "correct": true
+        }
+      }
+    },
+    {
+      "caseId": "case-007",
+      "latencyMs": 3376,
+      "usage": {
+        "inputTokens": 2717,
+        "cachedInputTokens": 369,
+        "cacheWriteTokens": 0,
+        "outputTokens": 601,
+        "thinkingTokens": 499
+      },
+      "costUsd": 0.00600585,
+      "stopReason": "end_turn",
+      "got": {
+        "billedUsd": 25000,
+        "carc": "50",
+        "code": "0104",
+        "codeSystem": "CMG",
+        "dateOfService": "2026-06-07",
+        "payerName": "Silverline Medicare Advantage",
+        "remark": "Documentation does not demonstrate that the member required the intensity of services provided in an inpatient rehabilitation facility; the member’s needs could have been met at a skilled nursing facility level of care.",
+        "serviceEnd": "2026-06-21"
+      },
+      "fields": {
+        "carc": {
+          "expected": "50",
+          "got": "50",
+          "correct": true
+        },
+        "remark": {
+          "expected": "Documentation does not demonstrate that the member required the intensity of services provided in an inpatient rehabilitation facility; the member’s needs could have been met at a skilled nursing facility level of care.",
+          "got": "Documentation does not demonstrate that the member required the intensity of services provided in an inpatient rehabilitation facility; the member’s needs could have been met at a skilled nursing facility level of care.",
+          "correct": true
+        },
+        "dateOfService": {
+          "expected": "2026-06-07",
+          "got": "2026-06-07",
+          "correct": true
+        },
+        "serviceEnd": {
+          "expected": "2026-06-21",
+          "got": "2026-06-21",
+          "correct": true
+        },
+        "code": {
+          "expected": "0104",
+          "got": "0104",
+          "correct": true
+        },
+        "codeSystem": {
+          "expected": "CMG",
+          "got": "CMG",
+          "correct": true
+        },
+        "billedUsd": {
+          "expected": 25000,
+          "got": 25000,
+          "correct": true
+        },
+        "payerName": {
+          "expected": "Silverline Medicare Advantage",
+          "got": "Silverline Medicare Advantage",
+          "correct": true
+        }
+      }
+    },
+    {
+      "caseId": "case-008",
+      "latencyMs": 3696,
+      "usage": {
+        "inputTokens": 2717,
+        "cachedInputTokens": 369,
+        "cacheWriteTokens": 0,
+        "outputTokens": 412,
+        "thinkingTokens": 325
+      },
+      "costUsd": 0.0052026,
+      "stopReason": "end_turn",
+      "got": {
+        "billedUsd": 3500,
+        "carc": "56",
+        "code": "81455",
+        "codeSystem": "CPT",
+        "dateOfService": "2026-04-26",
+        "payerName": "Lanternhill Health Plan",
+        "remark": "Panels of more than 50 genes are investigational under the plan’s genetic testing policy and are not covered.",
+        "serviceEnd": ""
+      },
+      "fields": {
+        "carc": {
+          "expected": "56",
+          "got": "56",
+          "correct": true
+        },
+        "remark": {
+          "expected": "Panels of more than 50 genes are investigational under the plan’s genetic testing policy and are not covered.",
+          "got": "Panels of more than 50 genes are investigational under the plan’s genetic testing policy and are not covered.",
+          "correct": true
+        },
+        "dateOfService": {
+          "expected": "2026-04-26",
+          "got": "2026-04-26",
+          "correct": true
+        },
+        "serviceEnd": {
+          "expected": null,
+          "got": null,
+          "correct": true
+        },
+        "code": {
+          "expected": "81455",
+          "got": "81455",
+          "correct": true
+        },
+        "codeSystem": {
+          "expected": "CPT",
+          "got": "CPT",
+          "correct": true
+        },
+        "billedUsd": {
+          "expected": 3500,
+          "got": 3500,
+          "correct": true
+        },
+        "payerName": {
+          "expected": "Lanternhill Health Plan",
+          "got": "Lanternhill Health Plan",
+          "correct": true
+        }
+      }
+    },
+    {
+      "caseId": "case-009",
+      "latencyMs": 3923,
+      "usage": {
+        "inputTokens": 2717,
+        "cachedInputTokens": 369,
+        "cacheWriteTokens": 0,
+        "outputTokens": 567,
+        "thinkingTokens": 478
+      },
+      "costUsd": 0.00586135,
+      "stopReason": "end_turn",
+      "got": {
+        "billedUsd": 15000,
+        "carc": "11",
+        "code": "37227",
+        "codeSystem": "CPT",
+        "dateOfService": "2026-08-02",
+        "payerName": "Saltmarsh Benefits Administrators",
+        "remark": "The diagnosis reported does not support the procedure billed.",
+        "serviceEnd": ""
+      },
+      "fields": {
+        "carc": {
+          "expected": "11",
+          "got": "11",
+          "correct": true
+        },
+        "remark": {
+          "expected": "The diagnosis reported does not support the procedure billed.",
+          "got": "The diagnosis reported does not support the procedure billed.",
+          "correct": true
+        },
+        "dateOfService": {
+          "expected": "2026-08-02",
+          "got": "2026-08-02",
+          "correct": true
+        },
+        "serviceEnd": {
+          "expected": null,
+          "got": null,
+          "correct": true
+        },
+        "code": {
+          "expected": "37227",
+          "got": "37227",
+          "correct": true
+        },
+        "codeSystem": {
+          "expected": "CPT",
+          "got": "CPT",
+          "correct": true
+        },
+        "billedUsd": {
+          "expected": 15000,
+          "got": 15000,
+          "correct": true
+        },
+        "payerName": {
+          "expected": "Saltmarsh Benefits Administrators",
+          "got": "Saltmarsh Benefits Administrators",
+          "correct": true
+        }
+      }
+    },
+    {
+      "caseId": "case-010",
+      "latencyMs": 2430,
+      "usage": {
+        "inputTokens": 2717,
+        "cachedInputTokens": 369,
+        "cacheWriteTokens": 0,
+        "outputTokens": 532,
+        "thinkingTokens": 450
+      },
+      "costUsd": 0.0057126,
+      "stopReason": "end_turn",
+      "got": {
+        "billedUsd": 40000,
+        "carc": "50",
+        "code": "63685",
+        "codeSystem": "CPT",
+        "dateOfService": "2026-02-03",
+        "payerName": "Northwind Mutual Health",
+        "remark": "Documentation does not establish a successful trial meeting the plan’s definition of 50 percent pain reduction with functional improvement.",
+        "serviceEnd": ""
+      },
+      "fields": {
+        "carc": {
+          "expected": "50",
+          "got": "50",
+          "correct": true
+        },
+        "remark": {
+          "expected": "Documentation does not establish a successful trial meeting the plan’s definition of 50 percent pain reduction with functional improvement.",
+          "got": "Documentation does not establish a successful trial meeting the plan’s definition of 50 percent pain reduction with functional improvement.",
+          "correct": true
+        },
+        "dateOfService": {
+          "expected": "2026-02-03",
+          "got": "2026-02-03",
+          "correct": true
+        },
+        "serviceEnd": {
+          "expected": null,
+          "got": null,
+          "correct": true
+        },
+        "code": {
+          "expected": "63685",
+          "got": "63685",
+          "correct": true
+        },
+        "codeSystem": {
+          "expected": "CPT",
+          "got": "CPT",
+          "correct": true
+        },
+        "billedUsd": {
+          "expected": 40000,
+          "got": 40000,
+          "correct": true
+        },
+        "payerName": {
+          "expected": "Northwind Mutual Health",
+          "got": "Northwind Mutual Health",
+          "correct": true
+        }
+      }
+    },
+    {
+      "caseId": "case-011",
+      "latencyMs": 2662,
+      "usage": {
+        "inputTokens": 2717,
+        "cachedInputTokens": 369,
+        "cacheWriteTokens": 0,
+        "outputTokens": 411,
+        "thinkingTokens": 339
+      },
+      "costUsd": 0.00519835,
+      "stopReason": "end_turn",
+      "got": {
+        "billedUsd": 25000,
+        "carc": "11",
+        "code": "27447",
+        "codeSystem": "CPT",
+        "dateOfService": "2026-03-15",
+        "payerName": "Copperfield Health",
+        "remark": "The diagnosis reported does not support the procedure billed.",
+        "serviceEnd": ""
+      },
+      "fields": {
+        "carc": {
+          "expected": "11",
+          "got": "11",
+          "correct": true
+        },
+        "remark": {
+          "expected": "The diagnosis reported does not support the procedure billed.",
+          "got": "The diagnosis reported does not support the procedure billed.",
+          "correct": true
+        },
+        "dateOfService": {
+          "expected": "2026-03-15",
+          "got": "2026-03-15",
+          "correct": true
+        },
+        "serviceEnd": {
+          "expected": null,
+          "got": null,
+          "correct": true
+        },
+        "code": {
+          "expected": "27447",
+          "got": "27447",
+          "correct": true
+        },
+        "codeSystem": {
+          "expected": "CPT",
+          "got": "CPT",
+          "correct": true
+        },
+        "billedUsd": {
+          "expected": 25000,
+          "got": 25000,
+          "correct": true
+        },
+        "payerName": {
+          "expected": "Copperfield Health",
+          "got": "Copperfield Health",
+          "correct": true
+        }
+      }
+    },
+    {
+      "caseId": "case-012",
+      "latencyMs": 2676,
+      "usage": {
+        "inputTokens": 2717,
+        "cachedInputTokens": 369,
+        "cacheWriteTokens": 0,
+        "outputTokens": 461,
+        "thinkingTokens": 372
+      },
+      "costUsd": 0.00541085,
+      "stopReason": "end_turn",
+      "got": {
+        "billedUsd": 20000,
+        "carc": "4",
+        "code": "92928",
+        "codeSystem": "CPT",
+        "dateOfService": "2026-02-03",
+        "payerName": "Prairie Commons Medicaid Plan",
+        "remark": "Modifier 59 was billed on the stent line together with modifier LD; the combination is invalid for this code. Resubmit a corrected claim.",
+        "serviceEnd": ""
+      },
+      "fields": {
+        "carc": {
+          "expected": "4",
+          "got": "4",
+          "correct": true
+        },
+        "remark": {
+          "expected": "Modifier 59 was billed on the stent line together with modifier LD; the combination is invalid for this code. Resubmit a corrected claim.",
+          "got": "Modifier 59 was billed on the stent line together with modifier LD; the combination is invalid for this code. Resubmit a corrected claim.",
+          "correct": true
+        },
+        "dateOfService": {
+          "expected": "2026-02-03",
+          "got": "2026-02-03",
+          "correct": true
+        },
+        "serviceEnd": {
+          "expected": null,
+          "got": null,
+          "correct": true
+        },
+        "code": {
+          "expected": "92928",
+          "got": "92928",
+          "correct": true
+        },
+        "codeSystem": {
+          "expected": "CPT",
+          "got": "CPT",
+          "correct": true
+        },
+        "billedUsd": {
+          "expected": 20000,
+          "got": 20000,
+          "correct": true
+        },
+        "payerName": {
+          "expected": "Prairie Commons Medicaid Plan",
+          "got": "Prairie Commons Medicaid Plan",
+          "correct": true
+        }
+      }
+    },
+    {
+      "caseId": "case-013",
+      "latencyMs": 4412,
+      "usage": {
+        "inputTokens": 2717,
+        "cachedInputTokens": 369,
+        "cacheWriteTokens": 0,
+        "outputTokens": 405,
+        "thinkingTokens": 308
+      },
+      "costUsd": 0.0051728500000000005,
+      "stopReason": "end_turn",
+      "got": {
+        "billedUsd": 12000,
+        "carc": "50",
+        "code": "871",
+        "codeSystem": "MS-DRG",
+        "dateOfService": "2026-02-27",
+        "payerName": "Silverline Medicare Advantage",
+        "remark": "Inpatient level of care is not supported by the clinical documentation. Observation services were appropriate for the services rendered; the claim is denied as billed.",
+        "serviceEnd": "2026-03-03"
+      },
+      "fields": {
+        "carc": {
+          "expected": "50",
+          "got": "50",
+          "correct": true
+        },
+        "remark": {
+          "expected": "Inpatient level of care is not supported by the clinical documentation. Observation services were appropriate for the services rendered; the claim is denied as billed.",
+          "got": "Inpatient level of care is not supported by the clinical documentation. Observation services were appropriate for the services rendered; the claim is denied as billed.",
+          "correct": true
+        },
+        "dateOfService": {
+          "expected": "2026-02-27",
+          "got": "2026-02-27",
+          "correct": true
+        },
+        "serviceEnd": {
+          "expected": "2026-03-03",
+          "got": "2026-03-03",
+          "correct": true
+        },
+        "code": {
+          "expected": "871",
+          "got": "871",
+          "correct": true
+        },
+        "codeSystem": {
+          "expected": "MS-DRG",
+          "got": "MS-DRG",
+          "correct": true
+        },
+        "billedUsd": {
+          "expected": 12000,
+          "got": 12000,
+          "correct": true
+        },
+        "payerName": {
+          "expected": "Silverline Medicare Advantage",
+          "got": "Silverline Medicare Advantage",
+          "correct": true
+        }
+      }
+    },
+    {
+      "caseId": "case-014",
+      "latencyMs": 4844,
+      "usage": {
+        "inputTokens": 2717,
+        "cachedInputTokens": 369,
+        "cacheWriteTokens": 0,
+        "outputTokens": 529,
+        "thinkingTokens": 405
+      },
+      "costUsd": 0.00569985,
+      "stopReason": "end_turn",
+      "got": {
+        "billedUsd": 8000,
+        "carc": "119",
+        "code": "KD0B1",
+        "codeSystem": "HIPPS",
+        "dateOfService": "2026-01-23",
+        "payerName": "Silverline Medicare Advantage",
+        "remark": "The member’s skilled nursing facility benefit of 100 days per benefit period was exhausted before day 15 of this stay. Days 15 through 28 are not a covered benefit.",
+        "serviceEnd": "2026-02-05"
+      },
+      "fields": {
+        "carc": {
+          "expected": "119",
+          "got": "119",
+          "correct": true
+        },
+        "remark": {
+          "expected": "The member’s skilled nursing facility benefit of 100 days per benefit period was exhausted before day 15 of this stay. Days 15 through 28 are not a covered benefit.",
+          "got": "The member’s skilled nursing facility benefit of 100 days per benefit period was exhausted before day 15 of this stay. Days 15 through 28 are not a covered benefit.",
+          "correct": true
+        },
+        "dateOfService": {
+          "expected": "2026-01-23",
+          "got": "2026-01-23",
+          "correct": true
+        },
+        "serviceEnd": {
+          "expected": "2026-02-05",
+          "got": "2026-02-05",
+          "correct": true
+        },
+        "code": {
+          "expected": "KDOB1",
+          "got": "KD0B1",
+          "correct": false
+        },
+        "codeSystem": {
+          "expected": "HIPPS",
+          "got": "HIPPS",
+          "correct": true
+        },
+        "billedUsd": {
+          "expected": 8000,
+          "got": 8000,
+          "correct": true
+        },
+        "payerName": {
+          "expected": "Silverline Medicare Advantage",
+          "got": "Silverline Medicare Advantage",
+          "correct": true
+        }
+      }
+    },
+    {
+      "caseId": "case-015",
+      "latencyMs": 4258,
+      "usage": {
+        "inputTokens": 2717,
+        "cachedInputTokens": 369,
+        "cacheWriteTokens": 0,
+        "outputTokens": 401,
+        "thinkingTokens": 324
+      },
+      "costUsd": 0.00515585,
+      "stopReason": "end_turn",
+      "got": {
+        "billedUsd": 12000,
+        "carc": "29",
+        "code": "19357",
+        "codeSystem": "CPT",
+        "dateOfService": "2026-08-21",
+        "payerName": "Saltmarsh Benefits Administrators",
+        "remark": "The claim was received more than 90 days after the date of service.",
+        "serviceEnd": ""
+      },
+      "fields": {
+        "carc": {
+          "expected": "29",
+          "got": "29",
+          "correct": true
+        },
+        "remark": {
+          "expected": "The claim was received more than 90 days after the date of service.",
+          "got": "The claim was received more than 90 days after the date of service.",
+          "correct": true
+        },
+        "dateOfService": {
+          "expected": "2026-08-21",
+          "got": "2026-08-21",
+          "correct": true
+        },
+        "serviceEnd": {
+          "expected": null,
+          "got": null,
+          "correct": true
+        },
+        "code": {
+          "expected": "19357",
+          "got": "19357",
+          "correct": true
+        },
+        "codeSystem": {
+          "expected": "CPT",
+          "got": "CPT",
+          "correct": true
+        },
+        "billedUsd": {
+          "expected": 12000,
+          "got": 12000,
+          "correct": true
+        },
+        "payerName": {
+          "expected": "Saltmarsh Benefits Administrators",
+          "got": "Saltmarsh Benefits Administrators",
+          "correct": true
+        }
+      }
+    },
+    {
+      "caseId": "case-016",
+      "latencyMs": 4713,
+      "usage": {
+        "inputTokens": 2717,
+        "cachedInputTokens": 369,
+        "cacheWriteTokens": 0,
+        "outputTokens": 486,
+        "thinkingTokens": 393
+      },
+      "costUsd": 0.0055171000000000005,
+      "stopReason": "end_turn",
+      "got": {
+        "billedUsd": 18000,
+        "carc": "50",
+        "code": "35301",
+        "codeSystem": "CPT",
+        "dateOfService": "2026-04-12",
+        "payerName": "Northwind Mutual Health",
+        "remark": "Documentation does not establish the degree of stenosis or the symptomatic status required for coverage.",
+        "serviceEnd": ""
+      },
+      "fields": {
+        "carc": {
+          "expected": "50",
+          "got": "50",
+          "correct": true
+        },
+        "remark": {
+          "expected": "Documentation does not establish the degree of stenosis or the symptomatic status required for coverage.",
+          "got": "Documentation does not establish the degree of stenosis or the symptomatic status required for coverage.",
+          "correct": true
+        },
+        "dateOfService": {
+          "expected": "2026-04-12",
+          "got": "2026-04-12",
+          "correct": true
+        },
+        "serviceEnd": {
+          "expected": null,
+          "got": null,
+          "correct": true
+        },
+        "code": {
+          "expected": "35301",
+          "got": "35301",
+          "correct": true
+        },
+        "codeSystem": {
+          "expected": "CPT",
+          "got": "CPT",
+          "correct": true
+        },
+        "billedUsd": {
+          "expected": 18000,
+          "got": 18000,
+          "correct": true
+        },
+        "payerName": {
+          "expected": "Northwind Mutual Health",
+          "got": "Northwind Mutual Health",
+          "correct": true
+        }
+      }
+    },
+    {
+      "caseId": "case-017",
+      "latencyMs": 3635,
+      "usage": {
+        "inputTokens": 2717,
+        "cachedInputTokens": 369,
+        "cacheWriteTokens": 0,
+        "outputTokens": 431,
+        "thinkingTokens": 342
+      },
+      "costUsd": 0.00528335,
+      "stopReason": "end_turn",
+      "got": {
+        "billedUsd": 11000,
+        "carc": "56",
+        "code": "J9271",
+        "codeSystem": "HCPCS",
+        "dateOfService": "2026-02-26",
+        "payerName": "Copperfield Health",
+        "remark": "Use of this agent is considered investigational for the submitted diagnosis.",
+        "serviceEnd": ""
+      },
+      "fields": {
+        "carc": {
+          "expected": "56",
+          "got": "56",
+          "correct": true
+        },
+        "remark": {
+          "expected": "Use of this agent is considered investigational for the submitted diagnosis.",
+          "got": "Use of this agent is considered investigational for the submitted diagnosis.",
+          "correct": true
+        },
+        "dateOfService": {
+          "expected": "2026-02-26",
+          "got": "2026-02-26",
+          "correct": true
+        },
+        "serviceEnd": {
+          "expected": null,
+          "got": null,
+          "correct": true
+        },
+        "code": {
+          "expected": "J9271",
+          "got": "J9271",
+          "correct": true
+        },
+        "codeSystem": {
+          "expected": "HCPCS",
+          "got": "HCPCS",
+          "correct": true
+        },
+        "billedUsd": {
+          "expected": 11000,
+          "got": 11000,
+          "correct": true
+        },
+        "payerName": {
+          "expected": "Copperfield Health",
+          "got": "Copperfield Health",
+          "correct": true
+        }
+      }
+    },
+    {
+      "caseId": "case-018",
+      "latencyMs": 3358,
+      "usage": {
+        "inputTokens": 2717,
+        "cachedInputTokens": 369,
+        "cacheWriteTokens": 0,
+        "outputTokens": 430,
+        "thinkingTokens": 352
+      },
+      "costUsd": 0.0052791,
+      "stopReason": "end_turn",
+      "got": {
+        "billedUsd": 6000,
+        "carc": "50",
+        "code": "J1745",
+        "codeSystem": "HCPCS",
+        "dateOfService": "2026-04-05",
+        "payerName": "Prairie Commons Medicaid Plan",
+        "remark": "Documentation does not establish failure of conventional therapy as required by the step therapy policy.",
+        "serviceEnd": ""
+      },
+      "fields": {
+        "carc": {
+          "expected": "50",
+          "got": "50",
+          "correct": true
+        },
+        "remark": {
+          "expected": "Documentation does not establish failure of conventional therapy as required by the step therapy policy.",
+          "got": "Documentation does not establish failure of conventional therapy as required by the step therapy policy.",
+          "correct": true
+        },
+        "dateOfService": {
+          "expected": "2026-04-05",
+          "got": "2026-04-05",
+          "correct": true
+        },
+        "serviceEnd": {
+          "expected": null,
+          "got": null,
+          "correct": true
+        },
+        "code": {
+          "expected": "J1745",
+          "got": "J1745",
+          "correct": true
+        },
+        "codeSystem": {
+          "expected": "HCPCS",
+          "got": "HCPCS",
+          "correct": true
+        },
+        "billedUsd": {
+          "expected": 6000,
+          "got": 6000,
+          "correct": true
+        },
+        "payerName": {
+          "expected": "Prairie Commons Medicaid Plan",
+          "got": "Prairie Commons Medicaid Plan",
+          "correct": true
+        }
+      }
+    },
+    {
+      "caseId": "case-019",
+      "latencyMs": 2609,
+      "usage": {
+        "inputTokens": 2717,
+        "cachedInputTokens": 369,
+        "cacheWriteTokens": 0,
+        "outputTokens": 324,
+        "thinkingTokens": 233
+      },
+      "costUsd": 0.004828600000000001,
+      "stopReason": "end_turn",
+      "got": {
+        "billedUsd": 25000,
+        "carc": "50",
+        "code": "27447",
+        "codeSystem": "CPT",
+        "dateOfService": "2026-09-04",
+        "payerName": "Silverline Medicare Advantage",
+        "remark": "Documentation does not establish failure of conservative treatment prior to arthroplasty.",
+        "serviceEnd": ""
+      },
+      "fields": {
+        "carc": {
+          "expected": "50",
+          "got": "50",
+          "correct": true
+        },
+        "remark": {
+          "expected": "Documentation does not establish failure of conservative treatment prior to arthroplasty.",
+          "got": "Documentation does not establish failure of conservative treatment prior to arthroplasty.",
+          "correct": true
+        },
+        "dateOfService": {
+          "expected": "2026-09-04",
+          "got": "2026-09-04",
+          "correct": true
+        },
+        "serviceEnd": {
+          "expected": null,
+          "got": null,
+          "correct": true
+        },
+        "code": {
+          "expected": "27447",
+          "got": "27447",
+          "correct": true
+        },
+        "codeSystem": {
+          "expected": "CPT",
+          "got": "CPT",
+          "correct": true
+        },
+        "billedUsd": {
+          "expected": 25000,
+          "got": 25000,
+          "correct": true
+        },
+        "payerName": {
+          "expected": "Silverline Medicare Advantage",
+          "got": "Silverline Medicare Advantage",
+          "correct": true
+        }
+      }
+    },
+    {
+      "caseId": "case-020",
+      "latencyMs": 2329,
+      "usage": {
+        "inputTokens": 2717,
+        "cachedInputTokens": 369,
+        "cacheWriteTokens": 0,
+        "outputTokens": 432,
+        "thinkingTokens": 335
+      },
+      "costUsd": 0.0052876,
+      "stopReason": "end_turn",
+      "got": {
+        "billedUsd": 11000,
+        "carc": "50",
+        "code": "J9271",
+        "codeSystem": "HCPCS",
+        "dateOfService": "2026-04-02",
+        "payerName": "Lanternhill Health Plan",
+        "remark": "Documentation does not establish that the coverage criteria for pembrolizumab in this indication are met.",
+        "serviceEnd": ""
+      },
+      "fields": {
+        "carc": {
+          "expected": "50",
+          "got": "50",
+          "correct": true
+        },
+        "remark": {
+          "expected": "Documentation does not establish that the coverage criteria for pembrolizumab in this indication are met.",
+          "got": "Documentation does not establish that the coverage criteria for pembrolizumab in this indication are met.",
+          "correct": true
+        },
+        "dateOfService": {
+          "expected": "2026-04-02",
+          "got": "2026-04-02",
+          "correct": true
+        },
+        "serviceEnd": {
+          "expected": null,
+          "got": null,
+          "correct": true
+        },
+        "code": {
+          "expected": "J9271",
+          "got": "J9271",
+          "correct": true
+        },
+        "codeSystem": {
+          "expected": "HCPCS",
+          "got": "HCPCS",
+          "correct": true
+        },
+        "billedUsd": {
+          "expected": 11000,
+          "got": 11000,
+          "correct": true
+        },
+        "payerName": {
+          "expected": "Lanternhill Health Plan",
+          "got": "Lanternhill Health Plan",
+          "correct": true
+        }
+      }
+    },
+    {
+      "caseId": "case-021",
+      "latencyMs": 2489,
+      "usage": {
+        "inputTokens": 2717,
+        "cachedInputTokens": 369,
+        "cacheWriteTokens": 0,
+        "outputTokens": 599,
+        "thinkingTokens": 502
+      },
+      "costUsd": 0.00599735,
+      "stopReason": "end_turn",
+      "got": {
+        "billedUsd": 12000,
+        "carc": "50",
+        "code": "871",
+        "codeSystem": "MS-DRG",
+        "dateOfService": "2026-02-04",
+        "payerName": "Saltmarsh Benefits Administrators",
+        "remark": "Inpatient level of care is not supported by the clinical documentation. Observation services were appropriate for the services rendered; the claim is denied as billed.",
+        "serviceEnd": "2026-02-08"
+      },
+      "fields": {
+        "carc": {
+          "expected": "50",
+          "got": "50",
+          "correct": true
+        },
+        "remark": {
+          "expected": "Inpatient level of care is not supported by the clinical documentation. Observation services were appropriate for the services rendered; the claim is denied as billed.",
+          "got": "Inpatient level of care is not supported by the clinical documentation. Observation services were appropriate for the services rendered; the claim is denied as billed.",
+          "correct": true
+        },
+        "dateOfService": {
+          "expected": "2026-02-04",
+          "got": "2026-02-04",
+          "correct": true
+        },
+        "serviceEnd": {
+          "expected": "2026-02-08",
+          "got": "2026-02-08",
+          "correct": true
+        },
+        "code": {
+          "expected": "871",
+          "got": "871",
+          "correct": true
+        },
+        "codeSystem": {
+          "expected": "MS-DRG",
+          "got": "MS-DRG",
+          "correct": true
+        },
+        "billedUsd": {
+          "expected": 12000,
+          "got": 12000,
+          "correct": true
+        },
+        "payerName": {
+          "expected": "Saltmarsh Benefits Administrators",
+          "got": "Saltmarsh Benefits Administrators",
+          "correct": true
+        }
+      }
+    },
+    {
+      "caseId": "case-022",
+      "latencyMs": 2204,
+      "usage": {
+        "inputTokens": 2717,
+        "cachedInputTokens": 369,
+        "cacheWriteTokens": 0,
+        "outputTokens": 354,
+        "thinkingTokens": 282
+      },
+      "costUsd": 0.004956100000000001,
+      "stopReason": "end_turn",
+      "got": {
+        "billedUsd": 18000,
+        "carc": "96",
+        "code": "43775",
+        "codeSystem": "CPT",
+        "dateOfService": "2026-06-11",
+        "payerName": "Saltmarsh Benefits Administrators",
+        "remark": "Bariatric surgery is a listed plan exclusion.",
+        "serviceEnd": ""
+      },
+      "fields": {
+        "carc": {
+          "expected": "96",
+          "got": "96",
+          "correct": true
+        },
+        "remark": {
+          "expected": "Bariatric surgery is a listed plan exclusion.",
+          "got": "Bariatric surgery is a listed plan exclusion.",
+          "correct": true
+        },
+        "dateOfService": {
+          "expected": "2026-06-11",
+          "got": "2026-06-11",
+          "correct": true
+        },
+        "serviceEnd": {
+          "expected": null,
+          "got": null,
+          "correct": true
+        },
+        "code": {
+          "expected": "43775",
+          "got": "43775",
+          "correct": true
+        },
+        "codeSystem": {
+          "expected": "CPT",
+          "got": "CPT",
+          "correct": true
+        },
+        "billedUsd": {
+          "expected": 18000,
+          "got": 18000,
+          "correct": true
+        },
+        "payerName": {
+          "expected": "Saltmarsh Benefits Administrators",
+          "got": "Saltmarsh Benefits Administrators",
+          "correct": true
+        }
+      }
+    },
+    {
+      "caseId": "case-023",
+      "latencyMs": 2703,
+      "usage": {
+        "inputTokens": 2717,
+        "cachedInputTokens": 369,
+        "cacheWriteTokens": 0,
+        "outputTokens": 505,
+        "thinkingTokens": 400
+      },
+      "costUsd": 0.005597850000000001,
+      "stopReason": "end_turn",
+      "got": {
+        "billedUsd": 25000,
+        "carc": "50",
+        "code": "0104",
+        "codeSystem": "CMG",
+        "dateOfService": "2026-07-25",
+        "payerName": "Silverline Medicare Advantage",
+        "remark": "Documentation does not demonstrate that the member required the intensity of services provided in an inpatient rehabilitation facility; the member’s needs could have been met at a skilled nursing facility level of care.",
+        "serviceEnd": "2026-08-08"
+      },
+      "fields": {
+        "carc": {
+          "expected": "50",
+          "got": "50",
+          "correct": true
+        },
+        "remark": {
+          "expected": "Documentation does not demonstrate that the member required the intensity of services provided in an inpatient rehabilitation facility; the member’s needs could have been met at a skilled nursing facility level of care.",
+          "got": "Documentation does not demonstrate that the member required the intensity of services provided in an inpatient rehabilitation facility; the member’s needs could have been met at a skilled nursing facility level of care.",
+          "correct": true
+        },
+        "dateOfService": {
+          "expected": "2026-07-25",
+          "got": "2026-07-25",
+          "correct": true
+        },
+        "serviceEnd": {
+          "expected": "2026-08-08",
+          "got": "2026-08-08",
+          "correct": true
+        },
+        "code": {
+          "expected": "0104",
+          "got": "0104",
+          "correct": true
+        },
+        "codeSystem": {
+          "expected": "CMG",
+          "got": "CMG",
+          "correct": true
+        },
+        "billedUsd": {
+          "expected": 25000,
+          "got": 25000,
+          "correct": true
+        },
+        "payerName": {
+          "expected": "Silverline Medicare Advantage",
+          "got": "Silverline Medicare Advantage",
+          "correct": true
+        }
+      }
+    },
+    {
+      "caseId": "case-024",
+      "latencyMs": 2514,
+      "usage": {
+        "inputTokens": 2717,
+        "cachedInputTokens": 369,
+        "cacheWriteTokens": 0,
+        "outputTokens": 465,
+        "thinkingTokens": 359
+      },
+      "costUsd": 0.0054278500000000006,
+      "stopReason": "end_turn",
+      "got": {
+        "billedUsd": 25000,
+        "carc": "197",
+        "code": "0104",
+        "codeSystem": "CMG",
+        "dateOfService": "2026-09-12",
+        "payerName": "Silverline Medicare Advantage",
+        "remark": "No authorization is on file. A retrospective medical necessity review may be requested with supporting clinical documentation within 60 days.",
+        "serviceEnd": "2026-09-26"
+      },
+      "fields": {
+        "carc": {
+          "expected": "197",
+          "got": "197",
+          "correct": true
+        },
+        "remark": {
+          "expected": "No authorization is on file. A retrospective medical necessity review may be requested with supporting clinical documentation within 60 days.",
+          "got": "No authorization is on file. A retrospective medical necessity review may be requested with supporting clinical documentation within 60 days.",
+          "correct": true
+        },
+        "dateOfService": {
+          "expected": "2026-09-12",
+          "got": "2026-09-12",
+          "correct": true
+        },
+        "serviceEnd": {
+          "expected": "2026-09-26",
+          "got": "2026-09-26",
+          "correct": true
+        },
+        "code": {
+          "expected": "0104",
+          "got": "0104",
+          "correct": true
+        },
+        "codeSystem": {
+          "expected": "CMG",
+          "got": "CMG",
+          "correct": true
+        },
+        "billedUsd": {
+          "expected": 25000,
+          "got": 25000,
+          "correct": true
+        },
+        "payerName": {
+          "expected": "Silverline Medicare Advantage",
+          "got": "Silverline Medicare Advantage",
+          "correct": true
+        }
+      }
+    },
+    {
+      "caseId": "case-025",
+      "latencyMs": 2615,
+      "usage": {
+        "inputTokens": 2717,
+        "cachedInputTokens": 369,
+        "cacheWriteTokens": 0,
+        "outputTokens": 415,
+        "thinkingTokens": 315
+      },
+      "costUsd": 0.0052153500000000005,
+      "stopReason": "end_turn",
+      "got": {
+        "billedUsd": 25000,
+        "carc": "50",
+        "code": "77301",
+        "codeSystem": "CPT",
+        "dateOfService": "2026-09-02",
+        "payerName": "Silverline Medicare Advantage",
+        "remark": "Intensity modulated radiation therapy is not medically necessary for breast cancer; three-dimensional conformal radiation therapy is the covered standard.",
+        "serviceEnd": ""
+      },
+      "fields": {
+        "carc": {
+          "expected": "50",
+          "got": "50",
+          "correct": true
+        },
+        "remark": {
+          "expected": "Intensity modulated radiation therapy is not medically necessary for breast cancer; three-dimensional conformal radiation therapy is the covered standard.",
+          "got": "Intensity modulated radiation therapy is not medically necessary for breast cancer; three-dimensional conformal radiation therapy is the covered standard.",
+          "correct": true
+        },
+        "dateOfService": {
+          "expected": "2026-09-02",
+          "got": "2026-09-02",
+          "correct": true
+        },
+        "serviceEnd": {
+          "expected": null,
+          "got": null,
+          "correct": true
+        },
+        "code": {
+          "expected": "77301",
+          "got": "77301",
+          "correct": true
+        },
+        "codeSystem": {
+          "expected": "CPT",
+          "got": "CPT",
+          "correct": true
+        },
+        "billedUsd": {
+          "expected": 25000,
+          "got": 25000,
+          "correct": true
+        },
+        "payerName": {
+          "expected": "Silverline Medicare Advantage",
+          "got": "Silverline Medicare Advantage",
+          "correct": true
+        }
+      }
+    },
+    {
+      "caseId": "case-026",
+      "latencyMs": 2037,
+      "usage": {
+        "inputTokens": 2717,
+        "cachedInputTokens": 369,
+        "cacheWriteTokens": 0,
+        "outputTokens": 464,
+        "thinkingTokens": 383
+      },
+      "costUsd": 0.005423600000000001,
+      "stopReason": "end_turn",
+      "got": {
+        "billedUsd": 9000,
+        "carc": "50",
+        "code": "19318",
+        "codeSystem": "CPT",
+        "dateOfService": "2026-06-20",
+        "payerName": "Lanternhill Health Plan",
+        "remark": "Documentation submitted does not establish failure of conservative therapy or an expected resection weight meeting the policy threshold.",
+        "serviceEnd": ""
+      },
+      "fields": {
+        "carc": {
+          "expected": "50",
+          "got": "50",
+          "correct": true
+        },
+        "remark": {
+          "expected": "Documentation submitted does not establish failure of conservative therapy or an expected resection weight meeting the policy threshold.",
+          "got": "Documentation submitted does not establish failure of conservative therapy or an expected resection weight meeting the policy threshold.",
+          "correct": true
+        },
+        "dateOfService": {
+          "expected": "2026-06-20",
+          "got": "2026-06-20",
+          "correct": true
+        },
+        "serviceEnd": {
+          "expected": null,
+          "got": null,
+          "correct": true
+        },
+        "code": {
+          "expected": "19318",
+          "got": "19318",
+          "correct": true
+        },
+        "codeSystem": {
+          "expected": "CPT",
+          "got": "CPT",
+          "correct": true
+        },
+        "billedUsd": {
+          "expected": 9000,
+          "got": 9000,
+          "correct": true
+        },
+        "payerName": {
+          "expected": "Lanternhill Health Plan",
+          "got": "Lanternhill Health Plan",
+          "correct": true
+        }
+      }
+    },
+    {
+      "caseId": "case-027",
+      "latencyMs": 2734,
+      "usage": {
+        "inputTokens": 2717,
+        "cachedInputTokens": 369,
+        "cacheWriteTokens": 0,
+        "outputTokens": 305,
+        "thinkingTokens": 211
+      },
+      "costUsd": 0.0047478500000000005,
+      "stopReason": "end_turn",
+      "got": {
+        "billedUsd": 8000,
+        "carc": "50",
+        "code": "15271",
+        "codeSystem": "CPT",
+        "dateOfService": "2026-02-14",
+        "payerName": "Saltmarsh Benefits Administrators",
+        "remark": "Documentation does not meet coverage criteria for cellular and tissue-based products for wounds.",
+        "serviceEnd": ""
+      },
+      "fields": {
+        "carc": {
+          "expected": "50",
+          "got": "50",
+          "correct": true
+        },
+        "remark": {
+          "expected": "Documentation does not meet coverage criteria for cellular and tissue-based products for wounds.",
+          "got": "Documentation does not meet coverage criteria for cellular and tissue-based products for wounds.",
+          "correct": true
+        },
+        "dateOfService": {
+          "expected": "2026-02-14",
+          "got": "2026-02-14",
+          "correct": true
+        },
+        "serviceEnd": {
+          "expected": null,
+          "got": null,
+          "correct": true
+        },
+        "code": {
+          "expected": "15271",
+          "got": "15271",
+          "correct": true
+        },
+        "codeSystem": {
+          "expected": "CPT",
+          "got": "CPT",
+          "correct": true
+        },
+        "billedUsd": {
+          "expected": 8000,
+          "got": 8000,
+          "correct": true
+        },
+        "payerName": {
+          "expected": "Saltmarsh Benefits Administrators",
+          "got": "Saltmarsh Benefits Administrators",
+          "correct": true
+        }
+      }
+    },
+    {
+      "caseId": "case-028",
+      "latencyMs": 2754,
+      "usage": {
+        "inputTokens": 2717,
+        "cachedInputTokens": 369,
+        "cacheWriteTokens": 0,
+        "outputTokens": 452,
+        "thinkingTokens": 352
+      },
+      "costUsd": 0.0053726,
+      "stopReason": "end_turn",
+      "got": {
+        "billedUsd": 40000,
+        "carc": "50",
+        "code": "63685",
+        "codeSystem": "CPT",
+        "dateOfService": "2026-01-30",
+        "payerName": "Northwind Mutual Health",
+        "remark": "Documentation does not establish a successful trial meeting the plan’s definition of 50 percent pain reduction with functional improvement.",
+        "serviceEnd": ""
+      },
+      "fields": {
+        "carc": {
+          "expected": "50",
+          "got": "50",
+          "correct": true
+        },
+        "remark": {
+          "expected": "Documentation does not establish a successful trial meeting the plan’s definition of 50 percent pain reduction with functional improvement.",
+          "got": "Documentation does not establish a successful trial meeting the plan’s definition of 50 percent pain reduction with functional improvement.",
+          "correct": true
+        },
+        "dateOfService": {
+          "expected": "2026-01-30",
+          "got": "2026-01-30",
+          "correct": true
+        },
+        "serviceEnd": {
+          "expected": null,
+          "got": null,
+          "correct": true
+        },
+        "code": {
+          "expected": "63685",
+          "got": "63685",
+          "correct": true
+        },
+        "codeSystem": {
+          "expected": "CPT",
+          "got": "CPT",
+          "correct": true
+        },
+        "billedUsd": {
+          "expected": 40000,
+          "got": 40000,
+          "correct": true
+        },
+        "payerName": {
+          "expected": "Northwind Mutual Health",
+          "got": "Northwind Mutual Health",
+          "correct": true
+        }
+      }
+    },
+    {
+      "caseId": "case-029",
+      "latencyMs": 3007,
+      "usage": {
+        "inputTokens": 2717,
+        "cachedInputTokens": 369,
+        "cacheWriteTokens": 0,
+        "outputTokens": 430,
+        "thinkingTokens": 347
+      },
+      "costUsd": 0.0052791,
+      "stopReason": "end_turn",
+      "got": {
+        "billedUsd": 25000,
+        "carc": "50",
+        "code": "77301",
+        "codeSystem": "CPT",
+        "dateOfService": "2026-07-11",
+        "payerName": "Copperfield Health",
+        "remark": "Intensity modulated radiation therapy is not medically necessary for breast cancer; three-dimensional conformal radiation therapy is the covered standard.",
+        "serviceEnd": ""
+      },
+      "fields": {
+        "carc": {
+          "expected": "50",
+          "got": "50",
+          "correct": true
+        },
+        "remark": {
+          "expected": "Intensity modulated radiation therapy is not medically necessary for breast cancer; three-dimensional conformal radiation therapy is the covered standard.",
+          "got": "Intensity modulated radiation therapy is not medically necessary for breast cancer; three-dimensional conformal radiation therapy is the covered standard.",
+          "correct": true
+        },
+        "dateOfService": {
+          "expected": "2026-07-11",
+          "got": "2026-07-11",
+          "correct": true
+        },
+        "serviceEnd": {
+          "expected": null,
+          "got": null,
+          "correct": true
+        },
+        "code": {
+          "expected": "77301",
+          "got": "77301",
+          "correct": true
+        },
+        "codeSystem": {
+          "expected": "CPT",
+          "got": "CPT",
+          "correct": true
+        },
+        "billedUsd": {
+          "expected": 25000,
+          "got": 25000,
+          "correct": true
+        },
+        "payerName": {
+          "expected": "Copperfield Health",
+          "got": "Copperfield Health",
+          "correct": true
+        }
+      }
+    },
+    {
+      "caseId": "case-030",
+      "latencyMs": 2233,
+      "usage": {
+        "inputTokens": 2717,
+        "cachedInputTokens": 369,
+        "cacheWriteTokens": 0,
+        "outputTokens": 336,
+        "thinkingTokens": 241
+      },
+      "costUsd": 0.0048796,
+      "stopReason": "end_turn",
+      "got": {
+        "billedUsd": 45000,
+        "carc": "50",
+        "code": "22630",
+        "codeSystem": "CPT",
+        "dateOfService": "2026-07-15",
+        "payerName": "Prairie Commons Medicaid Plan",
+        "remark": "Documentation does not demonstrate instability requiring fusion; decompression alone would be the covered procedure.",
+        "serviceEnd": ""
+      },
+      "fields": {
+        "carc": {
+          "expected": "50",
+          "got": "50",
+          "correct": true
+        },
+        "remark": {
+          "expected": "Documentation does not demonstrate instability requiring fusion; decompression alone would be the covered procedure.",
+          "got": "Documentation does not demonstrate instability requiring fusion; decompression alone would be the covered procedure.",
+          "correct": true
+        },
+        "dateOfService": {
+          "expected": "2026-07-15",
+          "got": "2026-07-15",
+          "correct": true
+        },
+        "serviceEnd": {
+          "expected": null,
+          "got": null,
+          "correct": true
+        },
+        "code": {
+          "expected": "22630",
+          "got": "22630",
+          "correct": true
+        },
+        "codeSystem": {
+          "expected": "CPT",
+          "got": "CPT",
+          "correct": true
+        },
+        "billedUsd": {
+          "expected": 45000,
+          "got": 45000,
+          "correct": true
+        },
+        "payerName": {
+          "expected": "Prairie Commons Medicaid Plan",
+          "got": "Prairie Commons Medicaid Plan",
+          "correct": true
+        }
+      }
+    },
+    {
+      "caseId": "case-031",
+      "latencyMs": 3997,
+      "usage": {
+        "inputTokens": 2717,
+        "cachedInputTokens": 369,
+        "cacheWriteTokens": 0,
+        "outputTokens": 753,
+        "thinkingTokens": 651
+      },
+      "costUsd": 0.00665185,
+      "stopReason": "end_turn",
+      "got": {
+        "billedUsd": 8000,
+        "carc": "50",
+        "code": "KD0B1",
+        "codeSystem": "HIPPS",
+        "dateOfService": "2026-07-25",
+        "payerName": "Silverline Medicare Advantage",
+        "remark": "Based on review of the clinical record, the member no longer required daily skilled services as of day 15 and could have been safely managed at home with home health services.",
+        "serviceEnd": "2026-08-07"
+      },
+      "fields": {
+        "carc": {
+          "expected": "50",
+          "got": "50",
+          "correct": true
+        },
+        "remark": {
+          "expected": "Based on review of the clinical record, the member no longer required daily skilled services as of day 15 and could have been safely managed at home with home health services.",
+          "got": "Based on review of the clinical record, the member no longer required daily skilled services as of day 15 and could have been safely managed at home with home health services.",
+          "correct": true
+        },
+        "dateOfService": {
+          "expected": "2026-07-25",
+          "got": "2026-07-25",
+          "correct": true
+        },
+        "serviceEnd": {
+          "expected": "2026-08-07",
+          "got": "2026-08-07",
+          "correct": true
+        },
+        "code": {
+          "expected": "KDOB1",
+          "got": "KD0B1",
+          "correct": false
+        },
+        "codeSystem": {
+          "expected": "HIPPS",
+          "got": "HIPPS",
+          "correct": true
+        },
+        "billedUsd": {
+          "expected": 8000,
+          "got": 8000,
+          "correct": true
+        },
+        "payerName": {
+          "expected": "Silverline Medicare Advantage",
+          "got": "Silverline Medicare Advantage",
+          "correct": true
+        }
+      }
+    },
+    {
+      "caseId": "case-032",
+      "latencyMs": 2743,
+      "usage": {
+        "inputTokens": 2717,
+        "cachedInputTokens": 369,
+        "cacheWriteTokens": 0,
+        "outputTokens": 656,
+        "thinkingTokens": 554
+      },
+      "costUsd": 0.0062396000000000005,
+      "stopReason": "end_turn",
+      "got": {
+        "billedUsd": 8000,
+        "carc": "50",
+        "code": "KD0B1",
+        "codeSystem": "HIPPS",
+        "dateOfService": "2026-03-23",
+        "payerName": "Silverline Medicare Advantage",
+        "remark": "Based on review of the clinical record, the member no longer required daily skilled services as of day 15 and could have been safely managed at home with home health services.",
+        "serviceEnd": "2026-04-05"
+      },
+      "fields": {
+        "carc": {
+          "expected": "50",
+          "got": "50",
+          "correct": true
+        },
+        "remark": {
+          "expected": "Based on review of the clinical record, the member no longer required daily skilled services as of day 15 and could have been safely managed at home with home health services.",
+          "got": "Based on review of the clinical record, the member no longer required daily skilled services as of day 15 and could have been safely managed at home with home health services.",
+          "correct": true
+        },
+        "dateOfService": {
+          "expected": "2026-03-23",
+          "got": "2026-03-23",
+          "correct": true
+        },
+        "serviceEnd": {
+          "expected": "2026-04-05",
+          "got": "2026-04-05",
+          "correct": true
+        },
+        "code": {
+          "expected": "KDOB1",
+          "got": "KD0B1",
+          "correct": false
+        },
+        "codeSystem": {
+          "expected": "HIPPS",
+          "got": "HIPPS",
+          "correct": true
+        },
+        "billedUsd": {
+          "expected": 8000,
+          "got": 8000,
+          "correct": true
+        },
+        "payerName": {
+          "expected": "Silverline Medicare Advantage",
+          "got": "Silverline Medicare Advantage",
+          "correct": true
+        }
+      }
+    },
+    {
+      "caseId": "case-033",
+      "latencyMs": 2672,
+      "usage": {
+        "inputTokens": 2717,
+        "cachedInputTokens": 369,
+        "cacheWriteTokens": 0,
+        "outputTokens": 466,
+        "thinkingTokens": 352
+      },
+      "costUsd": 0.0054321000000000005,
+      "stopReason": "end_turn",
+      "got": {
+        "billedUsd": 12000,
+        "carc": "50",
+        "code": "871",
+        "codeSystem": "MS-DRG",
+        "dateOfService": "2026-04-18",
+        "payerName": "Saltmarsh Benefits Administrators",
+        "remark": "Inpatient level of care is not supported by the clinical documentation. Observation services were appropriate for the services rendered; the claim is denied as billed.",
+        "serviceEnd": "2026-04-19"
+      },
+      "fields": {
+        "carc": {
+          "expected": "50",
+          "got": "50",
+          "correct": true
+        },
+        "remark": {
+          "expected": "Inpatient level of care is not supported by the clinical documentation. Observation services were appropriate for the services rendered; the claim is denied as billed.",
+          "got": "Inpatient level of care is not supported by the clinical documentation. Observation services were appropriate for the services rendered; the claim is denied as billed.",
+          "correct": true
+        },
+        "dateOfService": {
+          "expected": "2026-04-18",
+          "got": "2026-04-18",
+          "correct": true
+        },
+        "serviceEnd": {
+          "expected": "2026-04-19",
+          "got": "2026-04-19",
+          "correct": true
+        },
+        "code": {
+          "expected": "871",
+          "got": "871",
+          "correct": true
+        },
+        "codeSystem": {
+          "expected": "MS-DRG",
+          "got": "MS-DRG",
+          "correct": true
+        },
+        "billedUsd": {
+          "expected": 12000,
+          "got": 12000,
+          "correct": true
+        },
+        "payerName": {
+          "expected": "Saltmarsh Benefits Administrators",
+          "got": "Saltmarsh Benefits Administrators",
+          "correct": true
+        }
+      }
+    },
+    {
+      "caseId": "case-034",
+      "latencyMs": 3765,
+      "usage": {
+        "inputTokens": 2717,
+        "cachedInputTokens": 369,
+        "cacheWriteTokens": 0,
+        "outputTokens": 536,
+        "thinkingTokens": 414
+      },
+      "costUsd": 0.0057296000000000005,
+      "stopReason": "end_turn",
+      "got": {
+        "billedUsd": 25000,
+        "carc": "50",
+        "code": "0104",
+        "codeSystem": "CMG",
+        "dateOfService": "2026-06-30",
+        "payerName": "Silverline Medicare Advantage",
+        "remark": "Documentation does not demonstrate that the member required the intensity of services provided in an inpatient rehabilitation facility; the member’s needs could have been met at a skilled nursing facility level of care.",
+        "serviceEnd": "2026-07-14"
+      },
+      "fields": {
+        "carc": {
+          "expected": "50",
+          "got": "50",
+          "correct": true
+        },
+        "remark": {
+          "expected": "Documentation does not demonstrate that the member required the intensity of services provided in an inpatient rehabilitation facility; the member’s needs could have been met at a skilled nursing facility level of care.",
+          "got": "Documentation does not demonstrate that the member required the intensity of services provided in an inpatient rehabilitation facility; the member’s needs could have been met at a skilled nursing facility level of care.",
+          "correct": true
+        },
+        "dateOfService": {
+          "expected": "2026-06-30",
+          "got": "2026-06-30",
+          "correct": true
+        },
+        "serviceEnd": {
+          "expected": "2026-07-14",
+          "got": "2026-07-14",
+          "correct": true
+        },
+        "code": {
+          "expected": "0104",
+          "got": "0104",
+          "correct": true
+        },
+        "codeSystem": {
+          "expected": "CMG",
+          "got": "CMG",
+          "correct": true
+        },
+        "billedUsd": {
+          "expected": 25000,
+          "got": 25000,
+          "correct": true
+        },
+        "payerName": {
+          "expected": "Silverline Medicare Advantage",
+          "got": "Silverline Medicare Advantage",
+          "correct": true
+        }
+      }
+    },
+    {
+      "caseId": "case-035",
+      "latencyMs": 2734,
+      "usage": {
+        "inputTokens": 2717,
+        "cachedInputTokens": 369,
+        "cacheWriteTokens": 0,
+        "outputTokens": 481,
+        "thinkingTokens": 401
+      },
+      "costUsd": 0.00549585,
+      "stopReason": "end_turn",
+      "got": {
+        "billedUsd": 3500,
+        "carc": "56",
+        "code": "81455",
+        "codeSystem": "CPT",
+        "dateOfService": "2026-01-25",
+        "payerName": "Copperfield Health",
+        "remark": "Multi-gene panel testing is considered investigational for this diagnosis based on the documentation submitted.",
+        "serviceEnd": ""
+      },
+      "fields": {
+        "carc": {
+          "expected": "56",
+          "got": "56",
+          "correct": true
+        },
+        "remark": {
+          "expected": "Multi-gene panel testing is considered investigational for this diagnosis based on the documentation submitted.",
+          "got": "Multi-gene panel testing is considered investigational for this diagnosis based on the documentation submitted.",
+          "correct": true
+        },
+        "dateOfService": {
+          "expected": "2026-01-25",
+          "got": "2026-01-25",
+          "correct": true
+        },
+        "serviceEnd": {
+          "expected": null,
+          "got": null,
+          "correct": true
+        },
+        "code": {
+          "expected": "81455",
+          "got": "81455",
+          "correct": true
+        },
+        "codeSystem": {
+          "expected": "CPT",
+          "got": "CPT",
+          "correct": true
+        },
+        "billedUsd": {
+          "expected": 3500,
+          "got": 3500,
+          "correct": true
+        },
+        "payerName": {
+          "expected": "Copperfield Health",
+          "got": "Copperfield Health",
+          "correct": true
+        }
+      }
+    },
+    {
+      "caseId": "case-036",
+      "latencyMs": 3001,
+      "usage": {
+        "inputTokens": 2717,
+        "cachedInputTokens": 369,
+        "cacheWriteTokens": 0,
+        "outputTokens": 462,
+        "thinkingTokens": 373
+      },
+      "costUsd": 0.0054151,
+      "stopReason": "end_turn",
+      "got": {
+        "billedUsd": 18000,
+        "carc": "50",
+        "code": "43775",
+        "codeSystem": "CPT",
+        "dateOfService": "2026-02-16",
+        "payerName": "Prairie Commons Medicaid Plan",
+        "remark": "Documentation does not demonstrate completion of the required supervised weight management program.",
+        "serviceEnd": ""
+      },
+      "fields": {
+        "carc": {
+          "expected": "50",
+          "got": "50",
+          "correct": true
+        },
+        "remark": {
+          "expected": "Documentation does not demonstrate completion of the required supervised weight management program.",
+          "got": "Documentation does not demonstrate completion of the required supervised weight management program.",
+          "correct": true
+        },
+        "dateOfService": {
+          "expected": "2026-02-16",
+          "got": "2026-02-16",
+          "correct": true
+        },
+        "serviceEnd": {
+          "expected": null,
+          "got": null,
+          "correct": true
+        },
+        "code": {
+          "expected": "43775",
+          "got": "43775",
+          "correct": true
+        },
+        "codeSystem": {
+          "expected": "CPT",
+          "got": "CPT",
+          "correct": true
+        },
+        "billedUsd": {
+          "expected": 18000,
+          "got": 18000,
+          "correct": true
+        },
+        "payerName": {
+          "expected": "Prairie Commons Medicaid Plan",
+          "got": "Prairie Commons Medicaid Plan",
+          "correct": true
+        }
+      }
+    },
+    {
+      "caseId": "case-037",
+      "latencyMs": 2634,
+      "usage": {
+        "inputTokens": 2717,
+        "cachedInputTokens": 369,
+        "cacheWriteTokens": 0,
+        "outputTokens": 335,
+        "thinkingTokens": 235
+      },
+      "costUsd": 0.0048753500000000005,
+      "stopReason": "end_turn",
+      "got": {
+        "billedUsd": 35000,
+        "carc": "50",
+        "code": "33249",
+        "codeSystem": "CPT",
+        "dateOfService": "2026-06-09",
+        "payerName": "Silverline Medicare Advantage",
+        "remark": "Documentation does not establish an ejection fraction of 35 percent or less after an adequate trial of guideline-directed medical therapy.",
+        "serviceEnd": ""
+      },
+      "fields": {
+        "carc": {
+          "expected": "50",
+          "got": "50",
+          "correct": true
+        },
+        "remark": {
+          "expected": "Documentation does not establish an ejection fraction of 35 percent or less after an adequate trial of guideline-directed medical therapy.",
+          "got": "Documentation does not establish an ejection fraction of 35 percent or less after an adequate trial of guideline-directed medical therapy.",
+          "correct": true
+        },
+        "dateOfService": {
+          "expected": "2026-06-09",
+          "got": "2026-06-09",
+          "correct": true
+        },
+        "serviceEnd": {
+          "expected": null,
+          "got": null,
+          "correct": true
+        },
+        "code": {
+          "expected": "33249",
+          "got": "33249",
+          "correct": true
+        },
+        "codeSystem": {
+          "expected": "CPT",
+          "got": "CPT",
+          "correct": true
+        },
+        "billedUsd": {
+          "expected": 35000,
+          "got": 35000,
+          "correct": true
+        },
+        "payerName": {
+          "expected": "Silverline Medicare Advantage",
+          "got": "Silverline Medicare Advantage",
+          "correct": true
+        }
+      }
+    },
+    {
+      "caseId": "case-038",
+      "latencyMs": 3596,
+      "usage": {
+        "inputTokens": 2717,
+        "cachedInputTokens": 369,
+        "cacheWriteTokens": 0,
+        "outputTokens": 548,
+        "thinkingTokens": 452
+      },
+      "costUsd": 0.0057806,
+      "stopReason": "end_turn",
+      "got": {
+        "billedUsd": 20000,
+        "carc": "50",
+        "code": "92928",
+        "codeSystem": "CPT",
+        "dateOfService": "2026-01-26",
+        "payerName": "Lanternhill Health Plan",
+        "remark": "Documentation does not establish refractory angina on optimal medical therapy or objective ischemia in the target vessel.",
+        "serviceEnd": ""
+      },
+      "fields": {
+        "carc": {
+          "expected": "50",
+          "got": "50",
+          "correct": true
+        },
+        "remark": {
+          "expected": "Documentation does not establish refractory angina on optimal medical therapy or objective ischemia in the target vessel.",
+          "got": "Documentation does not establish refractory angina on optimal medical therapy or objective ischemia in the target vessel.",
+          "correct": true
+        },
+        "dateOfService": {
+          "expected": "2026-01-26",
+          "got": "2026-01-26",
+          "correct": true
+        },
+        "serviceEnd": {
+          "expected": null,
+          "got": null,
+          "correct": true
+        },
+        "code": {
+          "expected": "92928",
+          "got": "92928",
+          "correct": true
+        },
+        "codeSystem": {
+          "expected": "CPT",
+          "got": "CPT",
+          "correct": true
+        },
+        "billedUsd": {
+          "expected": 20000,
+          "got": 20000,
+          "correct": true
+        },
+        "payerName": {
+          "expected": "Lanternhill Health Plan",
+          "got": "Lanternhill Health Plan",
+          "correct": true
+        }
+      }
+    },
+    {
+      "caseId": "case-039",
+      "latencyMs": 3022,
+      "usage": {
+        "inputTokens": 2717,
+        "cachedInputTokens": 369,
+        "cacheWriteTokens": 0,
+        "outputTokens": 509,
+        "thinkingTokens": 418
+      },
+      "costUsd": 0.00561485,
+      "stopReason": "end_turn",
+      "got": {
+        "billedUsd": 25000,
+        "carc": "50",
+        "code": "27447",
+        "codeSystem": "CPT",
+        "dateOfService": "2026-05-17",
+        "payerName": "Saltmarsh Benefits Administrators",
+        "remark": "Documentation does not establish failure of conservative treatment prior to arthroplasty.",
+        "serviceEnd": ""
+      },
+      "fields": {
+        "carc": {
+          "expected": "50",
+          "got": "50",
+          "correct": true
+        },
+        "remark": {
+          "expected": "Documentation does not establish failure of conservative treatment prior to arthroplasty.",
+          "got": "Documentation does not establish failure of conservative treatment prior to arthroplasty.",
+          "correct": true
+        },
+        "dateOfService": {
+          "expected": "2026-05-17",
+          "got": "2026-05-17",
+          "correct": true
+        },
+        "serviceEnd": {
+          "expected": null,
+          "got": null,
+          "correct": true
+        },
+        "code": {
+          "expected": "27447",
+          "got": "27447",
+          "correct": true
+        },
+        "codeSystem": {
+          "expected": "CPT",
+          "got": "CPT",
+          "correct": true
+        },
+        "billedUsd": {
+          "expected": 25000,
+          "got": 25000,
+          "correct": true
+        },
+        "payerName": {
+          "expected": "Saltmarsh Benefits Administrators",
+          "got": "Saltmarsh Benefits Administrators",
+          "correct": true
+        }
+      }
+    },
+    {
+      "caseId": "case-040",
+      "latencyMs": 2913,
+      "usage": {
+        "inputTokens": 2717,
+        "cachedInputTokens": 369,
+        "cacheWriteTokens": 0,
+        "outputTokens": 550,
+        "thinkingTokens": 452
+      },
+      "costUsd": 0.0057891,
+      "stopReason": "end_turn",
+      "got": {
+        "billedUsd": 6000,
+        "carc": "197",
+        "code": "J1745",
+        "codeSystem": "HCPCS",
+        "dateOfService": "2026-04-08",
+        "payerName": "Northwind Mutual Health",
+        "remark": "No authorization is on file. Under the plan terms, services rendered without prior authorization are not eligible for retrospective review. This is an administrative determination and not a medical necessity determination.",
+        "serviceEnd": ""
+      },
+      "fields": {
+        "carc": {
+          "expected": "197",
+          "got": "197",
+          "correct": true
+        },
+        "remark": {
+          "expected": "No authorization is on file. Under the plan terms, services rendered without prior authorization are not eligible for retrospective review. This is an administrative determination and not a medical necessity determination.",
+          "got": "No authorization is on file. Under the plan terms, services rendered without prior authorization are not eligible for retrospective review. This is an administrative determination and not a medical necessity determination.",
+          "correct": true
+        },
+        "dateOfService": {
+          "expected": "2026-04-08",
+          "got": "2026-04-08",
+          "correct": true
+        },
+        "serviceEnd": {
+          "expected": null,
+          "got": null,
+          "correct": true
+        },
+        "code": {
+          "expected": "J1745",
+          "got": "J1745",
+          "correct": true
+        },
+        "codeSystem": {
+          "expected": "HCPCS",
+          "got": "HCPCS",
+          "correct": true
+        },
+        "billedUsd": {
+          "expected": 6000,
+          "got": 6000,
+          "correct": true
+        },
+        "payerName": {
+          "expected": "Northwind Mutual Health",
+          "got": "Northwind Mutual Health",
+          "correct": true
+        }
+      }
+    },
+    {
+      "caseId": "case-041",
+      "latencyMs": 2364,
+      "usage": {
+        "inputTokens": 2717,
+        "cachedInputTokens": 369,
+        "cacheWriteTokens": 0,
+        "outputTokens": 383,
+        "thinkingTokens": 290
+      },
+      "costUsd": 0.005079350000000001,
+      "stopReason": "end_turn",
+      "got": {
+        "billedUsd": 15000,
+        "carc": "56",
+        "code": "37227",
+        "codeSystem": "CPT",
+        "dateOfService": "2026-05-06",
+        "payerName": "Copperfield Health",
+        "remark": "Atherectomy is considered investigational for femoropopliteal disease.",
+        "serviceEnd": ""
+      },
+      "fields": {
+        "carc": {
+          "expected": "56",
+          "got": "56",
+          "correct": true
+        },
+        "remark": {
+          "expected": "Atherectomy is considered investigational for femoropopliteal disease.",
+          "got": "Atherectomy is considered investigational for femoropopliteal disease.",
+          "correct": true
+        },
+        "dateOfService": {
+          "expected": "2026-05-06",
+          "got": "2026-05-06",
+          "correct": true
+        },
+        "serviceEnd": {
+          "expected": null,
+          "got": null,
+          "correct": true
+        },
+        "code": {
+          "expected": "37227",
+          "got": "37227",
+          "correct": true
+        },
+        "codeSystem": {
+          "expected": "CPT",
+          "got": "CPT",
+          "correct": true
+        },
+        "billedUsd": {
+          "expected": 15000,
+          "got": 15000,
+          "correct": true
+        },
+        "payerName": {
+          "expected": "Copperfield Health",
+          "got": "Copperfield Health",
+          "correct": true
+        }
+      }
+    },
+    {
+      "caseId": "case-042",
+      "latencyMs": 2640,
+      "usage": {
+        "inputTokens": 2717,
+        "cachedInputTokens": 369,
+        "cacheWriteTokens": 0,
+        "outputTokens": 389,
+        "thinkingTokens": 293
+      },
+      "costUsd": 0.00510485,
+      "stopReason": "end_turn",
+      "got": {
+        "billedUsd": 18000,
+        "carc": "167",
+        "code": "35301",
+        "codeSystem": "CPT",
+        "dateOfService": "2026-08-07",
+        "payerName": "Prairie Commons Medicaid Plan",
+        "remark": "The diagnosis reported (cerebral atherosclerosis, unspecified) is not a covered indication for this procedure.",
+        "serviceEnd": ""
+      },
+      "fields": {
+        "carc": {
+          "expected": "167",
+          "got": "167",
+          "correct": true
+        },
+        "remark": {
+          "expected": "The diagnosis reported (cerebral atherosclerosis, unspecified) is not a covered indication for this procedure.",
+          "got": "The diagnosis reported (cerebral atherosclerosis, unspecified) is not a covered indication for this procedure.",
+          "correct": true
+        },
+        "dateOfService": {
+          "expected": "2026-08-07",
+          "got": "2026-08-07",
+          "correct": true
+        },
+        "serviceEnd": {
+          "expected": null,
+          "got": null,
+          "correct": true
+        },
+        "code": {
+          "expected": "35301",
+          "got": "35301",
+          "correct": true
+        },
+        "codeSystem": {
+          "expected": "CPT",
+          "got": "CPT",
+          "correct": true
+        },
+        "billedUsd": {
+          "expected": 18000,
+          "got": 18000,
+          "correct": true
+        },
+        "payerName": {
+          "expected": "Prairie Commons Medicaid Plan",
+          "got": "Prairie Commons Medicaid Plan",
+          "correct": true
+        }
+      }
+    },
+    {
+      "caseId": "case-043",
+      "latencyMs": 2721,
+      "usage": {
+        "inputTokens": 2717,
+        "cachedInputTokens": 369,
+        "cacheWriteTokens": 0,
+        "outputTokens": 415,
+        "thinkingTokens": 323
+      },
+      "costUsd": 0.0052153500000000005,
+      "stopReason": "end_turn",
+      "got": {
+        "billedUsd": 45000,
+        "carc": "50",
+        "code": "22630",
+        "codeSystem": "CPT",
+        "dateOfService": "2026-05-19",
+        "payerName": "Silverline Medicare Advantage",
+        "remark": "Documentation does not demonstrate instability requiring fusion; decompression alone would be the covered procedure.",
+        "serviceEnd": ""
+      },
+      "fields": {
+        "carc": {
+          "expected": "50",
+          "got": "50",
+          "correct": true
+        },
+        "remark": {
+          "expected": "Documentation does not demonstrate instability requiring fusion; decompression alone would be the covered procedure.",
+          "got": "Documentation does not demonstrate instability requiring fusion; decompression alone would be the covered procedure.",
+          "correct": true
+        },
+        "dateOfService": {
+          "expected": "2026-05-19",
+          "got": "2026-05-19",
+          "correct": true
+        },
+        "serviceEnd": {
+          "expected": null,
+          "got": null,
+          "correct": true
+        },
+        "code": {
+          "expected": "22630",
+          "got": "22630",
+          "correct": true
+        },
+        "codeSystem": {
+          "expected": "CPT",
+          "got": "CPT",
+          "correct": true
+        },
+        "billedUsd": {
+          "expected": 45000,
+          "got": 45000,
+          "correct": true
+        },
+        "payerName": {
+          "expected": "Silverline Medicare Advantage",
+          "got": "Silverline Medicare Advantage",
+          "correct": true
+        }
+      }
+    },
+    {
+      "caseId": "case-044",
+      "latencyMs": 2194,
+      "usage": {
+        "inputTokens": 2717,
+        "cachedInputTokens": 369,
+        "cacheWriteTokens": 0,
+        "outputTokens": 474,
+        "thinkingTokens": 377
+      },
+      "costUsd": 0.005466100000000001,
+      "stopReason": "end_turn",
+      "got": {
+        "billedUsd": 12000,
+        "carc": "50",
+        "code": "871",
+        "codeSystem": "MS-DRG",
+        "dateOfService": "2026-02-04",
+        "payerName": "Lanternhill Health Plan",
+        "remark": "Inpatient level of care is not supported by the clinical documentation. Observation services were appropriate for the services rendered; the claim is denied as billed.",
+        "serviceEnd": "2026-02-08"
+      },
+      "fields": {
+        "carc": {
+          "expected": "50",
+          "got": "50",
+          "correct": true
+        },
+        "remark": {
+          "expected": "Inpatient level of care is not supported by the clinical documentation. Observation services were appropriate for the services rendered; the claim is denied as billed.",
+          "got": "Inpatient level of care is not supported by the clinical documentation. Observation services were appropriate for the services rendered; the claim is denied as billed.",
+          "correct": true
+        },
+        "dateOfService": {
+          "expected": "2026-02-04",
+          "got": "2026-02-04",
+          "correct": true
+        },
+        "serviceEnd": {
+          "expected": "2026-02-08",
+          "got": "2026-02-08",
+          "correct": true
+        },
+        "code": {
+          "expected": "871",
+          "got": "871",
+          "correct": true
+        },
+        "codeSystem": {
+          "expected": "MS-DRG",
+          "got": "MS-DRG",
+          "correct": true
+        },
+        "billedUsd": {
+          "expected": 12000,
+          "got": 12000,
+          "correct": true
+        },
+        "payerName": {
+          "expected": "Lanternhill Health Plan",
+          "got": "Lanternhill Health Plan",
+          "correct": true
+        }
+      }
+    },
+    {
+      "caseId": "case-045",
+      "latencyMs": 2270,
+      "usage": {
+        "inputTokens": 2717,
+        "cachedInputTokens": 369,
+        "cacheWriteTokens": 0,
+        "outputTokens": 408,
+        "thinkingTokens": 314
+      },
+      "costUsd": 0.0051856,
+      "stopReason": "end_turn",
+      "got": {
+        "billedUsd": 45000,
+        "carc": "50",
+        "code": "22630",
+        "codeSystem": "CPT",
+        "dateOfService": "2026-08-02",
+        "payerName": "Saltmarsh Benefits Administrators",
+        "remark": "Documentation does not demonstrate instability requiring fusion; decompression alone would be the covered procedure.",
+        "serviceEnd": ""
+      },
+      "fields": {
+        "carc": {
+          "expected": "50",
+          "got": "50",
+          "correct": true
+        },
+        "remark": {
+          "expected": "Documentation does not demonstrate instability requiring fusion; decompression alone would be the covered procedure.",
+          "got": "Documentation does not demonstrate instability requiring fusion; decompression alone would be the covered procedure.",
+          "correct": true
+        },
+        "dateOfService": {
+          "expected": "2026-08-02",
+          "got": "2026-08-02",
+          "correct": true
+        },
+        "serviceEnd": {
+          "expected": null,
+          "got": null,
+          "correct": true
+        },
+        "code": {
+          "expected": "22630",
+          "got": "22630",
+          "correct": true
+        },
+        "codeSystem": {
+          "expected": "CPT",
+          "got": "CPT",
+          "correct": true
+        },
+        "billedUsd": {
+          "expected": 45000,
+          "got": 45000,
+          "correct": true
+        },
+        "payerName": {
+          "expected": "Saltmarsh Benefits Administrators",
+          "got": "Saltmarsh Benefits Administrators",
+          "correct": true
+        }
+      }
+    },
+    {
+      "caseId": "case-046",
+      "latencyMs": 2732,
+      "usage": {
+        "inputTokens": 2717,
+        "cachedInputTokens": 369,
+        "cacheWriteTokens": 0,
+        "outputTokens": 424,
+        "thinkingTokens": 311
+      },
+      "costUsd": 0.005253600000000001,
+      "stopReason": "end_turn",
+      "got": {
+        "billedUsd": 11000,
+        "carc": "50",
+        "code": "J9271",
+        "codeSystem": "HCPCS",
+        "dateOfService": "2026-04-18",
+        "payerName": "Northwind Mutual Health",
+        "remark": "Pembrolizumab monotherapy is not indicated in the presence of an EGFR sensitizing mutation; first-line therapy for this member is an EGFR tyrosine kinase inhibitor.",
+        "serviceEnd": ""
+      },
+      "fields": {
+        "carc": {
+          "expected": "50",
+          "got": "50",
+          "correct": true
+        },
+        "remark": {
+          "expected": "Pembrolizumab monotherapy is not indicated in the presence of an EGFR sensitizing mutation; first-line therapy for this member is an EGFR tyrosine kinase inhibitor.",
+          "got": "Pembrolizumab monotherapy is not indicated in the presence of an EGFR sensitizing mutation; first-line therapy for this member is an EGFR tyrosine kinase inhibitor.",
+          "correct": true
+        },
+        "dateOfService": {
+          "expected": "2026-04-18",
+          "got": "2026-04-18",
+          "correct": true
+        },
+        "serviceEnd": {
+          "expected": null,
+          "got": null,
+          "correct": true
+        },
+        "code": {
+          "expected": "J9271",
+          "got": "J9271",
+          "correct": true
+        },
+        "codeSystem": {
+          "expected": "HCPCS",
+          "got": "HCPCS",
+          "correct": true
+        },
+        "billedUsd": {
+          "expected": 11000,
+          "got": 11000,
+          "correct": true
+        },
+        "payerName": {
+          "expected": "Northwind Mutual Health",
+          "got": "Northwind Mutual Health",
+          "correct": true
+        }
+      }
+    },
+    {
+      "caseId": "case-047",
+      "latencyMs": 2809,
+      "usage": {
+        "inputTokens": 2717,
+        "cachedInputTokens": 369,
+        "cacheWriteTokens": 0,
+        "outputTokens": 435,
+        "thinkingTokens": 346
+      },
+      "costUsd": 0.0053003500000000005,
+      "stopReason": "end_turn",
+      "got": {
+        "billedUsd": 8000,
+        "carc": "151",
+        "code": "15271",
+        "codeSystem": "CPT",
+        "dateOfService": "2026-02-17",
+        "payerName": "Copperfield Health",
+        "remark": "The number of applications billed exceeds what the documentation supports for this wound.",
+        "serviceEnd": ""
+      },
+      "fields": {
+        "carc": {
+          "expected": "151",
+          "got": "151",
+          "correct": true
+        },
+        "remark": {
+          "expected": "The number of applications billed exceeds what the documentation supports for this wound.",
+          "got": "The number of applications billed exceeds what the documentation supports for this wound.",
+          "correct": true
+        },
+        "dateOfService": {
+          "expected": "2026-02-17",
+          "got": "2026-02-17",
+          "correct": true
+        },
+        "serviceEnd": {
+          "expected": null,
+          "got": null,
+          "correct": true
+        },
+        "code": {
+          "expected": "15271",
+          "got": "15271",
+          "correct": true
+        },
+        "codeSystem": {
+          "expected": "CPT",
+          "got": "CPT",
+          "correct": true
+        },
+        "billedUsd": {
+          "expected": 8000,
+          "got": 8000,
+          "correct": true
+        },
+        "payerName": {
+          "expected": "Copperfield Health",
+          "got": "Copperfield Health",
+          "correct": true
+        }
+      }
+    },
+    {
+      "caseId": "case-048",
+      "latencyMs": 2867,
+      "usage": {
+        "inputTokens": 2717,
+        "cachedInputTokens": 369,
+        "cacheWriteTokens": 0,
+        "outputTokens": 354,
+        "thinkingTokens": 268
+      },
+      "costUsd": 0.004956100000000001,
+      "stopReason": "end_turn",
+      "got": {
+        "billedUsd": 35000,
+        "carc": "50",
+        "code": "33249",
+        "codeSystem": "CPT",
+        "dateOfService": "2026-05-09",
+        "payerName": "Prairie Commons Medicaid Plan",
+        "remark": "Documentation does not establish an ejection fraction of 35 percent or less after an adequate trial of guideline-directed medical therapy.",
+        "serviceEnd": ""
+      },
+      "fields": {
+        "carc": {
+          "expected": "50",
+          "got": "50",
+          "correct": true
+        },
+        "remark": {
+          "expected": "Documentation does not establish an ejection fraction of 35 percent or less after an adequate trial of guideline-directed medical therapy.",
+          "got": "Documentation does not establish an ejection fraction of 35 percent or less after an adequate trial of guideline-directed medical therapy.",
+          "correct": true
+        },
+        "dateOfService": {
+          "expected": "2026-05-09",
+          "got": "2026-05-09",
+          "correct": true
+        },
+        "serviceEnd": {
+          "expected": null,
+          "got": null,
+          "correct": true
+        },
+        "code": {
+          "expected": "33249",
+          "got": "33249",
+          "correct": true
+        },
+        "codeSystem": {
+          "expected": "CPT",
+          "got": "CPT",
+          "correct": true
+        },
+        "billedUsd": {
+          "expected": 35000,
+          "got": 35000,
+          "correct": true
+        },
+        "payerName": {
+          "expected": "Prairie Commons Medicaid Plan",
+          "got": "Prairie Commons Medicaid Plan",
+          "correct": true
+        }
+      }
+    },
+    {
+      "caseId": "case-049",
+      "latencyMs": 3099,
+      "usage": {
+        "inputTokens": 2717,
+        "cachedInputTokens": 369,
+        "cacheWriteTokens": 0,
+        "outputTokens": 510,
+        "thinkingTokens": 420
+      },
+      "costUsd": 0.0056191,
+      "stopReason": "end_turn",
+      "got": {
+        "billedUsd": 8000,
+        "carc": "50",
+        "code": "15271",
+        "codeSystem": "CPT",
+        "dateOfService": "2026-02-13",
+        "payerName": "Silverline Medicare Advantage",
+        "remark": "Documentation does not meet coverage criteria for cellular and tissue-based products for wounds.",
+        "serviceEnd": ""
+      },
+      "fields": {
+        "carc": {
+          "expected": "50",
+          "got": "50",
+          "correct": true
+        },
+        "remark": {
+          "expected": "Documentation does not meet coverage criteria for cellular and tissue-based products for wounds.",
+          "got": "Documentation does not meet coverage criteria for cellular and tissue-based products for wounds.",
+          "correct": true
+        },
+        "dateOfService": {
+          "expected": "2026-02-13",
+          "got": "2026-02-13",
+          "correct": true
+        },
+        "serviceEnd": {
+          "expected": null,
+          "got": null,
+          "correct": true
+        },
+        "code": {
+          "expected": "15271",
+          "got": "15271",
+          "correct": true
+        },
+        "codeSystem": {
+          "expected": "CPT",
+          "got": "CPT",
+          "correct": true
+        },
+        "billedUsd": {
+          "expected": 8000,
+          "got": 8000,
+          "correct": true
+        },
+        "payerName": {
+          "expected": "Silverline Medicare Advantage",
+          "got": "Silverline Medicare Advantage",
+          "correct": true
+        }
+      }
+    },
+    {
+      "caseId": "case-050",
+      "latencyMs": 3323,
+      "usage": {
+        "inputTokens": 2717,
+        "cachedInputTokens": 369,
+        "cacheWriteTokens": 0,
+        "outputTokens": 503,
+        "thinkingTokens": 427
+      },
+      "costUsd": 0.005589350000000001,
+      "stopReason": "end_turn",
+      "got": {
+        "billedUsd": 15000,
+        "carc": "50",
+        "code": "37227",
+        "codeSystem": "CPT",
+        "dateOfService": "2026-02-17",
+        "payerName": "Lanternhill Health Plan",
+        "remark": "Documentation does not establish limb-threatening ischemia or failure of supervised exercise therapy.",
+        "serviceEnd": ""
+      },
+      "fields": {
+        "carc": {
+          "expected": "50",
+          "got": "50",
+          "correct": true
+        },
+        "remark": {
+          "expected": "Documentation does not establish limb-threatening ischemia or failure of supervised exercise therapy.",
+          "got": "Documentation does not establish limb-threatening ischemia or failure of supervised exercise therapy.",
+          "correct": true
+        },
+        "dateOfService": {
+          "expected": "2026-02-17",
+          "got": "2026-02-17",
+          "correct": true
+        },
+        "serviceEnd": {
+          "expected": null,
+          "got": null,
+          "correct": true
+        },
+        "code": {
+          "expected": "37227",
+          "got": "37227",
+          "correct": true
+        },
+        "codeSystem": {
+          "expected": "CPT",
+          "got": "CPT",
+          "correct": true
+        },
+        "billedUsd": {
+          "expected": 15000,
+          "got": 15000,
+          "correct": true
+        },
+        "payerName": {
+          "expected": "Lanternhill Health Plan",
+          "got": "Lanternhill Health Plan",
+          "correct": true
+        }
+      }
+    }
+  ]
+}

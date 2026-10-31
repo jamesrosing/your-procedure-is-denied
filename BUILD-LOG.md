@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-10-31 06:51 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-10-31 06:53 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -50,7 +50,7 @@ Each commit that changed the version string in `build/src/litmus.ts`. The gate i
 
 ## Commits since `hackathon-start`
 
-Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 41 commits by github-actions[bot] are this log regenerating itself after a push; they touch only the generated files and carry no ledger row.
+Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 42 commits by github-actions[bot] are this log regenerating itself after a push; they touch only the generated files and carry no ledger row.
 
 ### 79e5e21 · 2026-10-26 20:38 · Add hackathon scaffolding: NEW-WORK.md and /build
 
@@ -590,3 +590,11 @@ The repair turn and the stated reason (post hoc; README 2.9, Table 5). `build/sr
 
 Results added: `effort/baseten-meta-models_muse-spark-open-1026-high-agentic-chart-2026-10-31T06-37-15-798Z.json`, `effort/baseten-meta-models_muse-spark-open-1026-medium-agentic-chart-2026-10-31T06-33-13-175Z.json`, `effort/meta-muse-spark-1.3-high-agentic-chart-2026-10-31T06-35-14-790Z.json`, `effort/meta-muse-spark-1.3-medium-agentic-chart-2026-10-31T06-33-13-182Z.json`.
 The effort sweep (post hoc; README 2.10, Table 6): muse-spark-1.3 and Muse Spark Open in the live-CHART configuration at effort medium and high, the same 50 cases and settings, into `results/effort/` (four files; Spark 1.3 $1.60 and $1.73, Spark Open $1.19 and $2.14). Spark 1.3: 47 of 50 at medium (one empty warranted answer, one decline on a warranted case with no reason, the case-023 false pass), 45 of 50 at high (four empty warranted answers, three on unsupported cases, and case-007 blocked for criteria without evidence); thinking tokens 1,608, 3,029, and 3,567 per case at low, medium, and high. Spark Open: 50 of 50 at medium, 47 of 50 at high (two answers cut at the 12,288-token output cap, recorded as failed; the case-023 false pass again). Table 6 in `build-log.ts` (`effortRow`) with each model's kept low run as its first row, in README order; `--effort high` accepted by the harness. Results paragraph, one Discussion paragraph, Methods 2.1 row times
+
+### 2e2739e · 2026-10-30 23:51 · Build log: regenerate after cb56bbd
+
+(generated files only; no ledger row by design)
+
+### next commit · the one that carries this regeneration
+
+The denial as a letter and its intake (post hoc; README 2.11, Table 7). `build/src/synthetic/letters.ts` renders each of the 50 denials as a one-page remittance letter image (1275 by 1650 px, deterministic from the case file: fictional letterhead, alias with age and sex, one claim line with code, dates, billed amount, CARC and RARC, the payer's remark, appeal rights with the payer's window; no identifiers, and the page says so) through Playwright's Chromium via `playwright-core` (`npm run letters`); the 50 PNGs are committed under `build/synthetic/letters/` with a manifest of HTML and PNG hashes, and `tests/letters.test.ts` regenerates every letter's HTML and two of the images and compares bytes (the image test skips where that Chromium is not installed). `build/src/intake.ts` (`npm run intake`) sends each image to muse-spark-1.3 as a base64 image block with a JSON schema for eight fields and scores each against the case file; one run into `results/intake/` ($0.27, $0.0054 a letter, median 2.8 s): 46 of 50 letters with all eight fields correct, and the 4 errors one glyph, the HIPPS code KDOB1 read as KD0B1 in the monospace face. Table 7 in `build-log.ts` (`intakeRows`). Eleven tests; 232 tests

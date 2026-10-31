@@ -205,7 +205,7 @@ A post hoc run put the gate on the other side of the exchange (`npm run harness 
 
 ### 2.8 Reproducibility
 
-`npm test` runs the suite (221 tests). `npm run synthetic` regenerates the fifty cases byte for byte. `npm run harness` runs a model over the set and writes a result file whose header records the model, mode, gate version, and any later re-gate. `npm run mutate` reruns the spike-in. `npm run log` regenerates the build log and the tables in section 3 from the result files; nothing in those tables is typed by hand.
+`npm test` runs the suite (232 tests). `npm run synthetic` regenerates the fifty cases byte for byte. `npm run harness` runs a model over the set and writes a result file whose header records the model, mode, gate version, and any later re-gate. `npm run mutate` reruns the spike-in. `npm run log` regenerates the build log and the tables in section 3 from the result files; nothing in those tables is typed by hand.
 
 The gate also ships on its own, as a command-line tool and an MCP server ([`build/litmus-gate/`](build/litmus-gate/)): `npm run gate -- check draft.json case.json` returns the verdict with exit code 0, 1, or 2 for pass, blocked, or declined, and `litmus-gate mcp` serves `litmus_verify_draft`, `litmus_check_sentence`, and `litmus_contract` over stdio to any agent host, so a drafting agent can be held to the record before its draft is shown to anyone. It is published on npm as [`litmus-gate`](https://www.npmjs.com/package/litmus-gate), so `npx -y litmus-gate mcp` needs no checkout. Both wrap the module the harness and the viewer call, and a test checks that they reproduce every stored verdict and hash of a kept run.
 
@@ -223,12 +223,18 @@ Both additions were made on October 30, after the kept runs, and every run that 
 
 The kept runs used effort low, fixed before they began (section 2.1). On October 30, after the kept runs, muse-spark-1.3 and Muse Spark Open were run again in the live-CHART configuration at effort medium and at effort high: the same 50 cases, the same tools, the same 12,288-token output cap, the same gate, into `build/results/effort/` (`npm run harness -- --agentic --chart --effort medium`). Effort is the API's `output_config.effort`, set explicitly on every call; on the Meta Model API the reasoning it buys is reported as `thinking_tokens` and billed as output, and on the Baseten endpoint it is not reported. muse-wonder-1.0 was not swept: its kept run agreed on 50 of 50 and it is the costliest of the three. The `why` field of section 2.9 was in force. Table 6 reports each run beside the model's kept effort-low run.
 
+### 2.11 The denial as a letter, and its intake (post hoc)
+
+A practice does not receive a case file; it receives a remittance. On October 30 each of the fifty denials was rendered as a one-page remittance letter image, 1275 by 1650 pixels, deterministic from the case file ([`build/src/synthetic/letters.ts`](build/src/synthetic/letters.ts), `npm run letters`): a fictional payer letterhead, the patient alias with age and sex, one claim line with the code and its code system, the dates of service, the billed amount (the case's stakes figure) and nothing allowed, the CARC code and its text, the RARC where there is one, the payer's remark, and an appeal-rights paragraph with that payer's own appeal window. No member, subscriber, or claim identifier appears, because the set issues none, and the page says so. The HTML is rendered by Playwright's Chromium through `playwright-core`, a plain JavaScript package; the fifty images are committed under [`build/synthetic/letters/`](build/synthetic/letters/) with a manifest of hashes, and a test regenerates the HTML of every letter and two of the images and compares the bytes.
+
+Each image was then sent to muse-spark-1.3 as a base64 image block with a JSON schema for eight fields, the CARC, the remark, the first and last dates of service, the code, the code system, the billed amount, and the payer's name ([`build/src/intake.ts`](build/src/intake.ts), `npm run intake`, effort low), and each field read was scored against the case file: exact after trimming for codes and dates, exact after whitespace and quote normalization for the remark and the payer's name, a number for the amount, empty for no service end. This is document intake of an administrative letter and nothing clinical: no chart entry is sent, no clinical judgment is asked for, and the model is told to transcribe what is printed and to leave a field empty rather than guess. Table 7 reports the result. In a production path the intake would fill the denial fields the appeal step needs; here it is measured on its own.
+
 <br>
 
 ## 3. Results
 
 <!-- results:start -->
-_Tables generated from the result files by `npm run log`; the prose below them is written by hand. Last regenerated 2026-10-31 06:51 UTC._
+_Tables generated from the result files by `npm run log`; the prose below them is written by hand. Last regenerated 2026-10-31 06:53 UTC._
 
 **Table 1. Kept runs.** 9 runs, 50 cases each, effort low. Agreed is correct-pass plus correct-decline against the grading key, with a 95% Wilson interval. Blocked is a draft the gate stopped. Missed is a decline on a case the key labels warranted. False pass is a draft the gate passed on a case the key labels unsupported. The five outcome columns sum to 50. Fabricated quotes counts quotes the gate refuted as not in the entry cited, in a sentence or in an evidence item, on any draft including declined ones. Care defended is the billed value of the warranted cases whose appeal passed the gate, out of the $568,500 billed across the thirty warranted cases ($940,000 across all fifty); the values are the synthetic set's, not a payer's. Entries read applies to the agentic modes.
 
@@ -298,6 +304,19 @@ Of the 8 blocked drafts in the kept runs, 6 were on cases the key labels warrant
 | Muse Spark Open (open weights on Baseten) | medium | 50 of 50 | 0 | 0 | 0 | 0 | 0 | not reported | 13.9 s | $0.024 |
 | Muse Spark Open (open weights on Baseten) | high | 47 of 50 | 0 | 0 | 1 | 0 | 2 | not reported | 25.8 s | $0.043 |
 
+**Table 7. Document intake (post hoc).** Each of the 50 synthetic denials rendered as a one-page remittance letter image (`build/synthetic/letters/`, 1275 by 1650 px, deterministic from the case file) and sent to muse-spark-1.3 as an image with a JSON schema for eight fields (`build/src/intake.ts`, `build/results/intake/`); each field read is scored against the case file. This is document intake of an administrative letter and nothing clinical: the fields are the claim's code, dates, amount, reason codes, and payer. Cost $0.0054 per letter, median latency 2.8 s.
+
+| Field | Correct of 50 | Errors read |
+| --- | :---: | --- |
+| carc | 50 of 50 | none |
+| remark | 50 of 50 | none |
+| dateOfService | 50 of 50 | none |
+| serviceEnd | 50 of 50 | none |
+| code | 46 of 50 | case-001: read KD0B1 for KDOB1; case-014: read KD0B1 for KDOB1; case-031: read KD0B1 for KDOB1; case-032: read KD0B1 for KDOB1 |
+| codeSystem | 50 of 50 | none |
+| billedUsd | 50 of 50 | none |
+| payerName | 50 of 50 | none |
+
 <!-- results:end -->
 
 **Figures.** The figures of this paper are frames of the replay, addressed by deep link; `step=end` lands on the verdict and the arrow keys walk the trace from there.
@@ -337,6 +356,8 @@ Of the 8 blocked drafts in the kept runs, 6 were on cases the key labels warrant
 **The repair turn (post hoc).** With one repair turn offered on blocked drafts (Table 5), muse-wonder-1.0 blocked no draft on the first turn, made no repair, and agreed on 50 of 50. muse-spark-1.3 blocked 3 drafts on the first turn. Two were repaired to pass: case-007, where the first draft had one sentence and four of five criteria without verified evidence, and the repair read seven more entries and returned ten verified sentences; and case-038, where the count of three antianginal agents was returned as needs-citation naming note-003, and the repair cited it without reading anything further. The third, case-023, an empty warranted answer on a case the key labels near-miss, was returned by the repair, after nine more reads, as another empty warranted answer, and stayed blocked. Agreement moved from 47 to 49 of 50. Muse Spark Open blocked 4 drafts on the first turn, every one a needs-citation on a case the key labels warranted (case-007, case-013, case-032, case-038), and all 4 were repaired to pass; agreement moved from 45 to 49 of 50. Its one false pass, case-023, was passed on the first turn and was not created by a repair. No repair in any run turned a blocked draft on an unsupported case into a pass. The repair turns took 4.8 to 19.9 seconds for muse-spark-1.3 and 3.8 to 8.4 seconds for Muse Spark Open, and cost $0.049 of the $1.06 run and $0.038 of the $0.91 run. Every tool call in the three runs carried a stated reason (1,402 of 1,402).
 
 **The effort sweep (post hoc).** At effort medium and high in the live-CHART configuration (Table 6), muse-spark-1.3 agreed on 47 of 50 at medium: one draft was blocked as an empty warranted answer (case-034), one case the key labels warranted was declined with no stated reason after 7 of 27 entries (case-011), and the false pass on case-023 recurred. At high it agreed on 45 of 50 and blocked 5 drafts: four empty warranted answers (case-023, case-043, case-044, case-045, three of them on cases the key labels unsupported) and one draft on case-007 with criteria without verified evidence. Its thinking tokens per case were 1,608 at low, 3,029 at medium, and 3,567 at high; median latency 10.8, 14.9, and 18.2 seconds; cost per case $0.019, $0.032, and $0.035. Muse Spark Open agreed on 50 of 50 at medium, with no draft blocked and no false pass, and on 47 of 50 at high, where two answers (case-043, case-049) stopped at the output cap before the JSON closed and were recorded as failed, and the false pass on case-023 recurred. Its median latency was 7.3 seconds at low, 13.9 at medium, and 25.8 at high; output tokens per case 3,800 at medium and 7,920 at high; cost per case $0.016, $0.024, and $0.043. The Baseten endpoint reported no thinking tokens at any effort.
+
+**Document intake (post hoc).** Of the 50 letters (Table 7), muse-spark-1.3 read all eight fields correctly on 46 and seven of eight on the other 4. The 4 errors were one field and one glyph: the HIPPS code KDOB1 was read as KD0B1, the letter O as a zero, in each of the four letters that carry it, set in the monospace face the letter uses for codes. The reason code, the remark (copied verbatim in 50 of 50), both dates, the billed amount, the code system, and the payer's name were read correctly in every letter. The run cost $0.27, $0.0054 a letter, at a median 2.8 seconds.
 
 <br>
 
@@ -415,9 +436,9 @@ Meta and Cerebral Valley for the event; Baseten for hosting the open-weights mod
 Every commit since the event began has a row in [NEW-WORK.md](NEW-WORK.md), every result file carries its model, mode, gate version, and any re-gate in its own header, and this section is regenerated from those sources after every push. Nothing in it is typed by hand.
 
 <!-- build-log:start -->
-_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-10-31 06:51 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
+_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-10-31 06:53 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
 
-131 commits since the `hackathon-start` tag, the last at 2026-10-30 23:50 (cb56bbd). Gate v1.4. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
+132 commits since the `hackathon-start` tag, the last at 2026-10-30 23:51 (2e2739e). Gate v1.4. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
 
 | Started (UTC) | Model | Mode | Agreed | Blocked | Missed | False pass | Advisor |
 | --- | --- | --- | :---: | :---: | :---: | :---: | --- |
