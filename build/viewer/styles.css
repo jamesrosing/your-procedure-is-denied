@@ -229,6 +229,10 @@ select:hover { border-color: var(--ink-3); }
 /* --- stage ----------------------------------------------------------------- */
 
 .stage { flex: 1; display: flex; flex-direction: column; padding: 0 24px; min-height: 0; }
+/* With the writ open below it, the stage keeps the height it had alone (the
+   viewport less the bar and the foot) instead of shrinking under the sheet;
+   the page then scrolls to the writ with nothing drawn over its band. */
+body:has(.writ:not([hidden])) .stage { flex: 0 0 calc(100vh - 56px - 32px); }
 .stage[hidden] { display: none; }
 
 /* the case header, laid out like a book header: crumb, title, meta, provenance */

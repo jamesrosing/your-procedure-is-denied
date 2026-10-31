@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-10-31 07:20 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-10-31 07:48 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -50,7 +50,7 @@ Each commit that changed the version string in `build/src/litmus.ts`. The gate i
 
 ## Commits since `hackathon-start`
 
-Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 45 commits by github-actions[bot] are this log regenerating itself after a push; they touch only the generated files and carry no ledger row.
+Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 46 commits by github-actions[bot] are this log regenerating itself after a push; they touch only the generated files and carry no ledger row.
 
 ### 79e5e21 · 2026-10-26 20:38 · Add hackathon scaffolding: NEW-WORK.md and /build
 
@@ -624,3 +624,11 @@ Release v1.1.0. Abstract updated for the post hoc work, one unstructured paragra
 ### 8d5c5a4 · 2026-10-31 00:19 · Data and code availability: the v1.1.0 version DOI and the GitHub release
 
 Zenodo version 1.1.0 published by the author (version DOI 10.5281/zenodo.23831511 under the concept DOI 10.5281/zenodo.23794797; the deposited zip's MD5 cb4f823a3ea6aa6d5a1f63b9a43859b3 matches the GitHub release asset, created from the v1.1.0 tag with the same file). README Data and code availability names the v1.1.0 version DOI and the release
+
+### e47494b · 2026-10-31 00:20 · Build log: regenerate after 8d5c5a4
+
+(generated files only; no ledger row by design)
+
+### next commit · the one that carries this regeneration
+
+Viewer (`build/viewer/styles.css`): with the writ open, the stage kept shrinking under the sheet until its counters were drawn over the writ's band at 1920 by 1080 (seen in a headless take of shot 3); the stage now keeps the height it has alone while the writ is open, so the page scrolls to the sheet with nothing over it. Asset links v33
