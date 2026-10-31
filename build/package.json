@@ -13,6 +13,7 @@
     "synthetic": "node --import tsx src/synthetic/generate.ts",
     "letters": "node --import tsx src/synthetic/letters.ts",
     "intake": "node --env-file=../.env --import tsx src/intake.ts",
+    "dictate": "node --env-file=../.env --import tsx src/dictation.ts",
     "harness": "node --env-file=../.env --import tsx src/harness.ts",
     "live": "node --env-file=../.env --import tsx src/harness.ts --provider meta --model muse-spark-1.3 --agentic --chart --live",
     "viewer": "node --import tsx scripts/build-viewer.ts && tsc -p viewer/tsconfig.json",

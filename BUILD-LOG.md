@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-10-31 06:54 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-10-31 06:57 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -50,7 +50,7 @@ Each commit that changed the version string in `build/src/litmus.ts`. The gate i
 
 ## Commits since `hackathon-start`
 
-Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 42 commits by github-actions[bot] are this log regenerating itself after a push; they touch only the generated files and carry no ledger row.
+Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 43 commits by github-actions[bot] are this log regenerating itself after a push; they touch only the generated files and carry no ledger row.
 
 ### 79e5e21 · 2026-10-26 20:38 · Add hackathon scaffolding: NEW-WORK.md and /build
 
@@ -599,3 +599,11 @@ The effort sweep (post hoc; README 2.10, Table 6): muse-spark-1.3 and Muse Spark
 
 Results added: `intake/meta-muse-spark-1.3-low-intake-2026-10-31T06-46-16-120Z.json`.
 The denial as a letter and its intake (post hoc; README 2.11, Table 7). `build/src/synthetic/letters.ts` renders each of the 50 denials as a one-page remittance letter image (1275 by 1650 px, deterministic from the case file: fictional letterhead, alias with age and sex, one claim line with code, dates, billed amount, CARC and RARC, the payer's remark, appeal rights with the payer's window; no identifiers, and the page says so) through Playwright's Chromium via `playwright-core` (`npm run letters`); the 50 PNGs are committed under `build/synthetic/letters/` with a manifest of HTML and PNG hashes, and `tests/letters.test.ts` regenerates every letter's HTML and two of the images and compares bytes (the image test skips where that Chromium is not installed). `build/src/intake.ts` (`npm run intake`) sends each image to muse-spark-1.3 as a base64 image block with a JSON schema for eight fields and scores each against the case file; one run into `results/intake/` ($0.27, $0.0054 a letter, median 2.8 s): 46 of 50 letters with all eight fields correct, and the 4 errors one glyph, the HIPPS code KDOB1 read as KD0B1 in the monospace face. Table 7 in `build-log.ts` (`intakeRows`). Eleven tests; 232 tests
+
+### d1548ea · 2026-10-30 23:54 · Build log: regenerate after c47c6e2
+
+(generated files only; no ledger row by design)
+
+### next commit · the one that carries this regeneration
+
+Dictation prepared (README 2.12): `build/src/dictation.ts` (`npm run dictate -- --audio <wav> --case <id> --entry <note>`) transcribes a WAV with Muse Voice Transcribe through the Meta Model API (`POST /v1/asr/transcribe`, multipart settings and audio parts, as the speech-to-text docs describe), writes the transcript as that entry's text into a copy of the case under `synthetic/dictated/` with the original kept beside it, and runs the primary configuration (muse-spark-1.3, agentic, live CHART, verbose) on that case into `results/dictated/`; the entry is then spoken words and the gate's quotes are quotes of speech. Without the file it stops with a clear error naming `assets/audio/case-001-note-013.wav` and prints the command to run. Proven end to end on a text-to-speech clip of note-013 (Windows speech; not the author's voice; the clip is not committed): transcript in 5.5 s for $0.0014 with two doubled words the clip does not contain, then PASS 10 of 10 with three sentences quoting the dictated entry ($0.028); the dictated case and result file are committed as the stand-in until the author records. Four tests; 236 tests

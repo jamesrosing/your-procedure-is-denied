@@ -205,7 +205,7 @@ A post hoc run put the gate on the other side of the exchange (`npm run harness 
 
 ### 2.8 Reproducibility
 
-`npm test` runs the suite (232 tests). `npm run synthetic` regenerates the fifty cases byte for byte. `npm run harness` runs a model over the set and writes a result file whose header records the model, mode, gate version, and any later re-gate. `npm run mutate` reruns the spike-in. `npm run log` regenerates the build log and the tables in section 3 from the result files; nothing in those tables is typed by hand.
+`npm test` runs the suite (236 tests). `npm run synthetic` regenerates the fifty cases byte for byte. `npm run harness` runs a model over the set and writes a result file whose header records the model, mode, gate version, and any later re-gate. `npm run mutate` reruns the spike-in. `npm run log` regenerates the build log and the tables in section 3 from the result files; nothing in those tables is typed by hand.
 
 The gate also ships on its own, as a command-line tool and an MCP server ([`build/litmus-gate/`](build/litmus-gate/)): `npm run gate -- check draft.json case.json` returns the verdict with exit code 0, 1, or 2 for pass, blocked, or declined, and `litmus-gate mcp` serves `litmus_verify_draft`, `litmus_check_sentence`, and `litmus_contract` over stdio to any agent host, so a drafting agent can be held to the record before its draft is shown to anyone. It is published on npm as [`litmus-gate`](https://www.npmjs.com/package/litmus-gate), so `npx -y litmus-gate mcp` needs no checkout. Both wrap the module the harness and the viewer call, and a test checks that they reproduce every stored verdict and hash of a kept run.
 
@@ -229,12 +229,16 @@ A practice does not receive a case file; it receives a remittance. On October 30
 
 Each image was then sent to muse-spark-1.3 as a base64 image block with a JSON schema for eight fields, the CARC, the remark, the first and last dates of service, the code, the code system, the billed amount, and the payer's name ([`build/src/intake.ts`](build/src/intake.ts), `npm run intake`, effort low), and each field read was scored against the case file: exact after trimming for codes and dates, exact after whitespace and quote normalization for the remark and the payer's name, a number for the amount, empty for no service end. This is document intake of an administrative letter and nothing clinical: no chart entry is sent, no clinical judgment is asked for, and the model is told to transcribe what is printed and to leave a field empty rather than guess. Table 7 reports the result. In a production path the intake would fill the denial fields the appeal step needs; here it is measured on its own.
 
+### 2.12 Dictation (prepared; the recording is the author's)
+
+The chart entry a draft quotes is, in practice, dictated. `npm run dictate -- --audio <wav> --case case-001 --entry note-013` ([`build/src/dictation.ts`](build/src/dictation.ts)) transcribes a recording with Muse Voice Transcribe through the Meta Model API (`POST /v1/asr/transcribe`, multipart: a JSON settings part naming `muse-voice-transcribe-1.0`, WAV encoding, and an English bias, then the WAV, mono 16-bit PCM at 16 or 24 kHz, billed at $0.18 an hour), writes the transcript as that entry's text into a copy of the case under [`build/synthetic/dictated/`](build/synthetic/dictated/) with the original text kept beside it, and runs the primary configuration (muse-spark-1.3, agentic, live CHART, verbose) on that one case into `build/results/dictated/`. The entry is then the physician's spoken words, so every quote the gate verifies against it is a quote of speech, and a transcription error becomes a fact of the record the gate will hold the draft to. Without the recording the command stops, names the file it needs, and prints the command to run once the file exists; the author's recording of note-013 is not yet made. The pipeline was proven end to end on a test clip of the same entry read by a text-to-speech voice (Windows speech, 28.8 seconds; not the author's voice, and not committed): the transcript came back in 5.5 seconds for $0.0014 with two doubled words the clip does not contain, and muse-spark-1.3 drafted and the gate passed 10 of 10 sentences, three of them quoting the dictated entry, doubled words included ($0.028). The dictated case and its result file from that clip are committed as the stand-in until the author's recording replaces them; the viewer does not show them.
+
 <br>
 
 ## 3. Results
 
 <!-- results:start -->
-_Tables generated from the result files by `npm run log`; the prose below them is written by hand. Last regenerated 2026-10-31 06:54 UTC._
+_Tables generated from the result files by `npm run log`; the prose below them is written by hand. Last regenerated 2026-10-31 06:57 UTC._
 
 **Table 1. Kept runs.** 9 runs, 50 cases each, effort low. Agreed is correct-pass plus correct-decline against the grading key, with a 95% Wilson interval. Blocked is a draft the gate stopped. Missed is a decline on a case the key labels warranted. False pass is a draft the gate passed on a case the key labels unsupported. The five outcome columns sum to 50. Fabricated quotes counts quotes the gate refuted as not in the entry cited, in a sentence or in an evidence item, on any draft including declined ones. Care defended is the billed value of the warranted cases whose appeal passed the gate, out of the $568,500 billed across the thirty warranted cases ($940,000 across all fifty); the values are the synthetic set's, not a payer's. Entries read applies to the agentic modes.
 
@@ -436,9 +440,9 @@ Meta and Cerebral Valley for the event; Baseten for hosting the open-weights mod
 Every commit since the event began has a row in [NEW-WORK.md](NEW-WORK.md), every result file carries its model, mode, gate version, and any re-gate in its own header, and this section is regenerated from those sources after every push. Nothing in it is typed by hand.
 
 <!-- build-log:start -->
-_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-10-31 06:54 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
+_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-10-31 06:57 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
 
-133 commits since the `hackathon-start` tag, the last at 2026-10-30 23:53 (c47c6e2). Gate v1.4. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
+134 commits since the `hackathon-start` tag, the last at 2026-10-30 23:54 (d1548ea). Gate v1.4. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
 
 | Started (UTC) | Model | Mode | Agreed | Blocked | Missed | False pass | Advisor |
 | --- | --- | --- | :---: | :---: | :---: | :---: | --- |

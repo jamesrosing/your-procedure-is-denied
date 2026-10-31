@@ -1,0 +1,543 @@
+{
+  "run": {
+    "startedAt": "2026-10-31T06:54:46.023Z",
+    "finishedAt": "2026-10-31T06:55:03.276Z",
+    "provider": "meta",
+    "model": "muse-spark-1.3",
+    "effort": "low",
+    "concurrency": 1,
+    "maxTokens": 12288,
+    "cases": 1,
+    "agentic": true,
+    "side": "physician",
+    "tools": [
+      "list_entries",
+      "read_entry",
+      "policy_status"
+    ],
+    "litmus": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
+    "synthetic": true,
+    "dictated": {
+      "entryId": "note-013",
+      "audio": "case-001-note-013-tts.wav",
+      "model": "muse-voice-transcribe-1.0",
+      "audioDurationMs": 28880,
+      "transcribedAt": "2026-10-31T06:54:46.019Z",
+      "original": "PT 5 days this week, 45 to 60 minutes per session, plus OT 5 days. Skilled gait training with the rolling walker, transfer training, and stair training started. Progress this week: transfers improved from moderate assist of two to minimal assist of one. Ambulation 40 feet to 110 feet with the rolling walker and contact guard. Able to stand at the sink for 3 minutes for grooming."
+    }
+  },
+  "summary": {
+    "cases": 1,
+    "outcomes": {
+      "correct-pass": 1
+    },
+    "agreementRate": 1,
+    "gatePassRate": 1,
+    "ungroundedSentencesCaught": 0,
+    "sentencesVerified": 10,
+    "checkErrors": 0,
+    "latencyMs": {
+      "mean": 17239,
+      "p50": 17239,
+      "p95": 17239
+    },
+    "tokens": {
+      "input": 8228,
+      "cachedInput": 14675,
+      "cacheWrite": 0,
+      "output": 3627,
+      "thinking": 1806,
+      "perCase": {
+        "input": 22903,
+        "output": 3627,
+        "thinking": 1806
+      }
+    },
+    "costUsd": {
+      "total": 0.027901,
+      "perCase": 0.027901
+    },
+    "stakesUsd": {
+      "total": 8000,
+      "defended": 8000,
+      "warranted": 8000
+    },
+    "citationPrecision": 0.9,
+    "reading": {
+      "entriesReadPerCase": 9,
+      "chartSizePerCase": 26,
+      "supportCoverage": 1,
+      "turnsPerCase": 4
+    },
+    "bySubtype": {
+      "warranted": {
+        "correct-pass": 1
+      }
+    },
+    "byCategory": {
+      "post-acute care": {
+        "correct-pass": 1
+      }
+    }
+  },
+  "results": [
+    {
+      "caseId": "case-001",
+      "category": "post-acute care",
+      "setting": "post-acute",
+      "stakesUsd": 8000,
+      "expected": {
+        "warranted": true
+      },
+      "provider": "meta",
+      "model": "muse-spark-1.3",
+      "stopReason": "end_turn",
+      "latencyMs": 17239,
+      "usage": {
+        "inputTokens": 8228,
+        "cachedInputTokens": 14675,
+        "cacheWriteTokens": 0,
+        "outputTokens": 3627,
+        "thinkingTokens": 1806
+      },
+      "costUsd": 0.027901,
+      "turns": 4,
+      "trace": [
+        {
+          "step": 0,
+          "tool": "list_entries",
+          "input": {},
+          "atMs": 2095,
+          "ok": true,
+          "note": "26 entries"
+        },
+        {
+          "step": 1,
+          "tool": "policy_status",
+          "input": {
+            "authority": "cms",
+            "code": "KDOB1",
+            "date_of_service": "2026-09-13",
+            "why": "Check freshness of coverage material for this SNF continued stay code at time of service."
+          },
+          "atMs": 2096,
+          "ok": true,
+          "live": true,
+          "note": "cms: criteria last changed 2026-09-27, last checked 2026-09-28",
+          "why": "Check freshness of coverage material for this SNF continued stay code at time of service."
+        },
+        {
+          "step": 2,
+          "tool": "read_entry",
+          "input": {
+            "id": "note-001",
+            "why": "Check admission context and qualifying hospital stay for crit-4."
+          },
+          "atMs": 5224,
+          "ok": true,
+          "entryId": "note-001",
+          "why": "Check admission context and qualifying hospital stay for crit-4."
+        },
+        {
+          "step": 3,
+          "tool": "read_entry",
+          "input": {
+            "id": "note-009",
+            "why": "Assess inability to manage stairs/home supporting inpatient need crit-3."
+          },
+          "atMs": 5224,
+          "ok": true,
+          "entryId": "note-009",
+          "why": "Assess inability to manage stairs/home supporting inpatient need crit-3."
+        },
+        {
+          "step": 4,
+          "tool": "read_entry",
+          "input": {
+            "id": "note-013",
+            "why": "Check daily skilled therapy frequency for crit-1 during denied period."
+          },
+          "atMs": 5224,
+          "ok": true,
+          "entryId": "note-013",
+          "why": "Check daily skilled therapy frequency for crit-1 during denied period."
+        },
+        {
+          "step": 5,
+          "tool": "read_entry",
+          "input": {
+            "id": "note-016",
+            "why": "Check daily skilled nursing services for crit-1."
+          },
+          "atMs": 5224,
+          "ok": true,
+          "entryId": "note-016",
+          "why": "Check daily skilled nursing services for crit-1."
+        },
+        {
+          "step": 6,
+          "tool": "read_entry",
+          "input": {
+            "id": "note-021",
+            "why": "Check measurable functional progress for crit-2."
+          },
+          "atMs": 5224,
+          "ok": true,
+          "entryId": "note-021",
+          "why": "Check measurable functional progress for crit-2."
+        },
+        {
+          "step": 7,
+          "tool": "read_entry",
+          "input": {
+            "id": "note-025",
+            "why": "Check week four progress toward goals for crit-2."
+          },
+          "atMs": 5224,
+          "ok": true,
+          "entryId": "note-025",
+          "why": "Check week four progress toward goals for crit-2."
+        },
+        {
+          "step": 8,
+          "tool": "read_entry",
+          "input": {
+            "id": "note-026",
+            "why": "Check discharge summary for stay duration and qualifying stay crit-4."
+          },
+          "atMs": 5224,
+          "ok": true,
+          "entryId": "note-026",
+          "why": "Check discharge summary for stay duration and qualifying stay crit-4."
+        },
+        {
+          "step": 9,
+          "tool": "read_entry",
+          "input": {
+            "id": "note-017",
+            "why": "Check social work note on home readiness for crit-3 inpatient need."
+          },
+          "atMs": 5224,
+          "ok": true,
+          "entryId": "note-017",
+          "why": "Check social work note on home readiness for crit-3 inpatient need."
+        },
+        {
+          "step": 10,
+          "tool": "read_entry",
+          "input": {
+            "id": "note-002",
+            "why": "Confirm baseline function to contextualize progress for crit-2."
+          },
+          "atMs": 13380,
+          "ok": true,
+          "entryId": "note-002",
+          "why": "Confirm baseline function to contextualize progress for crit-2."
+        }
+      ],
+      "reading": {
+        "entriesRead": 9,
+        "chartSize": 26,
+        "supportRead": 5,
+        "supportTotal": 5
+      },
+      "outcome": "correct-pass",
+      "warrantedMatch": true,
+      "citationPrecision": 0.9,
+      "draft": {
+        "warranted": true,
+        "evidence": [
+          {
+            "criterion": "crit-1",
+            "citation": "note-013",
+            "quote": "PT five days this week, 45 to 60 minutes per session, plus OT five days"
+          },
+          {
+            "criterion": "crit-1",
+            "citation": "note-016",
+            "quote": "enoxaparin 40 subcutaneous daily through day 28"
+          },
+          {
+            "criterion": "crit-2",
+            "citation": "note-013",
+            "quote": "transfers improved from moderate assist of two to minimal assist of one"
+          },
+          {
+            "criterion": "crit-2",
+            "citation": "note-013",
+            "quote": "Ambulation 40 feet to 110 feet with with the rolling walker and contact guard"
+          },
+          {
+            "criterion": "crit-2",
+            "citation": "note-021",
+            "quote": "ambulation 110 to 200 feet with the rolling walker and supervision"
+          },
+          {
+            "criterion": "crit-2",
+            "citation": "note-025",
+            "quote": "Ambulation 300 feet with the rolling walker, independent"
+          },
+          {
+            "criterion": "crit-3",
+            "citation": "note-009",
+            "quote": "Home health could not provide twice daily transfer assistance and daily injections for someone living alone"
+          },
+          {
+            "criterion": "crit-3",
+            "citation": "note-009",
+            "quote": "Cannot yet manage the 14 stairs to the apartment"
+          },
+          {
+            "criterion": "crit-3",
+            "citation": "note-001",
+            "quote": "Lives alone in a second-floor walk-up, 14 steps, no elevator, no caregiver available during the day"
+          },
+          {
+            "criterion": "crit-4",
+            "citation": "note-001",
+            "quote": "after a 4 day inpatient stay for a left femoral neck fracture treated with cephalomedullary nail fixation"
+          }
+        ],
+        "sentences": [
+          {
+            "text": "He came to the skilled unit after a 4 day inpatient hospital stay for surgical repair of a left femoral neck fracture.",
+            "citation": "note-001",
+            "quote": "after a 4 day inpatient stay for a left femoral neck fracture treated with cephalomedullary nail fixation"
+          },
+          {
+            "text": "During the denied period he received PT five days in the week plus OT five days, with sessions lasting 45 to 60 minutes.",
+            "citation": "note-013",
+            "quote": "PT five days this week, 45 to 60 minutes per session, plus OT five days"
+          },
+          {
+            "text": "He also required daily skilled nursing for enoxaparin injections through day 28 with ongoing incision monitoring and pain titration.",
+            "citation": "note-016",
+            "quote": "enoxaparin 40 subcutaneous daily through day 28"
+          },
+          {
+            "text": "His transfers improved from needing moderate help from two people to needing minimal help from one person.",
+            "citation": "note-013",
+            "quote": "transfers improved from moderate assist of two to minimal assist of one"
+          },
+          {
+            "text": "His walking with a rolling walker progressed from 40 feet to 110 feet with standby help for safety.",
+            "citation": "note-013",
+            "quote": "Ambulation 40 feet to 110 feet with with the rolling walker and contact guard"
+          },
+          {
+            "text": "The next week his walking advanced further from 110 to 200 feet with supervision.",
+            "citation": "note-021",
+            "quote": "ambulation 110 to 200 feet with the rolling walker and supervision"
+          },
+          {
+            "text": "By the end of the stay he walked 300 feet independently with the walker.",
+            "citation": "note-025",
+            "quote": "Ambulation 300 feet with the rolling walker, independent"
+          },
+          {
+            "text": "He progressed to climbing 14 steps with a rail and supervision, meeting the goal needed to reach his apartment.",
+            "citation": "note-025",
+            "quote": "Stairs 14 steps with one rail and supervision"
+          },
+          {
+            "text": "The physician documented that he could not yet manage the stairs home and needed help for every transfer.",
+            "citation": "note-009",
+            "quote": "Cannot yet manage the 14 stairs to the apartment"
+          },
+          {
+            "text": "The physician explained that home health could not provide the twice daily transfer help and daily injections he needed while living alone, so the inpatient stay had to continue.",
+            "citation": "note-009",
+            "quote": "Home health could not provide twice daily transfer assistance and daily injections for someone living alone"
+          }
+        ]
+      },
+      "gate": {
+        "litmus": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
+        "verdict": "pass",
+        "reasons": [],
+        "errored": false,
+        "sentences": [
+          {
+            "index": 0,
+            "text": "He came to the skilled unit after a 4 day inpatient hospital stay for surgical repair of a left femoral neck fracture.",
+            "citation": "note-001",
+            "quote": "after a 4 day inpatient stay for a left femoral neck fracture treated with cephalomedullary nail fixation",
+            "reason": "verified: quote found in the cited entry; every hard token sourced from the entry, the criteria, the denial, or the case facts",
+            "status": "verified"
+          },
+          {
+            "index": 1,
+            "text": "During the denied period he received PT five days in the week plus OT five days, with sessions lasting 45 to 60 minutes.",
+            "citation": "note-013",
+            "quote": "PT five days this week, 45 to 60 minutes per session, plus OT five days",
+            "reason": "verified: quote found in the cited entry; every hard token sourced from the entry, the criteria, the denial, or the case facts",
+            "status": "verified"
+          },
+          {
+            "index": 2,
+            "text": "He also required daily skilled nursing for enoxaparin injections through day 28 with ongoing incision monitoring and pain titration.",
+            "citation": "note-016",
+            "quote": "enoxaparin 40 subcutaneous daily through day 28",
+            "reason": "verified: quote found in the cited entry; every hard token sourced from the entry, the criteria, the denial, or the case facts",
+            "status": "verified"
+          },
+          {
+            "index": 3,
+            "text": "His transfers improved from needing moderate help from two people to needing minimal help from one person.",
+            "citation": "note-013",
+            "quote": "transfers improved from moderate assist of two to minimal assist of one",
+            "reason": "verified: quote found in the cited entry; every hard token sourced from the entry, the criteria, the denial, or the case facts",
+            "status": "verified"
+          },
+          {
+            "index": 4,
+            "text": "His walking with a rolling walker progressed from 40 feet to 110 feet with standby help for safety.",
+            "citation": "note-013",
+            "quote": "Ambulation 40 feet to 110 feet with with the rolling walker and contact guard",
+            "reason": "verified: quote found in the cited entry; every hard token sourced from the entry, the criteria, the denial, or the case facts",
+            "status": "verified"
+          },
+          {
+            "index": 5,
+            "text": "The next week his walking advanced further from 110 to 200 feet with supervision.",
+            "citation": "note-021",
+            "quote": "ambulation 110 to 200 feet with the rolling walker and supervision",
+            "reason": "verified: quote found in the cited entry; every hard token sourced from the entry, the criteria, the denial, or the case facts",
+            "status": "verified"
+          },
+          {
+            "index": 6,
+            "text": "By the end of the stay he walked 300 feet independently with the walker.",
+            "citation": "note-025",
+            "quote": "Ambulation 300 feet with the rolling walker, independent",
+            "reason": "verified: quote found in the cited entry; every hard token sourced from the entry, the criteria, the denial, or the case facts",
+            "status": "verified"
+          },
+          {
+            "index": 7,
+            "text": "He progressed to climbing 14 steps with a rail and supervision, meeting the goal needed to reach his apartment.",
+            "citation": "note-025",
+            "quote": "Stairs 14 steps with one rail and supervision",
+            "reason": "verified: quote found in the cited entry; every hard token sourced from the entry, the criteria, the denial, or the case facts",
+            "status": "verified"
+          },
+          {
+            "index": 8,
+            "text": "The physician documented that he could not yet manage the stairs home and needed help for every transfer.",
+            "citation": "note-009",
+            "quote": "Cannot yet manage the 14 stairs to the apartment",
+            "reason": "verified: quote found in the cited entry; every hard token sourced from the entry, the criteria, the denial, or the case facts",
+            "status": "verified"
+          },
+          {
+            "index": 9,
+            "text": "The physician explained that home health could not provide the twice daily transfer help and daily injections he needed while living alone, so the inpatient stay had to continue.",
+            "citation": "note-009",
+            "quote": "Home health could not provide twice daily transfer assistance and daily injections for someone living alone",
+            "reason": "verified: quote found in the cited entry; every hard token sourced from the entry, the criteria, the denial, or the case facts",
+            "status": "verified"
+          }
+        ],
+        "evidence": [
+          {
+            "index": 0,
+            "criterion": "crit-1",
+            "citation": "note-013",
+            "quote": "PT five days this week, 45 to 60 minutes per session, plus OT five days",
+            "reason": "verified: quote found in the cited entry",
+            "status": "verified"
+          },
+          {
+            "index": 1,
+            "criterion": "crit-1",
+            "citation": "note-016",
+            "quote": "enoxaparin 40 subcutaneous daily through day 28",
+            "reason": "verified: quote found in the cited entry",
+            "status": "verified"
+          },
+          {
+            "index": 2,
+            "criterion": "crit-2",
+            "citation": "note-013",
+            "quote": "transfers improved from moderate assist of two to minimal assist of one",
+            "reason": "verified: quote found in the cited entry",
+            "status": "verified"
+          },
+          {
+            "index": 3,
+            "criterion": "crit-2",
+            "citation": "note-013",
+            "quote": "Ambulation 40 feet to 110 feet with with the rolling walker and contact guard",
+            "reason": "verified: quote found in the cited entry",
+            "status": "verified"
+          },
+          {
+            "index": 4,
+            "criterion": "crit-2",
+            "citation": "note-021",
+            "quote": "ambulation 110 to 200 feet with the rolling walker and supervision",
+            "reason": "verified: quote found in the cited entry",
+            "status": "verified"
+          },
+          {
+            "index": 5,
+            "criterion": "crit-2",
+            "citation": "note-025",
+            "quote": "Ambulation 300 feet with the rolling walker, independent",
+            "reason": "verified: quote found in the cited entry",
+            "status": "verified"
+          },
+          {
+            "index": 6,
+            "criterion": "crit-3",
+            "citation": "note-009",
+            "quote": "Home health could not provide twice daily transfer assistance and daily injections for someone living alone",
+            "reason": "verified: quote found in the cited entry",
+            "status": "verified"
+          },
+          {
+            "index": 7,
+            "criterion": "crit-3",
+            "citation": "note-009",
+            "quote": "Cannot yet manage the 14 stairs to the apartment",
+            "reason": "verified: quote found in the cited entry",
+            "status": "verified"
+          },
+          {
+            "index": 8,
+            "criterion": "crit-3",
+            "citation": "note-001",
+            "quote": "Lives alone in a second-floor walk-up, 14 steps, no elevator, no caregiver available during the day",
+            "reason": "verified: quote found in the cited entry",
+            "status": "verified"
+          },
+          {
+            "index": 9,
+            "criterion": "crit-4",
+            "citation": "note-001",
+            "quote": "after a 4 day inpatient stay for a left femoral neck fracture treated with cephalomedullary nail fixation",
+            "reason": "verified: quote found in the cited entry",
+            "status": "verified"
+          }
+        ],
+        "criteria": {
+          "crit-1": "verified",
+          "crit-2": "verified",
+          "crit-3": "verified",
+          "crit-4": "verified"
+        },
+        "counts": {
+          "sentences": 10,
+          "verified": 10,
+          "unresolved": 0,
+          "refuted": 0,
+          "needsCitation": 0,
+          "error": 0,
+          "evidence": 10,
+          "evidenceVerified": 10
+        },
+        "inputHash": "b0367cfab767410cabda10cfa6dd4b7f1d21b1a58d878c154ad3b23efac48728"
+      }
+    }
+  ]
+}
