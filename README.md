@@ -238,7 +238,7 @@ The chart entry a draft quotes is, in practice, dictated. `npm run dictate -- --
 ## 3. Results
 
 <!-- results:start -->
-_Tables generated from the result files by `npm run log`; the prose below them is written by hand. Last regenerated 2026-10-31 07:19 UTC._
+_Tables generated from the result files by `npm run log`; the prose below them is written by hand. Last regenerated 2026-10-31 07:20 UTC._
 
 **Table 1. Kept runs.** 9 runs, 50 cases each, effort low. Agreed is correct-pass plus correct-decline against the grading key, with a 95% Wilson interval. Blocked is a draft the gate stopped. Missed is a decline on a case the key labels warranted. False pass is a draft the gate passed on a case the key labels unsupported. The five outcome columns sum to 50. Fabricated quotes counts quotes the gate refuted as not in the entry cited, in a sentence or in an evidence item, on any draft including declined ones. Care defended is the billed value of the warranted cases whose appeal passed the gate, out of the $568,500 billed across the thirty warranted cases ($940,000 across all fifty); the values are the synthetic set's, not a payer's. Entries read applies to the agentic modes.
 
@@ -444,9 +444,9 @@ Meta and Cerebral Valley for the event; Baseten for hosting the open-weights mod
 Every commit since the event began has a row in [NEW-WORK.md](NEW-WORK.md), every result file carries its model, mode, gate version, and any re-gate in its own header, and this section is regenerated from those sources after every push. Nothing in it is typed by hand.
 
 <!-- build-log:start -->
-_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-10-31 07:19 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
+_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-10-31 07:20 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
 
-138 commits since the `hackathon-start` tag, the last at 2026-10-31 00:01 (8e395e0). Gate v1.4. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
+139 commits since the `hackathon-start` tag, the last at 2026-10-31 00:19 (8d5c5a4). Gate v1.4. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
 
 | Started (UTC) | Model | Mode | Agreed | Blocked | Missed | False pass | Advisor |
 | --- | --- | --- | :---: | :---: | :---: | :---: | --- |
@@ -462,11 +462,11 @@ _Generated from the git history, the ledger, and the result files by `npm run lo
 
 Last five authored commits, newest first, with the ledger row each one carried (the bot's regenerate commits are left out):
 
+- **8d5c5a4 · 2026-10-31 00:19** · Data and code availability: the v1.1.0 version DOI and the GitHub release. Zenodo version 1.1.0 published by the author (version DOI 10.5281/zenodo.23831511 under the concept DOI 10.5281/zenodo.23794797; the deposited zip's MD5 cb4f823a3ea6aa6d5a1f63b9a43859b3 matches the GitHub release asset, created from the v1.1.0 tag with the same file). README Data and code availability names the v1.1.0 version DOI and the release
 - **13dd45e · 2026-10-31 00:01** · Release v1.1.0: abstract, Figures 10 to 13, the Methods 2.1 row, the concept DOI for all versions, citation files at 1.1.0, the repair turn and the live run in the shot list, captions regenerated · tag v1.1.0. Release v1.1.0. Abstract updated for the post hoc work, one unstructured paragraph of 448 words (methods: the repair turn, the effort sweep, the letters read back; results: six of seven blocked drafts repaired with no decline eroded, effort, 46 of 50 letters with every field correct, every error one glyph). Figures 10 to 13 by deep link: the repair turn…
 - **988a98e · 2026-10-30 23:57** · Dictation prepared: a recording transcribed with Muse Voice Transcribe becomes the chart entry, the primary configuration runs on it verbose, the gate's quotes are quotes of speech; proven on a text-to-speech clip; Methods 2.12. Dictation prepared (README 2.12): `build/src/dictation.ts` (`npm run dictate -- --audio <wav> --case <id> --entry <note>`) transcribes a WAV with Muse Voice Transcribe through the Meta Model API (`POST /v1/asr/transcribe`, multipart settings and audio parts, as the speech-to-text docs describe), writes the transcript as that entry's text into a copy of…
 - **c47c6e2 · 2026-10-30 23:53** · The denial as a letter and its intake: fifty deterministic remittance letter images, document intake of eight fields by muse-spark-1.3 with a JSON schema, one post hoc run in results/intake, Table 7, Methods 2.11 · tag event-07-intake. The denial as a letter and its intake (post hoc; README 2.11, Table 7). `build/src/synthetic/letters.ts` renders each of the 50 denials as a one-page remittance letter image (1275 by 1650 px, deterministic from the case file: fictional letterhead, alias with age and sex, one claim line with code, dates, billed amount, CARC and RARC, the payer's remark,…
 - **cb56bbd · 2026-10-30 23:50** · The effort sweep: muse-spark-1.3 and Muse Spark Open at medium and high in the live-CHART configuration, four post hoc runs in results/effort, Table 6, Methods 2.10. The effort sweep (post hoc; README 2.10, Table 6): muse-spark-1.3 and Muse Spark Open in the live-CHART configuration at effort medium and high, the same 50 cases and settings, into `results/effort/` (four files; Spark 1.3 $1.60 and $1.73, Spark Open $1.19 and $2.14). Spark 1.3: 47 of 50 at medium (one empty warranted answer, one decline on a warranted…
-- **090c0d4 · 2026-10-30 23:39** · The repair turn and the stated reason: --repair N on the harness, a required why on the chart tools, three post hoc runs in results/repair, Table 5, the viewer re-stamps and a Compare tab, a live run with a record hash · tag event-06-repair. The repair turn and the stated reason (post hoc; README 2.9, Table 5). `build/src/harness.ts --repair N` (default 0): when the gate blocks a warranted draft, the gate's record goes back to the model verbatim in the same exchange (sentence index, status, reason, alsoCite entries, draft-level reasons; `repairMessage`), the model keeps its tools and reads…
 <!-- build-log:end -->
 
 ## From the inside

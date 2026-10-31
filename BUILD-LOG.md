@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-10-31 07:19 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-10-31 07:20 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -621,6 +621,6 @@ Release v1.1.0. Abstract updated for the post hoc work, one unstructured paragra
 
 (generated files only; no ledger row by design)
 
-### next commit · the one that carries this regeneration
+### 8d5c5a4 · 2026-10-31 00:19 · Data and code availability: the v1.1.0 version DOI and the GitHub release
 
 Zenodo version 1.1.0 published by the author (version DOI 10.5281/zenodo.23831511 under the concept DOI 10.5281/zenodo.23794797; the deposited zip's MD5 cb4f823a3ea6aa6d5a1f63b9a43859b3 matches the GitHub release asset, created from the v1.1.0 tag with the same file). README Data and code availability names the v1.1.0 version DOI and the release
