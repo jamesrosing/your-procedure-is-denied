@@ -323,7 +323,7 @@ Of the 8 blocked drafts in the kept runs, 6 were on cases the key labels warrant
 
 <!-- results:end -->
 
-**Figures.** The figures of this paper are frames of the replay, addressed by deep link; `step=end` lands on the verdict and the arrow keys walk the trace from there.
+**Figures.** The figures of this paper are frames of the replay, addressed by deep link; `step=end` lands on the verdict and the arrow keys walk the trace from there. The viewer lists these figures and tables under its Figures tab (the f key), read from this file when the page is built.
 
 - Figure 1. The system under test: the flow in section 2.2.
 - Figure 2. A warranted case drafted and verified: [case-001, muse-spark-1.3 with the live query, at the verdict](https://demo.hemeehr.com/#file=meta-muse-spark-1.3-low-agentic-chart-2026-10-28T06-48-41-422Z.json&case=case-001&step=end). Eight sentences, each stamped against the entry it cites; the payer's reason above the criteria it is answered by.

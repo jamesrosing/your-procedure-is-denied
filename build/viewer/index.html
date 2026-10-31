@@ -8,7 +8,7 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%274%27 fill=%27%2314181C%27/%3E%3Crect x=%278%27 y=%2715%27 width=%2716%27 height=%272%27 fill=%27%23FFFFFF%27/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=34">
+  <link rel="stylesheet" href="styles.css?v=35">
   <script>
     // Theme before first paint; the choice is a per-viewer convenience.
     try { var t = localStorage.getItem('ypid-theme'); if (t === 'dark') document.documentElement.dataset.theme = 'dark'; } catch (e) {}
@@ -39,6 +39,7 @@
       <button id="tab-replay" class="tab" role="tab" aria-selected="true">Replay</button>
       <button id="btn-board" class="tab" role="tab" aria-selected="false" title="Scoreboard (S)">Scoreboard</button>
       <button id="tab-compare" class="tab" role="tab" aria-selected="false" title="Compare the three models on one case (C)">Compare</button>
+      <button id="tab-figures" class="tab" role="tab" aria-selected="false" title="The paper's figures and tables (F)">Figures</button>
     </nav>
     <div class="pickers">
       <label class="picker">
@@ -137,6 +138,17 @@
     <p class="note">Pure layout over the stored result files of the three kept live-CHART runs (README Table 1, last three rows): the entries each model opened, in order; its sentences with the gate's stamps; its verdict; the call's cost and latency. Nothing is re-run here. Pick another case with the case picker above, or press C to return to the replay.</p>
   </section>
 
+  <section id="figures" class="figures" hidden aria-labelledby="figures-h">
+    <div class="figures-head">
+      <h2 id="figures-h">Figures and tables</h2>
+      <p class="figures-sub">The figures of the paper are frames of this replay: each link lands on its frame, and the arrow keys walk the trace from there. The tables are in the README on GitHub; Table 1 is also the Scoreboard tab. Read from README.md when the page is built, so this list is the paper's.</p>
+    </div>
+    <h3>Figures</h3>
+    <ol class="figure-list" id="figure-list"></ol>
+    <h3>Tables</h3>
+    <ol class="figure-list" id="table-list"></ol>
+  </section>
+
   <section id="writ" class="writ" hidden aria-labelledby="writ-h">
     <div class="writ-tools">
       <span class="writ-tools-lbl">the instrument, as the physician would sign it</span>
@@ -171,9 +183,9 @@
     <span>Hackathon work, Meta Global AI Developer Hackathon, October 26 to November 4, 2026. Synthetic data only: no real patient record appears anywhere in this repository.
     <a href="https://github.com/jamesrosing/your-procedure-is-denied/blob/main/NEW-WORK.md">What was built during the event</a>
     <button id="btn-about" class="btn-about" title="About this page (p)">about this page</button></span>
-    <span class="keys">space · ← → · home end · s · c · w · i · p</span>
+    <span class="keys">space · ← → · home end · s · c · f · w · i · p</span>
   </footer>
 
-  <script src="app.js?v=34"></script>
+  <script src="app.js?v=35"></script>
 </body>
 </html>

@@ -518,6 +518,21 @@ body:has(.writ:not([hidden])) .stage { flex: 0 0 calc(100vh - 56px - 32px); }
 .sentence.restamped .stamp::after { content: " \00b7 re-stamped"; color: var(--state-failed); font-weight: 400; }
 
 /* --- compare tab (Oct 31): three models, one case ------------------------------ */
+/* The Figures tab: the paper's figures and tables as a list, each figure a link to its frame. */
+.figures { flex: 1; padding: 24px 32px 40px; max-width: 1100px; width: 100%; margin: 0 auto; }
+.figures[hidden] { display: none; }
+.figures-head { margin-bottom: 18px; }
+.figures h2 { font-size: 22px; font-weight: 450; letter-spacing: -0.013em; line-height: 1.15; color: var(--heading); margin: 0 0 6px; }
+.figures-sub { color: var(--ink-5); max-width: 80ch; margin: 0; font-size: 12.5px; }
+.figures h3 { font-size: 11px; letter-spacing: 0.01em; text-transform: uppercase; color: var(--ink-5); font-weight: 500; margin: 22px 0 8px; }
+.figure-list { list-style: none; margin: 0; padding: 0; background: var(--surface); border: var(--hairline); }
+.figure-list li { display: grid; grid-template-columns: 80px 1fr; gap: 14px; padding: 11px 14px; border-bottom: var(--hairline); font-size: 13.5px; line-height: 1.5; color: var(--ink-6); }
+.figure-list li:last-child { border-bottom: 0; }
+.figure-list .fig-n { font-family: var(--font-mono); font-size: 12px; color: var(--ink-5); padding-top: 2px; white-space: nowrap; }
+.figure-list b { color: var(--ink-7); font-weight: 500; }
+.figure-list a { color: var(--brand); text-decoration: underline; text-underline-offset: 2px; }
+.figure-list a.out::after { content: " \2197"; font-size: 11px; }
+.figure-list .tab-link { font: inherit; color: var(--brand); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
 .compare { flex: 1; padding: 20px 24px 28px; }
 .compare[hidden] { display: none; }
 .compare-head { display: flex; flex-direction: column; gap: 4px; margin-bottom: 14px; }

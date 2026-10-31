@@ -1,6 +1,7 @@
 // The page: loads the manifest the build script writes into data/, picks a
 // results file and a case, and renders `stateAt` for the current cursor.
 // Everything that decides what a step means lives in replay.ts.
+import type { PaperIndex } from './figures.js';
 import {
   buildTimeline, carcHelp, codeSystemHelp, compareColumns, DATA_NOTE, denialKind, DENIAL_KIND_HELP, firstLine, PANEL_HELP, parseStep, VERDICT_HELP, formatSeconds, formatUsd, INTRO_CHAR_MS, LABEL_HELP, payerRemark, INTRO_END_PAUSE_MS, INTRO_FADE_MS, INTRO_LINES, INTRO_MOVE_MS, INTRO_NOTES, INTRO_STAMP, introSchedule, newestRun, playDelayMs, scoreboard, sideText, stateAt,
   type ReplayState, type ResultsFile, type Step, type ViewerCase, type ViewerResult,
@@ -18,9 +19,10 @@ interface ManifestRun { file: string; provider: string; model: string; effort: s
 interface Manifest {
   results: ManifestRun[];
   cases: string;
+  figures?: string;
 }
 const groupOf = (m: ManifestRun): Group => m.group ?? (m.side === 'payer' ? 'payer' : 'kept');
-type View = 'replay' | 'board' | 'compare';
+type View = 'replay' | 'board' | 'compare' | 'figures';
 let view: View = 'replay';
 
 const $ = <T extends HTMLElement>(id: string): T => {
@@ -42,6 +44,10 @@ const ui = {
   tabReplay: $<HTMLButtonElement>('tab-replay'),
   tabCompare: $<HTMLButtonElement>('tab-compare'),
   compareSection: $<HTMLElement>('compare'),
+  tabFigures: $<HTMLButtonElement>('tab-figures'),
+  figuresSection: $<HTMLElement>('figures'),
+  figureList: $<HTMLOListElement>('figure-list'),
+  tableList: $<HTMLOListElement>('table-list'),
   compareGrid: $<HTMLElement>('compare-grid'),
   compareHead: $<HTMLElement>('compare-case'),
   chartWhy: $<HTMLElement>('chart-why'),
@@ -723,7 +729,7 @@ function selectCase(caseId: string, step: string | null = null): void {
 // page was opened on one, the step. Written without a history entry, so the
 // back button leaves the page rather than walking through cases.
 function writeAddress(caseId: string, step: string | null): void {
-  const next = `#file=${encodeURIComponent(ui.filePicker.value)}&case=${caseId}${step !== null && step !== '' ? `&step=${encodeURIComponent(step)}` : ''}${view === 'compare' ? '&view=compare' : ''}`;
+  const next = `#file=${encodeURIComponent(ui.filePicker.value)}&case=${caseId}${step !== null && step !== '' ? `&step=${encodeURIComponent(step)}` : ''}${view === 'compare' || view === 'figures' ? `&view=${view}` : ''}`;
   if (window.location.hash !== next) history.replaceState(null, '', next);
 }
 
@@ -737,9 +743,11 @@ function showView(next: View, step: string | null = null): void {
   ui.tabReplay.setAttribute('aria-selected', String(next === 'replay'));
   ui.board.setAttribute('aria-selected', String(next === 'board'));
   ui.tabCompare.setAttribute('aria-selected', String(next === 'compare'));
+  ui.tabFigures.setAttribute('aria-selected', String(next === 'figures'));
   ui.stage.hidden = next !== 'replay';
   ui.boardSection.hidden = next !== 'board';
   ui.compareSection.hidden = next !== 'compare';
+  ui.figuresSection.hidden = next !== 'figures';
   if (next !== 'replay') { stop(); render(); }
   if (next === 'compare') void renderCompare();
   if (session.result) writeAddress(session.result.caseId, next === 'replay' ? step : null);
@@ -762,6 +770,44 @@ async function loadFiles(runs: ManifestRun[]): Promise<{ file: string; data: Res
 // The compare tab: the case on the picker, the three models' kept live-CHART
 // results in three columns, from the stored files. Nothing is re-run.
 let compareKey = '';
+// The Figures tab: the paper's figures and tables from data/figures.json
+// (README.md, read at build time). A figure's in-page link is a hash, so the
+// browser's own hash change lands it on its frame; links out open GitHub.
+function renderFigures(paper: PaperIndex): void {
+  const item = (label: string, body: (HTMLElement | string)[]): HTMLLIElement => {
+    const li = document.createElement('li');
+    const n = document.createElement('span'); n.className = 'fig-n'; n.textContent = label;
+    const d = document.createElement('div'); d.append(...body);
+    li.append(n, d);
+    return li;
+  };
+  const link = (text: string, href: string, inPage: boolean): HTMLAnchorElement => {
+    const a = document.createElement('a');
+    a.href = href; a.textContent = text;
+    if (!inPage) { a.target = '_blank'; a.rel = 'noopener'; a.className = 'out'; }
+    return a;
+  };
+  ui.figureList.replaceChildren(...paper.figures.map(f => {
+    const body: (HTMLElement | string)[] = [];
+    f.segments.forEach((s, i) => {
+      const text = i === 0 && s.text.startsWith(f.title) ? s.text.slice(f.title.length) : s.text;
+      if (i === 0) { const b = document.createElement('b'); b.textContent = f.title; body.push(b); }
+      if (s.href) body.push(link(s.text, s.href, s.inPage === true)); else body.push(text);
+    });
+    return item(`Figure ${f.n}`, body);
+  }));
+  ui.tableList.replaceChildren(...paper.tables.map(t => {
+    const b = document.createElement('b'); b.textContent = t.title;
+    const body: (HTMLElement | string)[] = [b, ` ${t.caption} `, link('README', t.href, false)];
+    if (t.n === 1) {
+      const btn = document.createElement('button'); btn.type = 'button'; btn.className = 'tab-link'; btn.textContent = 'Scoreboard';
+      btn.addEventListener('click', () => showView('board'));
+      body.push(', ', btn);
+    }
+    return item(`Table ${t.n}`, body);
+  }));
+}
+
 async function renderCompare(): Promise<void> {
   const caseId = session.result?.caseId ?? ui.casePicker.value;
   const c = session.cases.get(caseId);
@@ -971,7 +1017,8 @@ async function applyHash(): Promise<void> {
   const wantedFile = params.get('file');
   const wantedCase = params.get('case');
   const wantedStep = params.get('step');
-  const wantedView: View = params.get('view') === 'compare' ? 'compare' : 'replay';
+  const v = params.get('view');
+  const wantedView: View = v === 'compare' || v === 'figures' ? v : 'replay';
   if (wantedView !== view && view !== 'board') view = wantedView;
   const landOnStep = (): void => {
     const n = parseStep(wantedStep, session.steps.length);
@@ -1034,6 +1081,8 @@ async function boot(): Promise<void> {
   ui.board.addEventListener('click', () => showView('board'));
   ui.tabReplay.addEventListener('click', () => showView('replay'));
   ui.tabCompare.addEventListener('click', () => showView('compare'));
+  ui.tabFigures.addEventListener('click', () => showView('figures'));
+  if (session.manifest.figures) renderFigures(await fetchJson<PaperIndex>(`data/${session.manifest.figures}`));
   // Each column says in one line what it holds; the header repeats it on hover.
   for (const key of ['chart', 'criteria', 'draft'] as const) { ui.panelSub[key].textContent = PANEL_HELP[key]; ui.panelHead[key].title = PANEL_HELP[key]; }
   ui.boardData.textContent = DATA_NOTE;
@@ -1068,6 +1117,7 @@ async function boot(): Promise<void> {
       case 'End': e.preventDefault(); stop(); seek(session.steps.length); break;
       case 's': case 'S': showView(view === 'board' ? 'replay' : 'board'); break;
       case 'c': case 'C': showView(view === 'compare' ? 'replay' : 'compare'); break;
+      case 'f': case 'F': showView(view === 'figures' ? 'replay' : 'figures'); break;
       case 'p': case 'P': showPreamble(ui.preamble.hidden !== false); break;
       case 'w': case 'W': showWrit(ui.writ.hidden !== false); break;
       case 'Escape': if (!ui.writ.hidden) showWrit(false); break;

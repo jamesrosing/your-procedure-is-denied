@@ -6,6 +6,7 @@ import { build } from 'esbuild';
 import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { paperIndex } from '../viewer/src/figures.js';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const root = join(here, '..');
@@ -52,7 +53,10 @@ const results = listed.map(({ dir, f, group }) => {
 const casesDir = join(root, 'synthetic', 'cases');
 const cases = readdirSync(casesDir).filter(f => f.endsWith('.json')).sort().map(f => JSON.parse(readFileSync(join(casesDir, f), 'utf8')) as unknown);
 writeFileSync(join(data, 'cases.json'), JSON.stringify(cases));
-writeFileSync(join(data, 'index.json'), JSON.stringify({ results, cases: 'cases.json', builtAt: new Date().toISOString() }, null, 2));
+// The paper's figures and tables, for the Figures tab, read from README.md so they cannot drift.
+const paper = paperIndex(readFileSync(join(root, '..', 'README.md'), 'utf8'));
+writeFileSync(join(data, 'figures.json'), JSON.stringify(paper));
+writeFileSync(join(data, 'index.json'), JSON.stringify({ results, cases: 'cases.json', figures: 'figures.json', builtAt: new Date().toISOString() }, null, 2));
 
 await build({
   entryPoints: [join(viewer, 'src', 'main.ts')],
@@ -65,4 +69,4 @@ await build({
   logLevel: 'warning',
 });
 
-console.error(`viewer built: ${results.length} results file(s), ${cases.length} cases, app.js`);
+console.error(`viewer built: ${results.length} results file(s), ${cases.length} cases, ${paper.figures.length} figures and ${paper.tables.length} tables, app.js`);
