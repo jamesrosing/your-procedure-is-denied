@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-10-31 07:01 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-10-31 07:19 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -50,7 +50,7 @@ Each commit that changed the version string in `build/src/litmus.ts`. The gate i
 
 ## Commits since `hackathon-start`
 
-Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 44 commits by github-actions[bot] are this log regenerating itself after a push; they touch only the generated files and carry no ledger row.
+Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 45 commits by github-actions[bot] are this log regenerating itself after a push; they touch only the generated files and carry no ledger row.
 
 ### 79e5e21 · 2026-10-26 20:38 · Add hackathon scaffolding: NEW-WORK.md and /build
 
@@ -616,3 +616,11 @@ Dictation prepared (README 2.12): `build/src/dictation.ts` (`npm run dictate -- 
 ### 13dd45e · 2026-10-31 00:01 · Release v1.1.0: abstract, Figures 10 to 13, the Methods 2.1 row, the concept DOI for all versions, citation files at 1.1.0, the repair turn and the live run in the shot list, captions regenerated · tag v1.1.0
 
 Release v1.1.0. Abstract updated for the post hoc work, one unstructured paragraph of 448 words (methods: the repair turn, the effort sweep, the letters read back; results: six of seven blocked drafts repaired with no decline eroded, effort, 46 of 50 letters with every field correct, every error one glyph). Figures 10 to 13 by deep link: the repair turn at the first verdict and at the verdict (case-038, muse-spark-1.3 with one repair turn, steps 21 and end), the stated reason (case-001, step 2), the Compare tab (case-001, view=compare), and case-001 as a remittance letter. Methods 2.1 row with the time of every post hoc run. The Zenodo badge and the Data and code availability paragraph on the concept DOI 10.5281/zenodo.23794797, which lists all versions; CITATION.cff and .zenodo.json at 1.1.0, dated 2026-10-31. Video (`assets/video/`): shot 5 is the repair turn (case-038 on the muse-spark-1.3 repair run: BLOCKED at step 21, the banner at 22, PASS after the repair at the end; 31 words, 14 s) in place of the empty warranted answer, shot 8 the live run in the terminal (`npm run live -- --case case-001`, the record hash beside the viewer's; 29 words, 13 s) in place of the run header and the grep; one sentence out of shot 6 and four words out of 7a pay the four seconds; total 3:00, 350 words after the opening; `narration.srt` regenerated at 140 words a minute, 37 cues. `build/README.md` names the post hoc result directories. Tag v1.1.0
+
+### 8e395e0 · 2026-10-31 00:01 · Build log: regenerate after 13dd45e
+
+(generated files only; no ledger row by design)
+
+### next commit · the one that carries this regeneration
+
+Zenodo version 1.1.0 published by the author (version DOI 10.5281/zenodo.23831511 under the concept DOI 10.5281/zenodo.23794797; the deposited zip's MD5 cb4f823a3ea6aa6d5a1f63b9a43859b3 matches the GitHub release asset, created from the v1.1.0 tag with the same file). README Data and code availability names the v1.1.0 version DOI and the release
