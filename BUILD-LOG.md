@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-10-31 07:48 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-10-31 20:47 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -37,6 +37,7 @@ From the ledger rows that say so. A run is superseded when a gate defect it expo
 - 2026-10-28 5b133e0: Live CHART run on muse-wonder-1.0: 50 of 50, 229 sentences, p50 9.0 s, $0.054 per case, 7.9 of 25.6 entries read, 95% of key entries, `policy_status` first in all 50 cases, one metered query and 49 from memory, no CHART fact in any draft. Eighth README row. The same run on Muse Spark Open failed on all 50 with Baseten HTTP 402 (payment status), file discarded, retry once credit is added
 - 2026-10-28 e6600f2: Live CHART run on Muse Spark Open (Baseten, concurrency 3 after a run at 8 lost 16 cases to HTTP 429 and was discarded): 45 of 50, 245 sentences, p50 7.3 s, $0.016 per case, 9.3 of 25.6 entries read, 97% of key entries, `policy_status` in all 50 cases (40 first), one metered query. Four blocks read: each a true sentence citing one entry for a fact in another (antianginal count, 150-foot goal vs 160-foot discharge note, "bilateral", "8 weeks of PT"), gate right by its one-citation rule. One false pass kept and reported: case-023, absent (no intensity documentation), model cited "plan 5 to 6 days a week" for the 3-hours-a-day criterion and the gate passed it, the referential limit from the LITMUS papers now on the public scoreboard. Ninth README row and paragraph. Viewer scoreboard gains a "Gate passed, key says no" column when any run has one; asset links v8. 98 tests
 - 2026-10-28 a60c2a3: Build log: `build/scripts/build-log.ts` (`npm run log`) generates `BUILD-LOG.md` from the git history since `hackathon-start`, the ledger rows matched by hash, the gate version at every commit that changed it, and the run headers in `build/results/` (model, mode, gate at run, re-gates, advisor), plus the kept and superseded runs; it also rewrites a Build log section of the README between markers. `.github/workflows/build-log.yml` reruns it after every push to main and commits the two generated files as github-actions[bot] with no ledger row (the ledger says so). README navigation links the section
+- 2026-10-31 0fd3a30: The video as one take (`assets/video/WALKTHROUGH.md`): an introduction read from the abstract (its opening two sentences and the question), then demo.hemeehr.com control by control (the three columns, Play on case-001 to PASS, test the gate, case-044 declined on muse-wonder-1.0, the Scoreboard, Compare, the writ with print and save as text), the abstract's last sentence as the close; ten beats, 376 words at 140 words a minute, speech ending at 2:48, every spoken number sourced; `narration.srt` regenerated as 23 cues on the planned times; `SHOT-LIST.md` marked superseded (it keeps the step addresses) and its test count corrected to 236
 
 ## Gate versions
 
@@ -50,7 +51,7 @@ Each commit that changed the version string in `build/src/litmus.ts`. The gate i
 
 ## Commits since `hackathon-start`
 
-Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 46 commits by github-actions[bot] are this log regenerating itself after a push; they touch only the generated files and carry no ledger row.
+Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 47 commits by github-actions[bot] are this log regenerating itself after a push; they touch only the generated files and carry no ledger row.
 
 ### 79e5e21 · 2026-10-26 20:38 · Add hackathon scaffolding: NEW-WORK.md and /build
 
@@ -632,3 +633,11 @@ Zenodo version 1.1.0 published by the author (version DOI 10.5281/zenodo.2383151
 ### 3700151 · 2026-10-31 00:48 · Viewer: the stage keeps its height while the writ is open, so the counters no longer overlap the band; asset links v33
 
 Viewer (`build/viewer/styles.css`): with the writ open, the stage kept shrinking under the sheet until its counters were drawn over the writ's band at 1920 by 1080 (seen in a headless take of shot 3); the stage now keeps the height it has alone while the writ is open, so the page scrolls to the sheet with nothing over it. Asset links v33
+
+### dfbf5b6 · 2026-10-31 00:48 · Build log: regenerate after 3700151
+
+(generated files only; no ledger row by design)
+
+### 0fd3a30 · 2026-10-31 13:47 · Video as one take: WALKTHROUGH.md (introduction from the abstract, then the page control by control), narration.srt regenerated as 23 cues, SHOT-LIST.md superseded
+
+The video as one take (`assets/video/WALKTHROUGH.md`): an introduction read from the abstract (its opening two sentences and the question), then demo.hemeehr.com control by control (the three columns, Play on case-001 to PASS, test the gate, case-044 declined on muse-wonder-1.0, the Scoreboard, Compare, the writ with print and save as text), the abstract's last sentence as the close; ten beats, 376 words at 140 words a minute, speech ending at 2:48, every spoken number sourced; `narration.srt` regenerated as 23 cues on the planned times; `SHOT-LIST.md` marked superseded (it keeps the step addresses) and its test count corrected to 236
