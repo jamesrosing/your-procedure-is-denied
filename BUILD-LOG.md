@@ -604,6 +604,7 @@ The denial as a letter and its intake (post hoc; README 2.11, Table 7). `build/s
 
 (generated files only; no ledger row by design)
 
-### next commit · the one that carries this regeneration
+### 988a98e · 2026-10-30 23:57 · Dictation prepared: a recording transcribed with Muse Voice Transcribe becomes the chart entry, the primary configuration runs on it verbose, the gate's quotes are quotes of speech; proven on a text-to-speech clip; Methods 2.12
 
+Results added: `dictated/meta-muse-spark-1.3-low-agentic-chart-2026-10-31T06-54-46-023Z-dictated-case-001-note-013.json`.
 Dictation prepared (README 2.12): `build/src/dictation.ts` (`npm run dictate -- --audio <wav> --case <id> --entry <note>`) transcribes a WAV with Muse Voice Transcribe through the Meta Model API (`POST /v1/asr/transcribe`, multipart settings and audio parts, as the speech-to-text docs describe), writes the transcript as that entry's text into a copy of the case under `synthetic/dictated/` with the original kept beside it, and runs the primary configuration (muse-spark-1.3, agentic, live CHART, verbose) on that case into `results/dictated/`; the entry is then spoken words and the gate's quotes are quotes of speech. Without the file it stops with a clear error naming `assets/audio/case-001-note-013.wav` and prints the command to run. Proven end to end on a text-to-speech clip of note-013 (Windows speech; not the author's voice; the clip is not committed): transcript in 5.5 s for $0.0014 with two doubled words the clip does not contain, then PASS 10 of 10 with three sentences quoting the dictated entry ($0.028); the dictated case and result file are committed as the stand-in until the author records. Four tests; 236 tests
