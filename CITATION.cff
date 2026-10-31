@@ -1,14 +1,14 @@
 cff-version: 1.2.0
 message: "If you use this work, cite it as below, and cite the LITMUS papers it implements."
 type: software
-doi: 10.5281/zenodo.23794798
-version: 1.0.0
+doi: 10.5281/zenodo.23794797
+version: 1.1.0
 title: "Your procedure is denied: fail-closed verification of model-drafted claim-denial appeals against the clinical record"
 authors:
   - family-names: Rosing
     given-names: James H.
     affiliation: "Newport Beach, California"
-date-released: 2026-11-03
+date-released: 2026-10-31
 repository-code: "https://github.com/jamesrosing/your-procedure-is-denied"
 url: "https://demo.hemeehr.com"
 license: Apache-2.0

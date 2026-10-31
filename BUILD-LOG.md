@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-10-31 06:57 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-10-31 07:01 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -50,7 +50,7 @@ Each commit that changed the version string in `build/src/litmus.ts`. The gate i
 
 ## Commits since `hackathon-start`
 
-Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 43 commits by github-actions[bot] are this log regenerating itself after a push; they touch only the generated files and carry no ledger row.
+Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 44 commits by github-actions[bot] are this log regenerating itself after a push; they touch only the generated files and carry no ledger row.
 
 ### 79e5e21 · 2026-10-26 20:38 · Add hackathon scaffolding: NEW-WORK.md and /build
 
@@ -608,3 +608,11 @@ The denial as a letter and its intake (post hoc; README 2.11, Table 7). `build/s
 
 Results added: `dictated/meta-muse-spark-1.3-low-agentic-chart-2026-10-31T06-54-46-023Z-dictated-case-001-note-013.json`.
 Dictation prepared (README 2.12): `build/src/dictation.ts` (`npm run dictate -- --audio <wav> --case <id> --entry <note>`) transcribes a WAV with Muse Voice Transcribe through the Meta Model API (`POST /v1/asr/transcribe`, multipart settings and audio parts, as the speech-to-text docs describe), writes the transcript as that entry's text into a copy of the case under `synthetic/dictated/` with the original kept beside it, and runs the primary configuration (muse-spark-1.3, agentic, live CHART, verbose) on that case into `results/dictated/`; the entry is then spoken words and the gate's quotes are quotes of speech. Without the file it stops with a clear error naming `assets/audio/case-001-note-013.wav` and prints the command to run. Proven end to end on a text-to-speech clip of note-013 (Windows speech; not the author's voice; the clip is not committed): transcript in 5.5 s for $0.0014 with two doubled words the clip does not contain, then PASS 10 of 10 with three sentences quoting the dictated entry ($0.028); the dictated case and result file are committed as the stand-in until the author records. Four tests; 236 tests
+
+### 250984d · 2026-10-30 23:57 · Build log: regenerate after 988a98e
+
+(generated files only; no ledger row by design)
+
+### next commit · the one that carries this regeneration
+
+Release v1.1.0. Abstract updated for the post hoc work, one unstructured paragraph of 448 words (methods: the repair turn, the effort sweep, the letters read back; results: six of seven blocked drafts repaired with no decline eroded, effort, 46 of 50 letters with every field correct, every error one glyph). Figures 10 to 13 by deep link: the repair turn at the first verdict and at the verdict (case-038, muse-spark-1.3 with one repair turn, steps 21 and end), the stated reason (case-001, step 2), the Compare tab (case-001, view=compare), and case-001 as a remittance letter. Methods 2.1 row with the time of every post hoc run. The Zenodo badge and the Data and code availability paragraph on the concept DOI 10.5281/zenodo.23794797, which lists all versions; CITATION.cff and .zenodo.json at 1.1.0, dated 2026-10-31. Video (`assets/video/`): shot 5 is the repair turn (case-038 on the muse-spark-1.3 repair run: BLOCKED at step 21, the banner at 22, PASS after the repair at the end; 31 words, 14 s) in place of the empty warranted answer, shot 8 the live run in the terminal (`npm run live -- --case case-001`, the record hash beside the viewer's; 29 words, 13 s) in place of the run header and the grep; one sentence out of shot 6 and four words out of 7a pay the four seconds; total 3:00, 350 words after the opening; `narration.srt` regenerated at 140 words a minute, 37 cues. `build/README.md` names the post hoc result directories. Tag v1.1.0
