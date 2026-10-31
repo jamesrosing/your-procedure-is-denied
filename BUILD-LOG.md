@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-10-31 06:50 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-10-31 06:51 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -586,6 +586,7 @@ The repair turn and the stated reason (post hoc; README 2.9, Table 5). `build/sr
 
 (generated files only; no ledger row by design)
 
-### next commit · the one that carries this regeneration
+### cb56bbd · 2026-10-30 23:50 · The effort sweep: muse-spark-1.3 and Muse Spark Open at medium and high in the live-CHART configuration, four post hoc runs in results/effort, Table 6, Methods 2.10
 
+Results added: `effort/baseten-meta-models_muse-spark-open-1026-high-agentic-chart-2026-10-31T06-37-15-798Z.json`, `effort/baseten-meta-models_muse-spark-open-1026-medium-agentic-chart-2026-10-31T06-33-13-175Z.json`, `effort/meta-muse-spark-1.3-high-agentic-chart-2026-10-31T06-35-14-790Z.json`, `effort/meta-muse-spark-1.3-medium-agentic-chart-2026-10-31T06-33-13-182Z.json`.
 The effort sweep (post hoc; README 2.10, Table 6): muse-spark-1.3 and Muse Spark Open in the live-CHART configuration at effort medium and high, the same 50 cases and settings, into `results/effort/` (four files; Spark 1.3 $1.60 and $1.73, Spark Open $1.19 and $2.14). Spark 1.3: 47 of 50 at medium (one empty warranted answer, one decline on a warranted case with no reason, the case-023 false pass), 45 of 50 at high (four empty warranted answers, three on unsupported cases, and case-007 blocked for criteria without evidence); thinking tokens 1,608, 3,029, and 3,567 per case at low, medium, and high. Spark Open: 50 of 50 at medium, 47 of 50 at high (two answers cut at the 12,288-token output cap, recorded as failed; the case-023 false pass again). Table 6 in `build-log.ts` (`effortRow`) with each model's kept low run as its first row, in README order; `--effort high` accepted by the harness. Results paragraph, one Discussion paragraph, Methods 2.1 row times
