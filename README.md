@@ -26,7 +26,7 @@
 
 > An insurer can now issue a claim denial in about a second. Answering it takes a physician hours. In between, a patient waits to learn whether the operation their surgeon recommended will be approved or refused.
 >
-> — James H. Rosing, MD, FACS · Board-certified in general and plastic surgery · Newport Beach, California
+> — James H. Rosing, MD, FACS · Newport Beach, California
 
 This repository is the public record of one physician's attempt to change that balance: the evidence, the standard I believe every medical AI should meet, and the work of meeting it, measured in the open.
 
