@@ -378,7 +378,8 @@ function main(): void {
     const effort = runs('effort');
     if (effort.length) {
       const effortRank: Record<string, number> = { low: 0, medium: 1, high: 2 };
-      const models = [...new Set(effort.map(modelName))];
+      const order = ['muse-spark-1.3', 'muse-wonder-1.0', 'Muse Spark Open'];
+      const models = [...new Set(effort.map(modelName))].sort((a, b) => order.indexOf(a) - order.indexOf(b));
       const rowsOut: RunFile[] = [];
       for (const m of models) {
         const low = kept.filter(r => modelName(r) === m && mode(r.run) === 'agentic, live CHART').sort((a, b) => b.run.startedAt.localeCompare(a.run.startedAt))[0];

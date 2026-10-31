@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-10-31 06:41 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-10-31 06:50 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -50,7 +50,7 @@ Each commit that changed the version string in `build/src/litmus.ts`. The gate i
 
 ## Commits since `hackathon-start`
 
-Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 40 commits by github-actions[bot] are this log regenerating itself after a push; they touch only the generated files and carry no ledger row.
+Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 41 commits by github-actions[bot] are this log regenerating itself after a push; they touch only the generated files and carry no ledger row.
 
 ### 79e5e21 · 2026-10-26 20:38 · Add hackathon scaffolding: NEW-WORK.md and /build
 
@@ -581,3 +581,11 @@ Abstract re-led on the author's instruction, opening cadence unchanged: the ques
 
 Results added: `repair/baseten-meta-models_muse-spark-open-1026-low-agentic-chart-repair1-2026-10-31T06-25-01-671Z.json`, `repair/meta-muse-spark-1.3-low-agentic-chart-repair1-2026-10-31T06-25-01-670Z.json`, `repair/meta-muse-wonder-1.0-low-agentic-chart-repair1-2026-10-31T06-26-25-644Z.json`.
 The repair turn and the stated reason (post hoc; README 2.9, Table 5). `build/src/harness.ts --repair N` (default 0): when the gate blocks a warranted draft, the gate's record goes back to the model verbatim in the same exchange (sentence index, status, reason, alsoCite entries, draft-level reasons; `repairMessage`), the model keeps its tools and reads (`provider.ts` returns the transcript and resumes it), and the revised draft is re-gated; a declined draft is never offered a repair. Each result keeps `firstOutcome`, `firstGate` (when a repair happened), and `repairs[]` (reasons sent, revised draft, gate, usage, latency); the summary reports blocked before and after, repaired to pass, repaired to decline, still blocked, and false passes created (the repair eroding a decline). `npm run test-call` showed the API returns only `redacted_thinking`, so `read_entry` and `policy_status` take a required one-sentence `why`, recorded on the trace event. Three runs into `results/repair/` (Spark 1.3 $1.06, Wonder $2.97, Spark Open $0.91): 7 blocked drafts, 6 repaired to pass, 1 still blocked (case-023, an empty warranted answer returned empty again), 0 false passes created; `why` on 1,402 of 1,402 tool calls. Table 5 in `build-log.ts`. Viewer: a repaired case replays the first draft blocked, the repair banner with the reasons, the repair-turn reads tagged, and each sentence re-stamped in place with its first stamp kept above; the `why` types out under the chart header as the entry lights; a `record` hash of the sources in the case header; a Compare tab (`c`) with the three kept live-CHART results side by side (`compareColumns`, tested for every case); results/repair and results/effort listed last in the picker and kept off the scoreboard. `--verbose` and `--live` on the harness (one line per tool call as it happens, the verdict, the input hash, and the sources hash, sized for 140 columns; `npm run live -- --case case-001` writes no file unless `--out-dir`); `sourcesHash` in `src/sources.ts`; effort high accepted. `scripts/check-viewer.ts` (`npm run viewer:check`) drives the built page in headless Chromium through playwright-core (dev dependency, pure JavaScript; the browser is Playwright's own install) and fails on any console or page error. Asset links v32. README: Methods 2.1 row, 2.8 live run and compare tab, 2.9, Results and Discussion paragraphs; 32 new tests, 221 tests
+
+### 2cefd01 · 2026-10-30 23:41 · Build log: regenerate after 090c0d4
+
+(generated files only; no ledger row by design)
+
+### next commit · the one that carries this regeneration
+
+The effort sweep (post hoc; README 2.10, Table 6): muse-spark-1.3 and Muse Spark Open in the live-CHART configuration at effort medium and high, the same 50 cases and settings, into `results/effort/` (four files; Spark 1.3 $1.60 and $1.73, Spark Open $1.19 and $2.14). Spark 1.3: 47 of 50 at medium (one empty warranted answer, one decline on a warranted case with no reason, the case-023 false pass), 45 of 50 at high (four empty warranted answers, three on unsupported cases, and case-007 blocked for criteria without evidence); thinking tokens 1,608, 3,029, and 3,567 per case at low, medium, and high. Spark Open: 50 of 50 at medium, 47 of 50 at high (two answers cut at the 12,288-token output cap, recorded as failed; the case-023 false pass again). Table 6 in `build-log.ts` (`effortRow`) with each model's kept low run as its first row, in README order; `--effort high` accepted by the harness. Results paragraph, one Discussion paragraph, Methods 2.1 row times

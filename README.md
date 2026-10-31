@@ -162,7 +162,7 @@ The line between what was fixed before the reported runs and what changed after 
 | The fifty cases and their grading keys. Four keys were corrected during development runs between 00:40 and 01:17 PT, each defect found by a model reading the chart (section 4.4); no case file changed after the kept runs began. | The agentic mode and its two chart tools (October 27, 20:22 PT) and the live policy query (October 27, 23:44 PT). |
 | The gate (v1) and the appeal contract: one citation per sentence, a verbatim quote, every hard token sourced. Fact sourcing was widened from the quoted span to the whole cited entry after a development run (00:50 PT). | Gate v1.1 to v1.4: compound number words read as one number, hundreds included, a needs-citation label naming the entry that holds a missing token, and a side treated as a hard token wherever it names one. Every kept run was re-gated under each version with the change recorded in the file; re-gating to v1.3 changed seven sentence labels and no verdict, to v1.4 none. |
 | The primary measure, agreement with the key, and the outcome categories. | The advisor (October 28), the mutation harness (October 28), the repeat runs (October 28 to 29), the payer-side runs (October 29, section 2.7), the viewer, and this document. |
-| Three models, effort low, eight cases in flight. | The repair turn and the stated reason (October 30, 23:25 PT, section 2.9, Table 5); the effort sweep (October 31, section 2.10, Table 6); the letter intake (October 31, section 2.11, Table 7); the compare tab, the live run, and the dictation pipeline (October 31, section 2.8). Every run from these is post hoc and sits in its own directory; Table 1 is unchanged. |
+| Three models, effort low, eight cases in flight. | The repair turn and the stated reason (October 30, 23:25 PT, section 2.9, Table 5); the effort sweep (October 30, 23:33 PT, section 2.10, Table 6); the letters and their intake (October 30, 23:45 PT, section 2.11, Table 7); the compare tab and the live run (October 30, section 2.8); the dictation pipeline (October 31, section 2.12). Every run from these is post hoc and sits in its own directory; Table 1 is unchanged. |
 
 ### 2.2 The system under test
 
@@ -219,12 +219,16 @@ Both additions were made on October 30, after the kept runs, and every run that 
 
 **The stated reason.** The Meta Model API returns the model's reasoning only as `redacted_thinking` blocks (`npm run test-call` on October 30 reported content block types `redacted_thinking, text`), so there is no thought text to show. Instead, the two tools that open something, `read_entry` and `policy_status`, took a required `why` field: one sentence on what the model expects the entry to bear on and why it is opening it now. The executor ignores the field; the trace records it on the tool-call event, cut at 400 characters, and the viewer types it out under the chart column as the entry lights. Nothing is faked: a trace without a `why` shows none. The repair runs are the first to carry it.
 
+### 2.10 The effort sweep (post hoc)
+
+The kept runs used effort low, fixed before they began (section 2.1). On October 30, after the kept runs, muse-spark-1.3 and Muse Spark Open were run again in the live-CHART configuration at effort medium and at effort high: the same 50 cases, the same tools, the same 12,288-token output cap, the same gate, into `build/results/effort/` (`npm run harness -- --agentic --chart --effort medium`). Effort is the API's `output_config.effort`, set explicitly on every call; on the Meta Model API the reasoning it buys is reported as `thinking_tokens` and billed as output, and on the Baseten endpoint it is not reported. muse-wonder-1.0 was not swept: its kept run agreed on 50 of 50 and it is the costliest of the three. The `why` field of section 2.9 was in force. Table 6 reports each run beside the model's kept effort-low run.
+
 <br>
 
 ## 3. Results
 
 <!-- results:start -->
-_Tables generated from the result files by `npm run log`; the prose below them is written by hand. Last regenerated 2026-10-31 06:41 UTC._
+_Tables generated from the result files by `npm run log`; the prose below them is written by hand. Last regenerated 2026-10-31 06:50 UTC._
 
 **Table 1. Kept runs.** 9 runs, 50 cases each, effort low. Agreed is correct-pass plus correct-decline against the grading key, with a 95% Wilson interval. Blocked is a draft the gate stopped. Missed is a decline on a case the key labels warranted. False pass is a draft the gate passed on a case the key labels unsupported. The five outcome columns sum to 50. Fabricated quotes counts quotes the gate refuted as not in the entry cited, in a sentence or in an evidence item, on any draft including declined ones. Care defended is the billed value of the warranted cases whose appeal passed the gate, out of the $568,500 billed across the thirty warranted cases ($940,000 across all fifty); the values are the synthetic set's, not a payer's. Entries read applies to the agentic modes.
 
@@ -283,6 +287,17 @@ Of the 8 blocked drafts in the kept runs, 6 were on cases the key labels warrant
 | Muse Spark Open (open weights on Baseten) | 4 | 0 | 4 | 0 | 0 | 0 | 45 of 50 | 49 of 50 | $0.017 | $0.018 |
 | muse-wonder-1.0 (Meta Model API) | 0 | 0 | 0 | 0 | 0 | 0 | 50 of 50 | 50 of 50 | $0.059 | $0.059 |
 
+**Table 6. The effort sweep (post hoc).** muse-spark-1.3 and Muse Spark Open in the live-CHART configuration at effort medium and high (`build/results/effort/`, 4 files, same 50 cases, same settings otherwise), with each model's kept effort-low run from Table 1 as its first row. Empty warranted answers are drafts that set warranted to true with no sentences, which the gate blocks. Thinking tokens are the API's `thinking_tokens` count per case; Muse Spark Open on Baseten reports none. These runs are kept apart from Tables 1 and 2 and from the viewer's scoreboard.
+
+| Model | Effort | Agreed | Blocked | Empty warranted answers | False pass | Missed | Failed | Thinking tokens per case | Median latency | Cost per case |
+| --- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| muse-spark-1.3 (Meta Model API) | low (kept run, Table 1) | 49 of 50 | 1 | 1 | 0 | 0 | 0 | 1,608 | 10.8 s | $0.019 |
+| muse-spark-1.3 (Meta Model API) | medium | 47 of 50 | 1 | 1 | 1 | 1 | 0 | 3,029 | 14.9 s | $0.032 |
+| muse-spark-1.3 (Meta Model API) | high | 45 of 50 | 5 | 4 | 0 | 0 | 0 | 3,567 | 18.2 s | $0.035 |
+| Muse Spark Open (open weights on Baseten) | low (kept run, Table 1) | 45 of 50 | 4 | 0 | 1 | 0 | 0 | not reported | 7.3 s | $0.016 |
+| Muse Spark Open (open weights on Baseten) | medium | 50 of 50 | 0 | 0 | 0 | 0 | 0 | not reported | 13.9 s | $0.024 |
+| Muse Spark Open (open weights on Baseten) | high | 47 of 50 | 0 | 0 | 1 | 0 | 2 | not reported | 25.8 s | $0.043 |
+
 <!-- results:end -->
 
 **Figures.** The figures of this paper are frames of the replay, addressed by deep link; `step=end` lands on the verdict and the arrow keys walk the trace from there.
@@ -321,6 +336,8 @@ Of the 8 blocked drafts in the kept runs, 6 were on cases the key labels warrant
 
 **The repair turn (post hoc).** With one repair turn offered on blocked drafts (Table 5), muse-wonder-1.0 blocked no draft on the first turn, made no repair, and agreed on 50 of 50. muse-spark-1.3 blocked 3 drafts on the first turn. Two were repaired to pass: case-007, where the first draft had one sentence and four of five criteria without verified evidence, and the repair read seven more entries and returned ten verified sentences; and case-038, where the count of three antianginal agents was returned as needs-citation naming note-003, and the repair cited it without reading anything further. The third, case-023, an empty warranted answer on a case the key labels near-miss, was returned by the repair, after nine more reads, as another empty warranted answer, and stayed blocked. Agreement moved from 47 to 49 of 50. Muse Spark Open blocked 4 drafts on the first turn, every one a needs-citation on a case the key labels warranted (case-007, case-013, case-032, case-038), and all 4 were repaired to pass; agreement moved from 45 to 49 of 50. Its one false pass, case-023, was passed on the first turn and was not created by a repair. No repair in any run turned a blocked draft on an unsupported case into a pass. The repair turns took 4.8 to 19.9 seconds for muse-spark-1.3 and 3.8 to 8.4 seconds for Muse Spark Open, and cost $0.049 of the $1.06 run and $0.038 of the $0.91 run. Every tool call in the three runs carried a stated reason (1,402 of 1,402).
 
+**The effort sweep (post hoc).** At effort medium and high in the live-CHART configuration (Table 6), muse-spark-1.3 agreed on 47 of 50 at medium: one draft was blocked as an empty warranted answer (case-034), one case the key labels warranted was declined with no stated reason after 7 of 27 entries (case-011), and the false pass on case-023 recurred. At high it agreed on 45 of 50 and blocked 5 drafts: four empty warranted answers (case-023, case-043, case-044, case-045, three of them on cases the key labels unsupported) and one draft on case-007 with criteria without verified evidence. Its thinking tokens per case were 1,608 at low, 3,029 at medium, and 3,567 at high; median latency 10.8, 14.9, and 18.2 seconds; cost per case $0.019, $0.032, and $0.035. Muse Spark Open agreed on 50 of 50 at medium, with no draft blocked and no false pass, and on 47 of 50 at high, where two answers (case-043, case-049) stopped at the output cap before the JSON closed and were recorded as failed, and the false pass on case-023 recurred. Its median latency was 7.3 seconds at low, 13.9 at medium, and 25.8 at high; output tokens per case 3,800 at medium and 7,920 at high; cost per case $0.016, $0.024, and $0.043. The Baseten endpoint reported no thinking tokens at any effort.
+
 <br>
 
 ## 4. Discussion
@@ -336,6 +353,8 @@ The secondary question also answered itself. Given an index and two tools, the m
 - **muse-wonder-1.0 declined a wound-care case the key calls warranted.** The criterion lists infection control and glycemic management among the components of standard wound care. The weekly notes document debridement, dressings, and offloading, and the chart holds a normal A1c and a clean wound elsewhere. The model read the criterion strictly and said the record did not meet it. That is a judgment a physician could share. It is not an invented fact.
 - **The gate blocked a true count.** "Three antianginal agents," citing a note that lists metoprolol, amlodipine, and isosorbide. The count is correct and the gate blocked it, because the number three appears nowhere in the record. The gate cannot count. Whether to exempt simple counts, with the derivation recorded, is an open question.
 - **Empty warranted answers.** Twice in the kept runs and three times in one repeat, a model set warranted to true on an absent case with no evidence and no sentences. The gate blocked every one. That is the fail-closed design doing its job, and it is also the clearest sign that declining is the harder half of the task.
+
+More effort did not buy more agreement on this set (Table 6). For muse-spark-1.3 the added reasoning went into not committing: at high effort four answers set warranted to true and wrote nothing, three of them on cases the key labels unsupported, where the same model at low effort had declined with a reason. The gate blocked every one, so nothing false left, but an empty warranted answer is a worse answer than a decline, because it tells the physician nothing. For Muse Spark Open, medium effort gave the best run of any in this study, 50 of 50 with the case-023 draft declined, and high effort cost it two answers to the output cap at twice the latency. Effort low was fixed before the kept runs and stays the reported setting; these four files say that the open-weights model's five disagreements at low were not a ceiling of the model, and that one run of fifty at one setting is too few to call medium its right setting.
 
 The repair turn (Table 5) is the answer to the first two of these that costs nothing in the gate. Told which entry holds the number it stated, the model cited it, and six of the seven drafts blocked for a true derivation passed on the second turn at about a twentieth of a run's cost; the gate did not change and still cannot count. The seventh, the empty warranted answer on case-023, came back empty and stayed blocked, which is the behavior the design wants: a repair that argued a case the record does not support would be the repair eroding the decline, and in seven repairs none did. Seven is a small count, and the column that would show the erosion is in the table so a larger run can be read the same way. The stated reason changes nothing in the outcomes and everything in what a reader can see: with no thought text from the API, the one sentence the model writes before each read is the only account of why it opened what it opened, and in the three repair runs it never omitted one.
 
@@ -396,9 +415,9 @@ Meta and Cerebral Valley for the event; Baseten for hosting the open-weights mod
 Every commit since the event began has a row in [NEW-WORK.md](NEW-WORK.md), every result file carries its model, mode, gate version, and any re-gate in its own header, and this section is regenerated from those sources after every push. Nothing in it is typed by hand.
 
 <!-- build-log:start -->
-_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-10-31 06:41 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
+_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-10-31 06:50 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
 
-129 commits since the `hackathon-start` tag, the last at 2026-10-30 23:39 (090c0d4). Gate v1.4. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
+130 commits since the `hackathon-start` tag, the last at 2026-10-30 23:41 (2cefd01). Gate v1.4. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
 
 | Started (UTC) | Model | Mode | Agreed | Blocked | Missed | False pass | Advisor |
 | --- | --- | --- | :---: | :---: | :---: | :---: | --- |
