@@ -238,7 +238,7 @@ The chart entry a draft quotes is, in practice, dictated. `npm run dictate -- --
 ## 3. Results
 
 <!-- results:start -->
-_Tables generated from the result files by `npm run log`; the prose below them is written by hand. Last regenerated 2026-10-31 22:44 UTC._
+_Tables generated from the result files by `npm run log`; the prose below them is written by hand. Last regenerated 2026-10-31 22:52 UTC._
 
 **Table 1. Kept runs.** 9 runs, 50 cases each, effort low. Agreed is correct-pass plus correct-decline against the grading key, with a 95% Wilson interval. Blocked is a draft the gate stopped. Missed is a decline on a case the key labels warranted. False pass is a draft the gate passed on a case the key labels unsupported. The five outcome columns sum to 50. Fabricated quotes counts quotes the gate refuted as not in the entry cited, in a sentence or in an evidence item, on any draft including declined ones. Care defended is the billed value of the warranted cases whose appeal passed the gate, out of the $568,500 billed across the thirty warranted cases ($940,000 across all fifty); the values are the synthetic set's, not a payer's. Entries read applies to the agentic modes.
 
@@ -444,9 +444,9 @@ Meta and Cerebral Valley for the event; Baseten for hosting the open-weights mod
 Every commit since the event began has a row in [NEW-WORK.md](NEW-WORK.md), every result file carries its model, mode, gate version, and any re-gate in its own header, and this section is regenerated from those sources after every push. Nothing in it is typed by hand.
 
 <!-- build-log:start -->
-_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-10-31 22:44 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
+_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-10-31 22:52 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
 
-149 commits since the `hackathon-start` tag, the last at 2026-10-31 15:43 (49a719d). Gate v1.4. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
+151 commits since the `hackathon-start` tag, the last at 2026-10-31 15:52 (afbb63c). Gate v1.4. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
 
 | Started (UTC) | Model | Mode | Agreed | Blocked | Missed | False pass | Advisor |
 | --- | --- | --- | :---: | :---: | :---: | :---: | --- |
@@ -462,11 +462,11 @@ _Generated from the git history, the ledger, and the result files by `npm run lo
 
 Last five authored commits, newest first, with the ledger row each one carried (the bot's regenerate commits are left out):
 
+- **afbb63c · 2026-10-31 15:52** · README: the board certification clause removed from the byline. README byline: the clause "Board-certified in general and plastic surgery" removed at the author's direction; the line now reads name, MD, FACS, city. No other file carried it.
 - **49a719d · 2026-10-31 15:43** · Viewer: the header's unlinked replay label is removed; the four tabs stand alone in the row; asset links v36. Viewer (`build/viewer/index.html`, `styles.css`): the header's second, unlinked "replay" label beside the title is removed; the four tabs (Replay, Scoreboard, Compare, Figures) stand alone in the row, confirmed headless at 1440 and 1000 px wide; asset links v36. No change to tests (245 pass).
 - **8295722 · 2026-10-31 14:26** · Viewer: a Figures tab lists the paper's figures and tables, read from README.md at build time; each figure link lands on its frame; asset links v35. Viewer: a Figures tab (the f key, `view=figures` in the address) lists the paper's 13 figures and 7 tables with their captions; each figure's deep link lands on its frame in place, files and sections open on GitHub, Table 1 also opens the Scoreboard. The list is read from README.md when the page is built (`build/viewer/src/figures.ts`,…
 - **60518e4 · 2026-10-31 13:57** · Viewer: a deep link keeps its step through boot again. Viewer (`build/viewer/src/main.ts`): the step in a deep link survives boot again. The Compare tab commit (090c0d4) made `showView` rewrite the address without a step, and the hash handler calls it last, so every figure link opened on its frame and then had `&step=` stripped, and a reload landed on step 0. `showView` now takes the step the hash handler…
 - **0fd3a30 · 2026-10-31 13:47** · Video as one take: WALKTHROUGH.md (introduction from the abstract, then the page control by control), narration.srt regenerated as 23 cues, SHOT-LIST.md superseded. The video as one take (`assets/video/WALKTHROUGH.md`): an introduction read from the abstract (its opening two sentences and the question), then demo.hemeehr.com control by control (the three columns, Play on case-001 to PASS, test the gate, case-044 declined on muse-wonder-1.0, the Scoreboard, Compare, the writ with print and save as text), the…
-- **3700151 · 2026-10-31 00:48** · Viewer: the stage keeps its height while the writ is open, so the counters no longer overlap the band; asset links v33. Viewer (`build/viewer/styles.css`): with the writ open, the stage kept shrinking under the sheet until its counters were drawn over the writ's band at 1920 by 1080 (seen in a headless take of shot 3); the stage now keeps the height it has alone while the writ is open, so the page scrolls to the sheet with nothing over it. Asset links v33
 <!-- build-log:end -->
 
 ## From the inside
