@@ -729,7 +729,10 @@ function writeAddress(caseId: string, step: string | null): void {
 
 // Three surfaces share the header: the replay, the scoreboard, and the compare
 // tab. The case picker drives the replay and the compare tab alike.
-function showView(next: View): void {
+// A step is kept in the address only when the caller lands on one: the hash
+// change handler passes the step it was given, so a figure's deep link
+// survives the view being set at boot; a tab click passes none.
+function showView(next: View, step: string | null = null): void {
   view = next;
   ui.tabReplay.setAttribute('aria-selected', String(next === 'replay'));
   ui.board.setAttribute('aria-selected', String(next === 'board'));
@@ -739,7 +742,7 @@ function showView(next: View): void {
   ui.compareSection.hidden = next !== 'compare';
   if (next !== 'replay') { stop(); render(); }
   if (next === 'compare') void renderCompare();
-  if (session.result) writeAddress(session.result.caseId, null);
+  if (session.result) writeAddress(session.result.caseId, next === 'replay' ? step : null);
 }
 function showBoard(on: boolean): void { showView(on ? 'board' : 'replay'); }
 
@@ -990,7 +993,7 @@ async function applyHash(): Promise<void> {
   else if (wantedCase) selectCase(wantedCase);
   landOnStep();
   if (view === 'board') showView('replay');
-  showView(wantedView);
+  showView(wantedView, parseStep(wantedStep, session.steps.length) !== null ? wantedStep : null);
 }
 
 async function boot(): Promise<void> {
