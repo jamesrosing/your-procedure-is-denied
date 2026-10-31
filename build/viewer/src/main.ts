@@ -2,17 +2,26 @@
 // results file and a case, and renders `stateAt` for the current cursor.
 // Everything that decides what a step means lives in replay.ts.
 import {
-  buildTimeline, carcHelp, codeSystemHelp, DATA_NOTE, denialKind, DENIAL_KIND_HELP, firstLine, PANEL_HELP, parseStep, VERDICT_HELP, formatSeconds, formatUsd, INTRO_CHAR_MS, LABEL_HELP, payerRemark, INTRO_END_PAUSE_MS, INTRO_FADE_MS, INTRO_LINES, INTRO_MOVE_MS, INTRO_NOTES, INTRO_STAMP, introSchedule, newestRun, playDelayMs, scoreboard, sideText, stateAt,
+  buildTimeline, carcHelp, codeSystemHelp, compareColumns, DATA_NOTE, denialKind, DENIAL_KIND_HELP, firstLine, PANEL_HELP, parseStep, VERDICT_HELP, formatSeconds, formatUsd, INTRO_CHAR_MS, LABEL_HELP, payerRemark, INTRO_END_PAUSE_MS, INTRO_FADE_MS, INTRO_LINES, INTRO_MOVE_MS, INTRO_NOTES, INTRO_STAMP, introSchedule, newestRun, playDelayMs, scoreboard, sideText, stateAt,
   type ReplayState, type ResultsFile, type Step, type ViewerCase, type ViewerResult,
   type SentenceState,
 } from './replay.js';
 import { recheck, recheckLabel, EDIT_BUTTON, EDIT_HELP, EDIT_NOTE } from './gatecheck.js';
 import { writDocument, writText, WRIT_BUTTON, WRIT_HELP } from './writ.js';
+import { gateSources, sourcesHash } from '../../src/sources.js';
 
+// group: where the file sits. kept is results/ (Table 1, the scoreboard, the
+// compare tab); payer, repair, and effort are the post hoc directories, listed
+// last in the picker, labeled, and kept off the scoreboard.
+type Group = 'kept' | 'payer' | 'repair' | 'effort';
+interface ManifestRun { file: string; provider: string; model: string; effort: string; startedAt: string; cases: number; agentic: boolean; live?: boolean; side?: 'payer'; group?: Group; repair?: number }
 interface Manifest {
-  results: { file: string; provider: string; model: string; effort: string; startedAt: string; cases: number; agentic: boolean; live?: boolean; side?: 'payer' }[];
+  results: ManifestRun[];
   cases: string;
 }
+const groupOf = (m: ManifestRun): Group => m.group ?? (m.side === 'payer' ? 'payer' : 'kept');
+type View = 'replay' | 'board' | 'compare';
+let view: View = 'replay';
 
 const $ = <T extends HTMLElement>(id: string): T => {
   const el = document.getElementById(id);
@@ -31,6 +40,11 @@ const ui = {
   speed: $<HTMLSelectElement>('speed'),
   board: $<HTMLButtonElement>('btn-board'),
   tabReplay: $<HTMLButtonElement>('tab-replay'),
+  tabCompare: $<HTMLButtonElement>('tab-compare'),
+  compareSection: $<HTMLElement>('compare'),
+  compareGrid: $<HTMLElement>('compare-grid'),
+  compareHead: $<HTMLElement>('compare-case'),
+  chartWhy: $<HTMLElement>('chart-why'),
   theme: $<HTMLButtonElement>('btn-theme'),
   ctxCrumb: $<HTMLElement>('ctx-crumb'),
   ctxTitle: $<HTMLElement>('ctx-title'),
@@ -153,7 +167,9 @@ function renderContext(c: ViewerCase, r: ViewerResult): void {
   ui.ctxStamp.replaceChildren(
     ...(run ? [help(text('span', '', `model ${run.model}`), LABEL_HELP['model'] ?? ''), help(text('span', '', `provider ${run.provider}`), LABEL_HELP['provider'] ?? ''), help(text('span', '', `effort ${run.effort}`), LABEL_HELP['effort'] ?? ''), help(text('span', '', `run ${run.startedAt.slice(0, 10)}`), LABEL_HELP['run'] ?? '')] : []),
     ...(gateVersion ? [help(text('span', '', `gate litmus ${gateVersion}`), LABEL_HELP['gate'] ?? '')] : []),
+    ...(run?.repair ? [help(text('span', 'strong', `repair turn \u00d7${run.repair}, post hoc`), LABEL_HELP['repair'] ?? '')] : []),
     ...(side.stamp ? [help(text('span', 'strong', side.stamp), side.draftHelp)] : []),
+    help(text('span', 'mono', `record ${sourcesHash(gateSources(c)).slice(0, 12)}`), LABEL_HELP['record'] ?? ''),
     help(text('span', '', 'synthetic record'), LABEL_HELP['synthetic'] ?? ''),
   );
   if (ui.panelHead.draft.textContent !== side.draftHeading) { ui.panelHead.draft.textContent = side.draftHeading; ui.panelHead.draft.title = side.draftHelp; ui.panelSub.draft.textContent = side.draftHelp; }
@@ -202,15 +218,55 @@ function renderEntries(state: ReplayState, steps: Step[]): void {
     if (el.dataset['state'] !== next) el.dataset['state'] = next;
     const tag = el.querySelector('.tag') as HTMLElement;
     const s = readAt.get(id);
-    const label: string = s?.kind === 'read' ? `${s.tool}${s.live ? ', live' : ''}` : state.read.includes(id) ? 'cited' : '';
+    const label: string = s?.kind === 'read' ? `${s.tool}${s.live ? ', live' : ''}${s.repair ? `, repair turn ${s.repair}` : ''}` : state.read.includes(id) ? 'cited' : '';
     if (tag.textContent !== label) tag.textContent = label;
     tag.classList.toggle('live', s?.kind === 'read' && s.live === true);
+    tag.classList.toggle('repair', s?.kind === 'read' && s.repair !== undefined);
   }
   // state.open is a citation the model wrote; escape it so a stray quote or
   // bracket cannot throw inside render and stall playback.
   const open = state.open ? ui.entries.querySelector<HTMLElement>(`[data-id="${CSS.escape(state.open)}"]`) : null;
   open?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
   ui.chartMeta.textContent = `${state.counters.chartSize} entries, ${state.read.length} read`;
+  renderWhy(state);
+}
+
+// The model's reason for the read it is making, typed out under the chart
+// header while the entry lights (the API returns only redacted thinking, so
+// the reason is the one the model wrote into the tool call). Typed once per
+// visit to the step; a re-render at the same cursor leaves it alone.
+let whyTimers: number[] = [];
+let whyKey = '';
+function renderWhy(state: ReplayState): void {
+  const why = state.why;
+  const key = why ? `${session.rendered.file ?? ''}|${session.result?.caseId ?? ''}|${state.cursor}` : '';
+  if (!why) {
+    if (!ui.chartWhy.hidden) { ui.chartWhy.hidden = true; ui.chartWhy.replaceChildren(); }
+    for (const t of whyTimers) window.clearTimeout(t);
+    whyTimers = []; whyKey = '';
+    return;
+  }
+  if (key === whyKey && !ui.chartWhy.hidden) return;
+  for (const t of whyTimers) window.clearTimeout(t);
+  whyTimers = []; whyKey = key;
+  const lbl = text('span', 'lbl', why.entryId ? `why ${why.entryId}` : why.live ? 'why the live query' : 'why');
+  const val = text('span', 'val', '');
+  ui.chartWhy.replaceChildren(lbl, val);
+  ui.chartWhy.hidden = false;
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduced) { val.textContent = why.text; return; }
+  const chars = [...why.text];
+  const cursor = text('span', 'cursor', '');
+  val.append(cursor);
+  let n = 0;
+  const tick = (): void => {
+    const ch = chars[n];
+    if (ch !== undefined) cursor.before(document.createTextNode(ch));
+    n += 1;
+    if (n < chars.length) whyTimers.push(window.setTimeout(tick, Math.max(8, INTRO_CHAR_MS / 3)));
+    else whyTimers.push(window.setTimeout(() => cursor.remove(), 600));
+  };
+  tick();
 }
 
 function renderCriteria(state: ReplayState): void {
@@ -317,9 +373,16 @@ function stampText(status: SentenceState['status']): string {
   return `${status === 'verified' ? '✓' : status === 'needs-citation' ? '◐' : '⚠'} ${recheckLabel(status)}`;
 }
 
-function fillWhy(why: HTMLElement, s: SentenceOriginal): void {
+function fillWhy(why: HTMLElement, s: SentenceOriginal, previous?: { status: SentenceState['status']; reason: string }): void {
   why.className = s.status === 'verified' ? 'why' : 'why bad';
   why.replaceChildren();
+  // A re-stamped sentence shows its first stamp and the gate's reason, then the stamp it carries now.
+  if (previous) {
+    const first = text('div', 'restamp', '');
+    first.dataset['status'] = previous.status;
+    first.append(text('b', '', `first ${stampText(previous.status)}`), text('span', '', ` ${previous.reason}`), text('span', 'then', ` \u2192 after the repair turn ${stampText(s.status)}`));
+    why.append(first);
+  }
   if (s.status === 'verified') {
     why.append(text('b', '', 'verified '), text('span', 'src', `${s.citation}: `), (() => { const q = document.createElement('q'); q.textContent = s.quote; return q; })());
   } else {
@@ -332,6 +395,21 @@ function renderSentences(state: ReplayState): void {
   const existing = ui.sentences.children.length;
   // Append only the new sentences so earlier ones keep still and the new one animates in.
   if (existing > state.sentences.length) ui.sentences.replaceChildren();
+  // A repair turn re-stamps a sentence in place: the row stays, its stamp and
+  // reason change, and the first stamp is kept above the new one.
+  for (let i = 0; i < Math.min(ui.sentences.children.length, state.sentences.length); i++) {
+    const li = ui.sentences.children[i] as HTMLElement;
+    const s = state.sentences[i]!;
+    const o = originals.get(li);
+    if (!o || li.dataset['editing'] || (o.status === s.status && o.reason === s.reason && o.text === s.text && o.citation === s.citation && o.quote === s.quote)) continue;
+    const original: SentenceOriginal = { text: s.text, citation: s.citation, quote: s.quote, status: s.status, reason: s.reason };
+    originals.set(li, original);
+    li.dataset['status'] = s.status;
+    li.classList.add('restamped');
+    li.querySelector<HTMLElement>('.text')!.textContent = s.text;
+    li.querySelector<HTMLElement>('.stamp')!.textContent = stampText(s.status);
+    fillWhy(li.querySelector<HTMLElement>('.why')!, original, s.previous);
+  }
   for (const s of state.sentences.slice(ui.sentences.children.length)) {
     const li = document.createElement('li');
     li.className = 'sentence';
@@ -340,7 +418,8 @@ function renderSentences(state: ReplayState): void {
     const original: SentenceOriginal = { text: s.text, citation: s.citation, quote: s.quote, status: s.status, reason: s.reason };
     originals.set(li, original);
     const why = document.createElement('div');
-    fillWhy(why, original);
+    fillWhy(why, original, s.previous);
+    if (s.previous) li.classList.add('restamped');
     const edit = document.createElement('button');
     edit.type = 'button';
     edit.className = 'edit';
@@ -430,7 +509,18 @@ function openEditor(li: HTMLElement): void {
 
 function renderVerdict(state: ReplayState): void {
   const v = state.verdict;
-  ui.stage.dataset['verdict'] = v ? v.verdict : '';
+  ui.stage.dataset['verdict'] = v ? v.verdict : state.repair ? 'repair' : '';
+  if (!v && state.repair) {
+    // The repair turn: the gate's record went back to the model, verbatim.
+    ui.verdict.hidden = false;
+    ui.verdict.dataset['verdict'] = 'repair';
+    const row = text('div', 'state', '');
+    const stamp = text('span', 'state-name', `REPAIR TURN ${state.repair.turn}`);
+    stamp.title = LABEL_HELP['repair'] ?? '';
+    row.append(stamp, text('span', 'state-head', 'the gate\u2019s record sent back to the model, verbatim; the revised draft is re-stamped below'));
+    ui.verdict.replaceChildren(row, ...state.repair.reasons.map(r => text('div', 'reason', r)));
+    return;
+  }
   if (!v) { ui.verdict.hidden = true; ui.verdict.replaceChildren(); return; }
   ui.verdict.hidden = false;
   ui.verdict.dataset['verdict'] = v.verdict;
@@ -464,6 +554,7 @@ function renderVerdict(state: ReplayState): void {
   } else {
     parts.push(stateRow('FAILED', v.error ?? 'the request failed before the gate ran'));
   }
+  if (v.repair) parts.push(text('div', 'after-repair', `after repair turn ${v.repair}; the first verdict was BLOCKED and each re-stamped sentence keeps its first stamp above`));
   ui.verdict.replaceChildren(...parts);
 }
 
@@ -548,6 +639,7 @@ function render(): void {
   // The writ follows the verdict: off the PASS frame, or on another case, it closes.
   if (!ui.writ.hidden && (!state.verdict || state.verdict.verdict !== 'pass')) ui.writ.hidden = true;
   renderCounters(state);
+  if (view === 'compare') renderCompare();
   ui.back.disabled = session.cursor === 0;
   ui.restart.disabled = session.cursor === 0;
   ui.step.disabled = state.done;
@@ -631,24 +723,95 @@ function selectCase(caseId: string, step: string | null = null): void {
 // page was opened on one, the step. Written without a history entry, so the
 // back button leaves the page rather than walking through cases.
 function writeAddress(caseId: string, step: string | null): void {
-  const next = `#file=${encodeURIComponent(ui.filePicker.value)}&case=${caseId}${step !== null && step !== '' ? `&step=${encodeURIComponent(step)}` : ''}`;
+  const next = `#file=${encodeURIComponent(ui.filePicker.value)}&case=${caseId}${step !== null && step !== '' ? `&step=${encodeURIComponent(step)}` : ''}${view === 'compare' ? '&view=compare' : ''}`;
   if (window.location.hash !== next) history.replaceState(null, '', next);
 }
 
-function showBoard(on: boolean): void {
-  ui.board.setAttribute('aria-selected', String(on));
-  ui.tabReplay.setAttribute('aria-selected', String(!on));
-  ui.boardSection.hidden = !on;
-  ui.stage.hidden = on;
-  if (on) { stop(); render(); }
+// Three surfaces share the header: the replay, the scoreboard, and the compare
+// tab. The case picker drives the replay and the compare tab alike.
+function showView(next: View): void {
+  view = next;
+  ui.tabReplay.setAttribute('aria-selected', String(next === 'replay'));
+  ui.board.setAttribute('aria-selected', String(next === 'board'));
+  ui.tabCompare.setAttribute('aria-selected', String(next === 'compare'));
+  ui.stage.hidden = next !== 'replay';
+  ui.boardSection.hidden = next !== 'board';
+  ui.compareSection.hidden = next !== 'compare';
+  if (next !== 'replay') { stop(); render(); }
+  if (next === 'compare') void renderCompare();
+  if (session.result) writeAddress(session.result.caseId, null);
+}
+function showBoard(on: boolean): void { showView(on ? 'board' : 'replay'); }
+
+// The kept runs: results/ itself, the files of Table 1 and the scoreboard.
+function keptManifest(): ManifestRun[] {
+  return session.manifest.results.filter(m => groupOf(m) === 'kept');
+}
+
+async function loadFiles(runs: ManifestRun[]): Promise<{ file: string; data: ResultsFile }[]> {
+  return Promise.all(runs.map(async m => {
+    let f = session.files.get(m.file);
+    if (!f) { f = await fetchJson<ResultsFile>(`data/results/${m.file}`); session.files.set(m.file, f); }
+    return { file: m.file, data: f };
+  }));
+}
+
+// The compare tab: the case on the picker, the three models' kept live-CHART
+// results in three columns, from the stored files. Nothing is re-run.
+let compareKey = '';
+async function renderCompare(): Promise<void> {
+  const caseId = session.result?.caseId ?? ui.casePicker.value;
+  const c = session.cases.get(caseId);
+  if (!c) return;
+  const files = await loadFiles(keptManifest());
+  const cols = compareColumns(files, caseId);
+  const key = `${caseId}|${cols.map(x => x.file).join(',')}`;
+  if (key === compareKey) return;
+  compareKey = key;
+  ui.compareHead.replaceChildren(text('span', 'mono', c.id), text('span', '', ` \u203a ${c.procedure.description} \u203a CARC ${c.denial.carc}, ${c.payer.name}`), text('span', 'dim', ` \u00b7 the three models\u2019 kept live-CHART runs on this case, from the stored files; the key labels this case ${c.expected.warranted ? 'warranted' : `not warranted (${c.expected.subtype ?? 'unsupported'})`}`));
+  ui.compareGrid.replaceChildren(...cols.map(col => {
+    const el = document.createElement('article');
+    el.className = 'col';
+    el.dataset['verdict'] = col.verdict;
+    const head = text('header', 'col-head', '');
+    head.append(text('h3', '', col.label), text('span', 'mono dim', `${col.provider} \u00b7 run ${col.startedAt.slice(0, 10)}`));
+    const verdict = text('div', 'col-verdict', '');
+    verdict.dataset['verdict'] = col.verdict;
+    verdict.append(text('span', 'state-name', col.verdict.toUpperCase()), text('span', 'state-head', col.outcomeLabel));
+    const facts = text('div', 'col-facts', '');
+    facts.append(text('span', '', `${col.sentences.filter(s => s.status === 'verified').length} of ${col.sentences.length} sentences verified`), text('span', '', `${col.entriesRead}${col.chartSize !== null ? ` of ${col.chartSize}` : ''} entries opened`), text('span', '', formatSeconds(col.latencyMs)), text('span', '', formatUsd(col.costUsd)));
+    el.append(head, verdict, facts);
+    if (col.declinedReason) el.append(text('p', 'col-reason', col.declinedReason));
+    for (const r of col.reasons) el.append(text('p', 'col-reason mono', r));
+    const openedH = text('h4', '', 'entries opened, in order');
+    const opened = document.createElement('ol');
+    opened.className = 'col-opened';
+    const entries = new Map(c.chart.map(e => [e.id, e]));
+    for (const l of col.lookups) { const li = text('li', 'lookup', ''); li.append(text('span', 'live-tag', l.live ? 'live CHART query' : l.tool), text('span', 'mono', ` ${l.tool}: ${l.note}`)); opened.append(li); }
+    for (const id of col.opened) {
+      const e = entries.get(id);
+      const li = document.createElement('li');
+      li.append(text('span', 'mono', id), text('span', 'dim', e ? ` ${e.date} ${e.kind}` : ''), text('span', 'line', e ? ` ${firstLine(e.text, 56)}` : ''));
+      opened.append(li);
+    }
+    if (col.opened.length === 0 && col.lookups.length === 0) opened.append(text('li', 'dim', 'none'));
+    const sentH = text('h4', '', col.sentences.length ? 'sentences, with the gate\u2019s stamps' : 'no sentences');
+    const sentences = document.createElement('ol');
+    sentences.className = 'col-sentences';
+    for (const s of col.sentences) {
+      const li = document.createElement('li');
+      li.dataset['status'] = s.status;
+      li.append(text('span', 'stamp', stampText(s.status)), text('span', 'text', s.text), text('span', 'cite mono', ` ${s.citation}`));
+      sentences.append(li);
+    }
+    el.append(openedH, opened, sentH, sentences);
+    return el;
+  }));
+  if (cols.length === 0) ui.compareGrid.append(text('p', 'dim', 'No kept live-CHART run holds this case.'));
 }
 
 async function renderBoard(): Promise<void> {
-  const files = await Promise.all(session.manifest.results.map(async m => {
-    let f = session.files.get(m.file);
-    if (!f) { f = await fetchJson<ResultsFile>(`data/results/${m.file}`); session.files.set(m.file, f); }
-    return f;
-  }));
+  const files = (await loadFiles(keptManifest())).map(f => f.data);
   const rows = scoreboard(files);
   const anyAgentic = rows.some(r => r.agentic);
   const anyErrors = rows.some(r => r.errors > 0);
@@ -805,6 +968,8 @@ async function applyHash(): Promise<void> {
   const wantedFile = params.get('file');
   const wantedCase = params.get('case');
   const wantedStep = params.get('step');
+  const wantedView: View = params.get('view') === 'compare' ? 'compare' : 'replay';
+  if (wantedView !== view && view !== 'board') view = wantedView;
   const landOnStep = (): void => {
     const n = parseStep(wantedStep, session.steps.length);
     if (n !== null) { stop(); seek(n); }
@@ -824,7 +989,8 @@ async function applyHash(): Promise<void> {
   if (fileChanged || !session.file) await selectFile(ui.filePicker.value);
   else if (wantedCase) selectCase(wantedCase);
   landOnStep();
-  if (!ui.boardSection.hasAttribute('hidden')) showBoard(false);
+  if (view === 'board') showView('replay');
+  showView(wantedView);
 }
 
 async function boot(): Promise<void> {
@@ -834,14 +1000,16 @@ async function boot(): Promise<void> {
   ui.filePicker.replaceChildren(...session.manifest.results.map(m => {
     const o = document.createElement('option');
     o.value = m.file;
-    o.textContent = `${m.model}, ${m.provider}${m.agentic ? (m.live ? ', agentic, live CHART' : ', agentic') : ''}${m.side === 'payer' ? ', payer side' : ''}, ${m.startedAt.slice(0, 10)}`;
+    const g = groupOf(m);
+    const tag = g === 'payer' ? ', payer side' : g === 'repair' ? `, ${m.repair ?? 1} repair turn, post hoc` : g === 'effort' ? `, effort ${m.effort}, post hoc` : '';
+    o.textContent = `${m.model}, ${m.provider}${m.agentic ? (m.live ? ', agentic, live CHART' : ', agentic') : ''}${tag}, ${m.startedAt.slice(0, 10)}`;
     return o;
   }));
   // Read before applyHash, which writes the case into the hash.
   const deepLinked = window.location.hash.length > 1;
-  // Without a deep link, open on the newest run that used every tool.
+  // Without a deep link, open on the newest kept run that used every tool.
   if (!deepLinked) {
-    const newest = newestRun(session.manifest.results);
+    const newest = newestRun(keptManifest());
     if (newest) ui.filePicker.value = newest.file;
   }
   await applyHash();
@@ -860,8 +1028,9 @@ async function boot(): Promise<void> {
   ui.back.addEventListener('click', () => { stop(); seek(session.cursor - 1); });
   ui.restart.addEventListener('click', () => { stop(); seek(0); });
   ui.end.addEventListener('click', () => { stop(); seek(session.steps.length); });
-  ui.board.addEventListener('click', () => showBoard(true));
-  ui.tabReplay.addEventListener('click', () => showBoard(false));
+  ui.board.addEventListener('click', () => showView('board'));
+  ui.tabReplay.addEventListener('click', () => showView('replay'));
+  ui.tabCompare.addEventListener('click', () => showView('compare'));
   // Each column says in one line what it holds; the header repeats it on hover.
   for (const key of ['chart', 'criteria', 'draft'] as const) { ui.panelSub[key].textContent = PANEL_HELP[key]; ui.panelHead[key].title = PANEL_HELP[key]; }
   ui.boardData.textContent = DATA_NOTE;
@@ -894,7 +1063,8 @@ async function boot(): Promise<void> {
       case 'ArrowLeft': e.preventDefault(); stop(); seek(session.cursor - 1); break;
       case 'Home': e.preventDefault(); stop(); seek(0); break;
       case 'End': e.preventDefault(); stop(); seek(session.steps.length); break;
-      case 's': case 'S': showBoard(ui.boardSection.hasAttribute('hidden')); break;
+      case 's': case 'S': showView(view === 'board' ? 'replay' : 'board'); break;
+      case 'c': case 'C': showView(view === 'compare' ? 'replay' : 'compare'); break;
       case 'p': case 'P': showPreamble(ui.preamble.hidden !== false); break;
       case 'w': case 'W': showWrit(ui.writ.hidden !== false); break;
       case 'Escape': if (!ui.writ.hidden) showWrit(false); break;

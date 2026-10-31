@@ -196,3 +196,74 @@ describe('messagesProvider.proposeAgentic', () => {
     assert.equal(r.trace.length, 6);
   });
 });
+
+describe('the repair turn in the provider (resume) and the why field in the trace', () => {
+  const TOOLS = [
+    { name: 'list_entries', description: 'list', inputSchema: { type: 'object', properties: {}, additionalProperties: false } },
+    { name: 'read_entry', description: 'read', inputSchema: { type: 'object', required: ['id', 'why'], properties: { id: { type: 'string' }, why: { type: 'string' } }, additionalProperties: false } },
+  ];
+  function sequence(replies: Record<string, unknown>[], captured: Captured[]): typeof fetch {
+    let i = 0;
+    return (async (input: string | URL | Request, init?: RequestInit) => {
+      const headers: Record<string, string> = {};
+      new Headers(init?.headers).forEach((v, k) => { headers[k] = v; });
+      captured.push({ url: String(input), headers, body: JSON.parse(String(init?.body)) });
+      const reply = replies[Math.min(i++, replies.length - 1)]!;
+      return new Response(JSON.stringify(reply), { status: 200, headers: { 'content-type': 'application/json' } });
+    }) as typeof fetch;
+  }
+  const TOOL_TURN = {
+    ...REPLY,
+    content: [{ type: 'redacted_thinking', data: 'x' }, { type: 'tool_use', id: 'tu_1', name: 'read_entry', input: { id: 'note-001', why: ' The admission note should carry the qualifying stay. ' } }],
+    stop_reason: 'tool_use',
+    usage: { input_tokens: 100, output_tokens: 50, cache_read_input_tokens: 1000, output_tokens_details: { thinking_tokens: 30 } },
+  };
+
+  test('the agentic result returns the transcript, including the final assistant turn, and the trace carries the why the model gave', async () => {
+    const captured: Captured[] = [];
+    const p = messagesProvider({ label: 'meta', baseURL: 'https://api.meta.ai', authToken: 'k', model: 'muse-spark-1.3', fetch: sequence([TOOL_TURN, REPLY], captured) });
+    const r = await p.proposeAgentic!({ ...REQ, tools: TOOLS, maxTurns: 4, execute: async () => ({ ok: true, content: '[note-001] text', entryId: 'note-001' }) });
+    assert.equal(r.trace[0]?.why, 'The admission note should carry the qualifying stay.');
+    assert.deepEqual(r.trace[0]?.input, { id: 'note-001', why: ' The admission note should carry the qualifying stay. ' }, 'the input is kept as the model sent it');
+    // user, assistant(tool_use), user(tool_result), assistant(final)
+    const roles = (r.transcript.messages as { role: string }[]).map(m => m.role);
+    assert.deepEqual(roles, ['user', 'assistant', 'user', 'assistant']);
+    const last = r.transcript.messages[3] as { content: { type: string }[] };
+    assert.ok(last.content.some(b => b.type === 'redacted_thinking'), 'redacted thinking is kept in the transcript so it is replayed, as the Meta docs ask');
+  });
+
+  test('a resumed agentic request replays the transcript, appends the repair turn as a user message, keeps the tools, and the same cached system blocks', async () => {
+    const captured: Captured[] = [];
+    const p = messagesProvider({ label: 'meta', baseURL: 'https://api.meta.ai', authToken: 'k', model: 'muse-spark-1.3', fetch: sequence([TOOL_TURN, REPLY, TOOL_TURN, REPLY], captured) });
+    const first = await p.proposeAgentic!({ ...REQ, tools: TOOLS, maxTurns: 4, execute: async () => ({ ok: true, content: 'x', entryId: 'note-001' }) });
+    captured.length = 0;
+    const second = await p.proposeAgentic!({ ...REQ, tools: TOOLS, maxTurns: 4, execute: async () => ({ ok: true, content: 'y', entryId: 'note-002' }), resume: { transcript: first.transcript, user: 'REPAIR: sentence 0 refuted' } });
+    const body = captured[0]!.body;
+    const msgs = body['messages'] as { role: string; content: unknown }[];
+    assert.equal(msgs.length, 5);
+    assert.equal(msgs[4]!.role, 'user');
+    assert.equal(msgs[4]!.content, 'REPAIR: sentence 0 refuted');
+    assert.deepEqual(msgs.slice(0, 4).map(m => m.role), ['user', 'assistant', 'user', 'assistant']);
+    assert.ok(Array.isArray(body['tools']) && (body['tools'] as unknown[]).length === 2, 'the model keeps its tools');
+    const sys = body['system'] as { text: string; cache_control?: unknown }[];
+    assert.equal(sys[0]!.text, 'SHARED INSTRUCTIONS');
+    assert.ok(sys[0]!.cache_control);
+    for (const f of FORBIDDEN_FIELDS) assert.ok(!(f in body));
+    assert.equal(second.trace[0]?.entryId, 'note-002');
+    assert.equal((second.transcript.messages as unknown[]).length, 8, 'five replayed, then tool_use, tool_result, and the final draft');
+    assert.equal(second.usage.inputTokens, 100 + 55);
+  });
+
+  test('a resumed plain propose replays the first exchange as text turns', async () => {
+    const captured: Captured[] = [];
+    const p = messagesProvider({ label: 'meta', baseURL: 'https://api.meta.ai', authToken: 'k', model: 'muse-spark-1.3', fetch: fakeFetch(REPLY, captured) });
+    const first = await p.propose(REQ);
+    assert.deepEqual((first.transcript.messages as { role: string }[]).map(m => m.role), ['user', 'assistant']);
+    captured.length = 0;
+    await p.propose({ ...REQ, resume: { transcript: first.transcript, user: 'REPAIR' } });
+    const msgs = captured[0]!.body['messages'] as { role: string; content: unknown }[];
+    assert.deepEqual(msgs.map(m => m.role), ['user', 'assistant', 'user']);
+    assert.equal(msgs[0]!.content, 'DENIAL');
+    assert.equal(msgs[2]!.content, 'REPAIR');
+  });
+});

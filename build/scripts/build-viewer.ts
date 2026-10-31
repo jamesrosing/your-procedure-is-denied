@@ -15,18 +15,23 @@ const data = join(viewer, 'data');
 rmSync(data, { recursive: true, force: true });
 mkdirSync(join(data, 'results'), { recursive: true });
 
-// The kept physician-side runs, then the payer-side runs of README Table 4
-// (results/payer/), which the page lists last in the picker and keeps off the
-// scoreboard. Repeat runs (results/repeats/) are not shown.
+// The kept physician-side runs (results/, group kept: Table 1, the scoreboard,
+// the compare tab), then the post hoc directories the page lists last in the
+// picker, labeled, and keeps off the scoreboard: the payer-side runs of Table 4
+// (results/payer/), the repair-turn runs of Table 5 (results/repair/), and the
+// effort sweep of Table 6 (results/effort/). Repeat runs (results/repeats/) and
+// the intake run (results/intake/) are not shown.
 const resultsDir = join(root, 'results');
-const listed = [
-  ...readdirSync(resultsDir).filter(f => f.endsWith('.json')).sort().map(f => ({ dir: resultsDir, f })),
-  ...(existsSync(join(resultsDir, 'payer')) ? readdirSync(join(resultsDir, 'payer')).filter(f => f.endsWith('.json')).sort().map(f => ({ dir: join(resultsDir, 'payer'), f })) : []),
-];
-const results = listed.map(({ dir, f }) => {
+type Group = 'kept' | 'payer' | 'repair' | 'effort';
+const sub = (name: Group): { dir: string; f: string; group: Group }[] => {
+  const dir = name === 'kept' ? resultsDir : join(resultsDir, name);
+  return existsSync(dir) ? readdirSync(dir).filter(f => f.endsWith('.json')).sort().map(f => ({ dir, f, group: name })) : [];
+};
+const listed = [...sub('kept'), ...sub('payer'), ...sub('repair'), ...sub('effort')];
+const results = listed.map(({ dir, f, group }) => {
   cpSync(join(dir, f), join(data, 'results', f));
   const parsed = JSON.parse(readFileSync(join(dir, f), 'utf8')) as {
-    run: { provider: string; model: string; effort: string; startedAt: string; cases: number; agentic?: boolean; side?: 'payer' };
+    run: { provider: string; model: string; effort: string; startedAt: string; cases: number; agentic?: boolean; side?: 'payer'; repair?: number };
     results: { trace?: { live?: boolean }[] }[];
   };
   return {
@@ -38,7 +43,9 @@ const results = listed.map(({ dir, f }) => {
     cases: parsed.run.cases,
     agentic: parsed.run.agentic === true || parsed.results.some(r => (r.trace?.length ?? 0) > 0),
     live: parsed.results.some(r => (r.trace ?? []).some(t => t.live === true)),
+    group,
     ...(parsed.run.side === 'payer' ? { side: 'payer' as const } : {}),
+    ...(parsed.run.repair ? { repair: parsed.run.repair } : {}),
   };
 });
 

@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readdirSync, readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { newestRun, sideText, buildTimeline, citedEntries, firstLine, carcHelp, codeSystemHelp, DATA_NOTE, denialKind, DENIAL_KIND_HELP, PANEL_HELP, parseStep, VERDICT_HELP, INTRO_END_PAUSE_MS, INTRO_FADE_MS, INTRO_LINES, INTRO_MOVE_MS, INTRO_NOTES, INTRO_STAMP, introTypeMs, introSchedule, LABEL_HELP, LOOKUP_DWELL_MS, lookupStrip, payerRemark, playDelayMs, scoreboard, stateAt, type ResultsFile, type ViewerCase, type ViewerResult } from '../viewer/src/replay.js';
+import { compareColumns, newestRun, sideText, buildTimeline, citedEntries, firstLine, carcHelp, codeSystemHelp, DATA_NOTE, denialKind, DENIAL_KIND_HELP, PANEL_HELP, parseStep, VERDICT_HELP, INTRO_END_PAUSE_MS, INTRO_FADE_MS, INTRO_LINES, INTRO_MOVE_MS, INTRO_NOTES, INTRO_STAMP, introTypeMs, introSchedule, LABEL_HELP, LOOKUP_DWELL_MS, lookupStrip, payerRemark, playDelayMs, scoreboard, stateAt, type ResultsFile, type ViewerCase, type ViewerResult } from '../viewer/src/replay.js';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const resultsDir = join(here, '..', 'results');
@@ -449,5 +449,165 @@ describe('a deep link can name a step, so a figure in the paper is a frame', () 
     assert.equal(parseStep('-3', 12), 0);
     assert.equal(parseStep('abc', 12), null);
     assert.equal(parseStep('2.5', 12), 2);
+  });
+});
+
+// --- the repair turn in the replay (Oct 31) -----------------------------------
+// A results file written with --repair carries, per repaired case, firstGate
+// (the gate before any repair), repairs[] (each with the reasons sent, the
+// revised draft, its gate), and the final gate. The timeline shows the first
+// draft stamped and blocked, then the repair turn with the gate's reasons, the
+// entries it read, and every sentence re-stamped from its first status to its
+// final one with the reason between.
+describe('the repair turn in the replay', () => {
+  const c = caseOf(passing);
+  const final = passing.gate!;
+  const firstSentences = final.sentences.map((s, i) => (i === 0 ? { ...s, status: 'needs-citation' as const, reason: 'needs-citation: 110 not in note-001; the chart has it in note-013' } : s));
+  const firstGate: NonNullable<ViewerResult['gate']> = { ...final, verdict: 'blocked', reasons: [`sentence 0 needs-citation: ${firstSentences[0]!.reason}`], sentences: firstSentences };
+  const repaired: ViewerResult = {
+    ...passing,
+    latencyMs: 15000,
+    costUsd: 0.03,
+    firstOutcome: 'blocked',
+    firstGate,
+    repairs: [{ turn: 1, reasons: firstGate.reasons, sent: 'The verifier blocked this draft...', latencyMs: 5000, costUsd: 0.01, gate: final, outcome: 'correct-pass' }],
+    trace: [
+      { step: 0, tool: 'read_entry', input: { id: c.chart[0]!.id, why: 'the admission note' }, entryId: c.chart[0]!.id, atMs: 1000, ok: true, why: 'the admission note' },
+      { step: 1, tool: 'read_entry', input: { id: c.chart[1]!.id, why: 'the gate named it' }, entryId: c.chart[1]!.id, atMs: 11000, ok: true, why: 'the gate named it', repair: 1 },
+    ],
+  };
+
+  test('the timeline: first-turn reads, the first draft stamped and blocked, then a repair step, the repair-turn reads, the re-stamped sentences, and the final verdict', () => {
+    const steps = buildTimeline(repaired, c);
+    const kinds = steps.map(s => s.kind);
+    const firstVerdict = kinds.indexOf('verdict');
+    const repair = kinds.indexOf('repair');
+    const lastVerdict = kinds.lastIndexOf('verdict');
+    assert.ok(firstVerdict > 0 && repair > firstVerdict && lastVerdict > repair, kinds.join(','));
+    const v1 = steps[firstVerdict]!;
+    if (v1.kind === 'verdict') { assert.equal(v1.verdict, 'blocked'); assert.equal(v1.blockedSentence, 0); }
+    const rep = steps[repair]!;
+    if (rep.kind === 'repair') { assert.equal(rep.turn, 1); assert.deepEqual(rep.reasons, firstGate.reasons); assert.equal(rep.sentences, final.sentences.length); }
+    // the repair-turn read comes after the repair step, marked with its turn
+    const reads = steps.map((s, i) => [s, i] as const).filter(([s]) => s.kind === 'read');
+    assert.equal(reads.length, 2);
+    assert.ok(reads[1]![1] > repair);
+    if (reads[1]![0].kind === 'read') { assert.equal(reads[1]![0].repair, 1); assert.equal(reads[1]![0].why, 'the gate named it'); }
+    // sentences are stamped twice: once from the first gate, once from the final gate with the first status carried as previous
+    const sentenceSteps = steps.filter(s => s.kind === 'sentence');
+    assert.equal(sentenceSteps.length, 2 * final.sentences.length);
+    const restamped = sentenceSteps.find(s => s.kind === 'sentence' && s.index === 0 && s.previous);
+    assert.ok(restamped && restamped.kind === 'sentence');
+    if (restamped && restamped.kind === 'sentence') { assert.equal(restamped.previous!.status, 'needs-citation'); assert.equal(restamped.status, 'verified'); }
+    const v2 = steps[lastVerdict]!;
+    if (v2.kind === 'verdict') { assert.equal(v2.verdict, 'pass'); assert.equal(v2.repair, 1); }
+    for (let i = 1; i < steps.length; i++) assert.ok(steps[i]!.atMs >= steps[i - 1]!.atMs, `step ${i} time goes backwards`);
+    assert.equal(steps[steps.length - 1]!.atMs, repaired.latencyMs);
+  });
+
+  test('the state: at the first verdict the draft is blocked; at the repair step the verdict clears and the reasons show; after the re-stamp the sentence carries its first status; at the end PASS after one repair', () => {
+    const steps = buildTimeline(repaired, c);
+    const kinds = steps.map(s => s.kind);
+    const atFirstVerdict = stateAt(steps, repaired, c, kinds.indexOf('verdict') + 1);
+    assert.equal(atFirstVerdict.verdict?.verdict, 'blocked');
+    assert.equal(atFirstVerdict.sentences[0]?.status, 'needs-citation');
+    assert.equal(atFirstVerdict.repair, null);
+    const atRepair = stateAt(steps, repaired, c, kinds.indexOf('repair') + 1);
+    assert.equal(atRepair.verdict, null);
+    assert.equal(atRepair.done, false);
+    assert.deepEqual(atRepair.repair, { turn: 1, reasons: firstGate.reasons });
+    assert.equal(atRepair.sentences.length, final.sentences.length, 'the sentences stay on screen to be re-stamped');
+    assert.ok(atRepair.criteria.every(k => k.evidence.length === 0 && k.status === 'pending'), 'the revised draft re-attaches its evidence');
+    const whyStep = steps.findIndex(s => s.kind === 'read' && s.repair === 1);
+    const atWhy = stateAt(steps, repaired, c, whyStep + 1);
+    assert.deepEqual(atWhy.why, { entryId: c.chart[1]!.id, text: 'the gate named it', live: false });
+    const end = stateAt(steps, repaired, c, steps.length);
+    assert.equal(end.verdict?.verdict, 'pass');
+    assert.equal(end.verdict?.repair, 1);
+    assert.equal(end.sentences[0]?.status, 'verified');
+    assert.deepEqual(end.sentences[0]?.previous, { status: 'needs-citation', reason: firstSentences[0]!.reason });
+    assert.equal(end.sentences[1]?.previous, undefined, 'a sentence whose status did not change carries no previous');
+    assert.equal(end.counters.sentencesVerified, final.sentences.length);
+    assert.equal(end.counters.costUsd, 0.03);
+    assert.equal(end.why, null);
+  });
+
+  test('a result without firstGate replays exactly as before: no repair step, one verdict, no previous on any sentence', () => {
+    const steps = buildTimeline(passing, c);
+    assert.ok(!steps.some(s => s.kind === 'repair'));
+    assert.equal(steps.filter(s => s.kind === 'verdict').length, 1);
+    assert.ok(steps.every(s => s.kind !== 'sentence' || s.previous === undefined));
+    const end = stateAt(steps, passing, c, steps.length);
+    assert.equal(end.verdict?.repair, undefined);
+    assert.equal(end.repair, null);
+  });
+
+  test('a read step carries the why the model gave, and the state shows it while the entry lights', () => {
+    const steps = buildTimeline(repaired, c);
+    const first = steps[0]!;
+    assert.equal(first.kind, 'read');
+    if (first.kind === 'read') assert.equal(first.why, 'the admission note');
+    const s1 = stateAt(steps, repaired, c, 1);
+    assert.deepEqual(s1.why, { entryId: c.chart[0]!.id, text: 'the admission note', live: false });
+    assert.equal(s1.open, c.chart[0]!.id);
+  });
+
+  test('every kept file still replays: no result carries a repair, and the why is absent on their traces', () => {
+    for (const f of files) for (const r of f.results) {
+      const steps = buildTimeline(r, caseOf(r));
+      assert.ok(!steps.some(s => s.kind === 'repair'), `${r.caseId}`);
+    }
+  });
+});
+
+// --- the compare tab (Oct 31) -------------------------------------------------
+describe('the compare tab: three models side by side on one case', () => {
+  const kept = files.map(f => ({ file: 'x', data: f }));
+
+  test('picks, per model, the newest kept physician-side live-CHART run, in README order, and lays out one column each', () => {
+    const cols = compareColumns(kept, 'case-001');
+    assert.equal(cols.length, 3);
+    assert.deepEqual(cols.map(c => c.model), ['muse-spark-1.3', 'muse-wonder-1.0', 'meta-models/muse-spark-open']);
+    for (const col of cols) {
+      assert.ok(col.live, 'only live-CHART runs are compared');
+      assert.equal(col.result?.caseId, 'case-001');
+      const r = col.result!;
+      assert.equal(col.sentences.length, r.gate?.sentences.length ?? 0);
+      assert.equal(col.verdict, r.gate?.verdict ?? 'error');
+      assert.equal(col.costUsd, r.costUsd);
+      assert.equal(col.latencyMs, r.latencyMs);
+      // entries opened, in order, each once, only reads that resolved
+      const expected: string[] = [];
+      for (const t of (r.trace ?? []).filter(t => t.tool === 'read_entry' && t.ok && t.entryId)) if (!expected.includes(t.entryId!)) expected.push(t.entryId!);
+      assert.deepEqual(col.opened, expected);
+      assert.ok(col.lookups.every(l => l.live));
+    }
+  });
+
+  test('works for every case in the set: three columns, every sentence stamped, every verdict named, every opened entry in the chart', () => {
+    for (const [id, c] of cases) {
+      const cols = compareColumns(kept, id);
+      assert.equal(cols.length, 3, id);
+      for (const col of cols) {
+        const chartIds = new Set(c.chart.map(e => e.id));
+        for (const e of col.opened) assert.ok(chartIds.has(e), `${id} ${col.model} opened ${e}`);
+        for (const s of col.sentences) assert.ok(['verified', 'refuted', 'needs-citation', 'unresolved', 'error'].includes(s.status), `${id} ${col.model}`);
+        assert.ok(['pass', 'blocked', 'declined', 'error'].includes(col.verdict), `${id} ${col.model} ${col.verdict}`);
+        assert.ok(col.outcomeLabel.length > 0);
+      }
+    }
+  });
+
+  test('payer-side, repair, and non-live files are left out; a missing model leaves a shorter list, never a blank column', () => {
+    const live = files.filter(f => f.results.some(r => (r.trace ?? []).some(t => t.live)));
+    const spark = live.find(f => f.run.model === 'muse-spark-1.3')!;
+    const payer: ResultsFile = { ...spark, run: { ...spark.run, side: 'payer' } };
+    const repair: ResultsFile = { ...spark, run: { ...spark.run, repair: 1 } };
+    const plain = files.find(f => f.run.model === 'muse-spark-1.3' && !f.results.some(r => (r.trace ?? []).some(t => t.live)))!;
+    const cols = compareColumns([{ file: 'a', data: payer }, { file: 'b', data: repair }, { file: 'c', data: plain }], 'case-001');
+    assert.equal(cols.length, 0);
+    const one = compareColumns([{ file: 'd', data: spark }], 'case-001');
+    assert.equal(one.length, 1);
+    assert.equal(one[0]!.file, 'd');
   });
 });

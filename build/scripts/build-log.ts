@@ -6,7 +6,7 @@
 // Regenerate with `npm run log`; the file is committed so a reader can follow
 // the build without a checkout.
 import { execSync } from 'node:child_process';
-import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { formatInterval, ruleOfThree } from '../src/stats.js';
@@ -88,15 +88,88 @@ function ledgerRows(): Map<string, { date: string; text: string }> {
   return rows;
 }
 
-interface RunFile {
+export interface RunFile {
   file: string;
-  run: { startedAt: string; provider: string; model: string; effort: string; cases: number; agentic?: boolean; tools?: string[]; litmus?: string; regated?: { from: string; to: string; at: string; changedVerdicts: number }[]; concurrency?: number };
-  summary: { outcomes: Record<string, number>; bySubtype?: Record<string, Record<string, number>>; sentencesVerified: number; ungroundedSentencesCaught?: number; citationPrecision?: number; reading?: { entriesReadPerCase: number; chartSizePerCase: number; supportCoverage: number; turnsPerCase: number }; costUsd: { perCase: number; total?: number }; latencyMs: { p50: number }; stakesUsd?: { total: number; defended: number; warranted: number }; advice?: { model: string; cases: number; criteria: number; supports: number; partial: number; silent: number; falsePassesFlagged: number; falsePasses: number } };
-  results?: { caseId: string; outcome?: string; expected?: { warranted: boolean }; gate?: { sentences?: Quoted[]; evidence?: Quoted[] } }[];
+  run: { startedAt: string; provider: string; model: string; effort: string; cases: number; agentic?: boolean; repair?: number; tools?: string[]; litmus?: string; regated?: { from: string; to: string; at: string; changedVerdicts: number }[]; concurrency?: number };
+  summary: { outcomes: Record<string, number>; bySubtype?: Record<string, Record<string, number>>; sentencesVerified: number; ungroundedSentencesCaught?: number; citationPrecision?: number; reading?: { entriesReadPerCase: number; chartSizePerCase: number; supportCoverage: number; turnsPerCase: number }; costUsd: { perCase: number; total?: number }; latencyMs: { p50: number }; tokens?: { perCase?: { input: number; output: number; thinking: number } }; stakesUsd?: { total: number; defended: number; warranted: number }; advice?: { model: string; cases: number; criteria: number; supports: number; partial: number; silent: number; falsePassesFlagged: number; falsePasses: number } };
+  results?: { caseId: string; outcome?: string; firstOutcome?: string; error?: string; expected?: { warranted: boolean }; draft?: { warranted: boolean; sentences?: unknown[] }; gate?: { verdict?: string; reasons?: string[]; sentences?: Quoted[]; evidence?: Quoted[] }; repairs?: { turn: number; costUsd: number; latencyMs: number; error?: string }[] }[];
+}
+
+// --- the post hoc tables (Oct 31) ----------------------------------------------
+
+// Table 5, the repair turn (results/repair/): per run, what one repair turn did
+// to the blocked drafts, from the per-case records (firstOutcome, outcome, the
+// final verdict). Repaired to pass counts every blocked draft that ended in
+// pass, false passes included; false passes created is the subset on cases the
+// key labels unsupported, the repair eroding the decline.
+export interface RepairRow { model: string; provider: string; blockedBefore: number; blockedAfter: number; repairedToPass: number; repairedToDecline: number; stillBlocked: number; falsePassesCreated: number; failed: number; agreedBefore: number; agreedAfter: number; costPerCase: number; costPerCaseFirstTurn: number }
+export function repairRow(r: RunFile): RepairRow {
+  const results = r.results ?? [];
+  const first = (o: string): number => results.filter(x => x.firstOutcome === o).length;
+  const offered = results.filter(x => (x.repairs?.length ?? 0) > 0);
+  const verdict = (x: NonNullable<RunFile['results']>[number]): string | undefined => x.gate?.verdict;
+  const repairCost = offered.reduce((n, x) => n + x.repairs!.reduce((m, y) => m + y.costUsd, 0), 0);
+  const total = r.summary.costUsd.total ?? r.summary.costUsd.perCase * r.run.cases;
+  const o = r.summary.outcomes;
+  return {
+    model: r.run.model, provider: r.run.provider,
+    blockedBefore: first('blocked'),
+    blockedAfter: o['blocked'] ?? 0,
+    repairedToPass: offered.filter(x => verdict(x) === 'pass').length,
+    repairedToDecline: offered.filter(x => verdict(x) === 'declined').length,
+    stillBlocked: offered.filter(x => verdict(x) === 'blocked').length,
+    falsePassesCreated: offered.filter(x => x.firstOutcome === 'blocked' && x.outcome === 'false-pass').length,
+    failed: offered.filter(x => x.repairs!.some(y => y.error)).length,
+    agreedBefore: first('correct-pass') + first('correct-decline'),
+    agreedAfter: (o['correct-pass'] ?? 0) + (o['correct-decline'] ?? 0),
+    costPerCase: r.summary.costUsd.perCase,
+    costPerCaseFirstTurn: (total - repairCost) / r.run.cases,
+  };
+}
+
+// Table 6, the effort sweep (results/effort/, with the kept low run of each
+// model as its first row): outcomes, empty warranted answers (a draft that set
+// warranted with no sentences, the fail-closed case), thinking tokens per
+// case, median latency, cost per case.
+export interface EffortRow { model: string; provider: string; effort: string; agreed: number; blocked: number; emptyWarranted: number; falsePass: number; missed: number; failed: number; thinkingPerCase: number; latencyP50Ms: number; costPerCase: number }
+export function effortRow(r: RunFile): EffortRow {
+  const o = r.summary.outcomes;
+  const results = r.results ?? [];
+  const empty = results.filter(x => x.gate?.verdict === 'blocked' && (x.gate.reasons ?? []).some(reason => reason.startsWith('no cited sentences'))).length;
+  return {
+    model: r.run.model, provider: r.run.provider, effort: r.run.effort,
+    agreed: (o['correct-pass'] ?? 0) + (o['correct-decline'] ?? 0),
+    blocked: o['blocked'] ?? 0,
+    emptyWarranted: empty,
+    falsePass: o['false-pass'] ?? 0,
+    missed: o['missed'] ?? 0,
+    failed: o['error'] ?? 0,
+    thinkingPerCase: r.summary.tokens?.perCase?.thinking ?? 0,
+    latencyP50Ms: r.summary.latencyMs.p50,
+    costPerCase: r.summary.costUsd.perCase,
+  };
+}
+
+// Table 7, document intake (results/intake/): each synthetic denial rendered as
+// a one-page letter image and read back by the model into eight fields; one
+// row per field with the count read correctly and every error, named.
+export interface IntakeFile { run: { model: string; cases: number; startedAt?: string; provider?: string; costUsd?: number; latencyMs?: { p50: number } }; summary?: { costUsd?: { total: number; perCase: number }; latencyMs?: { p50: number } }; results: { caseId: string; error?: string; fields?: Record<string, { expected: unknown; got: unknown; correct: boolean }> }[] }
+export interface IntakeRow { field: string; correct: number; total: number; errors: string[] }
+export function intakeRows(file: IntakeFile): IntakeRow[] {
+  const fields: string[] = [];
+  for (const r of file.results) for (const f of Object.keys(r.fields ?? {})) if (!fields.includes(f)) fields.push(f);
+  const show = (v: unknown): string => (v === null || v === undefined || v === '' ? 'nothing' : typeof v === 'string' ? v : JSON.stringify(v));
+  return fields.map(field => {
+    const rows = file.results.filter(r => r.fields?.[field]);
+    const errors = rows.filter(r => !r.fields![field]!.correct).map(r => `${r.caseId}: read ${show(r.fields![field]!.got)} for ${show(r.fields![field]!.expected)}`);
+    const failed = file.results.filter(r => !r.fields).map(r => `${r.caseId}: ${r.error ?? 'no answer'}`);
+    return { field, correct: rows.filter(r => r.fields![field]!.correct).length, total: file.results.length, errors: [...errors, ...failed] };
+  });
 }
 
 function runs(sub = ''): RunFile[] {
   const dir = join(root, 'build', 'results', sub);
+  if (!existsSync(dir)) return [];
   return readdirSync(dir).filter(f => f.endsWith('.json')).sort().map(f => ({ file: f, ...(JSON.parse(readFileSync(join(dir, f), 'utf8')) as Omit<RunFile, 'file'>) }))
     .sort((a, b) => a.run.startedAt.localeCompare(b.run.startedAt));
 }
@@ -287,6 +360,62 @@ function main(): void {
       }
       b.push('');
     }
+    // Table 5, post hoc: one repair turn on the live-CHART configuration.
+    const repair = runs('repair');
+    if (repair.length) {
+      b.push(`**Table 5. The repair turn (post hoc).** The three live-CHART configurations run again with \`--repair 1\` (\`build/results/repair/\`, ${repair.length} files, agentic, live CHART, effort low): when the gate blocked a warranted draft, its record went back to the model verbatim, one line per finding (sentence index, status, reason, and the entries a needs-citation names), the model kept its tools and its reads, and the complete revised draft was re-gated. A declined draft was never offered a repair. Repaired to pass counts every blocked draft that ended in PASS; false passes created is the subset on cases the key labels unsupported, the repair eroding the decline. Agreed, first turn is the no-repair figure from the same file. These runs are kept apart from Tables 1 and 2 and from the viewer's scoreboard.`);
+      b.push('');
+      b.push('| Model | Blocked before | Blocked after | Repaired to pass | Repaired to decline | Still blocked | False passes created | Agreed, first turn | Agreed, after repair | Cost per case, first turn | Cost per case with repair |');
+      b.push('| --- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |');
+      for (const r of repair) {
+        const x = repairRow(r);
+        b.push(`| ${modelName(r)} (${host(r)}) | ${x.blockedBefore} | ${x.blockedAfter} | ${x.repairedToPass} | ${x.repairedToDecline} | ${x.stillBlocked} | ${x.falsePassesCreated} | ${x.agreedBefore} of ${r.run.cases} | ${x.agreedAfter} of ${r.run.cases} | $${x.costPerCaseFirstTurn.toFixed(3)} | $${x.costPerCase.toFixed(3)} |`);
+      }
+      b.push('');
+    }
+
+    // Table 6, post hoc: the effort sweep, with the kept low run of each model first.
+    const effort = runs('effort');
+    if (effort.length) {
+      const effortRank: Record<string, number> = { low: 0, medium: 1, high: 2 };
+      const models = [...new Set(effort.map(modelName))];
+      const rowsOut: RunFile[] = [];
+      for (const m of models) {
+        const low = kept.filter(r => modelName(r) === m && mode(r.run) === 'agentic, live CHART').sort((a, b) => b.run.startedAt.localeCompare(a.run.startedAt))[0];
+        if (low) rowsOut.push(low);
+        rowsOut.push(...effort.filter(r => modelName(r) === m).sort((a, b) => (effortRank[a.run.effort] ?? 9) - (effortRank[b.run.effort] ?? 9)));
+      }
+      b.push(`**Table 6. The effort sweep (post hoc).** muse-spark-1.3 and Muse Spark Open in the live-CHART configuration at effort medium and high (\`build/results/effort/\`, ${effort.length} files, same 50 cases, same settings otherwise), with each model's kept effort-low run from Table 1 as its first row. Empty warranted answers are drafts that set warranted to true with no sentences, which the gate blocks. Thinking tokens are the API's \`thinking_tokens\` count per case; Muse Spark Open on Baseten reports none. These runs are kept apart from Tables 1 and 2 and from the viewer's scoreboard.`);
+      b.push('');
+      b.push('| Model | Effort | Agreed | Blocked | Empty warranted answers | False pass | Missed | Failed | Thinking tokens per case | Median latency | Cost per case |');
+      b.push('| --- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |');
+      for (const r of rowsOut) {
+        const x = effortRow(r);
+        const keptNote = kept.includes(r) ? ' (kept run, Table 1)' : '';
+        b.push(`| ${modelName(r)} (${host(r)}) | ${x.effort}${keptNote} | ${x.agreed} of ${r.run.cases} | ${x.blocked} | ${x.emptyWarranted} | ${x.falsePass} | ${x.missed} | ${x.failed} | ${x.thinkingPerCase > 0 ? x.thinkingPerCase.toLocaleString('en-US') : 'not reported'} | ${(x.latencyP50Ms / 1000).toFixed(1)} s | $${x.costPerCase.toFixed(3)} |`);
+      }
+      b.push('');
+    }
+
+    // Table 7, post hoc: document intake of the letter images.
+    try {
+      const intakeDir = join(root, 'build', 'results', 'intake');
+      const intakeFiles = existsSync(intakeDir) ? readdirSync(intakeDir).filter(f => f.endsWith('.json')).sort() : [];
+      const intakeName = intakeFiles[intakeFiles.length - 1];
+      if (intakeName) {
+        const intake = JSON.parse(readFileSync(join(intakeDir, intakeName), 'utf8')) as IntakeFile;
+        const rowsI = intakeRows(intake);
+        const perCase = intake.summary?.costUsd?.perCase;
+        const p50 = intake.summary?.latencyMs?.p50;
+        b.push(`**Table 7. Document intake (post hoc).** Each of the 50 synthetic denials rendered as a one-page remittance letter image (\`build/synthetic/letters/\`, 1275 by 1650 px, deterministic from the case file) and sent to ${intake.run.model} as an image with a JSON schema for eight fields (\`build/src/intake.ts\`, \`build/results/intake/\`); each field read is scored against the case file. This is document intake of an administrative letter and nothing clinical: the fields are the claim's code, dates, amount, reason codes, and payer. ${perCase !== undefined ? `Cost $${perCase.toFixed(4)} per letter` : ''}${p50 !== undefined ? `, median latency ${(p50 / 1000).toFixed(1)} s` : ''}.`);
+        b.push('');
+        b.push('| Field | Correct of 50 | Errors read |');
+        b.push('| --- | :---: | --- |');
+        for (const row of rowsI) b.push(`| ${row.field} | ${row.correct} of ${row.total} | ${row.errors.length ? row.errors.join('; ') : 'none'} |`);
+        b.push('');
+      }
+    } catch { /* no intake run yet */ }
+
     b.push(re);
     const next0 = readme0.slice(0, readme0.indexOf(rs)) + b.join('\n') + readme0.slice(readme0.indexOf(re) + re.length);
     if (next0 !== readme0) writeFileSync(readmePath0, next0);

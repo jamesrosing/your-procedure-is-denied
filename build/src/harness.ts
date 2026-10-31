@@ -6,11 +6,11 @@ import { readdirSync, readFileSync, mkdirSync, writeFileSync } from 'node:fs';
 import { resolve, join, dirname } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { parseArgs } from 'node:util';
-import { messagesProvider, openAiProvider, type AgenticRequest, type Effort, type Provider, type ProposeRequest, type ToolCall, type ToolDefinition, type ToolOutcome, type TraceEvent } from './provider.js';
+import { messagesProvider, openAiProvider, type AgenticRequest, type AgenticResult, type Effort, type Provider, type ProposeRequest, type ProposeResult, type Resume, type ToolCall, type ToolDefinition, type ToolOutcome, type TraceEvent } from './provider.js';
 import type { Usage } from './cost.js';
 import type { Appeal } from './schema.js';
 import { litmus, LITMUS_VERSION, type GateResult } from './litmus.js';
-import { gateSources } from './sources.js';
+import { gateSources, sourcesHash } from './sources.js';
 import type { SyntheticCase } from './synthetic/types.js';
 import { POLICY_STATUS_TOOL, policyStatusExecutor, DEFAULT_AUTHORITY } from './chart.js';
 
@@ -108,7 +108,10 @@ export const CHART_TOOLS: ToolDefinition[] = [
   {
     name: 'read_entry',
     description: 'Returns the full text of one chart entry by id, e.g. note-012. Quote only from entries you have read with this tool.',
-    inputSchema: { type: 'object', required: ['id'], properties: { id: { type: 'string', description: 'the entry id, like note-012' } }, additionalProperties: false },
+    // `why` (Oct 31): the Meta API returns only redacted thinking, so the model
+    // states in one sentence why it is opening the entry; the trace records it
+    // and the viewer shows it as the entry lights. The executor ignores it.
+    inputSchema: { type: 'object', required: ['id', 'why'], properties: { id: { type: 'string', description: 'the entry id, like note-012' }, why: { type: 'string', description: 'one sentence: what you expect this entry to bear on and why you are opening it now' } }, additionalProperties: false },
   },
 ];
 
@@ -196,8 +199,32 @@ export interface CaseResult {
   draft?: Appeal; // kept because the data is synthetic; a real run would store only the gate record
   gate?: GateResult;
   turns?: number; // agentic runs: model turns in the tool loop
-  trace?: TraceEvent[]; // agentic runs: every tool call, in order, with timestamps
-  reading?: { entriesRead: number; chartSize: number; supportRead: number; supportTotal: number }; // agentic runs: what was read against the grading key
+  trace?: TraceEvent[]; // agentic runs: every tool call, in order, with timestamps; repair-turn calls carry `repair`
+  reading?: { entriesRead: number; chartSize: number; supportRead: number; supportTotal: number }; // agentic runs: what was read against the grading key, repair turns included
+  // --repair N (Oct 31). The outcome above is scored on the final gate; these
+  // keep the no-repair result in the same file. firstGate is stored only when
+  // a repair turn happened (otherwise it is the gate above).
+  firstOutcome?: Outcome;
+  firstGate?: GateResult;
+  repairs?: RepairRecord[];
+}
+
+// One repair turn: the gate's reasons sent back verbatim, the revised draft,
+// its gate record, and what the turn cost. Offered only on a blocked draft,
+// never on a declined one.
+export interface RepairRecord {
+  turn: number; // 1-based
+  reasons: string[]; // the gate's lines as sent: sentence index, status, reason, alsoCite entries; criteria without evidence
+  sent: string; // the user turn, verbatim
+  stopReason: string | null;
+  latencyMs: number;
+  usage: Usage;
+  costUsd: number;
+  toolCalls: number; // agentic: calls made in this turn; the events are in trace[] with repair = turn
+  draft?: Appeal;
+  gate?: GateResult;
+  outcome?: Outcome; // scored on this turn's gate
+  error?: string; // the revised draft did not parse or the request failed; the prior gate stands
 }
 
 export interface RunOptions {
@@ -207,6 +234,70 @@ export interface RunOptions {
   tools?: ToolDefinition[]; // extra tools for the agentic path
   extra?: (call: ToolCall) => Promise<ToolOutcome | null>;
   side?: Side; // payer: the same gate pointed at the insurer's determination
+  repair?: number; // repair turns to offer a blocked draft; default 0
+  verbose?: boolean; // stream one line per tool call and the verdict to `log`
+  log?: (line: string) => void; // default: stderr
+}
+
+// The repair turn's text. The gate's record goes back verbatim: for every
+// unverified sentence its index, status, reason, and the alsoCite entries of a
+// needs-citation; then the draft-level reasons (an empty warranted draft, a
+// criterion with no verified evidence). The model is asked for the complete
+// revised draft under the same schema, and told that declining is an answer.
+export function repairMessage(gate: GateResult): { text: string; reasons: string[] } {
+  const reasons: string[] = [];
+  for (const s of gate.sentences) {
+    if (s.status === 'verified') continue;
+    reasons.push(`sentence ${s.index} ${s.status}: ${s.reason}${s.alsoCite && s.alsoCite.length > 0 ? ` [alsoCite: ${s.alsoCite.join(', ')}]` : ''}`);
+  }
+  for (const r of gate.reasons) if (!/^sentence \d+ /.test(r)) reasons.push(r);
+  const text = [
+    'The verifier blocked this draft. Its record, verbatim, one line per finding:',
+    ...reasons.map(r => `- ${r}`),
+    '',
+    'Return the complete revised draft as the same JSON object: warranted, reason, every evidence item, and every sentence, each with one citation and a quote copied exactly from that entry. Keep every sentence that verified. A sentence returned as needs-citation states a fact that lives in a different entry: read that entry and cite it for the fact, or rewrite the sentence without the fact. A refuted token appears in no admissible source: remove it or replace it with what the cited entry says. A criterion with no verified evidence needs an evidence item quoting an entry that supports it. If, on reading again, the record does not support the appeal, set warranted to false with your reason and leave sentences empty.',
+  ].join('\n');
+  return { text, reasons };
+}
+
+// One tool call as a line for a 140-column terminal (harness --verbose): time
+// since the case started, the tool, its input, the entry id, ok or failed, and
+// the model's why. Wide fields are cut so the line never wraps.
+export function verboseLine(t: TraceEvent): string {
+  const secs = `${(t.atMs / 1000).toFixed(1)} s`.padStart(8);
+  const tool = t.tool.padEnd(14);
+  const input = t.tool === 'read_entry'
+    ? String(t.input['id'] ?? t.entryId ?? '')
+    : Object.entries(t.input).filter(([k]) => k !== 'why').map(([, v]) => String(v)).join(' ');
+  const target = (t.entryId && t.tool !== 'read_entry' ? `${input} ${t.entryId}` : input).slice(0, 36).padEnd(36);
+  const ok = (t.ok ? 'ok' : 'failed').padEnd(7);
+  const live = t.live ? 'live ' : '';
+  const head = `${secs}  ${tool} ${target} ${ok} ${live}`;
+  const room = 140 - head.length;
+  const why = t.why ? `why: ${t.why}` : t.note ? t.note : '';
+  const tail = why.length > room ? `${why.slice(0, Math.max(0, room - 1))}…` : why;
+  return `${head}${tail}`.trimEnd();
+}
+
+// The verdict block that ends a verbose run: verdict and counts, gate version,
+// the gate's input hash (sources and draft), and the sources hash (the record
+// alone, shared with the kept replay of the same case in the viewer).
+export function verboseVerdict(gate: GateResult, sources: ReturnType<typeof gateSources>): string[] {
+  const version = /v\d+(?:\.\d+)?/.exec(gate.litmus)?.[0] ?? gate.litmus.slice(0, 20);
+  const name = gate.verdict.toUpperCase();
+  const counts = `${gate.counts.verified} of ${gate.counts.sentences} sentences verified`;
+  const lines = [`verdict ${name}  ${counts}  gate ${version}`];
+  if (gate.verdict === 'declined' && gate.declinedReason) lines.push(`reason  ${gate.declinedReason}`.slice(0, 140));
+  for (const r of gate.reasons) lines.push(`reason  ${r}`.slice(0, 140));
+  lines.push(`input hash    ${gate.inputHash}`);
+  lines.push(`sources hash  ${sourcesHash(sources)}`);
+  return lines;
+}
+
+export const EFFORTS: readonly Effort[] = ['low', 'medium', 'high'];
+export function parseEffort(value: string): Effort {
+  if ((EFFORTS as readonly string[]).includes(value)) return value as Effort;
+  throw new Error(`effort must be one of ${EFFORTS.join(', ')}; got ${value}`);
 }
 
 export function readingStats(c: SyntheticCase, trace: TraceEvent[]): NonNullable<CaseResult['reading']> {
@@ -218,25 +309,53 @@ export function readingStats(c: SyntheticCase, trace: TraceEvent[]): NonNullable
 
 const EMPTY_USAGE: Usage = { inputTokens: 0, cachedInputTokens: 0, cacheWriteTokens: 0, outputTokens: 0, thinkingTokens: 0 };
 
+function addUsage(a: Usage, b: Usage): Usage {
+  return { inputTokens: a.inputTokens + b.inputTokens, cachedInputTokens: a.cachedInputTokens + b.cachedInputTokens, cacheWriteTokens: a.cacheWriteTokens + b.cacheWriteTokens, outputTokens: a.outputTokens + b.outputTokens, thinkingTokens: a.thinkingTokens + b.thinkingTokens };
+}
+
 export async function runCase(provider: Provider, c: SyntheticCase, opts: RunOptions): Promise<CaseResult> {
   const side: Side = opts.side ?? 'physician';
   const expected = expectedFor(c, side);
+  const budget = Math.max(0, Math.floor(opts.repair ?? 0));
+  const log = opts.log ?? ((line: string) => console.error(line));
   const base = {
     caseId: c.id, category: c.category, setting: c.setting, stakesUsd: c.stakesUsd,
     expected,
     ...(side === 'payer' ? { side } : {}),
     provider: provider.label, model: provider.model,
   };
+  const started = Date.now();
+  // Verbose: every tool call is printed as it happens, from the executor the
+  // provider calls, so the line appears before the model's next turn.
+  const extra = opts.extra;
+  const verboseExtra = opts.verbose
+    ? async (call: ToolCall): Promise<ToolOutcome | null> => {
+        const out = extra ? await extra(call) : null;
+        if (out) log(verboseLine({ step: 0, tool: call.name, input: call.input, atMs: Date.now() - started, ok: out.ok, ...(out.entryId ? { entryId: out.entryId } : {}), ...(out.live ? { live: true } : {}), ...(out.note ? { note: out.note } : {}), ...(typeof call.input['why'] === 'string' ? { why: String(call.input['why']).trim().slice(0, 400) } : {}) }));
+        return out;
+      }
+    : extra;
+  const verboseExecute = (execute: (call: ToolCall) => Promise<ToolOutcome>) => async (call: ToolCall): Promise<ToolOutcome> => {
+    const out = await execute(call);
+    if (opts.verbose && call.name !== POLICY_STATUS_TOOL.name) log(verboseLine({ step: 0, tool: call.name, input: call.input, atMs: Date.now() - started, ok: out.ok, ...(out.entryId ? { entryId: out.entryId } : {}), ...(out.note ? { note: out.note } : {}), ...(typeof call.input['why'] === 'string' ? { why: String(call.input['why']).trim().slice(0, 400) } : {}) }));
+    return out;
+  };
+  const agenticRequest = (resume?: Resume): AgenticRequest => {
+    const req = buildAgenticRequest(c, opts.effort, opts.maxTokens, { ...(opts.tools ? { tools: opts.tools } : {}), ...(verboseExtra ? { extra: verboseExtra } : {}), side });
+    return { ...req, execute: verboseExecute(req.execute), ...(resume ? { resume } : {}) };
+  };
+  const plainRequest = (resume?: Resume): ProposeRequest => ({ ...buildRequest(c, opts.effort, opts.maxTokens, side), ...(resume ? { resume } : {}) });
+
   let result;
   let agentic: { turns: number; trace: TraceEvent[] } | null = null;
   try {
     if (opts.agentic) {
       if (!provider.proposeAgentic) throw new Error(`${provider.label} has no agentic path`);
-      const r = await provider.proposeAgentic(buildAgenticRequest(c, opts.effort, opts.maxTokens, { ...(opts.tools ? { tools: opts.tools } : {}), ...(opts.extra ? { extra: opts.extra } : {}), side }));
+      const r = await provider.proposeAgentic(agenticRequest());
       result = r;
       agentic = { turns: r.turns, trace: r.trace };
     } else {
-      result = await provider.propose(buildRequest(c, opts.effort, opts.maxTokens, side));
+      result = await provider.propose(plainRequest());
     }
   } catch (error: unknown) {
     // Error class and HTTP status only: SDK messages can echo the request body.
@@ -244,24 +363,74 @@ export async function runCase(provider: Provider, c: SyntheticCase, opts: RunOpt
     const kind = error instanceof Error ? error.constructor.name : 'Error';
     return { ...base, stopReason: null, latencyMs: 0, usage: EMPTY_USAGE, costUsd: 0, outcome: 'error', warrantedMatch: null, citationPrecision: null, error: `request failed: ${kind}${status ? ` (HTTP ${status})` : ''}` };
   }
-  const common = {
-    ...base, stopReason: result.stopReason, latencyMs: result.latencyMs, usage: result.usage, costUsd: result.costUsd,
-    ...(agentic ? { turns: agentic.turns, trace: agentic.trace, reading: readingStats(c, agentic.trace) } : {}),
-  };
+  const sources = gateSources(c);
+  const withReading = (trace: TraceEvent[], turns: number) => ({ turns, trace, reading: readingStats(c, trace) });
   if (!result.draft.ok) {
+    const common = { ...base, stopReason: result.stopReason, latencyMs: result.latencyMs, usage: result.usage, costUsd: result.costUsd, ...(agentic ? withReading(agentic.trace, agentic.turns) : {}) };
+    if (opts.verbose) log(`answer failed: ${result.draft.error}`);
     return { ...common, outcome: 'error', warrantedMatch: null, citationPrecision: null, error: `parse failed: ${result.draft.error}`, rawPreview: result.rawText.slice(0, 400) };
   }
-  const appeal = result.draft.appeal;
-  const gate = litmus(gateSources(c), appeal);
+
+  let appeal = result.draft.appeal;
+  let gate = litmus(sources, appeal);
+  const firstGate = gate;
+  const firstOutcome = classify(expected.warranted, gate.verdict);
+  let usage = result.usage;
+  let cost = result.costUsd;
+  let latency = result.latencyMs;
+  let stopReason = result.stopReason;
+  let transcript = result.transcript;
+  const trace: TraceEvent[] = agentic ? agentic.trace.slice() : [];
+  let turns = agentic?.turns ?? 0;
+  const repairs: RepairRecord[] = [];
+
+  // The repair turn: only a blocked draft is offered one, never a declined
+  // draft (the model's decision to decline stands) and never a passing one.
+  for (let turn = 1; turn <= budget && gate.verdict === 'blocked'; turn++) {
+    const { text, reasons } = repairMessage(gate);
+    if (opts.verbose) { log(`repair turn ${turn}: the gate's record sent back, ${reasons.length} line(s)`); for (const r of reasons) log(`  ${r}`.slice(0, 140)); }
+    let r: ProposeResult | AgenticResult;
+    try {
+      r = opts.agentic ? await provider.proposeAgentic!(agenticRequest({ transcript, user: text })) : await provider.propose(plainRequest({ transcript, user: text }));
+    } catch (error: unknown) {
+      const status = (error as { status?: number }).status;
+      const kind = error instanceof Error ? error.constructor.name : 'Error';
+      repairs.push({ turn, reasons, sent: text, stopReason: null, latencyMs: 0, usage: EMPTY_USAGE, costUsd: 0, toolCalls: 0, error: `request failed: ${kind}${status ? ` (HTTP ${status})` : ''}` });
+      break;
+    }
+    const ag = r as Partial<AgenticResult>;
+    const repairTrace: TraceEvent[] = ag.trace ?? [];
+    for (const e of repairTrace) trace.push({ ...e, step: trace.length, atMs: latency + e.atMs, repair: turn });
+    turns += ag.turns ?? 0;
+    usage = addUsage(usage, r.usage);
+    cost += r.costUsd;
+    latency += r.latencyMs;
+    stopReason = r.stopReason;
+    transcript = r.transcript;
+    const record: RepairRecord = { turn, reasons, sent: text, stopReason: r.stopReason, latencyMs: r.latencyMs, usage: r.usage, costUsd: r.costUsd, toolCalls: repairTrace.length };
+    if (!r.draft.ok) {
+      repairs.push({ ...record, error: `parse failed: ${r.draft.error}` });
+      if (opts.verbose) log(`repair turn ${turn} failed: ${r.draft.error}`);
+      break;
+    }
+    appeal = r.draft.appeal;
+    gate = litmus(sources, appeal);
+    repairs.push({ ...record, draft: appeal, gate, outcome: classify(expected.warranted, gate.verdict) });
+  }
+
+  const outcome = classify(expected.warranted, gate.verdict);
+  if (opts.verbose) for (const line of verboseVerdict(gate, sources)) log(line);
   const verifiedEvidence = gate.evidence.filter(e => e.status === 'verified');
   const onKey = verifiedEvidence.filter(e => (c.expected.support[e.criterion] ?? []).includes(e.citation)).length;
   return {
-    ...common,
-    outcome: classify(expected.warranted, gate.verdict),
+    ...base, stopReason, latencyMs: latency, usage, costUsd: cost,
+    ...(agentic ? withReading(trace, turns) : {}),
+    outcome,
     warrantedMatch: appeal.warranted === expected.warranted,
     citationPrecision: verifiedEvidence.length > 0 ? onKey / verifiedEvidence.length : null,
     draft: appeal,
     gate,
+    ...(budget > 0 ? { firstOutcome, repairs, ...(repairs.some(x => x.gate) ? { firstGate } : {}) } : {}),
   };
 }
 
@@ -294,6 +463,11 @@ export interface Summary {
   reading?: { entriesReadPerCase: number; chartSizePerCase: number; supportCoverage: number; turnsPerCase: number }; // agentic runs only
   bySubtype: Record<string, Partial<Record<Outcome, number>>>;
   byCategory: Record<string, Partial<Record<Outcome, number>>>;
+  // --repair runs: the no-repair outcomes, and what the repair turns did.
+  // falsePassesCreated counts blocked drafts on cases the key labels
+  // unsupported that a repair turned into a pass: the repair eroding the decline.
+  firstOutcomes?: Partial<Record<Outcome, number>>;
+  repair?: { blockedBefore: number; blockedAfter: number; offered: number; repairedToPass: number; repairedToDecline: number; stillBlocked: number; falsePassesCreated: number; failed: number; costUsd: number };
 }
 
 function percentile(sorted: number[], p: number): number {
@@ -317,6 +491,26 @@ export function summarize(results: CaseResult[]): Summary {
   const sum = (f: (r: CaseResult) => number) => results.reduce((n, r) => n + f(r), 0);
   const n = results.length || 1;
   const precisions = results.map(r => r.citationPrecision).filter((p): p is number => p !== null);
+  const repaired = results.filter(r => r.firstOutcome !== undefined);
+  let firstOutcomes: Partial<Record<Outcome, number>> | undefined;
+  let repair: Summary['repair'] | undefined;
+  if (repaired.length > 0) {
+    firstOutcomes = {};
+    for (const r of repaired) firstOutcomes[r.firstOutcome!] = (firstOutcomes[r.firstOutcome!] ?? 0) + 1;
+    const offered = repaired.filter(r => (r.repairs?.length ?? 0) > 0);
+    const finalVerdict = (r: CaseResult) => r.gate?.verdict;
+    repair = {
+      blockedBefore: firstOutcomes['blocked'] ?? 0,
+      blockedAfter: outcomes['blocked'] ?? 0,
+      offered: offered.length,
+      repairedToPass: offered.filter(r => finalVerdict(r) === 'pass').length,
+      repairedToDecline: offered.filter(r => finalVerdict(r) === 'declined').length,
+      stillBlocked: offered.filter(r => finalVerdict(r) === 'blocked').length,
+      falsePassesCreated: offered.filter(r => r.firstOutcome === 'blocked' && r.outcome === 'false-pass').length,
+      failed: offered.filter(r => r.repairs!.some(x => x.error)).length,
+      costUsd: offered.reduce((n, r) => n + r.repairs!.reduce((m, x) => m + x.costUsd, 0), 0),
+    };
+  }
   const read = results.filter(r => r.reading);
   const reading = read.length === 0 ? undefined : {
     entriesReadPerCase: read.reduce((a, r) => a + r.reading!.entriesRead, 0) / read.length,
@@ -355,6 +549,8 @@ export function summarize(results: CaseResult[]): Summary {
     ...(reading ? { reading } : {}),
     bySubtype,
     byCategory,
+    ...(firstOutcomes ? { firstOutcomes } : {}),
+    ...(repair ? { repair } : {}),
   };
 }
 
@@ -395,10 +591,10 @@ export function resolveOutDir(here: string, outDir: string | undefined, side: Si
   return outDir ? resolve(outDir) : side === 'payer' ? join(here, '..', 'results', 'payer') : join(here, '..', 'results');
 }
 
-export function resultFileName(run: { label: string; model: string; effort: string; agentic: boolean; chart: boolean; startedAt: string; side?: Side }): string {
+export function resultFileName(run: { label: string; model: string; effort: string; agentic: boolean; chart: boolean; startedAt: string; side?: Side; repair?: number }): string {
   const safeModel = run.model.replace(/[^a-z0-9.-]+/gi, '_');
   const stamp = run.startedAt.replace(/[:.]/g, '-');
-  return `${run.label}-${safeModel}-${run.effort}${run.agentic ? '-agentic' : ''}${run.chart ? '-chart' : ''}${run.side === 'payer' ? '-payer' : ''}-${stamp}.json`;
+  return `${run.label}-${safeModel}-${run.effort}${run.agentic ? '-agentic' : ''}${run.chart ? '-chart' : ''}${run.side === 'payer' ? '-payer' : ''}${run.repair ? `-repair${run.repair}` : ''}-${stamp}.json`;
 }
 
 export function loadCases(dir: string): SyntheticCase[] {
@@ -420,6 +616,10 @@ async function main(): Promise<void> {
       agentic: { type: 'boolean', default: false },
       chart: { type: 'boolean', default: false },
       side: { type: 'string', default: 'physician' },
+      repair: { type: 'string', default: '0' },
+      verbose: { type: 'boolean', default: false },
+      // --live: verbose, and no results file unless --out-dir is given; `npm run live -- --case case-001`.
+      live: { type: 'boolean', default: false },
     },
   });
   const side = values.side as Side;
@@ -431,8 +631,11 @@ async function main(): Promise<void> {
   if (chart && !chartKey) throw new Error('CHART_API_KEY (or CHART_VERIFY_KEY, CHART_CUSTOM_TOKEN) is not set');
   const tools: ToolDefinition[] = chart ? [POLICY_STATUS_TOOL] : [];
   const extra = chartKey ? policyStatusExecutor({ apiKey: chartKey }) : undefined;
-  const effort = values.effort as Effort;
-  if (!['low', 'medium'].includes(effort)) throw new Error('effort must be low or medium; high and xhigh are not run (see ROADMAP measurements)');
+  const effort = parseEffort(values.effort!);
+  const repair = Number(values.repair);
+  if (!Number.isInteger(repair) || repair < 0) throw new Error('--repair must be a whole number');
+  const live = values.live === true;
+  const verbose = values.verbose === true || live;
   const here = dirname(fileURLToPath(import.meta.url));
   let cases = loadCases(join(here, '..', 'synthetic', 'cases'));
   if (values.case && values.case.length > 0) cases = cases.filter(c => values.case!.includes(c.id));
@@ -441,19 +644,26 @@ async function main(): Promise<void> {
   const concurrency = Number(values.concurrency);
   const maxTokens = Number(values['max-tokens']);
   const startedAt = new Date().toISOString();
-  console.error(`running ${cases.length} case(s) on ${provider.label}/${provider.model}, effort ${effort}, concurrency ${concurrency}${agentic ? ', agentic' : ''}${side === 'payer' ? ', payer side' : ''}`);
+  console.error(`running ${cases.length} case(s) on ${provider.label}/${provider.model}, effort ${effort}, concurrency ${concurrency}${agentic ? ', agentic' : ''}${chart ? ', live CHART' : ''}${repair ? `, repair ${repair}` : ''}${side === 'payer' ? ', payer side' : ''}${live ? ', live (no results file unless --out-dir)' : ''}`);
 
-  const results = await mapWithConcurrency(cases, concurrency, async c => {
-    const r = await runCase(provider, c, { effort, maxTokens, agentic, tools, side, ...(extra ? { extra } : {}) });
+  const results = await mapWithConcurrency(cases, verbose ? 1 : concurrency, async c => {
+    if (verbose) console.error(`\n${c.id}  ${c.procedure.codeSystem} ${c.procedure.code}  CARC ${c.denial.carc}  ${c.chart.length} entries  ${c.payer.name}`);
+    const r = await runCase(provider, c, { effort, maxTokens, agentic, tools, side, repair, verbose, ...(extra ? { extra } : {}) });
     const reading = r.reading ? ` read ${r.reading.entriesRead}/${r.reading.chartSize} key ${r.reading.supportRead}/${r.reading.supportTotal} turns ${r.turns}` : '';
     console.error(`${r.caseId} ${r.outcome.padEnd(15)} ${r.gate ? `${r.gate.verdict.padEnd(8)} verified ${r.gate.counts.verified}/${r.gate.counts.sentences}` : (r.error ?? '')}${reading} ${r.latencyMs}ms $${r.costUsd.toFixed(4)}`);
     return r;
   });
   const summary = summarize(results);
+  console.error(`cost of this run: $${summary.costUsd.total.toFixed(4)} over ${cases.length} case(s), $${summary.costUsd.perCase.toFixed(4)} per case${summary.repair ? ` (repair turns $${summary.repair.costUsd.toFixed(4)})` : ''}`);
+  if (live && !values['out-dir']) {
+    console.error('live mode: no results file written (give --out-dir to keep one)');
+    console.log(JSON.stringify(summary, null, 2));
+    return;
+  }
   const outDir = resolveOutDir(here, values['out-dir'], side);
   mkdirSync(outDir, { recursive: true });
-  const file = join(outDir, resultFileName({ label: values.label ?? provider.label, model: provider.model, effort, agentic, chart, startedAt, side }));
-  writeFileSync(file, JSON.stringify({ run: { startedAt, finishedAt: new Date().toISOString(), provider: provider.label, model: provider.model, effort, concurrency, maxTokens, cases: cases.length, agentic, side, tools: ['list_entries', 'read_entry', ...tools.map(t => t.name)], litmus: LITMUS_VERSION, synthetic: true }, summary, results }, null, 2) + '\n');
+  const file = join(outDir, resultFileName({ label: values.label ?? provider.label, model: provider.model, effort, agentic, chart, startedAt, side, repair }));
+  writeFileSync(file, JSON.stringify({ run: { startedAt, finishedAt: new Date().toISOString(), provider: provider.label, model: provider.model, effort, concurrency, maxTokens, cases: cases.length, agentic, side, ...(repair ? { repair } : {}), tools: ['list_entries', 'read_entry', ...tools.map(t => t.name)], litmus: LITMUS_VERSION, synthetic: true }, summary, results }, null, 2) + '\n');
   console.error(`wrote ${file}`);
   console.log(JSON.stringify(summary, null, 2));
 }

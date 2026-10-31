@@ -32,7 +32,7 @@ function fakeProvider(appeal: Appeal | null, opts: { delayMs?: number; onCall?: 
       return {
         provider: 'fake', model: 'fake-1', stopReason: 'end_turn', latencyMs: 12,
         usage: { inputTokens: 1000, cachedInputTokens: 500, cacheWriteTokens: 0, outputTokens: 800, thinkingTokens: 300 },
-        costUsd: 0.005, draft, rawText: appeal ? JSON.stringify(appeal) : 'garbage',
+        costUsd: 0.005, draft, rawText: appeal ? JSON.stringify(appeal) : 'garbage', transcript: { messages: [] },
       };
     },
   };
@@ -231,7 +231,7 @@ describe('agentic harness', async () => {
         return {
           provider: 'fake', model: 'fake-1', stopReason: 'end_turn', latencyMs: 300,
           usage: { inputTokens: 2000, cachedInputTokens: 3000, cacheWriteTokens: 0, outputTokens: 900, thinkingTokens: 400 },
-          costUsd: 0.01, draft: { ok: true, appeal }, rawText: JSON.stringify(appeal), turns: 4, trace,
+          costUsd: 0.01, draft: { ok: true, appeal }, rawText: JSON.stringify(appeal), turns: 4, trace, transcript: { messages: [] },
         };
       },
     };

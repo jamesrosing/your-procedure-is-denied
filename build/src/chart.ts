@@ -19,11 +19,13 @@ export const POLICY_STATUS_TOOL: ToolDefinition = {
     'Live query against CHART, a pre-existing coverage index of US payer policy. Returns when the named authority\'s coverage material last changed and was last checked, so you can say whether the criteria you were given are current. It does not return policy text: the criteria in this request are the criteria. Use authority "cms" unless told otherwise.',
   inputSchema: {
     type: 'object',
-    required: ['code', 'date_of_service'],
+    required: ['code', 'date_of_service', 'why'],
     properties: {
       authority: { type: 'string', description: 'CHART authority id, e.g. cms, ma-uhc, cigna; defaults to cms' },
       code: { type: 'string', description: 'the CPT, HCPCS, or ICD-10 code on the denial' },
       date_of_service: { type: 'string', description: 'YYYY-MM-DD' },
+      // The API returns only redacted thinking, so the model states its reason here; the trace and the viewer show it.
+      why: { type: 'string', description: 'one sentence: what you want to learn from this query and why now' },
     },
     additionalProperties: false,
   },

@@ -42,7 +42,8 @@ export function writDocument(c: ViewerCase, r: ViewerResult, run: ResultsFile['r
   const dates = c.denial.serviceEnd ? `${c.denial.dateOfService} to ${c.denial.serviceEnd}` : c.denial.dateOfService;
   const hash = (gate as { inputHash?: string }).inputHash;
   const version = /v\d+(?:\.\d+)?/.exec(gate.litmus ?? '')?.[0] ?? '';
-  const provenance = `Drafted by ${run.model} (${run.provider}), run started ${run.startedAt.slice(0, 10)}, from the synthetic record of ${c.patient.alias}. Every sentence verified against its cited entry by the LITMUS gate ${version}${hash ? `; input hash ${hash}` : ''}. Synthetic data only.`;
+  const repaired = run.repair && r.repairs && r.repairs.length > 0 ? ` after ${r.repairs.length} repair turn${r.repairs.length > 1 ? 's' : ''} (post hoc; the first verdict was blocked)` : '';
+  const provenance = `Drafted by ${run.model} (${run.provider}), run started ${run.startedAt.slice(0, 10)}, from the synthetic record of ${c.patient.alias}${repaired}. Every sentence verified against its cited entry by the LITMUS gate ${version}${hash ? `; input hash ${hash}` : ''}. Synthetic data only.`;
   return {
     heading: 'Response to claim denial',
     to: `${c.payer.name}, ${c.payer.planType}`,

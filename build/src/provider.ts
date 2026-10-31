@@ -14,11 +14,24 @@ export interface SystemBlock {
   cache?: boolean; // mark the shared prefix so it is written to and read from the prompt cache
 }
 
+// The exchange so far, in the provider's own message shape, opaque to the
+// harness: the first request, the model's turns (tool calls, redacted thinking,
+// the draft), and the tool results. A repair turn (harness --repair) resumes it
+// with one more user message so the model keeps its tools, its reads, and its
+// chain of thought; the Meta docs say to replay redacted_thinking blocks.
+export interface Transcript { readonly messages: readonly unknown[] }
+
+export interface Resume {
+  transcript: Transcript;
+  user: string; // the next user turn, e.g. the gate's reasons and the request for a revised draft
+}
+
 export interface ProposeRequest {
   system: SystemBlock[]; // instructions (shared, cached) then the chart for this case
   user: string; // the denial and the payer criteria
   effort: Effort;
   maxTokens: number;
+  resume?: Resume; // continue a prior exchange with one more user turn; `user` is the first turn and is then already in the transcript
 }
 
 export interface ProposeResult {
@@ -30,6 +43,7 @@ export interface ProposeResult {
   costUsd: number;
   draft: ParsedAppeal;
   rawText: string; // kept for the verifier; the harness stores it only for synthetic runs
+  transcript: Transcript; // the whole exchange, for a repair turn
 }
 
 // --- the agentic path --------------------------------------------------------
@@ -65,6 +79,8 @@ export interface TraceEvent {
   ok: boolean;
   live?: boolean;
   note?: string;
+  why?: string; // the model's one-sentence reason for the call, from the tool input's `why` field (the API returns only redacted thinking), at most 400 characters
+  repair?: number; // set by the harness: the repair turn this call was made in; absent for the first turn
 }
 
 export interface AgenticRequest extends ProposeRequest {
@@ -167,7 +183,9 @@ export function messagesProvider(options: MessagesProviderOptions): Provider {
     async proposeAgentic(request: AgenticRequest): Promise<AgenticResult> {
       const started = Date.now();
       const maxTurns = request.maxTurns ?? 24;
-      const messages: Anthropic.MessageParam[] = [{ role: 'user', content: request.user }];
+      const messages: Anthropic.MessageParam[] = request.resume
+        ? [...(request.resume.transcript.messages as Anthropic.MessageParam[]), { role: 'user', content: request.resume.user }]
+        : [{ role: 'user', content: request.user }];
       const trace: TraceEvent[] = [];
       const usage: Usage = { inputTokens: 0, cachedInputTokens: 0, cacheWriteTokens: 0, outputTokens: 0, thinkingTokens: 0 };
       let turns = 0;
@@ -201,11 +219,13 @@ export function messagesProvider(options: MessagesProviderOptions): Provider {
           } catch (error: unknown) {
             outcome = { ok: false, content: `tool failed: ${error instanceof Error ? error.constructor.name : 'Error'}`, note: 'tool threw' };
           }
+          const why = typeof input['why'] === 'string' ? input['why'].trim().slice(0, 400) : '';
           trace.push({
             step: trace.length, tool: call.name, input, atMs, ok: outcome.ok,
             ...(outcome.entryId ? { entryId: outcome.entryId } : {}),
             ...(outcome.live ? { live: true } : {}),
             ...(outcome.note ? { note: outcome.note } : {}),
+            ...(why ? { why } : {}),
           });
           results.push({ type: 'tool_result', tool_use_id: call.id, content: outcome.content, ...(outcome.ok ? {} : { is_error: true }) });
         }
@@ -216,6 +236,8 @@ export function messagesProvider(options: MessagesProviderOptions): Provider {
       const ended = response !== null && response.stop_reason !== 'tool_use';
       const rawText = response && ended ? textOf(response) : '';
       const stopReason = ended ? response!.stop_reason : 'max_turns';
+      // The final assistant turn joins the transcript so a repair turn can follow it.
+      if (response && ended) messages.push({ role: 'assistant', content: response.content as Anthropic.ContentBlockParam[] });
       return {
         provider: options.label,
         model: response?.model ?? options.model,
@@ -225,6 +247,7 @@ export function messagesProvider(options: MessagesProviderOptions): Provider {
         costUsd: costUsd(priceKey, usage),
         draft: rawText ? parseAppeal(rawText) : { ok: false, error: `no text in response (stop reason ${stopReason})` },
         rawText,
+        transcript: { messages },
         turns,
         trace,
       };
@@ -246,16 +269,20 @@ export function messagesProvider(options: MessagesProviderOptions): Provider {
 
     async propose(request: ProposeRequest): Promise<ProposeResult> {
       const started = Date.now();
+      const messages: Anthropic.MessageParam[] = request.resume
+        ? [...(request.resume.transcript.messages as Anthropic.MessageParam[]), { role: 'user', content: request.resume.user }]
+        : [{ role: 'user', content: request.user }];
       const response = await client.messages.create({
         model: options.model,
         max_tokens: request.maxTokens,
         system: systemBlocks(request),
         output_config: { effort: request.effort, format: { type: 'json_schema', schema: APPEAL_SCHEMA } },
-        messages: [{ role: 'user', content: request.user }],
+        messages,
       });
       const latencyMs = Date.now() - started;
       const usage = readUsage(response);
       const rawText = textOf(response);
+      messages.push({ role: 'assistant', content: response.content as Anthropic.ContentBlockParam[] });
       return {
         provider: options.label,
         model: response.model,
@@ -265,6 +292,7 @@ export function messagesProvider(options: MessagesProviderOptions): Provider {
         costUsd: costUsd(priceKey, usage),
         draft: rawText ? parseAppeal(rawText) : { ok: false, error: `no text in response (stop reason ${response.stop_reason})` },
         rawText,
+        transcript: { messages },
       };
     },
   };
@@ -299,6 +327,9 @@ export function openAiProvider(options: OpenAiProviderOptions): Provider {
     model: options.model,
     async propose(request: ProposeRequest): Promise<ProposeResult> {
       const started = Date.now();
+      const turns: { role: string; content: string }[] = request.resume
+        ? [...(request.resume.transcript.messages as { role: string; content: string }[]), { role: 'user', content: request.resume.user }]
+        : [{ role: 'user', content: request.user }];
       const res = await doFetch(`${options.baseURL.replace(/\/$/, '')}/chat/completions`, {
         method: 'POST',
         headers: { 'content-type': 'application/json', authorization: `Bearer ${options.apiKey}` },
@@ -309,7 +340,7 @@ export function openAiProvider(options: OpenAiProviderOptions): Provider {
           response_format: { type: 'json_schema', json_schema: { name: 'appeal', schema: APPEAL_SCHEMA, strict: true } },
           messages: [
             { role: 'system', content: request.system.map(b => b.text).join('\n\n') },
-            { role: 'user', content: request.user },
+            ...turns,
           ],
         }),
       });
@@ -336,6 +367,7 @@ export function openAiProvider(options: OpenAiProviderOptions): Provider {
         costUsd: costUsd(options.priceKey, usage),
         draft: rawText ? parseAppeal(rawText) : { ok: false, error: 'no text in response' },
         rawText,
+        transcript: { messages: [...turns, { role: 'assistant', content: rawText }] },
       };
     },
   };

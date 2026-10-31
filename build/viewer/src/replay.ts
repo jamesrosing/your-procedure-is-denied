@@ -45,6 +45,21 @@ export interface TraceEvent {
   ok: boolean;
   live?: boolean; // a query against an external data source, labeled in the viewer
   note?: string;
+  why?: string; // the model's one-sentence reason for the call (the API returns only redacted thinking, so the tool input carries it)
+  repair?: number; // the repair turn this call was made in; absent for the first turn
+}
+
+// One repair turn (harness --repair): the gate's reasons sent back verbatim,
+// the revised draft's gate, and what the turn cost. Offered only on a blocked draft.
+export interface RepairRecord {
+  turn: number;
+  reasons: string[];
+  sent: string;
+  latencyMs: number;
+  costUsd: number;
+  gate?: ViewerResult['gate'];
+  outcome?: string;
+  error?: string;
 }
 
 export interface ViewerResult {
@@ -74,12 +89,16 @@ export interface ViewerResult {
   reading?: { entriesRead: number; chartSize: number; supportRead: number; supportTotal: number };
   // the advisor's opinion per criterion, with the model's name; never a gate input
   advice?: { provider: string; model: string; items: { criterion: string; verdict: 'supports' | 'partial' | 'silent'; why: string }[]; error?: string };
+  // --repair runs: the outcome above is scored on the final gate; these keep the no-repair result
+  firstOutcome?: string;
+  firstGate?: ViewerResult['gate']; // present only when a repair turn happened
+  repairs?: RepairRecord[];
 }
 
 export type Side = 'payer' | undefined; // absent: the physician's side, the default
 
 export interface ResultsFile {
-  run: { startedAt: string; provider: string; model: string; effort: string; cases: number; agentic?: boolean; side?: 'payer' };
+  run: { startedAt: string; provider: string; model: string; effort: string; cases: number; agentic?: boolean; side?: 'payer'; repair?: number };
   summary: {
     cases: number;
     outcomes: Record<string, number>;
@@ -94,13 +113,16 @@ export interface ResultsFile {
 }
 
 export type Step =
-  | { kind: 'read'; entryId: string; tool: string; live: boolean; note?: string; atMs: number }
-  | { kind: 'lookup'; tool: string; note: string; live: boolean; input?: LookupQuestion; atMs: number }
+  | { kind: 'read'; entryId: string; tool: string; live: boolean; note?: string; why?: string; repair?: number; atMs: number }
+  | { kind: 'lookup'; tool: string; note: string; live: boolean; input?: LookupQuestion; why?: string; repair?: number; atMs: number }
   | { kind: 'read-all'; entryIds: string[]; atMs: number }
   | { kind: 'evidence'; criterion: string; citation: string; quote: string; status: RecordStatus; reason: string; atMs: number }
-  | { kind: 'sentence'; index: number; text: string; citation: string; quote: string; status: RecordStatus; reason: string; atMs: number }
+  // previous: the stamp this sentence carried before a repair turn re-stamped it; the reason is shown between the two
+  | { kind: 'sentence'; index: number; text: string; citation: string; quote: string; status: RecordStatus; reason: string; previous?: { status: RecordStatus; reason: string }; repair?: number; atMs: number }
+  // the repair turn: the gate's reasons go back to the model verbatim; `sentences` is the revised draft's count
+  | { kind: 'repair'; turn: number; reasons: string[]; sentences: number; atMs: number }
   | { kind: 'advice'; model: string; items: { criterion: string; verdict: 'supports' | 'partial' | 'silent'; why: string }[]; atMs: number }
-  | { kind: 'verdict'; verdict: 'pass' | 'blocked' | 'declined' | 'error'; reasons: string[]; declinedReason?: string; blockedSentence?: number; error?: string; atMs: number };
+  | { kind: 'verdict'; verdict: 'pass' | 'blocked' | 'declined' | 'error'; reasons: string[]; declinedReason?: string; blockedSentence?: number; error?: string; repair?: number; atMs: number };
 
 export interface CriterionState {
   id: string;
@@ -117,6 +139,7 @@ export interface SentenceState {
   quote: string;
   status: RecordStatus;
   reason: string;
+  previous?: { status: RecordStatus; reason: string }; // the stamp before a repair turn re-stamped this sentence
 }
 
 export interface ReplayState {
@@ -129,6 +152,8 @@ export interface ReplayState {
   criteria: CriterionState[];
   sentences: SentenceState[];
   verdict: Extract<Step, { kind: 'verdict' }> | null;
+  repair: { turn: number; reasons: string[] } | null; // the repair turn in progress or just finished
+  why: { entryId: string | null; text: string; live: boolean } | null; // the model's reason for the last read or query, while that step is the last applied
   counters: { entriesRead: number; chartSize: number; sentencesVerified: number; sentencesTotal: number; costUsd: number; elapsedMs: number };
   done: boolean;
 }
@@ -161,7 +186,9 @@ export function parseStep(value: string | null, total: number): number | null {
 export const LABEL_HELP: Record<string, string> = {
   model: 'The Meta model that drafted this appeal.',
   provider: 'Where the model ran: meta is the Meta Model API; baseten is the open-weights model on Baseten.',
-  effort: 'The reasoning effort the model was asked for; every run here used low.',
+  effort: 'The reasoning effort the model was asked for. The kept runs used low; the effort sweep (post hoc, README Table 6) ran medium and high.',
+  repair: 'A post hoc run in which a blocked draft was sent back to the model once with the gate\u2019s reasons, verbatim, and the revised draft re-gated (README Table 5). The outcome shown is the final one; the first stamp of each re-stamped sentence is kept in the replay.',
+  record: 'A hash of the record alone: the chart, the criteria, the denial, and the case facts, with no draft in it. A live run of this case in a terminal (npm run live) prints the same value, which is how a reader can tell the two are on the same record.',
   run: 'The date of this run.',
   gate: 'The version of the deterministic check that verifies every sentence against the chart.',
   synthetic: 'A synthetic patient and chart; no real record appears anywhere in this repository.',
@@ -316,18 +343,27 @@ export function buildTimeline(result: ViewerResult, c: ViewerCase): Step[] {
   const steps: Step[] = [];
   const chartIds = new Set(c.chart.map(e => e.id));
   const trace = (result.trace ?? []).slice().sort((a, b) => a.step - b.step);
-  let readingEnds = 0;
 
-  if (trace.length > 0) {
-    for (const t of trace) {
+  // Tool calls become read and lookup steps; the model's why and the repair
+  // turn ride along. Returns when the reading ended.
+  const pushReads = (events: TraceEvent[]): number => {
+    let ends = 0;
+    for (const t of events) {
+      const extra = { ...(t.why ? { why: t.why } : {}), ...(t.repair ? { repair: t.repair } : {}) };
       if (t.tool === 'read_entry' && t.entryId && chartIds.has(t.entryId)) {
-        steps.push({ kind: 'read', entryId: t.entryId, tool: t.tool, live: t.live ?? false, ...(t.note ? { note: t.note } : {}), atMs: t.atMs });
+        steps.push({ kind: 'read', entryId: t.entryId, tool: t.tool, live: t.live ?? false, ...(t.note ? { note: t.note } : {}), ...extra, atMs: t.atMs });
       } else if (t.tool !== 'read_entry') {
         const input = lookupQuestion(t.input);
-        steps.push({ kind: 'lookup', tool: t.tool, note: t.note ?? (t.ok ? 'ok' : 'failed'), live: t.live ?? false, ...(input ? { input } : {}), atMs: t.atMs });
+        steps.push({ kind: 'lookup', tool: t.tool, note: t.note ?? (t.ok ? 'ok' : 'failed'), live: t.live ?? false, ...(input ? { input } : {}), ...extra, atMs: t.atMs });
       }
-      readingEnds = Math.max(readingEnds, t.atMs);
+      ends = Math.max(ends, t.atMs);
     }
+    return ends;
+  };
+
+  let readingEnds = 0;
+  if (trace.length > 0) {
+    readingEnds = pushReads(trace.filter(t => !t.repair));
   } else {
     const ids = citedEntries(result).filter(id => chartIds.has(id));
     if (ids.length > 0) steps.push({ kind: 'read-all', entryIds: ids, atMs: 0 });
@@ -341,26 +377,55 @@ export function buildTimeline(result: ViewerResult, c: ViewerCase): Step[] {
   if (!gate) return steps;
 
   // The gate's records come back in one shot after the model answers; spread
-  // them across the remaining latency so the replay has a visible rhythm.
-  const tail = gate.evidence.length + gate.sentences.length + 1;
-  const span = Math.max(0, result.latencyMs - readingEnds);
-  const at = (i: number) => Math.round(readingEnds + (span * (i + 1)) / tail);
-  let i = 0;
-  for (const e of gate.evidence) {
-    steps.push({ kind: 'evidence', criterion: e.criterion, citation: e.citation, quote: e.quote, status: e.status, reason: e.reason, atMs: at(i++) });
+  // them across the remaining latency so the replay has a visible rhythm. A
+  // sentence re-stamped by a repair turn carries its earlier stamp as previous.
+  type Gate = NonNullable<ViewerResult['gate']>;
+  const pushGate = (g: Gate, from: number, to: number, previous: Gate | null, repair: number | undefined): void => {
+    const tail = g.evidence.length + g.sentences.length + 1;
+    const span = Math.max(0, to - from);
+    const at = (i: number) => Math.round(from + (span * (i + 1)) / tail);
+    let i = 0;
+    for (const e of g.evidence) {
+      steps.push({ kind: 'evidence', criterion: e.criterion, citation: e.citation, quote: e.quote, status: e.status, reason: e.reason, atMs: at(i++) });
+    }
+    for (const s of g.sentences) {
+      const prev = previous?.sentences.find(p => p.index === s.index);
+      const changed = prev !== undefined && (prev.status !== s.status || prev.reason !== s.reason || prev.text !== s.text);
+      steps.push({ kind: 'sentence', index: s.index, text: s.text, citation: s.citation, quote: s.quote, status: s.status, reason: s.reason, ...(changed ? { previous: { status: prev.status, reason: prev.reason } } : {}), ...(repair ? { repair } : {}), atMs: at(i++) });
+    }
+    const blocked = g.sentences.find(s => s.status !== 'verified');
+    steps.push({
+      kind: 'verdict',
+      verdict: g.verdict,
+      reasons: g.reasons,
+      ...(g.declinedReason ? { declinedReason: g.declinedReason } : {}),
+      ...(g.verdict === 'blocked' && blocked ? { blockedSentence: blocked.index } : {}),
+      ...(repair ? { repair } : {}),
+      atMs: to,
+    });
+  };
+
+  const repairs = (result.repairs ?? []).filter(r => r.gate);
+  if (result.firstGate && repairs.length > 0) {
+    // The first draft, stamped and blocked; then each repair turn: the reasons
+    // sent, the entries it read, the revised draft re-stamped, its verdict.
+    const repairLatency = repairs.reduce((n, r) => n + r.latencyMs, 0);
+    const firstEnd = Math.max(readingEnds, result.latencyMs - repairLatency);
+    pushGate(result.firstGate, readingEnds, firstEnd, null, undefined);
+    let t0 = firstEnd;
+    let previous: Gate = result.firstGate;
+    repairs.forEach((r, i) => {
+      const g = r.gate!;
+      steps.push({ kind: 'repair', turn: r.turn, reasons: r.reasons, sentences: g.sentences.length, atMs: t0 });
+      const ends = Math.max(t0, pushReads(trace.filter(t => t.repair === r.turn)));
+      const to = Math.max(ends, i === repairs.length - 1 ? result.latencyMs : t0 + r.latencyMs);
+      pushGate(g, ends, to, previous, r.turn);
+      previous = g;
+      t0 = to;
+    });
+  } else {
+    pushGate(gate, readingEnds, result.latencyMs, null, undefined);
   }
-  for (const s of gate.sentences) {
-    steps.push({ kind: 'sentence', index: s.index, text: s.text, citation: s.citation, quote: s.quote, status: s.status, reason: s.reason, atMs: at(i++) });
-  }
-  const blocked = gate.sentences.find(s => s.status !== 'verified');
-  steps.push({
-    kind: 'verdict',
-    verdict: gate.verdict,
-    reasons: gate.reasons,
-    ...(gate.declinedReason ? { declinedReason: gate.declinedReason } : {}),
-    ...(gate.verdict === 'blocked' && blocked ? { blockedSentence: blocked.index } : {}),
-    atMs: result.latencyMs,
-  });
   if (result.advice && result.advice.items.length > 0) {
     steps.push({ kind: 'advice', model: result.advice.model, items: result.advice.items, atMs: result.latencyMs + 1 });
   }
@@ -378,6 +443,8 @@ export function initialState(steps: Step[], result: ViewerResult, c: ViewerCase)
     criteria: c.criteria.map(k => ({ id: k.id, text: k.text, status: 'pending', evidence: [] })),
     sentences: [],
     verdict: null,
+    repair: null,
+    why: null,
     counters: { entriesRead: 0, chartSize: c.chart.length, sentencesVerified: 0, sentencesTotal: result.gate?.sentences.length ?? 0, costUsd: 0, elapsedMs: 0 },
     done: steps.length === 0,
   };
@@ -387,6 +454,7 @@ function apply(state: ReplayState, step: Step, result: ViewerResult, c: ViewerCa
   const next: ReplayState = {
     ...state,
     strip: null,
+    why: null,
     read: state.read.slice(),
     lookups: state.lookups.slice(),
     criteria: state.criteria.map(k => ({ ...k, evidence: k.evidence.slice() })),
@@ -397,6 +465,7 @@ function apply(state: ReplayState, step: Step, result: ViewerResult, c: ViewerCa
     case 'read':
       if (!next.read.includes(step.entryId)) next.read.push(step.entryId);
       next.open = step.entryId;
+      if (step.why) next.why = { entryId: step.entryId, text: step.why, live: step.live };
       break;
     case 'read-all':
       for (const id of step.entryIds) if (!next.read.includes(id)) next.read.push(id);
@@ -405,6 +474,17 @@ function apply(state: ReplayState, step: Step, result: ViewerResult, c: ViewerCa
     case 'lookup':
       next.lookups.push({ tool: step.tool, note: step.note, live: step.live, ...(step.input ? { input: step.input } : {}) });
       next.strip = lookupStrip(step, c);
+      if (step.why) next.why = { entryId: null, text: step.why, live: step.live };
+      break;
+    case 'repair':
+      // The gate's reasons go back to the model. The verdict clears, the
+      // revised draft re-attaches its evidence, and the sentences stay on
+      // screen to be re-stamped one by one; any beyond the revised count go.
+      next.verdict = null;
+      next.done = false;
+      next.repair = { turn: step.turn, reasons: step.reasons };
+      next.criteria = next.criteria.map(k => ({ id: k.id, text: k.text, status: 'pending', evidence: [] }));
+      next.sentences = next.sentences.slice(0, step.sentences);
       break;
     case 'evidence': {
       const k = next.criteria.find(x => x.id === step.criterion);
@@ -415,10 +495,13 @@ function apply(state: ReplayState, step: Step, result: ViewerResult, c: ViewerCa
       next.open = step.citation;
       break;
     }
-    case 'sentence':
-      next.sentences.push({ index: step.index, text: step.text, citation: step.citation, quote: step.quote, status: step.status, reason: step.reason });
+    case 'sentence': {
+      const record: SentenceState = { index: step.index, text: step.text, citation: step.citation, quote: step.quote, status: step.status, reason: step.reason, ...(step.previous ? { previous: step.previous } : {}) };
+      const at = next.sentences.findIndex(s => s.index === step.index);
+      if (at === -1) next.sentences.push(record); else next.sentences[at] = record;
       next.open = step.citation;
       break;
+    }
     case 'advice':
       for (const item of step.items) {
         const k = next.criteria.find(x => x.id === item.criterion);
@@ -532,6 +615,74 @@ export function scoreboard(files: ResultsFile[]): ScoreboardRow[] {
     .filter(f => f.run.side !== 'payer')
     .map(scoreboardRow)
     .sort((a, b) => Number(a.agentic) - Number(b.agentic) || Number(a.live) - Number(b.live) || rank(a.model) - rank(b.model) || a.model.localeCompare(b.model));
+}
+
+// --- the compare tab -------------------------------------------------------------
+// One case, the three models' kept live-CHART results side by side: the entries
+// each opened in order, its sentences with the gate's stamps, its verdict, cost,
+// and latency. Pure layout over the stored files; nothing is re-run. Payer-side
+// and repair runs are left out, as are runs that made no live query; per model
+// the newest run by start time is taken, in README order.
+export interface CompareColumn {
+  file: string;
+  model: string; // run.model as stored
+  label: string; // MODEL_LABELS
+  provider: string;
+  startedAt: string;
+  live: boolean;
+  result: ViewerResult | null;
+  opened: string[]; // entry ids, in the order first read, reads that resolved only
+  lookups: { tool: string; note: string; live: boolean }[];
+  sentences: SentenceState[];
+  verdict: 'pass' | 'blocked' | 'declined' | 'error';
+  reasons: string[];
+  declinedReason?: string;
+  outcomeLabel: string;
+  costUsd: number;
+  latencyMs: number;
+  entriesRead: number;
+  chartSize: number | null;
+}
+
+export function compareColumns(files: { file: string; data: ResultsFile }[], caseId: string): CompareColumn[] {
+  const live = files.filter(f => f.data.run.side !== 'payer' && !f.data.run.repair && f.data.results.some(r => (r.trace ?? []).some(t => t.live === true)));
+  const byModel = new Map<string, { file: string; data: ResultsFile }>();
+  for (const f of live) {
+    const key = MODEL_LABELS[f.data.run.model] ?? f.data.run.model;
+    const current = byModel.get(key);
+    if (!current || f.data.run.startedAt.localeCompare(current.data.run.startedAt) > 0) byModel.set(key, f);
+  }
+  const ordered = [...byModel.values()].sort((a, b) => rank(MODEL_LABELS[a.data.run.model] ?? a.data.run.model) - rank(MODEL_LABELS[b.data.run.model] ?? b.data.run.model));
+  return ordered.map(f => {
+    const r = f.data.results.find(x => x.caseId === caseId) ?? null;
+    const opened: string[] = [];
+    const lookups: CompareColumn['lookups'] = [];
+    for (const t of (r?.trace ?? []).slice().sort((a, b) => a.step - b.step)) {
+      if (t.tool === 'read_entry') { if (t.ok && t.entryId && !opened.includes(t.entryId)) opened.push(t.entryId); }
+      else lookups.push({ tool: t.tool, note: t.note ?? (t.ok ? 'ok' : 'failed'), live: t.live ?? false });
+    }
+    const gate = r?.gate;
+    return {
+      file: f.file,
+      model: f.data.run.model,
+      label: MODEL_LABELS[f.data.run.model] ?? f.data.run.model,
+      provider: f.data.run.provider,
+      startedAt: f.data.run.startedAt,
+      live: true,
+      result: r,
+      opened,
+      lookups,
+      sentences: (gate?.sentences ?? []).map(s => ({ index: s.index, text: s.text, citation: s.citation, quote: s.quote, status: s.status, reason: s.reason })),
+      verdict: gate ? gate.verdict : 'error',
+      reasons: gate?.reasons ?? [],
+      ...(gate?.declinedReason ? { declinedReason: gate.declinedReason } : {}),
+      outcomeLabel: r ? sideText(undefined).outcome(r.outcome) : 'not in this run',
+      costUsd: r?.costUsd ?? 0,
+      latencyMs: r?.latencyMs ?? 0,
+      entriesRead: opened.length,
+      chartSize: r?.reading?.chartSize ?? null,
+    };
+  });
 }
 
 export function formatUsd(n: number): string {

@@ -8,7 +8,7 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%274%27 fill=%27%2314181C%27/%3E%3Crect x=%278%27 y=%2715%27 width=%2716%27 height=%272%27 fill=%27%23FFFFFF%27/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=31">
+  <link rel="stylesheet" href="styles.css?v=32">
   <script>
     // Theme before first paint; the choice is a per-viewer convenience.
     try { var t = localStorage.getItem('ypid-theme'); if (t === 'dark') document.documentElement.dataset.theme = 'dark'; } catch (e) {}
@@ -38,6 +38,7 @@
     <nav class="tabs" role="tablist" aria-label="Surface">
       <button id="tab-replay" class="tab" role="tab" aria-selected="true">Replay</button>
       <button id="btn-board" class="tab" role="tab" aria-selected="false" title="Scoreboard (S)">Scoreboard</button>
+      <button id="tab-compare" class="tab" role="tab" aria-selected="false" title="Compare the three models on one case (C)">Compare</button>
     </nav>
     <div class="pickers">
       <label class="picker">
@@ -80,6 +81,7 @@
           <span class="panel-meta" id="chart-meta"></span>
         </header>
         <p class="panel-sub" id="chart-sub"></p>
+        <p class="chart-why" id="chart-why" hidden aria-live="polite"></p>
         <ol class="entries" id="entries"></ol>
       </section>
 
@@ -126,6 +128,15 @@
     <p class="note">Agentic rows: the model reads the chart by tool call from an index instead of receiving it whole; entries read is the mean per case against the mean chart size, and key entries read is the share of grading-key evidence entries the model opened. Gate passed, key says no counts drafts the gate passed on a case the key labels absent: every sentence was in the record, but the record did not satisfy the criterion, which is the referential limit the physician's signature covers. A live CHART row adds a third tool, a query against the author's pre-existing coverage index for when the authority's criteria last changed; its answer appears under the criteria panel and never in the draft. Muse Spark Open on Baseten reports no thinking-token count on the Messages path, so its cost per appeal omits reasoning tokens. Fifty cases is a small set: one case is two percentage points.</p>
   </section>
 
+  <section id="compare" class="compare" hidden aria-labelledby="compare-h">
+    <div class="compare-head">
+      <h2 id="compare-h">Compare</h2>
+      <p class="compare-sub" id="compare-case"></p>
+    </div>
+    <div class="compare-grid" id="compare-grid"></div>
+    <p class="note">Pure layout over the stored result files of the three kept live-CHART runs (README Table 1, last three rows): the entries each model opened, in order; its sentences with the gate's stamps; its verdict; the call's cost and latency. Nothing is re-run here. Pick another case with the case picker above, or press C to return to the replay.</p>
+  </section>
+
   <section id="writ" class="writ" hidden aria-labelledby="writ-h">
     <div class="writ-tools">
       <span class="writ-tools-lbl">the instrument, as the physician would sign it</span>
@@ -160,9 +171,9 @@
     <span>Hackathon work, Meta Global AI Developer Hackathon, October 26 to November 4, 2026. Synthetic data only: no real patient record appears anywhere in this repository.
     <a href="https://github.com/jamesrosing/your-procedure-is-denied/blob/main/NEW-WORK.md">What was built during the event</a>
     <button id="btn-about" class="btn-about" title="About this page (p)">about this page</button></span>
-    <span class="keys">space · ← → · home end · s · i · p</span>
+    <span class="keys">space · ← → · home end · s · c · w · i · p</span>
   </footer>
 
-  <script src="app.js?v=31"></script>
+  <script src="app.js?v=32"></script>
 </body>
 </html>

@@ -12,8 +12,10 @@
     "smoke": "node --env-file=../.env --import tsx src/smoke.ts",
     "synthetic": "node --import tsx src/synthetic/generate.ts",
     "harness": "node --env-file=../.env --import tsx src/harness.ts",
+    "live": "node --env-file=../.env --import tsx src/harness.ts --provider meta --model muse-spark-1.3 --agentic --chart --live",
     "viewer": "node --import tsx scripts/build-viewer.ts && tsc -p viewer/tsconfig.json",
     "viewer:serve": "python3 -m http.server 8787 --directory viewer",
+    "viewer:check": "node --import tsx scripts/check-viewer.ts",
     "advise": "node --env-file=../.env --import tsx scripts/advise.ts",
     "regate": "node --import tsx scripts/regate.ts",
     "log": "node --import tsx scripts/build-log.ts",
@@ -31,6 +33,7 @@
     "@modelcontextprotocol/client": "^2.4.0",
     "@types/node": "^26.6.5",
     "esbuild": "^0.25.4",
+    "playwright-core": "^1.56.1",
     "tsx": "^4.23.15",
     "typescript": "^7.0.2"
   }

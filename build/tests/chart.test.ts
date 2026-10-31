@@ -114,10 +114,10 @@ describe('policyStatusExecutor', () => {
     assert.match(out!.content, /CHART unreachable: TypeError/);
   });
 
-  test('the tool definition names the three inputs and says it returns no policy text', () => {
+  test('the tool definition names the three inputs and the why, and says it returns no policy text', () => {
     assert.equal(POLICY_STATUS_TOOL.name, 'policy_status');
     const props = (POLICY_STATUS_TOOL.inputSchema as { properties: Record<string, unknown> }).properties;
-    assert.deepEqual(Object.keys(props).sort(), ['authority', 'code', 'date_of_service']);
+    assert.deepEqual(Object.keys(props).sort(), ['authority', 'code', 'date_of_service', 'why']);
     assert.match(POLICY_STATUS_TOOL.description, /does not return policy text/);
     assert.match(POLICY_STATUS_TOOL.description, /pre-existing/);
   });
