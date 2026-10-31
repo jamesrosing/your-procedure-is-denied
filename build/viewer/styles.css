@@ -176,9 +176,8 @@ h2 { font-size: 13.5px; font-weight: 500; color: var(--ink-7); }
   background: var(--ink-0);
   position: sticky; top: 0; z-index: 50;
 }
-.brand { display: flex; align-items: baseline; gap: 8px; min-width: 0; white-space: nowrap; }
+.brand { display: flex; align-items: baseline; min-width: 0; white-space: nowrap; }
 .brand-name { font-size: 17px; font-weight: 500; letter-spacing: -0.005em; color: var(--brand); }
-.brand-sub { color: var(--ink-5); font-size: 12.5px; font-weight: 500; }
 .tabs { display: flex; height: 56px; }
 .tab {
   height: 56px; padding: 0 12px; white-space: nowrap;
