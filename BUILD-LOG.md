@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-11-01 05:38 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-11-01 06:32 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -52,7 +52,7 @@ Each commit that changed the version string in `build/src/litmus.ts`. The gate i
 
 ## Commits since `hackathon-start`
 
-Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 56 regenerate commits (by github-actions[bot] after a push, or by the author running `npm run log` locally) are this log regenerating itself; they touch only the generated files and carry no ledger row.
+Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 57 regenerate commits (by github-actions[bot] after a push, or by the author running `npm run log` locally) are this log regenerating itself; they touch only the generated files and carry no ledger row.
 
 ### 79e5e21 · 2026-10-26 20:38 · Add hackathon scaffolding: NEW-WORK.md and /build
 
@@ -735,3 +735,11 @@ Video plan revised after review (`assets/video/WALKTHROUGH.md`, `narration.srt`)
 ### d3ac267 · 2026-10-31 22:37 · Build log: regenerate after 6660d40 · tag event-08-tribunal
 
 (generated files only; no ledger row by design)
+
+### b342b34 · 2026-10-31 22:38 · Build log: regenerate after d3ac267
+
+(generated files only; no ledger row by design)
+
+### 4cd5dcb · 2026-10-31 23:32 · README: the abstract's and Conclusion's spike-in numbers follow Table 3 under v1.5
+
+README: the abstract and the Conclusion still carried the v1.4 spike-in numbers (9,475 fabrications, 5,781 of 5,781 hard) after the Results prose moved to v1.5; now 9,518 and 5,824 of 5,824, matching Table 3. `.zenodo.json` description likewise, for the next deposit (the v1.1.0 record is unchanged). No verdict, label, or Table 1 number is involved
