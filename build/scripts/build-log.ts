@@ -335,12 +335,13 @@ function main(): void {
         'quote-word-dropped': 'a word dropped from the quote',
         'date-shift': 'date shifted',
         'laterality-swap': 'side swapped, other side absent from the cited entry',
+        'laterality-idiom-leak': 'side added that the cited entry carries only inside an idiom',
         'number-collision': 'number replaced by a value that appears in the criteria, the denial, or the case facts',
         'laterality-collision': 'side swapped, other side present somewhere in the cited entry',
         'negation-flip': 'negation flipped',
         'pronoun-swap': 'pronoun swapped',
       };
-      const kindClass: Record<string, string> = { 'number-absent': 'hard', 'citation-moved': 'hard', 'quote-word-dropped': 'hard', 'date-shift': 'hard', 'laterality-swap': 'hard', 'number-collision': 'collision', 'laterality-collision': 'collision', 'negation-flip': 'soft', 'pronoun-swap': 'soft' };
+      const kindClass: Record<string, string> = { 'number-absent': 'hard', 'citation-moved': 'hard', 'quote-word-dropped': 'hard', 'date-shift': 'hard', 'laterality-swap': 'hard', 'laterality-idiom-leak': 'hard', 'number-collision': 'collision', 'laterality-collision': 'collision', 'negation-flip': 'soft', 'pronoun-swap': 'soft' };
       const total = Object.values(cls).reduce((n, c) => n + c.attempted, 0);
       b.push(`**Table 3. Gate sensitivity by corruption class** (\`build/scripts/mutate.ts\`, gate ${short(rep.gate)}). ${total.toLocaleString()} fabrications injected one at a time into the sentences the kept runs verified; caught means the gate returned refuted or needs-citation. Where zero were missed, the 95% upper bound on the miss rate is by the rule of three.`);
       b.push('');

@@ -5,9 +5,10 @@ import { Rng } from '../src/synthetic/rng.js';
 import { gateMutation, mutateSentence, summarizeMutations, type Mutation, type MutationRecord } from '../scripts/mutate.js';
 
 // A small chart in the project's own fixture style. note-001 names the left
-// side only; note-002 carries a non-anatomical "right" ("right back to baseline")
-// so a laterality swap on note-001 is sourced elsewhere, which the gate reports
-// as needs-citation: still blocked, still caught.
+// side only; note-002 carries a non-anatomical "right" ("right back to baseline"),
+// which since gate v1.5 is a side nowhere, so a laterality swap on note-001 is
+// refuted outright (under v1.4 the idiom counted as a source elsewhere and the
+// gate returned needs-citation: still blocked, still caught).
 const chart = [
   { id: 'note-001', date: '2025-06-26', kind: 'office visit', text: '49 year old woman here about her left breast pain for 17 months. Schnur 22nd percentile at that BSA is about 620 grams. I am estimating 690 grams per side.' },
   { id: 'note-002', date: '2025-08-14', kind: 'physical therapy', text: 'Finished 12 weeks of PT across the street, says it helped while she was there and then right back to baseline.' },
@@ -61,7 +62,7 @@ describe('mutations the gate must catch (class hard)', () => {
     assert.equal(m.sentence.text, 'The pain is in the right breast.');
     const g = gateMutation(sources, m);
     assert.notEqual(g.status, 'verified');
-    assert.equal(g.status, 'needs-citation'); // "right back to baseline" lives in note-002
+    assert.equal(g.status, 'refuted'); // "right back to baseline" in note-002 is an idiom, not a side (v1.5)
   });
 
   test('a citation moved to an entry that lacks the quote is refuted', () => {
@@ -154,5 +155,28 @@ describe('laterality candidates', () => {
     const idiom = { text: 'She was right back to baseline after the sessions.', citation: 'note-002', quote: 'right back to baseline' };
     const ms = mutateSentence(idiom, sources, new Rng(1));
     assert.equal(ms.filter(m => m.kind === 'laterality-swap' || m.kind === 'laterality-collision').length, 0);
+  });
+});
+
+// Oct 31 (review): the idiom leak. A side the cited entry carries only inside
+// an idiom ("right back to baseline") is added to a sentence that had none.
+// Under v1.4 the gate verified it, since sourceTokens never masked the idiom;
+// a hard corruption, so every pass is a gate defect.
+describe('the idiom leak (class hard, v1.5)', () => {
+  test('a side added to a sentence whose entry has that word only in an idiom is caught', () => {
+    verifiedFirst(PT);
+    const m = only(mutateSentence(PT, sources, new Rng(1)), 'laterality-idiom-leak');
+    assert.equal(m.class, 'hard');
+    assert.ok(m.sentence.text.endsWith(' on the right side.'), m.sentence.text);
+    assert.equal(m.sentence.text.startsWith(PT.text.slice(0, -1)), true);
+    const g = gateMutation(sources, m);
+    assert.equal(g.status, 'refuted');
+    assert.match(g.reason, /unsourced-token: right/);
+  });
+
+  test('no leak is attempted when the sentence already names a side, or when the entry has no idiom', () => {
+    assert.equal(mutateSentence(SIDE, sources, new Rng(1)).filter(m => m.kind === 'laterality-idiom-leak').length, 0);
+    const bp = { text: 'Blood pressure was 128 over 82.', citation: 'note-003', quote: 'Blood pressure check. 128 over 82 today' };
+    assert.equal(mutateSentence(bp, sources, new Rng(1)).filter(m => m.kind === 'laterality-idiom-leak').length, 0);
   });
 });

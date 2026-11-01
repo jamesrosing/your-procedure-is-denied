@@ -14,7 +14,9 @@
 // How this gate checks support (the part the papers leave to the builder):
 //   1. Resolve the citation to one chart entry. Unknown or malformed: unresolved.
 //   2. The quote must appear verbatim in that entry's text (whitespace, case,
-//      and quote glyphs normalized, nothing else). Absent or trivial: refuted.
+//      quote glyphs, and dash variants normalized: curly quotes to straight,
+//      en, em, and figure dashes and the minus sign to the ASCII hyphen;
+//      nothing else). Absent or trivial: refuted.
 //   3. Every hard token in the sentence (numbers, dates, codes, and a side,
 //      left or right) must appear in the cited entry, the payer criteria,
 //      the denial, or the stated case facts. Anything else: refuted, token named.
@@ -28,7 +30,7 @@ import { sha256Hex } from './hash.js';
 import { CITATION_ID } from './citation.js';
 import type { Appeal } from './schema.js';
 
-export const LITMUS_VERSION = 'build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list';
+export const LITMUS_VERSION = 'build/src/litmus.ts v1.5 (2026-10-31): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list; a side that a source carries only inside an idiom (right back to baseline) is not an admissible source for a side';
 
 export interface GateEntry {
   id: string;
@@ -170,6 +172,13 @@ function stripZeros(n: string): string {
 // that list: "left ventricle", "left forefoot ulcer", "right great toe extensor",
 // "left total knee arthroplasty". The uses of left and right that are not sides
 // ("left the clinic", "right back to baseline") are masked before the check.
+// v1.5: the same mask applies to the sources. Until Oct 31 only the sentence
+// was masked, so an entry that carried "right back to baseline" made the bare
+// word admissible for every sentence citing it, and an invented right-sided
+// claim citing such an entry was verified (found in review on case-006
+// note-017; the shunt-direction pair "left to right" / "right to left" leaked
+// the same way). The idiom list is fixed and not exhaustive; it is applied
+// identically on both sides of the check.
 const SIDE_IDIOM = /\bright (?:back|away|now|after|before|here|there|then|to|at)\b|\bleft (?:the|a|an|against|behind|over|off|out|in|to|for|at|on|with|without|home|early|before|after|us|him|her|them|it|from)\b/g;
 
 // Hard tokens of a sentence: the facts that must have an admissible source.
@@ -203,7 +212,7 @@ function sourceTokens(text: string, into: Set<string>): void {
   }
   for (const m of t.matchAll(/\d+(?:\.\d+)?/g)) into.add(stripZeros(m[0]));
   for (const m of t.matchAll(/\b[a-z]\d{2}(?:\.\d+)?\b/g)) into.add(m[0]);
-  for (const m of t.matchAll(/\b(left|right)\b/g)) into.add(m[1]!);
+  for (const m of t.replace(SIDE_IDIOM, ' ').matchAll(/\b(left|right)\b/g)) into.add(m[1]!);
   if (/\bbilateral(?:ly)?\b/.test(t)) into.add('bilateral');
 }
 

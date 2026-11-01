@@ -1,7 +1,10 @@
 import { describe, test } from 'node:test';
 import assert from 'node:assert/strict';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { litmus, type GateSources, type SentenceRecord } from '../src/litmus.js';
 import type { Appeal } from '../src/schema.js';
+import { gateSources, loadCases } from '../src/harness.js';
 
 const chart = [
   { id: 'note-001', date: '2025-06-26', kind: 'office visit', text: '49 year old woman here about her breasts. Going on 17 months of upper back and neck pain that she ties to the weight of the breasts, worse by the end of a shift. She is 5 foot 2, 200 pounds, which puts BSA right around 1.99. Schnur 22nd percentile at that BSA is about 620 grams. I am estimating 724 grams on the right and 690 on the left.' },
@@ -302,5 +305,47 @@ describe('laterality anywhere it names a side (v1.4)', () => {
     ], []));
     assert.equal(r.sentences[0]!.status, 'verified');
     assert.equal(r.sentences[1]!.status, 'verified');
+  });
+});
+
+// Gate v1.5 (Oct 31, found in review): sourceTokens admitted a side from an
+// idiom in the cited entry. sentenceHardTokens masked "right back to baseline"
+// before deciding what a sentence must source, but the same function was never
+// applied to the entry, so any entry that carried the idiom made the bare word
+// admissible for every sentence citing it, including an invented right-sided
+// claim. The exact reproduction from the review, on the committed case, and the
+// shunt-direction case it also covers.
+describe('an idiom in the cited entry is not a source for a side (v1.5)', () => {
+  const here = dirname(fileURLToPath(import.meta.url));
+  const case006 = loadCases(join(here, '..', 'synthetic', 'cases')).find(c => c.id === 'case-006')!;
+
+  test('case-006 note-017, whose only "right" is "right back to baseline", does not source a fabricated right shoulder', () => {
+    const entry = case006.chart.find(e => e.id === 'note-017')!;
+    assert.match(entry.text, /right back to baseline/);
+    assert.equal((entry.text.match(/\bright\b/g) ?? []).length, 1, 'the entry carries the word once, in the idiom');
+    const r = litmus(gateSources(case006), appeal([{ text: 'Her right shoulder pain and intertrigo persisted through 9 months of conservative measures without durable relief.', citation: 'note-017', quote: 'without durable relief' }], []));
+    assert.equal(r.verdict, 'blocked');
+    assert.notEqual(r.sentences[0]!.status, 'verified');
+    assert.deepEqual(r.sentences[0]!.missing, ['right']);
+    assert.match(r.sentences[0]!.reason, /right/);
+  });
+
+  test('the same sentence without the invented side stays verified', () => {
+    const r = litmus(gateSources(case006), appeal([{ text: 'Her symptoms and intertrigo persisted through 9 months of conservative measures without durable relief.', citation: 'note-017', quote: 'without durable relief' }], []));
+    assert.equal(r.sentences[0]!.status, 'verified');
+  });
+
+  const shuntChart = [{ id: 'note-001', date: '2026-03-02', kind: 'echocardiogram', text: 'Transthoracic echo: left to right shunt across a secundum atrial septal defect, Qp:Qs 1.8.' }];
+  const shuntSources: GateSources = { chart: shuntChart, criteria: [{ id: 'crit-1', text: 'Hemodynamically significant shunt.' }], denial: ['Northwind denied CPT 93580. CARC 50.'], facts: ['SYN-051, 34 year old woman'] };
+
+  test('a shunt direction swapped against the cited entry is refuted', () => {
+    const r = litmus(shuntSources, appeal([{ text: 'The echocardiogram shows a right to left shunt across the atrial septal defect.', citation: 'note-001', quote: 'across a secundum atrial septal defect' }], []));
+    assert.equal(r.sentences[0]!.status, 'refuted');
+    assert.deepEqual(r.sentences[0]!.missing, ['left']);
+  });
+
+  test('the shunt direction as written in the entry stays verified', () => {
+    const r = litmus(shuntSources, appeal([{ text: 'The echocardiogram shows a left to right shunt across the atrial septal defect.', citation: 'note-001', quote: 'across a secundum atrial septal defect' }], []));
+    assert.equal(r.sentences[0]!.status, 'verified');
   });
 });

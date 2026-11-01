@@ -6,8 +6,10 @@
 // Three classes, reported separately:
 //   hard       a fact the gate is built to check is corrupted: a number replaced
 //              by a value absent from every admissible source, a date shifted,
-//              a side swapped, a citation moved to an entry that lacks the quote,
-//              a word dropped from the quote. Every pass here is a gate defect.
+//              a side swapped, a side added that the cited entry carries only
+//              inside an idiom ("right back to baseline"; Oct 31), a citation
+//              moved to an entry that lacks the quote, a word dropped from the
+//              quote. Every pass here is a gate defect.
 //   collision  a wrong number or side that happens to appear in the criteria,
 //              the denial, the case facts, or elsewhere in the cited entry. The
 //              gate checks presence, not correspondence, so these pass by design;
@@ -31,6 +33,7 @@ export type MutationKind =
   | 'number-absent'
   | 'date-shift'
   | 'laterality-swap'
+  | 'laterality-idiom-leak'
   | 'citation-moved'
   | 'quote-word-dropped'
   | 'number-collision'
@@ -46,6 +49,7 @@ export const CLASS_OF: Record<MutationKind, MutationClass> = {
   'number-absent': 'hard',
   'date-shift': 'hard',
   'laterality-swap': 'hard',
+  'laterality-idiom-leak': 'hard',
   'citation-moved': 'hard',
   'quote-word-dropped': 'hard',
   'number-collision': 'collision',
@@ -104,9 +108,24 @@ function digitTokens(text: string): Set<string> {
   return out;
 }
 
+// "right back to baseline" and "left the clinic" are not sides, in a sentence
+// or in a source (gate v1.5). The idioms are masked with spaces of the same
+// length so offsets survive.
+const SIDE_IDIOM_RE = /\bright\s+(?:back|away|now|after|before|here|there|then|to|at)\b|\bleft\s+(?:the|a|an|against|behind|over|off|out|in|to|for|at|on|with|without|home|early|before|after|us|him|her|them|it|from)\b/gi;
+
 function sideTokens(text: string): Set<string> {
   const out = new Set<string>();
-  for (const m of canon(text).matchAll(/\b(left|right)\b/g)) out.add(m[1]!);
+  for (const m of canon(text).replace(SIDE_IDIOM_RE, m => ' '.repeat(m.length)).matchAll(/\b(left|right)\b/g)) out.add(m[1]!);
+  return out;
+}
+
+// The side words a text carries only inside an idiom.
+function idiomSides(text: string): string[] {
+  const out: string[] = [];
+  for (const m of canon(text).matchAll(SIDE_IDIOM_RE)) {
+    const w = m[0].split(/\s+/)[0]!;
+    if (!out.includes(w)) out.push(w);
+  }
   return out;
 }
 
@@ -228,10 +247,6 @@ function dateShift(s: Sentence, adm: Admissible): Mutation | null {
   return null;
 }
 
-// "right back to baseline" and "left the clinic" are not sides. The idioms are
-// masked with spaces of the same length so offsets survive.
-const SIDE_IDIOM_RE = /\bright\s+(?:back|away|now|after|before|here|there|then|to|at)\b|\bleft\s+(?:the|a|an|against|behind|over|off|out|in|to|for|at|on|with|without|home|early|before|after|us|him|her|them|it|from)\b/gi;
-
 function sideSpots(text: string): { start: number; end: number; word: string }[] {
   const masked = text.replace(SIDE_IDIOM_RE, m => ' '.repeat(m.length));
   return [...masked.matchAll(/\b(left|right)\b/gi)].map(m => ({ start: m.index!, end: m.index! + m[0].length, word: m[0] }));
@@ -247,6 +262,19 @@ function lateralitySwap(s: Sentence, adm: Admissible): Mutation | null {
   const present = swappedIn.some(w => adm.sidesEntry.has(w) || adm.sidesShared.has(w));
   const kind: MutationKind = present ? 'laterality-collision' : 'laterality-swap';
   return { kind, class: CLASS_OF[kind], sentence: { ...s, text }, note: `${[...sides].join('/')} -> ${swappedIn.join('/')}${present ? ' (the other side already appears in the entry, criteria, denial, or facts)' : ''}` };
+}
+
+// The idiom leak (Oct 31, found in review): a side the cited entry carries only
+// inside an idiom is added to a sentence that named none. Under gate v1.4 the
+// entry's idiom made the word admissible and the sentence was verified. Only
+// attempted where the word is a side nowhere in the entry, the criteria, the
+// denial, or the facts, so a pass is the leak and nothing else.
+function lateralityIdiomLeak(s: Sentence, entry: GateEntry, adm: Admissible): Mutation | null {
+  if (sideSpots(s.text).length > 0) return null;
+  const leaked = idiomSides(entry.text).find(w => !adm.sidesEntry.has(w) && !adm.sidesShared.has(w));
+  if (!leaked) return null;
+  const text = s.text.endsWith('.') ? `${s.text.slice(0, -1)} on the ${leaked} side.` : `${s.text} on the ${leaked} side`;
+  return { kind: 'laterality-idiom-leak', class: 'hard', sentence: { ...s, text }, note: `"${leaked}" added; the entry has the word only in an idiom` };
 }
 
 function citationMoved(s: Sentence, sources: GateSources, rng: Rng): Mutation | null {
@@ -324,6 +352,7 @@ export function mutateSentence(s: Sentence, sources: GateSources, rng: Rng): Mut
   push(numberAbsent(s, adm, rng));
   push(dateShift(s, adm));
   push(lateralitySwap(s, adm));
+  push(lateralityIdiomLeak(s, entry, adm));
   push(citationMoved(s, sources, rng));
   push(quoteWordDropped(s, entry, rng));
   push(numberCollision(s, adm, rng));
@@ -407,7 +436,7 @@ async function main(): Promise<void> {
     collisionPasses,
     collisionCaughtSample: records.filter(r => r.class === 'collision' && r.status !== 'verified').slice(0, 15),
     softPassSample: softPasses.slice(0, 25),
-    caughtExamples: (['number-absent', 'date-shift', 'laterality-swap', 'citation-moved', 'quote-word-dropped'] as MutationKind[]).map(k => example(k, 'caught')).filter(Boolean),
+    caughtExamples: (['number-absent', 'date-shift', 'laterality-swap', 'laterality-idiom-leak', 'citation-moved', 'quote-word-dropped'] as MutationKind[]).map(k => example(k, 'caught')).filter(Boolean),
   };
   const out = values.out ? values.out : join(resultsDir, 'mutations', 'report.json');
   mkdirSync(dirname(out), { recursive: true });
