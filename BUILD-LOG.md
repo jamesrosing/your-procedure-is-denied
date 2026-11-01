@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-11-01 08:24 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-11-01 19:33 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -52,7 +52,7 @@ Each commit that changed the version string in `build/src/litmus.ts`. The gate i
 
 ## Commits since `hackathon-start`
 
-Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 60 regenerate commits (by github-actions[bot] after a push, or by the author running `npm run log` locally) are this log regenerating itself; they touch only the generated files and carry no ledger row.
+Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 61 regenerate commits (by github-actions[bot] after a push, or by the author running `npm run log` locally) are this log regenerating itself; they touch only the generated files and carry no ledger row.
 
 ### 79e5e21 · 2026-10-26 20:38 · Add hackathon scaffolding: NEW-WORK.md and /build
 
@@ -759,3 +759,11 @@ Viewer: the presenter spotlight (`build/viewer/src/spotlight.ts`, `window.ypid.s
 ### 0160a27 · 2026-11-01 01:23 · Build log: regenerate after 6e2fd0c
 
 (generated files only; no ledger row by design)
+
+### b232709 · 2026-11-01 01:24 · Build log: regenerate after 0160a27
+
+(generated files only; no ledger row by design)
+
+### ce6c04a · 2026-11-01 11:33 · Video: the author's own script, case-025 featured, the picture timed to the words with the spotlight at each word; two more writ regions
+
+Video script and plan rewritten in the author's own words (`assets/video/WALKTHROUGH.md`, `narration.srt`): who is speaking, the problem, one case (case-025: IMRT planning after lumpectomy for breast cancer, a Medicare Advantage denial, $25,000), how the system works on it, what was found, and what comes next; 404 words, speech ending at 2:56, the clicks timed to the words at 140 a minute and the spotlight called at the word it belongs to (a Spotlight column in the table; 32 caption cues). The close states the spike-in honestly: nine and a half thousand fabrications injected, every hard one caught. The viewer's spotlight gains `writ-footnotes` and `writ-reason`. The browser take is recorded headlessly from a local viewer build with the clicks and spotlights on these seconds; the terminal clip is the author's, on case-025 (`npm run live -- --case case-025`, record hash 6f43998d3d11…). 260 tests
