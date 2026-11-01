@@ -481,6 +481,8 @@ export function summarize(results: CaseResult[]): Summary {
   const bySubtype: Summary['bySubtype'] = {};
   const byCategory: Summary['byCategory'] = {};
   for (const r of results) {
+    // A record without a key is not an appeal result (an intake record, say) and is left out of the tallies.
+    if (!r.expected) continue;
     outcomes[r.outcome] = (outcomes[r.outcome] ?? 0) + 1;
     const sub = r.expected.subtype ?? 'warranted';
     (bySubtype[sub] ??= {})[r.outcome] = ((bySubtype[sub] ?? {})[r.outcome] ?? 0) + 1;
@@ -543,7 +545,7 @@ export function summarize(results: CaseResult[]): Summary {
     stakesUsd: {
       total: sum(r => r.stakesUsd),
       defended: sum(r => (r.outcome === 'correct-pass' ? r.stakesUsd : 0)),
-      warranted: sum(r => (r.expected.warranted ? r.stakesUsd : 0)),
+      warranted: sum(r => (r.expected?.warranted ? r.stakesUsd : 0)),
     },
     citationPrecision: precisions.length ? precisions.reduce((a, b) => a + b, 0) / precisions.length : null,
     ...(reading ? { reading } : {}),
