@@ -9,6 +9,7 @@ import {
 } from './replay.js';
 import { recheck, recheckLabel, EDIT_BUTTON, EDIT_HELP, EDIT_NOTE } from './gatecheck.js';
 import { writDocument, writText, WRIT_BUTTON, WRIT_HELP } from './writ.js';
+import { SPOT_ATTR, SPOT_CLASS, spotSelector } from './spotlight.js';
 import { gateSources, sourcesHash } from '../../src/sources.js';
 
 // group: where the file sits. kept is results/ (Table 1, the scoreboard, the
@@ -1124,6 +1125,21 @@ async function boot(): Promise<void> {
     }
   });
 }
+
+// The presenter spotlight: window.ypid.spotlight('chart' | 'sentence:3' | ... | null)
+// rings one region and dims the rest of the stage; null clears. Called by the
+// recording script while a take is made, never by the page itself.
+function spotlight(name: string | null): boolean {
+  for (const el of document.querySelectorAll(`.${SPOT_CLASS}`)) el.classList.remove(SPOT_CLASS);
+  const selector = name ? spotSelector(name) : null;
+  const target = selector ? document.querySelector<HTMLElement>(selector) : null;
+  if (!target) { document.body.removeAttribute(SPOT_ATTR); return false; }
+  target.classList.add(SPOT_CLASS);
+  document.body.setAttribute(SPOT_ATTR, name!);
+  target.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  return true;
+}
+(window as unknown as { ypid: { spotlight: typeof spotlight } }).ypid = { spotlight };
 
 boot().catch((error: unknown) => {
   ui.context.textContent = error instanceof Error ? error.message : String(error);

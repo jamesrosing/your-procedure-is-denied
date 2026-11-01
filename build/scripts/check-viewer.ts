@@ -108,6 +108,20 @@ async function main(): Promise<void> {
     await page.keyboard.press('s');
     await page.waitForFunction(() => document.querySelectorAll('#board-table tr').length >= 10, null, { timeout: 10_000 }).catch(() => problems.push('scoreboard: fewer than nine rows'));
     const boardRows = await page.locator('#board-table tr').count();
+
+    // 5. The presenter spotlight: a region is ringed on request and cleared on null; the page never sets it itself.
+    await page.keyboard.press('s');
+    const spotIdle = await page.evaluate(() => document.body.hasAttribute('data-spot') || document.querySelector('.spot') !== null);
+    if (spotIdle) problems.push('spotlight: set without being asked');
+    const spotOn = await page.evaluate(() => (window as unknown as { ypid: { spotlight: (n: string | null) => boolean } }).ypid.spotlight('chart') && document.querySelector('.panel.chart.spot') !== null && document.body.getAttribute('data-spot') === 'chart');
+    if (!spotOn) problems.push('spotlight: chart did not ring');
+    await page.keyboard.press('End');
+    await page.waitForFunction(() => document.querySelectorAll('li.sentence').length > 0, null, { timeout: 10_000 }).catch(() => problems.push('spotlight: no sentences at the verdict'));
+    const spotSentence = await page.evaluate(() => (window as unknown as { ypid: { spotlight: (n: string | null) => boolean } }).ypid.spotlight('sentence:0'));
+    if (spotSentence !== true) problems.push('spotlight: sentence 0 did not ring');
+    await page.screenshot({ path: join(out, 'spotlight-sentence.png'), fullPage: false });
+    const spotOff = await page.evaluate(() => !(window as unknown as { ypid: { spotlight: (n: string | null) => boolean } }).ypid.spotlight(null) && document.querySelector('.spot') === null && !document.body.hasAttribute('data-spot'));
+    if (!spotOff) problems.push('spotlight: null did not clear');
     await browser.close();
     console.log(`compare: ${compared} cases laid out; repaired cases shown: ${repairedShown}; scoreboard rows (with header): ${boardRows}; frames in ${out}`);
   } finally {

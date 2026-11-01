@@ -627,3 +627,13 @@ body:has(.writ:not([hidden])) .stage { flex: 0 0 calc(100vh - 56px - 32px); }
   .writ:not([hidden]) { display: block !important; border: 0; background: #fff; padding: 0; }
   .writ-sheet { box-shadow: none; border: 0; max-width: none; padding: 0; color: #000; }
 }
+
+/* The presenter spotlight (Nov 1): window.ypid.spotlight(name) rings one
+   region and dims the rest of the stage while a take is recorded, so the
+   picture leads the narration. Nothing on the page sets it on its own. */
+.spot { position: relative; z-index: 2; box-shadow: 0 0 0 2px var(--accent), 0 0 0 7px color-mix(in oklab, var(--accent) 22%, transparent); border-radius: var(--radius-md); transition: box-shadow 260ms var(--ease-out); }
+.panel.spot { border-radius: 0; }
+li.spot, .verdict.spot, #payer-reason.spot, #strip.spot { box-shadow: 0 0 0 2px var(--accent), 0 0 0 6px color-mix(in oklab, var(--accent) 22%, transparent); }
+body[data-spot] .panels .panel:not(.spot):not(:has(.spot)) { opacity: 0.45; transition: opacity 260ms var(--ease-out); }
+body[data-spot] .panels .panel:has(.spot) > :not(:has(.spot)):not(.spot) { opacity: 0.6; }
+body[data-spot="context"] .panels, body[data-spot="pickers"] .panels, body[data-spot="transport"] .panels, body[data-spot="counters"] .panels { opacity: 0.45; }
