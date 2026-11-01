@@ -51,3 +51,6 @@ Thumbs.db
 
 # index-tool artifact
 /PROJECT_INDEX.json
+
+# Local review reports from the Oct 31 tribunal loop; not published
+/review/
