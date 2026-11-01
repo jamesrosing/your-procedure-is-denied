@@ -1,7 +1,8 @@
 # Regenerates BUILD-LOG.md and the build-log section of README.md after every
 # push to main, from the git history, the ledger, and the results files. The
-# commit it makes touches only those two generated files and carries no ledger
-# row; NEW-WORK.md says so. It skips itself so it never loops.
+# commit it makes touches only the generated files, plus the ledger's own
+# pending row when the regenerate fills its hash, and carries no ledger row;
+# NEW-WORK.md says so. It skips itself so it never loops.
 name: build log
 on:
   push:
@@ -25,7 +26,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          if git diff --quiet -- BUILD-LOG.md README.md; then echo "log unchanged"; exit 0; fi
-          git add BUILD-LOG.md README.md
+          if git diff --quiet -- BUILD-LOG.md README.md NEW-WORK.md; then echo "log unchanged"; exit 0; fi
+          git add BUILD-LOG.md README.md NEW-WORK.md
           git commit -m "Build log: regenerate after ${GITHUB_SHA::7}"
           git push

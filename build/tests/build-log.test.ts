@@ -1,6 +1,6 @@
 import { describe, test } from 'node:test';
 import assert from 'node:assert/strict';
-import { fabricatedQuotes, resolvePending, type Commit } from '../scripts/build-log.js';
+import { fabricatedQuotes, fillPendingRow, resolvePending, type Commit } from '../scripts/build-log.js';
 
 const commit = (hash: string, author = 'James'): Commit => ({ hash, author, bot: author === 'github-actions[bot]', date: '2026-10-30 09:00', subject: 's', tags: [], results: { added: [], removed: [] } });
 const rows = (entries: [string, string][]): Map<string, { date: string; text: string }> => new Map(entries.map(([h, t]) => [h, { date: '2026-10-30', text: t }]));
@@ -23,6 +23,30 @@ describe('the ledger pending row', () => {
     const r = resolvePending([commit('aaaaaaa'), commit('ccccccc', 'github-actions[bot]')], rows([['aaaaaaa', 'first'], ['pending', 'next']]));
     assert.equal(r.get('pending')?.text, 'next');
     assert.equal(r.has('ccccccc'), false);
+  });
+
+  // Oct 31: the row for afbb63c sat at `pending` through the bot's regenerate,
+  // which resolved it in memory for BUILD-LOG.md and never wrote the hash back.
+  // The regenerate now fills the ledger itself, so a resolved row cannot survive it.
+  const ledger = [
+    '| Date | Commit | What |',
+    '| --- | --- | --- |',
+    '| 2026-10-30 | aaaaaaa | first |',
+    '| 2026-10-31 | pending | second, with a pending word inside the text |',
+    '',
+  ].join('\n');
+
+  test('a resolved pending row is written back into the ledger text with its hash, the rest untouched', () => {
+    const out = fillPendingRow(ledger, 'bbbbbbb');
+    assert.ok(out.includes('| 2026-10-31 | bbbbbbb | second, with a pending word inside the text |'));
+    assert.ok(out.includes('| 2026-10-30 | aaaaaaa | first |'));
+    assert.equal(out.includes('| pending |'), false);
+    assert.equal(out.split('\n').length, ledger.split('\n').length);
+  });
+
+  test('a ledger with no pending row is returned as it was', () => {
+    const filled = fillPendingRow(ledger, 'bbbbbbb');
+    assert.equal(fillPendingRow(filled, 'ccccccc'), filled);
   });
 });
 

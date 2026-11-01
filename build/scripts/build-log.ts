@@ -53,6 +53,15 @@ export function resolvePending(event: Commit[], rows: Map<string, { date: string
   return out;
 }
 
+// Once the pending row has resolved to a commit, the hash is written back into
+// the ledger itself, so the regenerate that resolves it leaves no `pending` row
+// behind (Oct 31: the row for afbb63c had stayed `pending` past its regenerate).
+// Only the hash cell of the row changes; the text is left as written.
+const PENDING_ROW = /^(\| \d{4}-\d{2}-\d{2} \| )pending( \| .* \|)$/m;
+export function fillPendingRow(ledger: string, hash: string): string {
+  return ledger.replace(PENDING_ROW, `$1${hash}$2`);
+}
+
 // A fabricated quote is one the gate refuted because it is not in the entry it
 // cites, whether it sits in a sentence or in an evidence item; the same quote
 // cited the same way in both counts once. Refutations for an unsourced token
@@ -180,7 +189,17 @@ const mode = (r: RunFile['run']): string => (r.tools?.includes('policy_status') 
 function main(): void {
   const pre = commits('hackathon-start');
   const event = commits('hackathon-start..HEAD');
-  const rows = resolvePending(event, ledgerRows());
+  const ledgerPath = join(root, 'NEW-WORK.md');
+  const unresolved = ledgerRows();
+  const rows = resolvePending(event, unresolved);
+  const resolvedTo = [...rows.keys()].find(h => !unresolved.has(h));
+  if (resolvedTo) {
+    const ledger = readFileSync(ledgerPath, 'utf8');
+    const filled = fillPendingRow(ledger, resolvedTo);
+    if (filled === ledger) throw new Error(`NEW-WORK.md: the pending row resolved to ${resolvedTo} but could not be written back`);
+    writeFileSync(ledgerPath, filled);
+    console.log(`NEW-WORK.md: pending row filled with ${resolvedTo}`);
+  }
   const kept = runs();
   const out: string[] = [];
   out.push('# Build log');
