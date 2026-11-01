@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-10-29T04:47:25.384Z",
+  "generatedAt": "2026-11-01T05:23:23.248Z",
   "seed": 2026,
-  "gate": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
+  "gate": "build/src/litmus.ts v1.5 (2026-10-31): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list; a side that a source carries only inside an idiom (right back to baseline) is not an admissible source for a side",
   "corpus": {
     "files": [
       "baseten-meta-models_muse-spark-open-low-2026-10-27T08-20-22-534Z.json",
@@ -16,7 +16,7 @@
     ],
     "drafts": 449,
     "verifiedSentences": 2201,
-    "mutations": 9475
+    "mutations": 9518
   },
   "summary": {
     "byKind": {
@@ -85,6 +85,14 @@
           "verified": 522
         }
       },
+      "laterality-idiom-leak": {
+        "attempted": 43,
+        "caught": 43,
+        "passed": 0,
+        "statuses": {
+          "needs-citation": 43
+        }
+      },
       "date-shift": {
         "attempted": 13,
         "caught": 13,
@@ -96,8 +104,8 @@
     },
     "byClass": {
       "hard": {
-        "attempted": 5781,
-        "caught": 5781,
+        "attempted": 5824,
+        "caught": 5824,
         "passed": 0
       },
       "collision": {
@@ -26837,6 +26845,26 @@
         "text": "The SNF admission was preceded by a qualifying hospital stay, as the patient was \"Admitted to the skilled unit from the hospital after a 4 day inpatient stay for a right femoral neck fracture treated with cephalomedullary nail fixation on hospital day 1\".",
         "citation": "note-001",
         "quote": "Admitted to the skilled unit from the hospital after a 4 day inpatient stay for a left femoral neck fracture treated with cephalomedullary nail fixation on hospital day 1"
+      }
+    },
+    {
+      "file": "baseten-meta-models_muse-spark-open-low-2026-10-27T08-20-22-534Z.json",
+      "caseId": "case-006",
+      "sentence": 2,
+      "kind": "laterality-idiom-leak",
+      "class": "hard",
+      "status": "needs-citation",
+      "reason": "needs-citation: right not in note-017; the chart has it in note-005. If that entry is the source, cite it as well; if it is a count or figure the chart never states, rewrite the sentence",
+      "note": "\"right\" added; the entry has the word only in an idiom",
+      "before": {
+        "text": "She completed 12 weeks of physical therapy without lasting benefit, noting improvement only while in therapy and then return to baseline.",
+        "citation": "note-017",
+        "quote": "Finished 12 weeks of PT across the street, says it helped while she was there and then right back to baseline"
+      },
+      "after": {
+        "text": "She completed 12 weeks of physical therapy without lasting benefit, noting improvement only while in therapy and then return to baseline on the right side.",
+        "citation": "note-017",
+        "quote": "Finished 12 weeks of PT across the street, says it helped while she was there and then right back to baseline"
       }
     },
     {
