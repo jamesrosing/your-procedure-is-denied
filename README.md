@@ -238,7 +238,7 @@ The chart entry a draft quotes is, in practice, dictated. `npm run dictate -- --
 ## 3. Results
 
 <!-- results:start -->
-_Tables generated from the result files by `npm run log`; the prose below them is written by hand. Last regenerated 2026-11-01 05:29 UTC._
+_Tables generated from the result files by `npm run log`; the prose below them is written by hand. Last regenerated 2026-11-01 05:31 UTC._
 
 **Table 1. Kept runs.** 9 runs, 50 cases each, effort low. Agreed is correct-pass plus correct-decline against the grading key, with a 95% Wilson interval. Blocked is a draft the gate stopped. Missed is a decline on a case the key labels warranted. False pass is a draft the gate passed on a case the key labels unsupported. The five outcome columns sum to 50. Fabricated quotes counts quotes the gate refuted as not in the entry cited, in a sentence or in an evidence item, on any draft including declined ones. Care defended is the billed value of the warranted cases whose appeal passed the gate, out of the $568,500 billed across the thirty warranted cases ($940,000 across all fifty); the values are the synthetic set's, not a payer's. Entries read applies to the agentic modes.
 
@@ -445,9 +445,9 @@ Meta and Cerebral Valley for the event; Baseten for hosting the open-weights mod
 Every commit since the event began has a row in [NEW-WORK.md](NEW-WORK.md), every result file carries its model, mode, gate version, and any re-gate in its own header, and this section is regenerated from those sources after every push. Nothing in it is typed by hand.
 
 <!-- build-log:start -->
-_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-11-01 05:29 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
+_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-11-01 05:31 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
 
-161 commits since the `hackathon-start` tag, the last at 2026-10-31 22:29 (ae971aa). Gate v1.5. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
+163 commits since the `hackathon-start` tag, the last at 2026-10-31 22:31 (f2acfeb). Gate v1.5. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
 
 | Started (UTC) | Model | Mode | Agreed | Blocked | Missed | False pass | Advisor |
 | --- | --- | --- | :---: | :---: | :---: | :---: | --- |
@@ -463,11 +463,11 @@ _Generated from the git history, the ledger, and the result files by `npm run lo
 
 Last five authored commits, newest first, with the ledger row each one carried (the bot's regenerate commits are left out):
 
+- **f2acfeb · 2026-10-31 22:31** · README: prior versus new on the first screen, the local viewer fallback, the two bonus-prize entries named, the production home; ledger: CHART as prior work; chart.ts: outage guidance; CONTRIBUTING: pytest. README, from the review: one sentence under "What this is, and is not" saying what was built this week and what is pre-existing and not included, in the viewer's own words; 2.8 names `npm run viewer` then `npm run viewer:serve` as the local fallback if demo.hemeehr.com is unreachable; 2.5 names the Muse Spark Open runs as the entry for the Best Build on…
 - **ae971aa · 2026-10-31 22:29** · Test count: written into README 2.8 and build/README.md by the regenerate from the suite's own summary, held by a test. Test count generated (`build/scripts/test-count.ts`): `npm run log` runs the suite in a child process and writes its `# tests` total between markers in README 2.8 and `build/README.md`; both had said 236 while `npm test` printed 245 (found in review). `tests/test-count.test.ts` fails when either stated count differs from the suite's, so the number cannot…
 - **e5599f5 · 2026-10-31 22:26** · Tests: the writ's provenance pin follows the gate version in the result file. Tests (`build/tests/writ.test.ts`): the writ's provenance test had pinned the gate version as the string v1.4 and failed once the result file it reads was re-gated; it now takes the version from that file's header, so a re-gate cannot break it again. 256 tests
 - **4a2c40e · 2026-10-31 22:24** · Mutation report under v1.5, the v1.4 report kept beside it; README: the fourth gate defect and the v1.5 numbers in the Results prose. Mutation report regenerated under v1.5 (`build/results/mutations/report.json`, `npm run mutate`): 9,518 fabrications over the same 2,201 verified sentences, the 43 idiom leaks among them, all on case-006 and case-026; hard 5,824 of 5,824 caught, collision 1,308 and soft 2,386 passed as before. The same ten-class harness run against the v1.4 gate source…
 - **a417d6d · 2026-10-31 22:24** · Re-gate: every result file to v1.5; no sentence label and no verdict changed. Every committed result file re-gated to v1.5 (`npm run regate`; 28 files rewritten: the nine kept runs, eight repeats, three payer, three repair, four effort, the dictated run; the intake file has no gate and was left as it was): 0 sentence labels and 0 verdicts changed, so Tables 1, 2, and 4 to 7 and every number in the Results and the abstract stand.…
-- **706a6ba · 2026-10-31 22:22** · Gate v1.5: a side a source carries only inside an idiom is not an admissible side; the idiom leak joins the mutation harness. Gate v1.5 (`build/src/litmus.ts`): a side a source carries only inside an idiom is not an admissible side. `sourceTokens` now applies the same `SIDE_IDIOM` mask `sentenceHardTokens` has applied since v1.4; until now "right back to baseline" in a cited entry admitted "right" for any sentence citing it, and the review's fabricated right-shoulder sentence…
 <!-- build-log:end -->
 
 ## From the inside

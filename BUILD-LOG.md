@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-11-01 05:29 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-11-01 05:31 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -52,7 +52,7 @@ Each commit that changed the version string in `build/src/litmus.ts`. The gate i
 
 ## Commits since `hackathon-start`
 
-Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 53 regenerate commits (by github-actions[bot] after a push, or by the author running `npm run log` locally) are this log regenerating itself; they touch only the generated files and carry no ledger row.
+Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 54 regenerate commits (by github-actions[bot] after a push, or by the author running `npm run log` locally) are this log regenerating itself; they touch only the generated files and carry no ledger row.
 
 ### 79e5e21 · 2026-10-26 20:38 · Add hackathon scaffolding: NEW-WORK.md and /build
 
@@ -200,7 +200,7 @@ Viewer: deep links apply on hash change in an open tab (run, case, board closed)
 
 ### 42f6ef5 · 2026-10-28 00:06 · Viewer and README figures in the CHART Library composite of the heme design system
 
-Viewer restyled to the CHART Library composite of the heme design system (Jim pointed at both Claude Design projects): ink-ramp light chrome with a dark remap behind a theme button (remembered per viewer), Google Sans Flex interface, JetBrains Mono for ids, dates, codes, money and provenance, EB Garamond for record text, quotes and the letter, the low-chroma oklch state set (pass, blocked, declined, failed) with the result state in mono like the Resolve surface, warrant-style highlights on quotes and sentences, a book-style case header with crumb, title, meta and provenance stamp (model, provider, effort, run date, gate version), tabs for Replay and Scoreboard, 32px footer strip; README figures remapped to the ink ramp and sans stack as single light assets (dark variants removed); asset links v7. 98 tests
+Viewer restyled to the CHART Library composite of the heme design system (Jim pointed at two earlier design explorations): ink-ramp light chrome with a dark remap behind a theme button (remembered per viewer), Google Sans Flex interface, JetBrains Mono for ids, dates, codes, money and provenance, EB Garamond for record text, quotes and the letter, the low-chroma oklch state set (pass, blocked, declined, failed) with the result state in mono like the Resolve surface, warrant-style highlights on quotes and sentences, a book-style case header with crumb, title, meta and provenance stamp (model, provider, effort, run date, gate version), tabs for Replay and Scoreboard, 32px footer strip; README figures remapped to the ink ramp and sans stack as single light assets (dark variants removed); asset links v7. 98 tests
 
 ### e6600f2 · 2026-10-28 00:17 · Live CHART run on Muse Spark Open: 45 of 50 with one referential-limit false pass reported; scoreboard shows gate misses
 
@@ -715,3 +715,11 @@ Tests (`build/tests/writ.test.ts`): the writ's provenance test had pinned the ga
 ### ae971aa · 2026-10-31 22:29 · Test count: written into README 2.8 and build/README.md by the regenerate from the suite's own summary, held by a test
 
 Test count generated (`build/scripts/test-count.ts`): `npm run log` runs the suite in a child process and writes its `# tests` total between markers in README 2.8 and `build/README.md`; both had said 236 while `npm test` printed 245 (found in review). `tests/test-count.test.ts` fails when either stated count differs from the suite's, so the number cannot go stale again without the suite saying so. Build log: a commit whose subject begins "Build log: regenerate after" is a regenerate commit whether the Action or the author made it, so a local `npm run log` commit is not listed as an authored commit without a row. Two tests; 258 tests
+
+### 3fb773a · 2026-10-31 22:29 · Build log: regenerate after ae971aa
+
+(generated files only; no ledger row by design)
+
+### f2acfeb · 2026-10-31 22:31 · README: prior versus new on the first screen, the local viewer fallback, the two bonus-prize entries named, the production home; ledger: CHART as prior work; chart.ts: outage guidance; CONTRIBUTING: pytest
+
+README, from the review: one sentence under "What this is, and is not" saying what was built this week and what is pre-existing and not included, in the viewer's own words; 2.8 names `npm run viewer` then `npm run viewer:serve` as the local fallback if demo.hemeehr.com is unreachable; 2.5 names the Muse Spark Open runs as the entry for the Best Build on Meta Open Weight Models bonus prize and the agentic runs as the entry for Best Agentic Use-Case; 4.7 adds the author's own sentence that his practice already runs on heme with CHART and writ in daily use, so the gate's production home exists today. NEW-WORK.md: CHART (chart.hemeehr.com) added as a fourth prior-work bullet, matching README 2.5, the Declarations, the viewer footer, and the spoken line; the Oct 28 viewer row's design-tool mention made generic. `build/src/chart.ts`: the network-exception branch of `policy_status` now gives the same "Proceed without it; the criteria you were given still apply." sentence as the HTTP-error branch, pinned in `chart.test.ts`. CONTRIBUTING.md: how to install pytest for `tests/test_phi_check.py`. 258 tests
