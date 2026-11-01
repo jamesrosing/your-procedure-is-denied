@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-11-01 05:36 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-11-01 05:38 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -52,7 +52,7 @@ Each commit that changed the version string in `build/src/litmus.ts`. The gate i
 
 ## Commits since `hackathon-start`
 
-Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 55 regenerate commits (by github-actions[bot] after a push, or by the author running `npm run log` locally) are this log regenerating itself; they touch only the generated files and carry no ledger row.
+Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 56 regenerate commits (by github-actions[bot] after a push, or by the author running `npm run log` locally) are this log regenerating itself; they touch only the generated files and carry no ledger row.
 
 ### 79e5e21 · 2026-10-26 20:38 · Add hackathon scaffolding: NEW-WORK.md and /build
 
@@ -731,3 +731,7 @@ README, from the review: one sentence under "What this is, and is not" saying wh
 ### 6660d40 · 2026-10-31 22:36 · Video: the prior-versus-new line spoken over the stamp; the live terminal run cut in as its own 11-second segment; the SRT on the new times
 
 Video plan revised after review (`assets/video/WALKTHROUGH.md`, `narration.srt`): the prior-versus-new line is spoken at 0:20 over the typed stamp that says the same ("Everything shown was built this week, on my pre-existing record system, appeal engine, and coverage index"), paid for by the run-picker sentence, whose numbers are spoken again at the scoreboard; the live terminal run returns as an 11-second clip cut in at 1:32 after "test the gate", which keeps its full length, paid for by 6 seconds of Compare, 3 of print-and-save, and 2 of the silent hold at the close; total 3:00, 380 words at 140 a minute, speech ending about 2:50, 25 cues. The terminal clip is specified to be recorded on its own (140 columns, large font, `build/`, the streaming tool-call lines, then the verdict block with gate v1.5, the input hash, and the record hash `4ee7910eac9e…` the viewer shows), with the cut list so the browser take is not re-recorded. Every spoken number re-checked against the re-gated files: none moved. `SHOT-LIST.md`: 236 corrected to 258, v1.4 to v1.5, 9,475 to 9,518, each marked in passing
+
+### d3ac267 · 2026-10-31 22:37 · Build log: regenerate after 6660d40 · tag event-08-tribunal
+
+(generated files only; no ledger row by design)
