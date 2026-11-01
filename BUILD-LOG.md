@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-10-31 22:52 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-11-01 05:24 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -12,15 +12,15 @@ Every file carries its own header: model, mode, gate version at the run, any lat
 
 | Started (UTC) | Model | Mode | Agreed | Blocked | Missed | False pass | Failed | Fabricated quotes | Gate at run | Re-gated to | Advisor |
 | --- | --- | --- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | --- |
-| 2026-10-27 08:17 | muse-spark-1.3 (meta) | chart in prompt | 50 of 50 | 0 | 0 | 0 | 0 | 0 | v1 | v1.4 |  |
-| 2026-10-27 08:19 | muse-wonder-1.0 (meta) | chart in prompt | 49 of 50 | 0 | 1 | 0 | 0 | 0 | v1 | v1.4 |  |
-| 2026-10-27 08:20 | meta-models/muse-spark-open (baseten) | chart in prompt | 49 of 50 | 1 | 0 | 0 | 0 | 1 | v1 | v1.4 |  |
-| 2026-10-28 03:20 | muse-spark-1.3 (meta) | agentic | 50 of 50 | 0 | 0 | 0 | 0 | 1 | v1.1 | v1.4 |  |
-| 2026-10-28 03:24 | muse-wonder-1.0 (meta) | agentic | 49 of 50 | 1 | 0 | 0 | 0 | 0 | v1.1 | v1.4 |  |
-| 2026-10-28 03:24 | meta-models/muse-spark-open (baseten) | agentic | 48 of 50 | 1 | 0 | 0 | 1 | 0 | v1.1 | v1.4 |  |
-| 2026-10-28 06:48 | muse-spark-1.3 (meta) | agentic, live CHART | 49 of 50 | 1 | 0 | 0 | 0 | 0 | v1.2 | v1.4 | muse-wonder-1.0: 30 cases, 86 supports, 28 partial, 0 silent |
-| 2026-10-28 06:51 | muse-wonder-1.0 (meta) | agentic, live CHART | 50 of 50 | 0 | 0 | 0 | 0 | 0 | v1.2 | v1.4 | muse-wonder-1.0: 30 cases, 94 supports, 28 partial, 0 silent |
-| 2026-10-28 07:13 | meta-models/muse-spark-open (baseten) | agentic, live CHART | 45 of 50 | 4 | 0 | 1 | 0 | 0 | v1.2 | v1.4 | muse-wonder-1.0: 31 cases, 86 supports, 41 partial, 0 silent, flagged 1 of 1 false passes |
+| 2026-10-27 08:17 | muse-spark-1.3 (meta) | chart in prompt | 50 of 50 | 0 | 0 | 0 | 0 | 0 | v1 | v1.5 |  |
+| 2026-10-27 08:19 | muse-wonder-1.0 (meta) | chart in prompt | 49 of 50 | 0 | 1 | 0 | 0 | 0 | v1 | v1.5 |  |
+| 2026-10-27 08:20 | meta-models/muse-spark-open (baseten) | chart in prompt | 49 of 50 | 1 | 0 | 0 | 0 | 1 | v1 | v1.5 |  |
+| 2026-10-28 03:20 | muse-spark-1.3 (meta) | agentic | 50 of 50 | 0 | 0 | 0 | 0 | 1 | v1.1 | v1.5 |  |
+| 2026-10-28 03:24 | muse-wonder-1.0 (meta) | agentic | 49 of 50 | 1 | 0 | 0 | 0 | 0 | v1.1 | v1.5 |  |
+| 2026-10-28 03:24 | meta-models/muse-spark-open (baseten) | agentic | 48 of 50 | 1 | 0 | 0 | 1 | 0 | v1.1 | v1.5 |  |
+| 2026-10-28 06:48 | muse-spark-1.3 (meta) | agentic, live CHART | 49 of 50 | 1 | 0 | 0 | 0 | 0 | v1.2 | v1.5 | muse-wonder-1.0: 30 cases, 86 supports, 28 partial, 0 silent |
+| 2026-10-28 06:51 | muse-wonder-1.0 (meta) | agentic, live CHART | 50 of 50 | 0 | 0 | 0 | 0 | 0 | v1.2 | v1.5 | muse-wonder-1.0: 30 cases, 94 supports, 28 partial, 0 silent |
+| 2026-10-28 07:13 | meta-models/muse-spark-open (baseten) | agentic, live CHART | 45 of 50 | 4 | 0 | 1 | 0 | 0 | v1.2 | v1.5 | muse-wonder-1.0: 31 cases, 86 supports, 41 partial, 0 silent, flagged 1 of 1 false passes |
 
 ## Runs superseded or discarded
 
@@ -48,10 +48,11 @@ Each commit that changed the version string in `build/src/litmus.ts`. The gate i
 - 2026-10-27 23:48 8db4fc3: build/src/litmus.ts v1.2 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words, hundreds included, read as one number
 - 2026-10-28 00:49 2b86e41: build/src/litmus.ts v1.3 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked
 - 2026-10-28 21:52 3b0a483: build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list
+- 2026-10-31 22:22 706a6ba: build/src/litmus.ts v1.5 (2026-10-31): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list; a side that a source carries only inside an idiom (right back to baseline) is not an admissible source for a side
 
 ## Commits since `hackathon-start`
 
-Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 51 commits by github-actions[bot] are this log regenerating itself after a push; they touch only the generated files and carry no ledger row.
+Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 52 commits by github-actions[bot] are this log regenerating itself after a push; they touch only the generated files and carry no ledger row.
 
 ### 79e5e21 · 2026-10-26 20:38 · Add hackathon scaffolding: NEW-WORK.md and /build
 
@@ -673,3 +674,32 @@ Viewer (`build/viewer/index.html`, `styles.css`): the header's second, unlinked 
 ### afbb63c · 2026-10-31 15:52 · README: the board certification clause removed from the byline
 
 README byline: the clause "Board-certified in general and plastic surgery" removed at the author's direction; the line now reads name, MD, FACS, city. No other file carried it.
+
+### 3f6ba9d · 2026-10-31 15:52 · Build log: regenerate after afbb63c
+
+(generated files only; no ledger row by design)
+
+### 3ffab38 · 2026-10-31 22:04 · Ignore: review/ kept local, not published
+
+(no ledger row)
+
+### 8d89193 · 2026-10-31 22:17 · Ledger: the afbb63c row filled; the regenerate writes a resolved pending hash back into NEW-WORK.md
+
+Ledger: the row for afbb63c, left at `pending` through the bot's regenerate, filled by hand. Build log (`build/scripts/build-log.ts`): when the pending row resolves to a commit, the regenerate now writes that hash back into NEW-WORK.md and stops with an error if it cannot, so a resolved row cannot survive its own regenerate; the Action commits NEW-WORK.md with the two generated files. Two tests; 247 tests
+
+### 0831e57 · 2026-10-31 22:19 · Regate: the dictated and intake result shapes no longer crash; a no-op regate at the current version writes nothing
+
+Re-gate (`build/scripts/regate.ts`) ran clean on 27 of the 29 committed result files and crashed on two, found in review: the dictated run (`results/dictated/`) was gated against the dictated copy of its case under `synthetic/dictated/`, and regate loaded only `synthetic/cases/`, so the input hash disagreed; the intake run (`results/intake/`) has no drafts, gates, or keys, and `summarize()` read `r.expected.subtype`. Now `casesFor()` loads the dictated copies when the run header says the run was dictated; a file with no gated record passes through untouched; `summarize()` leaves a record without a key out of its tallies; and a regate from the current version to itself with no label or verdict moved writes nothing and appends nothing to `run.regated[]` (before, every run appended a no-op entry and rewrote the file). All 29 files regate with no crash, no change, no diff. Three tests; 250 tests
+
+### 706a6ba · 2026-10-31 22:22 · Gate v1.5: a side a source carries only inside an idiom is not an admissible side; the idiom leak joins the mutation harness
+
+Gate v1.5 (`build/src/litmus.ts`): a side a source carries only inside an idiom is not an admissible side. `sourceTokens` now applies the same `SIDE_IDIOM` mask `sentenceHardTokens` has applied since v1.4; until now "right back to baseline" in a cited entry admitted "right" for any sentence citing it, and the review's fabricated right-shoulder sentence on case-006 note-017 came back verified. Four tests: the exact reproduction (now blocked, `right` named), the same sentence without the side (verified), and a swapped shunt direction (refuted) beside the direction as written (verified). The header comment now says dash variants are folded to the ASCII hyphen too (it had said quote glyphs only). Mutation harness (`build/scripts/mutate.ts`): a tenth corruption, the idiom leak (class hard): a side the cited entry carries only inside an idiom is added to a sentence that named none; the harness's own side reading masks idioms as the gate does, so a swap whose other side appears only in an idiom is scored hard, not collision. Two tests; the swap test's expectation moves from needs-citation to refuted. Table 3 labels the new class. 256 tests
+
+### a417d6d · 2026-10-31 22:24 · Re-gate: every result file to v1.5; no sentence label and no verdict changed
+
+Every committed result file re-gated to v1.5 (`npm run regate`; 28 files rewritten: the nine kept runs, eight repeats, three payer, three repair, four effort, the dictated run; the intake file has no gate and was left as it was): 0 sentence labels and 0 verdicts changed, so Tables 1, 2, and 4 to 7 and every number in the Results and the abstract stand. Each file's header records the re-gate from v1.4 to v1.5
+
+### 4a2c40e · 2026-10-31 22:24 · Mutation report under v1.5, the v1.4 report kept beside it; README: the fourth gate defect and the v1.5 numbers in the Results prose
+
+Results added: `mutations/report-v1.4.json`.
+Mutation report regenerated under v1.5 (`build/results/mutations/report.json`, `npm run mutate`): 9,518 fabrications over the same 2,201 verified sentences, the 43 idiom leaks among them, all on case-006 and case-026; hard 5,824 of 5,824 caught, collision 1,308 and soft 2,386 passed as before. The same ten-class harness run against the v1.4 gate source is kept as `report-v1.4.json`: 43 of 43 idiom leaks verified, 5,781 of 5,824 hard caught. README: the Gate sensitivity and Gate defects paragraphs and the pre-specified table now carry v1.5 and the fourth defect; Table 3 regenerates with the next log

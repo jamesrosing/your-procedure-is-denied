@@ -238,7 +238,7 @@ The chart entry a draft quotes is, in practice, dictated. `npm run dictate -- --
 ## 3. Results
 
 <!-- results:start -->
-_Tables generated from the result files by `npm run log`; the prose below them is written by hand. Last regenerated 2026-10-31 22:52 UTC._
+_Tables generated from the result files by `npm run log`; the prose below them is written by hand. Last regenerated 2026-11-01 05:24 UTC._
 
 **Table 1. Kept runs.** 9 runs, 50 cases each, effort low. Agreed is correct-pass plus correct-decline against the grading key, with a 95% Wilson interval. Blocked is a draft the gate stopped. Missed is a decline on a case the key labels warranted. False pass is a draft the gate passed on a case the key labels unsupported. The five outcome columns sum to 50. Fabricated quotes counts quotes the gate refuted as not in the entry cited, in a sentence or in an evidence item, on any draft including declined ones. Care defended is the billed value of the warranted cases whose appeal passed the gate, out of the $568,500 billed across the thirty warranted cases ($940,000 across all fifty); the values are the synthetic set's, not a payer's. Entries read applies to the agentic modes.
 
@@ -264,7 +264,7 @@ Of the 8 blocked drafts in the kept runs, 6 were on cases the key labels warrant
 | muse-wonder-1.0 (Meta Model API), agentic, live CHART | 3 | 50 of 50 in all | 0 in all | 0 | 0 | 0 | 0 |
 | Muse Spark Open (open weights on Baseten), agentic, live CHART | 5 | 42 to 48 of 50 | 1 to 7 | 0 | 2 | 2 | 0 |
 
-**Table 3. Gate sensitivity by corruption class** (`build/scripts/mutate.ts`, gate v1.4). 9,475 fabrications injected one at a time into the sentences the kept runs verified; caught means the gate returned refuted or needs-citation. Where zero were missed, the 95% upper bound on the miss rate is by the rule of three.
+**Table 3. Gate sensitivity by corruption class** (`build/scripts/mutate.ts`, gate v1.5). 9,518 fabrications injected one at a time into the sentences the kept runs verified; caught means the gate returned refuted or needs-citation. Where zero were missed, the 95% upper bound on the miss rate is by the rule of three.
 
 | Class | Corruption | Injected | Caught | Sensitivity | Miss rate, 95% upper bound |
 | --- | --- | :---: | :---: | :---: | :---: |
@@ -272,8 +272,9 @@ Of the 8 blocked drafts in the kept runs, 6 were on cases the key labels warrant
 | hard | citation moved to an entry that lacks the quote | 2,201 | 2,201 | 100% | 0.14% |
 | hard | a word dropped from the quote | 2,148 | 2,148 | 100% | 0.14% |
 | hard | side swapped, other side absent from the cited entry | 225 | 225 | 100% | 1.33% |
+| hard | side added that the cited entry carries only inside an idiom | 43 | 43 | 100% | 6.98% |
 | hard | date shifted | 13 | 13 | 100% | 23.08% |
-| **hard, all** | | **5,781** | **5,781** | **100%** | **0.05%** |
+| **hard, all** | | **5,824** | **5,824** | **100%** | **0.05%** |
 | collision | number replaced by a value that appears in the criteria, the denial, or the case facts | 1,194 | 0 | 0% |  |
 | collision | side swapped, other side present somewhere in the cited entry | 114 | 0 | 0% |  |
 | **collision, all** | | **1,308** | **0** | **0%** |  |
@@ -444,9 +445,9 @@ Meta and Cerebral Valley for the event; Baseten for hosting the open-weights mod
 Every commit since the event began has a row in [NEW-WORK.md](NEW-WORK.md), every result file carries its model, mode, gate version, and any re-gate in its own header, and this section is regenerated from those sources after every push. Nothing in it is typed by hand.
 
 <!-- build-log:start -->
-_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-10-31 22:52 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
+_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-11-01 05:24 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
 
-151 commits since the `hackathon-start` tag, the last at 2026-10-31 15:52 (afbb63c). Gate v1.4. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
+158 commits since the `hackathon-start` tag, the last at 2026-10-31 22:24 (4a2c40e). Gate v1.5. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
 
 | Started (UTC) | Model | Mode | Agreed | Blocked | Missed | False pass | Advisor |
 | --- | --- | --- | :---: | :---: | :---: | :---: | --- |
@@ -462,11 +463,11 @@ _Generated from the git history, the ledger, and the result files by `npm run lo
 
 Last five authored commits, newest first, with the ledger row each one carried (the bot's regenerate commits are left out):
 
-- **afbb63c · 2026-10-31 15:52** · README: the board certification clause removed from the byline. README byline: the clause "Board-certified in general and plastic surgery" removed at the author's direction; the line now reads name, MD, FACS, city. No other file carried it.
-- **49a719d · 2026-10-31 15:43** · Viewer: the header's unlinked replay label is removed; the four tabs stand alone in the row; asset links v36. Viewer (`build/viewer/index.html`, `styles.css`): the header's second, unlinked "replay" label beside the title is removed; the four tabs (Replay, Scoreboard, Compare, Figures) stand alone in the row, confirmed headless at 1440 and 1000 px wide; asset links v36. No change to tests (245 pass).
-- **8295722 · 2026-10-31 14:26** · Viewer: a Figures tab lists the paper's figures and tables, read from README.md at build time; each figure link lands on its frame; asset links v35. Viewer: a Figures tab (the f key, `view=figures` in the address) lists the paper's 13 figures and 7 tables with their captions; each figure's deep link lands on its frame in place, files and sections open on GitHub, Table 1 also opens the Scoreboard. The list is read from README.md when the page is built (`build/viewer/src/figures.ts`,…
-- **60518e4 · 2026-10-31 13:57** · Viewer: a deep link keeps its step through boot again. Viewer (`build/viewer/src/main.ts`): the step in a deep link survives boot again. The Compare tab commit (090c0d4) made `showView` rewrite the address without a step, and the hash handler calls it last, so every figure link opened on its frame and then had `&step=` stripped, and a reload landed on step 0. `showView` now takes the step the hash handler…
-- **0fd3a30 · 2026-10-31 13:47** · Video as one take: WALKTHROUGH.md (introduction from the abstract, then the page control by control), narration.srt regenerated as 23 cues, SHOT-LIST.md superseded. The video as one take (`assets/video/WALKTHROUGH.md`): an introduction read from the abstract (its opening two sentences and the question), then demo.hemeehr.com control by control (the three columns, Play on case-001 to PASS, test the gate, case-044 declined on muse-wonder-1.0, the Scoreboard, Compare, the writ with print and save as text), the…
+- **4a2c40e · 2026-10-31 22:24** · Mutation report under v1.5, the v1.4 report kept beside it; README: the fourth gate defect and the v1.5 numbers in the Results prose. Mutation report regenerated under v1.5 (`build/results/mutations/report.json`, `npm run mutate`): 9,518 fabrications over the same 2,201 verified sentences, the 43 idiom leaks among them, all on case-006 and case-026; hard 5,824 of 5,824 caught, collision 1,308 and soft 2,386 passed as before. The same ten-class harness run against the v1.4 gate source…
+- **a417d6d · 2026-10-31 22:24** · Re-gate: every result file to v1.5; no sentence label and no verdict changed. Every committed result file re-gated to v1.5 (`npm run regate`; 28 files rewritten: the nine kept runs, eight repeats, three payer, three repair, four effort, the dictated run; the intake file has no gate and was left as it was): 0 sentence labels and 0 verdicts changed, so Tables 1, 2, and 4 to 7 and every number in the Results and the abstract stand.…
+- **706a6ba · 2026-10-31 22:22** · Gate v1.5: a side a source carries only inside an idiom is not an admissible side; the idiom leak joins the mutation harness. Gate v1.5 (`build/src/litmus.ts`): a side a source carries only inside an idiom is not an admissible side. `sourceTokens` now applies the same `SIDE_IDIOM` mask `sentenceHardTokens` has applied since v1.4; until now "right back to baseline" in a cited entry admitted "right" for any sentence citing it, and the review's fabricated right-shoulder sentence…
+- **0831e57 · 2026-10-31 22:19** · Regate: the dictated and intake result shapes no longer crash; a no-op regate at the current version writes nothing. Re-gate (`build/scripts/regate.ts`) ran clean on 27 of the 29 committed result files and crashed on two, found in review: the dictated run (`results/dictated/`) was gated against the dictated copy of its case under `synthetic/dictated/`, and regate loaded only `synthetic/cases/`, so the input hash disagreed; the intake run (`results/intake/`) has no…
+- **8d89193 · 2026-10-31 22:17** · Ledger: the afbb63c row filled; the regenerate writes a resolved pending hash back into NEW-WORK.md. Ledger: the row for afbb63c, left at `pending` through the bot's regenerate, filled by hand. Build log (`build/scripts/build-log.ts`): when the pending row resolves to a commit, the regenerate now writes that hash back into NEW-WORK.md and stops with an error if it cannot, so a resolved row cannot survive its own regenerate; the Action commits…
 <!-- build-log:end -->
 
 ## From the inside
