@@ -110,7 +110,7 @@ export function policyStatusExecutor(options: PolicyStatusOptions): (call: ToolC
         signal: AbortSignal.timeout(options.timeoutMs ?? 15_000),
       });
     } catch (error: unknown) {
-      return { ok: false, content: `CHART unreachable: ${error instanceof Error ? error.constructor.name : 'Error'}`, live: true, note: 'CHART unreachable' };
+      return { ok: false, content: `CHART unreachable: ${error instanceof Error ? error.constructor.name : 'Error'}. Proceed without it; the criteria you were given still apply.`, live: true, note: 'CHART unreachable' };
     }
     if (!res.ok) {
       const why = res.status === 402 || res.status === 401 ? 'key missing, unknown, or plan required' : 'request failed';

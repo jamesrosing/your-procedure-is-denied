@@ -18,7 +18,7 @@ Corrections. A figure, date, case status, or citation that is inaccurate or out 
 
 Critique of the standard. Arguments that LITMUS is wrong, unworkable, or incomplete. These are as valuable as agreement.
 
-Code, once there is code. The hackathon work will land here. When it does, pull requests that add tests, fix defects, or improve verification are welcome.
+Code, once there is code. The hackathon work will land here. When it does, pull requests that add tests, fix defects, or improve verification are welcome. The TypeScript suite is `cd build && npm ci && npm test`; the patient-data check's own test, `tests/test_phi_check.py`, needs pytest (`pip install pytest`, then `pytest -q tests/test_phi_check.py`), which the repository does not install for you.
 
 ## How to contribute
 

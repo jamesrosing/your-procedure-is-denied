@@ -112,6 +112,7 @@ describe('policyStatusExecutor', () => {
     const out = await run(CALL);
     assert.equal(out?.ok, false);
     assert.match(out!.content, /CHART unreachable: TypeError/);
+    assert.match(out!.content, /Proceed without it; the criteria you were given still apply\./); // the same guidance the HTTP-error branch gives
   });
 
   test('the tool definition names the three inputs and the why, and says it returns no policy text', () => {
