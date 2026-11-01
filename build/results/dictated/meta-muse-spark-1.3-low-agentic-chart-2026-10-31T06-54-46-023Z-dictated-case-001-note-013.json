@@ -15,7 +15,7 @@
       "read_entry",
       "policy_status"
     ],
-    "litmus": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
+    "litmus": "build/src/litmus.ts v1.5 (2026-10-31): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list; a side that a source carries only inside an idiom (right back to baseline) is not an admissible source for a side",
     "synthetic": true,
     "dictated": {
       "entryId": "note-013",
@@ -24,7 +24,15 @@
       "audioDurationMs": 28880,
       "transcribedAt": "2026-10-31T06:54:46.019Z",
       "original": "PT 5 days this week, 45 to 60 minutes per session, plus OT 5 days. Skilled gait training with the rolling walker, transfer training, and stair training started. Progress this week: transfers improved from moderate assist of two to minimal assist of one. Ambulation 40 feet to 110 feet with the rolling walker and contact guard. Able to stand at the sink for 3 minutes for grooming."
-    }
+    },
+    "regated": [
+      {
+        "from": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
+        "to": "build/src/litmus.ts v1.5 (2026-10-31): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list; a side that a source carries only inside an idiom (right back to baseline) is not an admissible source for a side",
+        "at": "2026-11-01T05:22:29.002Z",
+        "changedVerdicts": 0
+      }
+    ]
   },
   "summary": {
     "cases": 1,
@@ -352,7 +360,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.4 (2026-10-28): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list",
+        "litmus": "build/src/litmus.ts v1.5 (2026-10-31): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list; a side that a source carries only inside an idiom (right back to baseline) is not an admissible source for a side",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
