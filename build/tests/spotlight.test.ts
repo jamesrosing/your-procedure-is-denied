@@ -12,6 +12,8 @@ describe('the presenter spotlight', () => {
     assert.equal(spotSelector('chart'), '.panel.chart');
     assert.equal(spotSelector('criteria'), '.panel.criteria');
     assert.equal(spotSelector('draft'), '.panel.draft');
+    assert.equal(spotSelector('writ-footnotes'), '#writ-footnotes');
+    assert.equal(spotSelector('writ-reason'), '#writ-reason');
   });
 
   test('a sentence is addressed by index, and an unknown name is null', () => {

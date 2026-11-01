@@ -7,7 +7,7 @@
 // calls it. Pure mapping here, DOM work in main.ts.
 
 export const SPOT_REGIONS = [
-  'pickers', 'transport', 'context', 'chart', 'criteria', 'draft', 'payer-reason', 'strip', 'verdict', 'sentences', 'counters', 'board', 'compare', 'writ', 'writ-signature', 'writ-tools', 'writ-provenance',
+  'pickers', 'transport', 'context', 'chart', 'criteria', 'draft', 'payer-reason', 'strip', 'verdict', 'sentences', 'counters', 'board', 'compare', 'writ', 'writ-signature', 'writ-tools', 'writ-provenance', 'writ-footnotes', 'writ-reason',
 ] as const;
 export type SpotRegion = (typeof SPOT_REGIONS)[number];
 
@@ -29,6 +29,8 @@ const SELECTORS: Record<SpotRegion, string> = {
   'writ-signature': '#writ-signature',
   'writ-tools': '.writ-tools',
   'writ-provenance': '#writ-provenance',
+  'writ-footnotes': '#writ-footnotes',
+  'writ-reason': '#writ-reason',
 };
 
 // A region name, or `sentence:<index>` for one sentence of the draft, or an
