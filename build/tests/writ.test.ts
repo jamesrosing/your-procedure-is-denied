@@ -51,7 +51,9 @@ describe('the writ: a passing draft rendered as the instrument the physician wou
     const doc = writDocument(caseOf('case-001'), r, spark.run)!;
     assert.match(doc.provenance, /muse-spark-1\.3/);
     assert.match(doc.provenance, /2026-10-28/);
-    assert.match(doc.provenance, /v1\.4/);
+    // The gate version named is the one the result file carries after its last re-gate, not a pinned string.
+    const gateTag = /v\d+\.\d+/.exec(String((spark.run as { litmus?: string }).litmus))![0];
+    assert.match(doc.provenance, new RegExp(`LITMUS gate ${gateTag.replace('.', '\\.')}`));
     assert.ok(doc.provenance.includes((r.gate as { inputHash?: string }).inputHash!.slice(0, 12)));
     assert.equal(doc.band, WRIT_BAND);
     assert.equal(doc.signature, WRIT_SIGNATURE);
