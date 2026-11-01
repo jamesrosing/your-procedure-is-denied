@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-11-01 05:24 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-11-01 05:29 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -52,7 +52,7 @@ Each commit that changed the version string in `build/src/litmus.ts`. The gate i
 
 ## Commits since `hackathon-start`
 
-Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 52 commits by github-actions[bot] are this log regenerating itself after a push; they touch only the generated files and carry no ledger row.
+Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 53 regenerate commits (by github-actions[bot] after a push, or by the author running `npm run log` locally) are this log regenerating itself; they touch only the generated files and carry no ledger row.
 
 ### 79e5e21 · 2026-10-26 20:38 · Add hackathon scaffolding: NEW-WORK.md and /build
 
@@ -703,3 +703,15 @@ Every committed result file re-gated to v1.5 (`npm run regate`; 28 files rewritt
 
 Results added: `mutations/report-v1.4.json`.
 Mutation report regenerated under v1.5 (`build/results/mutations/report.json`, `npm run mutate`): 9,518 fabrications over the same 2,201 verified sentences, the 43 idiom leaks among them, all on case-006 and case-026; hard 5,824 of 5,824 caught, collision 1,308 and soft 2,386 passed as before. The same ten-class harness run against the v1.4 gate source is kept as `report-v1.4.json`: 43 of 43 idiom leaks verified, 5,781 of 5,824 hard caught. README: the Gate sensitivity and Gate defects paragraphs and the pre-specified table now carry v1.5 and the fourth defect; Table 3 regenerates with the next log
+
+### a8a1f60 · 2026-10-31 22:24 · Build log: regenerate after 4a2c40e
+
+(generated files only; no ledger row by design)
+
+### e5599f5 · 2026-10-31 22:26 · Tests: the writ's provenance pin follows the gate version in the result file
+
+Tests (`build/tests/writ.test.ts`): the writ's provenance test had pinned the gate version as the string v1.4 and failed once the result file it reads was re-gated; it now takes the version from that file's header, so a re-gate cannot break it again. 256 tests
+
+### ae971aa · 2026-10-31 22:29 · Test count: written into README 2.8 and build/README.md by the regenerate from the suite's own summary, held by a test
+
+Test count generated (`build/scripts/test-count.ts`): `npm run log` runs the suite in a child process and writes its `# tests` total between markers in README 2.8 and `build/README.md`; both had said 236 while `npm test` printed 245 (found in review). `tests/test-count.test.ts` fails when either stated count differs from the suite's, so the number cannot go stale again without the suite saying so. Build log: a commit whose subject begins "Build log: regenerate after" is a regenerate commit whether the Action or the author made it, so a local `npm run log` commit is not listed as an authored commit without a row. Two tests; 258 tests
