@@ -9,6 +9,7 @@ import { execSync } from 'node:child_process';
 import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { countTests, TEST_COUNT_FILES, withTestCount } from './test-count.js';
 import { formatInterval, ruleOfThree } from '../src/stats.js';
 
 const here = dirname(fileURLToPath(import.meta.url));
@@ -20,6 +21,7 @@ const git = (args: string): string => execSync(`git ${args}`, { cwd: root, encod
 
 // The Action that regenerates this log commits as github-actions[bot]; those
 // commits touch only the generated files and carry no ledger row.
+const REGENERATE_SUBJECT = /^Build log: regenerate after /;
 const BOT_AUTHOR = 'github-actions[bot]';
 
 export interface Commit { hash: string; author: string; bot: boolean; date: string; subject: string; tags: string[]; results: { added: string[]; removed: string[] }; litmus?: string }
@@ -37,7 +39,8 @@ function commits(range: string): Commit[] {
       if (code.startsWith('A')) results.added.push(path.slice('build/results/'.length));
       if (code.startsWith('D')) results.removed.push(path.slice('build/results/'.length));
     }
-    return { hash, author, bot: author === BOT_AUTHOR, date, subject, tags, results };
+    // A regenerate commit carries no ledger row whether the Action made it or the author ran `npm run log` locally.
+    return { hash, author, bot: author === BOT_AUTHOR || REGENERATE_SUBJECT.test(subject), date, subject, tags, results };
   });
 }
 
@@ -245,7 +248,7 @@ function main(): void {
   out.push('');
   out.push('## Commits since `hackathon-start`');
   out.push('');
-  out.push(`Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The ${event.filter(c => c.bot).length} commits by ${BOT_AUTHOR} are this log regenerating itself after a push; they touch only the generated files and carry no ledger row.`);
+  out.push(`Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The ${event.filter(c => c.bot).length} regenerate commits (by ${BOT_AUTHOR} after a push, or by the author running \`npm run log\` locally) are this log regenerating itself; they touch only the generated files and carry no ledger row.`);
   out.push('');
   for (const c of event) {
     const row = rows.get(c.hash);
@@ -478,7 +481,16 @@ function main(): void {
     const next = readme.slice(0, readme.indexOf(start)) + block.join('\n') + readme.slice(readme.indexOf(end) + end.length);
     if (next !== readme) writeFileSync(readmePath, next);
   }
-  console.log(`BUILD-LOG.md: ${event.length} event commits, ${kept.length} kept runs, ${rows.size} ledger rows`);
+  // The test count the documents state is the suite's own, between markers in
+  // README.md 2.8 and build/README.md; tests/test-count.test.ts holds them to it.
+  const tests = countTests(join(root, 'build', 'tests'));
+  for (const f of TEST_COUNT_FILES) {
+    const path = join(root, f);
+    const before = readFileSync(path, 'utf8');
+    const after = withTestCount(before, tests);
+    if (after !== before) writeFileSync(path, after);
+  }
+  console.log(`BUILD-LOG.md: ${event.length} event commits, ${kept.length} kept runs, ${rows.size} ledger rows; ${tests} tests`);
 }
 
 if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) main();
