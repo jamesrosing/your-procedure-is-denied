@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-11-01 06:32 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-11-01 08:23 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -52,7 +52,7 @@ Each commit that changed the version string in `build/src/litmus.ts`. The gate i
 
 ## Commits since `hackathon-start`
 
-Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 58 regenerate commits (by github-actions[bot] after a push, or by the author running `npm run log` locally) are this log regenerating itself; they touch only the generated files and carry no ledger row.
+Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 59 regenerate commits (by github-actions[bot] after a push, or by the author running `npm run log` locally) are this log regenerating itself; they touch only the generated files and carry no ledger row.
 
 ### 79e5e21 · 2026-10-26 20:38 · Add hackathon scaffolding: NEW-WORK.md and /build
 
@@ -747,3 +747,11 @@ README: the abstract and the Conclusion still carried the v1.4 spike-in numbers 
 ### 45e761c · 2026-10-31 23:32 · Build log: regenerate after 4cd5dcb
 
 (generated files only; no ledger row by design)
+
+### 739624e · 2026-10-31 23:32 · Build log: regenerate after 45e761c
+
+(generated files only; no ledger row by design)
+
+### 6e2fd0c · 2026-11-01 01:23 · Viewer: the presenter spotlight, a region ringed and the rest dimmed while a take is recorded, driven only from outside the page
+
+Viewer: the presenter spotlight (`build/viewer/src/spotlight.ts`, `window.ypid.spotlight(name)`): a named region of the page (a panel, a sentence by index, an entry by id, the verdict, the scoreboard, the compare grid, the writ, its signature line) is ringed and the rest of the stage dimmed, so a recorded take leads the narration to the part being spoken about and the speaker, reading over the picture, sees what to say. Driven only from outside the page by the recording script; the page never sets it itself, and `null` clears it. `check-viewer.ts` holds it to that: not set at rest, rings the chart and a sentence on request, clears on null. Two tests; 260 tests. The video's featured case moves from case-001 (skilled nursing) to case-025 (IMRT planning after lumpectomy for breast cancer, Medicare Advantage, $25,000, 8 of 8 verified in every model): the browser take is re-recorded headlessly on it, the live terminal run retaken on it

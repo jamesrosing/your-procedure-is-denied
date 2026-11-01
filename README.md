@@ -205,7 +205,7 @@ A post hoc run put the gate on the other side of the exchange (`npm run harness 
 
 ### 2.8 Reproducibility
 
-`npm test` runs the suite (<!-- test-count:start -->258<!-- test-count:end --> tests; the number is written here by `npm run log` from the suite's own summary). `npm run synthetic` regenerates the fifty cases byte for byte. `npm run harness` runs a model over the set and writes a result file whose header records the model, mode, gate version, and any later re-gate. `npm run mutate` reruns the spike-in. `npm run log` regenerates the build log and the tables in section 3 from the result files; nothing in those tables is typed by hand.
+`npm test` runs the suite (<!-- test-count:start -->260<!-- test-count:end --> tests; the number is written here by `npm run log` from the suite's own summary). `npm run synthetic` regenerates the fifty cases byte for byte. `npm run harness` runs a model over the set and writes a result file whose header records the model, mode, gate version, and any later re-gate. `npm run mutate` reruns the spike-in. `npm run log` regenerates the build log and the tables in section 3 from the result files; nothing in those tables is typed by hand.
 
 The gate also ships on its own, as a command-line tool and an MCP server ([`build/litmus-gate/`](build/litmus-gate/)): `npm run gate -- check draft.json case.json` returns the verdict with exit code 0, 1, or 2 for pass, blocked, or declined, and `litmus-gate mcp` serves `litmus_verify_draft`, `litmus_check_sentence`, and `litmus_contract` over stdio to any agent host, so a drafting agent can be held to the record before its draft is shown to anyone. It is published on npm as [`litmus-gate`](https://www.npmjs.com/package/litmus-gate), so `npx -y litmus-gate mcp` needs no checkout. Both wrap the module the harness and the viewer call, and a test checks that they reproduce every stored verdict and hash of a kept run.
 
@@ -238,7 +238,7 @@ The chart entry a draft quotes is, in practice, dictated. `npm run dictate -- --
 ## 3. Results
 
 <!-- results:start -->
-_Tables generated from the result files by `npm run log`; the prose below them is written by hand. Last regenerated 2026-11-01 06:32 UTC._
+_Tables generated from the result files by `npm run log`; the prose below them is written by hand. Last regenerated 2026-11-01 08:23 UTC._
 
 **Table 1. Kept runs.** 9 runs, 50 cases each, effort low. Agreed is correct-pass plus correct-decline against the grading key, with a 95% Wilson interval. Blocked is a draft the gate stopped. Missed is a decline on a case the key labels warranted. False pass is a draft the gate passed on a case the key labels unsupported. The five outcome columns sum to 50. Fabricated quotes counts quotes the gate refuted as not in the entry cited, in a sentence or in an evidence item, on any draft including declined ones. Care defended is the billed value of the warranted cases whose appeal passed the gate, out of the $568,500 billed across the thirty warranted cases ($940,000 across all fifty); the values are the synthetic set's, not a payer's. Entries read applies to the agentic modes.
 
@@ -445,9 +445,9 @@ Meta and Cerebral Valley for the event; Baseten for hosting the open-weights mod
 Every commit since the event began has a row in [NEW-WORK.md](NEW-WORK.md), every result file carries its model, mode, gate version, and any re-gate in its own header, and this section is regenerated from those sources after every push. Nothing in it is typed by hand.
 
 <!-- build-log:start -->
-_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-11-01 06:32 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
+_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-11-01 08:23 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
 
-169 commits since the `hackathon-start` tag, the last at 2026-10-31 23:32 (45e761c). Gate v1.5. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
+171 commits since the `hackathon-start` tag, the last at 2026-11-01 01:23 (6e2fd0c). Gate v1.5. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
 
 | Started (UTC) | Model | Mode | Agreed | Blocked | Missed | False pass | Advisor |
 | --- | --- | --- | :---: | :---: | :---: | :---: | --- |
@@ -463,11 +463,11 @@ _Generated from the git history, the ledger, and the result files by `npm run lo
 
 Last five authored commits, newest first, with the ledger row each one carried (the bot's regenerate commits are left out):
 
+- **6e2fd0c · 2026-11-01 01:23** · Viewer: the presenter spotlight, a region ringed and the rest dimmed while a take is recorded, driven only from outside the page. Viewer: the presenter spotlight (`build/viewer/src/spotlight.ts`, `window.ypid.spotlight(name)`): a named region of the page (a panel, a sentence by index, an entry by id, the verdict, the scoreboard, the compare grid, the writ, its signature line) is ringed and the rest of the stage dimmed, so a recorded take leads the narration to the part being spoken…
 - **4cd5dcb · 2026-10-31 23:32** · README: the abstract's and Conclusion's spike-in numbers follow Table 3 under v1.5. README: the abstract and the Conclusion still carried the v1.4 spike-in numbers (9,475 fabrications, 5,781 of 5,781 hard) after the Results prose moved to v1.5; now 9,518 and 5,824 of 5,824, matching Table 3. `.zenodo.json` description likewise, for the next deposit (the v1.1.0 record is unchanged). No verdict, label, or Table 1 number is involved
 - **6660d40 · 2026-10-31 22:36** · Video: the prior-versus-new line spoken over the stamp; the live terminal run cut in as its own 11-second segment; the SRT on the new times. Video plan revised after review (`assets/video/WALKTHROUGH.md`, `narration.srt`): the prior-versus-new line is spoken at 0:20 over the typed stamp that says the same ("Everything shown was built this week, on my pre-existing record system, appeal engine, and coverage index"), paid for by the run-picker sentence, whose numbers are spoken again at the…
 - **f2acfeb · 2026-10-31 22:31** · README: prior versus new on the first screen, the local viewer fallback, the two bonus-prize entries named, the production home; ledger: CHART as prior work; chart.ts: outage guidance; CONTRIBUTING: pytest. README, from the review: one sentence under "What this is, and is not" saying what was built this week and what is pre-existing and not included, in the viewer's own words; 2.8 names `npm run viewer` then `npm run viewer:serve` as the local fallback if demo.hemeehr.com is unreachable; 2.5 names the Muse Spark Open runs as the entry for the Best Build on…
 - **ae971aa · 2026-10-31 22:29** · Test count: written into README 2.8 and build/README.md by the regenerate from the suite's own summary, held by a test. Test count generated (`build/scripts/test-count.ts`): `npm run log` runs the suite in a child process and writes its `# tests` total between markers in README 2.8 and `build/README.md`; both had said 236 while `npm test` printed 245 (found in review). `tests/test-count.test.ts` fails when either stated count differs from the suite's, so the number cannot…
-- **e5599f5 · 2026-10-31 22:26** · Tests: the writ's provenance pin follows the gate version in the result file. Tests (`build/tests/writ.test.ts`): the writ's provenance test had pinned the gate version as the string v1.4 and failed once the result file it reads was re-gated; it now takes the version from that file's header, so a re-gate cannot break it again. 256 tests
 <!-- build-log:end -->
 
 ## From the inside
