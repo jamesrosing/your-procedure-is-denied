@@ -477,7 +477,7 @@ Every commit since the event began has a row in [NEW-WORK.md](NEW-WORK.md), ever
 <!-- build-log:start -->
 _Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-11-02 20:34 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
 
-205 commits since the `hackathon-start` tag, the last at 2026-11-02 12:19 (376e95b). Gate v1.7. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
+206 commits since the `hackathon-start` tag, the last at 2026-11-02 12:33 (2c026a8). Gate v1.7. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
 
 | Started (UTC) | Model | Mode | Agreed | Blocked | Missed | False pass | Advisor |
 | --- | --- | --- | :---: | :---: | :---: | :---: | --- |
@@ -493,11 +493,11 @@ _Generated from the git history, the ledger, and the result files by `npm run lo
 
 Last five authored commits, newest first, with the ledger row each one carried (the bot's regenerate commits are left out):
 
+- **2c026a8 · 2026-11-02 12:33** · litmus-gate 0.3.0 on npm, the bundle of gate v1.7; package README publish date; ledger row. (no ledger row)
 - **5a9051b · 2026-11-02 12:19** · litmus-gate 0.3.0: the bundle of gate v1.7, version strings matched (package.json, server, README); to be published. litmus-gate 0.3.0 published to npm (`build/litmus-gate/`), the bundle of gate v1.7, by the author with a one-time code; prepack rebuilt the bundle; package README carries the publish date.
 - **2083ba1 · 2026-11-02 12:18** · Gate v1.7: the four classes README 4.6 listed as open, test first; the article a or an before a unit is a count of one, an ordinal word is its number, a Roman numeral after a grading word is its number with its substage, and a number keeps the side the sources pair it with; two masks from the first regate (per second, three hours a day); four spike-in classes, 8,602 of 8,602 hard caught, report-v1.6.json archived; all 29 result files regated, nine verdicts moved and reported; README tables and prose follow; viewer rebuilt; ledger hash for v1.6 corrected. Gate v1.7 (`build/src/litmus.ts`), the four token classes README 4.6 had listed as open since v1.6, test first (`build/tests/litmus.test.ts`): the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number set beside a side keeps that…
 - **4171527 · 2026-11-02 11:50** · litmus-gate 0.2.0 on npm, the bundle of gate v1.6; package.json normalized; package README version line. litmus-gate 0.2.0 published to npm (`build/litmus-gate/`), the bundle built from gate v1.6, after `npm run gate:smoke` reproduced a stored verdict and hash; package.json normalized by `npm pkg fix` (repository url); the package README names the version and that 0.1.0 carried v1.5
 - **c0708b2 · 2026-11-02 10:20** · Gate v1.6: the six token classes from the Muse Code review, test first; six spike-in classes, 7,861 of 7,861 hard caught; all 29 result files regated, four repeat and payer verdicts moved and reported; README prose and Table 3 follow. Gate v1.6 (`build/src/litmus.ts`), the six token classes Meta's coding agent found (`build/reviews/muse-code/`), test first with its reproductions (`build/tests/litmus.test.ts`): one and zero are counts (pronoun uses masked, both sides); a date written with a month name is a date, held in one form, and a date's day and month are no longer admissible as…
-- **4edc467 · 2026-11-02 00:40** · Ledger: the row for 074d43f. (no ledger row)
 <!-- build-log:end -->
 
 ## From the inside

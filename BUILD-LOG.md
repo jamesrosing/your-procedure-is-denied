@@ -895,3 +895,7 @@ litmus-gate 0.3.0 published to npm (`build/litmus-gate/`), the bundle of gate v1
 ### 376e95b · 2026-11-02 12:19 · Build log: regenerate after 5a9051b
 
 (generated files only; no ledger row by design)
+
+### 2c026a8 · 2026-11-02 12:33 · litmus-gate 0.3.0 on npm, the bundle of gate v1.7; package README publish date; ledger row
+
+(no ledger row)
