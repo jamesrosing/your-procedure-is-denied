@@ -52,7 +52,7 @@ Each commit that changed the version string in `build/src/litmus.ts`. The gate i
 
 ## Commits since `hackathon-start`
 
-Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 69 regenerate commits (by github-actions[bot] after a push, or by the author running `npm run log` locally) are this log regenerating itself; they touch only the generated files and carry no ledger row.
+Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 70 regenerate commits (by github-actions[bot] after a push, or by the author running `npm run log` locally) are this log regenerating itself; they touch only the generated files and carry no ledger row.
 
 ### 79e5e21 · 2026-10-26 20:38 · Add hackathon scaffolding: NEW-WORK.md and /build
 
@@ -827,3 +827,11 @@ Video plan for the author's third script (`assets/video/WALKTHROUGH.md`, `narrat
 ### 9e166bb · 2026-11-01 22:01 · README: results tables split and condensed so they read without scrolling; reading note, short model names in cells, In brief callout
 
 README results tables, for the reader (`build/scripts/build-log.ts`): Table 1 split into a headline table (agreed with its interval, false pass, fabricated quotes, care defended, cost) and a detail table of the same nine runs (blocked, missed, failed, sentences verified, citation precision, entries read, latency), so neither scrolls sideways on GitHub; the terms the tables share defined once in a reading note before Table 1 and each caption cut to one sentence; model names short in cells (Spark 1.3, Wonder 1.0, Spark Open, defined in the note) with full ids kept in prose; numeric columns right-aligned and counts held on one line; Table 5 rows in the models' standing order with its before-and-after pairs merged into one cell each; Table 7's four identical misreads collapsed to one line; an In brief callout under the title with the five numbers of the abstract. No result file, no gate, and no number changed; `npm test` 263 passing.
+
+### 2f99087 · 2026-11-01 22:01 · Build log: regenerate after 9e166bb
+
+(generated files only; no ledger row by design)
+
+### next commit · the one that carries this regeneration
+
+README: the In brief callout under the title (a GitHub note block with the five numbers of the abstract), the hand-written half of the table patch that the previous commit left out because only the generator's hunks were applied; no number changed
