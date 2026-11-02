@@ -241,7 +241,7 @@ The chart entry a draft quotes is, in practice, dictated. `npm run dictate -- --
 ## 3. Results
 
 <!-- results:start -->
-_Tables generated from the result files by `npm run log`; the prose below them is written by hand. Last regenerated 2026-11-02 08:20 UTC._
+_Tables generated from the result files by `npm run log`; the prose below them is written by hand. Last regenerated 2026-11-02 08:40 UTC._
 
 **How to read the tables.** Spark 1.3 is muse-spark-1.3 and Wonder 1.0 is muse-wonder-1.0, both through the Meta Model API; Spark Open is Muse Spark Open, the open-weights model, on Baseten. Agreed is correct-pass plus correct-decline against the grading key, shown with its 95% Wilson interval. Blocked is a draft the gate stopped. Missed is a decline on a case the key labels warranted. False pass is a draft the gate passed on a case the key labels unsupported. Failed is no valid answer. Agreed, blocked, missed, false pass, and failed sum to 50. Fabricated quotes counts quotes the gate refuted as not in the entry cited, in a sentence or in an evidence item, on any draft including declined ones. Care defended is the billed value of the warranted cases whose appeal passed the gate, out of the $568,500 billed across the thirty warranted cases ($940,000 across all fifty); the values are the synthetic set's, not a payer's. Entries read applies to the agentic modes. Cost is per case from the provider's token prices; latency is the median per case.
 
@@ -464,9 +464,9 @@ Meta and Cerebral Valley for the event; Baseten for hosting the open-weights mod
 Every commit since the event began has a row in [NEW-WORK.md](NEW-WORK.md), every result file carries its model, mode, gate version, and any re-gate in its own header, and this section is regenerated from those sources after every push. Nothing in it is typed by hand.
 
 <!-- build-log:start -->
-_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-11-02 08:20 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
+_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-11-02 08:40 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
 
-193 commits since the `hackathon-start` tag, the last at 2026-11-02 00:20 (ec4e5df). Gate v1.5. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
+196 commits since the `hackathon-start` tag, the last at 2026-11-02 00:40 (4edc467). Gate v1.5. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
 
 | Started (UTC) | Model | Mode | Agreed | Blocked | Missed | False pass | Advisor |
 | --- | --- | --- | :---: | :---: | :---: | :---: | --- |
@@ -482,11 +482,11 @@ _Generated from the git history, the ledger, and the result files by `npm run lo
 
 Last five authored commits, newest first, with the ledger row each one carried (the bot's regenerate commits are left out):
 
+- **4edc467 · 2026-11-02 00:40** · Ledger: the row for 074d43f. (no ledger row)
+- **074d43f · 2026-11-02 00:39** · README 4.5: Cuban's filter answered (the model both sides can buy, the record one side holds, the gate either side can run); video plan: the author's fourth script says it, 385 words, planned beats rebalanced, the three flagged lines corrected. README 4.5: Mark Cuban's filter for healthcare AI (an efficiency nets to zero when both sides can buy the same model) answered in one sentence with a footnote: the model is the part both sides can buy, the chart is held by one side and a denial is a claim about a policy while an appeal is a claim about the record, and the gate is a published standard…
 - **ec4e5df · 2026-11-02 00:20** · Reviews by Meta's coding agent: two Muse Code runs against a read-only clone (muse-spark-1.3 high, muse-wonder-1.0 xhigh), reports, prompts, complete traces and session trajectories under build/reviews/muse-code; README 4.4 states what they found beyond the author's own review. Reviews by Meta's coding agent (`build/reviews/muse-code/`): Muse Code 1.4.14 run headless twice against a read-only clone at 4cafe9f, muse-spark-1.3 at effort high and muse-wonder-1.0 at effort xhigh (ultra closed to this account), each with its report, prompt, stderr, complete local trace, exported session trajectory, and the exact command; both found…
 - **bbaab7b · 2026-11-01 22:02** · README: the In brief callout under the title, from the table patch. README: the In brief callout under the title (a GitHub note block with the five numbers of the abstract), the hand-written half of the table patch that the previous commit left out because only the generator's hunks were applied; no number changed
 - **9e166bb · 2026-11-01 22:01** · README: results tables split and condensed so they read without scrolling; reading note, short model names in cells, In brief callout. README results tables, for the reader (`build/scripts/build-log.ts`): Table 1 split into a headline table (agreed with its interval, false pass, fabricated quotes, care defended, cost) and a detail table of the same nine runs (blocked, missed, failed, sentences verified, citation precision, entries read, latency), so neither scrolls sideways on GitHub;…
-- **74c5646 · 2026-11-01 21:55** · Video plan for the author's third script: the denial letter first, the case, the replay zoomed on the draft, the gate refused, the decline, the scoreboard with its numbers as captions, the writ scrolled to its footnotes, an end card at 2:35, the cut at 2:55. Video plan for the author's third script (`assets/video/WALKTHROUGH.md`, `narration.srt`), written after a reviewer's note on the first cut: the synthetic denial letter for case-025 fills the frame at 0:00 while the author says who he is; the case at 0:25; Play at 0:45 at half speed so the sentences are still stamping when the picture zooms 1.7x on the…
-- **d5c6001 · 2026-11-01 21:34** · Viewer: the pager, step three of the mobile plan: the three panels as a left-to-right strip on a phone, dots that follow; README and ACCESSIBILITY state the phone mode. Viewer, the pager, step three of the mobile plan (`build/viewer/`): under 900 px the three panels sit side by side in a strip that snaps one panel at a time, so record, rules, appeal keep the left-to-right order the narration reads them in; three buttons above the strip name the panel in view and page to one (`renderPager`, from the strip's scroll…
 <!-- build-log:end -->
 
 ## From the inside

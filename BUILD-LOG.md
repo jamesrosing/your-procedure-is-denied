@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-11-02 08:20 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-11-02 08:40 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -52,7 +52,7 @@ Each commit that changed the version string in `build/src/litmus.ts`. The gate i
 
 ## Commits since `hackathon-start`
 
-Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 71 regenerate commits (by github-actions[bot] after a push, or by the author running `npm run log` locally) are this log regenerating itself; they touch only the generated files and carry no ledger row.
+Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 72 regenerate commits (by github-actions[bot] after a push, or by the author running `npm run log` locally) are this log regenerating itself; they touch only the generated files and carry no ledger row.
 
 ### 79e5e21 · 2026-10-26 20:38 · Add hackathon scaffolding: NEW-WORK.md and /build
 
@@ -843,3 +843,15 @@ README: the In brief callout under the title (a GitHub note block with the five 
 ### ec4e5df · 2026-11-02 00:20 · Reviews by Meta's coding agent: two Muse Code runs against a read-only clone (muse-spark-1.3 high, muse-wonder-1.0 xhigh), reports, prompts, complete traces and session trajectories under build/reviews/muse-code; README 4.4 states what they found beyond the author's own review
 
 Reviews by Meta's coding agent (`build/reviews/muse-code/`): Muse Code 1.4.14 run headless twice against a read-only clone at 4cafe9f, muse-spark-1.3 at effort high and muse-wonder-1.0 at effort xhigh (ultra closed to this account), each with its report, prompt, stderr, complete local trace, exported session trajectory, and the exact command; both found gate token classes outside the spike-in (count words one and a, month-name dates, R and L sides, code letters and systems, two-stopword quotes, numbers recombined from dates or vitals), none moving a stored verdict; README 4.4 states it; the fixes are the next gate version
+
+### e2a22fa · 2026-11-02 00:20 · Build log: regenerate after ec4e5df
+
+(generated files only; no ledger row by design)
+
+### 074d43f · 2026-11-02 00:39 · README 4.5: Cuban's filter answered (the model both sides can buy, the record one side holds, the gate either side can run); video plan: the author's fourth script says it, 385 words, planned beats rebalanced, the three flagged lines corrected
+
+README 4.5: Mark Cuban's filter for healthcare AI (an efficiency nets to zero when both sides can buy the same model) answered in one sentence with a footnote: the model is the part both sides can buy, the chart is held by one side and a denial is a claim about a policy while an appeal is a claim about the record, and the gate is a published standard either side can run. Video plan (`assets/video/WALKTHROUGH.md`, `narration.srt`): the author's fourth script says the same in the case, gate, and end beats; 385 words against the author's recorded pace; planned beats rebalanced (case 0:24, Play 1:00, zoom 1:15, gate 1:30, decline 1:45, scoreboard 1:57, writ 2:15, end card 2:30, cut 2:55); the three lines flagged against the record corrected
+
+### 4edc467 · 2026-11-02 00:40 · Ledger: the row for 074d43f
+
+(no ledger row)
