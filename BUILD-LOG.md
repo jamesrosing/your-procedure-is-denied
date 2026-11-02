@@ -792,6 +792,6 @@ Viewer: the typed opening removed (`build/viewer/`): no title cards, no `i` key,
 
 (generated files only; no ledger row by design)
 
-### next commit · the one that carries this regeneration
+### 6a69f68 · 2026-11-01 21:26 · Viewer: the phone shell, step one of the mobile plan: dvh, stacked panels, a fixed dock with 44 px controls and a status line; the desktop page proven pixel-invariant in the headless check
 
 Viewer, the phone shell, step one of the mobile plan (`build/viewer/`): under 900 px the header scrolls away, the tabs scroll sideways, the two pickers take a row each, the three panels stack in reading order with each list scrolling inside 46 dvh, and the header's transport gives way to a fixed dock at the bottom with 44 px controls (restart, back, play, step, end, the writ once a passing verdict is on screen, the theme) and a status line (`dockStatus` in `replay.ts`: the verdict or repair turn, then sentences verified once one is on screen, entries read before that; two tests). The page's height is in dvh so a phone's moving browser bars no longer misplace it. Every narrow-screen rule lives in one media block and the dock is hidden outside it, and `check-viewer.ts` now proves the desktop page at 1600 wide renders pixel for pixel the same with that block stripped (per-pixel compare on a canvas, antialiasing tolerance) and drives a 390-wide phone viewport from the dock to PASS and the writ; the recorded takes stay true. Asset links v38; 260 tests

@@ -447,7 +447,7 @@ Every commit since the event began has a row in [NEW-WORK.md](NEW-WORK.md), ever
 <!-- build-log:start -->
 _Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-11-02 05:26 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
 
-180 commits since the `hackathon-start` tag, the last at 2026-11-01 21:11 (63c386e). Gate v1.5. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
+181 commits since the `hackathon-start` tag, the last at 2026-11-01 21:26 (6a69f68). Gate v1.5. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
 
 | Started (UTC) | Model | Mode | Agreed | Blocked | Missed | False pass | Advisor |
 | --- | --- | --- | :---: | :---: | :---: | :---: | --- |
@@ -463,11 +463,11 @@ _Generated from the git history, the ledger, and the result files by `npm run lo
 
 Last five authored commits, newest first, with the ledger row each one carried (the bot's regenerate commits are left out):
 
+- **6a69f68 · 2026-11-01 21:26** · Viewer: the phone shell, step one of the mobile plan: dvh, stacked panels, a fixed dock with 44 px controls and a status line; the desktop page proven pixel-invariant in the headless check. Viewer, the phone shell, step one of the mobile plan (`build/viewer/`): under 900 px the header scrolls away, the tabs scroll sideways, the two pickers take a row each, the three panels stack in reading order with each list scrolling inside 46 dvh, and the header's transport gives way to a fixed dock at the bottom with 44 px controls (restart, back,…
 - **c5a60b7 · 2026-11-01 21:10** · Viewer: the typed opening removed, the page opens on the case; its words kept in the video plan, the take opening on the payer's reason. Viewer: the typed opening removed (`build/viewer/`): no title cards, no `i` key, no travel into a preamble paragraph, no `cards` body class; the page opens on the case at rest, as a reviewer of the Nov 1 cut asked (the first thirty seconds were a block of typed text with the voice over it, and the block then sat at the top of the frame for the rest of…
 - **07205e4 · 2026-11-01 16:29** · Viewer: a figures spotlight region; video plan: Figures at 2:02, Compare from 2:07, the pickers opened briefly, both themes. Viewer: a `figures` spotlight region (`#figure-list`), so the Figures tab can be ringed in a take; one assertion. Video plan (`assets/video/WALKTHROUGH.md`): the Figures tab shown at 2:02 and Compare from 2:07, four seconds longer on the grid, at the author's request; the case picker opened for a moment at "one of fifty" and the run picker at "nine…
 - **ce6c04a · 2026-11-01 11:33** · Video: the author's own script, case-025 featured, the picture timed to the words with the spotlight at each word; two more writ regions. Video script and plan rewritten in the author's own words (`assets/video/WALKTHROUGH.md`, `narration.srt`): who is speaking, the problem, one case (case-025: IMRT planning after lumpectomy for breast cancer, a Medicare Advantage denial, $25,000), how the system works on it, what was found, and what comes next; 404 words, speech ending at 2:56, the clicks…
 - **6e2fd0c · 2026-11-01 01:23** · Viewer: the presenter spotlight, a region ringed and the rest dimmed while a take is recorded, driven only from outside the page. Viewer: the presenter spotlight (`build/viewer/src/spotlight.ts`, `window.ypid.spotlight(name)`): a named region of the page (a panel, a sentence by index, an entry by id, the verdict, the scoreboard, the compare grid, the writ, its signature line) is ringed and the rest of the stage dimmed, so a recorded take leads the narration to the part being spoken…
-- **4cd5dcb · 2026-10-31 23:32** · README: the abstract's and Conclusion's spike-in numbers follow Table 3 under v1.5. README: the abstract and the Conclusion still carried the v1.4 spike-in numbers (9,475 fabrications, 5,781 of 5,781 hard) after the Results prose moved to v1.5; now 9,518 and 5,824 of 5,824, matching Table 3. `.zenodo.json` description likewise, for the next deposit (the v1.1.0 record is unchanged). No verdict, label, or Table 1 number is involved
 <!-- build-log:end -->
 
 ## From the inside
