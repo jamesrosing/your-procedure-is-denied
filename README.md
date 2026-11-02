@@ -238,36 +238,50 @@ The chart entry a draft quotes is, in practice, dictated. `npm run dictate -- --
 ## 3. Results
 
 <!-- results:start -->
-_Tables generated from the result files by `npm run log`; the prose below them is written by hand. Last regenerated 2026-11-02 05:56 UTC._
+_Tables generated from the result files by `npm run log`; the prose below them is written by hand. Last regenerated 2026-11-02 06:00 UTC._
 
-**Table 1. Kept runs.** 9 runs, 50 cases each, effort low. Agreed is correct-pass plus correct-decline against the grading key, with a 95% Wilson interval. Blocked is a draft the gate stopped. Missed is a decline on a case the key labels warranted. False pass is a draft the gate passed on a case the key labels unsupported. The five outcome columns sum to 50. Fabricated quotes counts quotes the gate refuted as not in the entry cited, in a sentence or in an evidence item, on any draft including declined ones. Care defended is the billed value of the warranted cases whose appeal passed the gate, out of the $568,500 billed across the thirty warranted cases ($940,000 across all fifty); the values are the synthetic set's, not a payer's. Entries read applies to the agentic modes.
+**How to read the tables.** Spark 1.3 is muse-spark-1.3 and Wonder 1.0 is muse-wonder-1.0, both through the Meta Model API; Spark Open is Muse Spark Open, the open-weights model, on Baseten. Agreed is correct-pass plus correct-decline against the grading key, shown with its 95% Wilson interval. Blocked is a draft the gate stopped. Missed is a decline on a case the key labels warranted. False pass is a draft the gate passed on a case the key labels unsupported. Failed is no valid answer. Agreed, blocked, missed, false pass, and failed sum to 50. Fabricated quotes counts quotes the gate refuted as not in the entry cited, in a sentence or in an evidence item, on any draft including declined ones. Care defended is the billed value of the warranted cases whose appeal passed the gate, out of the $568,500 billed across the thirty warranted cases ($940,000 across all fifty); the values are the synthetic set's, not a payer's. Entries read applies to the agentic modes. Cost is per case from the provider's token prices; latency is the median per case.
 
-| Model | Mode | Agreed | 95% interval | Blocked | Missed | False pass | Failed | Fabricated quotes | Care defended | Sentences verified | Citation precision | Entries read per case | Median latency | Cost per case |
-| --- | --- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| muse-spark-1.3 (Meta Model API) | chart in prompt | 50 of 50 | 93 to 100% | 0 | 0 | 0 | 0 | 0 | $568,500 | 247 | 98% | all | 16.3 s | $0.013 |
-| muse-wonder-1.0 (Meta Model API) | chart in prompt | 49 of 50 | 90 to 100% | 0 | 1 | 0 | 0 | 0 | $560,500 | 236 | 97% | all | 8.8 s | $0.037 |
-| Muse Spark Open (open weights on Baseten) | chart in prompt | 49 of 50 | 90 to 100% | 1 | 0 | 0 | 0 | 1 | $548,500 | 233 | 95% | all | 4.3 s | $0.007 |
-| muse-spark-1.3 (Meta Model API) | agentic | 50 of 50 | 93 to 100% | 0 | 0 | 0 | 0 | 1 | $568,500 | 265 | 95% | 9.6 of 25.6 | 8.0 s | $0.017 |
-| muse-wonder-1.0 (Meta Model API) | agentic | 49 of 50 | 90 to 100% | 1 | 0 | 0 | 0 | 0 | $568,500 | 244 | 96% | 8.7 of 25.6 | 10.0 s | $0.052 |
-| Muse Spark Open (open weights on Baseten) | agentic | 48 of 50 | 87 to 99% | 1 | 0 | 0 | 1 | 0 | $503,500 | 239 | 95% | 9.4 of 25.6 | 9.9 s | $0.018 |
-| muse-spark-1.3 (Meta Model API) | agentic, live CHART | 49 of 50 | 90 to 100% | 1 | 0 | 0 | 0 | 0 | $568,500 | 263 | 94% | 9.8 of 25.6 | 10.8 s | $0.019 |
-| muse-wonder-1.0 (Meta Model API) | agentic, live CHART | 50 of 50 | 93 to 100% | 0 | 0 | 0 | 0 | 0 | $568,500 | 229 | 94% | 7.9 of 25.6 | 9.0 s | $0.054 |
-| Muse Spark Open (open weights on Baseten) | agentic, live CHART | 45 of 50 | 79 to 96% | 4 | 0 | 1 | 0 | 0 | $453,500 | 245 | 97% | 9.3 of 25.6 | 7.3 s | $0.016 |
+**Table 1. Kept runs.** 9 runs, 50 cases each, effort low; the headline outcomes first, the secondary measures of the same runs beneath.
+
+| Model | Mode | Agreed | 95% interval | False pass | Fabricated quotes | Care defended | Cost |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Spark&nbsp;1.3 | chart in prompt | 50&nbsp;of&nbsp;50 | 93&nbsp;to&nbsp;100% | 0 | 0 | $568,500 | $0.013 |
+| Wonder&nbsp;1.0 | chart in prompt | 49&nbsp;of&nbsp;50 | 90&nbsp;to&nbsp;100% | 0 | 0 | $560,500 | $0.037 |
+| Spark&nbsp;Open | chart in prompt | 49&nbsp;of&nbsp;50 | 90&nbsp;to&nbsp;100% | 0 | 1 | $548,500 | $0.007 |
+| Spark&nbsp;1.3 | agentic | 50&nbsp;of&nbsp;50 | 93&nbsp;to&nbsp;100% | 0 | 1 | $568,500 | $0.017 |
+| Wonder&nbsp;1.0 | agentic | 49&nbsp;of&nbsp;50 | 90&nbsp;to&nbsp;100% | 0 | 0 | $568,500 | $0.052 |
+| Spark&nbsp;Open | agentic | 48&nbsp;of&nbsp;50 | 87&nbsp;to&nbsp;99% | 0 | 0 | $503,500 | $0.018 |
+| Spark&nbsp;1.3 | agentic, live CHART | 49&nbsp;of&nbsp;50 | 90&nbsp;to&nbsp;100% | 0 | 0 | $568,500 | $0.019 |
+| Wonder&nbsp;1.0 | agentic, live CHART | 50&nbsp;of&nbsp;50 | 93&nbsp;to&nbsp;100% | 0 | 0 | $568,500 | $0.054 |
+| Spark&nbsp;Open | agentic, live CHART | 45&nbsp;of&nbsp;50 | 79&nbsp;to&nbsp;96% | 1 | 0 | $453,500 | $0.016 |
+
+| Model | Mode | Blocked | Missed | Failed | Sentences verified | Citation precision | Entries read | Latency |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Spark&nbsp;1.3 | chart in prompt | 0 | 0 | 0 | 247 | 98% | all | 16.3&nbsp;s |
+| Wonder&nbsp;1.0 | chart in prompt | 0 | 1 | 0 | 236 | 97% | all | 8.8&nbsp;s |
+| Spark&nbsp;Open | chart in prompt | 1 | 0 | 0 | 233 | 95% | all | 4.3&nbsp;s |
+| Spark&nbsp;1.3 | agentic | 0 | 0 | 0 | 265 | 95% | 9.6&nbsp;of&nbsp;25.6 | 8.0&nbsp;s |
+| Wonder&nbsp;1.0 | agentic | 1 | 0 | 0 | 244 | 96% | 8.7&nbsp;of&nbsp;25.6 | 10.0&nbsp;s |
+| Spark&nbsp;Open | agentic | 1 | 0 | 1 | 239 | 95% | 9.4&nbsp;of&nbsp;25.6 | 9.9&nbsp;s |
+| Spark&nbsp;1.3 | agentic, live CHART | 1 | 0 | 0 | 263 | 94% | 9.8&nbsp;of&nbsp;25.6 | 10.8&nbsp;s |
+| Wonder&nbsp;1.0 | agentic, live CHART | 0 | 0 | 0 | 229 | 94% | 7.9&nbsp;of&nbsp;25.6 | 9.0&nbsp;s |
+| Spark&nbsp;Open | agentic, live CHART | 4 | 0 | 0 | 245 | 97% | 9.3&nbsp;of&nbsp;25.6 | 7.3&nbsp;s |
 
 Of the 8 blocked drafts in the kept runs, 6 were on cases the key labels warranted (a true derivation the gate could not source; an appeal not sent) and 2 on cases it labels unsupported (a warranted answer with nothing to verify, stopped). The full $568,500 was defended in 5 of 9 runs (muse-spark-1.3, chart in prompt; muse-spark-1.3, agentic; muse-wonder-1.0, agentic; muse-spark-1.3, agentic, live CHART; muse-wonder-1.0, agentic, live CHART), at $0.63 to $2.70 for the fifty cases of a run.
 
-**Table 2. Repeat runs.** Each live-CHART configuration run again with the same 50 cases and settings (`build/results/repeats/`, 8 files). Ranges include the kept run. Fabricated quotes are counted as in Table 1, over sentences and evidence items.
+**Table 2. Repeat runs.** Each live-CHART configuration run again with the same 50 cases and settings (`build/results/repeats/`, 8 files); ranges include the kept run.
 
 | Configuration | Runs | Agreed, range | Blocked, range | Missed, total | False passes, total | Failed, total | Fabricated quotes |
-| --- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| muse-spark-1.3 (Meta Model API), agentic, live CHART | 3 | 47 to 50 of 50 | 0 to 3 | 0 | 0 | 0 | 0 |
-| muse-wonder-1.0 (Meta Model API), agentic, live CHART | 3 | 50 of 50 in all | 0 in all | 0 | 0 | 0 | 0 |
-| Muse Spark Open (open weights on Baseten), agentic, live CHART | 5 | 42 to 48 of 50 | 1 to 7 | 0 | 2 | 2 | 0 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Spark&nbsp;1.3, agentic, live CHART | 3 | 47&nbsp;to&nbsp;50&nbsp;of&nbsp;50 | 0&nbsp;to&nbsp;3 | 0 | 0 | 0 | 0 |
+| Wonder&nbsp;1.0, agentic, live CHART | 3 | 50&nbsp;of&nbsp;50&nbsp;in&nbsp;all | 0&nbsp;in&nbsp;all | 0 | 0 | 0 | 0 |
+| Spark&nbsp;Open, agentic, live CHART | 5 | 42&nbsp;to&nbsp;48&nbsp;of&nbsp;50 | 1&nbsp;to&nbsp;7 | 0 | 2 | 2 | 0 |
 
-**Table 3. Gate sensitivity by corruption class** (`build/scripts/mutate.ts`, gate v1.5). 9,518 fabrications injected one at a time into the sentences the kept runs verified; caught means the gate returned refuted or needs-citation. Where zero were missed, the 95% upper bound on the miss rate is by the rule of three.
+**Table 3. Gate sensitivity by corruption class** (`build/scripts/mutate.ts`, gate v1.5). 9,518 fabrications injected one at a time into the sentences the kept runs verified, with caught meaning the gate returned refuted or needs-citation, and, where zero were missed, the 95% upper bound on the miss rate by the rule of three.
 
 | Class | Corruption | Injected | Caught | Sensitivity | Miss rate, 95% upper bound |
-| --- | --- | :---: | :---: | :---: | :---: |
+| --- | --- | ---: | ---: | ---: | ---: |
 | hard | number replaced by a value absent from every admissible source | 1,194 | 1,194 | 100% | 0.25% |
 | hard | citation moved to an entry that lacks the quote | 2,201 | 2,201 | 100% | 0.14% |
 | hard | a word dropped from the quote | 2,148 | 2,148 | 100% | 0.14% |
@@ -282,45 +296,45 @@ Of the 8 blocked drafts in the kept runs, 6 were on cases the key labels warrant
 | soft | pronoun swapped | 522 | 0 | 0% |  |
 | **soft, all** | | **2,386** | **0** | **0%** |  |
 
-**Table 4. The other chair (post hoc).** The same models asked for the plan's written claim determination over the same 50 charts, under the same contract and gate (`build/results/payer/`, 3 files, chart in prompt, effort low). The key is inverted: a denial is warranted exactly where the record fails a criterion. These runs are kept apart from Tables 1 and 2 and from the viewer's scoreboard.
+**Table 4. The other chair (post hoc).** The same models asked for the plan's written claim determination over the same 50 charts, under the same contract and gate, with the key inverted so that a denial is warranted exactly where the record fails a criterion (`build/results/payer/`, 3 files, chart in prompt, effort low; kept apart from Tables 1 and 2 and from the viewer's scoreboard). Declined to deny is a supporting record the model declined to deny, of the 30; verified denial is a failing record with a determination the gate verified, of the 20; false denial is a determination written against a supporting record.
 
-| Model | Declined to deny a record that supports the service | Verified determination where the record fails a criterion | Determination written against a supporting record | Blocked | Failed | Fabricated quotes | Sentences verified | Median latency | Cost per case |
-| --- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| muse-spark-1.3 (Meta Model API) | 29 of 30 | 20 of 20 | 1 | 0 | 0 | 0 | 122 | 10.7 s | $0.013 |
-| muse-wonder-1.0 (Meta Model API) | 30 of 30 | 20 of 20 | 0 | 0 | 0 | 0 | 102 | 6.5 s | $0.036 |
-| Muse Spark Open (open weights on Baseten) | 30 of 30 | 18 of 20 | 0 | 2 | 0 | 1 | 108 | 3.4 s | $0.007 |
+| Model | Declined to deny | Verified denial | False denial | Blocked | Failed | Fabricated quotes | Sentences verified | Latency | Cost |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Spark&nbsp;1.3 | 29&nbsp;of&nbsp;30 | 20&nbsp;of&nbsp;20 | 1 | 0 | 0 | 0 | 122 | 10.7&nbsp;s | $0.013 |
+| Wonder&nbsp;1.0 | 30&nbsp;of&nbsp;30 | 20&nbsp;of&nbsp;20 | 0 | 0 | 0 | 0 | 102 | 6.5&nbsp;s | $0.036 |
+| Spark&nbsp;Open | 30&nbsp;of&nbsp;30 | 18&nbsp;of&nbsp;20 | 0 | 2 | 0 | 1 | 108 | 3.4&nbsp;s | $0.007 |
 
-**Table 5. The repair turn (post hoc).** The three live-CHART configurations run again with `--repair 1` (`build/results/repair/`, 3 files, agentic, live CHART, effort low): when the gate blocked a warranted draft, its record went back to the model verbatim, one line per finding (sentence index, status, reason, and the entries a needs-citation names), the model kept its tools and its reads, and the complete revised draft was re-gated. A declined draft was never offered a repair. Repaired to pass counts every blocked draft that ended in PASS; false passes created is the subset on cases the key labels unsupported, the repair eroding the decline. Agreed, first turn is the no-repair figure from the same file. These runs are kept apart from Tables 1 and 2 and from the viewer's scoreboard.
+**Table 5. The repair turn (post hoc).** The three live-CHART configurations run again with `--repair 1`, so that a draft the gate blocked on a warranted answer went back to the model once with the gate's record verbatim and the complete revised draft was re-gated (`build/results/repair/`, 3 files, agentic, live CHART, effort low; kept apart from Tables 1 and 2 and from the viewer's scoreboard). A declined draft was never offered a repair; false passes created is the subset of repaired drafts on cases the key labels unsupported, the repair eroding the decline.
 
-| Model | Blocked before | Blocked after | Repaired to pass | Repaired to decline | Still blocked | False passes created | Agreed, first turn | Agreed, after repair | Cost per case, first turn | Cost per case with repair |
-| --- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| muse-spark-1.3 (Meta Model API) | 3 | 1 | 2 | 0 | 1 | 0 | 47 of 50 | 49 of 50 | $0.020 | $0.021 |
-| Muse Spark Open (open weights on Baseten) | 4 | 0 | 4 | 0 | 0 | 0 | 45 of 50 | 49 of 50 | $0.017 | $0.018 |
-| muse-wonder-1.0 (Meta Model API) | 0 | 0 | 0 | 0 | 0 | 0 | 50 of 50 | 50 of 50 | $0.059 | $0.059 |
+| Model | Blocked, first turn → after repair | Repaired to pass | Repaired to decline | Still blocked | False passes created | Agreed, first turn → after repair | Cost, first turn → with repair |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Spark&nbsp;1.3 | 3&nbsp;→&nbsp;1 | 2 | 0 | 1 | 0 | 47&nbsp;→&nbsp;49&nbsp;of&nbsp;50 | $0.020&nbsp;→&nbsp;$0.021 |
+| Wonder&nbsp;1.0 | 0&nbsp;→&nbsp;0 | 0 | 0 | 0 | 0 | 50&nbsp;→&nbsp;50&nbsp;of&nbsp;50 | $0.059&nbsp;→&nbsp;$0.059 |
+| Spark&nbsp;Open | 4&nbsp;→&nbsp;0 | 4 | 0 | 0 | 0 | 45&nbsp;→&nbsp;49&nbsp;of&nbsp;50 | $0.017&nbsp;→&nbsp;$0.018 |
 
-**Table 6. The effort sweep (post hoc).** muse-spark-1.3 and Muse Spark Open in the live-CHART configuration at effort medium and high (`build/results/effort/`, 4 files, same 50 cases, same settings otherwise), with each model's kept effort-low run from Table 1 as its first row. Empty warranted answers are drafts that set warranted to true with no sentences, which the gate blocks. Thinking tokens are the API's `thinking_tokens` count per case; Muse Spark Open on Baseten reports none. These runs are kept apart from Tables 1 and 2 and from the viewer's scoreboard.
+**Table 6. The effort sweep (post hoc).** muse-spark-1.3 and Muse Spark Open in the live-CHART configuration at effort medium and high (`build/results/effort/`, 4 files, same 50 cases, same settings otherwise), with each model's kept effort-low run from Table 1 as its first row (kept apart from Tables 1 and 2 and from the viewer's scoreboard). Empty answers are drafts that set warranted to true with no sentences, which the gate blocks; thinking tokens are the API's `thinking_tokens` count per case, with a dash where the Baseten endpoint reports none.
 
-| Model | Effort | Agreed | Blocked | Empty warranted answers | False pass | Missed | Failed | Thinking tokens per case | Median latency | Cost per case |
-| --- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| muse-spark-1.3 (Meta Model API) | low (kept run, Table 1) | 49 of 50 | 1 | 1 | 0 | 0 | 0 | 1,608 | 10.8 s | $0.019 |
-| muse-spark-1.3 (Meta Model API) | medium | 47 of 50 | 1 | 1 | 1 | 1 | 0 | 3,029 | 14.9 s | $0.032 |
-| muse-spark-1.3 (Meta Model API) | high | 45 of 50 | 5 | 4 | 0 | 0 | 0 | 3,567 | 18.2 s | $0.035 |
-| Muse Spark Open (open weights on Baseten) | low (kept run, Table 1) | 45 of 50 | 4 | 0 | 1 | 0 | 0 | not reported | 7.3 s | $0.016 |
-| Muse Spark Open (open weights on Baseten) | medium | 50 of 50 | 0 | 0 | 0 | 0 | 0 | not reported | 13.9 s | $0.024 |
-| Muse Spark Open (open weights on Baseten) | high | 47 of 50 | 0 | 0 | 1 | 0 | 2 | not reported | 25.8 s | $0.043 |
+| Model | Effort | Agreed | Blocked | Empty answers | False pass | Missed | Failed | Thinking tokens | Latency | Cost |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Spark&nbsp;1.3 | low | 49&nbsp;of&nbsp;50 | 1 | 1 | 0 | 0 | 0 | 1,608 | 10.8&nbsp;s | $0.019 |
+| Spark&nbsp;1.3 | medium | 47&nbsp;of&nbsp;50 | 1 | 1 | 1 | 1 | 0 | 3,029 | 14.9&nbsp;s | $0.032 |
+| Spark&nbsp;1.3 | high | 45&nbsp;of&nbsp;50 | 5 | 4 | 0 | 0 | 0 | 3,567 | 18.2&nbsp;s | $0.035 |
+| Spark&nbsp;Open | low | 45&nbsp;of&nbsp;50 | 4 | 0 | 1 | 0 | 0 | — | 7.3&nbsp;s | $0.016 |
+| Spark&nbsp;Open | medium | 50&nbsp;of&nbsp;50 | 0 | 0 | 0 | 0 | 0 | — | 13.9&nbsp;s | $0.024 |
+| Spark&nbsp;Open | high | 47&nbsp;of&nbsp;50 | 0 | 0 | 1 | 0 | 2 | — | 25.8&nbsp;s | $0.043 |
 
-**Table 7. Document intake (post hoc).** Each of the 50 synthetic denials rendered as a one-page remittance letter image (`build/synthetic/letters/`, 1275 by 1650 px, deterministic from the case file) and sent to muse-spark-1.3 as an image with a JSON schema for eight fields (`build/src/intake.ts`, `build/results/intake/`); each field read is scored against the case file. This is document intake of an administrative letter and nothing clinical: the fields are the claim's code, dates, amount, reason codes, and payer. Cost $0.0054 per letter, median latency 2.8 s.
+**Table 7. Document intake (post hoc).** Each of the 50 synthetic denials rendered as a one-page remittance letter image (`build/synthetic/letters/`, 1275 by 1650 px, deterministic from the case file) and read back by muse-spark-1.3 into eight fields, each scored against the case file (`build/src/intake.ts`, `build/results/intake/`). This is document intake of an administrative letter and nothing clinical: the fields are the claim's code, dates, amount, reason codes, and payer; cost $0.0054 per letter, median latency 2.8 s.
 
 | Field | Correct of 50 | Errors read |
-| --- | :---: | --- |
-| carc | 50 of 50 | none |
-| remark | 50 of 50 | none |
-| dateOfService | 50 of 50 | none |
-| serviceEnd | 50 of 50 | none |
-| code | 46 of 50 | case-001: read KD0B1 for KDOB1; case-014: read KD0B1 for KDOB1; case-031: read KD0B1 for KDOB1; case-032: read KD0B1 for KDOB1 |
-| codeSystem | 50 of 50 | none |
-| billedUsd | 50 of 50 | none |
-| payerName | 50 of 50 | none |
+| --- | ---: | --- |
+| carc | 50&nbsp;of&nbsp;50 | none |
+| remark | 50&nbsp;of&nbsp;50 | none |
+| dateOfService | 50&nbsp;of&nbsp;50 | none |
+| serviceEnd | 50&nbsp;of&nbsp;50 | none |
+| code | 46&nbsp;of&nbsp;50 | 4 letters read KD0B1 for KDOB1: case-001, case-014, case-031, case-032 |
+| codeSystem | 50&nbsp;of&nbsp;50 | none |
+| billedUsd | 50&nbsp;of&nbsp;50 | none |
+| payerName | 50&nbsp;of&nbsp;50 | none |
 
 <!-- results:end -->
 
@@ -445,9 +459,9 @@ Meta and Cerebral Valley for the event; Baseten for hosting the open-weights mod
 Every commit since the event began has a row in [NEW-WORK.md](NEW-WORK.md), every result file carries its model, mode, gate version, and any re-gate in its own header, and this section is regenerated from those sources after every push. Nothing in it is typed by hand.
 
 <!-- build-log:start -->
-_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-11-02 05:56 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
+_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-11-02 06:00 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
 
-187 commits since the `hackathon-start` tag, the last at 2026-11-01 21:55 (74c5646). Gate v1.5. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
+188 commits since the `hackathon-start` tag, the last at 2026-11-01 21:56 (5d71fd0). Gate v1.5. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
 
 | Started (UTC) | Model | Mode | Agreed | Blocked | Missed | False pass | Advisor |
 | --- | --- | --- | :---: | :---: | :---: | :---: | --- |

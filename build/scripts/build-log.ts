@@ -279,22 +279,39 @@ function main(): void {
   if (readme0.includes(rs) && readme0.includes(re)) {
     const agreedOf = (r: RunFile): number => (r.summary.outcomes['correct-pass'] ?? 0) + (r.summary.outcomes['correct-decline'] ?? 0);
     const modelName = (r: RunFile): string => (r.run.model.startsWith('meta-models/muse-spark-open') ? 'Muse Spark Open' : r.run.model);
-    const host = (r: RunFile): string => (r.run.provider === 'baseten' ? 'open weights on Baseten' : 'Meta Model API');
+    // Table cells only: the short names the reading note defines (Spark 1.3,
+    // Wonder 1.0, Spark Open), and "50 of 50" or "93 to 100%" held on one line.
+    // Prose keeps the full model ids.
+    const nb = (text: string): string => text.replace(/ /g, '&nbsp;');
+    const shortName: Record<string, string> = { 'muse-spark-1.3': 'Spark 1.3', 'muse-wonder-1.0': 'Wonder 1.0', 'Muse Spark Open': 'Spark Open' };
+    const cell = (r: RunFile): string => nb(shortName[modelName(r)] ?? modelName(r));
     const b: string[] = [rs];
     b.push(`_Tables generated from the result files by \`npm run log\`; the prose below them is written by hand. Last regenerated ${new Date().toISOString().slice(0, 16).replace('T', ' ')} UTC._`);
     b.push('');
     const usd = (n: number): string => `$${Math.round(n).toLocaleString('en-US')}`;
     const warrantedStake = kept[0]?.summary.stakesUsd?.warranted ?? 0;
     const totalStake = kept[0]?.summary.stakesUsd?.total ?? 0;
-    b.push(`**Table 1. Kept runs.** ${kept.length} runs, 50 cases each, effort low. Agreed is correct-pass plus correct-decline against the grading key, with a 95% Wilson interval. Blocked is a draft the gate stopped. Missed is a decline on a case the key labels warranted. False pass is a draft the gate passed on a case the key labels unsupported. The five outcome columns sum to 50. Fabricated quotes counts quotes the gate refuted as not in the entry cited, in a sentence or in an evidence item, on any draft including declined ones. Care defended is the billed value of the warranted cases whose appeal passed the gate, out of the ${usd(warrantedStake)} billed across the thirty warranted cases (${usd(totalStake)} across all fifty); the values are the synthetic set's, not a payer's. Entries read applies to the agentic modes.`);
+    // The terms the tables share are defined once, here, so each caption can be
+    // one sentence. Model names are short in every table; the hosting is stated
+    // once in this note.
+    b.push(`**How to read the tables.** Spark 1.3 is muse-spark-1.3 and Wonder 1.0 is muse-wonder-1.0, both through the Meta Model API; Spark Open is Muse Spark Open, the open-weights model, on Baseten. Agreed is correct-pass plus correct-decline against the grading key, shown with its 95% Wilson interval. Blocked is a draft the gate stopped. Missed is a decline on a case the key labels warranted. False pass is a draft the gate passed on a case the key labels unsupported. Failed is no valid answer. Agreed, blocked, missed, false pass, and failed sum to 50. Fabricated quotes counts quotes the gate refuted as not in the entry cited, in a sentence or in an evidence item, on any draft including declined ones. Care defended is the billed value of the warranted cases whose appeal passed the gate, out of the ${usd(warrantedStake)} billed across the thirty warranted cases (${usd(totalStake)} across all fifty); the values are the synthetic set's, not a payer's. Entries read applies to the agentic modes. Cost is per case from the provider's token prices; latency is the median per case.`);
     b.push('');
-    b.push('| Model | Mode | Agreed | 95% interval | Blocked | Missed | False pass | Failed | Fabricated quotes | Care defended | Sentences verified | Citation precision | Entries read per case | Median latency | Cost per case |');
-    b.push('| --- | --- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |');
+    b.push(`**Table 1. Kept runs.** ${kept.length} runs, 50 cases each, effort low; the headline outcomes first, the secondary measures of the same runs beneath.`);
+    b.push('');
+    b.push('| Model | Mode | Agreed | 95% interval | False pass | Fabricated quotes | Care defended | Cost |');
+    b.push('| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |');
+    for (const r of kept) {
+      const o = r.summary.outcomes;
+      const st = r.summary.stakesUsd;
+      b.push(`| ${cell(r)} | ${mode(r.run)} | ${nb(`${agreedOf(r)} of ${r.run.cases}`)} | ${nb(formatInterval(agreedOf(r), r.run.cases))} | ${o['false-pass'] ?? 0} | ${fabricatedQuotes(r)} | ${st ? usd(st.defended) : ''} | $${r.summary.costUsd.perCase.toFixed(3)} |`);
+    }
+    b.push('');
+    b.push('| Model | Mode | Blocked | Missed | Failed | Sentences verified | Citation precision | Entries read | Latency |');
+    b.push('| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |');
     for (const r of kept) {
       const o = r.summary.outcomes;
       const rd = r.summary.reading;
-      const st = r.summary.stakesUsd;
-      b.push(`| ${modelName(r)} (${host(r)}) | ${mode(r.run)} | ${agreedOf(r)} of ${r.run.cases} | ${formatInterval(agreedOf(r), r.run.cases)} | ${o['blocked'] ?? 0} | ${o['missed'] ?? 0} | ${o['false-pass'] ?? 0} | ${o['error'] ?? 0} | ${fabricatedQuotes(r)} | ${st ? usd(st.defended) : ''} | ${r.summary.sentencesVerified} | ${r.summary.citationPrecision !== undefined ? `${Math.round(r.summary.citationPrecision * 100)}%` : ''} | ${rd ? `${rd.entriesReadPerCase.toFixed(1)} of ${rd.chartSizePerCase.toFixed(1)}` : 'all' } | ${(r.summary.latencyMs.p50 / 1000).toFixed(1)} s | $${r.summary.costUsd.perCase.toFixed(3)} |`);
+      b.push(`| ${cell(r)} | ${mode(r.run)} | ${o['blocked'] ?? 0} | ${o['missed'] ?? 0} | ${o['error'] ?? 0} | ${r.summary.sentencesVerified} | ${r.summary.citationPrecision !== undefined ? `${Math.round(r.summary.citationPrecision * 100)}%` : ''} | ${rd ? nb(`${rd.entriesReadPerCase.toFixed(1)} of ${rd.chartSizePerCase.toFixed(1)}`) : 'all' } | ${nb(`${(r.summary.latencyMs.p50 / 1000).toFixed(1)} s`)} |`);
     }
     b.push('');
     // Blocked is two things: a true derivation stopped on a warranted case (a
@@ -311,20 +328,20 @@ function main(): void {
     if (repeats.length) {
       const groups = new Map<string, RunFile[]>();
       for (const r of [...kept.filter(r => mode(r.run) === 'agentic, live CHART'), ...repeats]) {
-        const key = `${modelName(r)} (${host(r)}), ${mode(r.run)}`;
+        const key = `${modelName(r)}, ${mode(r.run)}`;
         groups.set(key, [...(groups.get(key) ?? []), r]);
       }
-      b.push(`**Table 2. Repeat runs.** Each live-CHART configuration run again with the same 50 cases and settings (\`build/results/repeats/\`, ${repeats.length} files). Ranges include the kept run. Fabricated quotes are counted as in Table 1, over sentences and evidence items.`);
+      b.push(`**Table 2. Repeat runs.** Each live-CHART configuration run again with the same 50 cases and settings (\`build/results/repeats/\`, ${repeats.length} files); ranges include the kept run.`);
       b.push('');
       b.push('| Configuration | Runs | Agreed, range | Blocked, range | Missed, total | False passes, total | Failed, total | Fabricated quotes |');
-      b.push('| --- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |');
+      b.push('| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |');
       for (const [key, g] of groups) {
         const agreed = g.map(agreedOf);
         const blocked = g.map(r => r.summary.outcomes['blocked'] ?? 0);
         const total = (k: string): number => g.reduce((n, r) => n + (r.summary.outcomes[k] ?? 0), 0);
         const fabricated = g.reduce((n, r) => n + fabricatedQuotes(r), 0);
         const range = (xs: number[], of = ''): string => (Math.min(...xs) === Math.max(...xs) ? `${xs[0]}${of} in all` : `${Math.min(...xs)} to ${Math.max(...xs)}${of}`);
-        b.push(`| ${key} | ${g.length} | ${range(agreed, ' of 50')} | ${range(blocked)} | ${total('missed')} | ${total('false-pass')} | ${total('error')} | ${fabricated} |`);
+        b.push(`| ${nb(shortName[modelName(g[0]!)] ?? modelName(g[0]!))}, ${mode(g[0]!.run)} | ${g.length} | ${nb(range(agreed, ' of 50'))} | ${nb(range(blocked))} | ${total('missed')} | ${total('false-pass')} | ${total('error')} | ${fabricated} |`);
       }
       b.push('');
     }
@@ -346,10 +363,10 @@ function main(): void {
       };
       const kindClass: Record<string, string> = { 'number-absent': 'hard', 'citation-moved': 'hard', 'quote-word-dropped': 'hard', 'date-shift': 'hard', 'laterality-swap': 'hard', 'laterality-idiom-leak': 'hard', 'number-collision': 'collision', 'laterality-collision': 'collision', 'negation-flip': 'soft', 'pronoun-swap': 'soft' };
       const total = Object.values(cls).reduce((n, c) => n + c.attempted, 0);
-      b.push(`**Table 3. Gate sensitivity by corruption class** (\`build/scripts/mutate.ts\`, gate ${short(rep.gate)}). ${total.toLocaleString()} fabrications injected one at a time into the sentences the kept runs verified; caught means the gate returned refuted or needs-citation. Where zero were missed, the 95% upper bound on the miss rate is by the rule of three.`);
+      b.push(`**Table 3. Gate sensitivity by corruption class** (\`build/scripts/mutate.ts\`, gate ${short(rep.gate)}). ${total.toLocaleString()} fabrications injected one at a time into the sentences the kept runs verified, with caught meaning the gate returned refuted or needs-citation, and, where zero were missed, the 95% upper bound on the miss rate by the rule of three.`);
       b.push('');
       b.push('| Class | Corruption | Injected | Caught | Sensitivity | Miss rate, 95% upper bound |');
-      b.push('| --- | --- | :---: | :---: | :---: | :---: |');
+      b.push('| --- | --- | ---: | ---: | ---: | ---: |');
       for (const c of ['hard', 'collision', 'soft']) {
         for (const [k, v] of Object.entries(kinds)) {
           if (kindClass[k] !== c) continue;
@@ -373,26 +390,27 @@ function main(): void {
     if (payer.length) {
       const supporting = (r: RunFile): number => Object.values(r.summary.bySubtype?.['warranted'] ?? {}).reduce((a, b) => a + b, 0);
       const failing = (r: RunFile): number => r.run.cases - supporting(r);
-      b.push(`**Table 4. The other chair (post hoc).** The same models asked for the plan's written claim determination over the same ${payer[0]!.run.cases} charts, under the same contract and gate (\`build/results/payer/\`, ${payer.length} files, chart in prompt, effort low). The key is inverted: a denial is warranted exactly where the record fails a criterion. These runs are kept apart from Tables 1 and 2 and from the viewer's scoreboard.`);
+      b.push(`**Table 4. The other chair (post hoc).** The same models asked for the plan's written claim determination over the same ${payer[0]!.run.cases} charts, under the same contract and gate, with the key inverted so that a denial is warranted exactly where the record fails a criterion (\`build/results/payer/\`, ${payer.length} files, chart in prompt, effort low; kept apart from Tables 1 and 2 and from the viewer's scoreboard). Declined to deny is a supporting record the model declined to deny, of the 30; verified denial is a failing record with a determination the gate verified, of the 20; false denial is a determination written against a supporting record.`);
       b.push('');
-      b.push('| Model | Declined to deny a record that supports the service | Verified determination where the record fails a criterion | Determination written against a supporting record | Blocked | Failed | Fabricated quotes | Sentences verified | Median latency | Cost per case |');
-      b.push('| --- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |');
+      b.push('| Model | Declined to deny | Verified denial | False denial | Blocked | Failed | Fabricated quotes | Sentences verified | Latency | Cost |');
+      b.push('| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |');
       for (const r of payer) {
         const o = r.summary.outcomes;
-        b.push(`| ${modelName(r)} (${host(r)}) | ${o['correct-decline'] ?? 0} of ${supporting(r)} | ${o['correct-pass'] ?? 0} of ${failing(r)} | ${o['false-pass'] ?? 0} | ${o['blocked'] ?? 0} | ${o['error'] ?? 0} | ${fabricatedQuotes(r)} | ${r.summary.sentencesVerified} | ${(r.summary.latencyMs.p50 / 1000).toFixed(1)} s | $${r.summary.costUsd.perCase.toFixed(3)} |`);
+        b.push(`| ${cell(r)} | ${nb(`${o['correct-decline'] ?? 0} of ${supporting(r)}`)} | ${nb(`${o['correct-pass'] ?? 0} of ${failing(r)}`)} | ${o['false-pass'] ?? 0} | ${o['blocked'] ?? 0} | ${o['error'] ?? 0} | ${fabricatedQuotes(r)} | ${r.summary.sentencesVerified} | ${nb(`${(r.summary.latencyMs.p50 / 1000).toFixed(1)} s`)} | $${r.summary.costUsd.perCase.toFixed(3)} |`);
       }
       b.push('');
     }
     // Table 5, post hoc: one repair turn on the live-CHART configuration.
     const repair = runs('repair');
     if (repair.length) {
-      b.push(`**Table 5. The repair turn (post hoc).** The three live-CHART configurations run again with \`--repair 1\` (\`build/results/repair/\`, ${repair.length} files, agentic, live CHART, effort low): when the gate blocked a warranted draft, its record went back to the model verbatim, one line per finding (sentence index, status, reason, and the entries a needs-citation names), the model kept its tools and its reads, and the complete revised draft was re-gated. A declined draft was never offered a repair. Repaired to pass counts every blocked draft that ended in PASS; false passes created is the subset on cases the key labels unsupported, the repair eroding the decline. Agreed, first turn is the no-repair figure from the same file. These runs are kept apart from Tables 1 and 2 and from the viewer's scoreboard.`);
+      b.push(`**Table 5. The repair turn (post hoc).** The three live-CHART configurations run again with \`--repair 1\`, so that a draft the gate blocked on a warranted answer went back to the model once with the gate's record verbatim and the complete revised draft was re-gated (\`build/results/repair/\`, ${repair.length} files, agentic, live CHART, effort low; kept apart from Tables 1 and 2 and from the viewer's scoreboard). A declined draft was never offered a repair; false passes created is the subset of repaired drafts on cases the key labels unsupported, the repair eroding the decline.`);
       b.push('');
-      b.push('| Model | Blocked before | Blocked after | Repaired to pass | Repaired to decline | Still blocked | False passes created | Agreed, first turn | Agreed, after repair | Cost per case, first turn | Cost per case with repair |');
-      b.push('| --- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |');
-      for (const r of repair) {
+      b.push('| Model | Blocked, first turn → after repair | Repaired to pass | Repaired to decline | Still blocked | False passes created | Agreed, first turn → after repair | Cost, first turn → with repair |');
+      b.push('| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |');
+      const repairOrder = ['muse-spark-1.3', 'muse-wonder-1.0', 'Muse Spark Open'];
+      for (const r of [...repair].sort((a, b2) => repairOrder.indexOf(modelName(a)) - repairOrder.indexOf(modelName(b2)))) {
         const x = repairRow(r);
-        b.push(`| ${modelName(r)} (${host(r)}) | ${x.blockedBefore} | ${x.blockedAfter} | ${x.repairedToPass} | ${x.repairedToDecline} | ${x.stillBlocked} | ${x.falsePassesCreated} | ${x.agreedBefore} of ${r.run.cases} | ${x.agreedAfter} of ${r.run.cases} | $${x.costPerCaseFirstTurn.toFixed(3)} | $${x.costPerCase.toFixed(3)} |`);
+        b.push(`| ${cell(r)} | ${nb(`${x.blockedBefore} → ${x.blockedAfter}`)} | ${x.repairedToPass} | ${x.repairedToDecline} | ${x.stillBlocked} | ${x.falsePassesCreated} | ${nb(`${x.agreedBefore} → ${x.agreedAfter} of ${r.run.cases}`)} | ${nb(`$${x.costPerCaseFirstTurn.toFixed(3)} → $${x.costPerCase.toFixed(3)}`)} |`);
       }
       b.push('');
     }
@@ -409,14 +427,13 @@ function main(): void {
         if (low) rowsOut.push(low);
         rowsOut.push(...effort.filter(r => modelName(r) === m).sort((a, b) => (effortRank[a.run.effort] ?? 9) - (effortRank[b.run.effort] ?? 9)));
       }
-      b.push(`**Table 6. The effort sweep (post hoc).** muse-spark-1.3 and Muse Spark Open in the live-CHART configuration at effort medium and high (\`build/results/effort/\`, ${effort.length} files, same 50 cases, same settings otherwise), with each model's kept effort-low run from Table 1 as its first row. Empty warranted answers are drafts that set warranted to true with no sentences, which the gate blocks. Thinking tokens are the API's \`thinking_tokens\` count per case; Muse Spark Open on Baseten reports none. These runs are kept apart from Tables 1 and 2 and from the viewer's scoreboard.`);
+      b.push(`**Table 6. The effort sweep (post hoc).** muse-spark-1.3 and Muse Spark Open in the live-CHART configuration at effort medium and high (\`build/results/effort/\`, ${effort.length} files, same 50 cases, same settings otherwise), with each model's kept effort-low run from Table 1 as its first row (kept apart from Tables 1 and 2 and from the viewer's scoreboard). Empty answers are drafts that set warranted to true with no sentences, which the gate blocks; thinking tokens are the API's \`thinking_tokens\` count per case, with a dash where the Baseten endpoint reports none.`);
       b.push('');
-      b.push('| Model | Effort | Agreed | Blocked | Empty warranted answers | False pass | Missed | Failed | Thinking tokens per case | Median latency | Cost per case |');
-      b.push('| --- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |');
+      b.push('| Model | Effort | Agreed | Blocked | Empty answers | False pass | Missed | Failed | Thinking tokens | Latency | Cost |');
+      b.push('| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |');
       for (const r of rowsOut) {
         const x = effortRow(r);
-        const keptNote = kept.includes(r) ? ' (kept run, Table 1)' : '';
-        b.push(`| ${modelName(r)} (${host(r)}) | ${x.effort}${keptNote} | ${x.agreed} of ${r.run.cases} | ${x.blocked} | ${x.emptyWarranted} | ${x.falsePass} | ${x.missed} | ${x.failed} | ${x.thinkingPerCase > 0 ? x.thinkingPerCase.toLocaleString('en-US') : 'not reported'} | ${(x.latencyP50Ms / 1000).toFixed(1)} s | $${x.costPerCase.toFixed(3)} |`);
+        b.push(`| ${cell(r)} | ${x.effort} | ${nb(`${x.agreed} of ${r.run.cases}`)} | ${x.blocked} | ${x.emptyWarranted} | ${x.falsePass} | ${x.missed} | ${x.failed} | ${x.thinkingPerCase > 0 ? x.thinkingPerCase.toLocaleString('en-US') : '—'} | ${nb(`${(x.latencyP50Ms / 1000).toFixed(1)} s`)} | $${x.costPerCase.toFixed(3)} |`);
       }
       b.push('');
     }
@@ -431,11 +448,21 @@ function main(): void {
         const rowsI = intakeRows(intake);
         const perCase = intake.summary?.costUsd?.perCase;
         const p50 = intake.summary?.latencyMs?.p50;
-        b.push(`**Table 7. Document intake (post hoc).** Each of the 50 synthetic denials rendered as a one-page remittance letter image (\`build/synthetic/letters/\`, 1275 by 1650 px, deterministic from the case file) and sent to ${intake.run.model} as an image with a JSON schema for eight fields (\`build/src/intake.ts\`, \`build/results/intake/\`); each field read is scored against the case file. This is document intake of an administrative letter and nothing clinical: the fields are the claim's code, dates, amount, reason codes, and payer. ${perCase !== undefined ? `Cost $${perCase.toFixed(4)} per letter` : ''}${p50 !== undefined ? `, median latency ${(p50 / 1000).toFixed(1)} s` : ''}.`);
+        b.push(`**Table 7. Document intake (post hoc).** Each of the 50 synthetic denials rendered as a one-page remittance letter image (\`build/synthetic/letters/\`, 1275 by 1650 px, deterministic from the case file) and read back by ${intake.run.model} into eight fields, each scored against the case file (\`build/src/intake.ts\`, \`build/results/intake/\`). This is document intake of an administrative letter and nothing clinical: the fields are the claim's code, dates, amount, reason codes, and payer${perCase !== undefined ? `; cost $${perCase.toFixed(4)} per letter` : ''}${p50 !== undefined ? `, median latency ${(p50 / 1000).toFixed(1)} s` : ''}.`);
         b.push('');
         b.push('| Field | Correct of 50 | Errors read |');
-        b.push('| --- | :---: | --- |');
-        for (const row of rowsI) b.push(`| ${row.field} | ${row.correct} of ${row.total} | ${row.errors.length ? row.errors.join('; ') : 'none'} |`);
+        b.push('| --- | ---: | --- |');
+        // Identical misreads across letters collapse to one cell: "4 letters read X for Y: case-001, case-014".
+        const collapse = (errors: string[]): string => {
+          const groups = new Map<string, string[]>();
+          for (const e of errors) {
+            const m = /^(case-\d+): (.*)$/.exec(e);
+            if (!m) { groups.set(e, [...(groups.get(e) ?? []), '']); continue; }
+            groups.set(m[2]!, [...(groups.get(m[2]!) ?? []), m[1]!]);
+          }
+          return [...groups].map(([what, cases]) => (cases.length > 1 ? `${cases.length} letters ${what}: ${cases.join(', ')}` : cases[0] ? `${cases[0]}: ${what}` : what)).join('; ');
+        };
+        for (const row of rowsI) b.push(`| ${row.field} | ${nb(`${row.correct} of ${row.total}`)} | ${row.errors.length ? collapse(row.errors) : 'none'} |`);
         b.push('');
       }
     } catch { /* no intake run yet */ }
