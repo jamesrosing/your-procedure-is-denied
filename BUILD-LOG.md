@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-11-02 20:19 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-11-02 20:34 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -54,7 +54,7 @@ Each commit that changed the version string in `build/src/litmus.ts`. The gate i
 
 ## Commits since `hackathon-start`
 
-Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 76 regenerate commits (by github-actions[bot] after a push, or by the author running `npm run log` locally) are this log regenerating itself; they touch only the generated files and carry no ledger row.
+Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 77 regenerate commits (by github-actions[bot] after a push, or by the author running `npm run log` locally) are this log regenerating itself; they touch only the generated files and carry no ledger row.
 
 ### 79e5e21 · 2026-10-26 20:38 · Add hackathon scaffolding: NEW-WORK.md and /build
 
@@ -890,4 +890,8 @@ Gate v1.7 (`build/src/litmus.ts`), the four token classes README 4.6 had listed 
 
 ### 5a9051b · 2026-11-02 12:19 · litmus-gate 0.3.0: the bundle of gate v1.7, version strings matched (package.json, server, README); to be published
 
-(no ledger row)
+litmus-gate 0.3.0 published to npm (`build/litmus-gate/`), the bundle of gate v1.7, by the author with a one-time code; prepack rebuilt the bundle; package README carries the publish date.
+
+### 376e95b · 2026-11-02 12:19 · Build log: regenerate after 5a9051b
+
+(generated files only; no ledger row by design)
