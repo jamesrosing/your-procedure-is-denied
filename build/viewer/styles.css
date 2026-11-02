@@ -80,7 +80,7 @@ body {
   -webkit-font-smoothing: antialiased;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: 100dvh; /* the dynamic unit: a phone's browser bars move, and vh does not follow them */
 }
 a { color: var(--heading); text-decoration: none; }
 a:hover { color: var(--brand); text-decoration: underline; }
@@ -198,7 +198,7 @@ select:hover { border-color: var(--ink-3); }
 /* With the writ open below it, the stage keeps the height it had alone (the
    viewport less the bar and the foot) instead of shrinking under the sheet;
    the page then scrolls to the writ with nothing drawn over its band. */
-body:has(.writ:not([hidden])) .stage { flex: 0 0 calc(100vh - 56px - 32px); }
+body:has(.writ:not([hidden])) .stage { flex: 0 0 calc(100dvh - 56px - 32px); }
 .stage[hidden] { display: none; }
 
 /* the case header, laid out like a book header: crumb, title, meta, provenance */
@@ -583,6 +583,68 @@ body:has(.writ:not([hidden])) .stage { flex: 0 0 calc(100vh - 56px - 32px); }
   body:has(.writ:not([hidden])) > *:not(#writ), .writ-tools { display: none !important; }
   .writ:not([hidden]) { display: block !important; border: 0; background: #fff; padding: 0; }
   .writ-sheet { box-shadow: none; border: 0; max-width: none; padding: 0; color: #000; }
+}
+
+/* --- the phone shell (Nov 1) ---------------------------------------------- */
+/* Under 900 px the page is read on a phone: the header scrolls away, the tabs
+   scroll sideways, the two pickers take a row each, the three panels stack in
+   reading order with each list scrolling inside a bounded height, and the
+   header's transport gives way to a fixed dock at the bottom with 44 px
+   controls and a status line. Everything here lives inside this one media
+   block and the dock is hidden outside it, so check-viewer.ts can prove that
+   the desktop page renders pixel for pixel the same with the block removed:
+   the recorded takes stay true. */
+.dock { display: none; }
+@media (max-width: 900px) {
+  body { padding-bottom: calc(84px + env(safe-area-inset-bottom)); }
+  .bar { position: static; display: grid; grid-template-columns: 1fr; gap: 0; padding: 0; height: auto; }
+  .brand { padding: 12px 16px 8px; }
+  .tabs { height: 44px; overflow-x: auto; scrollbar-width: none; border-top: var(--hairline); padding: 0 8px; }
+  .tab { height: 44px; padding: 0 12px; font-size: 13.5px; }
+  .pickers { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 8px 16px 10px; border-top: var(--hairline); border-bottom: var(--hairline); }
+  .picker { flex-direction: column; align-items: stretch; gap: 3px; font-size: 11px; }
+  .picker select { max-width: none; width: 100%; height: 40px; }
+  .transport { display: none; }
+  .stage { flex: none; padding: 0; min-height: auto; }
+  body:has(.writ:not([hidden])) .stage { flex: none; }
+  .context { padding: 12px 16px; }
+  .ctx-title { font-size: 19px; }
+  .panels { display: flex; flex-direction: column; border-left: 0; border-right: 0; flex: none; }
+  .panel { overflow: visible; min-height: 0; border-right: 0; border-bottom: var(--hairline); }
+  .panel ol, .panel ul { flex: none; max-height: 46dvh; overflow-y: auto; }
+  .counters { grid-template-columns: repeat(2, 1fr); padding: 12px 16px 14px; gap: 10px 16px; }
+  .sentence { padding: 10px 16px; }
+  .sentence .text { font-size: 16px; }
+  .sentence .edit { height: 32px; padding: 0 10px; }
+  .verdict { padding: 12px 16px; }
+  .board { padding: 16px; overflow-x: auto; }
+  .board-head { grid-template-columns: 1fr; gap: 6px; margin-bottom: 14px; }
+  .compare { padding: 16px; }
+  .figures { padding: 16px 16px 32px; }
+  .figure-list li { grid-template-columns: 1fr; gap: 2px; }
+  .writ { padding: 12px 0 24px; }
+  .writ-tools { padding: 0 16px; }
+  .writ-sheet { padding: 20px 16px 28px; border-left: 0; border-right: 0; border-radius: 0; font-size: 15px; }
+  .preamble { padding: 12px 16px; }
+  .foot { flex-direction: column; align-items: flex-start; gap: 6px; padding: 10px 16px; }
+  .foot .keys { display: none; }
+  .btn:not(.edit):not(.small):not(.writ-open), select { min-height: 40px; }
+  /* the dock */
+  .dock { position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; display: grid; gap: 6px; padding: 6px 12px calc(8px + env(safe-area-inset-bottom)); background: var(--ink-0); border-top: var(--hairline); }
+  .dock-status { display: flex; gap: 10px; align-items: baseline; min-height: 16px; font-family: var(--font-mono); font-size: 11px; color: var(--ink-5); padding: 0 2px; }
+  .dock-state { font-weight: 500; letter-spacing: 0.02em; }
+  .dock-state:empty { display: none; }
+  .stage[data-verdict="pass"] ~ .dock .dock-state { color: var(--state-pass); }
+  .stage[data-verdict="blocked"] ~ .dock .dock-state { color: var(--state-blocked); }
+  .stage[data-verdict="declined"] ~ .dock .dock-state { color: var(--state-declined); }
+  .stage[data-verdict="error"] ~ .dock .dock-state { color: var(--state-failed); }
+  .stage[data-verdict="repair"] ~ .dock .dock-state { color: var(--state-failed); }
+  .dock-row { display: flex; gap: 6px; }
+  .dock-row .btn { height: 44px; min-height: 44px; min-width: 44px; flex: 1; padding: 0 8px; font-size: 14px; }
+  .dock-row .btn.primary { flex: 2; }
+  .dock-row .btn[hidden] { display: none; }
+  body:not([data-view="replay"]) .dock .replay-only { display: none; }
+  body:not([data-view="replay"]) .dock-status { display: none; }
 }
 
 /* The presenter spotlight (Nov 1): window.ypid.spotlight(name) rings one

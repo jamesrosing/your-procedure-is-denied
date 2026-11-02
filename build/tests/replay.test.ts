@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readdirSync, readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { compareColumns, newestRun, sideText, buildTimeline, citedEntries, firstLine, carcHelp, codeSystemHelp, DATA_NOTE, denialKind, DENIAL_KIND_HELP, PANEL_HELP, parseStep, VERDICT_HELP, LABEL_HELP, PROVENANCE_STAMP, LOOKUP_DWELL_MS, lookupStrip, payerRemark, playDelayMs, scoreboard, stateAt, type ResultsFile, type ViewerCase, type ViewerResult } from '../viewer/src/replay.js';
+import { compareColumns, newestRun, sideText, buildTimeline, citedEntries, firstLine, carcHelp, codeSystemHelp, DATA_NOTE, denialKind, DENIAL_KIND_HELP, PANEL_HELP, parseStep, VERDICT_HELP, LABEL_HELP, PROVENANCE_STAMP, dockStatus, LOOKUP_DWELL_MS, lookupStrip, payerRemark, playDelayMs, scoreboard, stateAt, type ResultsFile, type ViewerCase, type ViewerResult } from '../viewer/src/replay.js';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const resultsDir = join(here, '..', 'results');
@@ -305,6 +305,33 @@ describe('the page at rest', () => {
       checked += 1;
     }
     assert.ok(checked >= 450, String(checked));
+  });
+});
+
+describe('the phone dock: the state and the count under the controls on a narrow screen', () => {
+  const spark = files.find(f => f.run.model === 'muse-spark-1.3' && f.run.agentic && !f.run.repair && f.results.some(r => (r.trace ?? []).some(t => t.live === true)))!;
+  const r = spark.results.find(x => x.caseId === 'case-025')!;
+  const c = cases.get('case-025')!;
+  const steps = buildTimeline(r, c);
+  test('at rest it counts entries read; once sentences arrive it counts them; at the verdict it names the state', () => {
+    const rest = dockStatus(stateAt(steps, r, c, 0));
+    assert.equal(rest.state, '');
+    assert.match(rest.count, /^0 of \d+ read$/);
+    const firstSentence = steps.findIndex(s => s.kind === 'sentence');
+    const mid = dockStatus(stateAt(steps, r, c, firstSentence + 1));
+    assert.equal(mid.state, '');
+    assert.match(mid.count, /^1 of \d+ verified$/);
+    const end = dockStatus(stateAt(steps, r, c, steps.length));
+    assert.equal(end.state, 'PASS');
+    assert.equal(end.count, '8 of 8 verified');
+  });
+  test('a decline is named', () => {
+    const wonder = files.find(f => f.run.model === 'muse-wonder-1.0' && f.run.agentic && !f.run.repair && f.results.some(x => (x.trace ?? []).some(t => t.live === true)))!;
+    const d = wonder.results.find(x => x.caseId === 'case-044')!;
+    const dc = cases.get('case-044')!;
+    const ds = buildTimeline(d, dc);
+    assert.equal(dockStatus(stateAt(ds, d, dc, ds.length)).state, 'DECLINED');
+    assert.equal(dockStatus(stateAt(ds, d, dc, 0)).state, '');
   });
 });
 

@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Your procedure is denied: replay</title>
   <meta name="description" content="Replays a synthetic denial case through a Meta model and the LITMUS gate: chart entries read, criteria met, sentences verified.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%274%27 fill=%27%2314181C%27/%3E%3Crect x=%278%27 y=%2715%27 width=%2716%27 height=%272%27 fill=%27%23FFFFFF%27/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=37">
+  <link rel="stylesheet" href="styles.css?v=38">
   <script>
     // Theme before first paint; the choice is a per-viewer convenience.
     try { var t = localStorage.getItem('ypid-theme'); if (t === 'dark') document.documentElement.dataset.theme = 'dark'; } catch (e) {}
@@ -168,6 +168,22 @@
     <span class="keys">space · ← → · home end · s · c · f · w · p</span>
   </footer>
 
-  <script src="app.js?v=37"></script>
+  <!-- The phone dock: shown under 900 px only (styles.css), where the header's
+       transport is hidden. Every key the page listens for has a 44 px button
+       here, and one line says where the replay is. -->
+  <nav id="dock" class="dock" aria-label="Playback on a narrow screen">
+    <div class="dock-status" aria-live="polite"><span id="dock-state" class="dock-state"></span><span id="dock-count" class="dock-count"></span></div>
+    <div class="dock-row">
+      <button id="dock-restart" class="btn replay-only" title="Restart" aria-label="Restart">|&#8249;</button>
+      <button id="dock-back" class="btn replay-only" title="Step back" aria-label="Step back">&#8249;</button>
+      <button id="dock-play" class="btn primary replay-only" title="Play or pause">Play</button>
+      <button id="dock-step" class="btn replay-only" title="Step" aria-label="Step forward">&#8250;</button>
+      <button id="dock-end" class="btn replay-only" title="Jump to the verdict" aria-label="Jump to end">&#8250;|</button>
+      <button id="dock-writ" class="btn replay-only" title="The writ: the passing draft as the instrument the physician would sign" hidden>writ</button>
+      <button id="dock-theme" class="btn" title="Switch theme" aria-label="Switch theme">&#9790;</button>
+    </div>
+  </nav>
+
+  <script src="app.js?v=38"></script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 // Everything that decides what a step means lives in replay.ts.
 import type { PaperIndex } from './figures.js';
 import {
-  buildTimeline, carcHelp, codeSystemHelp, compareColumns, DATA_NOTE, denialKind, DENIAL_KIND_HELP, firstLine, PANEL_HELP, parseStep, VERDICT_HELP, formatSeconds, formatUsd, LABEL_HELP, payerRemark, newestRun, PROVENANCE_STAMP, TYPE_CHAR_MS, playDelayMs, scoreboard, sideText, stateAt,
+  buildTimeline, carcHelp, codeSystemHelp, compareColumns, DATA_NOTE, denialKind, DENIAL_KIND_HELP, firstLine, PANEL_HELP, parseStep, VERDICT_HELP, formatSeconds, formatUsd, LABEL_HELP, payerRemark, newestRun, PROVENANCE_STAMP, TYPE_CHAR_MS, dockStatus, playDelayMs, scoreboard, sideText, stateAt,
   type ReplayState, type ResultsFile, type Step, type ViewerCase, type ViewerResult,
   type SentenceState,
 } from './replay.js';
@@ -97,6 +97,15 @@ const ui = {
   writFootnotes: $<HTMLOListElement>('writ-footnotes'),
   writProvenance: $<HTMLElement>('writ-provenance'),
   writSignature: $<HTMLElement>('writ-signature'),
+  dockState: $<HTMLElement>('dock-state'),
+  dockCount: $<HTMLElement>('dock-count'),
+  dockRestart: $<HTMLButtonElement>('dock-restart'),
+  dockBack: $<HTMLButtonElement>('dock-back'),
+  dockPlay: $<HTMLButtonElement>('dock-play'),
+  dockStep: $<HTMLButtonElement>('dock-step'),
+  dockEnd: $<HTMLButtonElement>('dock-end'),
+  dockWrit: $<HTMLButtonElement>('dock-writ'),
+  dockTheme: $<HTMLButtonElement>('dock-theme'),
   boardTable: $<HTMLTableElement>('board-table'),
   boardData: $<HTMLElement>('board-data'),
   panelSub: { chart: $<HTMLElement>('chart-sub'), criteria: $<HTMLElement>('crit-sub'), draft: $<HTMLElement>('draft-sub') },
@@ -645,6 +654,21 @@ function render(): void {
   ui.step.disabled = state.done;
   ui.end.disabled = state.done;
   ui.play.textContent = session.playing ? 'Pause' : state.done ? 'Replay' : 'Play';
+  renderDock(state);
+}
+
+// The phone dock mirrors the transport (styles.css shows it under 900 px
+// only): the same four steps and play, the writ once a passing verdict is on
+// screen, and the status line from dockStatus.
+function renderDock(state: ReplayState): void {
+  ui.dockBack.disabled = ui.dockRestart.disabled = session.cursor === 0;
+  ui.dockStep.disabled = ui.dockEnd.disabled = state.done;
+  ui.dockPlay.textContent = ui.play.textContent;
+  const status = dockStatus(state);
+  ui.dockState.textContent = status.state;
+  ui.dockCount.textContent = status.count;
+  const c = session.caseData, r = session.result, f = session.file;
+  ui.dockWrit.hidden = !(state.verdict?.verdict === 'pass' && sideText(f?.run.side).writ && c && r && f && writDocument(c, r, f.run));
 }
 
 // --- transport ---------------------------------------------------------------
@@ -734,6 +758,7 @@ function writeAddress(caseId: string, step: string | null): void {
 // survives the view being set at boot; a tab click passes none.
 function showView(next: View, step: string | null = null): void {
   view = next;
+  document.body.dataset['view'] = next; // the dock hides its transport off the replay
   ui.tabReplay.setAttribute('aria-selected', String(next === 'replay'));
   ui.board.setAttribute('aria-selected', String(next === 'board'));
   ui.tabCompare.setAttribute('aria-selected', String(next === 'compare'));
@@ -979,14 +1004,28 @@ async function boot(): Promise<void> {
   // Each column says in one line what it holds; the header repeats it on hover.
   for (const key of ['chart', 'criteria', 'draft'] as const) { ui.panelSub[key].textContent = PANEL_HELP[key]; ui.panelHead[key].title = PANEL_HELP[key]; }
   ui.boardData.textContent = DATA_NOTE;
-  const paintTheme = () => { ui.theme.textContent = document.documentElement.dataset['theme'] === 'dark' ? 'light theme' : 'dark theme'; };
+  const paintTheme = () => {
+    const dark = document.documentElement.dataset['theme'] === 'dark';
+    ui.theme.textContent = dark ? 'light theme' : 'dark theme';
+    ui.dockTheme.textContent = dark ? '\u2600' : '\u263e';
+    ui.dockTheme.title = dark ? 'Light theme' : 'Dark theme';
+  };
   paintTheme();
-  ui.theme.addEventListener('click', () => {
+  const toggleTheme = (): void => {
     const dark = document.documentElement.dataset['theme'] !== 'dark';
     if (dark) document.documentElement.dataset['theme'] = 'dark'; else delete document.documentElement.dataset['theme'];
     try { localStorage.setItem('ypid-theme', dark ? 'dark' : 'light'); } catch { /* per-viewer convenience only */ }
     paintTheme();
-  });
+  };
+  ui.theme.addEventListener('click', toggleTheme);
+  ui.dockTheme.addEventListener('click', toggleTheme);
+  // The dock's controls are the transport's, for a thumb.
+  ui.dockPlay.addEventListener('click', play);
+  ui.dockStep.addEventListener('click', () => { stop(); seek(session.cursor + 1); });
+  ui.dockBack.addEventListener('click', () => { stop(); seek(session.cursor - 1); });
+  ui.dockRestart.addEventListener('click', () => { stop(); seek(0); });
+  ui.dockEnd.addEventListener('click', () => { stop(); seek(session.steps.length); });
+  ui.dockWrit.addEventListener('click', () => showWrit(ui.writ.hidden !== false));
   ui.writClose.addEventListener('click', () => showWrit(false));
   ui.writPrint.addEventListener('click', () => window.print());
   ui.writText.addEventListener('click', saveWritText);

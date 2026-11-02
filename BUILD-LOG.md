@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-11-02 05:11 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-11-02 05:26 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -52,7 +52,7 @@ Each commit that changed the version string in `build/src/litmus.ts`. The gate i
 
 ## Commits since `hackathon-start`
 
-Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 64 regenerate commits (by github-actions[bot] after a push, or by the author running `npm run log` locally) are this log regenerating itself; they touch only the generated files and carry no ledger row.
+Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 65 regenerate commits (by github-actions[bot] after a push, or by the author running `npm run log` locally) are this log regenerating itself; they touch only the generated files and carry no ledger row.
 
 ### 79e5e21 · 2026-10-26 20:38 · Add hackathon scaffolding: NEW-WORK.md and /build
 
@@ -787,3 +787,11 @@ Viewer: a `figures` spotlight region (`#figure-list`), so the Figures tab can be
 ### c5a60b7 · 2026-11-01 21:10 · Viewer: the typed opening removed, the page opens on the case; its words kept in the video plan, the take opening on the payer's reason
 
 Viewer: the typed opening removed (`build/viewer/`): no title cards, no `i` key, no travel into a preamble paragraph, no `cards` body class; the page opens on the case at rest, as a reviewer of the Nov 1 cut asked (the first thirty seconds were a block of typed text with the voice over it, and the block then sat at the top of the frame for the rest of the video). The "about this page" panel (footer link, p key) keeps the data note and the provenance stamp (`PROVENANCE_STAMP`, formerly `INTRO_STAMP`); the typing pace the model's why and the live-query strip share is `TYPE_CHAR_MS`. Asset links v37. Video plan (`assets/video/WALKTHROUGH.md`): the take opens on case-025 with the payer's reason ringed from the first frame while the speaker says who they are; the three lines of the opening, their sources, and the stamp are kept in a section of the plan, not in the spoken script, since they would add about half a minute past the limit. The three title-card tests replaced by one on the stamp; 258 tests
+
+### 63c386e · 2026-11-01 21:11 · Build log: regenerate after c5a60b7
+
+(generated files only; no ledger row by design)
+
+### next commit · the one that carries this regeneration
+
+Viewer, the phone shell, step one of the mobile plan (`build/viewer/`): under 900 px the header scrolls away, the tabs scroll sideways, the two pickers take a row each, the three panels stack in reading order with each list scrolling inside 46 dvh, and the header's transport gives way to a fixed dock at the bottom with 44 px controls (restart, back, play, step, end, the writ once a passing verdict is on screen, the theme) and a status line (`dockStatus` in `replay.ts`: the verdict or repair turn, then sentences verified once one is on screen, entries read before that; two tests). The page's height is in dvh so a phone's moving browser bars no longer misplace it. Every narrow-screen rule lives in one media block and the dock is hidden outside it, and `check-viewer.ts` now proves the desktop page at 1600 wide renders pixel for pixel the same with that block stripped (per-pixel compare on a canvas, antialiasing tolerance) and drives a 390-wide phone viewport from the dock to PASS and the writ; the recorded takes stay true. Asset links v38; 260 tests

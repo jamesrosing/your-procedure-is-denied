@@ -704,3 +704,19 @@ export const TYPE_CHAR_MS = 36;
 // week and what was pre-existing, as the event rule asks. Plain words, no
 // exclamation marks; a test holds it to that.
 export const PROVENANCE_STAMP = "Built this week: everything shown here. Pre-existing, not shown: the author's record system, appeal engine, coverage index, and the published LITMUS standard.";
+
+// The phone dock (Nov 1): under 900 px the header's transport gives way to a
+// fixed bar at the bottom of the screen with 44 px controls, and one line
+// over them says where the replay is: the state once there is one (the
+// verdict, or the repair turn), and the count that matters at this moment,
+// sentences verified once any sentence is on screen, entries read before that
+// (the total is known from the record ahead of time; the count waits for the
+// first sentence).
+export function dockStatus(state: ReplayState): { state: string; count: string } {
+  const v = state.verdict;
+  const name = v ? (v.verdict === 'pass' ? 'PASS' : v.verdict === 'blocked' ? 'BLOCKED' : v.verdict === 'declined' ? 'DECLINED' : 'FAILED') : state.repair ? `REPAIR TURN ${state.repair.turn}` : '';
+  const count = state.sentences.length > 0
+    ? `${state.counters.sentencesVerified} of ${state.counters.sentencesTotal} verified`
+    : `${state.counters.entriesRead} of ${state.counters.chartSize} read`;
+  return { state: name, count };
+}
