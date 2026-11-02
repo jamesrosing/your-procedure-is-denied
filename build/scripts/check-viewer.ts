@@ -215,10 +215,32 @@ async function main(): Promise<void> {
     const overflow = await phone.evaluate(() => document.documentElement.scrollWidth > window.innerWidth + 1);
     if (overflow) problems.push('phone: the page runs wider than the screen');
     await phone.screenshot({ path: join(out, 'phone-case-025-writ.png'), fullPage: false });
+    // The footnote sheet: a tap on the first footnote number opens the cited
+    // entry with the quote marked; next walks to the second; Escape closes.
+    const keptData = JSON.parse(readFileSync(join(viewer, 'data', 'results', keptFile), 'utf8')) as ResultsFile;
+    const r025 = keptData.results.find(r => r.caseId === 'case-025')!;
+    await phone.tap('#writ-body sup');
+    await phone.waitForSelector('#sheet[open]', { timeout: 5_000 }).catch(() => problems.push('phone: the footnote sheet did not open'));
+    const sheetEntry = await phone.textContent('#sheet-entry');
+    if (!sheetEntry?.startsWith(r025.gate!.sentences[0]!.citation)) problems.push(`phone: the sheet names "${sheetEntry}", not the first citation`);
+    if ((await phone.locator('#sheet-text mark').count()) !== 1) problems.push('phone: the sheet does not mark the quote in the entry');
+    await phone.screenshot({ path: join(out, 'phone-case-025-sheet.png'), fullPage: false });
+    await phone.tap('#sheet-next');
+    const sheetTitle = await phone.textContent('#sheet-title');
+    if (sheetTitle !== `Footnote 2 of ${r025.gate!.sentences.length}`) problems.push(`phone: next did not walk to footnote 2 (title "${sheetTitle}")`);
+    await phone.keyboard.press('Escape');
+    await phone.waitForFunction(() => !(document.getElementById('sheet') as HTMLDialogElement).open, null, { timeout: 5_000 }).catch(() => problems.push('phone: Escape did not close the sheet'));
+    // Writ first: a case opened without a step lands on its verdict with the
+    // instrument open, above the replay.
+    await phone.goto(`${base}#file=${encodeURIComponent(keptFile)}&case=case-025`, { waitUntil: 'load' });
+    await phone.waitForSelector('#writ:not([hidden])', { timeout: 10_000 }).catch(() => problems.push('phone: a case without a step did not land on the writ'));
+    const writFirst = await phone.evaluate(() => document.getElementById('writ')!.getBoundingClientRect().top < document.getElementById('stage')!.getBoundingClientRect().top && document.getElementById('dock-state')!.textContent === 'PASS');
+    if (!writFirst) problems.push('phone: the writ is not above the replay, or the dock does not say PASS');
+    await phone.screenshot({ path: join(out, 'phone-case-025-landing.png'), fullPage: false });
     await phone.close();
 
     await browser.close();
-    console.log(`compare: ${compared} cases laid out; repaired cases shown: ${repairedShown}; scoreboard rows (with header): ${boardRows}; ${invariance}; phone dock drives the replay; frames in ${out}`);
+    console.log(`compare: ${compared} cases laid out; repaired cases shown: ${repairedShown}; scoreboard rows (with header): ${boardRows}; ${invariance}; phone dock drives the replay, the footnote sheet opens and walks, a case lands writ first; frames in ${out}`);
   } finally {
     server.kill();
   }

@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-11-02 05:26 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-11-02 05:32 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -52,7 +52,7 @@ Each commit that changed the version string in `build/src/litmus.ts`. The gate i
 
 ## Commits since `hackathon-start`
 
-Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 65 regenerate commits (by github-actions[bot] after a push, or by the author running `npm run log` locally) are this log regenerating itself; they touch only the generated files and carry no ledger row.
+Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 66 regenerate commits (by github-actions[bot] after a push, or by the author running `npm run log` locally) are this log regenerating itself; they touch only the generated files and carry no ledger row.
 
 ### 79e5e21 · 2026-10-26 20:38 · Add hackathon scaffolding: NEW-WORK.md and /build
 
@@ -795,3 +795,11 @@ Viewer: the typed opening removed (`build/viewer/`): no title cards, no `i` key,
 ### 6a69f68 · 2026-11-01 21:26 · Viewer: the phone shell, step one of the mobile plan: dvh, stacked panels, a fixed dock with 44 px controls and a status line; the desktop page proven pixel-invariant in the headless check
 
 Viewer, the phone shell, step one of the mobile plan (`build/viewer/`): under 900 px the header scrolls away, the tabs scroll sideways, the two pickers take a row each, the three panels stack in reading order with each list scrolling inside 46 dvh, and the header's transport gives way to a fixed dock at the bottom with 44 px controls (restart, back, play, step, end, the writ once a passing verdict is on screen, the theme) and a status line (`dockStatus` in `replay.ts`: the verdict or repair turn, then sentences verified once one is on screen, entries read before that; two tests). The page's height is in dvh so a phone's moving browser bars no longer misplace it. Every narrow-screen rule lives in one media block and the dock is hidden outside it, and `check-viewer.ts` now proves the desktop page at 1600 wide renders pixel for pixel the same with that block stripped (per-pixel compare on a canvas, antialiasing tolerance) and drives a 390-wide phone viewport from the dock to PASS and the writ; the recorded takes stay true. Asset links v38; 260 tests
+
+### 03e421b · 2026-11-01 21:26 · Build log: regenerate after 6a69f68
+
+(generated files only; no ledger row by design)
+
+### next commit · the one that carries this regeneration
+
+Viewer, writ first, step two of the mobile plan (`build/viewer/`): on a phone the instrument is the interface and the evidence comes to the sentence. Under 900 px a case opened without a step address lands on its verdict with the writ open above the replay (`landNarrow`; a deep link to a step stays a frame, a wide screen is untouched), and the footnote numbers in the body are 20 px chips. On every screen a tap on a footnote number, or on a footnote below, opens a sheet (a `dialog`; a bottom sheet on a phone) with the cited entry and the verified quote marked inside its text, the sentence it supports, the criteria that entry evidences in the gate record, and the gate's stamp and reason; previous and next walk the footnotes, Escape, the close button, or the backdrop closes it. `footnoteSheet` in `writ.ts` is the pure data (three tests: case-025 footnote 4 splits the entry around the quote and names its criterion; out of range and no gate are null; every footnote of every passing draft in the live run resolves to an entry, the quote found as written in at least 95 percent). `check-viewer.ts` opens the sheet on the phone, walks to footnote 2, closes it, and lands case-025 writ first with PASS in the dock. Asset links v39; 263 tests

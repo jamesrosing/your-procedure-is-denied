@@ -5,7 +5,7 @@
 // line under a band that says what this is: a draft, unsigned, not sent. Pure
 // functions over the case and the stored result; nothing here calls a model
 // and nothing is saved.
-import { payerRemark, type ResultsFile, type ViewerCase, type ViewerResult } from './replay.js';
+import { payerRemark, type RecordStatus, type ResultsFile, type ViewerCase, type ViewerResult } from './replay.js';
 
 export interface WritFootnote { n: number; entryId: string; date: string; kind: string; quote: string }
 
@@ -71,4 +71,45 @@ export function writText(doc: WritDocument): string {
   for (const f of doc.footnotes) lines.push(`[${f.n}] ${f.entryId}, ${f.date}, ${f.kind}: “${f.quote}”`);
   lines.push('', doc.provenance, '', doc.signature, '');
   return lines.join('\n');
+}
+
+// The footnote sheet (Nov 1): on a phone the instrument is the interface and
+// the evidence comes to the sentence. A tap on a footnote number opens the
+// cited entry with the verified quote marked inside its text, the criteria
+// that entry evidences in the gate record, and the gate's stamp on the
+// sentence. Pure data over the case and the stored result; the page draws it.
+export interface FootnoteSheet {
+  n: number;
+  total: number;
+  entry: { id: string; date: string; kind: string; text: string } | null;
+  sentence: string;
+  quote: string;
+  // the entry's text split around the quote; match is empty when the quote is not found as written
+  before: string;
+  match: string;
+  after: string;
+  criteria: { id: string; text: string }[];
+  status: RecordStatus;
+  reason: string;
+}
+
+export function footnoteSheet(c: ViewerCase, r: ViewerResult, n: number): FootnoteSheet | null {
+  const gate = r.gate;
+  if (!gate) return null;
+  const s = gate.sentences[n - 1];
+  if (!s || n < 1) return null;
+  const e = c.chart.find(x => x.id === s.citation) ?? null;
+  let before = '', match = '', after = e?.text ?? '';
+  if (e && s.quote) {
+    let i = e.text.indexOf(s.quote);
+    if (i < 0) i = e.text.toLowerCase().indexOf(s.quote.toLowerCase());
+    if (i >= 0) { before = e.text.slice(0, i); match = e.text.slice(i, i + s.quote.length); after = e.text.slice(i + s.quote.length); }
+  }
+  const ids = new Set(gate.evidence.filter(ev => ev.citation === s.citation).map(ev => ev.criterion));
+  const criteria = c.criteria.filter(k => ids.has(k.id)).map(k => ({ id: k.id, text: k.text }));
+  return {
+    n, total: gate.sentences.length,
+    entry: e ? { id: e.id, date: e.date, kind: e.kind, text: e.text } : null,
+    sentence: s.text, quote: s.quote, before, match, after, criteria, status: s.status, reason: s.reason,
+  };
 }

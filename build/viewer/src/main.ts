@@ -8,7 +8,7 @@ import {
   type SentenceState,
 } from './replay.js';
 import { recheck, recheckLabel, EDIT_BUTTON, EDIT_HELP, EDIT_NOTE } from './gatecheck.js';
-import { writDocument, writText, WRIT_BUTTON, WRIT_HELP } from './writ.js';
+import { footnoteSheet, writDocument, writText, WRIT_BUTTON, WRIT_HELP } from './writ.js';
 import { SPOT_ATTR, SPOT_CLASS, spotSelector } from './spotlight.js';
 import { gateSources, sourcesHash } from '../../src/sources.js';
 
@@ -97,6 +97,17 @@ const ui = {
   writFootnotes: $<HTMLOListElement>('writ-footnotes'),
   writProvenance: $<HTMLElement>('writ-provenance'),
   writSignature: $<HTMLElement>('writ-signature'),
+  sheet: $<HTMLDialogElement>('sheet'),
+  sheetTitle: $<HTMLElement>('sheet-title'),
+  sheetClose: $<HTMLButtonElement>('sheet-close'),
+  sheetEntry: $<HTMLElement>('sheet-entry'),
+  sheetText: $<HTMLElement>('sheet-text'),
+  sheetSentence: $<HTMLElement>('sheet-sentence'),
+  sheetCriteriaH: $<HTMLElement>('sheet-criteria-h'),
+  sheetCriteria: $<HTMLElement>('sheet-criteria'),
+  sheetStamp: $<HTMLElement>('sheet-stamp'),
+  sheetPrev: $<HTMLButtonElement>('sheet-prev'),
+  sheetNext: $<HTMLButtonElement>('sheet-next'),
   dockState: $<HTMLElement>('dock-state'),
   dockCount: $<HTMLElement>('dock-count'),
   dockRestart: $<HTMLButtonElement>('dock-restart'),
@@ -605,6 +616,37 @@ function showWrit(open: boolean): void {
   ui.writ.scrollIntoView({ block: 'start', behavior: 'smooth' });
 }
 
+// The footnote sheet: the cited entry comes to the sentence. Opened by a tap
+// on a footnote number in the body or on a footnote below; previous and next
+// walk the footnotes; Escape, the close button, or the backdrop closes it.
+let sheetN = 0;
+function openSheet(n: number): void {
+  const c = session.caseData, r = session.result;
+  if (!c || !r) return;
+  const data = footnoteSheet(c, r, n);
+  if (!data) return;
+  sheetN = n;
+  ui.sheetTitle.textContent = `Footnote ${data.n} of ${data.total}`;
+  ui.sheetEntry.textContent = data.entry ? `${data.entry.id} \u00b7 ${data.entry.date} \u00b7 ${data.entry.kind}` : `${r.gate?.sentences[n - 1]?.citation ?? ''} \u00b7 not in this chart`;
+  ui.sheetText.replaceChildren();
+  if (data.match) {
+    ui.sheetText.append(document.createTextNode(data.before), text('mark', '', data.match), document.createTextNode(data.after));
+  } else {
+    ui.sheetText.append(document.createTextNode(data.entry?.text ?? ''), text('span', 'unfound', `quoted: \u201c${data.quote}\u201d`));
+  }
+  ui.sheetSentence.textContent = data.sentence;
+  ui.sheetCriteriaH.hidden = data.criteria.length === 0;
+  ui.sheetCriteria.hidden = data.criteria.length === 0;
+  ui.sheetCriteria.replaceChildren(...data.criteria.map(k => { const li = document.createElement('li'); li.append(text('span', 'cid', k.id), document.createTextNode(k.text)); return li; }));
+  ui.sheetStamp.dataset['status'] = data.status;
+  ui.sheetStamp.replaceChildren(document.createTextNode(stampText(data.status)), text('span', 'reason', data.reason ? ` \u00b7 ${data.reason}` : ''));
+  ui.sheetPrev.disabled = n <= 1;
+  ui.sheetNext.disabled = n >= data.total;
+  if (!ui.sheet.open) ui.sheet.showModal();
+  ui.sheet.querySelector<HTMLElement>('.sheet-body')?.scrollTo({ top: 0 });
+}
+function closeSheet(): void { if (ui.sheet.open) ui.sheet.close(); }
+
 function saveWritText(): void {
   const c = session.caseData, r = session.result, f = session.file;
   // The instrument exists only once the replay has reached its verdict: PASS
@@ -933,6 +975,18 @@ function showPreamble(on: boolean): void {
 // with the board closed. selectCase rewrites the address in place (no history
 // entry, no hashchange), keeping the step a link arrived with so a reload
 // lands on the same frame.
+// Writ first on a phone: a case opened without a step address lands on its
+// verdict with the instrument open, so the document is what a narrow screen
+// shows first and the replay waits below it. A deep link to a step is a frame
+// and stays a frame; a wide screen is untouched.
+function landNarrow(): void {
+  if (!window.matchMedia('(max-width: 900px)').matches) return;
+  if (!session.result || session.steps.length === 0) return;
+  stop();
+  seek(session.steps.length);
+  showWrit(true);
+}
+
 async function applyHash(): Promise<void> {
   const params = new URLSearchParams(window.location.hash.slice(1));
   const wantedFile = params.get('file');
@@ -944,6 +998,7 @@ async function applyHash(): Promise<void> {
   const landOnStep = (): void => {
     const n = parseStep(wantedStep, session.steps.length);
     if (n !== null) { stop(); seek(n); }
+    else if (wantedView === 'replay') landNarrow();
     if (session.result) writeAddress(session.result.caseId, n !== null ? wantedStep : null);
   };
   const fileChanged = !!wantedFile && wantedFile !== ui.filePicker.value && session.manifest.results.some(m => m.file === wantedFile);
@@ -990,7 +1045,7 @@ async function boot(): Promise<void> {
   ui.about.addEventListener('click', () => showPreamble(true));
 
   ui.filePicker.addEventListener('change', () => { void selectFile(ui.filePicker.value); });
-  ui.casePicker.addEventListener('change', () => selectCase(ui.casePicker.value));
+  ui.casePicker.addEventListener('change', () => { selectCase(ui.casePicker.value); landNarrow(); });
   ui.play.addEventListener('click', play);
   ui.step.addEventListener('click', () => { stop(); seek(session.cursor + 1); });
   ui.back.addEventListener('click', () => { stop(); seek(session.cursor - 1); });
@@ -1027,6 +1082,12 @@ async function boot(): Promise<void> {
   ui.dockEnd.addEventListener('click', () => { stop(); seek(session.steps.length); });
   ui.dockWrit.addEventListener('click', () => showWrit(ui.writ.hidden !== false));
   ui.writClose.addEventListener('click', () => showWrit(false));
+  ui.writBody.addEventListener('click', e => { const sup = (e.target as HTMLElement).closest('sup'); if (sup) openSheet(Number(sup.textContent)); });
+  ui.writFootnotes.addEventListener('click', e => { const li = (e.target as HTMLElement).closest('li'); if (li) openSheet([...ui.writFootnotes.children].indexOf(li) + 1); });
+  ui.sheetClose.addEventListener('click', closeSheet);
+  ui.sheetPrev.addEventListener('click', () => openSheet(sheetN - 1));
+  ui.sheetNext.addEventListener('click', () => openSheet(sheetN + 1));
+  ui.sheet.addEventListener('click', e => { if (e.target === ui.sheet) closeSheet(); }); // the backdrop
   ui.writPrint.addEventListener('click', () => window.print());
   ui.writText.addEventListener('click', saveWritText);
   ui.sentences.addEventListener('click', e => {
@@ -1035,6 +1096,8 @@ async function boot(): Promise<void> {
     if (button && li) openEditor(li);
   });
   window.addEventListener('keydown', e => {
+    // The footnote sheet owns Escape while it is open, wherever focus sits.
+    if (ui.sheet.open && e.key === 'Escape') { e.preventDefault(); closeSheet(); return; }
     if (e.target instanceof HTMLSelectElement || e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
     // A focused button keeps Space and Enter for itself (the gate-check "check"
     // button, the transport); a held modifier is the browser's shortcut, not ours.

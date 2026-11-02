@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { writDocument, writText, WRIT_BAND, WRIT_BUTTON, WRIT_HELP, WRIT_SIGNATURE } from '../viewer/src/writ.js';
+import { writDocument, writText, footnoteSheet, WRIT_BAND, WRIT_BUTTON, WRIT_HELP, WRIT_SIGNATURE } from '../viewer/src/writ.js';
 import type { ResultsFile, ViewerCase } from '../viewer/src/replay.js';
 
 const here = dirname(fileURLToPath(import.meta.url));
@@ -104,5 +104,53 @@ describe('the writ: a passing draft rendered as the instrument the physician wou
       }
     }
     assert.ok(rendered > 80, `rendered ${rendered}`);
+  });
+});
+
+// The footnote sheet (Nov 1, the phone): a tap on a footnote number opens the
+// cited entry with the verified quote marked in it, the criteria that entry
+// evidences in the gate record, and the gate's stamp. Pure data; the page
+// draws it.
+describe('the footnote sheet: the evidence comes to the sentence', () => {
+  const live = load('meta-muse-spark-1.3-low-agentic-chart-2026-10-28T06-48-41-422Z.json');
+  test('case-025, footnote 4: the cited entry, the quote found verbatim and split out of its text, the criterion it evidences, verified', () => {
+    const c = caseOf('case-025');
+    const r = pick(live, 'case-025');
+    const sheet = footnoteSheet(c, r, 4)!;
+    assert.ok(sheet);
+    assert.equal(sheet.n, 4);
+    assert.equal(sheet.total, 8);
+    assert.equal(sheet.entry?.id, r.gate!.sentences[3]!.citation);
+    assert.equal(sheet.sentence, r.gate!.sentences[3]!.text);
+    assert.equal(sheet.quote, r.gate!.sentences[3]!.quote);
+    assert.equal(sheet.match, sheet.quote, 'the quote is found in the entry as written');
+    assert.equal(sheet.before + sheet.match + sheet.after, sheet.entry!.text, 'the split is the whole entry');
+    assert.ok(sheet.criteria.length >= 1, 'the entry evidences at least one criterion');
+    for (const k of sheet.criteria) assert.ok(c.criteria.some(x => x.id === k.id && x.text === k.text));
+    assert.equal(sheet.status, 'verified');
+  });
+  test('out of range is null, and a result with no gate record is null', () => {
+    const c = caseOf('case-025');
+    const r = pick(live, 'case-025');
+    assert.equal(footnoteSheet(c, r, 0), null);
+    assert.equal(footnoteSheet(c, r, 9), null);
+    const { gate: _gate, ...noGate } = r;
+    void _gate;
+    assert.equal(footnoteSheet(c, noGate, 1), null);
+  });
+  test('every footnote of every passing draft in the live run resolves to a chart entry, and the verified quote is found in it', () => {
+    let checked = 0, found = 0;
+    for (const r of live.results) {
+      if (r.gate?.verdict !== 'pass') continue;
+      const c = caseOf(r.caseId);
+      for (let n = 1; n <= r.gate.sentences.length; n++) {
+        const sheet = footnoteSheet(c, r, n)!;
+        assert.ok(sheet && sheet.entry, `${r.caseId} footnote ${n}`);
+        checked++;
+        if (sheet.match) found++;
+      }
+    }
+    assert.ok(checked > 200, String(checked));
+    assert.ok(found >= checked * 0.95, `${found} of ${checked} quotes found verbatim`);
   });
 });
