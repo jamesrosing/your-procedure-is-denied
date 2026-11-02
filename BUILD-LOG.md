@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-11-02 06:01 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-11-02 06:02 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -832,6 +832,6 @@ README results tables, for the reader (`build/scripts/build-log.ts`): Table 1 sp
 
 (generated files only; no ledger row by design)
 
-### next commit · the one that carries this regeneration
+### bbaab7b · 2026-11-01 22:02 · README: the In brief callout under the title, from the table patch
 
 README: the In brief callout under the title (a GitHub note block with the five numbers of the abstract), the hand-written half of the table patch that the previous commit left out because only the generator's hunks were applied; no number changed
