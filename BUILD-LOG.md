@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-11-02 18:21 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-11-02 19:50 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -53,7 +53,7 @@ Each commit that changed the version string in `build/src/litmus.ts`. The gate i
 
 ## Commits since `hackathon-start`
 
-Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 73 regenerate commits (by github-actions[bot] after a push, or by the author running `npm run log` locally) are this log regenerating itself; they touch only the generated files and carry no ledger row.
+Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 74 regenerate commits (by github-actions[bot] after a push, or by the author running `npm run log` locally) are this log regenerating itself; they touch only the generated files and carry no ledger row.
 
 ### 79e5e21 · 2026-10-26 20:38 · Add hackathon scaffolding: NEW-WORK.md and /build
 
@@ -865,3 +865,11 @@ README 4.5: Mark Cuban's filter for healthcare AI (an efficiency nets to zero wh
 
 Results added: `mutations/report-v1.5.json`.
 (no ledger row)
+
+### 92b3bfd · 2026-11-02 10:21 · Build log: regenerate after c0708b2
+
+(generated files only; no ledger row by design)
+
+### 4171527 · 2026-11-02 11:50 · litmus-gate 0.2.0 on npm, the bundle of gate v1.6; package.json normalized; package README version line
+
+litmus-gate 0.2.0 published to npm (`build/litmus-gate/`), the bundle built from gate v1.6, after `npm run gate:smoke` reproduced a stored verdict and hash; package.json normalized by `npm pkg fix` (repository url); the package README names the version and that 0.1.0 carried v1.5
