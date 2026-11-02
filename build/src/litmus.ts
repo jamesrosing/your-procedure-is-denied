@@ -15,10 +15,13 @@
 //   1. Resolve the citation to one chart entry. Unknown or malformed: unresolved.
 //   2. The quote must appear verbatim in that entry's text (whitespace, case,
 //      quote glyphs, and dash variants normalized: curly quotes to straight,
-//      en, em, and figure dashes and the minus sign to the ASCII hyphen;
-//      nothing else). Absent or trivial: refuted.
-//   3. Every hard token in the sentence (numbers, dates, codes, and a side,
-//      left or right) must appear in the cited entry, the payer criteria,
+//      en, em, and figure dashes and the minus sign to the ASCII hyphen,
+//      compatibility forms such as fullwidth digits to their ASCII form;
+//      nothing else). Absent, trivial, or made of stopwords alone: refuted.
+//   3. Every hard token in the sentence (numbers, including ones written as
+//      words; dates, in any written form; codes, with their letter and the
+//      system named before them; and a side, however abbreviated) must appear
+//      in the cited entry, the payer criteria,
 //      the denial, or the stated case facts. Anything else: refuted, token named.
 //      The whole cited entry counts, not only the quoted span: the gate exists
 //      to catch invented facts, not to grade quoting form, and the clinician who
@@ -30,7 +33,7 @@ import { sha256Hex } from './hash.js';
 import { CITATION_ID } from './citation.js';
 import type { Appeal } from './schema.js';
 
-export const LITMUS_VERSION = 'build/src/litmus.ts v1.5 (2026-10-31): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side (left or right) is a hard token wherever it names a side, not only before a fixed anatomy list; a side that a source carries only inside an idiom (right back to baseline) is not an admissible source for a side';
+export const LITMUS_VERSION = 'build/src/litmus.ts v1.6 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted';
 
 export interface GateEntry {
   id: string;
@@ -114,7 +117,7 @@ export interface GateResult {
 
 function canon(s: string): string {
   return s
-    .normalize('NFC')
+    .normalize('NFKC')
     .replace(/[‘’‚‛′]/g, "'")
     .replace(/[“”„‟″]/g, '"')
     .replace(/[‐-―−]/g, '-')
@@ -125,12 +128,21 @@ function canon(s: string): string {
 }
 
 const NUMBER_WORDS: Record<string, string> = {
-  two: '2', three: '3', four: '4', five: '5', six: '6', seven: '7', eight: '8', nine: '9', ten: '10',
+  zero: '0', one: '1', two: '2', three: '3', four: '4', five: '5', six: '6', seven: '7', eight: '8', nine: '9', ten: '10',
   eleven: '11', twelve: '12', thirteen: '13', fourteen: '14', fifteen: '15', sixteen: '16', seventeen: '17',
   eighteen: '18', nineteen: '19', twenty: '20', thirty: '30', forty: '40', fifty: '50', sixty: '60',
-  seventy: '70', eighty: '80', ninety: '90', hundred: '100',
+  seventy: '70', eighty: '80', ninety: '90', hundred: '100', dozen: '12',
 };
 const NUMBER_WORD_RE = new RegExp(`\\b(${Object.keys(NUMBER_WORDS).join('|')})\\b`, 'g');
+// v1.6: "one" and "zero" are counts (found in review: "one week of therapy"
+// against an entry that says twelve weeks was verified, because the word was
+// not a number). The uses of "one" that are a pronoun or a determiner ("one of
+// the entries", "no one", "this one") are masked first, on both sides of the
+// check, the way side idioms are. The list is fixed and not exhaustive; "the
+// one" is left as a count, because "the one month required" is one more often
+// than "the one entry that" in this prose (the spike-in found the masked form
+// passing a fabricated count).
+const ONE_IDIOM = /\b(?:no|any|each|every|some|this|that|which|another|other|same|either|neither) one\b|\bone (?:of|another|way|hand|thing|point)\b/g;
 // "eighty-one" or "eighty one" is 81, one number, not 80 and 1. Spoken dictation
 // and model prose both write compounds; the gate must read them as the clinician meant.
 const TENS = 'twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety';
@@ -153,19 +165,72 @@ function hundreds(_: string, h: string, tens?: string, tensOnes?: string, teen?:
   return String(n);
 }
 
+function blank(m: string): string {
+  return ' '.repeat(m.length);
+}
+
 function prepare(text: string): string {
-  return canon(text)
+  let t = canon(text)
     .replace(/\bnote-\d{3}\b/g, ' ')
     .replace(/\bcrit-\d+\b/g, ' ')
     .replace(HUNDREDS_RE, hundreds)
     .replace(COMPOUND_RE, (_, tens: string, ones: string) => String(Number(NUMBER_WORDS[tens]) + ONES_VALUE[ones]!))
+    .replace(ONE_IDIOM, blank)
     .replace(NUMBER_WORD_RE, w => NUMBER_WORDS[w]!);
+  // v1.6: "2,200 grams" is one number. Until Nov 2 it was read as 2 and 200,
+  // and an entry that said "5 foot 2, 200 pounds" sourced a resection of 2,200 grams.
+  while (/\d,\d{3}\b/.test(t)) t = t.replace(/(\d),(\d{3})\b/g, '$1$2');
+  return t;
 }
 
 function stripZeros(n: string): string {
   return n.replace(/^0+(?=\d)/, '');
 }
 
+// --- dates -------------------------------------------------------------------
+// v1.6: a date is a hard token in any written form, held in one form
+// (yyyy-mm-dd; yyyy-mm for a month and year; mm-dd for a month and day), so
+// "September 14, 2025" is checked against an entry dated 2025-08-14 and
+// refuted (found in review: month names were not tokens, so only the day was
+// checked, and it matched). Dates are blanked before the number pass, so the
+// day and the month of a date are not admissible as bare numbers: an entry
+// dated the 14th no longer sources "14 weeks". The year stays admissible.
+const MONTHS: Record<string, string> = {
+  jan: '01', january: '01', feb: '02', february: '02', mar: '03', march: '03', apr: '04', april: '04', may: '05',
+  jun: '06', june: '06', jul: '07', july: '07', aug: '08', august: '08', sep: '09', sept: '09', september: '09',
+  oct: '10', october: '10', nov: '11', november: '11', dec: '12', december: '12',
+};
+const MONTH = Object.keys(MONTHS).join('|');
+const MONTH_NOT_MAY = Object.keys(MONTHS).filter(m => m !== 'may').join('|');
+const ORD = '(?:st|nd|rd|th)?';
+const MDY_RE = new RegExp(`\\b(${MONTH})\\.? (\\d{1,2})${ORD},? (\\d{4})\\b`, 'g');
+const DMY_RE = new RegExp(`\\b(\\d{1,2})${ORD} (?:of )?(${MONTH})\\.?,? (\\d{4})\\b`, 'g');
+const MY_RE = new RegExp(`\\b(${MONTH})\\.?,? (\\d{4})\\b`, 'g');
+const MD_RE = new RegExp(`\\b(${MONTH_NOT_MAY})\\.? (\\d{1,2})${ORD}\\b`, 'g'); // "may 3" is too often the verb
+const ISO_RE = /\b(\d{4})-(\d{2})-(\d{2})\b/g;
+const SLASH_RE = /\b(\d{1,2})\/(\d{1,2})\/(\d{2,4})\b/g;
+const pad = (n: string): string => n.padStart(2, '0');
+const year4 = (y: string): string => (y.length === 2 ? `20${y}` : y);
+
+// Adds the dates of a text to the set and returns the text with every date
+// blanked. A sentence contributes the form it wrote; a source contributes every
+// form a sentence might write for the same date, and the year.
+function dateTokens(t: string, into: Set<string>, source: boolean): string {
+  const full = (y: string, m: string, d: string): string => {
+    into.add(`${y}-${m}-${d}`);
+    if (source) { into.add(`${y}-${m}`); into.add(`${m}-${d}`); into.add(y); }
+    return '';
+  };
+  return t
+    .replace(ISO_RE, (w, y: string, m: string, d: string) => { full(y, m, d); return blank(w); })
+    .replace(SLASH_RE, (w, m: string, d: string, y: string) => { full(year4(y), pad(m), pad(d)); return blank(w); })
+    .replace(MDY_RE, (w, mo: string, d: string, y: string) => { full(y, MONTHS[mo]!, pad(d)); return blank(w); })
+    .replace(DMY_RE, (w, d: string, mo: string, y: string) => { full(y, MONTHS[mo]!, pad(d)); return blank(w); })
+    .replace(MY_RE, (w, mo: string, y: string) => { into.add(`${y}-${MONTHS[mo]!}`); if (source) into.add(y); return blank(w); })
+    .replace(MD_RE, (w, mo: string, d: string) => { into.add(`${MONTHS[mo]!}-${pad(d)}`); return blank(w); });
+}
+
+// --- sides -------------------------------------------------------------------
 // v1.4: a side is a hard token wherever it names a side. v1.3 recognized a side
 // only before a fixed list of anatomical words, and the mutation harness
 // (scripts/mutate.ts, Oct 28) found 48 swapped sides passing in contexts outside
@@ -179,41 +244,53 @@ function stripZeros(n: string): string {
 // note-017; the shunt-direction pair "left to right" / "right to left" leaked
 // the same way). The idiom list is fixed and not exhaustive; it is applied
 // identically on both sides of the check.
+// v1.6: a side written R, L, Rt, or Lt is a side (found in review: "the R
+// knee" carried no side token at all). RT as radiation therapy, L as liters,
+// and R/O as rule out are masked first, on both sides; liters only when the
+// letter is attached to the number or followed by a unit word, so "grade 2 L
+// forefoot" is a side (the spike-in found it masked).
 const SIDE_IDIOM = /\bright (?:back|away|now|after|before|here|there|then|to|at)\b|\bleft (?:the|a|an|against|behind|over|off|out|in|to|for|at|on|with|without|home|early|before|after|us|him|her|them|it|from)\b/g;
+const NOT_A_SIDE = /\br\/o\b|\b\d+(?:\.\d+)?l\b|\b\d+(?:\.\d+)? l(?= (?:of|per|nc|o2|fluids?|saline|bolus|lactated|normal|ns|iv|over)\b|\/)|\/l\b|\bl\/(?:min|hr|h|day)\b|\brt (?:planning|therapy|dose|doses|dosimetry|simulation|field|fields|course|session|sessions|boost|fraction|fractions|completed|started|began|delivered|plan)\b|\b(?:radiation|respiratory|external beam|beam|adjuvant|palliative|definitive) rt\b/g;
+const SIDE_RE = /\b(left|right|l|r|lt|rt)\b/g;
+const SIDE_OF: Record<string, 'left' | 'right'> = { left: 'left', l: 'left', lt: 'left', right: 'right', r: 'right', rt: 'right' };
+function sideTokens(t: string, into: Set<string>): void {
+  for (const m of t.replace(SIDE_IDIOM, blank).replace(NOT_A_SIDE, blank).matchAll(SIDE_RE)) into.add(SIDE_OF[m[1]!]!);
+  if (/\bbilat(?:eral(?:ly)?)?\b|\bb\/l\b/.test(t)) into.add('bilateral');
+}
+
+// --- codes -------------------------------------------------------------------
+// A code with a letter (ICD-10 C34.90, HCPCS J9271) is one token, letter and
+// all; v1.6 adds the letter-and-four-digit form (found in review: K9271
+// verified against an entry that said J9271, because only the digits were
+// compared). A code system named before a code (CPT 19318, HCPCS 19318) is
+// part of the claim: the sentence's "system:code" must match a source that
+// names the same system for that code. A code no source labels is not graded
+// on its label, so an unlabeled entry never refuses a labeled sentence.
+const CODE_RE = /\b[a-z]\d{2}(?:\.\d+)?\b|\b[a-z]\d{4}\b/g;
+const SYSTEM_RE = /\b(cpt|hcpcs|icd(?:-?10(?:-?cm)?)?|carc|rarc|ndc|ms-drg|drg|loinc)\b(?: codes?)?:?[ -]?([a-z]?\d{2,5}(?:\.\d+)?)\b/g;
+function systemOf(s: string): string {
+  return s.startsWith('icd') ? 'icd' : s;
+}
 
 // Hard tokens of a sentence: the facts that must have an admissible source.
 function sentenceHardTokens(text: string): Set<string> {
-  const t = prepare(text);
   const out = new Set<string>();
-  for (const m of t.matchAll(/\b(\d{4})-(\d{2})-(\d{2})\b/g)) out.add(m[0]);
-  for (const m of t.matchAll(/\b(\d{1,2})\/(\d{1,2})\/(\d{2,4})\b/g)) out.add(m[0]);
+  const t = dateTokens(prepare(text), out, false);
+  for (const m of t.matchAll(SYSTEM_RE)) out.add(`${systemOf(m[1]!)}:${m[2]!}`);
   for (const m of t.matchAll(/\d+(?:\.\d+)?/g)) out.add(stripZeros(m[0]));
-  for (const m of t.matchAll(/\b[a-z]\d{2}(?:\.\d+)?\b/g)) out.add(m[0]);
-  for (const m of t.replace(SIDE_IDIOM, ' ').matchAll(/\b(left|right)\b/g)) out.add(m[1]!);
-  if (/\bbilateral(?:ly)?\b/.test(t)) out.add('bilateral');
+  for (const m of t.matchAll(CODE_RE)) out.add(m[0]);
+  sideTokens(t, out);
   out.delete('');
   return out;
 }
 
 // Admissible tokens of a source: everything a sentence may legitimately carry.
 function sourceTokens(text: string, into: Set<string>): void {
-  const t = prepare(text);
-  for (const m of t.matchAll(/\b(\d{4})-(\d{2})-(\d{2})\b/g)) {
-    into.add(m[0]);
-    into.add(stripZeros(m[1]!));
-    into.add(stripZeros(m[2]!));
-    into.add(stripZeros(m[3]!));
-  }
-  for (const m of t.matchAll(/\b(\d{1,2})\/(\d{1,2})\/(\d{2,4})\b/g)) {
-    into.add(m[0]);
-    into.add(stripZeros(m[1]!));
-    into.add(stripZeros(m[2]!));
-    into.add(stripZeros(m[3]!));
-  }
+  const t = dateTokens(prepare(text), into, true);
+  for (const m of t.matchAll(SYSTEM_RE)) { into.add(`${systemOf(m[1]!)}:${m[2]!}`); into.add(`coded:${m[2]!}`); }
   for (const m of t.matchAll(/\d+(?:\.\d+)?/g)) into.add(stripZeros(m[0]));
-  for (const m of t.matchAll(/\b[a-z]\d{2}(?:\.\d+)?\b/g)) into.add(m[0]);
-  for (const m of t.replace(SIDE_IDIOM, ' ').matchAll(/\b(left|right)\b/g)) into.add(m[1]!);
-  if (/\bbilateral(?:ly)?\b/.test(t)) into.add('bilateral');
+  for (const m of t.matchAll(CODE_RE)) into.add(m[0]);
+  sideTokens(t, into);
 }
 
 // --- the checks --------------------------------------------------------------
@@ -227,6 +304,8 @@ function resolve(chart: GateEntry[], citation: string): { ok: true; entry: GateE
   return { ok: true, entry };
 }
 
+const STOPWORDS = new Set(['the', 'a', 'an', 'of', 'in', 'on', 'at', 'to', 'for', 'and', 'or', 'but', 'is', 'was', 'were', 'be', 'been', 'by', 'with', 'as', 'it', 'its', 'this', 'that', 'these', 'those', 'he', 'she', 'they', 'his', 'her', 'their', 'has', 'have', 'had', 'not', 'no', 'from', 'if', 'so', 'than', 'then', 'there', 'which', 'who', 'we', 'you', 'i', 'my', 'our', 'your', 'are', 'am', 'do', 'did', 'does', 'will', 'would', 'can', 'could', 'may', 'might', 'shall', 'should']);
+
 function checkQuote(entry: GateEntry, quote: string): Check {
   const q = canon(quote);
   if (q.length === 0) return { ok: false, status: 'refuted', reason: 'quote-empty' };
@@ -234,12 +313,20 @@ function checkQuote(entry: GateEntry, quote: string): Check {
   const words = q.split(' ').filter(w => /[a-z0-9]/.test(w));
   const substantive = words.length === 1 && /^[a-z]{5,}$/.test(words[0]!);
   if (words.length < 2 && !substantive) return { ok: false, status: 'refuted', reason: 'quote-too-short: a quote must be at least two words, or one substantive word' };
+  // v1.6: "of the" is two words and appears in every entry; it is not a quote.
+  if (!words.some(w => !STOPWORDS.has(w))) return { ok: false, status: 'refuted', reason: 'quote-trivial: a quote must carry at least one word that is not a stopword' };
   if (!canon(entry.text).includes(q)) return { ok: false, status: 'refuted', reason: `quote-not-in-entry: the quote does not appear verbatim in ${entry.id}` };
   return { ok: true };
 }
 
 function checkHardTokens(text: string, allowed: Set<string>): Check {
-  const missing = [...sentenceHardTokens(text)].filter(t => !allowed.has(t));
+  const missing = [...sentenceHardTokens(text)].filter(t => {
+    if (allowed.has(t)) return false;
+    const labeled = /^([a-z-]+):(.+)$/.exec(t);
+    // A labeled code is wrong only when a source labels the same code otherwise.
+    if (labeled) return allowed.has(`coded:${labeled[2]!}`);
+    return true;
+  });
   if (missing.length > 0) return { ok: false, status: 'refuted', reason: `unsourced-token: ${missing.join(', ')}`, missing };
   return { ok: true };
 }
@@ -298,6 +385,7 @@ export interface SentenceInput { text: string; citation: string; quote: string }
 export function checkSentence(sources: GateSources, s: SentenceInput, index = 0, shared: Set<string> = sharedTokens(sources)): SentenceRecord {
   const base: SentenceBase = { index, text: s.text, citation: s.citation, quote: s.quote, reason: '' };
   try {
+    if (!/[a-z0-9]/.test(canon(s.text))) return { ...base, status: 'refuted', reason: 'sentence-empty: nothing to verify' };
     const r = resolve(sources.chart, s.citation);
     if (!r.ok) return { ...base, status: r.status, reason: r.reason };
     const q = checkQuote(r.entry, s.quote);

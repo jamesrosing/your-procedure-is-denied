@@ -9,7 +9,12 @@
 //              a side swapped, a side added that the cited entry carries only
 //              inside an idiom ("right back to baseline"; Oct 31), a citation
 //              moved to an entry that lacks the quote, a word dropped from the
-//              quote. Every pass here is a gate defect.
+//              quote; and, from Nov 2 (gate v1.6, after the Muse Code review),
+//              a count rewritten as the word one or zero, a date rewritten with
+//              a month name and the month moved, a side swapped and written as
+//              R or L, the letter of a code changed, the system word before a
+//              code swapped, a wrong number written in fullwidth digits. Every
+//              pass here is a gate defect.
 //   collision  a wrong number or side that happens to appear in the criteria,
 //              the denial, the case facts, or elsewhere in the cited entry. The
 //              gate checks presence, not correspondence, so these pass by design;
@@ -34,6 +39,12 @@ export type MutationKind =
   | 'date-shift'
   | 'laterality-swap'
   | 'laterality-idiom-leak'
+  | 'count-word'
+  | 'month-name-date'
+  | 'laterality-abbreviation'
+  | 'code-letter'
+  | 'code-system'
+  | 'fullwidth-digits'
   | 'citation-moved'
   | 'quote-word-dropped'
   | 'number-collision'
@@ -50,6 +61,12 @@ export const CLASS_OF: Record<MutationKind, MutationClass> = {
   'date-shift': 'hard',
   'laterality-swap': 'hard',
   'laterality-idiom-leak': 'hard',
+  'count-word': 'hard',
+  'month-name-date': 'hard',
+  'laterality-abbreviation': 'hard',
+  'code-letter': 'hard',
+  'code-system': 'hard',
+  'fullwidth-digits': 'hard',
   'citation-moved': 'hard',
   'quote-word-dropped': 'hard',
   'number-collision': 'collision',
@@ -62,7 +79,7 @@ export const CLASS_OF: Record<MutationKind, MutationClass> = {
 
 function canon(s: string): string {
   return s
-    .normalize('NFC')
+    .normalize('NFKC')
     .replace(/[‘’‚‛′]/g, "'")
     .replace(/[“”„‟″]/g, '"')
     .replace(/[‐-―−]/g, '-')
@@ -73,7 +90,7 @@ function canon(s: string): string {
 }
 
 const NUMBER_WORDS: Record<string, number> = {
-  two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10,
+  zero: 0, one: 1, dozen: 12, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10,
   eleven: 11, twelve: 12, thirteen: 13, fourteen: 14, fifteen: 15, sixteen: 16, seventeen: 17,
   eighteen: 18, nineteen: 19, twenty: 20, thirty: 30, forty: 40, fifty: 50, sixty: 60,
   seventy: 70, eighty: 80, ninety: 90,
@@ -89,21 +106,23 @@ function strip(n: string): string {
   return n.replace(/^0+(?=\d)/, '');
 }
 
+const MONTHS: Record<string, string> = { jan: '01', january: '01', feb: '02', february: '02', mar: '03', march: '03', apr: '04', april: '04', may: '05', jun: '06', june: '06', jul: '07', july: '07', aug: '08', august: '08', sep: '09', sept: '09', september: '09', oct: '10', october: '10', nov: '11', november: '11', dec: '12', december: '12' };
+const MONTH_NAME: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const MDY_RE = new RegExp(`\\b(${Object.keys(MONTHS).join('|')})\\.? (\\d{1,2})(?:st|nd|rd|th)?,? (\\d{4})\\b`, 'g');
+const ONE_IDIOM_RE = /\b(?:no|any|each|every|some|this|that|which|another|other|same|either|neither) one\b|\bone (?:of|another|way|hand|thing|point)\b/g;
+
+// The gate's admissible numbers and dates of a text (v1.6): every date in one
+// form (yyyy-mm-dd, yyyy-mm, mm-dd) plus its year; the day and the month are
+// not bare numbers; thousands separators folded; one and zero are numbers.
 function digitTokens(text: string): Set<string> {
-  const t = canon(text).replace(NUMBER_WORD_RE, w => String(NUMBER_WORDS[w]));
+  let t = canon(text).replace(ONE_IDIOM_RE, m => ' '.repeat(m.length)).replace(NUMBER_WORD_RE, w => String(NUMBER_WORDS[w]));
+  while (/\d,\d{3}\b/.test(t)) t = t.replace(/(\d),(\d{3})\b/g, '$1$2');
   const out = new Set<string>();
-  for (const m of t.matchAll(ISO_DATE_RE)) {
-    out.add(m[0]);
-    out.add(strip(m[1]!));
-    out.add(strip(m[2]!));
-    out.add(strip(m[3]!));
-  }
-  for (const m of t.matchAll(SLASH_DATE_RE)) {
-    out.add(m[0]);
-    out.add(strip(m[1]!));
-    out.add(strip(m[2]!));
-    out.add(strip(m[3]!));
-  }
+  const full = (y: string, m: string, d: string): string => { out.add(`${y}-${m}-${d}`); out.add(`${y}-${m}`); out.add(`${m}-${d}`); out.add(y); return ' '; };
+  t = t
+    .replace(ISO_DATE_RE, (_, y: string, m: string, d: string) => full(y, m, d))
+    .replace(SLASH_DATE_RE, (_, m: string, d: string, y: string) => full(y.length === 2 ? `20${y}` : y, m.padStart(2, '0'), d.padStart(2, '0')))
+    .replace(MDY_RE, (_, mo: string, d: string, y: string) => full(y, MONTHS[mo]!, d.padStart(2, '0')));
   for (const m of t.matchAll(/\d+(?:\.\d+)?/g)) out.add(strip(m[0]));
   return out;
 }
@@ -113,9 +132,12 @@ function digitTokens(text: string): Set<string> {
 // length so offsets survive.
 const SIDE_IDIOM_RE = /\bright\s+(?:back|away|now|after|before|here|there|then|to|at)\b|\bleft\s+(?:the|a|an|against|behind|over|off|out|in|to|for|at|on|with|without|home|early|before|after|us|him|her|them|it|from)\b/gi;
 
+const NOT_A_SIDE_RE = /\br\/o\b|\b\d+(?:\.\d+)?l\b|\b\d+(?:\.\d+)? l(?= (?:of|per|nc|o2|fluids?|saline|bolus|lactated|normal|ns|iv|over)\b|\/)|\/l\b|\bl\/(?:min|hr|h|day)\b|\brt (?:planning|therapy|dose|doses|dosimetry|simulation|field|fields|course|session|sessions|boost|fraction|fractions|completed|started|began|delivered|plan)\b|\b(?:radiation|respiratory|external beam|beam|adjuvant|palliative|definitive) rt\b/g;
+const SIDE_OF: Record<string, string> = { left: 'left', l: 'left', lt: 'left', right: 'right', r: 'right', rt: 'right' };
 function sideTokens(text: string): Set<string> {
   const out = new Set<string>();
-  for (const m of canon(text).replace(SIDE_IDIOM_RE, m => ' '.repeat(m.length)).matchAll(/\b(left|right)\b/g)) out.add(m[1]!);
+  const masked = canon(text).replace(SIDE_IDIOM_RE, m => ' '.repeat(m.length)).replace(NOT_A_SIDE_RE, m => ' '.repeat(m.length));
+  for (const m of masked.matchAll(/\b(left|right|l|r|lt|rt)\b/g)) out.add(SIDE_OF[m[1]!]!);
   return out;
 }
 
@@ -138,10 +160,14 @@ function admissible(sources: GateSources, entry: GateEntry): Admissible {
   for (const c of sources.criteria) for (const t of digitTokens(c.text)) shared.add(t);
   for (const d of sources.denial) for (const t of digitTokens(d)) shared.add(t);
   for (const f of sources.facts ?? []) for (const t of digitTokens(f)) shared.add(t);
+  for (const txt of [entry.text, ...sources.criteria.map(c => c.text), ...sources.denial, ...(sources.facts ?? [])]) {
+    for (const m of canon(txt).matchAll(/\b(cpt|hcpcs)\b(?: codes?)?:?[ -]?(\d{5})\b/g)) (txt === entry.text ? entryTokens : shared).add(`${m[1]}:${m[2]}`);
+  }
   const all = new Set([...entryTokens, ...shared]);
   const chartWide = new Set(all);
   for (const e of sources.chart) {
     for (const t of digitTokens(e.text)) chartWide.add(t);
+    for (const m of canon(e.text).matchAll(/\b[a-z]\d{2}(?:\.\d+)?\b|\b[a-z]\d{4}\b/g)) chartWide.add(m[0]);
     if (e.date) for (const t of digitTokens(e.date)) chartWide.add(t);
   }
   const sidesEntry = sideTokens(entry.text);
@@ -156,9 +182,10 @@ function admissible(sources: GateSources, entry: GateEntry): Admissible {
 
 interface NumberSpot { start: number; end: number; raw: string; value: number; word: boolean }
 
+const MONTH_DAY_RE = new RegExp(`\\b(?:${Object.keys(MONTHS).join('|')})\\.? \\d{1,2}(?:st|nd|rd|th)?(?:,? \\d{4})?\\b`, 'gi');
 function maskDatesAndIds(text: string): string {
-  // Same length, so offsets survive: dates and ids become spaces.
-  return text.replace(ISO_DATE_RE, m => ' '.repeat(m.length)).replace(SLASH_DATE_RE, m => ' '.repeat(m.length)).replace(/\b(note|crit)-\d+\b/g, m => ' '.repeat(m.length));
+  // Same length, so offsets survive: dates (in any written form, v1.6) and ids become spaces.
+  return text.replace(ISO_DATE_RE, m => ' '.repeat(m.length)).replace(SLASH_DATE_RE, m => ' '.repeat(m.length)).replace(MONTH_DAY_RE, m => ' '.repeat(m.length)).replace(/\b(note|crit)-\d+\b/g, m => ' '.repeat(m.length));
 }
 
 function numbersIn(text: string): NumberSpot[] {
@@ -277,6 +304,88 @@ function lateralityIdiomLeak(s: Sentence, entry: GateEntry, adm: Admissible): Mu
   return { kind: 'laterality-idiom-leak', class: 'hard', sentence: { ...s, text }, note: `"${leaked}" added; the entry has the word only in an idiom` };
 }
 
+// --- the v1.6 classes (Nov 2, after the Muse Code review) ----------------------
+
+// A count rewritten as the word "one" (or "zero"): absent everywhere, so a
+// pass means the word was not read as a number.
+function countWord(s: Sentence, adm: Admissible): Mutation | null {
+  const spot = numbersIn(s.text).find(sp => Number.isInteger(sp.value) && sp.value >= 2 && !sp.word);
+  if (!spot) return null;
+  for (const [n, w] of [[1, 'one'], [0, 'zero']] as const) {
+    if (adm.chartWide.has(String(n))) continue;
+    const text = splice(s.text, spot, w);
+    return { kind: 'count-word', class: 'hard', sentence: { ...s, text }, note: `${spot.raw} -> ${w}` };
+  }
+  return null;
+}
+
+// An ISO or slash date rewritten with a month name, the month moved by one to
+// three months, to a date no source carries in any form.
+function monthNameDate(s: Sentence, adm: Admissible): Mutation | null {
+  const m = [...s.text.matchAll(ISO_DATE_RE)][0] ?? null;
+  const sl = m ? null : ([...s.text.matchAll(SLASH_DATE_RE)][0] ?? null);
+  if (!m && !sl) return null;
+  const y = m ? m[1]! : (sl![3]!.length === 2 ? `20${sl![3]}` : sl![3]!);
+  const mo = Number(m ? m[2] : sl![1]);
+  const d = Number(m ? m[3] : sl![2]);
+  for (const delta of [1, -1, 2, -2, 3]) {
+    const nm = ((mo - 1 + delta + 12) % 12) + 1;
+    const iso = `${y}-${String(nm).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+    if (adm.all.has(iso) || adm.all.has(`${y}-${String(nm).padStart(2, '0')}`)) continue;
+    const written = `${MONTH_NAME[nm - 1]} ${d}, ${y}`;
+    return { kind: 'month-name-date', class: 'hard', sentence: { ...s, text: s.text.replace((m ?? sl!)[0], written) }, note: `${(m ?? sl!)[0]} -> ${written}` };
+  }
+  return null;
+}
+
+// A side swapped and written as its abbreviation (R, L).
+function lateralityAbbreviation(s: Sentence, adm: Admissible): Mutation | null {
+  const spots = sideSpots(s.text);
+  if (spots.length === 0) return null;
+  const sides = new Set(spots.map(sp => sp.word.toLowerCase()));
+  const swappedIn = [...sides].map(w => (w === 'left' ? 'right' : 'left'));
+  if (swappedIn.some(w => adm.sidesEntry.has(w) || adm.sidesShared.has(w))) return null;
+  let text = s.text;
+  for (const sp of [...spots].reverse()) text = splice(text, sp, sp.word.toLowerCase() === 'left' ? 'R' : 'L');
+  return { kind: 'laterality-abbreviation', class: 'hard', sentence: { ...s, text }, note: `${[...sides].join('/')} -> ${swappedIn.map(w => (w === 'left' ? 'L' : 'R')).join('/')}` };
+}
+
+// The letter of an alphanumeric code changed (J9271 -> K9271), to a code no
+// source carries.
+function codeLetter(s: Sentence, adm: Admissible): Mutation | null {
+  const m = /\b([A-Za-z])(\d{2}(?:\.\d+)?|\d{4})\b/.exec(s.text);
+  if (!m) return null;
+  const letter = m[1]!;
+  const next = String.fromCharCode(letter.charCodeAt(0) + (letter.toLowerCase() === 'z' ? -1 : 1));
+  const code = `${next}${m[2]}`;
+  if (adm.chartWide.has(code.toLowerCase())) return null;
+  const text = s.text.slice(0, m.index) + code + s.text.slice(m.index + m[0].length);
+  return { kind: 'code-letter', class: 'hard', sentence: { ...s, text }, note: `${m[0]} -> ${code}` };
+}
+
+// The system word before a code swapped (CPT 19318 -> HCPCS 19318) where a
+// source names the code under the written system, so the swap contradicts it.
+function codeSystem(s: Sentence, adm: Admissible): Mutation | null {
+  const m = /\b(CPT|HCPCS)\b(?: codes?)?:? ?(\d{5})\b/i.exec(s.text);
+  if (!m) return null;
+  const sys = m[1]!.toLowerCase();
+  if (!adm.all.has(`${sys}:${m[2]}`)) return null;
+  const other = sys === 'cpt' ? 'HCPCS' : 'CPT';
+  if (adm.all.has(`${other.toLowerCase()}:${m[2]}`)) return null;
+  const text = s.text.slice(0, m.index) + m[0].replace(m[1]!, other) + s.text.slice(m.index + m[0].length);
+  return { kind: 'code-system', class: 'hard', sentence: { ...s, text }, note: `${m[1]} ${m[2]} -> ${other} ${m[2]}` };
+}
+
+// A wrong number written in fullwidth digits (U+FF10 to U+FF19).
+function fullwidthDigits(s: Sentence, adm: Admissible): Mutation | null {
+  const spot = numbersIn(s.text).find(sp => Number.isInteger(sp.value) && !sp.word);
+  if (!spot) return null;
+  const value = [spot.value + 1, spot.value + 3, spot.value + 7, spot.value * 2 + 1].find(n => !adm.chartWide.has(String(n)));
+  if (value === undefined) return null;
+  const wide = String(value).replace(/\d/g, d => String.fromCharCode(0xff10 + Number(d)));
+  return { kind: 'fullwidth-digits', class: 'hard', sentence: { ...s, text: splice(s.text, spot, wide) }, note: `${spot.raw} -> ${wide}` };
+}
+
 function citationMoved(s: Sentence, sources: GateSources, rng: Rng): Mutation | null {
   const q = canon(s.quote);
   const others = sources.chart.filter(e => e.id !== s.citation && !canon(e.text).includes(q));
@@ -353,6 +462,12 @@ export function mutateSentence(s: Sentence, sources: GateSources, rng: Rng): Mut
   push(dateShift(s, adm));
   push(lateralitySwap(s, adm));
   push(lateralityIdiomLeak(s, entry, adm));
+  push(countWord(s, adm));
+  push(monthNameDate(s, adm));
+  push(lateralityAbbreviation(s, adm));
+  push(codeLetter(s, adm));
+  push(codeSystem(s, adm));
+  push(fullwidthDigits(s, adm));
   push(citationMoved(s, sources, rng));
   push(quoteWordDropped(s, entry, rng));
   push(numberCollision(s, adm, rng));

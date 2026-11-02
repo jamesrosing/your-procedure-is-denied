@@ -200,7 +200,7 @@ describe('litmus: hard tokens', () => {
     assert.equal(one('The therapy note of August 15, 2025 documents completion.', 'note-002', Q_PT).status, 'refuted');
   });
 
-  test('laterality is a hard token in anatomical context only', () => {
+  test('laterality is a hard token wherever it names a side (v1.4; the v1.3 anatomy list is gone)', () => {
     const s = one('Resection on the left breast was estimated at 724 grams.', 'note-002', Q_PT.replace('12', '12'));
     assert.equal(s.status, 'needs-citation');
     assert.deepEqual(s.missing, ['724', 'left']);
@@ -347,5 +347,92 @@ describe('an idiom in the cited entry is not a source for a side (v1.5)', () => 
   test('the shunt direction as written in the entry stays verified', () => {
     const r = litmus(shuntSources, appeal([{ text: 'The echocardiogram shows a left to right shunt across the atrial septal defect.', citation: 'note-001', quote: 'across a secundum atrial septal defect' }], []));
     assert.equal(r.sentences[0]!.status, 'verified');
+  });
+});
+
+// Gate v1.6 (Nov 2; found by Meta's coding agent, Muse Code, reviewing this
+// repository: build/reviews/muse-code/). Six token classes the gate never had,
+// each reproduced on the fixture before the fix: a count written as the word
+// one or zero; a date written with a month name; a side written R or L; the
+// letter of an alphanumeric code and the system word before a code; a quote
+// made only of stopwords; a number recombined from a date's day or from a
+// thousands-separated figure in the cited entry. Plus digits outside ASCII and
+// an empty sentence.
+describe('gate v1.6: the token classes the review found', () => {
+  const one = (text: string, citation: string, quote: string): SentenceRecord => litmus(sources, appeal([{ text, citation, quote }])).sentences[0]!;
+  const PT = 'note-002';
+  test('a count written as one or zero is a number the entry must carry', () => {
+    assert.equal(one('She finished one week of physical therapy.', PT, Q_PT).status, 'refuted');
+    assert.equal(one('She finished zero weeks of physical therapy.', PT, Q_PT).status, 'refuted');
+    assert.equal(one('She finished a dozen weeks of physical therapy.', PT, Q_PT).status, 'verified', 'a dozen is twelve, which the entry carries');
+    assert.equal(one('She finished twelve weeks of physical therapy.', PT, Q_PT).status, 'verified');
+  });
+  test('one as a pronoun or determiner is not a count', () => {
+    assert.equal(one('This is one of the entries documenting therapy.', PT, Q_PT).status, 'verified');
+    assert.equal(one('No one disputes that therapy was completed.', PT, Q_PT).status, 'verified');
+  });
+  test('a date written with a month name is checked as a date', () => {
+    assert.equal(one('The therapy note of August 14, 2025 documents completion.', PT, Q_PT).status, 'verified');
+    assert.equal(one('The therapy note of 14 August 2025 documents completion.', PT, Q_PT).status, 'verified');
+    assert.equal(one('The therapy note of Aug. 14th, 2025 documents completion.', PT, Q_PT).status, 'verified');
+    assert.equal(one('The therapy note of 8/14/2025 documents completion.', PT, Q_PT).status, 'verified', 'a slash date against an ISO entry date');
+    assert.notEqual(one('The therapy note of September 14, 2025 documents completion.', PT, Q_PT).status, 'verified');
+    assert.equal(one('The therapy note of December 14, 2025 documents completion.', PT, Q_PT).status, 'refuted');
+    assert.equal(one('Therapy was completed in August 2025.', PT, Q_PT).status, 'verified');
+    assert.equal(one('Therapy was completed in September 2025.', PT, Q_PT).status, 'needs-citation', 'note-003 is dated September 2025; the draft is still blocked');
+  });
+  test('a number is not sourced by the day or month of the entry date', () => {
+    assert.equal(one('She completed 14 weeks of physical therapy.', PT, Q_PT).status, 'refuted', '14 is the day of the entry date, not a count the entry states');
+    assert.equal(one('She completed 8 weeks of physical therapy.', PT, Q_PT).status, 'needs-citation', '8 is the month of the entry date, not a count it states; note-003 says 8 weeks, so the gate names it');
+    assert.equal(one('The 2025 therapy course lasted 12 weeks.', PT, Q_PT).status, 'verified', 'the year stays admissible');
+  });
+  test('a figure with a thousands separator is one number', () => {
+    assert.equal(one('The estimated resection was 2,200 grams.', 'note-001', Q_WEIGHT).status, 'refuted', '2 and 200 are in the entry; 2200 is not');
+    assert.equal(one('She weighs 200 pounds at 5 foot 2.', 'note-001', Q_WEIGHT).status, 'verified');
+  });
+  test('digits outside ASCII are digits', () => {
+    assert.equal(one('The estimated resection was ９９９ grams.', 'note-001', Q_WEIGHT).status, 'refuted');
+    assert.equal(one('The estimated resection was ７２４ grams on the right.', 'note-001', Q_WEIGHT).status, 'verified');
+  });
+  test('a quote of stopwords alone is not a quote', () => {
+    assert.equal(one('Therapy was completed.', PT, 'of the').status, 'refuted');
+    assert.equal(one('Therapy was completed.', PT, 'of PT').status, 'verified', 'PT is short but not a stopword');
+  });
+  test('an empty sentence is not verified', () => {
+    assert.equal(one('', PT, Q_PT).status, 'refuted');
+    assert.equal(one(' . ', PT, Q_PT).status, 'refuted');
+  });
+
+  const sideChart = [
+    { id: 'note-001', date: '2026-02-03', kind: 'imaging', text: 'Stress imaging showed a large reversible defect involving 12 percent of the left ventricle.' },
+    { id: 'note-002', date: '2026-02-10', kind: 'radiation oncology note', text: 'RT planning completed; 1.5 L of fluid given; R/O infection, none found.' },
+  ];
+  const sideSources: GateSources = { chart: sideChart, criteria: [{ id: 'crit-1', text: 'Reversible ischemia on stress imaging.' }], denial: ['Northwind denied CPT 92928. CARC 50.'], facts: ['SYN-038, 66 year old woman'] };
+  const side = (text: string, citation: string, quote: string) => litmus(sideSources, appeal([{ text, citation, quote }], [])).sentences[0]!;
+  test('a side written R, L, Rt, or Lt is a side', () => {
+    assert.equal(side('A reversible defect involved 12 percent of the R ventricle.', 'note-001', 'reversible defect involving 12 percent').status, 'refuted');
+    assert.equal(side('A reversible defect involved 12 percent of the Rt ventricle.', 'note-001', 'reversible defect involving 12 percent').status, 'refuted');
+    assert.equal(side('A reversible defect involved 12 percent of the L ventricle.', 'note-001', 'reversible defect involving 12 percent').status, 'verified');
+    assert.equal(side('A reversible defect involved 12 percent of the Lt ventricle.', 'note-001', 'reversible defect involving 12 percent').status, 'verified');
+  });
+  test('RT as radiation therapy, L as liters, and R/O as rule out are not sides', () => {
+    assert.equal(side('RT planning was completed and 1.5 L of fluid was given; R/O infection was negative.', 'note-002', 'RT planning completed').status, 'verified');
+  });
+
+  const codeChart = [
+    { id: 'note-001', date: '2026-03-02', kind: 'infusion record', text: 'Start J9271 infusion today, 200 mg over 30 minutes.' },
+    { id: 'note-002', date: '2026-03-03', kind: 'office visit', text: 'Tolerated the infusion. Plan: continue.' },
+  ];
+  const codeSources: GateSources = { chart: codeChart, criteria: [{ id: 'crit-1', text: 'Pembrolizumab for the documented indication.' }], denial: ['Northwind denied CPT 96413 and HCPCS J9271. CARC 50.'], facts: ['SYN-060, 61 year old man'] };
+  const code = (text: string, citation: string, quote: string) => litmus(codeSources, appeal([{ text, citation, quote }], [])).sentences[0]!;
+  test('the letter of an alphanumeric code is part of the code', () => {
+    assert.equal(code('She started K9271 infusion.', 'note-001', 'infusion today').status, 'refuted');
+    assert.equal(code('She started J9271 infusion.', 'note-001', 'infusion today').status, 'verified');
+  });
+  test('the code system named before a code must match a source that names it; an unlabeled code is not graded on its label', () => {
+    assert.equal(code('The denial was for HCPCS 96413.', 'note-002', 'Tolerated the infusion').status, 'refuted', 'the sources carry 96413 as CPT');
+    assert.equal(code('The denial was for CPT 96413.', 'note-002', 'Tolerated the infusion').status, 'verified');
+    assert.equal(code('The infusion was billed as 96413.', 'note-002', 'Tolerated the infusion').status, 'verified');
+    assert.equal(code('The 200 mg dose was given over 30 minutes, ICD-10 C34.90.', 'note-001', 'infusion today').status, 'refuted', 'a code the sources never carry stays refuted');
   });
 });

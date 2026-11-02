@@ -59,7 +59,7 @@ describe('litmus-gate library', () => {
     if (!out.ok) return;
     const md = renderMarkdown(out.result);
     assert.match(md, /^# LITMUS gate: PASS/);
-    assert.ok(md.includes('v1.5'));
+    assert.match(md, /litmus\.ts v1\.\d+/);
     assert.equal((md.match(/\[verified\]/g) ?? []).length, out.result.counts.verified + out.result.counts.evidenceVerified);
   });
 });
