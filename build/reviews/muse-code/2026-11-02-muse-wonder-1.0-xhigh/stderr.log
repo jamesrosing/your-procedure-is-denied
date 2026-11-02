@@ -1,0 +1,5 @@
+tbh: reasoning effort ultra is not available (gate ultra_reasoning_effort is closed); using xhigh
+muse: Named permission profiles are unavailable: missing field `schema_version` at line 1 column 34.
+muse: workspace root: /tmp/claude-1000/-home-james-projects-your-procedure-is-denied-build/9fc98b9d-e5c7-45fe-9c8e-9ef9e757f00f/scratchpad/muse-review-strong (explicit)
+muse: workspace trust: trusted source=run-flag
+exit 0

@@ -1,0 +1,12 @@
+You are reviewing this repository as a senior engineer. Do not modify any file. Read-only.
+
+Context: a hackathon entry (Meta AI Developer Hackathon). Everything under build/ was written during the event. The system drafts appeals to health-insurance claim denials from a synthetic chart and checks every sentence of the draft against the record with a deterministic gate (build/src/litmus.ts). README.md is written as a manuscript (abstract, methods, results). NEW-WORK.md is a per-commit ledger. Tests: cd build && npm test. The viewer in build/viewer replays stored model runs.
+
+Review for, in priority order:
+1. Correctness defects in the gate (build/src/litmus.ts) and its tests (build/tests/litmus.test.ts): any way a fabricated quote, number, date, code, or anatomical side could pass as verified. Give a concrete input that would slip through if you find one.
+2. Defects in the harness, provider, and regate tooling (build/src/harness.ts, build/src/provider.ts, build/scripts/regate.ts): crashes, silent failures, cost accounting errors.
+3. Claims in README.md that the code or result files do not support.
+4. Viewer robustness (build/viewer/src): anything a judge clicking through could break.
+5. Security and data: any PHI-like content, secrets, or unsafe handling.
+
+Report as markdown: a one-paragraph verdict, then findings ranked Blocker / Serious / Minor / Nit with file:line, how you confirmed each (ran or read), and a concrete repro where possible. End with what you found clean. Be skeptical and specific; do not pad. Print the report to stdout.

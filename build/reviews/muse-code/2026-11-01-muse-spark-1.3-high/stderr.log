@@ -1,0 +1,6 @@
+muse: Named permission profiles are unavailable: missing field `schema_version` at line 1 column 34.
+muse: workspace root: /tmp/claude-1000/-home-james-projects-your-procedure-is-denied-build/9fc98b9d-e5c7-45fe-9c8e-9ef9e757f00f/scratchpad/muse-review (explicit)
+muse: Including your Claude Code personal rules and 17 skills — manage with /settings.
+muse: Agent delegation: auto unavailable: workspace is untrusted.
+muse: retrying meta model stream in 1000ms (attempt 2/10)
+exit 0
