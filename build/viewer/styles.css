@@ -91,43 +91,14 @@ h2 { font-size: 13.5px; font-weight: 500; color: var(--ink-7); }
 .mono, .id, .date, .src, .cid, .num, .stamp, .keys { font-family: var(--font-mono); }
 .hidden { display: none; }
 
-/* --- title cards --------------------------------------------------------- */
-/* Four lines typed one after another at the top of the page, each held a
-   moment once complete and kept while the next types, so the block reads as
-   one short paragraph; then the block fades and the page beneath comes into
-   focus. Behind the lines is the replay page itself, frozen before the first
-   step, under a scrim that is nearly solid beneath the text and light over
-   the three columns, so what the lines describe stays visible below them.
-   The one orchestrated moment on the page; nothing else moves on its own. */
-.intro { position: fixed; inset: 0; z-index: 100; display: grid; align-content: start; justify-items: center; padding: 44px 2vw 0; }
-.intro[hidden] { display: none; }
-/* the scrim is its own layer so the lines can travel while it lifts */
-.intro-scrim { position: absolute; inset: 0; background: linear-gradient(to bottom, color-mix(in oklab, var(--ink-0) 92%, transparent) 0, color-mix(in oklab, var(--ink-0) 92%, transparent) 420px, color-mix(in oklab, var(--ink-0) 42%, transparent) 550px, color-mix(in oklab, var(--ink-0) 42%, transparent) 100%); opacity: 1; transition: opacity 700ms var(--ease-out); } /* INTRO_MOVE_MS */
-.intro.leaving { pointer-events: none; }
-.intro.leaving .intro-scrim, .intro.leaving .intro-foot { opacity: 0; }
-.intro-stage { position: relative; display: grid; gap: 10px; width: max-content; max-width: 92vw; transform-origin: 0 0; }
-.intro-line { margin: 0; text-align: left; text-wrap: pretty; font-family: var(--font-mono); font-weight: 400; font-size: clamp(17px, 1.85vw, 35px); line-height: 1.3; letter-spacing: -0.01em; color: var(--ink-7); opacity: 0; transition: opacity 400ms var(--ease-out); }
-.intro-line.show { opacity: 1; transition: none; }
-/* the cursor: a thin block after the last typed character, blinking while typing */
-.intro-line .ch { visibility: hidden; }
-.intro-line .ch.on { visibility: visible; }
-.intro-line .cursor { display: inline-block; width: 0.55em; height: 1em; margin-left: 0.05em; vertical-align: -0.12em; background: var(--ink-7); animation: cursor 900ms steps(2, start) infinite; }
-@keyframes cursor { to { visibility: hidden; } }
-/* the caption band: the sources for the marked statements and the provenance
-   stamp, solid, so nothing of the page shows half-covered beneath them */
-.intro-foot { position: absolute; left: 0; right: 0; bottom: 0; min-height: 100px; padding: 12px 24px; background: var(--ink-0); border-top: var(--hairline); display: flex; justify-content: space-between; align-items: center; gap: 24px; transition: opacity 700ms var(--ease-out); } /* INTRO_MOVE_MS */
-.intro-notes { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; min-width: 0; }
-.intro-stamp { font-family: var(--font-mono); font-size: clamp(11px, 0.8vw, 15px); line-height: 1.4; color: var(--ink-6); }
-
-/* --- the preamble: where the lines land, at the bottom of the page --------- */
-/* After the cards, the three lines travel down into one paragraph here, the
-   sources under it, with a dismiss button; the p key or the footer brings it
-   back. The stage above gives up the height while it is open. */
+/* --- about this page, at the bottom of the page ---------------------------- */
+/* The data note and the provenance stamp, with a dismiss button; the p key or
+   the footer's "about this page" brings it back. The stage above gives up the
+   height only while it is open. */
 .preamble { border-top: var(--hairline); background: var(--surface); padding: 12px 24px 12px; display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; align-items: start; animation: arrive var(--motion-base) var(--ease-out); }
 .preamble[hidden] { display: none; }
-.preamble-text { margin: 0; grid-column: 1; font-family: var(--font-mono); font-size: 14px; line-height: 1.5; color: var(--ink-7); max-width: 150ch; }
 .preamble-notes { margin: 0; grid-column: 1; font-family: var(--font-mono); font-size: 11px; line-height: 1.5; color: var(--ink-5); }
-.preamble-close { grid-column: 2; grid-row: 1 / span 4; align-self: start; width: 28px; height: 28px; padding: 0; font-size: 18px; line-height: 1; }
+.preamble-close { grid-column: 2; grid-row: 1 / span 2; align-self: start; width: 28px; height: 28px; padding: 0; font-size: 18px; line-height: 1; }
 .btn-about { margin-left: 12px; padding: 0; border: 0; background: none; color: var(--heading); font: inherit; cursor: pointer; }
 .btn-about:hover { color: var(--brand); text-decoration: underline; }
 
@@ -136,10 +107,6 @@ h2 { font-size: 13.5px; font-weight: 500; color: var(--ink-7); }
 .payer-reason[hidden] { display: none; }
 .payer-reason .lbl { display: block; font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-5); margin-bottom: 3px; }
 .payer-reason q { quotes: "\201C" "\201D"; font-family: var(--read-serif); font-size: 14px; line-height: 1.45; color: var(--ink-7); }
-
-/* footnote markers in the opening and the paragraph: set apart so they are seen */
-.intro-line .ch.mark { color: var(--heading); font-weight: 700; }
-.preamble-text .mark { color: var(--heading); font-weight: 700; }
 
 /* --- the live query as a strip ------------------------------------------- */
 /* For the one step the CHART query is the last thing that happened, the
@@ -271,14 +238,6 @@ body:has(.writ:not([hidden])) .stage { flex: 0 0 calc(100vh - 56px - 32px); }
   padding: 9px 16px;
   border-bottom: var(--hairline);
   background: var(--ink-0);
-}
-/* the reveal: as the cards lift, the three column headers light in order,
-   left to right, so the eye reads chart, criteria, draft without a word */
-.panel-head h2 { transition: color 300ms var(--ease-out); }
-.panel.criteria .panel-head h2 { transition-delay: 200ms; }
-.panel.draft .panel-head h2 { transition-delay: 400ms; }
-@media (prefers-reduced-motion: no-preference) {
-  body.cards .panel-head h2 { color: var(--ink-4); transition: none; }
 }
 .panel-meta { color: var(--ink-5); font-size: 11px; font-family: var(--font-mono); white-space: nowrap; }
 /* one line under each header: what the column holds, in plain words */
@@ -587,8 +546,6 @@ body:has(.writ:not([hidden])) .stage { flex: 0 0 calc(100vh - 56px - 32px); }
 @keyframes arrive { from { opacity: 0; } to { opacity: 1; } }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation: none !important; }
-  .intro-line .cursor { display: none; }
-  .intro-line .ch { visibility: visible; }
 }
 @media (max-width: 1100px) {
   .bar { grid-template-columns: 1fr 1fr; height: auto; padding: 8px 16px; gap: 8px 16px; }

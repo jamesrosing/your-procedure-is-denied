@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-11-02 00:51 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-11-02 05:09 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -52,7 +52,7 @@ Each commit that changed the version string in `build/src/litmus.ts`. The gate i
 
 ## Commits since `hackathon-start`
 
-Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 63 regenerate commits (by github-actions[bot] after a push, or by the author running `npm run log` locally) are this log regenerating itself; they touch only the generated files and carry no ledger row.
+Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 64 regenerate commits (by github-actions[bot] after a push, or by the author running `npm run log` locally) are this log regenerating itself; they touch only the generated files and carry no ledger row.
 
 ### 79e5e21 · 2026-10-26 20:38 · Add hackathon scaffolding: NEW-WORK.md and /build
 
@@ -779,3 +779,11 @@ Video script and plan rewritten in the author's own words (`assets/video/WALKTHR
 ### 07205e4 · 2026-11-01 16:29 · Viewer: a figures spotlight region; video plan: Figures at 2:02, Compare from 2:07, the pickers opened briefly, both themes
 
 Viewer: a `figures` spotlight region (`#figure-list`), so the Figures tab can be ringed in a take; one assertion. Video plan (`assets/video/WALKTHROUGH.md`): the Figures tab shown at 2:02 and Compare from 2:07, four seconds longer on the grid, at the author's request; the case picker opened for a moment at "one of fifty" and the run picker at "nine runs", drawn as an open list since a native dropdown never reaches a screencast; the take recorded in both themes. 260 tests
+
+### aa3e4d2 · 2026-11-01 16:51 · Build log: regenerate after 07205e4
+
+(generated files only; no ledger row by design)
+
+### next commit · the one that carries this regeneration
+
+Viewer: the typed opening removed (`build/viewer/`): no title cards, no `i` key, no travel into a preamble paragraph, no `cards` body class; the page opens on the case at rest, as a reviewer of the Nov 1 cut asked (the first thirty seconds were a block of typed text with the voice over it, and the block then sat at the top of the frame for the rest of the video). The "about this page" panel (footer link, p key) keeps the data note and the provenance stamp (`PROVENANCE_STAMP`, formerly `INTRO_STAMP`); the typing pace the model's why and the live-query strip share is `TYPE_CHAR_MS`. Asset links v37. Video plan (`assets/video/WALKTHROUGH.md`): the take opens on case-025 with the payer's reason ringed from the first frame while the speaker says who they are; the three lines of the opening, their sources, and the stamp are kept in a section of the plan, not in the spoken script, since they would add about half a minute past the limit. The three title-card tests replaced by one on the stamp; 258 tests

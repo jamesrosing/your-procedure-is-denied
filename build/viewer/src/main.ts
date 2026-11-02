@@ -3,7 +3,7 @@
 // Everything that decides what a step means lives in replay.ts.
 import type { PaperIndex } from './figures.js';
 import {
-  buildTimeline, carcHelp, codeSystemHelp, compareColumns, DATA_NOTE, denialKind, DENIAL_KIND_HELP, firstLine, PANEL_HELP, parseStep, VERDICT_HELP, formatSeconds, formatUsd, INTRO_CHAR_MS, LABEL_HELP, payerRemark, INTRO_END_PAUSE_MS, INTRO_FADE_MS, INTRO_LINES, INTRO_MOVE_MS, INTRO_NOTES, INTRO_STAMP, introSchedule, newestRun, playDelayMs, scoreboard, sideText, stateAt,
+  buildTimeline, carcHelp, codeSystemHelp, compareColumns, DATA_NOTE, denialKind, DENIAL_KIND_HELP, firstLine, PANEL_HELP, parseStep, VERDICT_HELP, formatSeconds, formatUsd, LABEL_HELP, payerRemark, newestRun, PROVENANCE_STAMP, TYPE_CHAR_MS, playDelayMs, scoreboard, sideText, stateAt,
   type ReplayState, type ResultsFile, type Step, type ViewerCase, type ViewerResult,
   type SentenceState,
 } from './replay.js';
@@ -76,13 +76,9 @@ const ui = {
   cElapsed: $<HTMLElement>('c-elapsed'),
   progress: $<HTMLElement>('progress'),
   boardSection: $<HTMLElement>('board'),
-  intro: $<HTMLElement>('intro'),
-  introStage: $<HTMLElement>('intro-stage'),
   strip: $<HTMLElement>('strip'),
   payerReason: $<HTMLElement>('payer-reason'),
   preamble: $<HTMLElement>('preamble'),
-  preambleText: $<HTMLElement>('preamble-text'),
-  preambleNotes: $<HTMLElement>('preamble-notes'),
   preambleData: $<HTMLElement>('preamble-data'),
   preambleStamp: $<HTMLElement>('preamble-stamp'),
   preambleClose: $<HTMLButtonElement>('preamble-close'),
@@ -101,9 +97,6 @@ const ui = {
   writFootnotes: $<HTMLOListElement>('writ-footnotes'),
   writProvenance: $<HTMLElement>('writ-provenance'),
   writSignature: $<HTMLElement>('writ-signature'),
-  introStamp: $<HTMLElement>('intro-stamp'),
-  introSources: $<HTMLElement>('intro-sources'),
-  introSkip: $<HTMLButtonElement>('intro-skip'),
   boardTable: $<HTMLTableElement>('board-table'),
   boardData: $<HTMLElement>('board-data'),
   panelSub: { chart: $<HTMLElement>('chart-sub'), criteria: $<HTMLElement>('crit-sub'), draft: $<HTMLElement>('draft-sub') },
@@ -270,7 +263,7 @@ function renderWhy(state: ReplayState): void {
     const ch = chars[n];
     if (ch !== undefined) cursor.before(document.createTextNode(ch));
     n += 1;
-    if (n < chars.length) whyTimers.push(window.setTimeout(tick, Math.max(8, INTRO_CHAR_MS / 3)));
+    if (n < chars.length) whyTimers.push(window.setTimeout(tick, Math.max(8, TYPE_CHAR_MS / 3)));
     else whyTimers.push(window.setTimeout(() => cursor.remove(), 600));
   };
   tick();
@@ -356,7 +349,7 @@ function renderStrip(state: ReplayState): void {
   const val = answer.querySelector<HTMLElement>('.val')!;
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reduced) { val.textContent = strip.answer; return; }
-  // Type the answer after the nodes have arrived, at the title cards' pace.
+  // Type the answer after the nodes have arrived, at the typing pace.
   const chars = [...strip.answer];
   const cursor = text('span', 'cursor', '');
   val.append(cursor);
@@ -365,7 +358,7 @@ function renderStrip(state: ReplayState): void {
     const ch = chars[n];
     if (ch !== undefined) cursor.before(document.createTextNode(ch));
     n += 1;
-    if (n < chars.length) stripTimers.push(window.setTimeout(tick, INTRO_CHAR_MS));
+    if (n < chars.length) stripTimers.push(window.setTimeout(tick, TYPE_CHAR_MS));
     else stripTimers.push(window.setTimeout(() => cursor.remove(), 900));
   };
   stripTimers.push(window.setTimeout(tick, 560));
@@ -894,116 +887,18 @@ async function renderBoard(): Promise<void> {
 
 // --- boot --------------------------------------------------------------------
 
-// --- title cards ---------------------------------------------------------------
-// Plays when the page opens without a deep link, and on the i key. Any key or
-// click skips. With reduced motion the three lines show at once and wait. The
-// lines type one after another and stay, gathering at the top of the page
-// over the case itself, rewound to the untouched chart; the reveal lights the
-// three column headers left to right (styles.css).
-
-let introTimers: number[] = [];
-let introOpen = false;
+// --- about this page ------------------------------------------------------------
+// The provenance stamp and the data note, at the bottom of the page, behind
+// the footer's "about this page" and the p key. (The typed opening that once
+// travelled into this panel left the page on Nov 1; its words are in
+// assets/video/WALKTHROUGH.md.)
 
 function showPreamble(on: boolean): void {
   if (on) {
-    // The footnote markers are set apart so they read at paragraph size.
-    ui.preambleText.replaceChildren(...INTRO_LINES.join(' ').split(/([\u00b9\u00b2\u00b3])/).map(part => /^[\u00b9\u00b2\u00b3]$/.test(part) ? text('span', 'mark', part) : document.createTextNode(part)));
-    ui.preambleNotes.textContent = INTRO_NOTES;
     ui.preambleData.textContent = DATA_NOTE;
-    ui.preambleStamp.textContent = INTRO_STAMP;
+    ui.preambleStamp.textContent = PROVENANCE_STAMP;
   }
   ui.preamble.hidden = !on;
-}
-
-// The cards end by travelling: the block of lines shrinks and slides down to
-// where the preamble paragraph sits at the bottom of the page, while the scrim
-// lifts and the column headers light; then the paragraph takes over. Reduced
-// motion, or an ended animation, goes straight to the paragraph.
-function endIntro(): void {
-  if (!introOpen) return;
-  introOpen = false;
-  for (const t of introTimers) window.clearTimeout(t);
-  introTimers = [];
-  ui.intro.classList.add('leaving');
-  document.body.classList.remove('cards');
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const finish = (): void => { ui.intro.hidden = true; ui.intro.classList.remove('leaving'); ui.introStage.style.transform = ''; ui.preamble.style.visibility = ''; };
-  showPreamble(true);
-  if (reduced || typeof ui.introStage.animate !== 'function') { finish(); return; }
-  ui.preamble.style.visibility = 'hidden';
-  const first = ui.introStage.getBoundingClientRect();
-  const last = ui.preambleText.getBoundingClientRect();
-  if (first.width === 0 || first.height === 0) { finish(); return; }
-  const dx = last.left - first.left;
-  const dy = last.top - first.top;
-  // One scale for both axes, the ratio of the two type sizes, so the glyphs
-  // keep their shape and arrive at the paragraph's size; the paragraph then
-  // takes over with its own line breaks.
-  const line = ui.introStage.querySelector<HTMLElement>('.intro-line');
-  const from = line ? parseFloat(getComputedStyle(line).fontSize) : 35;
-  const to = parseFloat(getComputedStyle(ui.preambleText).fontSize) || 14;
-  const scale = Math.max(0.05, to / from);
-  const run = ui.introStage.animate(
-    [{ transform: 'translate(0px, 0px) scale(1)', opacity: 1 }, { transform: `translate(${dx}px, ${dy}px) scale(${scale})`, opacity: 0.4 }],
-    { duration: INTRO_MOVE_MS, easing: 'cubic-bezier(0.2, 0.8, 0.2, 1)', fill: 'forwards' },
-  );
-  run.addEventListener('finish', () => { run.cancel(); finish(); });
-  run.addEventListener('cancel', finish);
-}
-
-function playIntro(): void {
-  if (introOpen) return;
-  introOpen = true;
-  stop();
-  seek(0);
-  showPreamble(false);
-  document.body.classList.add('cards');
-  const lines = [...ui.intro.querySelectorAll<HTMLElement>('.intro-line')];
-  lines.forEach(el => { el.textContent = ''; el.classList.remove('show', 'typing'); });
-  ui.introStamp.textContent = INTRO_STAMP;
-  ui.introSources.textContent = INTRO_NOTES;
-  ui.intro.hidden = false;
-  ui.intro.classList.remove('leaving');
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduced) {
-    lines.forEach((el, i) => { el.textContent = INTRO_LINES[i] ?? ''; el.classList.add('show'); });
-    return;
-  }
-  const schedule = introSchedule();
-  // Every character is due at an absolute time from the start, so a chain of
-  // timers cannot drift and the last character lands when the schedule says.
-  const t0 = performance.now();
-  schedule.forEach((slot, i) => {
-    const el = lines[i];
-    const text = INTRO_LINES[i] ?? '';
-    if (!el) return;
-    // Lay the whole line out at once, every character hidden, so revealing
-    // them one by one never reflows the line.
-    el.replaceChildren(...[...text].map(ch => { const sp = document.createElement('span'); sp.className = /[\u00b9\u00b2\u00b3]/.test(ch) ? 'ch mark' : 'ch'; sp.textContent = ch; return sp; }));
-    const cursor = document.createElement('span');
-    cursor.className = 'cursor';
-    const chars = [...el.querySelectorAll<HTMLElement>('.ch')];
-    introTimers.push(window.setTimeout(() => {
-      // Only the newest line carries the cursor; the ones above keep their place.
-      lines[i - 1]?.querySelector('.cursor')?.remove();
-      el.classList.add('show', 'typing');
-      el.prepend(cursor);
-      let n = 0;
-      const tick = (): void => {
-        const c = chars[n];
-        if (c) { c.classList.add('on'); c.after(cursor); }
-        n += 1;
-        if (n < chars.length) introTimers.push(window.setTimeout(tick, Math.max(0, t0 + slot.show + n * INTRO_CHAR_MS - performance.now())));
-        else el.classList.remove('typing'); // the cursor stays, blinking, until the next line or the travel
-      };
-      tick();
-    }, slot.show));
-  });
-  // The finished block holds a while longer, then it and the scrim leave
-  // together on one travel, so the first replay frame is the last line's hide
-  // plus the pause plus the move: the figure the budget test holds.
-  const last = schedule[schedule.length - 1];
-  introTimers.push(window.setTimeout(endIntro, (last ? last.hide : 0) + INTRO_END_PAUSE_MS));
 }
 
 // A deep link is `#file=<results file>&case=<case id>`, optionally with
@@ -1066,11 +961,8 @@ async function boot(): Promise<void> {
   await applyHash();
   void renderBoard();
   window.addEventListener('hashchange', () => { void applyHash(); });
-  ui.introSkip.addEventListener('click', endIntro);
-  ui.intro.addEventListener('click', endIntro);
   ui.preambleClose.addEventListener('click', () => showPreamble(false));
   ui.about.addEventListener('click', () => showPreamble(true));
-  if (!deepLinked) playIntro();
 
   ui.filePicker.addEventListener('change', () => { void selectFile(ui.filePicker.value); });
   ui.casePicker.addEventListener('change', () => selectCase(ui.casePicker.value));
@@ -1108,9 +1000,7 @@ async function boot(): Promise<void> {
     // A focused button keeps Space and Enter for itself (the gate-check "check"
     // button, the transport); a held modifier is the browser's shortcut, not ours.
     if (e.target instanceof HTMLButtonElement || e.ctrlKey || e.metaKey || e.altKey) return;
-    if (introOpen) { e.preventDefault(); endIntro(); return; }
     switch (e.key) {
-      case 'i': case 'I': playIntro(); break;
       case ' ': e.preventDefault(); play(); break;
       case 'ArrowRight': e.preventDefault(); stop(); seek(session.cursor + 1); break;
       case 'ArrowLeft': e.preventDefault(); stop(); seek(session.cursor - 1); break;

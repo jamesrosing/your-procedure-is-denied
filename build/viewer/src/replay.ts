@@ -693,55 +693,14 @@ export function formatSeconds(ms: number): string {
   return `${(ms / 1000).toFixed(1)} s`;
 }
 
-// The title cards: three lines typed out letter by letter at about
-// twenty-eight characters a second, each held a moment once complete and kept
-// while the next types, so the block gathers at the top of the page as one
-// short paragraph while the replay waits below; then the block fades and the
-// page comes into focus. Written from far out, for someone who has never seen
-// the project: how care is paid for in the United States, what payers have
-// been cited for, and what this does about it. No project names: a cold viewer
-// cannot know them. Kept here so a test can hold the copy to its discipline:
-// three lines, at most thirty-two words each, sentence case, no exclamation
-// marks, no jargon; a statement that warrants a source carries a superscript
-// marker that INTRO_NOTES resolves.
-export const INTRO_LINES: readonly string[] = [
-  "In the United States, when a doctor bills a health insurer or Medicare, payment depends on what the doctor documented, judged against that payer's coverage rules.",
-  "Those rules differ by payer.\u00b9 Federal investigators have found Medicare Advantage plans denying care that met Medicare's own criteria.\u00b2",
-  // The closing sentence is held together with no-break spaces so it never splits across rows.
-  "This project places the payer policy in force on the date of service beside the doctor's record, so each side can be checked against the other. It\u00a0drafts;\u00a0a\u00a0physician\u00a0signs.",
-];
+// The typing pace, per character, shared by the model's why under the chart
+// header and the live query strip's answer. The typed opening that once used
+// it (three lines over the page, Oct 28 to Nov 1) left the page on Nov 1 so a
+// take opens on the case itself; its words are kept in
+// assets/video/WALKTHROUGH.md for the script.
+export const TYPE_CHAR_MS = 36;
 
-// The sources for the marked statements, small, at the bottom with the stamp.
-// A test holds every marker in the lines to an entry here.
-export const INTRO_NOTES = "\u00b9 \u00b2 HHS Office of Inspector General, report OEI-09-18-00260, April 2022: Medicare Advantage plans applied clinical criteria not in Medicare coverage rules, and 13 percent of the requests they denied met those rules";
-
-export const INTRO_STAMP = "Built this week: everything shown here. Pre-existing, not shown: the author's record system, appeal engine, coverage index, and the published LITMUS standard.";
-
-export const INTRO_CHAR_MS = 36; // per typed character
-export const INTRO_HOLD_MS = 2000; // after the last character, cursor still blinking
-export const INTRO_FADE_MS = 400;
-// After the last line is typed and held, the finished block stays this much
-// longer before it travels to the bottom of the page; the travel itself takes
-// INTRO_MOVE_MS (styles.css fades the scrim and the caption band over the same
-// time). Both are Jim's: "leave an additional 2 seconds at end of cards before
-// moving to bottom", with the move slowed a little.
-export const INTRO_END_PAUSE_MS = 2000;
-export const INTRO_MOVE_MS = 700;
-
-export function introTypeMs(line: string): number {
-  return line.length * INTRO_CHAR_MS;
-}
-
-// When each card starts typing, finishes, and leaves, from the start of the sequence.
-export function introSchedule(lines: readonly string[] = INTRO_LINES): { show: number; typed: number; hide: number }[] {
-  const out: { show: number; typed: number; hide: number }[] = [];
-  let t = 300;
-  for (const line of lines) {
-    const show = t;
-    const typed = show + introTypeMs(line);
-    const hide = typed + INTRO_HOLD_MS;
-    out.push({ show, typed, hide });
-    t = hide + INTRO_FADE_MS;
-  }
-  return out;
-}
+// The provenance line in the "about this page" panel: what was built this
+// week and what was pre-existing, as the event rule asks. Plain words, no
+// exclamation marks; a test holds it to that.
+export const PROVENANCE_STAMP = "Built this week: everything shown here. Pre-existing, not shown: the author's record system, appeal engine, coverage index, and the published LITMUS standard.";

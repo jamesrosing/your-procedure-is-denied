@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readdirSync, readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { compareColumns, newestRun, sideText, buildTimeline, citedEntries, firstLine, carcHelp, codeSystemHelp, DATA_NOTE, denialKind, DENIAL_KIND_HELP, PANEL_HELP, parseStep, VERDICT_HELP, INTRO_END_PAUSE_MS, INTRO_FADE_MS, INTRO_LINES, INTRO_MOVE_MS, INTRO_NOTES, INTRO_STAMP, introTypeMs, introSchedule, LABEL_HELP, LOOKUP_DWELL_MS, lookupStrip, payerRemark, playDelayMs, scoreboard, stateAt, type ResultsFile, type ViewerCase, type ViewerResult } from '../viewer/src/replay.js';
+import { compareColumns, newestRun, sideText, buildTimeline, citedEntries, firstLine, carcHelp, codeSystemHelp, DATA_NOTE, denialKind, DENIAL_KIND_HELP, PANEL_HELP, parseStep, VERDICT_HELP, LABEL_HELP, PROVENANCE_STAMP, LOOKUP_DWELL_MS, lookupStrip, payerRemark, playDelayMs, scoreboard, stateAt, type ResultsFile, type ViewerCase, type ViewerResult } from '../viewer/src/replay.js';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const resultsDir = join(here, '..', 'results');
@@ -282,33 +282,13 @@ describe('the advisor step', () => {
   });
 });
 
-describe('the title cards', () => {
-  test('three lines, at most thirty-two words, sentence case, no exclamation marks, no project names; every footnote marker resolves in the notes; the last line ends on who signs; the stamp states what was built this week and what was pre-existing', () => {
-    assert.equal(INTRO_LINES.length, 3);
-    const markers = new Set<string>();
-    for (const line of INTRO_LINES) {
-      assert.ok(line.split(/\s+/).length <= 32, line);
-      assert.ok(!line.includes('!'));
-      assert.match(line, /^[A-Z]/);
-      assert.match(line, /\.[\u00b9\u00b2\u00b3]?$/, line);
-      assert.doesNotMatch(line, /\b(heme|writ|CHART|LITMUS|HIPPS|CARC|Muse)\b/, line);
-      for (const m of line.match(/[\u00b9\u00b2\u00b3]/g) ?? []) markers.add(m);
-    }
-    assert.match(INTRO_LINES[INTRO_LINES.length - 1]!, /a\u00a0physician\u00a0signs\.$/, 'the opening ends on who signs');
-    assert.ok(markers.size >= 2, 'the cited statements carry markers');
-    for (const m of markers) assert.ok(INTRO_NOTES.includes(`${m} `), `note for ${m}`);
-    assert.match(INTRO_NOTES, /^\u00b9 /);
-    assert.match(INTRO_STAMP, /^Built this week: /);
-    assert.match(INTRO_STAMP, /Pre-existing/);
-    assert.ok(!INTRO_STAMP.includes('!'));
+describe('the page at rest', () => {
+  test('the provenance stamp states what was built this week and what was pre-existing, in plain words', () => {
+    assert.match(PROVENANCE_STAMP, /^Built this week: /);
+    assert.match(PROVENANCE_STAMP, /Pre-existing/);
+    assert.ok(!PROVENANCE_STAMP.includes('!'));
   });
-  test('the finished block holds at least two seconds before it travels, and the opening reaches the first replay frame within the twenty-seven-second video budget', () => {
-    assert.ok(INTRO_END_PAUSE_MS >= 2000);
-    const s = introSchedule();
-    const firstReplayFrame = s[s.length - 1]!.hide + INTRO_END_PAUSE_MS + INTRO_MOVE_MS;
-    assert.ok(firstReplayFrame <= 27_000, `${firstReplayFrame} ms from the first frame to the first replay frame`);
-  });
-  test('behind the cards nothing is lit: at cursor 0 every entry is dim, no criterion has evidence, a check, or an opinion, and the draft is empty, for every result in every file', () => {
+  test('at cursor 0 nothing is lit: every entry is dim, no criterion has evidence, a check, or an opinion, and the draft is empty, for every result in every file', () => {
     let checked = 0;
     for (const f of files) for (const r of f.results) {
       const c = cases.get(r.caseId)!;
@@ -325,14 +305,6 @@ describe('the title cards', () => {
       checked += 1;
     }
     assert.ok(checked >= 450, String(checked));
-  });
-  test('each card types at about twenty-eight characters a second, holds once complete, and the cards never overlap', () => {
-    assert.equal(introTypeMs('abcd'), 144);
-    const s = introSchedule();
-    for (const slot of s) assert.ok(slot.show < slot.typed && slot.typed < slot.hide);
-    for (let i = 1; i < s.length; i++) assert.ok(s[i]!.show >= s[i - 1]!.hide, 'no overlap');
-    const total = s[s.length - 1]!.hide;
-    assert.ok(total > 9000 && total < 25000, String(total));
   });
 });
 

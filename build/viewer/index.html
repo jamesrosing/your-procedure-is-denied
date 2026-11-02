@@ -8,28 +8,13 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%274%27 fill=%27%2314181C%27/%3E%3Crect x=%278%27 y=%2715%27 width=%2716%27 height=%272%27 fill=%27%23FFFFFF%27/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=36">
+  <link rel="stylesheet" href="styles.css?v=37">
   <script>
     // Theme before first paint; the choice is a per-viewer convenience.
     try { var t = localStorage.getItem('ypid-theme'); if (t === 'dark') document.documentElement.dataset.theme = 'dark'; } catch (e) {}
   </script>
 </head>
 <body>
-  <div id="intro" class="intro" hidden aria-live="polite">
-    <div class="intro-scrim"></div>
-    <div id="intro-stage" class="intro-stage">
-      <p class="intro-line" data-line="0"></p>
-      <p class="intro-line" data-line="1"></p>
-      <p class="intro-line" data-line="2"></p>
-    </div>
-    <div class="intro-foot">
-      <div class="intro-notes">
-        <span id="intro-sources" class="intro-stamp"></span>
-        <span id="intro-stamp" class="intro-stamp"></span>
-      </div>
-      <button id="intro-skip" class="btn">skip</button>
-    </div>
-  </div>
   <header class="bar">
     <div class="brand">
       <span class="brand-name">Your procedure is denied</span>
@@ -171,8 +156,6 @@
   </section>
 
   <aside id="preamble" class="preamble" hidden aria-label="About this page">
-    <p id="preamble-text" class="preamble-text"></p>
-    <p id="preamble-notes" class="preamble-notes"></p>
     <p id="preamble-data" class="preamble-notes"></p>
     <p id="preamble-stamp" class="preamble-notes"></p>
     <button id="preamble-close" class="btn preamble-close" title="Dismiss (p)" aria-label="Dismiss">×</button>
@@ -182,9 +165,9 @@
     <span>Hackathon work, Meta Global AI Developer Hackathon, October 26 to November 4, 2026. Synthetic data only: no real patient record appears anywhere in this repository.
     <a href="https://github.com/jamesrosing/your-procedure-is-denied/blob/main/NEW-WORK.md">What was built during the event</a>
     <button id="btn-about" class="btn-about" title="About this page (p)">about this page</button></span>
-    <span class="keys">space · ← → · home end · s · c · f · w · i · p</span>
+    <span class="keys">space · ← → · home end · s · c · f · w · p</span>
   </footer>
 
-  <script src="app.js?v=36"></script>
+  <script src="app.js?v=37"></script>
 </body>
 </html>
