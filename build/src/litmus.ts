@@ -19,10 +19,13 @@
 //      compatibility forms such as fullwidth digits to their ASCII form;
 //      nothing else). Absent, trivial, or made of stopwords alone: refuted.
 //   3. Every hard token in the sentence (numbers, including ones written as
-//      words; dates, in any written form; codes, with their letter and the
-//      system named before them; and a side, however abbreviated) must appear
-//      in the cited entry, the payer criteria,
+//      words, as ordinals, as an article before a unit, or as a Roman numeral
+//      after a grading word; dates, in any written form; codes, with their
+//      letter and the system named before them; and a side, however
+//      abbreviated) must appear in the cited entry, the payer criteria,
 //      the denial, or the stated case facts. Anything else: refuted, token named.
+//      A number that sits nearest a side in the sentence must sit nearest the
+//      same side where the sources pair it with one.
 //      The whole cited entry counts, not only the quoted span: the gate exists
 //      to catch invented facts, not to grade quoting form, and the clinician who
 //      wrote the entry did not write it to a payer's vocabulary.
@@ -33,7 +36,7 @@ import { sha256Hex } from './hash.js';
 import { CITATION_ID } from './citation.js';
 import type { Appeal } from './schema.js';
 
-export const LITMUS_VERSION = 'build/src/litmus.ts v1.6 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted';
+export const LITMUS_VERSION = 'build/src/litmus.ts v1.7 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted; the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number keeps the side the sources pair it with';
 
 export interface GateEntry {
   id: string;
@@ -169,6 +172,34 @@ function blank(m: string): string {
   return ' '.repeat(m.length);
 }
 
+// v1.7: the four classes left open after v1.6 (README 4.6 at c0708b2).
+// "a week of therapy" is one week: the article before a unit of time or of
+// dosing is the count 1, on both sides of the check, so an entry that says
+// "for a month" sources "one month" and refuses "two months". A frequency
+// ("twice a day", "once an hour") is masked first; the article there is not a
+// count, and neither is the article after a plural unit ("three hours a day",
+// found on the first regate donating a 1 to case-024). The unit list is fixed;
+// "a course of" and "a trial of" are left as articles, since the count there
+// is rarely the claim.
+const ARTICLE_FREQUENCY = /\b(?:\d+|once|twice|thrice|per|each|every|a|an|(?:week|month|day|year|hour|minute|night|session|visit|cycle|dose|time|injection|infusion|tablet|unit)s) (?:a|an)(?= (?:week|month|day|year|hour|minute|night|session|visit|cycle)s?\b)/g;
+const ARTICLE_COUNT = /\b(?:a|an)(?= (?:week|month|day|year|hour|minute|night|dose|session|cycle|visit|fraction|unit|tablet|capsule|injection|infusion|pill)\b)/g;
+// An ordinal word is the number it names: "second-line" is 2, "the fourth
+// injection" is 4. "At first", an ordinal before a comma ("First, the record"),
+// and the unit of time ("30 seconds", "seconds later", "centimeters per
+// second", found on the first regate refusing case-042) are not counts.
+const ORDINAL_WORDS: Record<string, string> = { first: '1', second: '2', third: '3', fourth: '4', fifth: '5', sixth: '6', seventh: '7', eighth: '8', ninth: '9', tenth: '10', eleventh: '11', twelfth: '12' };
+const ORDINAL_RE = new RegExp(`\\b(${Object.keys(ORDINAL_WORDS).join('|')})\\b`, 'g');
+const ORDINAL_IDIOM = /\bat first\b|\bfirst of all\b|\b(?:first|second|third)(?:ly)?,|\bseconds\b|\bper second\b|(?<=\b\d+(?:\.\d+)?[ -])second\b|\bsecond(?= (?:later|before|after|to|from))\b/g;
+// A Roman numeral is a number only after a grading word (stage III, grade II,
+// class IV, type I, NYHA class III); "IV contrast" and the pronoun "I" are
+// untouched. A substage letter travels with the number: stage IIIA is "3a",
+// a token of its own beside the 3, so an entry that says stage III does not
+// source stage IIIA, and one that says IIIA sources both.
+const GRADING = 'stage|grade|class|type|phase|level|group|category|tier|degree|clark|nyha|asa|gold|fontaine|rutherford|killip';
+const ROMAN: Record<string, string> = { i: '1', ii: '2', iii: '3', iv: '4', v: '5', vi: '6', vii: '7', viii: '8', ix: '9', x: '10', xi: '11', xii: '12' };
+const ROMAN_RE = new RegExp(`\\b(${GRADING}) (i{1,3}|iv|vi{0,3}|ix|xi{0,2})([a-c])?\\b`, 'g');
+const SUBSTAGE_RE = new RegExp(`\\b(?:${GRADING}) (\\d{1,2}[a-c])\\b`, 'g');
+
 function prepare(text: string): string {
   let t = canon(text)
     .replace(/\bnote-\d{3}\b/g, ' ')
@@ -176,6 +207,11 @@ function prepare(text: string): string {
     .replace(HUNDREDS_RE, hundreds)
     .replace(COMPOUND_RE, (_, tens: string, ones: string) => String(Number(NUMBER_WORDS[tens]) + ONES_VALUE[ones]!))
     .replace(ONE_IDIOM, blank)
+    .replace(ARTICLE_FREQUENCY, blank)
+    .replace(ARTICLE_COUNT, '1')
+    .replace(ORDINAL_IDIOM, blank)
+    .replace(ORDINAL_RE, w => ORDINAL_WORDS[w]!)
+    .replace(ROMAN_RE, (_, g: string, r: string, sub?: string) => `${g} ${ROMAN[r]!}${sub ?? ''}`)
     .replace(NUMBER_WORD_RE, w => NUMBER_WORDS[w]!);
   // v1.6: "2,200 grams" is one number. Until Nov 2 it was read as 2 and 200,
   // and an entry that said "5 foot 2, 200 pounds" sourced a resection of 2,200 grams.
@@ -258,6 +294,32 @@ function sideTokens(t: string, into: Set<string>): void {
   if (/\bbilat(?:eral(?:ly)?)?\b|\bb\/l\b/.test(t)) into.add('bilateral');
 }
 
+// v1.7: a number keeps the side it sits with. "690 on the right" against an
+// entry that puts 690 on the left was verified through v1.6, because 690,
+// left, and right were each admissible on their own. A text is cut into
+// clauses at periods, semicolons, commas, line breaks, and the conjunctions
+// and, but, while, whereas, and versus; within a clause every standalone number
+// is paired with every side word, written "side|number", and bilateral (or
+// "left and right", read as one word before the cut) pairs it with both. A
+// sentence's pair is demanded only when the sources pair the same number with
+// the other side (checkHardTokens), so a number the record never sets beside a
+// side ("a 62 year old man with a left knee effusion") is not refused for the
+// side it happens to share a clause with.
+const BILATERAL_RE = /\bbilat(?:eral(?:ly)?)?\b|\bb\/l\b|\b(?:left and right|right and left|l and r|r and l)\b/g;
+const CLAUSE_CUT = /[.;,\n]|\b(?:and|but|while|whereas|versus|vs)\b/;
+const STANDALONE_NUMBER_RE = /(?<![a-z\d.])\d+(?:\.\d+)?(?![a-z\d])/g;
+const PAIR_RE = /^(left|right)\|(.+)$/;
+function pairTokens(t: string, into: Set<string>): void {
+  const masked = t.replace(SIDE_IDIOM, blank).replace(NOT_A_SIDE, blank).replace(BILATERAL_RE, m => 'bilateral'.padEnd(m.length));
+  for (const clause of masked.split(CLAUSE_CUT)) {
+    const sides = new Set<string>();
+    for (const m of clause.matchAll(SIDE_RE)) sides.add(SIDE_OF[m[1]!]!);
+    if (/\bbilateral\b/.test(clause)) { sides.add('left'); sides.add('right'); }
+    if (sides.size === 0) continue;
+    for (const m of clause.matchAll(STANDALONE_NUMBER_RE)) for (const side of sides) into.add(`${side}|${stripZeros(m[0])}`);
+  }
+}
+
 // --- codes -------------------------------------------------------------------
 // A code with a letter (ICD-10 C34.90, HCPCS J9271) is one token, letter and
 // all; v1.6 adds the letter-and-four-digit form (found in review: K9271
@@ -279,7 +341,9 @@ function sentenceHardTokens(text: string): Set<string> {
   for (const m of t.matchAll(SYSTEM_RE)) out.add(`${systemOf(m[1]!)}:${m[2]!}`);
   for (const m of t.matchAll(/\d+(?:\.\d+)?/g)) out.add(stripZeros(m[0]));
   for (const m of t.matchAll(CODE_RE)) out.add(m[0]);
+  for (const m of t.matchAll(SUBSTAGE_RE)) out.add(m[1]!);
   sideTokens(t, out);
+  pairTokens(t, out);
   out.delete('');
   return out;
 }
@@ -290,7 +354,9 @@ function sourceTokens(text: string, into: Set<string>): void {
   for (const m of t.matchAll(SYSTEM_RE)) { into.add(`${systemOf(m[1]!)}:${m[2]!}`); into.add(`coded:${m[2]!}`); }
   for (const m of t.matchAll(/\d+(?:\.\d+)?/g)) into.add(stripZeros(m[0]));
   for (const m of t.matchAll(CODE_RE)) into.add(m[0]);
+  for (const m of t.matchAll(SUBSTAGE_RE)) into.add(m[1]!);
   sideTokens(t, into);
+  pairTokens(t, into);
 }
 
 // --- the checks --------------------------------------------------------------
@@ -319,15 +385,26 @@ function checkQuote(entry: GateEntry, quote: string): Check {
   return { ok: true };
 }
 
+// A missing token as the physician reads it: "3 on the right (the sources pair 3 with the left)".
+export function showToken(t: string): string {
+  const pair = PAIR_RE.exec(t);
+  if (!pair) return t;
+  const other = pair[1] === 'left' ? 'right' : 'left';
+  return `${pair[2]!} on the ${pair[1]!} (the sources pair ${pair[2]!} with the ${other})`;
+}
+
 function checkHardTokens(text: string, allowed: Set<string>): Check {
   const missing = [...sentenceHardTokens(text)].filter(t => {
     if (allowed.has(t)) return false;
     const labeled = /^([a-z-]+):(.+)$/.exec(t);
     // A labeled code is wrong only when a source labels the same code otherwise.
     if (labeled) return allowed.has(`coded:${labeled[2]!}`);
+    const pair = PAIR_RE.exec(t);
+    // A side-number pair is wrong only when a source pairs the number with the other side.
+    if (pair) return allowed.has(`${pair[1] === 'left' ? 'right' : 'left'}|${pair[2]!}`);
     return true;
   });
-  if (missing.length > 0) return { ok: false, status: 'refuted', reason: `unsourced-token: ${missing.join(', ')}`, missing };
+  if (missing.length > 0) return { ok: false, status: 'refuted', reason: `unsourced-token: ${missing.map(showToken).join(', ')}`, missing };
   return { ok: true };
 }
 
@@ -396,7 +473,7 @@ export function checkSentence(sources: GateSources, s: SentenceInput, index = 0,
     const h = checkHardTokens(s.text, allowed);
     if (!h.ok) {
       const elsewhere = h.missing ? sourcedElsewhere(sources.chart, r.entry.id, h.missing) : null;
-      if (elsewhere) return { ...base, status: 'needs-citation', reason: `needs-citation: ${h.missing!.join(', ')} not in ${r.entry.id}; the chart has it in ${elsewhere.join(', ')}. If that entry is the source, cite it as well; if it is a count or figure the chart never states, rewrite the sentence`, missing: h.missing!, alsoCite: elsewhere };
+      if (elsewhere) return { ...base, status: 'needs-citation', reason: `needs-citation: ${h.missing!.map(showToken).join(', ')} not in ${r.entry.id}; the chart has it in ${elsewhere.join(', ')}. If that entry is the source, cite it as well; if it is a count or figure the chart never states, rewrite the sentence`, missing: h.missing!, alsoCite: elsewhere };
       return { ...base, status: h.status, reason: h.reason, ...(h.missing ? { missing: h.missing } : {}) };
     }
     return { ...base, status: 'verified', reason: 'verified: quote found in the cited entry; every hard token sourced from the entry, the criteria, the denial, or the case facts', [VERIFIED]: true };

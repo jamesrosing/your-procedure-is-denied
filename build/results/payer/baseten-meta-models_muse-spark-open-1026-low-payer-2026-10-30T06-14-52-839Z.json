@@ -14,7 +14,7 @@
       "list_entries",
       "read_entry"
     ],
-    "litmus": "build/src/litmus.ts v1.6 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted",
+    "litmus": "build/src/litmus.ts v1.7 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted; the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number keeps the side the sources pair it with",
     "synthetic": true,
     "regated": [
       {
@@ -28,6 +28,12 @@
         "to": "build/src/litmus.ts v1.6 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted",
         "at": "2026-11-02T18:16:54.362Z",
         "changedVerdicts": 1
+      },
+      {
+        "from": "build/src/litmus.ts v1.6 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted",
+        "to": "build/src/litmus.ts v1.7 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted; the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number keeps the side the sources pair it with",
+        "at": "2026-11-02T20:13:21.733Z",
+        "changedVerdicts": 2
       }
     ]
   },
@@ -66,7 +72,7 @@
     },
     "stakesUsd": {
       "total": 940000,
-      "defended": 336500,
+      "defended": 339000,
       "warranted": 371500
     },
     "citationPrecision": 0.8893066378066379,
@@ -78,12 +84,10 @@
         "correct-pass": 7
       },
       "exclusion": {
-        "correct-pass": 1,
-        "blocked": 2
+        "blocked": 3
       },
       "wrong-remedy": {
-        "correct-pass": 3,
-        "blocked": 1
+        "correct-pass": 4
       },
       "absent": {
         "correct-pass": 6
@@ -96,8 +100,8 @@
       },
       "oncology": {
         "correct-decline": 5,
-        "correct-pass": 2,
-        "blocked": 1
+        "blocked": 2,
+        "correct-pass": 1
       },
       "plastic surgery": {
         "correct-decline": 3,
@@ -125,7 +129,7 @@
       },
       "biologic therapy": {
         "correct-decline": 1,
-        "blocked": 1
+        "correct-pass": 1
       },
       "bariatric surgery": {
         "blocked": 1,
@@ -215,7 +219,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.6 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted",
+        "litmus": "build/src/litmus.ts v1.7 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted; the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number keeps the side the sources pair it with",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -381,7 +385,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.6 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted",
+        "litmus": "build/src/litmus.ts v1.7 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted; the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number keeps the side the sources pair it with",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -530,7 +534,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.6 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted",
+        "litmus": "build/src/litmus.ts v1.7 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted; the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number keeps the side the sources pair it with",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -706,7 +710,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.6 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted",
+        "litmus": "build/src/litmus.ts v1.7 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted; the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number keeps the side the sources pair it with",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -906,7 +910,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.6 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted",
+        "litmus": "build/src/litmus.ts v1.7 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted; the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number keeps the side the sources pair it with",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -1078,7 +1082,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.6 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted",
+        "litmus": "build/src/litmus.ts v1.7 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted; the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number keeps the side the sources pair it with",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -1231,7 +1235,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.6 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted",
+        "litmus": "build/src/litmus.ts v1.7 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted; the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number keeps the side the sources pair it with",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -1329,7 +1333,7 @@
         "thinkingTokens": 0
       },
       "costUsd": 0.008640799999999999,
-      "outcome": "correct-pass",
+      "outcome": "blocked",
       "warrantedMatch": true,
       "citationPrecision": 0.8333333333333334,
       "draft": {
@@ -1396,9 +1400,11 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.6 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted",
-        "verdict": "pass",
-        "reasons": [],
+        "litmus": "build/src/litmus.ts v1.7 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted; the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number keeps the side the sources pair it with",
+        "verdict": "blocked",
+        "reasons": [
+          "sentence 1 needs-citation: needs-citation: 4 not in note-013; the chart has it in note-003. If that entry is the source, cite it as well; if it is a count or figure the chart never states, rewrite the sentence"
+        ],
         "errored": false,
         "sentences": [
           {
@@ -1414,8 +1420,14 @@
             "text": "Imaging confirms metastatic disease consistent with stage IV cancer as described in crit-2, but that does not overcome the categorical exclusion in crit-1.",
             "citation": "note-013",
             "quote": "circumferential sigmoid mass with regional nodes, 2 hepatic lesions in the right lobe, largest 2.6 centimeters, consistent with metastases",
-            "reason": "verified: quote found in the cited entry; every hard token sourced from the entry, the criteria, the denial, or the case facts",
-            "status": "verified"
+            "reason": "needs-citation: 4 not in note-013; the chart has it in note-003. If that entry is the source, cite it as well; if it is a count or figure the chart never states, rewrite the sentence",
+            "status": "needs-citation",
+            "missing": [
+              "4"
+            ],
+            "alsoCite": [
+              "note-003"
+            ]
           },
           {
             "index": 2,
@@ -1501,10 +1513,10 @@
         },
         "counts": {
           "sentences": 5,
-          "verified": 5,
+          "verified": 4,
           "unresolved": 0,
           "refuted": 0,
-          "needsCitation": 0,
+          "needsCitation": 1,
           "error": 0,
           "evidence": 6,
           "evidenceVerified": 6
@@ -1574,7 +1586,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.6 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted",
+        "litmus": "build/src/litmus.ts v1.7 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted; the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number keeps the side the sources pair it with",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -1711,7 +1723,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.6 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted",
+        "litmus": "build/src/litmus.ts v1.7 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted; the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number keeps the side the sources pair it with",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -1858,7 +1870,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.6 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted",
+        "litmus": "build/src/litmus.ts v1.7 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted; the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number keeps the side the sources pair it with",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -2033,7 +2045,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.6 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted",
+        "litmus": "build/src/litmus.ts v1.7 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted; the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number keeps the side the sources pair it with",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -2221,7 +2233,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.6 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted",
+        "litmus": "build/src/litmus.ts v1.7 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted; the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number keeps the side the sources pair it with",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -2427,7 +2439,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.6 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted",
+        "litmus": "build/src/litmus.ts v1.7 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted; the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number keeps the side the sources pair it with",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -2637,7 +2649,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.6 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted",
+        "litmus": "build/src/litmus.ts v1.7 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted; the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number keeps the side the sources pair it with",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -2828,7 +2840,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.6 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted",
+        "litmus": "build/src/litmus.ts v1.7 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted; the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number keeps the side the sources pair it with",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -3023,7 +3035,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.6 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted",
+        "litmus": "build/src/litmus.ts v1.7 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted; the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number keeps the side the sources pair it with",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -3182,7 +3194,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.6 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted",
+        "litmus": "build/src/litmus.ts v1.7 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted; the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number keeps the side the sources pair it with",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -3352,7 +3364,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.6 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted",
+        "litmus": "build/src/litmus.ts v1.7 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted; the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number keeps the side the sources pair it with",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -3539,7 +3551,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.6 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted",
+        "litmus": "build/src/litmus.ts v1.7 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted; the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number keeps the side the sources pair it with",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -3698,7 +3710,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.6 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted",
+        "litmus": "build/src/litmus.ts v1.7 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted; the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number keeps the side the sources pair it with",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -3880,7 +3892,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.6 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted",
+        "litmus": "build/src/litmus.ts v1.7 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted; the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number keeps the side the sources pair it with",
         "verdict": "blocked",
         "reasons": [
           "criterion crit-1 has no verified evidence",
@@ -4104,7 +4116,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.6 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted",
+        "litmus": "build/src/litmus.ts v1.7 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted; the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number keeps the side the sources pair it with",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -4297,7 +4309,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.6 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted",
+        "litmus": "build/src/litmus.ts v1.7 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted; the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number keeps the side the sources pair it with",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -4474,7 +4486,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.6 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted",
+        "litmus": "build/src/litmus.ts v1.7 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted; the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number keeps the side the sources pair it with",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -4639,7 +4651,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.6 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted",
+        "litmus": "build/src/litmus.ts v1.7 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted; the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number keeps the side the sources pair it with",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -4836,7 +4848,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.6 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted",
+        "litmus": "build/src/litmus.ts v1.7 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted; the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number keeps the side the sources pair it with",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -5090,7 +5102,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.6 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted",
+        "litmus": "build/src/litmus.ts v1.7 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted; the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number keeps the side the sources pair it with",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -5309,7 +5321,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.6 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted",
+        "litmus": "build/src/litmus.ts v1.7 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted; the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number keeps the side the sources pair it with",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -5510,7 +5522,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.6 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted",
+        "litmus": "build/src/litmus.ts v1.7 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted; the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number keeps the side the sources pair it with",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -5713,7 +5725,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.6 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted",
+        "litmus": "build/src/litmus.ts v1.7 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted; the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number keeps the side the sources pair it with",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -5900,7 +5912,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.6 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted",
+        "litmus": "build/src/litmus.ts v1.7 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted; the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number keeps the side the sources pair it with",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -6095,7 +6107,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.6 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted",
+        "litmus": "build/src/litmus.ts v1.7 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted; the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number keeps the side the sources pair it with",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -6322,7 +6334,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.6 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted",
+        "litmus": "build/src/litmus.ts v1.7 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted; the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number keeps the side the sources pair it with",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -6495,7 +6507,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.6 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted",
+        "litmus": "build/src/litmus.ts v1.7 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted; the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number keeps the side the sources pair it with",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -6659,7 +6671,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.6 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted",
+        "litmus": "build/src/litmus.ts v1.7 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted; the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number keeps the side the sources pair it with",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -6883,7 +6895,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.6 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted",
+        "litmus": "build/src/litmus.ts v1.7 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted; the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number keeps the side the sources pair it with",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -7064,7 +7076,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.6 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted",
+        "litmus": "build/src/litmus.ts v1.7 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted; the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number keeps the side the sources pair it with",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -7223,7 +7235,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.6 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted",
+        "litmus": "build/src/litmus.ts v1.7 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted; the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number keeps the side the sources pair it with",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -7368,7 +7380,7 @@
         "thinkingTokens": 0
       },
       "costUsd": 0.0088583,
-      "outcome": "blocked",
+      "outcome": "correct-pass",
       "warrantedMatch": true,
       "citationPrecision": 0.8571428571428571,
       "draft": {
@@ -7444,11 +7456,9 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.6 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted",
-        "verdict": "blocked",
-        "reasons": [
-          "sentence 1 needs-citation: needs-citation: 1 not in note-025; the chart has it in note-007. If that entry is the source, cite it as well; if it is a count or figure the chart never states, rewrite the sentence"
-        ],
+        "litmus": "build/src/litmus.ts v1.7 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted; the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number keeps the side the sources pair it with",
+        "verdict": "pass",
+        "reasons": [],
         "errored": false,
         "sentences": [
           {
@@ -7464,14 +7474,8 @@
             "text": "The record shows that on 2026-04-01 the prior authorization request went in today, indicating authorization was sought just one week before the scheduled infusion.",
             "citation": "note-025",
             "quote": "the prior authorization request went in today",
-            "reason": "needs-citation: 1 not in note-025; the chart has it in note-007. If that entry is the source, cite it as well; if it is a count or figure the chart never states, rewrite the sentence",
-            "status": "needs-citation",
-            "missing": [
-              "1"
-            ],
-            "alsoCite": [
-              "note-007"
-            ]
+            "reason": "verified: quote found in the cited entry; every hard token sourced from the entry, the criteria, the denial, or the case facts",
+            "status": "verified"
           },
           {
             "index": 2,
@@ -7572,10 +7576,10 @@
         },
         "counts": {
           "sentences": 6,
-          "verified": 5,
+          "verified": 6,
           "unresolved": 0,
           "refuted": 0,
-          "needsCitation": 1,
+          "needsCitation": 0,
           "error": 0,
           "evidence": 7,
           "evidenceVerified": 7
@@ -7655,7 +7659,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.6 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted",
+        "litmus": "build/src/litmus.ts v1.7 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted; the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number keeps the side the sources pair it with",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -7813,7 +7817,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.6 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted",
+        "litmus": "build/src/litmus.ts v1.7 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted; the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number keeps the side the sources pair it with",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -7983,7 +7987,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.6 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted",
+        "litmus": "build/src/litmus.ts v1.7 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted; the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number keeps the side the sources pair it with",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -8182,7 +8186,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.6 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted",
+        "litmus": "build/src/litmus.ts v1.7 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted; the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number keeps the side the sources pair it with",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -8387,7 +8391,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.6 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted",
+        "litmus": "build/src/litmus.ts v1.7 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted; the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number keeps the side the sources pair it with",
         "verdict": "pass",
         "reasons": [],
         "errored": false,
@@ -8611,7 +8615,7 @@
         ]
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.6 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted",
+        "litmus": "build/src/litmus.ts v1.7 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted; the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number keeps the side the sources pair it with",
         "verdict": "blocked",
         "reasons": [
           "sentence 5 needs-citation: needs-citation: 19 not in note-027; the chart has it in note-021. If that entry is the source, cite it as well; if it is a count or figure the chart never states, rewrite the sentence"
@@ -8820,7 +8824,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.6 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted",
+        "litmus": "build/src/litmus.ts v1.7 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted; the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number keeps the side the sources pair it with",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -9006,7 +9010,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.6 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted",
+        "litmus": "build/src/litmus.ts v1.7 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted; the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number keeps the side the sources pair it with",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -9214,7 +9218,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.6 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted",
+        "litmus": "build/src/litmus.ts v1.7 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted; the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number keeps the side the sources pair it with",
         "verdict": "declined",
         "reasons": [],
         "errored": false,
@@ -9409,7 +9413,7 @@
         "sentences": []
       },
       "gate": {
-        "litmus": "build/src/litmus.ts v1.6 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted",
+        "litmus": "build/src/litmus.ts v1.7 (2026-11-02): exact-quote referential gate from the LITMUS papers; compound number words read as one number; a sentence whose unsourced tokens all live in another chart entry is returned as needs-citation naming that entry, still blocked; a side is a hard token wherever it names a side, written left, right, L, R, Lt, or Rt, and a side a source carries only inside an idiom is not an admissible source; the words one and zero are counts; a date written with a month name is a date; the day and month of a date are not admissible as bare numbers; a thousands-separated figure is one number and digits outside ASCII are digits; the letter of an alphanumeric code and the code system named before a code are part of the code; a quote of stopwords alone and an empty sentence are refuted; the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number keeps the side the sources pair it with",
         "verdict": "declined",
         "reasons": [],
         "errored": false,

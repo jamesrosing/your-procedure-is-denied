@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-11-02 19:50 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-11-02 20:18 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -12,15 +12,15 @@ Every file carries its own header: model, mode, gate version at the run, any lat
 
 | Started (UTC) | Model | Mode | Agreed | Blocked | Missed | False pass | Failed | Fabricated quotes | Gate at run | Re-gated to | Advisor |
 | --- | --- | --- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | --- |
-| 2026-10-27 08:17 | muse-spark-1.3 (meta) | chart in prompt | 50 of 50 | 0 | 0 | 0 | 0 | 0 | v1 | v1.6 |  |
-| 2026-10-27 08:19 | muse-wonder-1.0 (meta) | chart in prompt | 49 of 50 | 0 | 1 | 0 | 0 | 0 | v1 | v1.6 |  |
-| 2026-10-27 08:20 | meta-models/muse-spark-open (baseten) | chart in prompt | 49 of 50 | 1 | 0 | 0 | 0 | 1 | v1 | v1.6 |  |
-| 2026-10-28 03:20 | muse-spark-1.3 (meta) | agentic | 50 of 50 | 0 | 0 | 0 | 0 | 1 | v1.1 | v1.6 |  |
-| 2026-10-28 03:24 | muse-wonder-1.0 (meta) | agentic | 49 of 50 | 1 | 0 | 0 | 0 | 0 | v1.1 | v1.6 |  |
-| 2026-10-28 03:24 | meta-models/muse-spark-open (baseten) | agentic | 48 of 50 | 1 | 0 | 0 | 1 | 0 | v1.1 | v1.6 |  |
-| 2026-10-28 06:48 | muse-spark-1.3 (meta) | agentic, live CHART | 49 of 50 | 1 | 0 | 0 | 0 | 0 | v1.2 | v1.6 | muse-wonder-1.0: 30 cases, 86 supports, 28 partial, 0 silent |
-| 2026-10-28 06:51 | muse-wonder-1.0 (meta) | agentic, live CHART | 50 of 50 | 0 | 0 | 0 | 0 | 0 | v1.2 | v1.6 | muse-wonder-1.0: 30 cases, 94 supports, 28 partial, 0 silent |
-| 2026-10-28 07:13 | meta-models/muse-spark-open (baseten) | agentic, live CHART | 45 of 50 | 4 | 0 | 1 | 0 | 0 | v1.2 | v1.6 | muse-wonder-1.0: 31 cases, 86 supports, 41 partial, 0 silent, flagged 1 of 1 false passes |
+| 2026-10-27 08:17 | muse-spark-1.3 (meta) | chart in prompt | 50 of 50 | 0 | 0 | 0 | 0 | 0 | v1 | v1.7 |  |
+| 2026-10-27 08:19 | muse-wonder-1.0 (meta) | chart in prompt | 49 of 50 | 0 | 1 | 0 | 0 | 0 | v1 | v1.7 |  |
+| 2026-10-27 08:20 | meta-models/muse-spark-open (baseten) | chart in prompt | 49 of 50 | 1 | 0 | 0 | 0 | 1 | v1 | v1.7 |  |
+| 2026-10-28 03:20 | muse-spark-1.3 (meta) | agentic | 49 of 50 | 1 | 0 | 0 | 0 | 1 | v1.1 | v1.7 |  |
+| 2026-10-28 03:24 | muse-wonder-1.0 (meta) | agentic | 49 of 50 | 1 | 0 | 0 | 0 | 0 | v1.1 | v1.7 |  |
+| 2026-10-28 03:24 | meta-models/muse-spark-open (baseten) | agentic | 48 of 50 | 1 | 0 | 0 | 1 | 0 | v1.1 | v1.7 |  |
+| 2026-10-28 06:48 | muse-spark-1.3 (meta) | agentic, live CHART | 49 of 50 | 1 | 0 | 0 | 0 | 0 | v1.2 | v1.7 | muse-wonder-1.0: 30 cases, 86 supports, 28 partial, 0 silent |
+| 2026-10-28 06:51 | muse-wonder-1.0 (meta) | agentic, live CHART | 49 of 50 | 1 | 0 | 0 | 0 | 0 | v1.2 | v1.7 | muse-wonder-1.0: 30 cases, 94 supports, 28 partial, 0 silent |
+| 2026-10-28 07:13 | meta-models/muse-spark-open (baseten) | agentic, live CHART | 44 of 50 | 5 | 0 | 1 | 0 | 0 | v1.2 | v1.7 | muse-wonder-1.0: 31 cases, 86 supports, 41 partial, 0 silent, flagged 1 of 1 false passes |
 
 ## Runs superseded or discarded
 
@@ -53,7 +53,7 @@ Each commit that changed the version string in `build/src/litmus.ts`. The gate i
 
 ## Commits since `hackathon-start`
 
-Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 74 regenerate commits (by github-actions[bot] after a push, or by the author running `npm run log` locally) are this log regenerating itself; they touch only the generated files and carry no ledger row.
+Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 75 regenerate commits (by github-actions[bot] after a push, or by the author running `npm run log` locally) are this log regenerating itself; they touch only the generated files and carry no ledger row.
 
 ### 79e5e21 · 2026-10-26 20:38 · Add hackathon scaffolding: NEW-WORK.md and /build
 
@@ -864,7 +864,7 @@ README 4.5: Mark Cuban's filter for healthcare AI (an efficiency nets to zero wh
 ### c0708b2 · 2026-11-02 10:20 · Gate v1.6: the six token classes from the Muse Code review, test first; six spike-in classes, 7,861 of 7,861 hard caught; all 29 result files regated, four repeat and payer verdicts moved and reported; README prose and Table 3 follow
 
 Results added: `mutations/report-v1.5.json`.
-(no ledger row)
+Gate v1.6 (`build/src/litmus.ts`), the six token classes Meta's coding agent found (`build/reviews/muse-code/`), test first with its reproductions (`build/tests/litmus.test.ts`): one and zero are counts (pronoun uses masked, both sides); a date written with a month name is a date, held in one form, and a date's day and month are no longer admissible as bare numbers; R, L, Rt, Lt are sides (radiation RT, liters, and R/O masked); the letter of a code and the system word before a code are part of the code, a labeled code graded only against a source that labels it; a thousands-separated figure is one number; NFKC folds fullwidth digits; a quote of stopwords alone and an empty sentence are refuted. Spike-in (`build/scripts/mutate.ts`) mirrors the view and gains six classes (count-word, month-name-date, laterality-abbreviation, code-letter, code-system, fullwidth-digits): 11,567 corruptions, 7,861 of 7,861 hard caught (under v1.5 the six new classes had verified; `report-v1.5.json` archived); two harness blind spots found by the first run and fixed ("the one" kept as a count; liters masked only when attached to the number or followed by a unit word). Regate of all 29 files: kept runs unchanged; four verdicts in the repeat and payer runs moved pass to blocked, each a true sentence writing a count as "one" the entry states in other words, read before committing; one kept-run sentence moved needs-citation to verified. README: 2.4, the Gate sensitivity and Gate defects paragraphs, 4.3, 4.4, 4.6, abstract, In brief, Conclusion; build-log Table 3 rows for the new classes; 275 tests. Not done: npm litmus-gate still 0.1.0 (gate v1.5) until republished
 
 ### 92b3bfd · 2026-11-02 10:21 · Build log: regenerate after c0708b2
 
@@ -873,3 +873,11 @@ Results added: `mutations/report-v1.5.json`.
 ### 4171527 · 2026-11-02 11:50 · litmus-gate 0.2.0 on npm, the bundle of gate v1.6; package.json normalized; package README version line
 
 litmus-gate 0.2.0 published to npm (`build/litmus-gate/`), the bundle built from gate v1.6, after `npm run gate:smoke` reproduced a stored verdict and hash; package.json normalized by `npm pkg fix` (repository url); the package README names the version and that 0.1.0 carried v1.5
+
+### 04a490c · 2026-11-02 11:50 · Build log: regenerate after 4171527
+
+(generated files only; no ledger row by design)
+
+### next commit · the one that carries this regeneration
+
+Gate v1.7 (`build/src/litmus.ts`), the four token classes README 4.6 had listed as open since v1.6, test first (`build/tests/litmus.test.ts`): the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number set beside a side keeps that side where the sources pair the number with the other ("690 on the right" against an entry that puts 690 on the left is refuted; nearest-clause pairing, demanded only when the sources pair the number with a side). Two masks learned from the first regate, each a test: "centimeters per second" is not the ordinal two, "three hours a day" is not a count of one. Spike-in (`build/scripts/mutate.ts`): four classes added (article-count, ordinal-word, roman-numeral, side-number-swap; the last reclassified out of the collisions), 12,242 injected, 8,602 of 8,602 hard caught; `report-v1.6.json` archived. All 29 result files regated: nine verdicts moved, four in the kept runs, each read and reported in README section 3 (eight true sentences blocked as needs-citation for a count the entry states in other words, one verified by a collision on "first"). README tables regenerated; prose, abstract, In brief, 2.4, 4.4, 4.6, and conclusion hand-synced (agreement 44 to 50 of 50; Spark 1.3 defends the full stakes in two of three runs). Viewer rebuilt and checked; package smoke passes; `litmus-gate` server version string matched to package.json (0.3.0 to be published by the author). Ledger hash for the v1.6 row corrected to c0708b2.

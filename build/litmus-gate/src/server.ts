@@ -5,7 +5,7 @@ import * as z from 'zod/v4';
 import { APPEAL_SCHEMA, LITMUS_VERSION, draftInputSchema, renderMarkdown, renderSentenceMarkdown, sourcesInputSchema, toJson, verifyDraft, verifySentence } from './lib.js';
 
 export const SERVER_NAME = 'litmus-gate';
-export const SERVER_VERSION = '0.1.0';
+export const SERVER_VERSION = '0.2.0'; // kept equal to package.json; bump both on publish
 
 const responseFormat = z.enum(['markdown', 'json']).default('markdown').describe("'markdown' for a readable report, 'json' for the full gate record as structured content");
 

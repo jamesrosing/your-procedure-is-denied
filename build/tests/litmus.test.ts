@@ -205,7 +205,8 @@ describe('litmus: hard tokens', () => {
     assert.equal(s.status, 'needs-citation');
     assert.deepEqual(s.missing, ['724', 'left']);
     assert.deepEqual(s.alsoCite, ['note-001']);
-    assert.equal(one('Resection on the left breast was estimated at 724 grams.', 'note-001', 'I am estimating 724 grams on the right').status, 'verified');
+    assert.equal(one('Resection on the right breast was estimated at 724 grams.', 'note-001', 'I am estimating 724 grams on the right').status, 'verified');
+    assert.equal(one('Resection on the left breast was estimated at 724 grams.', 'note-001', 'I am estimating 724 grams on the right').status, 'refuted', 'verified through v1.6; from v1.7 the number keeps the side the entry pairs it with');
     assert.equal(one('The patient reserves the right to further appeal.', 'note-002', Q_PT).status, 'verified');
   });
 
@@ -434,5 +435,94 @@ describe('gate v1.6: the token classes the review found', () => {
     assert.equal(code('The denial was for CPT 96413.', 'note-002', 'Tolerated the infusion').status, 'verified');
     assert.equal(code('The infusion was billed as 96413.', 'note-002', 'Tolerated the infusion').status, 'verified');
     assert.equal(code('The 200 mg dose was given over 30 minutes, ICD-10 C34.90.', 'note-001', 'infusion today').status, 'refuted', 'a code the sources never carry stays refuted');
+  });
+});
+
+describe('gate v1.7: the four classes left open after v1.6', () => {
+  // Nearest-side pairing, ordinals, Roman numerals, and the article as a count
+  // are exercised on one entry written the way a knee note is written.
+  const kneeChart = [
+    { id: 'note-001', date: '2026-01-12', kind: 'office visit', text: 'Left knee: 3 prior corticosteroid injections, the last on 2025-03-02. Right knee: 1 injection. Pain 7/10 bilaterally. Stage III osteoarthritis on the left, grade 2 on the right. Second-line therapy for a month was tried; first-line NSAIDs failed. Resting heart rate 62, 30 seconds of single-leg stance. IV contrast not given.' },
+    { id: 'note-002', date: '2026-02-01', kind: 'physical therapy', text: 'Right knee: 4 sessions completed. Reports a week of relief after each.' },
+  ];
+  const kneeSources: GateSources = { chart: kneeChart, criteria: [{ id: 'crit-1', text: 'At least 2 corticosteroid injections documented.' }], denial: ['Northwind denied CPT 27447. CARC 50.'], facts: ['SYN-050, 71 year old man'] };
+  const knee = (text: string, quote = 'prior corticosteroid injections', citation = 'note-001'): SentenceRecord => litmus(kneeSources, appeal([{ text, citation, quote }], [])).sentences[0]!;
+
+  test('a or an before a unit is a count of one', () => {
+    assert.equal(knee('Pain relief lasted a week after each injection.').status, 'verified', 'a week is 1, which the entry carries as 1 injection: the known cost of reading counts');
+    assert.equal(knee('Therapy was tried for a month.').status, 'verified', 'the entry says a month');
+    assert.equal(knee('Therapy was tried for one month.').status, 'verified', 'an article in the source is a count of one for the sentence');
+    assert.equal(knee('Therapy was tried for a year.').status, 'verified', 'the entry says 1 injection; a year is the count 1, true or not, which is the known cost of reading counts');
+    assert.equal(knee('Injections were given an average of 3 times.').status, 'verified', 'an before a word that is not a unit is an article');
+    assert.equal(litmus(sources, appeal([{ text: 'She finished a week of physical therapy.', citation: 'note-002', quote: Q_PT }])).sentences[0]!.status, 'refuted', 'no admissible 1 anywhere in the macromastia fixture');
+    assert.equal(litmus(sources, appeal([{ text: 'Ibuprofen is taken twice a day.', citation: 'note-002', quote: Q_PT }])).sentences[0]!.status, 'verified', 'twice a day is a frequency, not a count of one');
+    assert.equal(litmus(sources, appeal([{ text: 'Ibuprofen is taken once an hour.', citation: 'note-002', quote: Q_PT }])).sentences[0]!.status, 'verified');
+  });
+
+  test('an ordinal word is the number it names', () => {
+    assert.equal(knee('Second-line therapy was tried for a month.').status, 'verified');
+    assert.equal(knee('First-line NSAIDs failed.').status, 'verified');
+    assert.equal(knee('Fourth-line therapy was tried.').status, 'needs-citation', 'note-002 carries a 4');
+    assert.equal(knee('Fifth-line therapy was tried.').status, 'refuted');
+    assert.equal(knee('The 5th injection was given.').status, 'refuted');
+    assert.equal(knee('The 3rd injection was given in the left knee.').status, 'verified');
+    assert.equal(knee('Single-leg stance lasted 30 seconds.').status, 'verified', 'seconds after a number is a unit, not the ordinal two');
+    assert.equal(knee('At first the pain was mild, and NSAIDs failed.').status, 'verified', 'at first is not a count');
+    assert.equal(knee('First, NSAIDs failed.').status, 'verified', 'an ordinal before a comma is a discourse marker');
+  });
+
+  test('a Roman numeral after a grading word is the number it names, substage and all', () => {
+    assert.equal(knee('Stage III osteoarthritis was documented.').status, 'verified');
+    assert.equal(knee('Stage 3 osteoarthritis was documented.').status, 'verified', 'the source wrote the numeral; the sentence may write the digit');
+    assert.equal(knee('Stage IV osteoarthritis was documented.').status, 'needs-citation', 'note-002 carries a 4');
+    assert.equal(knee('Stage V osteoarthritis was documented.').status, 'refuted');
+    assert.equal(knee('Stage IIIA osteoarthritis was documented.').status, 'refuted', 'a substage the entry does not state');
+    assert.equal(knee('Grade II changes were seen on the right.').status, 'verified');
+    assert.equal(knee('IV contrast was not given.').status, 'verified', 'IV with no grading word before it is not a four');
+    const kneeIIIA: GateSources = { ...kneeSources, chart: [{ ...kneeChart[0]!, text: kneeChart[0]!.text.replace('Stage III', 'Stage IIIA') }, kneeChart[1]!] };
+    const r = litmus(kneeIIIA, appeal([{ text: 'Stage III osteoarthritis was documented.', citation: 'note-001', quote: 'prior corticosteroid injections' }], [])).sentences[0]!;
+    assert.equal(r.status, 'verified', 'an entry that states the substage sources the stage');
+  });
+
+  test('a number keeps the side the sources pair it with', () => {
+    assert.equal(knee('Three prior injections were given in the left knee.').status, 'verified');
+    const swapped = knee('Three prior injections were given in the right knee.');
+    assert.equal(swapped.status, 'refuted', 'the entry pairs 3 with the left and 1 with the right');
+    assert.match(swapped.reason, /3 .*right.*left/);
+    assert.equal(knee('One injection was given in the right knee.').status, 'verified');
+    assert.equal(knee('One injection was given in the left knee.').status, 'refuted');
+    assert.equal(knee('Pain was 7/10 in the left knee.').status, 'verified', 'bilateral pairs the number with both sides');
+    assert.equal(knee('The left knee was treated in a 62 year old man.').status, 'verified', 'a number the sources pair with no side is not checked for its side');
+    assert.equal(knee('Grade II changes were seen on the left.').status, 'refuted', 'the entry pairs grade 2 with the right');
+    assert.equal(knee('Four sessions were completed for the right knee.', 'sessions completed', 'note-002').status, 'verified');
+    assert.equal(knee('Four sessions were completed for the left knee.', 'sessions completed', 'note-002').status, 'refuted');
+    const elsewhere = knee('Four sessions were completed for the right knee.');
+    assert.equal(elsewhere.status, 'needs-citation', 'note-001 has no 4; note-002 pairs 4 with the right, so the gate names it');
+    assert.deepEqual(elsewhere.alsoCite, ['note-002']);
+    assert.equal(knee('The left knee had 3 injections and the right had 1.').status, 'verified', 'a conjunction cuts the clause');
+    assert.equal(knee('The left knee had 1 injection and the right had 3.').status, 'refuted');
+    assert.equal(knee('Three injections were given in the left and right knees.').status, 'refuted', 'left and right is bilateral, and the entry pairs 3 with the left only');
+  });
+
+  test('the macromastia fixture is unmoved by pairing', () => {
+    const r = litmus(sources, appeal(GOOD));
+    assert.equal(r.verdict, 'pass');
+    assert.equal(litmus(sources, appeal([{ text: 'The estimated resection of 690 grams on the right and 724 on the left exceeds the threshold.', citation: 'note-001', quote: Q_WEIGHT }])).sentences[0]!.status, 'refuted', 'the sides swapped around numbers the entry carries');
+  });
+});
+
+describe('gate v1.7: what the first regate taught', () => {
+  const chart = [
+    { id: 'note-001', date: '2026-07-26', kind: 'imaging', text: 'Carotid duplex. Right internal carotid peak systolic velocity 310 centimeters per second, consistent with 70 to 99 percent stenosis.' },
+    { id: 'note-002', date: '2026-09-12', kind: 'admission', text: 'Three disciplines ordered. I expect her to tolerate three hours a day.' },
+  ];
+  const src: GateSources = { chart, criteria: [], denial: ['Northwind denied CPT 35301. CARC 50.'], facts: ['SYN-042, 68 year old man'] };
+  const one = (text: string, citation: string, quote: string): SentenceRecord => litmus(src, appeal([{ text, citation, quote }], [])).sentences[0]!;
+  test('per second is a unit, not the ordinal two', () => {
+    assert.equal(one('Peak systolic velocity was 310 centimeters per second.', 'note-001', 'peak systolic velocity 310 centimeters per second').status, 'verified');
+  });
+  test('the article after a plural unit is a rate, not a count of one', () => {
+    assert.equal(one('She was expected to tolerate one hour a day.', 'note-002', 'three hours a day').status, 'refuted', 'three hours a day does not source a count of one');
+    assert.equal(one('She was expected to tolerate three hours a day.', 'note-002', 'three hours a day').status, 'verified');
   });
 });

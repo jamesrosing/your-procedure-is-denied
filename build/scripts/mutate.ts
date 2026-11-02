@@ -45,6 +45,10 @@ export type MutationKind =
   | 'code-letter'
   | 'code-system'
   | 'fullwidth-digits'
+  | 'article-count'
+  | 'ordinal-word'
+  | 'roman-numeral'
+  | 'side-number-swap'
   | 'citation-moved'
   | 'quote-word-dropped'
   | 'number-collision'
@@ -67,6 +71,10 @@ export const CLASS_OF: Record<MutationKind, MutationClass> = {
   'code-letter': 'hard',
   'code-system': 'hard',
   'fullwidth-digits': 'hard',
+  'article-count': 'hard',
+  'ordinal-word': 'hard',
+  'roman-numeral': 'hard',
+  'side-number-swap': 'hard',
   'citation-moved': 'hard',
   'quote-word-dropped': 'hard',
   'number-collision': 'collision',
@@ -114,8 +122,28 @@ const ONE_IDIOM_RE = /\b(?:no|any|each|every|some|this|that|which|another|other|
 // The gate's admissible numbers and dates of a text (v1.6): every date in one
 // form (yyyy-mm-dd, yyyy-mm, mm-dd) plus its year; the day and the month are
 // not bare numbers; thousands separators folded; one and zero are numbers.
+// v1.7 (mirrored): the article before a unit is 1, an ordinal word is its
+// number, a Roman numeral after a grading word is its number.
+const ARTICLE_FREQUENCY_RE = /\b(?:\d+|once|twice|thrice|per|each|every|a|an|(?:week|month|day|year|hour|minute|night|session|visit|cycle|dose|time|injection|infusion|tablet|unit)s) (?:a|an)(?= (?:week|month|day|year|hour|minute|night|session|visit|cycle)s?\b)/g;
+const ARTICLE_COUNT_RE = /\b(?:a|an)(?= (?:week|month|day|year|hour|minute|night|dose|session|cycle|visit|fraction|unit|tablet|capsule|injection|infusion|pill)\b)/g;
+const ORDINAL_WORDS: Record<string, string> = { first: '1', second: '2', third: '3', fourth: '4', fifth: '5', sixth: '6', seventh: '7', eighth: '8', ninth: '9', tenth: '10', eleventh: '11', twelfth: '12' };
+const ORDINAL_RE = new RegExp(`\\b(${Object.keys(ORDINAL_WORDS).join('|')})\\b`, 'g');
+const ORDINAL_IDIOM_RE = /\bat first\b|\bfirst of all\b|\b(?:first|second|third)(?:ly)?,|\bseconds\b|\bper second\b|(?<=\b\d+(?:\.\d+)?[ -])second\b|\bsecond(?= (?:later|before|after|to|from))\b/g;
+const GRADING = 'stage|grade|class|type|phase|level|group|category|tier|degree|clark|nyha|asa|gold|fontaine|rutherford|killip';
+const ROMAN: Record<string, string> = { i: '1', ii: '2', iii: '3', iv: '4', v: '5', vi: '6', vii: '7', viii: '8', ix: '9', x: '10', xi: '11', xii: '12' };
+const ROMAN_FOR: string[] = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
+const ROMAN_RE = new RegExp(`\\b(${GRADING}) (i{1,3}|iv|vi{0,3}|ix|xi{0,2})([a-c])?\\b`, 'g');
+const ORDINAL_FOR: string[] = ['', 'first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh', 'eighth', 'ninth', 'tenth', 'eleventh', 'twelfth'];
+
 function digitTokens(text: string): Set<string> {
-  let t = canon(text).replace(ONE_IDIOM_RE, m => ' '.repeat(m.length)).replace(NUMBER_WORD_RE, w => String(NUMBER_WORDS[w]));
+  let t = canon(text)
+    .replace(ONE_IDIOM_RE, m => ' '.repeat(m.length))
+    .replace(ARTICLE_FREQUENCY_RE, m => ' '.repeat(m.length))
+    .replace(ARTICLE_COUNT_RE, '1')
+    .replace(ORDINAL_IDIOM_RE, m => ' '.repeat(m.length))
+    .replace(ORDINAL_RE, w => ORDINAL_WORDS[w]!)
+    .replace(ROMAN_RE, (_, g: string, r: string, sub?: string) => `${g} ${ROMAN[r]!}${sub ?? ''}`)
+    .replace(NUMBER_WORD_RE, w => String(NUMBER_WORDS[w]));
   while (/\d,\d{3}\b/.test(t)) t = t.replace(/(\d),(\d{3})\b/g, '$1$2');
   const out = new Set<string>();
   const full = (y: string, m: string, d: string): string => { out.add(`${y}-${m}-${d}`); out.add(`${y}-${m}`); out.add(`${m}-${d}`); out.add(y); return ' '; };
@@ -141,6 +169,25 @@ function sideTokens(text: string): Set<string> {
   return out;
 }
 
+// Gate v1.7's side-number pairs of a text ("left|3"): clauses cut at
+// punctuation and conjunctions, every standalone number paired with every side
+// in its clause, bilateral with both. Dates are masked first, as the gate does.
+const BILATERAL_RE = /\bbilat(?:eral(?:ly)?)?\b|\bb\/l\b|\b(?:left and right|right and left|l and r|r and l)\b/g;
+const CLAUSE_CUT_RE = /[.;,\n]|\b(?:and|but|while|whereas|versus|vs)\b/;
+function pairTokens(text: string): Set<string> {
+  const out = new Set<string>();
+  let t = canon(text).replace(ONE_IDIOM_RE, m => ' '.repeat(m.length)).replace(ARTICLE_FREQUENCY_RE, m => ' '.repeat(m.length)).replace(ARTICLE_COUNT_RE, '1').replace(ORDINAL_IDIOM_RE, m => ' '.repeat(m.length)).replace(ORDINAL_RE, w => ORDINAL_WORDS[w]!).replace(ROMAN_RE, (_, g: string, r: string, sub?: string) => `${g} ${ROMAN[r]!}${sub ?? ''}`).replace(NUMBER_WORD_RE, w => String(NUMBER_WORDS[w]));
+  t = maskDatesAndIds(t).replace(SIDE_IDIOM_RE, m => ' '.repeat(m.length)).replace(NOT_A_SIDE_RE, m => ' '.repeat(m.length)).replace(BILATERAL_RE, m => 'bilateral'.padEnd(m.length));
+  for (const clause of t.split(CLAUSE_CUT_RE)) {
+    const sides = new Set<string>();
+    for (const m of clause.matchAll(/\b(left|right|l|r|lt|rt)\b/g)) sides.add(SIDE_OF[m[1]!]!);
+    if (/\bbilateral\b/.test(clause)) { sides.add('left'); sides.add('right'); }
+    if (sides.size === 0) continue;
+    for (const m of clause.matchAll(/(?<![a-z\d.])\d+(?:\.\d+)?(?![a-z\d])/g)) for (const side of sides) out.add(`${side}|${strip(m[0])}`);
+  }
+  return out;
+}
+
 // The side words a text carries only inside an idiom.
 function idiomSides(text: string): string[] {
   const out: string[] = [];
@@ -151,7 +198,7 @@ function idiomSides(text: string): string[] {
   return out;
 }
 
-interface Admissible { entry: Set<string>; shared: Set<string>; all: Set<string>; chartWide: Set<string>; sidesEntry: Set<string>; sidesShared: Set<string> }
+interface Admissible { entry: Set<string>; shared: Set<string>; all: Set<string>; chartWide: Set<string>; sidesEntry: Set<string>; sidesShared: Set<string>; pairs: Set<string> }
 
 function admissible(sources: GateSources, entry: GateEntry): Admissible {
   const entryTokens = digitTokens(entry.text);
@@ -175,7 +222,9 @@ function admissible(sources: GateSources, entry: GateEntry): Admissible {
   for (const c of sources.criteria) for (const t of sideTokens(c.text)) sidesShared.add(t);
   for (const d of sources.denial) for (const t of sideTokens(d)) sidesShared.add(t);
   for (const f of sources.facts ?? []) for (const t of sideTokens(f)) sidesShared.add(t);
-  return { entry: entryTokens, shared, all, chartWide, sidesEntry, sidesShared };
+  const pairs = pairTokens(entry.text);
+  for (const txt of [...sources.criteria.map(c => c.text), ...sources.denial, ...(sources.facts ?? [])]) for (const p of pairTokens(txt)) pairs.add(p);
+  return { entry: entryTokens, shared, all, chartWide, sidesEntry, sidesShared, pairs };
 }
 
 // --- finding what a sentence carries
@@ -287,8 +336,12 @@ function lateralitySwap(s: Sentence, adm: Admissible): Mutation | null {
   const sides = new Set(spots.map(sp => sp.word.toLowerCase()));
   const swappedIn = [...sides].map(w => (w === 'left' ? 'right' : 'left'));
   const present = swappedIn.some(w => adm.sidesEntry.has(w) || adm.sidesShared.has(w));
-  const kind: MutationKind = present ? 'laterality-collision' : 'laterality-swap';
-  return { kind, class: CLASS_OF[kind], sentence: { ...s, text }, note: `${[...sides].join('/')} -> ${swappedIn.join('/')}${present ? ' (the other side already appears in the entry, criteria, denial, or facts)' : ''}` };
+  // v1.7: a collision whose swapped side now sits beside a number the sources
+  // pair with the original side ("690 on the right" where the entry has 690 on
+  // the left) is the side-number class, and hard: the gate has the pair to refuse it.
+  const contradicted = present && [...pairTokens(text)].some(p => { const [side, n] = p.split('|') as [string, string]; return !adm.pairs.has(p) && adm.pairs.has(`${side === 'left' ? 'right' : 'left'}|${n}`); });
+  const kind: MutationKind = contradicted ? 'side-number-swap' : present ? 'laterality-collision' : 'laterality-swap';
+  return { kind, class: CLASS_OF[kind], sentence: { ...s, text }, note: `${[...sides].join('/')} -> ${swappedIn.join('/')}${contradicted ? ' (the sources pair the number with the original side)' : present ? ' (the other side already appears in the entry, criteria, denial, or facts)' : ''}` };
 }
 
 // The idiom leak (Oct 31, found in review): a side the cited entry carries only
@@ -386,6 +439,51 @@ function fullwidthDigits(s: Sentence, adm: Admissible): Mutation | null {
   return { kind: 'fullwidth-digits', class: 'hard', sentence: { ...s, text: splice(s.text, spot, wide) }, note: `${spot.raw} -> ${wide}` };
 }
 
+// --- the v1.7 classes (Nov 2, the four left open in README 4.6) --------------
+
+// A count before a unit rewritten as the article: "12 weeks" -> "a week".
+// Only where neither the cited entry nor the shared sources carry a 1, so a
+// pass means the article was not read as a count; where another entry carries
+// a 1 the gate answers needs-citation, which is caught.
+const UNIT_RE = /(\d+) (week|month|day|year|hour|dose|session|cycle|visit)s\b/i;
+function articleCount(s: Sentence, adm: Admissible): Mutation | null {
+  if (adm.all.has('1')) return null;
+  const m = UNIT_RE.exec(maskDatesAndIds(s.text));
+  if (!m || Number(m[1]) < 2) return null;
+  // "every 6 hours" would become "every an hour", a frequency no one writes; the article there is not a count.
+  if (/\b(?:every|each|per|times)\s*$/i.test(s.text.slice(0, m.index))) return null;
+  const article = m[2]!.toLowerCase() === 'hour' ? 'an' : 'a';
+  const text = s.text.slice(0, m.index) + `${article} ${m[2]}` + s.text.slice(m.index + m[0].length);
+  return { kind: 'article-count', class: 'hard', sentence: { ...s, text }, note: `${m[0]} -> ${article} ${m[2]}` };
+}
+
+// A number rewritten as an ordinal word of another value absent everywhere:
+// "3 injections" -> "fifth injections". The grammar is not the point; whether
+// the gate reads the word as a number is.
+function ordinalWord(s: Sentence, adm: Admissible): Mutation | null {
+  const spot = numbersIn(s.text).find(sp => Number.isInteger(sp.value) && !sp.word && sp.value >= 1 && sp.value <= 12);
+  if (!spot) return null;
+  const base = spot.value;
+  const m = [base + 1, base + 2, base + 3, base - 1, base + 5, base + 7].find(n => n >= 1 && n <= 12 && n !== base && !adm.chartWide.has(String(n)));
+  if (m === undefined) return null;
+  const text = splice(s.text, spot, ORDINAL_FOR[m]!);
+  return { kind: 'ordinal-word', class: 'hard', sentence: { ...s, text }, note: `${spot.raw} -> ${ORDINAL_FOR[m]}` };
+}
+
+// A number after a grading word rewritten as a Roman numeral of another value
+// absent everywhere: "stage 3" -> "stage V".
+const GRADED_NUMBER_RE = new RegExp(`\\b(${GRADING}) (\\d{1,2})\\b`, 'i');
+function romanNumeral(s: Sentence, adm: Admissible): Mutation | null {
+  const m = GRADED_NUMBER_RE.exec(maskDatesAndIds(s.text));
+  if (!m) return null;
+  const base = Number(m[2]);
+  const other = [base + 1, base + 2, base - 1, base + 3, base + 5].find(n => n >= 1 && n <= 12 && n !== base && !adm.chartWide.has(String(n)));
+  if (other === undefined) return null;
+  const at = m.index + m[1]!.length + 1;
+  const text = s.text.slice(0, at) + ROMAN_FOR[other] + s.text.slice(at + m[2]!.length);
+  return { kind: 'roman-numeral', class: 'hard', sentence: { ...s, text }, note: `${m[0]} -> ${m[1]} ${ROMAN_FOR[other]}` };
+}
+
 function citationMoved(s: Sentence, sources: GateSources, rng: Rng): Mutation | null {
   const q = canon(s.quote);
   const others = sources.chart.filter(e => e.id !== s.citation && !canon(e.text).includes(q));
@@ -468,6 +566,9 @@ export function mutateSentence(s: Sentence, sources: GateSources, rng: Rng): Mut
   push(codeLetter(s, adm));
   push(codeSystem(s, adm));
   push(fullwidthDigits(s, adm));
+  push(articleCount(s, adm));
+  push(ordinalWord(s, adm));
+  push(romanNumeral(s, adm));
   push(citationMoved(s, sources, rng));
   push(quoteWordDropped(s, entry, rng));
   push(numberCollision(s, adm, rng));

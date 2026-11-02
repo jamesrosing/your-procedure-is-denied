@@ -362,12 +362,16 @@ function main(): void {
         'code-letter': 'the letter of a code changed',
         'code-system': 'the system word before a code swapped (CPT, HCPCS)',
         'fullwidth-digits': 'wrong number written in fullwidth digits',
+        'article-count': 'count before a unit rewritten as the article a or an',
+        'ordinal-word': 'number rewritten as an ordinal word of another value',
+        'roman-numeral': 'number after a grading word rewritten as a Roman numeral of another value',
+        'side-number-swap': 'side swapped beside a number the sources pair with the other side',
         'number-collision': 'number replaced by a value that appears in the criteria, the denial, or the case facts',
         'laterality-collision': 'side swapped, other side present somewhere in the cited entry',
         'negation-flip': 'negation flipped',
         'pronoun-swap': 'pronoun swapped',
       };
-      const kindClass: Record<string, string> = { 'number-absent': 'hard', 'citation-moved': 'hard', 'quote-word-dropped': 'hard', 'date-shift': 'hard', 'laterality-swap': 'hard', 'laterality-idiom-leak': 'hard', 'count-word': 'hard', 'month-name-date': 'hard', 'laterality-abbreviation': 'hard', 'code-letter': 'hard', 'code-system': 'hard', 'fullwidth-digits': 'hard', 'number-collision': 'collision', 'laterality-collision': 'collision', 'negation-flip': 'soft', 'pronoun-swap': 'soft' };
+      const kindClass: Record<string, string> = { 'number-absent': 'hard', 'citation-moved': 'hard', 'quote-word-dropped': 'hard', 'date-shift': 'hard', 'laterality-swap': 'hard', 'laterality-idiom-leak': 'hard', 'count-word': 'hard', 'month-name-date': 'hard', 'laterality-abbreviation': 'hard', 'code-letter': 'hard', 'code-system': 'hard', 'fullwidth-digits': 'hard', 'article-count': 'hard', 'ordinal-word': 'hard', 'roman-numeral': 'hard', 'side-number-swap': 'hard', 'number-collision': 'collision', 'laterality-collision': 'collision', 'negation-flip': 'soft', 'pronoun-swap': 'soft' };
       const total = Object.values(cls).reduce((n, c) => n + c.attempted, 0);
       b.push(`**Table 3. Gate sensitivity by corruption class** (\`build/scripts/mutate.ts\`, gate ${short(rep.gate)}). ${total.toLocaleString()} fabrications injected one at a time into the sentences the kept runs verified, with caught meaning the gate returned refuted or needs-citation, and, where zero were missed, the 95% upper bound on the miss rate by the rule of three.`);
       b.push('');
