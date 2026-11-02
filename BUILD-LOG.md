@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-11-02 05:34 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-11-02 05:35 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -808,6 +808,6 @@ Viewer, writ first, step two of the mobile plan (`build/viewer/`): on a phone th
 
 (generated files only; no ledger row by design)
 
-### next commit · the one that carries this regeneration
+### d5c6001 · 2026-11-01 21:34 · Viewer: the pager, step three of the mobile plan: the three panels as a left-to-right strip on a phone, dots that follow; README and ACCESSIBILITY state the phone mode
 
 Viewer, the pager, step three of the mobile plan (`build/viewer/`): under 900 px the three panels sit side by side in a strip that snaps one panel at a time, so record, rules, appeal keep the left-to-right order the narration reads them in; three buttons above the strip name the panel in view and page to one (`renderPager`, from the strip's scroll offset), and the replay's own scroll-into-view calls page the strip to where something just happened: an opened entry pages to the chart, a new sentence to the draft. Each list scrolls inside 56 dvh. `check-viewer.ts` pages to the draft from the third dot on the phone and the dot follows. README 2.8 states the phone mode in one paragraph; ACCESSIBILITY.md adds a section on it. Asset links v40; 263 tests
