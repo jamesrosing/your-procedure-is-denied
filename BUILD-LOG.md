@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-11-02 05:35 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-11-02 05:55 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -52,7 +52,7 @@ Each commit that changed the version string in `build/src/litmus.ts`. The gate i
 
 ## Commits since `hackathon-start`
 
-Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 67 regenerate commits (by github-actions[bot] after a push, or by the author running `npm run log` locally) are this log regenerating itself; they touch only the generated files and carry no ledger row.
+Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 68 regenerate commits (by github-actions[bot] after a push, or by the author running `npm run log` locally) are this log regenerating itself; they touch only the generated files and carry no ledger row.
 
 ### 79e5e21 · 2026-10-26 20:38 · Add hackathon scaffolding: NEW-WORK.md and /build
 
@@ -811,3 +811,11 @@ Viewer, writ first, step two of the mobile plan (`build/viewer/`): on a phone th
 ### d5c6001 · 2026-11-01 21:34 · Viewer: the pager, step three of the mobile plan: the three panels as a left-to-right strip on a phone, dots that follow; README and ACCESSIBILITY state the phone mode
 
 Viewer, the pager, step three of the mobile plan (`build/viewer/`): under 900 px the three panels sit side by side in a strip that snaps one panel at a time, so record, rules, appeal keep the left-to-right order the narration reads them in; three buttons above the strip name the panel in view and page to one (`renderPager`, from the strip's scroll offset), and the replay's own scroll-into-view calls page the strip to where something just happened: an opened entry pages to the chart, a new sentence to the draft. Each list scrolls inside 56 dvh. `check-viewer.ts` pages to the draft from the third dot on the phone and the dot follows. README 2.8 states the phone mode in one paragraph; ACCESSIBILITY.md adds a section on it. Asset links v40; 263 tests
+
+### e757b2b · 2026-11-01 21:35 · Build log: regenerate after d5c6001
+
+(generated files only; no ledger row by design)
+
+### next commit · the one that carries this regeneration
+
+Video plan for the author's third script (`assets/video/WALKTHROUGH.md`, `narration.srt`), written after a reviewer's note on the first cut: the synthetic denial letter for case-025 fills the frame at 0:00 while the author says who he is; the case at 0:25; Play at 0:45 at half speed so the sentences are still stamping when the picture zooms 1.7x on the draft panel at 1:05 and PASS lands in the zoomed frame; the gate refused by hand at 1:20; the decline at 1:30; the scoreboard at 1:45 zoomed on the table with the headline numbers as on-screen captions at the words they are spoken (9 runs and 45 to 50 of 50; 0 fabricated quotes in any sentence and under $1 a run; 9,518 injected and all 5,824 hard ones caught); the writ at 2:15 scrolled to the payer's reason, the footnotes, and the signature line; an end card at 2:35 with the repository, the demo, the DOI, and litmus-gate on npm; the cut ends at 2:55 and there is no terminal clip. 420 words, 34 cues on the planned times. The sourced-numbers section states where the spoken line and the record differ (the coverage index answers when the policy last changed, not which version was in force; no fabricated quote in any sentence, two in evidence items on declined drafts; the spike-in caught every hard corruption and by design none of the collisions or negation changes). The picture is recorded headlessly to the plan, then again to the recorded voice's word times, with the captions burned in
