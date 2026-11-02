@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-11-01 19:34 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-11-02 00:51 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -52,7 +52,7 @@ Each commit that changed the version string in `build/src/litmus.ts`. The gate i
 
 ## Commits since `hackathon-start`
 
-Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 62 regenerate commits (by github-actions[bot] after a push, or by the author running `npm run log` locally) are this log regenerating itself; they touch only the generated files and carry no ledger row.
+Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 63 regenerate commits (by github-actions[bot] after a push, or by the author running `npm run log` locally) are this log regenerating itself; they touch only the generated files and carry no ledger row.
 
 ### 79e5e21 · 2026-10-26 20:38 · Add hackathon scaffolding: NEW-WORK.md and /build
 
@@ -771,3 +771,11 @@ Video script and plan rewritten in the author's own words (`assets/video/WALKTHR
 ### e1576e1 · 2026-11-01 11:33 · Build log: regenerate after ce6c04a
 
 (generated files only; no ledger row by design)
+
+### 2f14700 · 2026-11-01 11:34 · Build log: regenerate after e1576e1
+
+(generated files only; no ledger row by design)
+
+### 07205e4 · 2026-11-01 16:29 · Viewer: a figures spotlight region; video plan: Figures at 2:02, Compare from 2:07, the pickers opened briefly, both themes
+
+Viewer: a `figures` spotlight region (`#figure-list`), so the Figures tab can be ringed in a take; one assertion. Video plan (`assets/video/WALKTHROUGH.md`): the Figures tab shown at 2:02 and Compare from 2:07, four seconds longer on the grid, at the author's request; the case picker opened for a moment at "one of fifty" and the run picker at "nine runs", drawn as an open list since a native dropdown never reaches a screencast; the take recorded in both themes. 260 tests

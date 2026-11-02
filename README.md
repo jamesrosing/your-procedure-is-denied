@@ -238,7 +238,7 @@ The chart entry a draft quotes is, in practice, dictated. `npm run dictate -- --
 ## 3. Results
 
 <!-- results:start -->
-_Tables generated from the result files by `npm run log`; the prose below them is written by hand. Last regenerated 2026-11-01 19:34 UTC._
+_Tables generated from the result files by `npm run log`; the prose below them is written by hand. Last regenerated 2026-11-02 00:51 UTC._
 
 **Table 1. Kept runs.** 9 runs, 50 cases each, effort low. Agreed is correct-pass plus correct-decline against the grading key, with a 95% Wilson interval. Blocked is a draft the gate stopped. Missed is a decline on a case the key labels warranted. False pass is a draft the gate passed on a case the key labels unsupported. The five outcome columns sum to 50. Fabricated quotes counts quotes the gate refuted as not in the entry cited, in a sentence or in an evidence item, on any draft including declined ones. Care defended is the billed value of the warranted cases whose appeal passed the gate, out of the $568,500 billed across the thirty warranted cases ($940,000 across all fifty); the values are the synthetic set's, not a payer's. Entries read applies to the agentic modes.
 
@@ -445,9 +445,9 @@ Meta and Cerebral Valley for the event; Baseten for hosting the open-weights mod
 Every commit since the event began has a row in [NEW-WORK.md](NEW-WORK.md), every result file carries its model, mode, gate version, and any re-gate in its own header, and this section is regenerated from those sources after every push. Nothing in it is typed by hand.
 
 <!-- build-log:start -->
-_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-11-01 19:34 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
+_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-11-02 00:51 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
 
-175 commits since the `hackathon-start` tag, the last at 2026-11-01 11:33 (e1576e1). Gate v1.5. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
+177 commits since the `hackathon-start` tag, the last at 2026-11-01 16:29 (07205e4). Gate v1.5. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
 
 | Started (UTC) | Model | Mode | Agreed | Blocked | Missed | False pass | Advisor |
 | --- | --- | --- | :---: | :---: | :---: | :---: | --- |
@@ -463,11 +463,11 @@ _Generated from the git history, the ledger, and the result files by `npm run lo
 
 Last five authored commits, newest first, with the ledger row each one carried (the bot's regenerate commits are left out):
 
+- **07205e4 · 2026-11-01 16:29** · Viewer: a figures spotlight region; video plan: Figures at 2:02, Compare from 2:07, the pickers opened briefly, both themes. Viewer: a `figures` spotlight region (`#figure-list`), so the Figures tab can be ringed in a take; one assertion. Video plan (`assets/video/WALKTHROUGH.md`): the Figures tab shown at 2:02 and Compare from 2:07, four seconds longer on the grid, at the author's request; the case picker opened for a moment at "one of fifty" and the run picker at "nine…
 - **ce6c04a · 2026-11-01 11:33** · Video: the author's own script, case-025 featured, the picture timed to the words with the spotlight at each word; two more writ regions. Video script and plan rewritten in the author's own words (`assets/video/WALKTHROUGH.md`, `narration.srt`): who is speaking, the problem, one case (case-025: IMRT planning after lumpectomy for breast cancer, a Medicare Advantage denial, $25,000), how the system works on it, what was found, and what comes next; 404 words, speech ending at 2:56, the clicks…
 - **6e2fd0c · 2026-11-01 01:23** · Viewer: the presenter spotlight, a region ringed and the rest dimmed while a take is recorded, driven only from outside the page. Viewer: the presenter spotlight (`build/viewer/src/spotlight.ts`, `window.ypid.spotlight(name)`): a named region of the page (a panel, a sentence by index, an entry by id, the verdict, the scoreboard, the compare grid, the writ, its signature line) is ringed and the rest of the stage dimmed, so a recorded take leads the narration to the part being spoken…
 - **4cd5dcb · 2026-10-31 23:32** · README: the abstract's and Conclusion's spike-in numbers follow Table 3 under v1.5. README: the abstract and the Conclusion still carried the v1.4 spike-in numbers (9,475 fabrications, 5,781 of 5,781 hard) after the Results prose moved to v1.5; now 9,518 and 5,824 of 5,824, matching Table 3. `.zenodo.json` description likewise, for the next deposit (the v1.1.0 record is unchanged). No verdict, label, or Table 1 number is involved
 - **6660d40 · 2026-10-31 22:36** · Video: the prior-versus-new line spoken over the stamp; the live terminal run cut in as its own 11-second segment; the SRT on the new times. Video plan revised after review (`assets/video/WALKTHROUGH.md`, `narration.srt`): the prior-versus-new line is spoken at 0:20 over the typed stamp that says the same ("Everything shown was built this week, on my pre-existing record system, appeal engine, and coverage index"), paid for by the run-picker sentence, whose numbers are spoken again at the…
-- **f2acfeb · 2026-10-31 22:31** · README: prior versus new on the first screen, the local viewer fallback, the two bonus-prize entries named, the production home; ledger: CHART as prior work; chart.ts: outage guidance; CONTRIBUTING: pytest. README, from the review: one sentence under "What this is, and is not" saying what was built this week and what is pre-existing and not included, in the viewer's own words; 2.8 names `npm run viewer` then `npm run viewer:serve` as the local fallback if demo.hemeehr.com is unreachable; 2.5 names the Muse Spark Open runs as the entry for the Best Build on…
 <!-- build-log:end -->
 
 ## From the inside
