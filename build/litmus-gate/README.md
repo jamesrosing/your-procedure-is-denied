@@ -45,7 +45,7 @@ claude mcp add litmus-gate -- node /path/to/your-procedure-is-denied/build/litmu
 
 Any other MCP host takes the same command and arguments in its server configuration (`command: node`, `args: [".../dist/cli.js", "mcp"]`). Nothing leaves the process: the server reads the chart and the draft from the tool call and answers from memory.
 
-The package is on npm as [`litmus-gate`](https://www.npmjs.com/package/litmus-gate) (0.1.0, Apache 2.0, published October 30, 2026), so no checkout is needed:
+The package is on npm as [`litmus-gate`](https://www.npmjs.com/package/litmus-gate) (0.2.0, Apache 2.0, published November 2, 2026, carrying gate v1.6; 0.1.0 of October 30 carried v1.5), so no checkout is needed:
 
 ```
 claude mcp add litmus-gate -- npx -y litmus-gate mcp
