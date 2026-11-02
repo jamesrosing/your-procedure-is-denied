@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-11-02 20:49 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-11-02 20:50 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -903,3 +903,7 @@ Video script v4, the author's trimmed revision (`assets/video/WALKTHROUGH.md`, `
 ### 4674852 · 2026-11-02 12:35 · Build log: regenerate after 2c026a8
 
 (generated files only; no ledger row by design)
+
+### e004e9d · 2026-11-02 12:49 · Video script v4, the author's trimmed revision: 449 words, five facts brought to gate v1.7 and litmus-gate 0.3.0; walkthrough, SRT, and fact bullets regenerated
+
+(no ledger row)
