@@ -241,7 +241,7 @@ The chart entry a draft quotes is, in practice, dictated. `npm run dictate -- --
 ## 3. Results
 
 <!-- results:start -->
-_Tables generated from the result files by `npm run log`; the prose below them is written by hand. Last regenerated 2026-11-02 18:20 UTC._
+_Tables generated from the result files by `npm run log`; the prose below them is written by hand. Last regenerated 2026-11-02 18:21 UTC._
 
 **How to read the tables.** Spark 1.3 is muse-spark-1.3 and Wonder 1.0 is muse-wonder-1.0, both through the Meta Model API; Spark Open is Muse Spark Open, the open-weights model, on Baseten. Agreed is correct-pass plus correct-decline against the grading key, shown with its 95% Wilson interval. Blocked is a draft the gate stopped. Missed is a decline on a case the key labels warranted. False pass is a draft the gate passed on a case the key labels unsupported. Failed is no valid answer. Agreed, blocked, missed, false pass, and failed sum to 50. Fabricated quotes counts quotes the gate refuted as not in the entry cited, in a sentence or in an evidence item, on any draft including declined ones. Care defended is the billed value of the warranted cases whose appeal passed the gate, out of the $568,500 billed across the thirty warranted cases ($940,000 across all fifty); the values are the synthetic set's, not a payer's. Entries read applies to the agentic modes. Cost is per case from the provider's token prices; latency is the median per case.
 
@@ -471,9 +471,9 @@ Meta and Cerebral Valley for the event; Baseten for hosting the open-weights mod
 Every commit since the event began has a row in [NEW-WORK.md](NEW-WORK.md), every result file carries its model, mode, gate version, and any re-gate in its own header, and this section is regenerated from those sources after every push. Nothing in it is typed by hand.
 
 <!-- build-log:start -->
-_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-11-02 18:20 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
+_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-11-02 18:21 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
 
-198 commits since the `hackathon-start` tag, the last at 2026-11-02 10:20 (4117752). Gate v1.6. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
+198 commits since the `hackathon-start` tag, the last at 2026-11-02 10:20 (c0708b2). Gate v1.6. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
 
 | Started (UTC) | Model | Mode | Agreed | Blocked | Missed | False pass | Advisor |
 | --- | --- | --- | :---: | :---: | :---: | :---: | --- |
@@ -489,7 +489,7 @@ _Generated from the git history, the ledger, and the result files by `npm run lo
 
 Last five authored commits, newest first, with the ledger row each one carried (the bot's regenerate commits are left out):
 
-- **4117752 · 2026-11-02 10:20** · Gate v1.6: the six token classes from the Muse Code review, test first; six spike-in classes, 7,861 of 7,861 hard caught; all 29 result files regated, four repeat and payer verdicts moved and reported; README prose and Table 3 follow. Gate v1.6 (`build/src/litmus.ts`), the six token classes Meta's coding agent found (`build/reviews/muse-code/`), test first with its reproductions (`build/tests/litmus.test.ts`): one and zero are counts (pronoun uses masked, both sides); a date written with a month name is a date, held in one form, and a date's day and month are no longer admissible as…
+- **c0708b2 · 2026-11-02 10:20** · Gate v1.6: the six token classes from the Muse Code review, test first; six spike-in classes, 7,861 of 7,861 hard caught; all 29 result files regated, four repeat and payer verdicts moved and reported; README prose and Table 3 follow. (no ledger row)
 - **4edc467 · 2026-11-02 00:40** · Ledger: the row for 074d43f. (no ledger row)
 - **074d43f · 2026-11-02 00:39** · README 4.5: Cuban's filter answered (the model both sides can buy, the record one side holds, the gate either side can run); video plan: the author's fourth script says it, 385 words, planned beats rebalanced, the three flagged lines corrected. README 4.5: Mark Cuban's filter for healthcare AI (an efficiency nets to zero when both sides can buy the same model) answered in one sentence with a footnote: the model is the part both sides can buy, the chart is held by one side and a denial is a claim about a policy while an appeal is a claim about the record, and the gate is a published standard…
 - **ec4e5df · 2026-11-02 00:20** · Reviews by Meta's coding agent: two Muse Code runs against a read-only clone (muse-spark-1.3 high, muse-wonder-1.0 xhigh), reports, prompts, complete traces and session trajectories under build/reviews/muse-code; README 4.4 states what they found beyond the author's own review. Reviews by Meta's coding agent (`build/reviews/muse-code/`): Muse Code 1.4.14 run headless twice against a read-only clone at 4cafe9f, muse-spark-1.3 at effort high and muse-wonder-1.0 at effort xhigh (ultra closed to this account), each with its report, prompt, stderr, complete local trace, exported session trajectory, and the exact command; both found…
