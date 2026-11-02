@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-11-02 05:09 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-11-02 05:11 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -784,6 +784,6 @@ Viewer: a `figures` spotlight region (`#figure-list`), so the Figures tab can be
 
 (generated files only; no ledger row by design)
 
-### next commit · the one that carries this regeneration
+### c5a60b7 · 2026-11-01 21:10 · Viewer: the typed opening removed, the page opens on the case; its words kept in the video plan, the take opening on the payer's reason
 
 Viewer: the typed opening removed (`build/viewer/`): no title cards, no `i` key, no travel into a preamble paragraph, no `cards` body class; the page opens on the case at rest, as a reviewer of the Nov 1 cut asked (the first thirty seconds were a block of typed text with the voice over it, and the block then sat at the top of the frame for the rest of the video). The "about this page" panel (footer link, p key) keeps the data note and the provenance stamp (`PROVENANCE_STAMP`, formerly `INTRO_STAMP`); the typing pace the model's why and the live-query strip share is `TYPE_CHAR_MS`. Asset links v37. Video plan (`assets/video/WALKTHROUGH.md`): the take opens on case-025 with the payer's reason ringed from the first frame while the speaker says who they are; the three lines of the opening, their sources, and the stamp are kept in a section of the plan, not in the spoken script, since they would add about half a minute past the limit. The three title-card tests replaced by one on the stamp; 258 tests
