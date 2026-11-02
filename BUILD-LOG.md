@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-11-02 05:55 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-11-02 05:56 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -816,6 +816,6 @@ Viewer, the pager, step three of the mobile plan (`build/viewer/`): under 900 px
 
 (generated files only; no ledger row by design)
 
-### next commit · the one that carries this regeneration
+### 74c5646 · 2026-11-01 21:55 · Video plan for the author's third script: the denial letter first, the case, the replay zoomed on the draft, the gate refused, the decline, the scoreboard with its numbers as captions, the writ scrolled to its footnotes, an end card at 2:35, the cut at 2:55
 
 Video plan for the author's third script (`assets/video/WALKTHROUGH.md`, `narration.srt`), written after a reviewer's note on the first cut: the synthetic denial letter for case-025 fills the frame at 0:00 while the author says who he is; the case at 0:25; Play at 0:45 at half speed so the sentences are still stamping when the picture zooms 1.7x on the draft panel at 1:05 and PASS lands in the zoomed frame; the gate refused by hand at 1:20; the decline at 1:30; the scoreboard at 1:45 zoomed on the table with the headline numbers as on-screen captions at the words they are spoken (9 runs and 45 to 50 of 50; 0 fabricated quotes in any sentence and under $1 a run; 9,518 injected and all 5,824 hard ones caught); the writ at 2:15 scrolled to the payer's reason, the footnotes, and the signature line; an end card at 2:35 with the repository, the demo, the DOI, and litmus-gate on npm; the cut ends at 2:55 and there is no terminal clip. 420 words, 34 cues on the planned times. The sourced-numbers section states where the spoken line and the record differ (the coverage index answers when the policy last changed, not which version was in force; no fabricated quote in any sentence, two in evidence items on declined drafts; the spike-in caught every hard corruption and by design none of the collisions or negation changes). The picture is recorded headlessly to the plan, then again to the recorded voice's word times, with the captions burned in
