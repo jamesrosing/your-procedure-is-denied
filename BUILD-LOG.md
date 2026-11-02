@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-11-02 20:18 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-11-02 20:19 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -54,7 +54,7 @@ Each commit that changed the version string in `build/src/litmus.ts`. The gate i
 
 ## Commits since `hackathon-start`
 
-Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 75 regenerate commits (by github-actions[bot] after a push, or by the author running `npm run log` locally) are this log regenerating itself; they touch only the generated files and carry no ledger row.
+Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 76 regenerate commits (by github-actions[bot] after a push, or by the author running `npm run log` locally) are this log regenerating itself; they touch only the generated files and carry no ledger row.
 
 ### 79e5e21 · 2026-10-26 20:38 · Add hackathon scaffolding: NEW-WORK.md and /build
 
@@ -883,3 +883,11 @@ litmus-gate 0.2.0 published to npm (`build/litmus-gate/`), the bundle built from
 
 Results added: `mutations/report-v1.6.json`.
 Gate v1.7 (`build/src/litmus.ts`), the four token classes README 4.6 had listed as open since v1.6, test first (`build/tests/litmus.test.ts`): the article a or an before a unit is a count of one, an ordinal word is the number it names, a Roman numeral after a grading word is the number it names with its substage, and a number set beside a side keeps that side where the sources pair the number with the other ("690 on the right" against an entry that puts 690 on the left is refuted; nearest-clause pairing, demanded only when the sources pair the number with a side). Two masks learned from the first regate, each a test: "centimeters per second" is not the ordinal two, "three hours a day" is not a count of one. Spike-in (`build/scripts/mutate.ts`): four classes added (article-count, ordinal-word, roman-numeral, side-number-swap; the last reclassified out of the collisions), 12,242 injected, 8,602 of 8,602 hard caught; `report-v1.6.json` archived. All 29 result files regated: nine verdicts moved, four in the kept runs, each read and reported in README section 3 (eight true sentences blocked as needs-citation for a count the entry states in other words, one verified by a collision on "first"). README tables regenerated; prose, abstract, In brief, 2.4, 4.4, 4.6, and conclusion hand-synced (agreement 44 to 50 of 50; Spark 1.3 defends the full stakes in two of three runs). Viewer rebuilt and checked; package smoke passes; `litmus-gate` server version string matched to package.json (0.3.0 to be published by the author). Ledger hash for the v1.6 row corrected to c0708b2.
+
+### 326b66f · 2026-11-02 12:19 · Build log: regenerate after 2083ba1
+
+(generated files only; no ledger row by design)
+
+### 5a9051b · 2026-11-02 12:19 · litmus-gate 0.3.0: the bundle of gate v1.7, version strings matched (package.json, server, README); to be published
+
+(no ledger row)
