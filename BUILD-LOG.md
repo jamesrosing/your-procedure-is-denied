@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-11-02 05:32 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-11-02 05:34 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -52,7 +52,7 @@ Each commit that changed the version string in `build/src/litmus.ts`. The gate i
 
 ## Commits since `hackathon-start`
 
-Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 66 regenerate commits (by github-actions[bot] after a push, or by the author running `npm run log` locally) are this log regenerating itself; they touch only the generated files and carry no ledger row.
+Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 67 regenerate commits (by github-actions[bot] after a push, or by the author running `npm run log` locally) are this log regenerating itself; they touch only the generated files and carry no ledger row.
 
 ### 79e5e21 · 2026-10-26 20:38 · Add hackathon scaffolding: NEW-WORK.md and /build
 
@@ -803,3 +803,11 @@ Viewer, the phone shell, step one of the mobile plan (`build/viewer/`): under 90
 ### 8177946 · 2026-11-01 21:32 · Viewer: writ first on a phone and the footnote sheet, step two of the mobile plan: the cited entry with the quote marked comes to the sentence
 
 Viewer, writ first, step two of the mobile plan (`build/viewer/`): on a phone the instrument is the interface and the evidence comes to the sentence. Under 900 px a case opened without a step address lands on its verdict with the writ open above the replay (`landNarrow`; a deep link to a step stays a frame, a wide screen is untouched), and the footnote numbers in the body are 20 px chips. On every screen a tap on a footnote number, or on a footnote below, opens a sheet (a `dialog`; a bottom sheet on a phone) with the cited entry and the verified quote marked inside its text, the sentence it supports, the criteria that entry evidences in the gate record, and the gate's stamp and reason; previous and next walk the footnotes, Escape, the close button, or the backdrop closes it. `footnoteSheet` in `writ.ts` is the pure data (three tests: case-025 footnote 4 splits the entry around the quote and names its criterion; out of range and no gate are null; every footnote of every passing draft in the live run resolves to an entry, the quote found as written in at least 95 percent). `check-viewer.ts` opens the sheet on the phone, walks to footnote 2, closes it, and lands case-025 writ first with PASS in the dock. Asset links v39; 263 tests
+
+### 6115e5d · 2026-11-01 21:32 · Build log: regenerate after 8177946
+
+(generated files only; no ledger row by design)
+
+### next commit · the one that carries this regeneration
+
+Viewer, the pager, step three of the mobile plan (`build/viewer/`): under 900 px the three panels sit side by side in a strip that snaps one panel at a time, so record, rules, appeal keep the left-to-right order the narration reads them in; three buttons above the strip name the panel in view and page to one (`renderPager`, from the strip's scroll offset), and the replay's own scroll-into-view calls page the strip to where something just happened: an opened entry pages to the chart, a new sentence to the draft. Each list scrolls inside 56 dvh. `check-viewer.ts` pages to the draft from the third dot on the phone and the dot follows. README 2.8 states the phone mode in one paragraph; ACCESSIBILITY.md adds a section on it. Asset links v40; 263 tests

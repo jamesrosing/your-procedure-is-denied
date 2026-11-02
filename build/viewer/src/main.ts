@@ -97,6 +97,8 @@ const ui = {
   writFootnotes: $<HTMLOListElement>('writ-footnotes'),
   writProvenance: $<HTMLElement>('writ-provenance'),
   writSignature: $<HTMLElement>('writ-signature'),
+  panels: $<HTMLElement>('panels'),
+  pager: $<HTMLElement>('pager'),
   sheet: $<HTMLDialogElement>('sheet'),
   sheetTitle: $<HTMLElement>('sheet-title'),
   sheetClose: $<HTMLButtonElement>('sheet-close'),
@@ -647,6 +649,16 @@ function openSheet(n: number): void {
 }
 function closeSheet(): void { if (ui.sheet.open) ui.sheet.close(); }
 
+// The pager (the phone): which panel the strip shows, from its scroll offset,
+// and a tap on a dot pages to that panel. The strip is a plain row on a wide
+// screen and never scrolls there, so the index is always 0 and the dots are
+// hidden by the stylesheet.
+function renderPager(): void {
+  const width = ui.panels.clientWidth || 1;
+  const index = Math.min(2, Math.max(0, Math.round(ui.panels.scrollLeft / width)));
+  [...ui.pager.querySelectorAll<HTMLButtonElement>('.pager-dot')].forEach((dot, i) => { dot.classList.toggle('on', i === index); dot.setAttribute('aria-pressed', String(i === index)); });
+}
+
 function saveWritText(): void {
   const c = session.caseData, r = session.result, f = session.file;
   // The instrument exists only once the replay has reached its verdict: PASS
@@ -1085,6 +1097,12 @@ async function boot(): Promise<void> {
   ui.writBody.addEventListener('click', e => { const sup = (e.target as HTMLElement).closest('sup'); if (sup) openSheet(Number(sup.textContent)); });
   ui.writFootnotes.addEventListener('click', e => { const li = (e.target as HTMLElement).closest('li'); if (li) openSheet([...ui.writFootnotes.children].indexOf(li) + 1); });
   ui.sheetClose.addEventListener('click', closeSheet);
+  ui.panels.addEventListener('scroll', renderPager, { passive: true });
+  ui.pager.addEventListener('click', e => {
+    const dot = (e.target as HTMLElement).closest<HTMLButtonElement>('.pager-dot');
+    const panel = dot ? document.querySelector<HTMLElement>(`.panel.${dot.dataset['panel']}`) : null;
+    if (panel) ui.panels.scrollTo({ left: panel.offsetLeft - ui.panels.offsetLeft, behavior: 'smooth' });
+  });
   ui.sheetPrev.addEventListener('click', () => openSheet(sheetN - 1));
   ui.sheetNext.addEventListener('click', () => openSheet(sheetN + 1));
   ui.sheet.addEventListener('click', e => { if (e.target === ui.sheet) closeSheet(); }); // the backdrop

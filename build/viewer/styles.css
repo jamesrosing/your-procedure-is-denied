@@ -624,6 +624,7 @@ body:has(.writ:not([hidden])) .stage { flex: 0 0 calc(100dvh - 56px - 32px); }
    the desktop page renders pixel for pixel the same with the block removed:
    the recorded takes stay true. */
 .dock { display: none; }
+.pager { display: none; }
 @media (max-width: 900px) {
   body { padding-bottom: calc(84px + env(safe-area-inset-bottom)); }
   .bar { position: static; display: grid; grid-template-columns: 1fr; gap: 0; padding: 0; height: auto; }
@@ -638,9 +639,17 @@ body:has(.writ:not([hidden])) .stage { flex: 0 0 calc(100dvh - 56px - 32px); }
   body:has(.writ:not([hidden])) .stage { flex: none; }
   .context { padding: 12px 16px; }
   .ctx-title { font-size: 19px; }
-  .panels { display: flex; flex-direction: column; border-left: 0; border-right: 0; flex: none; }
-  .panel { overflow: visible; min-height: 0; border-right: 0; border-bottom: var(--hairline); }
-  .panel ol, .panel ul { flex: none; max-height: 46dvh; overflow-y: auto; }
+  /* the pager: the three panels side by side in a strip that snaps one panel
+     at a time, so record, rules, appeal keep their left-to-right order; the
+     replay's own scrollIntoView calls (an opened entry, a new sentence) page
+     the strip to the panel where something just happened */
+  .pager { display: flex; gap: 6px; padding: 8px 16px; border-bottom: var(--hairline); background: var(--ink-0); }
+  .pager-dot { flex: 1; height: 36px; padding: 0 8px; border: var(--hairline); border-radius: 18px; background: var(--surface); color: var(--ink-5); font-size: 12.5px; font-weight: 450; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: pointer; }
+  .pager-dot.on { color: var(--brand); border-color: var(--brand); font-weight: 500; }
+  .panels { display: flex; flex-direction: row; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none; border-left: 0; border-right: 0; flex: none; }
+  .panels::-webkit-scrollbar { display: none; }
+  .panel { flex: 0 0 100%; min-width: 0; scroll-snap-align: start; overflow: hidden; min-height: 0; border-right: var(--hairline); border-bottom: var(--hairline); }
+  .panel ol, .panel ul { flex: none; max-height: 56dvh; overflow-y: auto; }
   .counters { grid-template-columns: repeat(2, 1fr); padding: 12px 16px 14px; gap: 10px 16px; }
   .sentence { padding: 10px 16px; }
   .sentence .text { font-size: 16px; }

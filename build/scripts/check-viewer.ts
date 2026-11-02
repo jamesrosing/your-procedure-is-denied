@@ -206,10 +206,16 @@ async function main(): Promise<void> {
     const phoneStatus0 = await phone.textContent('#dock-count');
     if (!/^0 of \d+ read$/.test(phoneStatus0 ?? '')) problems.push(`phone: the dock count at rest reads "${phoneStatus0}"`);
     await phone.screenshot({ path: join(out, 'phone-case-025-rest.png'), fullPage: false });
+    // The pager: the strip opens on the chart; a tap on the third dot pages to the draft and the dot follows.
+    const pagerRest = await phone.evaluate(() => getComputedStyle(document.getElementById('pager')!).display !== 'none' && document.getElementById('panels')!.scrollLeft === 0 && document.querySelector('.pager-dot.on')?.textContent === 'Chart');
+    if (!pagerRest) problems.push('phone: the pager is not shown on the chart at rest');
+    await phone.tap('.pager-dot[data-panel="draft"]');
+    await phone.waitForFunction(() => { const p = document.getElementById('panels')!; return Math.abs(p.scrollLeft - 2 * p.clientWidth) < 2 && document.querySelector('.pager-dot.on')?.textContent === 'Draft appeal'; }, null, { timeout: 5_000 }).catch(() => problems.push('phone: the pager did not page to the draft'));
     await phone.tap('#dock-end');
     await phone.waitForSelector('#verdict[data-verdict="pass"]', { timeout: 10_000 }).catch(() => problems.push('phone: End from the dock did not reach PASS'));
     const phoneState = await phone.textContent('#dock-state');
     if (phoneState !== 'PASS') problems.push(`phone: the dock state at the verdict reads "${phoneState}"`);
+    await phone.screenshot({ path: join(out, 'phone-case-025-verdict.png'), fullPage: false });
     await phone.tap('#dock-writ');
     await phone.waitForSelector('#writ:not([hidden])', { timeout: 5_000 }).catch(() => problems.push('phone: the writ did not open from the dock'));
     const overflow = await phone.evaluate(() => document.documentElement.scrollWidth > window.innerWidth + 1);
@@ -240,7 +246,7 @@ async function main(): Promise<void> {
     await phone.close();
 
     await browser.close();
-    console.log(`compare: ${compared} cases laid out; repaired cases shown: ${repairedShown}; scoreboard rows (with header): ${boardRows}; ${invariance}; phone dock drives the replay, the footnote sheet opens and walks, a case lands writ first; frames in ${out}`);
+    console.log(`compare: ${compared} cases laid out; repaired cases shown: ${repairedShown}; scoreboard rows (with header): ${boardRows}; ${invariance}; phone dock drives the replay, the pager pages, the footnote sheet opens and walks, a case lands writ first; frames in ${out}`);
   } finally {
     server.kill();
   }
