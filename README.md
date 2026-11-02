@@ -238,7 +238,7 @@ The chart entry a draft quotes is, in practice, dictated. `npm run dictate -- --
 ## 3. Results
 
 <!-- results:start -->
-_Tables generated from the result files by `npm run log`; the prose below them is written by hand. Last regenerated 2026-11-02 06:00 UTC._
+_Tables generated from the result files by `npm run log`; the prose below them is written by hand. Last regenerated 2026-11-02 06:01 UTC._
 
 **How to read the tables.** Spark 1.3 is muse-spark-1.3 and Wonder 1.0 is muse-wonder-1.0, both through the Meta Model API; Spark Open is Muse Spark Open, the open-weights model, on Baseten. Agreed is correct-pass plus correct-decline against the grading key, shown with its 95% Wilson interval. Blocked is a draft the gate stopped. Missed is a decline on a case the key labels warranted. False pass is a draft the gate passed on a case the key labels unsupported. Failed is no valid answer. Agreed, blocked, missed, false pass, and failed sum to 50. Fabricated quotes counts quotes the gate refuted as not in the entry cited, in a sentence or in an evidence item, on any draft including declined ones. Care defended is the billed value of the warranted cases whose appeal passed the gate, out of the $568,500 billed across the thirty warranted cases ($940,000 across all fifty); the values are the synthetic set's, not a payer's. Entries read applies to the agentic modes. Cost is per case from the provider's token prices; latency is the median per case.
 
@@ -459,9 +459,9 @@ Meta and Cerebral Valley for the event; Baseten for hosting the open-weights mod
 Every commit since the event began has a row in [NEW-WORK.md](NEW-WORK.md), every result file carries its model, mode, gate version, and any re-gate in its own header, and this section is regenerated from those sources after every push. Nothing in it is typed by hand.
 
 <!-- build-log:start -->
-_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-11-02 06:00 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
+_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-11-02 06:01 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
 
-188 commits since the `hackathon-start` tag, the last at 2026-11-01 21:56 (5d71fd0). Gate v1.5. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
+189 commits since the `hackathon-start` tag, the last at 2026-11-01 22:01 (9e166bb). Gate v1.5. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
 
 | Started (UTC) | Model | Mode | Agreed | Blocked | Missed | False pass | Advisor |
 | --- | --- | --- | :---: | :---: | :---: | :---: | --- |
@@ -477,11 +477,11 @@ _Generated from the git history, the ledger, and the result files by `npm run lo
 
 Last five authored commits, newest first, with the ledger row each one carried (the bot's regenerate commits are left out):
 
+- **9e166bb · 2026-11-01 22:01** · README: results tables split and condensed so they read without scrolling; reading note, short model names in cells, In brief callout. README results tables, for the reader (`build/scripts/build-log.ts`): Table 1 split into a headline table (agreed with its interval, false pass, fabricated quotes, care defended, cost) and a detail table of the same nine runs (blocked, missed, failed, sentences verified, citation precision, entries read, latency), so neither scrolls sideways on GitHub;…
 - **74c5646 · 2026-11-01 21:55** · Video plan for the author's third script: the denial letter first, the case, the replay zoomed on the draft, the gate refused, the decline, the scoreboard with its numbers as captions, the writ scrolled to its footnotes, an end card at 2:35, the cut at 2:55. Video plan for the author's third script (`assets/video/WALKTHROUGH.md`, `narration.srt`), written after a reviewer's note on the first cut: the synthetic denial letter for case-025 fills the frame at 0:00 while the author says who he is; the case at 0:25; Play at 0:45 at half speed so the sentences are still stamping when the picture zooms 1.7x on the…
 - **d5c6001 · 2026-11-01 21:34** · Viewer: the pager, step three of the mobile plan: the three panels as a left-to-right strip on a phone, dots that follow; README and ACCESSIBILITY state the phone mode. Viewer, the pager, step three of the mobile plan (`build/viewer/`): under 900 px the three panels sit side by side in a strip that snaps one panel at a time, so record, rules, appeal keep the left-to-right order the narration reads them in; three buttons above the strip name the panel in view and page to one (`renderPager`, from the strip's scroll…
 - **8177946 · 2026-11-01 21:32** · Viewer: writ first on a phone and the footnote sheet, step two of the mobile plan: the cited entry with the quote marked comes to the sentence. Viewer, writ first, step two of the mobile plan (`build/viewer/`): on a phone the instrument is the interface and the evidence comes to the sentence. Under 900 px a case opened without a step address lands on its verdict with the writ open above the replay (`landNarrow`; a deep link to a step stays a frame, a wide screen is untouched), and the footnote…
 - **6a69f68 · 2026-11-01 21:26** · Viewer: the phone shell, step one of the mobile plan: dvh, stacked panels, a fixed dock with 44 px controls and a status line; the desktop page proven pixel-invariant in the headless check. Viewer, the phone shell, step one of the mobile plan (`build/viewer/`): under 900 px the header scrolls away, the tabs scroll sideways, the two pickers take a row each, the three panels stack in reading order with each list scrolling inside 46 dvh, and the header's transport gives way to a fixed dock at the bottom with 44 px controls (restart, back,…
-- **c5a60b7 · 2026-11-01 21:10** · Viewer: the typed opening removed, the page opens on the case; its words kept in the video plan, the take opening on the payer's reason. Viewer: the typed opening removed (`build/viewer/`): no title cards, no `i` key, no travel into a preamble paragraph, no `cards` body class; the page opens on the case at rest, as a reviewer of the Nov 1 cut asked (the first thirty seconds were a block of typed text with the voice over it, and the block then sat at the top of the frame for the rest of…
 <!-- build-log:end -->
 
 ## From the inside

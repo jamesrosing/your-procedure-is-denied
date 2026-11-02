@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-11-02 06:00 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-11-02 06:01 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -824,6 +824,6 @@ Video plan for the author's third script (`assets/video/WALKTHROUGH.md`, `narrat
 
 (generated files only; no ledger row by design)
 
-### next commit · the one that carries this regeneration
+### 9e166bb · 2026-11-01 22:01 · README: results tables split and condensed so they read without scrolling; reading note, short model names in cells, In brief callout
 
 README results tables, for the reader (`build/scripts/build-log.ts`): Table 1 split into a headline table (agreed with its interval, false pass, fabricated quotes, care defended, cost) and a detail table of the same nine runs (blocked, missed, failed, sentences verified, citation precision, entries read, latency), so neither scrolls sideways on GitHub; the terms the tables share defined once in a reading note before Table 1 and each caption cut to one sentence; model names short in cells (Spark 1.3, Wonder 1.0, Spark Open, defined in the note) with full ids kept in prose; numeric columns right-aligned and counts held on one line; Table 5 rows in the models' standing order with its before-and-after pairs merged into one cell each; Table 7's four identical misreads collapsed to one line; an In brief callout under the title with the five numbers of the abstract. No result file, no gate, and no number changed; `npm test` 263 passing.
