@@ -7,7 +7,7 @@
 // calls it. Pure mapping here, DOM work in main.ts.
 
 export const SPOT_REGIONS = [
-  'pickers', 'transport', 'context', 'chart', 'criteria', 'draft', 'payer-reason', 'strip', 'verdict', 'sentences', 'counters', 'board', 'compare', 'writ', 'writ-signature', 'writ-tools', 'writ-provenance', 'writ-footnotes', 'writ-reason',
+  'pickers', 'transport', 'context', 'chart', 'criteria', 'draft', 'payer-reason', 'strip', 'verdict', 'sentences', 'counters', 'board', 'compare', 'figures', 'writ', 'writ-signature', 'writ-tools', 'writ-provenance', 'writ-footnotes', 'writ-reason',
 ] as const;
 export type SpotRegion = (typeof SPOT_REGIONS)[number];
 
@@ -25,6 +25,7 @@ const SELECTORS: Record<SpotRegion, string> = {
   counters: '.counters',
   board: '#board-table',
   compare: '#compare-grid',
+  figures: '#figure-list',
   writ: '#writ-sheet',
   'writ-signature': '#writ-signature',
   'writ-tools': '.writ-tools',
