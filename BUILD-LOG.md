@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-11-02 20:50 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-11-03 00:27 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -54,7 +54,7 @@ Each commit that changed the version string in `build/src/litmus.ts`. The gate i
 
 ## Commits since `hackathon-start`
 
-Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 78 regenerate commits (by github-actions[bot] after a push, or by the author running `npm run log` locally) are this log regenerating itself; they touch only the generated files and carry no ledger row.
+Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 79 regenerate commits (by github-actions[bot] after a push, or by the author running `npm run log` locally) are this log regenerating itself; they touch only the generated files and carry no ledger row.
 
 ### 79e5e21 · 2026-10-26 20:38 · Add hackathon scaffolding: NEW-WORK.md and /build
 
@@ -906,4 +906,8 @@ Video script v4, the author's trimmed revision (`assets/video/WALKTHROUGH.md`, `
 
 ### e004e9d · 2026-11-02 12:49 · Video script v4, the author's trimmed revision: 449 words, five facts brought to gate v1.7 and litmus-gate 0.3.0; walkthrough, SRT, and fact bullets regenerated
 
-(no ledger row)
+The recorded v4 captions (`assets/video/narration-recorded.srt`): the author's office take of his trimmed script, transcribed to word times and cut on the script's sentence boundaries in the script's spelling, 32 cues, speech 0:00 to 2:57; the finished cuts (final-v4-dark, final-v4-light, 2:59, captions burned in) are on Cloudinary and the author's drive, not in the repository. The author said forty-five where Table 1 now says 44; a pickup of that paragraph is planned.
+
+### fbda9ce · 2026-11-02 12:50 · Build log: regenerate after e004e9d
+
+(generated files only; no ledger row by design)
