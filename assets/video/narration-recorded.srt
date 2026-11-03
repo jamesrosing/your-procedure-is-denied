@@ -1,173 +1,148 @@
 1
-00:00:00,300 --> 00:00:02,200
+00:00:00,400 --> 00:00:01,880
 My name is James Rosing.
 
 2
-00:00:02,200 --> 00:00:07,940
-I'm a surgeon in Newport Beach,
-California, and for more than fourteen
-years I've been getting letters like
-this one.
+00:00:02,380 --> 00:00:08,080
+I'm a surgeon in Newport Beach, California, and for more than 14 years, I've been getting letters like this one.
 
 3
-00:00:07,940 --> 00:00:16,000
-The letter is fake; the reason is real:
-"not medically necessary." A payer's
-software writes a denial in about a
-second.
+00:00:08,580 --> 00:00:10,260
+Everything you will see was built this week.
 
 4
-00:00:16,000 --> 00:00:18,160
-Appealing it takes a physician hours.
+00:00:10,640 --> 00:00:14,620
+My record system, appeal engine, and coverage index are pre-existing and not shown.
 
 5
-00:00:18,160 --> 00:00:22,440
-So most denials never get appealed, and
-the patient ends up paying.
+00:00:15,120 --> 00:00:16,240
+So this letter is fake.
 
 6
-00:00:23,040 --> 00:00:28,960
-Some say AI cancels out here, because
-both sides can buy the same model.
+00:00:16,740 --> 00:00:18,380
+However, the reason is real.
 
 7
-00:00:28,960 --> 00:00:31,300
-But nobody can buy the chart.
+00:00:18,880 --> 00:00:20,380
+Not medically necessary.
 
 8
-00:00:31,300 --> 00:00:37,600
-A denial is a claim about the payer's
-policy, and the payer holds the policy.
+00:00:20,380 --> 00:00:23,840
+A payer software writes a denial in about a second.
 
 9
-00:00:37,600 --> 00:00:42,780
-An appeal is a claim about the medical
-record, and only the physician holds the
-record.
+00:00:24,100 --> 00:00:29,240
+Appealing it takes a physician hours, so most denials never get appealed, and the patient ends up paying.
 
 10
-00:00:42,780 --> 00:00:47,080
-The payer's model never sees the chart,
-so it can't write the appeal.
+00:00:30,090 --> 00:00:37,950
+Some say AI cancels out in this situation because both sides can buy the same model, but nobody can buy the chart.
 
 11
-00:00:47,080 --> 00:00:48,960
-The imbalance isn't in intelligence.
+00:00:37,950 --> 00:00:43,150
+A denial is a claim about the payer's policy, and the payer holds the policy.
 
 12
-00:00:48,960 --> 00:00:50,340
-It's in evidence.
+00:00:43,650 --> 00:00:48,590
+An appeal is a claim about the medical record, and only the physician holds the record.
 
 13
-00:00:50,340 --> 00:00:58,700
-This project gives the advantage to the
-side with the evidence: if the chart
-passes a deterministic gate, an appeal
-gets drafted.
+00:00:49,090 --> 00:00:51,270
+The imbalance isn't in intelligence.
 
 14
-00:00:58,700 --> 00:01:03,300
-Here's one of fifty synthetic cases, no
-real patients.
+00:00:51,770 --> 00:00:52,650
+It's in evidence.
 
 15
-00:01:03,300 --> 00:01:09,640
-A 47-year-old woman needs radiation
-planning after a lumpectomy, and her
-Medicare Advantage plan denied it.
+00:00:53,150 --> 00:00:55,810
+This project gives the advantage to the side with the evidence.
 
 16
-00:01:10,600 --> 00:01:21,220
-Muse Spark 1.3 first asks my coverage
-index when the plan's rules last
-changed, then opens only the entries it
-needs.
+00:00:56,310 --> 00:01:02,230
+If the chart passes a deterministic gate, an appeal draft gets written for the physician to sign.
 
 17
-00:01:21,220 --> 00:01:26,400
-Every sentence it writes quotes one
-entry and names it.
+00:01:02,730 --> 00:01:04,870
+Here's one of 50 synthetic cases.
 
 18
-00:01:27,160 --> 00:01:36,420
-As each sentence comes in, a
-deterministic gate checks that the quote
-really appears in that entry, and that
-every number, date, and code matches the
-source.
+00:01:05,370 --> 00:01:06,090
+No real patients.
 
 19
-00:01:36,420 --> 00:01:40,440
-Here, every sentence was verified, in
-twelve seconds, for two cents.
+00:01:06,590 --> 00:01:14,850
+A 47-year-old woman was prescribed radiation planning after a lumpectomy, and her Medicare Advantage plan denied it.
 
 20
-00:01:41,040 --> 00:01:47,140
-Now I'll change one number in a verified
-sentence, and the gate refuses it.
+00:01:14,850 --> 00:01:25,010
+Muse Spark 1.3 first asks CHART, my pre-existing coverage index, when the plan's rules last changed, and then opens the entries it needs.
 
 21
-00:01:47,140 --> 00:01:51,700
-The model writes the draft, but the
-record decides.
+00:01:25,510 --> 00:01:29,150
+Every sentence it writes quotes one entry and names it.
 
 22
-00:01:51,700 --> 00:01:58,120
-The payer can run the same gate on my
-appeal, so the dispute gets settled on
-the record, not on whose bot writes
-better.
+00:01:30,000 --> 00:01:38,700
+As each sentence comes in, a deterministic gate checks that the quote really appears in the entry, and that every number, date, and code matches the source.
 
 23
-00:01:58,720 --> 00:02:02,660
-When the chart can't support an
-argument, the model says so.
+00:01:39,200 --> 00:01:44,020
+Here, every sentence was verified, in 12 seconds for 2 cents.
 
 24
-00:02:02,660 --> 00:02:10,160
-Here, Muse Wonder read all twenty-two
-entries looking for a sepsis criterion,
-found nothing, and declined.
+00:01:44,870 --> 00:01:48,830
+Now change one number in the verified sentence, and the gate refuses it.
 
 25
-00:02:10,760 --> 00:02:23,960
-Across fifty cases, three Meta models
-including the open-weight one, and nine
-runs, agreement with the answer key
-ranged from forty-four to fifty out of
-fifty.
+00:01:49,330 --> 00:01:51,750
+The model writes the draft, but the record decides.
 
 26
-00:02:23,960 --> 00:02:27,180
-Not one sentence contained a fabricated
-quote.
+00:01:52,250 --> 00:01:59,370
+The payer can run the same gate on my appeal, so the dispute gets settled on the record, not on whose bot writes better.
 
 27
-00:02:27,180 --> 00:02:29,980
-Spark's runs cost under a dollar each.
+00:02:00,220 --> 00:02:03,980
+When the chart can't support an argument, the model says so.
 
 28
-00:02:29,980 --> 00:02:35,020
-We injected more than twelve thousand
-fabrications to attack the gate, and it
-caught every hard one.
+00:02:04,500 --> 00:02:10,920
+Here, Muse Wonder read all 22 entries, looking for a sepsis criterion, found nothing, and declined.
 
 29
-00:02:35,620 --> 00:02:45,060
-This is what the physician sees: the
-appeal, the payer's reason answered
-directly, every sentence footnoted to
-the entry it quotes.
+00:02:11,770 --> 00:02:20,670
+Across 50 cases, three Meta models, Muse Spark, Muse Wonder, and Muse Spark Open, the open-weights model, running on Baseten, and 9 runs.
 
 30
-00:02:45,060 --> 00:02:47,660
-It stays a draft until a human signs it.
+00:02:21,170 --> 00:02:25,070
+Agreement with the answer key ranged from 44 to 50 out of 50.
 
 31
-00:02:48,480 --> 00:02:55,480
-The gate is on npm as litmus-gate, and
-either side of the table can use it.
+00:02:25,570 --> 00:02:27,970
+Not one sentence contained a fabricated quote.
 
 32
-00:02:55,480 --> 00:02:56,780
-Thank you for the opportunity.
+00:02:28,470 --> 00:02:30,430
+Spark's runs cost under a dollar each.
+
+33
+00:02:30,930 --> 00:02:35,970
+I injected more than twelve thousand fabrications to attack the gate, and it caught every hard one.
+
+34
+00:02:36,820 --> 00:02:44,400
+This is what the physician sees, the appeal, the payer's reason answered directly, every sentence footnoted to the entry it quotes.
+
+35
+00:02:44,900 --> 00:02:48,700
+It stays a draft until the physician signs it.
+
+36
+00:02:49,550 --> 00:02:54,750
+The gate is on NPM at litmus-gate, and either side of the table can use it.
+
+37
+00:02:55,250 --> 00:02:56,710
+Thank you so much for this opportunity.
+
