@@ -928,6 +928,6 @@ Pre-submission review (`docs/` is not committed; the findings are): ledger reali
 
 (generated files only; no ledger row by design)
 
-### next commit · the one that carries this regeneration
+### 0fe9f13 · 2026-11-02 23:20 · Video recorded and submitted: the fifth script in one take, voice processed, picture re-recorded to the word times, 2:59, uploaded unlisted and entered on the form; narration-recorded.srt is that take's captions; walkthrough notes the four spoken changes
 
 Video recorded and submitted: the author's fifth script read in one office take, the pauses trimmed and the voice processed (2:57), the picture re-recorded to the recorded word times with the prior-versus-new line on screen at the open and on the end card, cut 2:59, uploaded unlisted (https://www.youtube.com/watch?v=rJXMfYcCAOo) and entered on the form Nov 2 night; `assets/video/narration-recorded.srt` is that take's caption file, 37 cues; WALKTHROUGH.md notes the recorded script's four changes from the written fourth
