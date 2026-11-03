@@ -936,6 +936,6 @@ Video recorded and submitted: the author's fifth script read in one office take,
 
 (generated files only; no ledger row by design)
 
-### next commit · the one that carries this regeneration
+### 4793ad3 · 2026-11-02 23:21 · Captions: cue 36 spelled as the script has it, npm as litmus-gate
 
 Captions: cue 36 of `narration-recorded.srt` reads "npm as litmus-gate", the script's spelling, not the transcriber's
