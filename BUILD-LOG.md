@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-11-03 03:06 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-11-03 03:07 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -920,6 +920,6 @@ The recorded v4 captions (`assets/video/narration-recorded.srt`): the author's o
 
 (generated files only; no ledger row by design)
 
-### next commit · the one that carries this regeneration
+### 36d6a5a · 2026-11-02 19:07 · Pre-submission review applied: ledger realigned and completed (5a9051b, 2c026a8, e004e9d; rows for 3ffab38, 4edc467, ac31ca9), What is new through Nov 2; README prose brought to v1.7 (2.1 regate line, eleven blocked drafts, agreement 88 to 100 with the hypothesis read honestly, 4.3 collision and soft counts, 4.4 dated, 2.5 Baseten model ids, 4.6 the no-hard-token pass stated); harness defaults Baseten to the hackathon id; build/README gate and spike-in entries; .zenodo.json spike-in count; litmus-gate rules text names every fold
 
 Pre-submission review (`docs/` is not committed; the findings are): ledger realigned for 5a9051b, 2c026a8, e004e9d and rows added for 3ffab38, 4edc467, ac31ca9; "What is new" gains the Oct 30 to Nov 2 bullet and two stale bullets corrected (whole-entry sourcing, spike-in count); README prose brought to v1.7 where the tables had moved and the text had not (2.1 regate line, eleven blocked drafts, nine true derivations blocked, agreement at or above 90 percent in eight of nine kept runs with the ninth at 88, collision and soft counts in 4.3, the v1.5 count in 4.4 dated, 2,198 sentences), the Baseten model ids stated in 2.5, and 4.6 says plainly that a sentence with no hard token is verified by any quote from its entry; `harness.ts` defaults Baseten to `meta-models/muse-spark-open-1026`; `build/README.md` gate and spike-in entries at v1.7; `.zenodo.json` spike-in count for the next deposit; litmus-gate server rules text names the dash and compatibility folds
