@@ -573,7 +573,7 @@ export function selectProvider(name: string, model: string | undefined): Provide
     case 'baseten': {
       const key = env('BASETEN_API_KEY');
       if (!key) throw new Error('BASETEN_API_KEY is not set');
-      return messagesProvider({ label: 'baseten', baseURL: 'https://inference.baseten.co', authToken: key, model: model ?? 'meta-models/muse-spark-open', priceKey: 'muse-spark-open' });
+      return messagesProvider({ label: 'baseten', baseURL: 'https://inference.baseten.co', authToken: key, model: model ?? 'meta-models/muse-spark-open-1026', priceKey: 'muse-spark-open' });
     }
     case 'fireworks': {
       const key = env('FIREWORKS_API_KEY');

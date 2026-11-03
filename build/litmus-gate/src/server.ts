@@ -16,7 +16,7 @@ const sentenceInput = z.object({
 });
 
 const RULES = [
-  'Each sentence cites one chart entry and carries a verbatim quote from it; the quote must appear in that entry with only whitespace, case, and quote glyphs normalized.',
+  'Each sentence cites one chart entry and carries a verbatim quote from it; the quote must appear in that entry with only whitespace, case, quote glyphs, dash variants, and compatibility forms such as fullwidth digits normalized.',
   'Every hard token in the sentence (number, date, code, and a side, left or right) must appear in the cited entry, the criteria, the denial, or the stated case facts; otherwise the sentence is refuted and the token named.',
   'When every missing token lives in another entry of the same chart, the sentence is returned as needs-citation naming that entry; the draft is still blocked.',
   'A draft passes only when every sentence verifies and every criterion it claims has verified evidence. A check that throws is an error, never a pass.',

@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-11-03 00:28 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-11-03 03:06 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -54,7 +54,7 @@ Each commit that changed the version string in `build/src/litmus.ts`. The gate i
 
 ## Commits since `hackathon-start`
 
-Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 79 regenerate commits (by github-actions[bot] after a push, or by the author running `npm run log` locally) are this log regenerating itself; they touch only the generated files and carry no ledger row.
+Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 80 regenerate commits (by github-actions[bot] after a push, or by the author running `npm run log` locally) are this log regenerating itself; they touch only the generated files and carry no ledger row.
 
 ### 79e5e21 · 2026-10-26 20:38 · Add hackathon scaffolding: NEW-WORK.md and /build
 
@@ -683,7 +683,7 @@ README byline: the clause "Board-certified in general and plastic surgery" remov
 
 ### 3ffab38 · 2026-10-31 22:04 · Ignore: review/ kept local, not published
 
-(no ledger row)
+`.gitignore`: `review/`, the Oct 31 tribunal's local reports, kept out of the repository
 
 ### 8d89193 · 2026-10-31 22:17 · Ledger: the afbb63c row filled; the regenerate writes a resolved pending hash back into NEW-WORK.md
 
@@ -856,7 +856,7 @@ README 4.5: Mark Cuban's filter for healthcare AI (an efficiency nets to zero wh
 
 ### 4edc467 · 2026-11-02 00:40 · Ledger: the row for 074d43f
 
-(no ledger row)
+Ledger: the row for 074d43f
 
 ### b17d2d6 · 2026-11-02 00:40 · Build log: regenerate after 4edc467
 
@@ -890,7 +890,7 @@ Gate v1.7 (`build/src/litmus.ts`), the four token classes README 4.6 had listed 
 
 ### 5a9051b · 2026-11-02 12:19 · litmus-gate 0.3.0: the bundle of gate v1.7, version strings matched (package.json, server, README); to be published
 
-litmus-gate 0.3.0 published to npm (`build/litmus-gate/`), the bundle of gate v1.7, by the author with a one-time code; prepack rebuilt the bundle; package README carries the publish date.
+litmus-gate 0.3.0 (`build/litmus-gate/`): the bundle of gate v1.7, version strings matched in package.json, server.ts, and the package README; to be published by the author
 
 ### 376e95b · 2026-11-02 12:19 · Build log: regenerate after 5a9051b
 
@@ -898,7 +898,7 @@ litmus-gate 0.3.0 published to npm (`build/litmus-gate/`), the bundle of gate v1
 
 ### 2c026a8 · 2026-11-02 12:33 · litmus-gate 0.3.0 on npm, the bundle of gate v1.7; package README publish date; ledger row
 
-Video script v4, the author's trimmed revision (`assets/video/WALKTHROUGH.md`, `narration.srt`): his own words, 449 words for 2:57 at his recorded pace; five facts brought to gate v1.7 (Muse Spark 1.3 named as such, "every sentence was verified" so the words match the 9 of 9 on screen, agreement 44 to 50, Spark's runs under a dollar since Wonder's cost up to $2.70, more than twelve thousand fabrications); the fact bullets under the plan re-sourced to v1.7 and litmus-gate 0.3.0; captions on the scoreboard beat updated.
+litmus-gate 0.3.0 published to npm, by the author with a one-time code; prepack rebuilt the bundle; package README carries the publish date
 
 ### 4674852 · 2026-11-02 12:35 · Build log: regenerate after 2c026a8
 
@@ -906,7 +906,7 @@ Video script v4, the author's trimmed revision (`assets/video/WALKTHROUGH.md`, `
 
 ### e004e9d · 2026-11-02 12:49 · Video script v4, the author's trimmed revision: 449 words, five facts brought to gate v1.7 and litmus-gate 0.3.0; walkthrough, SRT, and fact bullets regenerated
 
-The recorded v4 captions (`assets/video/narration-recorded.srt`): the author's office take of his trimmed script, transcribed to word times and cut on the script's sentence boundaries in the script's spelling, 32 cues, speech 0:00 to 2:57; the finished cuts (final-v4-dark, final-v4-light, 2:59, captions burned in) are on Cloudinary and the author's drive, not in the repository. The author said forty-five where Table 1 now says 44; a pickup of that paragraph is planned.
+Video script v4, the author's trimmed revision (`assets/video/WALKTHROUGH.md`, `narration.srt`): his own words, 449 words for 2:57 at his recorded pace; five facts brought to gate v1.7 (Muse Spark 1.3 named as such, "every sentence was verified" so the words match the 9 of 9 on screen, agreement 44 to 50, Spark's runs under a dollar since Wonder's cost up to $2.70, more than twelve thousand fabrications); the fact bullets under the plan re-sourced to v1.7 and litmus-gate 0.3.0; captions on the scoreboard beat updated
 
 ### fbda9ce · 2026-11-02 12:50 · Build log: regenerate after e004e9d
 
@@ -914,4 +914,12 @@ The recorded v4 captions (`assets/video/narration-recorded.srt`): the author's o
 
 ### ac31ca9 · 2026-11-02 16:27 · Video: the recorded v4 captions (assets/video/narration-recorded.srt) from the author's office take; cuts on Cloudinary and the drive
 
-(no ledger row)
+The recorded v4 captions (`assets/video/narration-recorded.srt`): the author's office take of his trimmed script, transcribed to word times and cut on the script's sentence boundaries in the script's spelling, 32 cues, speech 0:00 to 2:57; the finished cuts (final-v4-dark, final-v4-light, 2:59, captions burned in) are on Cloudinary and the author's drive, not in the repository. The author said forty-five where Table 1 now says 44; a pickup of that paragraph is planned
+
+### 384be2b · 2026-11-02 16:28 · Build log: regenerate after ac31ca9
+
+(generated files only; no ledger row by design)
+
+### next commit · the one that carries this regeneration
+
+Pre-submission review (`docs/` is not committed; the findings are): ledger realigned for 5a9051b, 2c026a8, e004e9d and rows added for 3ffab38, 4edc467, ac31ca9; "What is new" gains the Oct 30 to Nov 2 bullet and two stale bullets corrected (whole-entry sourcing, spike-in count); README prose brought to v1.7 where the tables had moved and the text had not (2.1 regate line, eleven blocked drafts, nine true derivations blocked, agreement at or above 90 percent in eight of nine kept runs with the ninth at 88, collision and soft counts in 4.3, the v1.5 count in 4.4 dated, 2,198 sentences), the Baseten model ids stated in 2.5, and 4.6 says plainly that a sentence with no hard token is verified by any quote from its entry; `harness.ts` defaults Baseten to `meta-models/muse-spark-open-1026`; `build/README.md` gate and spike-in entries at v1.7; `.zenodo.json` spike-in count for the next deposit; litmus-gate server rules text names the dash and compatibility folds
