@@ -140,7 +140,7 @@ It stays a draft until the physician signs it.
 
 36
 00:02:49,550 --> 00:02:54,750
-The gate is on NPM at litmus-gate, and either side of the table can use it.
+The gate is on npm as litmus-gate, and either side of the table can use it.
 
 37
 00:02:55,250 --> 00:02:56,710
