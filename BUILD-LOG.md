@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-11-03 00:27 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-11-03 00:28 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -911,3 +911,7 @@ The recorded v4 captions (`assets/video/narration-recorded.srt`): the author's o
 ### fbda9ce · 2026-11-02 12:50 · Build log: regenerate after e004e9d
 
 (generated files only; no ledger row by design)
+
+### ac31ca9 · 2026-11-02 16:27 · Video: the recorded v4 captions (assets/video/narration-recorded.srt) from the author's office take; cuts on Cloudinary and the drive
+
+(no ledger row)
