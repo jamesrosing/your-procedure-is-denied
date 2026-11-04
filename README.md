@@ -241,7 +241,7 @@ The chart entry a draft quotes is, in practice, dictated. `npm run dictate -- --
 ## 3. Results
 
 <!-- results:start -->
-_Tables generated from the result files by `npm run log`; the prose below them is written by hand. Last regenerated 2026-11-03 07:21 UTC._
+_Tables generated from the result files by `npm run log`; the prose below them is written by hand. Last regenerated 2026-11-04 03:15 UTC._
 
 **How to read the tables.** Spark 1.3 is muse-spark-1.3 and Wonder 1.0 is muse-wonder-1.0, both through the Meta Model API; Spark Open is Muse Spark Open, the open-weights model, on Baseten. Agreed is correct-pass plus correct-decline against the grading key, shown with its 95% Wilson interval. Blocked is a draft the gate stopped. Missed is a decline on a case the key labels warranted. False pass is a draft the gate passed on a case the key labels unsupported. Failed is no valid answer. Agreed, blocked, missed, false pass, and failed sum to 50. Fabricated quotes counts quotes the gate refuted as not in the entry cited, in a sentence or in an evidence item, on any draft including declined ones. Care defended is the billed value of the warranted cases whose appeal passed the gate, out of the $568,500 billed across the thirty warranted cases ($940,000 across all fifty); the values are the synthetic set's, not a payer's. Entries read applies to the agentic modes. Cost is per case from the provider's token prices; latency is the median per case.
 
@@ -475,9 +475,9 @@ Meta and Cerebral Valley for the event; Baseten for hosting the open-weights mod
 Every commit since the event began has a row in [NEW-WORK.md](NEW-WORK.md), every result file carries its model, mode, gate version, and any re-gate in its own header, and this section is regenerated from those sources after every push. Nothing in it is typed by hand.
 
 <!-- build-log:start -->
-_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-11-03 07:21 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
+_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-11-04 03:15 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
 
-216 commits since the `hackathon-start` tag, the last at 2026-11-02 23:21 (4793ad3). Gate v1.7. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
+218 commits since the `hackathon-start` tag, the last at 2026-11-03 19:14 (75fe542). Gate v1.7. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
 
 | Started (UTC) | Model | Mode | Agreed | Blocked | Missed | False pass | Advisor |
 | --- | --- | --- | :---: | :---: | :---: | :---: | --- |
@@ -493,11 +493,11 @@ _Generated from the git history, the ledger, and the result files by `npm run lo
 
 Last five authored commits, newest first, with the ledger row each one carried (the bot's regenerate commits are left out):
 
+- **75fe542 · 2026-11-03 19:14** · Release v1.2.0: CITATION.cff and .zenodo.json to 1.2.0, dated November 3; ledger row names what changed since v1.1.0 · tag v1.2.0. Release v1.2.0. CITATION.cff and .zenodo.json bumped to 1.2.0, dated November 3; the deposit description already carried the v1.7 spike-in count (12,242). Since v1.1.0: gate v1.6 and v1.7 (the ten token classes found by Muse Code and by hand, 8,602 of 8,602 hard corruptions caught on regate, nine verdicts moved, agreement 44 to 50 of 50), litmus-gate…
 - **4793ad3 · 2026-11-02 23:21** · Captions: cue 36 spelled as the script has it, npm as litmus-gate. Captions: cue 36 of `narration-recorded.srt` reads "npm as litmus-gate", the script's spelling, not the transcriber's
 - **0fe9f13 · 2026-11-02 23:20** · Video recorded and submitted: the fifth script in one take, voice processed, picture re-recorded to the word times, 2:59, uploaded unlisted and entered on the form; narration-recorded.srt is that take's captions; walkthrough notes the four spoken changes. Video recorded and submitted: the author's fifth script read in one office take, the pauses trimmed and the voice processed (2:57), the picture re-recorded to the recorded word times with the prior-versus-new line on screen at the open and on the end card, cut 2:59, uploaded unlisted (https://www.youtube.com/watch?v=rJXMfYcCAOo) and entered on the form…
 - **36d6a5a · 2026-11-02 19:07** · Pre-submission review applied: ledger realigned and completed (5a9051b, 2c026a8, e004e9d; rows for 3ffab38, 4edc467, ac31ca9), What is new through Nov 2; README prose brought to v1.7 (2.1 regate line, eleven blocked drafts, agreement 88 to 100 with the hypothesis read honestly, 4.3 collision and soft counts, 4.4 dated, 2.5 Baseten model ids, 4.6 the no-hard-token pass stated); harness defaults Baseten to the hackathon id; build/README gate and spike-in entries; .zenodo.json spike-in count; litmus-gate rules text names every fold. Pre-submission review (`docs/` is not committed; the findings are): ledger realigned for 5a9051b, 2c026a8, e004e9d and rows added for 3ffab38, 4edc467, ac31ca9; "What is new" gains the Oct 30 to Nov 2 bullet and two stale bullets corrected (whole-entry sourcing, spike-in count); README prose brought to v1.7 where the tables had moved and the text had not…
 - **ac31ca9 · 2026-11-02 16:27** · Video: the recorded v4 captions (assets/video/narration-recorded.srt) from the author's office take; cuts on Cloudinary and the drive. The recorded v4 captions (`assets/video/narration-recorded.srt`): the author's office take of his trimmed script, transcribed to word times and cut on the script's sentence boundaries in the script's spelling, 32 cues, speech 0:00 to 2:57; the finished cuts (final-v4-dark, final-v4-light, 2:59, captions burned in) are on Cloudinary and the author's…
-- **e004e9d · 2026-11-02 12:49** · Video script v4, the author's trimmed revision: 449 words, five facts brought to gate v1.7 and litmus-gate 0.3.0; walkthrough, SRT, and fact bullets regenerated. Video script v4, the author's trimmed revision (`assets/video/WALKTHROUGH.md`, `narration.srt`): his own words, 449 words for 2:57 at his recorded pace; five facts brought to gate v1.7 (Muse Spark 1.3 named as such, "every sentence was verified" so the words match the 9 of 9 on screen, agreement 44 to 50, Spark's runs under a dollar since Wonder's cost…
 <!-- build-log:end -->
 
 ## From the inside
