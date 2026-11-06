@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-11-06 09:29 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-11-06 09:34 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -54,7 +54,7 @@ Each commit that changed the version string in `build/src/litmus.ts`. The gate i
 
 ## Commits since `hackathon-start`
 
-Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 86 regenerate commits (by github-actions[bot] after a push, or by the author running `npm run log` locally) are this log regenerating itself; they touch only the generated files and carry no ledger row.
+Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 87 regenerate commits (by github-actions[bot] after a push, or by the author running `npm run log` locally) are this log regenerating itself; they touch only the generated files and carry no ledger row.
 
 ### 79e5e21 · 2026-10-26 20:38 · Add hackathon scaffolding: NEW-WORK.md and /build
 
@@ -960,14 +960,22 @@ Zenodo version 1.2.0 published by the author (version DOI 10.5281/zenodo.2393595
 
 (generated files only; no ledger row by design)
 
-### 01f178d · 2026-11-06 01:09 · Viewer: serve the preprint at /paper
+### d9e2370 · 2026-11-06 01:09 · Viewer: serve the preprint at /paper
 
-Viewer: the preprint served at demo.hemeehr.com/paper (`build/viewer/paper/`): the Zenodo manuscript.pdf (MD5 c58252bc93f9626882a6596686d70bae) and an in-page pdf.js reader so the paper opens inline on a phone instead of downloading; links to the DOI, the PDF, and the replay. Post-event; the row was added with the next commit
+Viewer: the preprint served at demo.hemeehr.com/paper (`build/viewer/paper/`): the Zenodo manuscript.pdf (MD5 c58252bc93f9626882a6596686d70bae) and an in-page pdf.js reader so the paper opens inline on a phone instead of downloading; links to the DOI, the PDF, and the replay. Post-event; the row was added with the next commit. Committed as 01f178d, rewritten to d9e2370 on Nov 6 to remove two attribution trailers from its message; content unchanged
 
-### 7298869 · 2026-11-06 01:16 · Build log: regenerate after 01f178d
+### e09e054 · 2026-11-06 01:16 · Build log: regenerate after 01f178d
 
 (generated files only; no ledger row by design)
 
-### 8219324 · 2026-11-06 01:29 · Preprint: manuscript source and build under docs/manuscript; the /paper page fixed to absolute PDF paths; README and CITATION point to doi:10.5281/zenodo.24000088
+### f656945 · 2026-11-06 01:29 · Preprint: manuscript source and build under docs/manuscript; the /paper page fixed to absolute PDF paths; README and CITATION point to doi:10.5281/zenodo.24000088
+
+Preprint: the /paper page fixed to absolute PDF paths (the page is served at `/paper` without a trailing slash, so the relative `manuscript.pdf` resolved to the root and returned 404; the in-page reader and the download link were both broken on the live site, found by an iPhone-emulation check that now renders all 19 pages); the manuscript source, PDF, docx, build script, figures, and Zenodo metadata under `docs/manuscript/` (published Nov 5 as doi:10.5281/zenodo.24000088, CC BY 4.0, describing v1.2.0 at gate v1.7); README Data and code availability and CITATION.cff preferred-citation point to it; .zenodo.json gains the isDescribedBy link for the next software version; `docs/` excluded from the Vercel upload. Post-event, no code changed. Committed as 8219324, rewritten to f656945 by the same trailer removal; the row had named its pre-amend hash ee8c7c9 in error
+
+### 687f019 · 2026-11-06 01:30 · Build log: regenerate after 8219324
+
+(generated files only; no ledger row by design)
+
+### 12e6e9e · 2026-11-06 01:33 · Ledger: hashes after the trailer removal (01f178d is d9e2370, 8219324 is f656945); the second row had named its pre-amend hash
 
 (no ledger row)
