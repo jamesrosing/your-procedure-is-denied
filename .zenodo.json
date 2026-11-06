@@ -13,7 +13,8 @@
   "related_identifiers": [
     { "identifier": "10.5281/zenodo.21227402", "relation": "isDerivedFrom", "resource_type": "publication-article", "scheme": "doi" },
     { "identifier": "10.5281/zenodo.21227855", "relation": "isDerivedFrom", "resource_type": "publication-article", "scheme": "doi" },
-    { "identifier": "https://demo.hemeehr.com", "relation": "isSupplementedBy", "scheme": "url" }
+    { "identifier": "https://demo.hemeehr.com", "relation": "isSupplementedBy", "scheme": "url" },
+    { "identifier": "10.5281/zenodo.24000088", "relation": "isDescribedBy", "resource_type": "publication-preprint", "scheme": "doi" }
   ],
   "notes": "Code is Apache-2.0; written content and figures are CC BY 4.0 (LICENSE-CONTENT.md). All data are synthetic."
 }

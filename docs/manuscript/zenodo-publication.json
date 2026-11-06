@@ -1,0 +1,24 @@
+{
+  "title": "Fail-closed verification of model-drafted claim-denial appeals against the clinical record: a 50-case synthetic benchmark of three Meta models",
+  "doi": "10.5281/zenodo.24000088",
+  "upload_type": "publication",
+  "publication_type": "preprint",
+  "publication_date": "2026-11-05",
+  "description": "<p>A bench study on synthetic data. Fifty synthetic claim denials across eighteen high-dollar services, thirty answerable from the chart and twenty not, were generated with a grading key. Three Meta models (muse-spark-1.3, muse-wonder-1.0, and the open-weights Muse Spark Open) drafted the physician's response with the chart in the prompt, by tool calls, and with a live query of a coverage index; a deterministic gate reimplemented from the LITMUS papers verified every quote, number, date, code, and side against the cited entry, and 12,242 injected fabrications measured its sensitivity. Across nine kept runs, agreement with the key was 44 to 50 of 50 with no fabricated quote in any sentence; the gate caught 8,602 of 8,602 hard corruptions and none of 2,382 negation or pronoun changes, at 4 to 16 seconds and USD 0.007 to 0.054 a case; one draft passed on an unsupported case. Post hoc: one repair turn, an effort sweep, the denials read back from remittance letter images, and the gate pointed at the plan's own determination. The gate verifies that a statement is in the record, not that the record satisfies the criterion; the physician's signature is what makes the draft an appeal. No real patient data. This preprint describes repository version 1.2.0 (gate v1.7), deposited separately as software.</p>",
+  "creators": [
+    { "name": "Rosing, James H.", "affiliation": "Newport Beach, California", "orcid": "0009-0009-0911-1915" }
+  ],
+  "keywords": ["claim denial", "medical necessity appeal", "prior authorization", "large language models", "fabrication", "fail-closed verification", "Medicare Advantage", "LITMUS", "synthetic data"],
+  "license": "CC-BY-4.0",
+  "access_right": "open",
+  "related_identifiers": [
+    { "identifier": "10.5281/zenodo.23794797", "relation": "isSupplementedBy", "resource_type": "software", "scheme": "doi" },
+    { "identifier": "10.5281/zenodo.23935951", "relation": "describes", "resource_type": "software", "scheme": "doi" },
+    { "identifier": "10.5281/zenodo.21227402", "relation": "cites", "resource_type": "publication-article", "scheme": "doi" },
+    { "identifier": "10.5281/zenodo.21227855", "relation": "cites", "resource_type": "publication-article", "scheme": "doi" },
+    { "identifier": "https://github.com/jamesrosing/your-procedure-is-denied/releases/tag/v1.2.0", "relation": "isSupplementedBy", "scheme": "url" },
+    { "identifier": "https://demo.hemeehr.com", "relation": "isSupplementedBy", "scheme": "url" },
+    { "identifier": "https://www.npmjs.com/package/litmus-gate", "relation": "isSupplementedBy", "scheme": "url" }
+  ],
+  "notes": "Preprint, not peer reviewed. All data are synthetic. Code is Apache-2.0 in the software deposit; this text and its figures are CC BY 4.0."
+}

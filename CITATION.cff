@@ -19,6 +19,18 @@ keywords:
   - large language models
   - fail-closed verification
   - LITMUS
+preferred-citation:
+  type: article
+  title: "Fail-closed verification of model-drafted claim-denial appeals against the clinical record: a 50-case synthetic benchmark of three Meta models"
+  authors:
+    - family-names: Rosing
+      given-names: James H.
+      orcid: "https://orcid.org/0009-0009-0911-1915"
+  year: 2026
+  month: 11
+  doi: 10.5281/zenodo.24000088
+  publisher: Zenodo
+  notes: "Preprint, not peer reviewed. All data are synthetic."
 references:
   - type: article
     title: "Litmus: The Admissible Set"
