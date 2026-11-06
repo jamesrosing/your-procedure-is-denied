@@ -241,7 +241,7 @@ The chart entry a draft quotes is, in practice, dictated. `npm run dictate -- --
 ## 3. Results
 
 <!-- results:start -->
-_Tables generated from the result files by `npm run log`; the prose below them is written by hand. Last regenerated 2026-11-06 09:16 UTC._
+_Tables generated from the result files by `npm run log`; the prose below them is written by hand. Last regenerated 2026-11-06 09:29 UTC._
 
 **How to read the tables.** Spark 1.3 is muse-spark-1.3 and Wonder 1.0 is muse-wonder-1.0, both through the Meta Model API; Spark Open is Muse Spark Open, the open-weights model, on Baseten. Agreed is correct-pass plus correct-decline against the grading key, shown with its 95% Wilson interval. Blocked is a draft the gate stopped. Missed is a decline on a case the key labels warranted. False pass is a draft the gate passed on a case the key labels unsupported. Failed is no valid answer. Agreed, blocked, missed, false pass, and failed sum to 50. Fabricated quotes counts quotes the gate refuted as not in the entry cited, in a sentence or in an evidence item, on any draft including declined ones. Care defended is the billed value of the warranted cases whose appeal passed the gate, out of the $568,500 billed across the thirty warranted cases ($940,000 across all fifty); the values are the synthetic set's, not a payer's. Entries read applies to the agentic modes. Cost is per case from the provider's token prices; latency is the median per case.
 
@@ -475,9 +475,9 @@ Meta and Cerebral Valley for the event; Baseten for hosting the open-weights mod
 Every commit since the event began has a row in [NEW-WORK.md](NEW-WORK.md), every result file carries its model, mode, gate version, and any re-gate in its own header, and this section is regenerated from those sources after every push. Nothing in it is typed by hand.
 
 <!-- build-log:start -->
-_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-11-06 09:16 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
+_Generated from the git history, the ledger, and the result files by `npm run log`; a GitHub Action regenerates it after every push. Last regenerated 2026-11-06 09:29 UTC. The full log is [BUILD-LOG.md](BUILD-LOG.md)._
 
-222 commits since the `hackathon-start` tag, the last at 2026-11-06 01:09 (01f178d). Gate v1.7. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
+224 commits since the `hackathon-start` tag, the last at 2026-11-06 01:29 (8219324). Gate v1.7. 9 runs kept, every one re-gated under the current gate; superseded runs are named in the ledger and the log, never silently replaced.
 
 | Started (UTC) | Model | Mode | Agreed | Blocked | Missed | False pass | Advisor |
 | --- | --- | --- | :---: | :---: | :---: | :---: | --- |
@@ -493,11 +493,11 @@ _Generated from the git history, the ledger, and the result files by `npm run lo
 
 Last five authored commits, newest first, with the ledger row each one carried (the bot's regenerate commits are left out):
 
-- **01f178d · 2026-11-06 01:09** · Viewer: serve the preprint at /paper. (no ledger row)
+- **8219324 · 2026-11-06 01:29** · Preprint: manuscript source and build under docs/manuscript; the /paper page fixed to absolute PDF paths; README and CITATION point to doi:10.5281/zenodo.24000088. (no ledger row)
+- **01f178d · 2026-11-06 01:09** · Viewer: serve the preprint at /paper. Viewer: the preprint served at demo.hemeehr.com/paper (`build/viewer/paper/`): the Zenodo manuscript.pdf (MD5 c58252bc93f9626882a6596686d70bae) and an in-page pdf.js reader so the paper opens inline on a phone instead of downloading; links to the DOI, the PDF, and the replay. Post-event; the row was added with the next commit
 - **7034eb6 · 2026-11-04 15:03** · Zenodo v1.2.0 deposited: version DOI 10.5281/zenodo.23935951 in README Data and code availability, ledger row. Zenodo version 1.2.0 published by the author (version DOI 10.5281/zenodo.23935951 under the concept DOI 10.5281/zenodo.23794797; the deposited zip is the v1.2.0 GitHub release asset, MD5 7a77ece74ecb5c597a5776b4e4b658dc, git archive of the tag). README Data and code availability names the v1.2.0 version DOI and the release
 - **75fe542 · 2026-11-03 19:14** · Release v1.2.0: CITATION.cff and .zenodo.json to 1.2.0, dated November 3; ledger row names what changed since v1.1.0 · tag v1.2.0. Release v1.2.0. CITATION.cff and .zenodo.json bumped to 1.2.0, dated November 3; the deposit description already carried the v1.7 spike-in count (12,242). Since v1.1.0: gate v1.6 and v1.7 (the ten token classes found by Muse Code and by hand, 8,602 of 8,602 hard corruptions caught on regate, nine verdicts moved, agreement 44 to 50 of 50), litmus-gate…
 - **4793ad3 · 2026-11-02 23:21** · Captions: cue 36 spelled as the script has it, npm as litmus-gate. Captions: cue 36 of `narration-recorded.srt` reads "npm as litmus-gate", the script's spelling, not the transcriber's
-- **0fe9f13 · 2026-11-02 23:20** · Video recorded and submitted: the fifth script in one take, voice processed, picture re-recorded to the word times, 2:59, uploaded unlisted and entered on the form; narration-recorded.srt is that take's captions; walkthrough notes the four spoken changes. Video recorded and submitted: the author's fifth script read in one office take, the pauses trimmed and the voice processed (2:57), the picture re-recorded to the recorded word times with the prior-versus-new line on screen at the open and on the end card, cut 2:59, uploaded unlisted (https://www.youtube.com/watch?v=rJXMfYcCAOo) and entered on the form…
 <!-- build-log:end -->
 
 ## From the inside
