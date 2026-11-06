@@ -1,6 +1,6 @@
 # Build log
 
-Generated 2026-11-04 23:03 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
+Generated 2026-11-06 09:16 UTC by `build/scripts/build-log.ts` (`npm run log`) from the git history, the ledger in [NEW-WORK.md](NEW-WORK.md), the gate source at each commit, and the run headers inside `build/results/`. Nothing here is typed by hand; regenerate it after every commit that should appear.
 
 ## Before the event
 
@@ -54,7 +54,7 @@ Each commit that changed the version string in `build/src/litmus.ts`. The gate i
 
 ## Commits since `hackathon-start`
 
-Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 84 regenerate commits (by github-actions[bot] after a push, or by the author running `npm run log` locally) are this log regenerating itself; they touch only the generated files and carry no ledger row.
+Oldest first. Each entry: hash, Pacific time, subject, tags, results files added or removed, and the ledger row written with the commit. The 85 regenerate commits (by github-actions[bot] after a push, or by the author running `npm run log` locally) are this log regenerating itself; they touch only the generated files and carry no ledger row.
 
 ### 79e5e21 · 2026-10-26 20:38 · Add hackathon scaffolding: NEW-WORK.md and /build
 
@@ -955,3 +955,11 @@ Release v1.2.0. CITATION.cff and .zenodo.json bumped to 1.2.0, dated November 3;
 ### 7034eb6 · 2026-11-04 15:03 · Zenodo v1.2.0 deposited: version DOI 10.5281/zenodo.23935951 in README Data and code availability, ledger row
 
 Zenodo version 1.2.0 published by the author (version DOI 10.5281/zenodo.23935951 under the concept DOI 10.5281/zenodo.23794797; the deposited zip is the v1.2.0 GitHub release asset, MD5 7a77ece74ecb5c597a5776b4e4b658dc, git archive of the tag). README Data and code availability names the v1.2.0 version DOI and the release
+
+### 0a26d79 · 2026-11-04 15:03 · Build log: regenerate after 7034eb6
+
+(generated files only; no ledger row by design)
+
+### 01f178d · 2026-11-06 01:09 · Viewer: serve the preprint at /paper
+
+(no ledger row)
