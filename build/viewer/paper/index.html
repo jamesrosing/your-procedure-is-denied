@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Preprint: Fail-closed verification of model-drafted claim-denial appeals</title>
+  <meta name="description" content="Preprint. Fail-closed verification of model-drafted claim-denial appeals against the clinical record: a 50-case synthetic benchmark of three Meta models. James H. Rosing, MD, FACS. doi 10.5281/zenodo.24000088.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%274%27 fill=%27%2314181C%27/%3E%3Crect x=%278%27 y=%2715%27 width=%2716%27 height=%272%27 fill=%27%23FFFFFF%27/%3E%3C/svg%3E">
+  <style>
+    :root { --bg: #f4f4f2; --fg: #14181c; --muted: #5c646c; --line: #d8d8d4; --link: #0b57d0; }
+    @media (prefers-color-scheme: dark) { :root { --bg: #14181c; --fg: #f0f0ec; --muted: #9aa3ab; --line: #2c3238; --link: #8ab4f8; } }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; background: var(--bg); color: var(--fg); font: 15px/1.5 -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; }
+    header { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; padding: 12px 16px; border-bottom: 1px solid var(--line); }
+    header strong { font-weight: 600; }
+    header a { color: var(--link); text-decoration: none; }
+    header a:hover { text-decoration: underline; }
+    main { max-width: 900px; margin: 0 auto; padding: 12px 16px 40px; }
+    canvas { display: block; width: 100%; height: auto; margin: 0 0 12px; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.2); }
+    #status { color: var(--muted); padding: 24px 0; text-align: center; }
+    footer { color: var(--muted); font-size: 13px; text-align: center; padding: 16px; }
+  </style>
+</head>
+<body>
+  <header>
+    <strong>Preprint</strong>
+    <a href="manuscript.pdf" download>Download PDF (149 kB)</a>
+    <a href="https://doi.org/10.5281/zenodo.24000088" rel="noopener">doi 10.5281/zenodo.24000088</a>
+    <a href="/">Replay a case</a>
+  </header>
+  <main>
+    <div id="pages"></div>
+    <p id="status">Loading the paper…</p>
+  </main>
+  <footer>Rosing JH. Fail-closed verification of model-drafted claim-denial appeals against the clinical record: a 50-case synthetic benchmark of three Meta models. Zenodo, 2026. CC BY 4.0. All data are synthetic.</footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script>
+    (async function () {
+      var status = document.getElementById('status');
+      var pages = document.getElementById('pages');
+      try {
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+        var pdf = await pdfjsLib.getDocument('manuscript.pdf').promise;
+        var scale = Math.min(2, window.devicePixelRatio || 1) * 1.5;
+        for (var n = 1; n <= pdf.numPages; n++) {
+          var page = await pdf.getPage(n);
+          var vp = page.getViewport({ scale: scale });
+          var canvas = document.createElement('canvas');
+          canvas.width = vp.width; canvas.height = vp.height;
+          canvas.setAttribute('aria-label', 'Page ' + n + ' of ' + pdf.numPages);
+          pages.appendChild(canvas);
+          await page.render({ canvasContext: canvas.getContext('2d'), viewport: vp }).promise;
+        }
+        status.remove();
+      } catch (e) {
+        status.innerHTML = 'The in-page viewer could not load. <a href="manuscript.pdf">Open the PDF directly</a>.';
+      }
+    })();
+  </script>
+</body>
+</html>
